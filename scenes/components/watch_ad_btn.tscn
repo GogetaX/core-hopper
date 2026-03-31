@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://dycpy5dqypos6"]
+
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="1_biyfq"]
+[ext_resource type="Script" uid="uid://dip8mv2chyo5o" path="res://scenes/components/watch_ad_btn.gd" id="1_n3dt7"]
+[ext_resource type="Texture2D" uid="uid://dveir84r8dkuf" path="res://art/icons/20_px/play_icon.png" id="2_n3dt7"]
+
+[node name="WatchAdBtn" type="Control" unique_id=2145509240]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 746.0
+offset_bottom = 120.0
+mouse_filter = 1
+script = ExtResource("1_n3dt7")
+
+[node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("1_biyfq")]
+layout_mode = 1
+panel_type = "INSIDE_ONLY"
+panel_color = "GOLD"
+set_border_as_bg = true
+
+[node name="HList" type="HBoxContainer" parent="SmartPanel" unique_id=535718342]
+modulate = Color(0.16470589, 0.11372549, 0.05882353, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="SmartPanel/HList" unique_id=233824646]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_n3dt7")
+stretch_mode = 5
+
+[node name="VList" type="VBoxContainer" parent="SmartPanel/HList" unique_id=1595863893]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="title_label" type="Label" parent="SmartPanel/HList/VList" unique_id=2096308158]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_White"
+theme_override_font_sizes/font_size = 40
+text = "CLAIM X2 REWARDS"
+
+[node name="subtitle_label" type="Label" parent="SmartPanel/HList/VList" unique_id=1911440154]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "WATCH AD"

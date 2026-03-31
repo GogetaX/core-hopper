@@ -1,0 +1,149 @@
+[gd_scene format=3 uid="uid://dpo46sl5j3kcq"]
+
+[ext_resource type="Script" uid="uid://bekis88hbro3b" path="res://scenes/screens/merge/smart_button_merge.gd" id="1_cdomc"]
+[ext_resource type="Texture2D" uid="uid://bg18vum2cai3c" path="res://art/icons/rocket.png" id="2_k7dux"]
+
+[node name="SmartButtonMerge" type="Control" unique_id=664760665]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 504.0
+offset_bottom = 120.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_horizontal = 3
+mouse_filter = 1
+script = ExtResource("1_cdomc")
+
+[node name="BuyBtn" type="Panel" parent="." unique_id=272776267]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_type_variation = &"PanelBlueStatus"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BuyBtn" unique_id=1581387820]
+modulate = Color(0.81960785, 0.98039216, 1, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="icon" type="TextureRect" parent="BuyBtn/HBoxContainer" unique_id=1559249099]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 3
+stretch_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BuyBtn/HBoxContainer" unique_id=224992519]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="label_title" type="Label" parent="BuyBtn/HBoxContainer/VBoxContainer" unique_id=1972893777]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "NEW UNIT"
+
+[node name="label_text" type="Label" parent="BuyBtn/HBoxContainer/VBoxContainer" unique_id=38108083]
+layout_mode = 2
+theme_type_variation = &"LabelButtonWhite"
+text = "BUY BOT"
+
+[node name="Control" type="Control" parent="BuyBtn/HBoxContainer" unique_id=1887812301]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="BuyBtn/HBoxContainer" unique_id=439972965]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_type_variation = &"PanelBuyBtnCurrency"
+
+[node name="HList" type="HBoxContainer" parent="BuyBtn/HBoxContainer/Panel" unique_id=1026706617]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="BuyBtn/HBoxContainer/Panel/HList" unique_id=1519188565]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_k7dux")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="BuyBtn/HBoxContainer/Panel/HList" unique_id=2026214348]
+layout_mode = 2
+theme_type_variation = &"LabelButtonWhite"
+text = "24.5K"
+
+[node name="MergeBtn" type="Panel" parent="." unique_id=1072374723]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_type_variation = &"PanelDimmedBG"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MergeBtn" unique_id=487926648]
+modulate = Color(0.81960785, 0.98039216, 1, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="icon" type="TextureRect" parent="MergeBtn/HBoxContainer" unique_id=680987382]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_k7dux")
+expand_mode = 3
+stretch_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MergeBtn/HBoxContainer" unique_id=1518760745]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="label_text" type="Label" parent="MergeBtn/HBoxContainer/VBoxContainer" unique_id=758646683]
+layout_mode = 2
+theme_type_variation = &"LabelButtonWhite"
+text = "BUY BOT"
+
+[node name="label_sub_title" type="Label" parent="MergeBtn/HBoxContainer/VBoxContainer" unique_id=662845400]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "NEW UNIT"

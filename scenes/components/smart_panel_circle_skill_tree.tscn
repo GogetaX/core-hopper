@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://cyrpeu1w058da"]
+
+[ext_resource type="Script" uid="uid://dcdt85ybg0fcg" path="res://scenes/components/smart_panel.gd" id="1_d5h2c"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_efivy"]
+bg_color = Color(1, 1, 1, 0.9411765)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+shadow_color = Color(0.21568628, 0.21568628, 0.21568628, 0.29411766)
+shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d5h2c"]
+resource_local_to_scene = true
+bg_color = Color(0.0627451, 0.1019608, 0.2039216, 0.94)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+shadow_color = Color(1, 1, 1, 0.7294118)
+shadow_size = 20
+
+[node name="SmartPanelCircleSkill" type="Control" unique_id=892379017]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+script = ExtResource("1_d5h2c")
+
+[node name="BGOnly" type="Panel" parent="." unique_id=430449126]
+self_modulate = Color(0.14117648, 0.08627451, 0.23921569, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_efivy")
+
+[node name="BorderOnly" type="Panel" parent="." unique_id=1539343970]
+self_modulate = Color(0.7607843, 0.43529412, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_d5h2c")

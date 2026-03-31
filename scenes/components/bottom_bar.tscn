@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://da8i4hknmta32"]
+
+[ext_resource type="PackedScene" uid="uid://cnkdl7afnnis7" path="res://scenes/components/bottom_button.tscn" id="1_5qgah"]
+
+[node name="BottomBar" type="Control" unique_id=331824961]
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="." unique_id=1302308196]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"PanelBottomBar"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=720128400]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BottomButton" parent="HBoxContainer" unique_id=727157254 instance=ExtResource("1_5qgah")]
+layout_mode = 2
+size_flags_horizontal = 3
+is_default = true
+
+[node name="BottomButton2" parent="HBoxContainer" unique_id=58706183 instance=ExtResource("1_5qgah")]
+layout_mode = 2
+size_flags_horizontal = 3
+btn_name = "MERGE"
+
+[node name="BottomButton3" parent="HBoxContainer" unique_id=1783667291 instance=ExtResource("1_5qgah")]
+layout_mode = 2
+size_flags_horizontal = 3
+btn_name = "PROGRESS"
+
+[node name="BottomButton4" parent="HBoxContainer" unique_id=340154130 instance=ExtResource("1_5qgah")]
+layout_mode = 2
+size_flags_horizontal = 3
+btn_name = "SKILLS"
+
+[node name="BottomButton5" parent="HBoxContainer" unique_id=122767507 instance=ExtResource("1_5qgah")]
+layout_mode = 2
+size_flags_horizontal = 3
+btn_name = "SHOP"

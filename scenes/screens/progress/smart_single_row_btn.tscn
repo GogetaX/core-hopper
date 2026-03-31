@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://cec3m3dpceceo"]
+
+[ext_resource type="Script" uid="uid://ba0etnt2vv04x" path="res://scenes/screens/progress/smart_single_row_btn.gd" id="1_lhyip"]
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="1_nd3ow"]
+[ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="2_k17ou"]
+[ext_resource type="FontVariation" uid="uid://bapc7tyfxh8r7" path="res://fonts/RES_BeVietman_Regular.tres" id="3_k17ou"]
+
+[node name="SmartSingleRowBtn" type="Control" unique_id=1442770830]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 508.0
+offset_bottom = 100.0
+mouse_filter = 1
+script = ExtResource("1_lhyip")
+
+[node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("1_nd3ow")]
+layout_mode = 1
+panel_type = "BORDER_ONLY"
+
+[node name="ProgressHashTag" parent="SmartPanel" unique_id=713365230 instance=ExtResource("2_k17ou")]
+self_modulate = Color(0.7607843, 0.43529412, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_k17ou")
+text = "button text"
+horizontal_alignment = 1
+vertical_alignment = 1
+no_bg = true

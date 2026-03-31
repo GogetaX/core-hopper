@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://dr8sh2flxv6hx"]
+
+[ext_resource type="Script" uid="uid://bhtt2o1deq51s" path="res://scenes/screens/dig/material.gd" id="1_itj41"]
+[ext_resource type="Texture2D" uid="uid://vpiw0ovundyf" path="res://art/icons/status_circle.png" id="2_itj41"]
+[ext_resource type="Texture2D" uid="uid://drtj871naoig5" path="res://art/particles/dirt_03.png" id="3_c4gli"]
+
+[sub_resource type="Gradient" id="Gradient_c4gli"]
+offsets = PackedFloat32Array(0, 0.07467532, 0.24025974, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_at2nx"]
+gradient = SubResource("Gradient_c4gli")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_at2nx"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(50, 10, 1)
+angle_min = 1.0728835e-05
+angle_max = 360.00003
+direction = Vector3(-1, 0, 0)
+spread = 180.0
+gravity = Vector3(0, 200, 0)
+scale_min = 0.099999994
+scale_max = 0.19999999
+color_ramp = SubResource("GradientTexture1D_at2nx")
+
+[node name="Material" type="Control" unique_id=812286270]
+self_modulate = Color(0.34216362, 0.01806524, 0.01806524, 1)
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 150.0
+offset_bottom = 100.0
+mouse_filter = 1
+theme_type_variation = &"PanelMaterialWhite"
+script = ExtResource("1_itj41")
+
+[node name="BG" type="Panel" parent="." unique_id=229068662]
+self_modulate = Color(0.23693943, 0.01250971, 0.01250971, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_type_variation = &"PanelMaterialWhite"
+
+[node name="VList" type="VBoxContainer" parent="BG" unique_id=69812055]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="StatusMining" type="TextureRect" parent="BG/VList" unique_id=1592450106]
+self_modulate = Color(0, 1, 0.12565732, 1)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_itj41")
+stretch_mode = 5
+
+[node name="name" type="Label" parent="BG/VList" unique_id=1367922622]
+layout_mode = 2
+theme_type_variation = &"LabelGrayHint"
+text = "DIRT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="BG/VList" unique_id=1156711730]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+mouse_filter = 2
+theme_type_variation = &"ProgressBarBlue"
+value = 75.0
+show_percentage = false
+
+[node name="Particles" type="Node2D" parent="." unique_id=2081440569]
+visible = false
+position = Vector2(75, 50)
+
+[node name="DirtParticles" type="GPUParticles2D" parent="Particles" unique_id=1320681379]
+amount = 20
+texture = ExtResource("3_c4gli")
+lifetime = 0.5
+preprocess = 0.5
+process_material = SubResource("ParticleProcessMaterial_at2nx")
+
+[node name="tap_timer" type="Timer" parent="." unique_id=445185701]
+wait_time = 0.1
+one_shot = true

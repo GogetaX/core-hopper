@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cqomofiy45d8b"]
+
+[ext_resource type="Texture2D" uid="uid://bqomb6kaaaip" path="res://art/currency/coin.png" id="1_0teqh"]
+[ext_resource type="Script" uid="uid://bfxhsr4gfxy7d" path="res://scenes/components/currency_animation.gd" id="2_0teqh"]
+
+[node name="CurrencyAnimation" type="Sprite2D" unique_id=1919685625]
+self_modulate = Color(0.91764706, 0.95686275, 1, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_0teqh")
+script = ExtResource("2_0teqh")

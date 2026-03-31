@@ -1,0 +1,9 @@
+[gd_resource type="FontVariation" format=3 uid="uid://bapc7tyfxh8r7"]
+
+[ext_resource type="FontFile" uid="uid://dfwyfmb0k8bgr" path="res://fonts/BeVietnamPro-Regular.ttf" id="1_jqdt3"]
+
+[resource]
+base_font = ExtResource("1_jqdt3")
+opentype_features = {
+1667329140: 0
+}

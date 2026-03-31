@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://dha8wrkx0hxow"]
+
+[ext_resource type="Script" uid="uid://bldimb7k1rmp1" path="res://scenes/screens/settings/clound_synced.gd" id="1_4p8q3"]
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="1_mtiso"]
+[ext_resource type="Texture2D" uid="uid://vpiw0ovundyf" path="res://art/icons/status_circle.png" id="2_4p8q3"]
+
+[node name="CloundSynced" type="Label" unique_id=811458978]
+theme_type_variation = &"LabelGrayHint"
+text = "CLOUD SYNCED"
+horizontal_alignment = 2
+script = ExtResource("1_4p8q3")
+
+[node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("1_mtiso")]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+offset_left = -35.0
+offset_top = -5.0
+offset_right = 10.0
+offset_bottom = 5.0
+panel_color = "DISABLED"
+darken_bg = true
+
+[node name="StatusIcon" type="TextureRect" parent="." unique_id=684697031]
+self_modulate = Color(0.31813353, 0.9866621, 0.3520437, 1)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -10.0
+offset_right = -7.0
+offset_bottom = 10.0
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("2_4p8q3")
+stretch_mode = 5

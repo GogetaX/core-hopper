@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://dnh4f6s25edjy"]
+
+[ext_resource type="Script" uid="uid://dx8iran5hmwyc" path="res://scenes/screens/settings/expand_to_right_button.gd" id="1_6b2qi"]
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="1_632tt"]
+[ext_resource type="Texture2D" uid="uid://bg18vum2cai3c" path="res://art/icons/rocket.png" id="2_6b2qi"]
+[ext_resource type="Texture2D" uid="uid://bnflgbhmtyito" path="res://art/icons/arrow_right.png" id="3_v4wwx"]
+
+[node name="ExpandToRightButton" type="Control" unique_id=566290834]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 639.0
+offset_bottom = 100.0
+mouse_filter = 1
+script = ExtResource("1_6b2qi")
+
+[node name="SmartPanel2" parent="." unique_id=892379017 instance=ExtResource("1_632tt")]
+layout_mode = 1
+panel_type = "INSIDE_ONLY"
+panel_color = "BLUE"
+darken_bg = true
+
+[node name="HList" type="HBoxContainer" parent="SmartPanel2" unique_id=721290057]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 20
+
+[node name="button_icon" type="TextureRect" parent="SmartPanel2/HList" unique_id=1661946778]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_6b2qi")
+stretch_mode = 5
+
+[node name="button_text" type="Label" parent="SmartPanel2/HList" unique_id=1691136178]
+layout_mode = 2
+theme_type_variation = &"LabelButtonWhite"
+text = "Credits"
+
+[node name="Control" type="Control" parent="SmartPanel2/HList" unique_id=1447423036]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="TextureRect2" type="TextureRect" parent="SmartPanel2/HList" unique_id=770173338]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_v4wwx")
+stretch_mode = 5

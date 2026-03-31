@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://drlay20xc5ihb"]
+
+[ext_resource type="Script" uid="uid://c05c2amsoxcd0" path="res://scenes/components/icon_bg.gd" id="1_bhobo"]
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="1_fsg7g"]
+[ext_resource type="Texture2D" uid="uid://bg18vum2cai3c" path="res://art/icons/rocket.png" id="2_bhobo"]
+
+[node name="IconBG" type="Control" unique_id=1682398798]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_bhobo")
+
+[node name="IconBG" parent="." unique_id=892379017 instance=ExtResource("1_fsg7g")]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+
+[node name="SkillIcon" type="TextureRect" parent="IconBG" unique_id=1652363911]
+self_modulate = Color(0.7607843, 0.43529412, 1, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bhobo")
+stretch_mode = 5

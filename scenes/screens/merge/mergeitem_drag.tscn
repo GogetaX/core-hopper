@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://cc5k71im5mdo7"]
+
+[ext_resource type="PackedScene" uid="uid://b7eir18rjtank" path="res://scenes/components/BotImage.tscn" id="1_bi2rq"]
+[ext_resource type="Script" uid="uid://buga18o4gtaas" path="res://scenes/screens/merge/mergeitem_drag.gd" id="1_kae0p"]
+
+[node name="MergeitemDrag" type="Control" unique_id=776900001]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 100.0
+offset_bottom = 100.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+script = ExtResource("1_kae0p")
+
+[node name="BotImage" parent="." unique_id=1502144827 instance=ExtResource("1_bi2rq")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5

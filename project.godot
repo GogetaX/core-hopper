@@ -1,0 +1,70 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="CORE HOPPER"
+run/main_scene="uid://vgy1fkq56ix"
+config/features=PackedStringArray("4.6", "Mobile")
+run/max_fps=60
+boot_splash/bg_color=Color(0.039215688, 0.043137256, 0.105882354, 1)
+config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*uid://dqn3ufdym5tav"
+GlobalBtn="*uid://uo87dmyq1xsa"
+GlobalSignals="*uid://cmudicfn21w14"
+GlobalColor="*uid://b4ma3ahiidw13"
+GlobalBlockDatabase="*uid://8pjyoan5v7el"
+GlobalSave="*uid://qsbxuirupeu8"
+GlobalStats="*uid://v5bpgl13d7ji"
+GlobalDiggingProcess="*uid://6pyqjp3j8yqd"
+GlobalOfflineProgress="*uid://dikbic6qjg2ts"
+
+[display]
+
+window/size/viewport_width=1080
+window/size/viewport_height=1920
+window/size/window_width_override=540
+window/size/window_height_override=960
+window/energy_saving/keep_screen_on=false
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation=1
+
+[gui]
+
+theme/default_theme_scale=1.6
+theme/custom="uid://b2wlnch7ymgfa"
+theme/custom_font="uid://c8yaxjyx7hkn7"
+
+[input]
+
+ui_tap={
+"deadzone": 0.2,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(293, 11),"global_position":Vector2(302, 59),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
+
+[input_devices]
+
+buffering/agile_event_flushing=true
+pointing/emulate_touch_from_mouse=true
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+rendering_device/driver.windows="d3d12"
+renderer/rendering_method="mobile"
+environment/defaults/default_clear_color=Color(0.039215688, 0.043137256, 0.105882354, 1)

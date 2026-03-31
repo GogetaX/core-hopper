@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://d0xkehgu1rebj"]
+
+[ext_resource type="Texture2D" uid="uid://52wk4te2cs6e" path="res://art/icons/20_px/lock_icon.png" id="1_f5vwq"]
+[ext_resource type="Script" uid="uid://dyb4tnbc8it06" path="res://scenes/screens/merge/merge_item.gd" id="1_ofani"]
+[ext_resource type="PackedScene" uid="uid://dbb7264ypuqrj" path="res://scenes/components/bot_image.tscn" id="2_2tu7h"]
+[ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="3_kxkr3"]
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="5_s4g4a"]
+
+[node name="MergeItem" type="Panel" unique_id=2143795646]
+custom_minimum_size = Vector2(100, 100)
+offset_right = 100.0
+offset_bottom = 100.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_type_variation = &"PanelGridBG"
+script = ExtResource("1_ofani")
+
+[node name="BotLevel" parent="." unique_id=713365230 instance=ExtResource("3_kxkr3")]
+self_modulate = Color(0.81960785, 0.98039216, 1, 1)
+layout_mode = 1
+offset_left = 11.0
+offset_top = 6.0
+offset_right = 54.0
+offset_bottom = 39.0
+text = "LV 1"
+hash_tag_type = "INSIDE_ONLY"
+hash_tag_color = "BLUE"
+
+[node name="BotDPS" parent="." unique_id=229597826 instance=ExtResource("3_kxkr3")]
+self_modulate = Color(0.8627451, 0.9098039, 1, 1)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -48.5
+offset_top = -33.0
+offset_right = 48.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "DPS"
+horizontal_alignment = 1
+hash_tag_color = "WHITE"
+no_bg = true
+
+[node name="BotImage" parent="." unique_id=2022498304 instance=ExtResource("2_2tu7h")]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+mouse_filter = 0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="locked_slot" type="TextureRect" parent="." unique_id=852663843]
+self_modulate = Color(1, 1, 1, 0.16862746)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_f5vwq")
+stretch_mode = 3
+
+[node name="IsDragIn" parent="." unique_id=892379017 instance=ExtResource("5_s4g4a")]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+panel_type = "INSIDE_ONLY"
+panel_color = "BLUE"
+darken_bg = true

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://tunwhalbrg53"]
+
+[ext_resource type="Script" uid="uid://4wrcqbc0fbb3" path="res://scenes/components/lane_depth_update.gd" id="1_0ku38"]
+
+[node name="LaneDepthUpdate" type="Node" unique_id=1771884160]
+script = ExtResource("1_0ku38")

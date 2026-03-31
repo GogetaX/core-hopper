@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://babuofulhomgc"]
+
+[ext_resource type="Script" uid="uid://dcdt85ybg0fcg" path="res://scenes/components/smart_panel.gd" id="1_xpgen"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lof2k"]
+bg_color = Color(1, 1, 1, 0.9411765)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+shadow_color = Color(0, 0.03529412, 0.09803922, 0.45)
+shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xpgen"]
+bg_color = Color(0.0627451, 0.1019608, 0.2039216, 0.94)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+shadow_color = Color(0, 0.03529412, 0.09803922, 0.45)
+shadow_size = 10
+
+[node name="SmartPanel" type="Control" unique_id=892379017]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+script = ExtResource("1_xpgen")
+
+[node name="BGOnly" type="Panel" parent="." unique_id=430449126]
+self_modulate = Color(0.14117648, 0.08627451, 0.23921569, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lof2k")
+
+[node name="BorderOnly" type="Panel" parent="." unique_id=1539343970]
+self_modulate = Color(0.7607843, 0.43529412, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xpgen")

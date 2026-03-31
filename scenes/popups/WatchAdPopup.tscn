@@ -1,0 +1,122 @@
+[gd_scene format=3 uid="uid://ceynbsidod3lc"]
+
+[ext_resource type="Script" uid="uid://cnx2d6io4n5dg" path="res://scenes/popups/watch_ad_popup.gd" id="1_iikkl"]
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="2_hv715"]
+[ext_resource type="PackedScene" uid="uid://cyrssis6jwdc2" path="res://scenes/screens/progress/progress_hash_tag_with_icon.tscn" id="2_ipdis"]
+[ext_resource type="Texture2D" uid="uid://bg18vum2cai3c" path="res://art/icons/rocket.png" id="3_6ym58"]
+[ext_resource type="PackedScene" uid="uid://bd05l24oekcer" path="res://scenes/popups/watch_ad_button.tscn" id="5_h44pm"]
+[ext_resource type="PackedScene" uid="uid://b2qghfcexq01t" path="res://scenes/components/icon_bg_circle.tscn" id="6_xukwe"]
+[ext_resource type="Texture2D" uid="uid://8d4xunnuoyea" path="res://art/icons/20_px/close_icon.png" id="7_3mn8y"]
+
+[node name="WatchAdPopup" type="Control" unique_id=1294155484]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -863.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_horizontal = 3
+mouse_filter = 2
+script = ExtResource("1_iikkl")
+
+[node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("2_hv715")]
+layout_mode = 1
+panel_type = "INSIDE_ONLY"
+panel_color = "TAB_BG"
+darken_bg = true
+
+[node name="ClosePopup" parent="SmartPanel" unique_id=1682398798 instance=ExtResource("6_xukwe")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -100.0
+offset_bottom = 100.0
+grow_horizontal = 0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+panel_type = "INSIDE_ONLY"
+panel_color = "BLUE"
+icon = ExtResource("7_3mn8y")
+as_button = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SmartPanel" unique_id=274183451]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="HList" type="HBoxContainer" parent="SmartPanel/VBoxContainer" unique_id=2091489790]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="ProgressHashTagWithIcon" parent="SmartPanel/VBoxContainer/HList" unique_id=2003499456 instance=ExtResource("2_ipdis")]
+custom_minimum_size = Vector2(295, 33)
+layout_mode = 2
+hash_tag_type = "INSIDE_ONLY"
+hash_tag_text = "LIMITED TIME OFFER"
+hashtag_icon = ExtResource("3_6ym58")
+
+[node name="Control" type="Control" parent="SmartPanel/VBoxContainer" unique_id=333208509]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HList2" type="HBoxContainer" parent="SmartPanel/VBoxContainer" unique_id=61304949]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="SmartPanel/VBoxContainer/HList2" unique_id=2046432609]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_White"
+text = "BOOST EXTRACTION"
+
+[node name="Label2" type="Label" parent="SmartPanel/VBoxContainer" unique_id=509960664]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "Select a bioluminescent surge to accelerate your subterranean progress."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Control2" type="Control" parent="SmartPanel/VBoxContainer" unique_id=841437587]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VList" type="VBoxContainer" parent="SmartPanel/VBoxContainer" unique_id=1026594115]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="WatchAdButton" parent="SmartPanel/VBoxContainer/VList" unique_id=235473059 instance=ExtResource("5_h44pm")]
+layout_mode = 2
+panel_color = "BLUE"
+icon_big = ExtResource("3_6ym58")
+
+[node name="WatchAdButton2" parent="SmartPanel/VBoxContainer/VList" unique_id=1933562370 instance=ExtResource("5_h44pm")]
+layout_mode = 2
+icon_big = ExtResource("3_6ym58")
+ad_title = "x3 Speed Surge"
+ad_subtitle = "ACTIVE FOR 10M"
+
+[node name="WatchAdButton3" parent="SmartPanel/VBoxContainer/VList" unique_id=233113782 instance=ExtResource("5_h44pm")]
+layout_mode = 2
+panel_color = "GOLD"
+icon_big = ExtResource("3_6ym58")
+ad_title = "Free Rare Digger Crate"
+ad_subtitle = "UNBOX EPIC PARTS"
+
+[connection signal="BtnPressed" from="SmartPanel/ClosePopup" to="." method="_on_close_popup_btn_pressed"]
+[connection signal="resized" from="SmartPanel/VBoxContainer/VList" to="." method="SyncYSize"]

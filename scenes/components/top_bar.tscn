@@ -1,0 +1,165 @@
+[gd_scene format=3 uid="uid://ctqo4k2ggmax2"]
+
+[ext_resource type="PackedScene" uid="uid://bw1pp5edaaob7" path="res://scenes/ui/border_btn.tscn" id="1_ijifo"]
+[ext_resource type="Script" uid="uid://d0lyap177ge73" path="res://scenes/components/top_bar.gd" id="1_k3yks"]
+[ext_resource type="Texture2D" uid="uid://j71qyv0due28" path="res://art/icons/chip.png" id="2_tmikl"]
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="4_amswt"]
+[ext_resource type="PackedScene" uid="uid://b2qghfcexq01t" path="res://scenes/components/icon_bg_circle.tscn" id="4_bywe0"]
+[ext_resource type="PackedScene" uid="uid://d32v5pknv4vq0" path="res://scenes/components/currency_icon.tscn" id="4_glubf"]
+[ext_resource type="PackedScene" uid="uid://cmkwtaxpnlcq0" path="res://scenes/components/UpdateControlFromSave.tscn" id="4_nts21"]
+[ext_resource type="Texture2D" uid="uid://dey60oevcyg38" path="res://art/icons/20_px/setting_icon.png" id="5_bywe0"]
+[ext_resource type="Texture2D" uid="uid://8d4xunnuoyea" path="res://art/icons/20_px/close_icon.png" id="6_p8s5q"]
+
+[node name="TopBar" type="Control" unique_id=56877988]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+script = ExtResource("1_k3yks")
+
+[node name="Panel" type="Panel" parent="." unique_id=1914411189]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_type_variation = &"PanelTopBar"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1579859445]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="BorderBtn" parent="HBoxContainer" unique_id=1442847914 instance=ExtResource("1_ijifo")]
+layout_mode = 2
+img = ExtResource("2_tmikl")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=278734022]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=1010607556]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_Blue"
+theme_override_font_sizes/font_size = 48
+text = "CORE HOPPER"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer" unique_id=1141686670]
+layout_mode = 2
+
+[node name="sub_title" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1107539414]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "LIVE DIG OPERATIONS"
+
+[node name="Control" type="Control" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=2107238176]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VList" type="VBoxContainer" parent="HBoxContainer" unique_id=699787057]
+layout_mode = 2
+alignment = 1
+
+[node name="CurrencyCointainer" type="HBoxContainer" parent="HBoxContainer/VList" unique_id=1723722295]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="total_coins" parent="HBoxContainer/VList/CurrencyCointainer" unique_id=892379017 instance=ExtResource("4_amswt")]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+panel_type = "INSIDE_ONLY"
+panel_color = "BLUE"
+darken_bg = true
+
+[node name="HList" type="HBoxContainer" parent="HBoxContainer/VList/CurrencyCointainer/total_coins" unique_id=2134060595]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="CurrencyIcon" parent="HBoxContainer/VList/CurrencyCointainer/total_coins/HList" unique_id=529445326 instance=ExtResource("4_glubf")]
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+icon_type = "COIN_SMALL"
+
+[node name="Value" type="Label" parent="HBoxContainer/VList/CurrencyCointainer/total_coins/HList" unique_id=1766494282]
+layout_mode = 2
+theme_type_variation = &"LabelCurrency"
+text = "123.K"
+horizontal_alignment = 2
+
+[node name="SaveLabelUpdate" parent="HBoxContainer/VList/CurrencyCointainer/total_coins/HList/Value" unique_id=172447789 instance=ExtResource("4_nts21")]
+str_format = "CURRENCY"
+listen_to_save_data = "currencies.coins"
+added_end_text = " "
+
+[node name="total_crystals" parent="HBoxContainer/VList/CurrencyCointainer" unique_id=1229446735 instance=ExtResource("4_amswt")]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+panel_type = "INSIDE_ONLY"
+panel_color = "BLUE"
+darken_bg = true
+
+[node name="HList" type="HBoxContainer" parent="HBoxContainer/VList/CurrencyCointainer/total_crystals" unique_id=1934578945]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="CurrencyIcon" parent="HBoxContainer/VList/CurrencyCointainer/total_crystals/HList" unique_id=641878075 instance=ExtResource("4_glubf")]
+custom_minimum_size = Vector2(30, 25)
+layout_mode = 2
+
+[node name="Value" type="Label" parent="HBoxContainer/VList/CurrencyCointainer/total_crystals/HList" unique_id=1283823263]
+layout_mode = 2
+theme_type_variation = &"LabelCurrency"
+text = "123.K"
+horizontal_alignment = 2
+
+[node name="SaveLabelUpdate" parent="HBoxContainer/VList/CurrencyCointainer/total_crystals/HList/Value" unique_id=152208863 instance=ExtResource("4_nts21")]
+str_format = "CURRENCY"
+listen_to_save_data = "currencies.crystals"
+added_end_text = " "
+
+[node name="expand_control" type="Control" parent="HBoxContainer" unique_id=587114375]
+layout_mode = 2
+
+[node name="SettingButton" parent="HBoxContainer" unique_id=1682398798 instance=ExtResource("4_bywe0")]
+custom_minimum_size = Vector2(110, 100)
+layout_mode = 2
+panel_type = "BORDER_AND_INSIDE"
+panel_color = "BLUE"
+icon = ExtResource("5_bywe0")
+as_button = true
+
+[node name="CloseSettingMenu" parent="HBoxContainer" unique_id=759189028 instance=ExtResource("4_bywe0")]
+custom_minimum_size = Vector2(110, 100)
+layout_mode = 2
+panel_type = "INSIDE_ONLY"
+panel_color = "BLUE"
+icon = ExtResource("6_p8s5q")
+as_button = true
+
+[connection signal="BtnPressed" from="HBoxContainer/SettingButton" to="." method="_on_setting_button_btn_pressed"]
+[connection signal="BtnPressed" from="HBoxContainer/CloseSettingMenu" to="." method="_on_close_setting_menu_btn_pressed"]

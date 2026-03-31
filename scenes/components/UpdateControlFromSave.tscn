@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cmkwtaxpnlcq0"]
+
+[ext_resource type="Script" uid="uid://blh4hjttr7sqy" path="res://scenes/components/save_label_update.gd" id="1_ywvoq"]
+
+[node name="SaveLabelUpdate" type="Node" unique_id=172447789]
+script = ExtResource("1_ywvoq")

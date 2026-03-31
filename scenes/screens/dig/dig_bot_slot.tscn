@@ -1,0 +1,163 @@
+[gd_scene format=3 uid="uid://ck6fuim6hek81"]
+
+[ext_resource type="Script" uid="uid://d1e1q1dbbfdvr" path="res://scenes/screens/dig/dig_bot_slot.gd" id="1_na4w1"]
+[ext_resource type="Texture2D" uid="uid://52wk4te2cs6e" path="res://art/icons/20_px/lock_icon.png" id="2_na4w1"]
+[ext_resource type="PackedScene" uid="uid://b7eir18rjtank" path="res://scenes/components/BotImage.tscn" id="2_s4if3"]
+[ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="4_lruj6"]
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="5_u8qxv"]
+[ext_resource type="PackedScene" uid="uid://d32v5pknv4vq0" path="res://scenes/components/currency_icon.tscn" id="6_ff87c"]
+
+[node name="DigBotSlot" type="Panel" unique_id=1867726318]
+custom_minimum_size = Vector2(150, 150)
+theme_type_variation = &"PanelWithWhiteBG"
+script = ExtResource("1_na4w1")
+
+[node name="State_DigBot" type="Control" parent="." unique_id=1511592070]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VList" type="VBoxContainer" parent="State_DigBot" unique_id=1907269660]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="bot_icon" parent="State_DigBot/VList" unique_id=1502144827 instance=ExtResource("2_s4if3")]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 5
+stretch_mode = 5
+
+[node name="locked_icon" type="TextureRect" parent="State_DigBot/VList" unique_id=198599282]
+visible = false
+layout_mode = 2
+texture = ExtResource("2_na4w1")
+stretch_mode = 5
+
+[node name="dps_label" type="Label" parent="State_DigBot/VList" unique_id=972440170]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "12 DPS"
+horizontal_alignment = 1
+
+[node name="cur_lvl" parent="State_DigBot" unique_id=713365230 instance=ExtResource("4_lruj6")]
+self_modulate = Color(0.95686275, 0.972549, 1, 1)
+layout_mode = 1
+offset_right = 43.0
+offset_bottom = 33.0
+text = "LV 1"
+hash_tag_type = "INSIDE_ONLY"
+hash_tag_color = "WHITE"
+
+[node name="IsDragIn" parent="State_DigBot" unique_id=892379017 instance=ExtResource("5_u8qxv")]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+panel_type = "INSIDE_ONLY"
+panel_color = "BLUE"
+darken_bg = true
+
+[node name="State_BuyBot" type="Control" parent="." unique_id=1760469175]
+visible = false
+modulate = Color(0.23403707, 0.23403707, 0.23403707, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 1
+
+[node name="SmartPanel" parent="State_BuyBot" unique_id=740149896 instance=ExtResource("5_u8qxv")]
+layout_mode = 1
+panel_type = "INSIDE_ONLY"
+panel_color = "BLUE"
+darken_bg = true
+
+[node name="VList" type="VBoxContainer" parent="State_BuyBot" unique_id=1461923551]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HList" type="HBoxContainer" parent="State_BuyBot/VList" unique_id=1777250767]
+layout_mode = 2
+alignment = 1
+
+[node name="CurrencyIcon" parent="State_BuyBot/VList/HList" unique_id=529445326 instance=ExtResource("6_ff87c")]
+layout_mode = 2
+icon_type = "COIN_SMALL"
+
+[node name="ProgressHashTag" parent="State_BuyBot/VList/HList" unique_id=1259687563 instance=ExtResource("4_lruj6")]
+self_modulate = Color(0.30980393, 0.89411765, 1, 1)
+layout_mode = 2
+text = "100"
+hash_tag_color = "BLUE"
+no_bg = true
+
+[node name="Label" type="Label" parent="State_BuyBot/VList" unique_id=1138785320]
+layout_mode = 2
+text = "Unlock"
+horizontal_alignment = 1
+
+[node name="State_Reach150m" type="Control" parent="." unique_id=1817242878]
+modulate = Color(0.23403707, 0.23403707, 0.23403707, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 1
+
+[node name="SmartPanel" parent="State_Reach150m" unique_id=1312020939 instance=ExtResource("5_u8qxv")]
+layout_mode = 1
+panel_type = "INSIDE_ONLY"
+panel_color = "BLUE"
+darken_bg = true
+
+[node name="VList" type="VBoxContainer" parent="State_Reach150m" unique_id=670299732]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="ProgressHashTag" parent="State_Reach150m/VList" unique_id=1745162572 instance=ExtResource("4_lruj6")]
+self_modulate = Color(0.30980393, 0.89411765, 1, 1)
+layout_mode = 2
+text = "REACH
+150M"
+horizontal_alignment = 1
+hash_tag_color = "BLUE"
+no_bg = true

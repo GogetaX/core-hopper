@@ -1,0 +1,210 @@
+[gd_scene format=3 uid="uid://v00nojprhp8b"]
+
+[ext_resource type="Script" uid="uid://buuk6fn2h5suk" path="res://scenes/screens/merge/merge_screen.gd" id="1_ei1ls"]
+[ext_resource type="PackedScene" uid="uid://d0xkehgu1rebj" path="res://scenes/screens/merge/merge_item.tscn" id="1_odqub"]
+[ext_resource type="PackedScene" uid="uid://njxlv6dxrlwj" path="res://scenes/screens/progress/smart_button_buy.tscn" id="2_2m8po"]
+[ext_resource type="PackedScene" uid="uid://ck6fuim6hek81" path="res://scenes/screens/dig/dig_bot_slot.tscn" id="2_ad68v"]
+[ext_resource type="PackedScene" uid="uid://dpo46sl5j3kcq" path="res://scenes/screens/merge/smart_button_merge.tscn" id="2_imfux"]
+[ext_resource type="Texture2D" uid="uid://bg18vum2cai3c" path="res://art/icons/rocket.png" id="3_um6mi"]
+[ext_resource type="Script" uid="uid://bg68ksebamcji" path="res://scenes/screens/merge/drag_drop_handler.gd" id="7_lfmeh"]
+
+[node name="MergeScreen" type="VBoxContainer" unique_id=787988230]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_ei1ls")
+
+[node name="Control" type="Control" parent="." unique_id=1926002110]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="HList" type="HBoxContainer" parent="." unique_id=2133305888]
+layout_mode = 2
+alignment = 2
+
+[node name="Panel" type="Panel" parent="HList" unique_id=597920981]
+custom_minimum_size = Vector2(400, 140)
+layout_mode = 2
+theme_type_variation = &"PanelDimmedBG"
+
+[node name="HList" type="HBoxContainer" parent="HList/Panel" unique_id=1409080299]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VList" type="VBoxContainer" parent="HList/Panel/HList" unique_id=889713636]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="HList/Panel/HList/VList" unique_id=890810880]
+layout_mode = 2
+theme_type_variation = &"LabelGrayHint"
+text = "TOTAL DPS"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="HList/Panel/HList/VList" unique_id=2134051860]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_Blue"
+text = "14.2K"
+horizontal_alignment = 1
+
+[node name="VList2" type="VBoxContainer" parent="HList/Panel/HList" unique_id=1180102577]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="HList/Panel/HList/VList2" unique_id=193002946]
+layout_mode = 2
+theme_type_variation = &"LabelGrayHint"
+text = "BOT SLOTS"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="HList/Panel/HList/VList2" unique_id=647084552]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_White"
+text = "12/16"
+horizontal_alignment = 1
+
+[node name="Control2" type="Control" parent="." unique_id=710313240]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="." unique_id=1009071683]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_Blue"
+text = "ACTIVE BOTS"
+
+[node name="HList2" type="HBoxContainer" parent="." unique_id=618588143]
+layout_mode = 2
+alignment = 1
+
+[node name="DigBotSlot" parent="HList2" unique_id=1867726318 instance=ExtResource("2_ad68v")]
+layout_mode = 2
+cur_lane = 0
+
+[node name="DigBotSlot2" parent="HList2" unique_id=1166187269 instance=ExtResource("2_ad68v")]
+layout_mode = 2
+
+[node name="DigBotSlot3" parent="HList2" unique_id=1271617781 instance=ExtResource("2_ad68v")]
+layout_mode = 2
+cur_lane = 2
+
+[node name="DigBotSlot4" parent="HList2" unique_id=2110798222 instance=ExtResource("2_ad68v")]
+layout_mode = 2
+cur_lane = 3
+
+[node name="DigBotSlot5" parent="HList2" unique_id=411223900 instance=ExtResource("2_ad68v")]
+layout_mode = 2
+cur_lane = 4
+
+[node name="Control4" type="Control" parent="." unique_id=1010910210]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="." unique_id=678543896]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_Blue"
+text = "MERGE MATRIX"
+
+[node name="MergePanel" type="Panel" parent="." unique_id=1388264730]
+custom_minimum_size = Vector2(0, 900)
+layout_mode = 2
+mouse_filter = 2
+theme_type_variation = &"PanelDimmedBG"
+
+[node name="MergeContainer" type="GridContainer" parent="MergePanel" unique_id=964692207]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 4
+
+[node name="MergeItem" parent="MergePanel/MergeContainer" unique_id=2143795646 instance=ExtResource("1_odqub")]
+layout_mode = 2
+
+[node name="MergeItem2" parent="MergePanel/MergeContainer" unique_id=343844664 instance=ExtResource("1_odqub")]
+layout_mode = 2
+
+[node name="MergeItem3" parent="MergePanel/MergeContainer" unique_id=878571083 instance=ExtResource("1_odqub")]
+layout_mode = 2
+
+[node name="MergeItem4" parent="MergePanel/MergeContainer" unique_id=1497413645 instance=ExtResource("1_odqub")]
+layout_mode = 2
+
+[node name="MergeItem5" parent="MergePanel/MergeContainer" unique_id=1601448510 instance=ExtResource("1_odqub")]
+layout_mode = 2
+
+[node name="MergeItem6" parent="MergePanel/MergeContainer" unique_id=1662442412 instance=ExtResource("1_odqub")]
+layout_mode = 2
+
+[node name="MergeItem7" parent="MergePanel/MergeContainer" unique_id=1450515037 instance=ExtResource("1_odqub")]
+layout_mode = 2
+
+[node name="MergeItem8" parent="MergePanel/MergeContainer" unique_id=1851429617 instance=ExtResource("1_odqub")]
+layout_mode = 2
+
+[node name="MergeItem9" parent="MergePanel/MergeContainer" unique_id=1433285422 instance=ExtResource("1_odqub")]
+layout_mode = 2
+
+[node name="MergeItem10" parent="MergePanel/MergeContainer" unique_id=1851378110 instance=ExtResource("1_odqub")]
+layout_mode = 2
+
+[node name="MergeItem11" parent="MergePanel/MergeContainer" unique_id=1809970373 instance=ExtResource("1_odqub")]
+layout_mode = 2
+
+[node name="MergeItem12" parent="MergePanel/MergeContainer" unique_id=326596057 instance=ExtResource("1_odqub")]
+layout_mode = 2
+
+[node name="MergeItem13" parent="MergePanel/MergeContainer" unique_id=747356885 instance=ExtResource("1_odqub")]
+layout_mode = 2
+
+[node name="MergeItem14" parent="MergePanel/MergeContainer" unique_id=1920701865 instance=ExtResource("1_odqub")]
+layout_mode = 2
+
+[node name="MergeItem15" parent="MergePanel/MergeContainer" unique_id=1668908934 instance=ExtResource("1_odqub")]
+layout_mode = 2
+
+[node name="MergeItem16" parent="MergePanel/MergeContainer" unique_id=841397494 instance=ExtResource("1_odqub")]
+layout_mode = 2
+
+[node name="Control3" type="Control" parent="." unique_id=881208437]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="VList" type="VBoxContainer" parent="." unique_id=2002021898]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="SmartButtonBuy" parent="VList" unique_id=664760665 instance=ExtResource("2_2m8po")]
+layout_mode = 2
+panel_color = "BLUE"
+price_text = "25"
+
+[node name="SmartButton2" parent="VList" unique_id=1762057336 instance=ExtResource("2_imfux")]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+btn_type = "MERGE_BTN"
+buy_btn_title = "NEW UNI"
+merge_btn_icon = ExtResource("3_um6mi")
+
+[node name="DragDropHandler" type="Node" parent="." unique_id=2044087815]
+script = ExtResource("7_lfmeh")
+
+[connection signal="BtnPressedWithPrice" from="VList/SmartButtonBuy" to="." method="_on_smart_button_buy_btn_pressed_with_price"]

@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://b7eir18rjtank"]
+
+[ext_resource type="Texture2D" uid="uid://c17v0un4ywatt" path="res://data/bot_atlas/bot_01.tres" id="1_640t7"]
+[ext_resource type="Script" uid="uid://bvc8qrcqym56s" path="res://scenes/components/bot_image.gd" id="2_yfov0"]
+
+[node name="BotImage" type="TextureRect" unique_id=1502144827]
+offset_right = 129.0
+offset_bottom = 107.0
+texture = ExtResource("1_640t7")
+script = ExtResource("2_yfov0")

@@ -1,0 +1,121 @@
+[gd_scene format=3 uid="uid://bsv1pqeyc0h4m"]
+
+[ext_resource type="Script" uid="uid://krs3bkmi2q7m" path="res://scenes/screens/progress/progress_skill.gd" id="1_qydmb"]
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="1_y3x46"]
+[ext_resource type="Texture2D" uid="uid://bg18vum2cai3c" path="res://art/icons/rocket.png" id="2_qydmb"]
+[ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="3_lrm15"]
+[ext_resource type="PackedScene" uid="uid://drlay20xc5ihb" path="res://scenes/components/icon_bg.tscn" id="4_lrm15"]
+[ext_resource type="PackedScene" uid="uid://njxlv6dxrlwj" path="res://scenes/screens/progress/smart_button_buy.tscn" id="4_rlqd5"]
+
+[node name="ProgressSkill" type="VBoxContainer" unique_id=1768715333]
+custom_minimum_size = Vector2(650, 0)
+offset_right = 647.0
+offset_bottom = 380.0
+size_flags_horizontal = 3
+script = ExtResource("1_qydmb")
+
+[node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("1_y3x46")]
+custom_minimum_size = Vector2(0, 380)
+layout_mode = 2
+panel_type = "BORDER_ONLY"
+panel_color = "DISABLED"
+
+[node name="IconBG" type="TextureRect" parent="SmartPanel" unique_id=391978201]
+self_modulate = Color(0.9490196, 0.8392157, 1, 0.039215688)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -220.0
+offset_bottom = 184.0
+grow_horizontal = 0
+texture = ExtResource("2_qydmb")
+stretch_mode = 5
+
+[node name="VList" type="VBoxContainer" parent="SmartPanel" unique_id=1818042831]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HList" type="HBoxContainer" parent="SmartPanel/VList" unique_id=1331387075]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="IconBG" parent="SmartPanel/VList/HList" unique_id=1682398798 instance=ExtResource("4_lrm15")]
+layout_mode = 2
+icon = ExtResource("2_qydmb")
+
+[node name="VList" type="VBoxContainer" parent="SmartPanel/VList/HList" unique_id=1984693671]
+layout_mode = 2
+
+[node name="skill_title" type="Label" parent="SmartPanel/VList/HList/VList" unique_id=245175734]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"LabelTitle_White"
+theme_override_font_sizes/font_size = 40
+text = "Global mining systems"
+
+[node name="HList" type="HBoxContainer" parent="SmartPanel/VList/HList/VList" unique_id=1005439169]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Control" type="Control" parent="SmartPanel/VList/HList/VList/HList" unique_id=1788356053]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Skilllevel" parent="SmartPanel/VList/HList/VList/HList" unique_id=713365230 instance=ExtResource("3_lrm15")]
+layout_mode = 2
+text = "LVL 245"
+hash_tag_type = "INSIDE_ONLY"
+
+[node name="Control" type="Control" parent="SmartPanel/VList" unique_id=29820569]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="output_title" type="Label" parent="SmartPanel/VList" unique_id=278928549]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "Current output"
+
+[node name="HList2" type="HBoxContainer" parent="SmartPanel/VList" unique_id=1408004380]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="cur_value" type="Label" parent="SmartPanel/VList/HList2" unique_id=1709074802]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_White"
+text = "45.2K"
+vertical_alignment = 1
+
+[node name="VList" type="VBoxContainer" parent="SmartPanel/VList/HList2" unique_id=581210785]
+layout_mode = 2
+alignment = 2
+
+[node name="per_level_hint" parent="SmartPanel/VList/HList2/VList" unique_id=1735225511 instance=ExtResource("3_lrm15")]
+self_modulate = Color(0.7607843, 0.43529412, 1, 1)
+layout_mode = 2
+text = "+2.4K/level"
+no_bg = true
+
+[node name="Control" type="Control" parent="SmartPanel/VList/HList2/VList" unique_id=577652906]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="SmartButtonBuy" parent="SmartPanel/VList" unique_id=664760665 instance=ExtResource("4_rlqd5")]
+custom_minimum_size = Vector2(350, 100)
+layout_mode = 2
+size_flags_horizontal = 1
+buy_btn_title = "UPGRADE"
+
+[connection signal="BtnPressedWithPrice" from="SmartPanel/VList/SmartButtonBuy" to="." method="_on_smart_button_buy_btn_pressed_with_price"]

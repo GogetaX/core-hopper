@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://dtuuq8uy378eb"]
+
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="1_a4rcp"]
+[ext_resource type="Script" uid="uid://dgkrnsogho86w" path="res://scenes/screens/progress/relic_item.gd" id="1_xbwj4"]
+[ext_resource type="PackedScene" uid="uid://b2qghfcexq01t" path="res://scenes/components/icon_bg_circle.tscn" id="2_xbwj4"]
+[ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="4_ysijg"]
+
+[node name="RelicItem" type="Control" unique_id=58938028]
+custom_minimum_size = Vector2(350, 250)
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 3
+mouse_filter = 2
+script = ExtResource("1_xbwj4")
+
+[node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("1_a4rcp")]
+layout_mode = 1
+darken_bg = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SmartPanel" unique_id=453275545]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Control" type="Control" parent="SmartPanel/VBoxContainer" unique_id=1857785109]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="IconBGCircle" parent="SmartPanel/VBoxContainer/Control" unique_id=1682398798 instance=ExtResource("2_xbwj4")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="relic_name" type="Label" parent="SmartPanel/VBoxContainer" unique_id=588654321]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"LabelTitle_White"
+theme_override_font_sizes/font_size = 24
+text = "Relic Name"
+horizontal_alignment = 1
+
+[node name="ProgressHashTag" parent="SmartPanel/VBoxContainer" unique_id=713365230 instance=ExtResource("4_ysijg")]
+self_modulate = Color(0.7607843, 0.43529412, 1, 1)
+layout_mode = 2
+text = "+10% power"
+horizontal_alignment = 1
+no_bg = true

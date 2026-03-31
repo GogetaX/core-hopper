@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://d3us88jhniywe"]
+
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="1_3xdhm"]
+[ext_resource type="Script" uid="uid://bi0fg1o11p462" path="res://scenes/screens/shop/daily_deal_item.gd" id="1_ddhwx"]
+[ext_resource type="PackedScene" uid="uid://drlay20xc5ihb" path="res://scenes/components/icon_bg.tscn" id="2_ddhwx"]
+[ext_resource type="PackedScene" uid="uid://bvpwx7yevqtth" path="res://scenes/screens/shop/smart_button_buy_with_icon.tscn" id="3_6tqjt"]
+
+[node name="DailyDealItem" type="Control" unique_id=737257032]
+custom_minimum_size = Vector2(400, 350)
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("1_ddhwx")
+
+[node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("1_3xdhm")]
+layout_mode = 1
+panel_type = "INSIDE_ONLY"
+panel_color = "DISABLED"
+darken_bg = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SmartPanel" unique_id=1103733827]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Control" type="Control" parent="SmartPanel/VBoxContainer" unique_id=2085518447]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="IconBG" parent="SmartPanel/VBoxContainer/Control" unique_id=1682398798 instance=ExtResource("2_ddhwx")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="item_title" type="Label" parent="SmartPanel/VBoxContainer" unique_id=392967085]
+layout_mode = 2
+theme_type_variation = &"LabelDailyTasks"
+text = "Daily Crate"
+horizontal_alignment = 1
+
+[node name="sub_title" type="Label" parent="SmartPanel/VBoxContainer" unique_id=1658357657]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "COMMON LOOT"
+horizontal_alignment = 1
+
+[node name="BuyBtn" parent="SmartPanel/VBoxContainer" unique_id=664760665 instance=ExtResource("3_6tqjt")]
+layout_mode = 2
+buy_btn_title = "FREE"

@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://b4e4dhrexxcfa"]
+
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="1_ns1qk"]
+
+[node name="RewardExtractedRareOres" type="Control" unique_id=528307520]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 3
+anchors_preset = 0
+
+[node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("1_ns1qk")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_top = 6.0
+offset_right = 1040.0
+offset_bottom = 306.0
+panel_type = "INSIDE_ONLY"
+panel_color = "DISABLED"
+darken_bg = true
+
+[node name="VList" type="VBoxContainer" parent="SmartPanel" unique_id=1220314147]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="SmartPanel/VList" unique_id=589166433]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "EXTRACTED RARE ORES"

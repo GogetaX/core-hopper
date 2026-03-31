@@ -1,0 +1,9 @@
+[gd_resource type="FontVariation" format=3 uid="uid://d2w56dg5r1dwf"]
+
+[ext_resource type="FontFile" uid="uid://w07v30xbwjng" path="res://fonts/PlusJakartaSans-Regular.ttf" id="1_7b7y2"]
+
+[resource]
+base_font = ExtResource("1_7b7y2")
+opentype_features = {
+1667329140: 0
+}

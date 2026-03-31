@@ -1,0 +1,185 @@
+[gd_scene format=3 uid="uid://d32v5pknv4vq0"]
+
+[ext_resource type="Script" uid="uid://cg6wkmw2yluk8" path="res://scenes/components/currency_icon.gd" id="1_1srcd"]
+[ext_resource type="Texture2D" uid="uid://bin8843pp8ao1" path="res://art/currency/crystal.png" id="1_oacq6"]
+[ext_resource type="Texture2D" uid="uid://xlueiw1ent7v" path="res://art/currency/crystal_plus.png" id="3_yw5ml"]
+[ext_resource type="Texture2D" uid="uid://bqomb6kaaaip" path="res://art/currency/coin.png" id="4_hffp4"]
+[ext_resource type="Texture2D" uid="uid://cfrmo2qtnksvg" path="res://art/currency/crystal_small.png" id="5_gjf62"]
+[ext_resource type="Texture2D" uid="uid://don6dria8d6rp" path="res://art/currency/energy.png" id="5_wkhfb"]
+[ext_resource type="Texture2D" uid="uid://biy4o4utcr7l" path="res://art/currency/energy_sun.png" id="6_aphy7"]
+
+[sub_resource type="Gradient" id="Gradient_hffp4"]
+offsets = PackedFloat32Array(0, 0.13636364, 0.8701299, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wkhfb"]
+gradient = SubResource("Gradient_hffp4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_aphy7"]
+particle_flag_disable_z = true
+emission_shape = 2
+emission_sphere_radius = 27.6
+gravity = Vector3(0, -10, 0)
+scale_min = 0.19999999
+scale_max = 0.7
+color = Color(0.7607843, 0.43529412, 1, 1)
+color_ramp = SubResource("GradientTexture1D_wkhfb")
+
+[sub_resource type="Animation" id="Animation_aphy7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.84290767, 0.52630603, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_gjf62"]
+resource_name = "in_out"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.22531268, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.4, 1.4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.89, 1),
+"transitions": PackedFloat32Array(1, 0.26794335, 1, 1),
+"update": 0,
+"values": [Color(1, 0.84313726, 0.5254902, 0), Color(1, 0.84290767, 0.52630603, 1), Color(1, 0.84290767, 0.52630603, 1), Color(1, 0.84313726, 0.5254902, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_psxnm"]
+_data = {
+&"RESET": SubResource("Animation_aphy7"),
+&"in_out": SubResource("Animation_gjf62")
+}
+
+[node name="CurrencyIcon" type="Control" unique_id=529445326]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1050.0
+offset_bottom = -1890.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1srcd")
+icon_type = "CRYSTAL_SMALL"
+
+[node name="Crystal_Big_Animated" type="TextureRect" parent="." unique_id=2101257494]
+visible = false
+self_modulate = Color(0.7607843, 0.43529412, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("1_oacq6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Crystal_Big_Animated" unique_id=1356405741]
+visible = false
+position = Vector2(25, 17)
+amount = 1
+texture = ExtResource("3_yw5ml")
+visibility_rect = Rect2(-50, -50, 100, 100)
+process_material = SubResource("ParticleProcessMaterial_aphy7")
+
+[node name="Coin_Small" type="TextureRect" parent="." unique_id=1781370266]
+visible = false
+self_modulate = Color(0.30980393, 0.89411765, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("4_hffp4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Crystal_Small" type="TextureRect" parent="." unique_id=703525740]
+self_modulate = Color(0.7607843, 0.43529412, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("5_gjf62")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Energy_Small" type="TextureRect" parent="." unique_id=946249660]
+visible = false
+self_modulate = Color(1, 0.74509805, 0.23137255, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("5_wkhfb")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Energy_Small_Animated" type="TextureRect" parent="." unique_id=132348953]
+visible = false
+self_modulate = Color(1, 0.74509805, 0.23137255, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("5_wkhfb")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="Energy_Small_Animated" unique_id=1353321783]
+self_modulate = Color(1, 0.84290767, 0.52630603, 1)
+position = Vector2(25, 24)
+texture = ExtResource("6_aphy7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Energy_Small_Animated" unique_id=1686231390]
+libraries/ = SubResource("AnimationLibrary_psxnm")

@@ -1,0 +1,210 @@
+[gd_scene format=3 uid="uid://clawhc48lwvqj"]
+
+[ext_resource type="Script" uid="uid://c51q8a5i8uxe2" path="res://scenes/screens/skills/skills_screen.gd" id="1_5kdes"]
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="1_8oqqp"]
+[ext_resource type="PackedScene" uid="uid://deonth6oogded" path="res://scenes/screens/skills/skill_tree_world.tscn" id="1_wroqw"]
+[ext_resource type="PackedScene" uid="uid://b2qghfcexq01t" path="res://scenes/components/icon_bg_circle.tscn" id="2_37rvp"]
+[ext_resource type="Texture2D" uid="uid://bg18vum2cai3c" path="res://art/icons/rocket.png" id="3_uni0c"]
+[ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="4_a6y85"]
+[ext_resource type="PackedScene" uid="uid://njxlv6dxrlwj" path="res://scenes/screens/progress/smart_button_buy.tscn" id="5_pewj6"]
+
+[node name="SkillScreen" type="Control" unique_id=1295626318]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_5kdes")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=814408936]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=984208928]
+handle_input_locally = false
+size = Vector2i(1080, 1920)
+render_target_update_mode = 4
+
+[node name="SkillTreeWorld" parent="SubViewportContainer/SubViewport" unique_id=249758520 instance=ExtResource("1_wroqw")]
+
+[node name="SelectedSkill" parent="." unique_id=892379017 instance=ExtResource("1_8oqqp")]
+custom_minimum_size = Vector2(0, 650)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+offset_top = -650.0
+grow_vertical = 0
+panel_color = "WHITE"
+darken_bg = false
+
+[node name="VList" type="VBoxContainer" parent="SelectedSkill" unique_id=1891716326]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="HList" type="HBoxContainer" parent="SelectedSkill/VList" unique_id=900763186]
+layout_mode = 2
+
+[node name="VList" type="VBoxContainer" parent="SelectedSkill/VList/HList" unique_id=956941755]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="SelectedSkill/VList/HList/VList" unique_id=1235810222]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_Blue"
+theme_override_font_sizes/font_size = 40
+text = "AUTO-COLLECTOR"
+
+[node name="Label2" type="Label" parent="SelectedSkill/VList/HList/VList" unique_id=1279859802]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+theme_override_font_sizes/font_size = 40
+text = "LEVEL 1 / 5"
+
+[node name="Control" type="Control" parent="SelectedSkill/VList/HList" unique_id=463882545]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SelectedSkill/VList/HList/Control" unique_id=1909510540]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -206.0
+offset_top = -50.0
+offset_bottom = 50.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="IconBGCircle" parent="SelectedSkill/VList/HList/Control/HBoxContainer" unique_id=1682398798 instance=ExtResource("2_37rvp")]
+layout_mode = 2
+panel_type = "INSIDE_ONLY"
+panel_color = "BLUE"
+icon = ExtResource("3_uni0c")
+
+[node name="Seperator" type="VSeparator" parent="SelectedSkill/VList/HList/Control/HBoxContainer" unique_id=1174924027]
+layout_mode = 2
+
+[node name="ScrollDownBtn" parent="SelectedSkill/VList/HList/Control/HBoxContainer" unique_id=573225849 instance=ExtResource("2_37rvp")]
+layout_mode = 2
+panel_type = "BORDER_ONLY"
+panel_color = "DISABLED"
+icon = ExtResource("3_uni0c")
+as_button = true
+
+[node name="ScrollUpBtn" parent="SelectedSkill/VList/HList/Control/HBoxContainer" unique_id=1204389369 instance=ExtResource("2_37rvp")]
+layout_mode = 2
+panel_type = "BORDER_ONLY"
+panel_color = "DISABLED"
+icon = ExtResource("3_uni0c")
+as_button = true
+
+[node name="Control" type="Control" parent="SelectedSkill/VList" unique_id=1351809411]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="SelectedSkill/VList" unique_id=178832608]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+theme_override_font_sizes/font_size = 40
+text = "Deploys micro-drones to automatically harvest floating crystals while the reactor is idle."
+autowrap_mode = 2
+
+[node name="Control2" type="Control" parent="SelectedSkill/VList" unique_id=621434781]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SelectedSkill/VList" unique_id=815999630]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="SelectedSkill/VList/HBoxContainer" unique_id=385301440]
+layout_mode = 2
+theme_type_variation = &"LabelGrayHint"
+theme_override_font_sizes/font_size = 40
+text = "CURRENT EFFECT"
+
+[node name="Control" type="Control" parent="SelectedSkill/VList/HBoxContainer" unique_id=2134988694]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ProgressHashTag" parent="SelectedSkill/VList/HBoxContainer" unique_id=713365230 instance=ExtResource("4_a6y85")]
+self_modulate = Color(0.8627451, 0.9098039, 1, 1)
+layout_mode = 2
+text = "+5% Idle Gain"
+hash_tag_color = "WHITE"
+no_bg = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="SelectedSkill/VList" unique_id=718229712]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="SelectedSkill/VList/HBoxContainer2" unique_id=1326132146]
+layout_mode = 2
+theme_type_variation = &"LabelGrayHint"
+theme_override_font_sizes/font_size = 40
+text = "NEXT LEVEL"
+
+[node name="Control" type="Control" parent="SelectedSkill/VList/HBoxContainer2" unique_id=1622055597]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ProgressHashTag" parent="SelectedSkill/VList/HBoxContainer2" unique_id=885810886 instance=ExtResource("4_a6y85")]
+self_modulate = Color(0.30980393, 0.89411765, 1, 1)
+layout_mode = 2
+text = "+12% Idle Gain"
+hash_tag_color = "BLUE"
+no_bg = true
+
+[node name="SmartButtonBuy" parent="SelectedSkill/VList" unique_id=664760665 instance=ExtResource("5_pewj6")]
+layout_mode = 2
+btn_type = "WITH_PRICE"
+buy_btn_title = "UPGRADE NODE"
+panel_color = "BLUE"
+price_text = "450K AU"
+
+[node name="VList" type="VBoxContainer" parent="." unique_id=752231860]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -100.0
+offset_bottom = 206.0
+grow_horizontal = 0
+mouse_filter = 2
+
+[node name="ResetCamera" parent="VList" unique_id=451844119 instance=ExtResource("2_37rvp")]
+layout_mode = 2
+panel_type = "BORDER_ONLY"
+panel_color = "DISABLED"
+icon = ExtResource("3_uni0c")
+as_button = true
+
+[node name="CenterSelectedSkill" parent="VList" unique_id=101831475 instance=ExtResource("2_37rvp")]
+layout_mode = 2
+panel_type = "BORDER_ONLY"
+panel_color = "DISABLED"
+icon = ExtResource("3_uni0c")
+as_button = true
+
+[connection signal="BtnPressed" from="SelectedSkill/VList/HList/Control/HBoxContainer/ScrollDownBtn" to="." method="_on_scroll_down_btn_btn_pressed"]
+[connection signal="BtnPressed" from="SelectedSkill/VList/HList/Control/HBoxContainer/ScrollUpBtn" to="." method="_on_scroll_up_btn_btn_pressed"]
+[connection signal="BtnPressed" from="VList/ResetCamera" to="." method="_on_reset_camera_btn_pressed"]
+[connection signal="BtnPressed" from="VList/CenterSelectedSkill" to="." method="_on_center_selected_skill_btn_pressed"]

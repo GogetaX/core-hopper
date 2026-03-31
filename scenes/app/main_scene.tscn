@@ -1,0 +1,123 @@
+[gd_scene format=3 uid="uid://vgy1fkq56ix"]
+
+[ext_resource type="Script" uid="uid://c2rs2h8royu5x" path="res://scenes/app/main_scene.gd" id="1_dphjg"]
+[ext_resource type="PackedScene" uid="uid://ctqo4k2ggmax2" path="res://scenes/components/top_bar.tscn" id="1_qfrj5"]
+[ext_resource type="PackedScene" uid="uid://da8i4hknmta32" path="res://scenes/components/bottom_bar.tscn" id="2_kuj8t"]
+[ext_resource type="Script" uid="uid://d28vujcn28p14" path="res://scenes/ui/stop_click_overlay.gd" id="4_dphjg"]
+[ext_resource type="Script" uid="uid://bbgo6bxqgpta5" path="res://scenes/app/overlay_layer.gd" id="4_u2ckv"]
+[ext_resource type="Shader" uid="uid://dldrgd5gds6xv" path="res://shaders/popup_blur.gdshader" id="5_ajjm1"]
+[ext_resource type="Script" uid="uid://dnsd5jrynaq8t" path="res://scenes/components/drop_manager.gd" id="7_whjeo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_whjeo"]
+shader = ExtResource("5_ajjm1")
+shader_parameter/blur_lod = 3.50000016625
+shader_parameter/tint = Color(0.08, 0.11, 0.2, 0.35)
+shader_parameter/saturation = 0.400000019
+shader_parameter/brightness = 0.10000000405148
+
+[node name="App" type="Control" unique_id=1304418827]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_dphjg")
+
+[node name="SafeArea" type="MarginContainer" parent="." unique_id=1131384018]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Root" type="Control" parent="SafeArea" unique_id=200429389]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ListContainer" type="VBoxContainer" parent="SafeArea/Root" unique_id=1420410399]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TopBar" parent="SafeArea/Root/ListContainer" unique_id=56877988 instance=ExtResource("1_qfrj5")]
+layout_mode = 2
+
+[node name="ScreenHost" type="MarginContainer" parent="SafeArea/Root/ListContainer" unique_id=1799712431]
+show_behind_parent = true
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Scroll" type="ScrollContainer" parent="SafeArea/Root/ListContainer/ScreenHost" unique_id=1505951053]
+layout_mode = 2
+
+[node name="BottomBar" parent="SafeArea/Root/ListContainer" unique_id=331824961 instance=ExtResource("2_kuj8t")]
+layout_mode = 2
+
+[node name="Background" type="TextureRect" parent="SafeArea/Root" unique_id=732182987]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="OverlayLayer" type="CanvasLayer" parent="." unique_id=286303035]
+visible = false
+script = ExtResource("4_u2ckv")
+
+[node name="BlurBG" type="ColorRect" parent="OverlayLayer" unique_id=1018703847]
+material = SubResource("ShaderMaterial_whjeo")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Popups" type="MarginContainer" parent="OverlayLayer" unique_id=1330473425]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = 100.0
+offset_right = -100.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Scroll" type="ScrollContainer" parent="OverlayLayer/Popups" unique_id=1103177396]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="StopClickOverlay" type="Control" parent="." unique_id=874246739]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_dphjg")
+
+[node name="DropManager" type="Control" parent="." unique_id=615955803]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("7_whjeo")

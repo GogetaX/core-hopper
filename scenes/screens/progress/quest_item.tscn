@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://cvul7nt3js8au"]
+
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="1_60bcs"]
+[ext_resource type="Script" uid="uid://ble41vn5n6xm0" path="res://scenes/screens/progress/quest_item.gd" id="1_ly53i"]
+[ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="2_ly53i"]
+
+[node name="QuestItem" type="Control" unique_id=688889240]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 811.0
+offset_bottom = 150.0
+mouse_filter = 2
+script = ExtResource("1_ly53i")
+skill_color = null
+
+[node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("1_60bcs")]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 1
+panel_type = "INSIDE_ONLY"
+panel_color = "TAB_BG"
+
+[node name="VList" type="VBoxContainer" parent="SmartPanel" unique_id=213400839]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="HList" type="HBoxContainer" parent="SmartPanel/VList" unique_id=1170391134]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VList" type="VBoxContainer" parent="SmartPanel/VList/HList" unique_id=1134436040]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="quest_title" type="Label" parent="SmartPanel/VList/HList/VList" unique_id=638401876]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"LabelTitle_White"
+theme_override_font_sizes/font_size = 32
+text = "Extract 500 rare void crystals"
+
+[node name="progress_text" type="Label" parent="SmartPanel/VList/HList/VList" unique_id=701490249]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"LabelGray"
+theme_override_font_sizes/font_size = 32
+text = "342 / 500 complete"
+
+[node name="VList2" type="VBoxContainer" parent="SmartPanel/VList/HList" unique_id=2112799177]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label3" type="Label" parent="SmartPanel/VList/HList/VList2" unique_id=1694215178]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"LabelGray"
+theme_override_font_sizes/font_size = 32
+text = "REWARD"
+horizontal_alignment = 2
+
+[node name="RewardText" parent="SmartPanel/VList/HList/VList2" unique_id=713365230 instance=ExtResource("2_ly53i")]
+self_modulate = Color(0.30980393, 0.89411765, 1, 1)
+layout_mode = 2
+text = "50.0K AU"
+horizontal_alignment = 2
+hash_tag_color = "BLUE"
+no_bg = true
+
+[node name="ProgressBar" type="ProgressBar" parent="SmartPanel/VList" unique_id=1988521567]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+theme_type_variation = &"ProgressBarGold"
+value = 75.0
+show_percentage = false

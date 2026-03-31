@@ -1,0 +1,779 @@
+[gd_scene format=3 uid="uid://h30nnnqsukj8"]
+
+[ext_resource type="Script" uid="uid://bcdl3aw30ovv2" path="res://scenes/screens/dig/dig_screen.gd" id="1_2ijye"]
+[ext_resource type="PackedScene" uid="uid://ds2fs82ijg3xn" path="res://scenes/components/status_label.tscn" id="1_fqevo"]
+[ext_resource type="PackedScene" uid="uid://dk2ys8k4etgng" path="res://scenes/components/smart_button.tscn" id="2_8q4ji"]
+[ext_resource type="PackedScene" uid="uid://ck6fuim6hek81" path="res://scenes/screens/dig/dig_bot_slot.tscn" id="2_b4o7w"]
+[ext_resource type="Script" uid="uid://wo27y1bp48s3" path="res://scenes/screens/dig/global_deapth.gd" id="2_elpyf"]
+[ext_resource type="Script" uid="uid://dpi87sp21cmph" path="res://scenes/screens/dig/status_flow_container.gd" id="3_yjxrm"]
+[ext_resource type="Script" uid="uid://cxmfj632fs325" path="res://scenes/label_data_scripts/bot_amount_active.gd" id="4_ghiss"]
+[ext_resource type="Script" uid="uid://drpo6jpqmbllk" path="res://scenes/label_data_scripts/income_ps.gd" id="4_tyi6r"]
+[ext_resource type="PackedScene" uid="uid://cyrssis6jwdc2" path="res://scenes/screens/progress/progress_hash_tag_with_icon.tscn" id="4_vr6j5"]
+[ext_resource type="Texture2D" uid="uid://bisqfreq6vd5f" path="res://art/icons/20_px/depth_icon.png" id="5_131td"]
+[ext_resource type="PackedScene" uid="uid://tunwhalbrg53" path="res://scenes/components/lane_depth_update.tscn" id="6_8n6rl"]
+[ext_resource type="Script" uid="uid://cq4k4opbybd6n" path="res://scenes/screens/dig/offline_cap.gd" id="7_5w0l6"]
+[ext_resource type="Script" uid="uid://d3une2dqopjgs" path="res://scenes/screens/dig/offline_level.gd" id="7_davrd"]
+[ext_resource type="Script" uid="uid://b1boirxy3j4fm" path="res://scenes/screens/dig/drop_bonus.gd" id="9_acvec"]
+[ext_resource type="Script" uid="uid://bb6aobrm7ji1h" path="res://scenes/screens/dig/drop_bonus_value.gd" id="9_elpyf"]
+
+[node name="DigScreen" type="VBoxContainer" unique_id=594767936]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -126.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+script = ExtResource("1_2ijye")
+
+[node name="Control" type="Control" parent="." unique_id=1165179827]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HList2" type="HBoxContainer" parent="." unique_id=1575408635]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VList" type="VBoxContainer" parent="HList2" unique_id=677940393]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="HList2/VList" unique_id=2026087024]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "GLOBAL DEPTH"
+
+[node name="HList" type="HBoxContainer" parent="HList2/VList" unique_id=1754382578]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = -2
+
+[node name="global_deapth" type="Label" parent="HList2/VList/HList" unique_id=1049620090]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_Blue"
+theme_override_font_sizes/font_size = 96
+text = "1,450"
+script = ExtResource("2_elpyf")
+
+[node name="Label3" type="Label" parent="HList2/VList/HList" unique_id=335542878]
+layout_mode = 2
+size_flags_vertical = 1
+theme_type_variation = &"LabelTitle_Blue"
+text = "m"
+vertical_alignment = 2
+
+[node name="StatusFlowContainer" type="HFlowContainer" parent="HList2/VList" unique_id=1356052321]
+layout_mode = 2
+script = ExtResource("3_yjxrm")
+
+[node name="StatusLabel" parent="HList2/VList/StatusFlowContainer" unique_id=2088306964 instance=ExtResource("1_fqevo")]
+custom_minimum_size = Vector2(256, 35)
+layout_mode = 2
+panel_color = "BLUE"
+status_text = "DIGGING INACTIVE"
+
+[node name="Control2" type="Control" parent="HList2/VList" unique_id=1835889744]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VList2" type="VBoxContainer" parent="HList2" unique_id=638358987]
+layout_mode = 2
+mouse_filter = 2
+alignment = 2
+
+[node name="Panel" type="Panel" parent="HList2/VList2" unique_id=603749544]
+custom_minimum_size = Vector2(300, 120)
+layout_mode = 2
+mouse_filter = 2
+theme_type_variation = &"PanelPurpleStatus"
+
+[node name="VList" type="VBoxContainer" parent="HList2/VList2/Panel" unique_id=759020745]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="HList" type="HBoxContainer" parent="HList2/VList2/Panel/VList" unique_id=880921548]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="HList2/VList2/Panel/VList/HList" unique_id=1784411160]
+layout_mode = 2
+theme_type_variation = &"LabelWithPurple"
+text = "CORE RESET"
+
+[node name="Control" type="Control" parent="HList2/VList2/Panel/VList/HList" unique_id=1154142246]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Label2" type="Label" parent="HList2/VList2/Panel/VList/HList" unique_id=1392936091]
+layout_mode = 2
+theme_type_variation = &"LabelWithPurple"
+text = "74"
+
+[node name="Label3" type="Label" parent="HList2/VList2/Panel/VList/HList" unique_id=2132480027]
+layout_mode = 2
+theme_type_variation = &"LabelWithPurple"
+text = "%"
+
+[node name="ProgressBar" type="ProgressBar" parent="HList2/VList2/Panel/VList" unique_id=2112530983]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+theme_type_variation = &"ProgressBarPurple"
+value = 75.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="HList2/VList2/Panel/VList" unique_id=1854554546]
+layout_mode = 2
+theme_type_variation = &"LabelGrayHint"
+text = "+1 Core Shard next reset"
+horizontal_alignment = 2
+
+[node name="Control2" type="Control" parent="HList2/VList2" unique_id=9808653]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HList3" type="HBoxContainer" parent="." unique_id=1465104853]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 20
+
+[node name="IncomePanel" type="Panel" parent="HList3" unique_id=1379284356]
+custom_minimum_size = Vector2(0, 170)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_type_variation = &"PanelDimmedBG"
+
+[node name="VList" type="VBoxContainer" parent="HList3/IncomePanel" unique_id=141622709]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="HList3/IncomePanel/VList" unique_id=110803792]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "INCOME / SEC"
+
+[node name="income_ps" type="Label" parent="HList3/IncomePanel/VList" unique_id=119779254]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_Blue"
+text = "18.4k AU"
+script = ExtResource("4_tyi6r")
+
+[node name="incone_counter" type="Timer" parent="HList3/IncomePanel/VList/income_ps" unique_id=285898926]
+autostart = true
+
+[node name="bot_amount_active" type="Label" parent="HList3/IncomePanel/VList" unique_id=1960137476]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "5 bots online"
+script = ExtResource("4_ghiss")
+
+[node name="OfflinePanel" type="Panel" parent="HList3" unique_id=1953278239]
+custom_minimum_size = Vector2(0, 170)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_type_variation = &"PanelDimmedBG"
+
+[node name="VList" type="VBoxContainer" parent="HList3/OfflinePanel" unique_id=1378124218]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="HList3/OfflinePanel/VList" unique_id=351293233]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "OFFLINE CAP"
+
+[node name="offline_cap" type="Label" parent="HList3/OfflinePanel/VList" unique_id=1722322066]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_Purple"
+text = "6h 00m"
+script = ExtResource("7_5w0l6")
+
+[node name="offline_level" type="Label" parent="HList3/OfflinePanel/VList" unique_id=429210954]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "Deep stasis lvl 34"
+script = ExtResource("7_davrd")
+
+[node name="XPBonusPanel" type="Panel" parent="HList3" unique_id=1579834141]
+custom_minimum_size = Vector2(0, 170)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_type_variation = &"PanelDimmedBG"
+
+[node name="VList" type="VBoxContainer" parent="HList3/XPBonusPanel" unique_id=112188415]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="HList3/XPBonusPanel/VList" unique_id=2067486006]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "DROP BONUS"
+
+[node name="drop_bonus_value" type="Label" parent="HList3/XPBonusPanel/VList" unique_id=1805263966]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_Gold"
+text = "x2.4"
+script = ExtResource("9_elpyf")
+
+[node name="drop_bonus" type="Label" parent="HList3/XPBonusPanel/VList" unique_id=381458678]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "Boosted ore yield"
+script = ExtResource("9_acvec")
+
+[node name="Control2" type="Control" parent="." unique_id=353041489]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MiningPanel" type="Panel" parent="." unique_id=443113635]
+custom_minimum_size = Vector2(0, 900)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_type_variation = &"PanelDimmedBG"
+
+[node name="VList" type="VBoxContainer" parent="MiningPanel" unique_id=1865003503]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HList" type="HBoxContainer" parent="MiningPanel/VList" unique_id=676413582]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VList" type="VBoxContainer" parent="MiningPanel/VList/HList" unique_id=2007105891]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="MiningPanel/VList/HList/VList" unique_id=496065548]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "MINING LANES"
+
+[node name="Label2" type="Label" parent="MiningPanel/VList/HList/VList" unique_id=828864365]
+layout_mode = 2
+theme_type_variation = &"LabelWhiteTitle"
+text = "Active excavation grid"
+
+[node name="Control" type="Control" parent="MiningPanel/VList/HList" unique_id=1824300718]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="VList2" type="VBoxContainer" parent="MiningPanel/VList/HList" unique_id=361238268]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="StatusLabel" parent="MiningPanel/VList/HList/VList2" unique_id=286645920 instance=ExtResource("1_fqevo")]
+custom_minimum_size = Vector2(281, 35)
+layout_mode = 2
+panel_color = "BLUE"
+status_text = "BOSS BLOCK IN 50M"
+
+[node name="Control2" type="Control" parent="MiningPanel/VList/HList" unique_id=454992255]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HList2" type="HBoxContainer" parent="MiningPanel/VList" unique_id=272936071]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="VList1" type="VBoxContainer" parent="MiningPanel/VList/HList2" unique_id=1815432582]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="MiningPanel/VList/HList2/VList1" unique_id=1940922194]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_type_variation = &"PanelWithWhiteBG"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MiningPanel/VList/HList2/VList1/Panel" unique_id=1724892054]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Lane_0_Depth" parent="MiningPanel/VList/HList2/VList1/Panel/VBoxContainer" unique_id=2003499456 instance=ExtResource("4_vr6j5")]
+custom_minimum_size = Vector2(115, 20)
+layout_mode = 2
+hash_tag_color = "BLUE"
+hash_tag_text = "100M"
+hashtag_icon = ExtResource("5_131td")
+hide_bg = true
+text_direction = "MIDDLE"
+is_currency = false
+
+[node name="LaneDepthUpdate" parent="MiningPanel/VList/HList2/VList1/Panel/VBoxContainer/Lane_0_Depth" unique_id=1771884160 instance=ExtResource("6_8n6rl")]
+
+[node name="DigBotSlot" parent="MiningPanel/VList/HList2/VList1/Panel/VBoxContainer" unique_id=1867726318 instance=ExtResource("2_b4o7w")]
+layout_mode = 2
+mouse_filter = 2
+cur_lane = 0
+
+[node name="Control" type="Control" parent="MiningPanel/VList/HList2/VList1/Panel/VBoxContainer" unique_id=1697160747]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Lane_0_List" type="VBoxContainer" parent="MiningPanel/VList/HList2/VList1/Panel/VBoxContainer" unique_id=1606150408]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="VList2" type="VBoxContainer" parent="MiningPanel/VList/HList2" unique_id=83304175]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="MiningPanel/VList/HList2/VList2" unique_id=1400586895]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_type_variation = &"PanelWithWhiteBG"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MiningPanel/VList/HList2/VList2/Panel" unique_id=1721915419]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Lane_1_Depth" parent="MiningPanel/VList/HList2/VList2/Panel/VBoxContainer" unique_id=414814828 instance=ExtResource("4_vr6j5")]
+custom_minimum_size = Vector2(115, 20)
+layout_mode = 2
+hash_tag_color = "BLUE"
+hash_tag_text = "100M"
+hashtag_icon = ExtResource("5_131td")
+hide_bg = true
+text_direction = "MIDDLE"
+is_currency = false
+
+[node name="LaneDepthUpdate" parent="MiningPanel/VList/HList2/VList2/Panel/VBoxContainer/Lane_1_Depth" unique_id=338296388 instance=ExtResource("6_8n6rl")]
+
+[node name="DigBotSlot" parent="MiningPanel/VList/HList2/VList2/Panel/VBoxContainer" unique_id=916014097 instance=ExtResource("2_b4o7w")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="MiningPanel/VList/HList2/VList2/Panel/VBoxContainer" unique_id=1836681742]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Lane_1_List" type="VBoxContainer" parent="MiningPanel/VList/HList2/VList2/Panel/VBoxContainer" unique_id=217775121]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="VList3" type="VBoxContainer" parent="MiningPanel/VList/HList2" unique_id=832403159]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="MiningPanel/VList/HList2/VList3" unique_id=1959463241]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_type_variation = &"PanelWithWhiteBG"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MiningPanel/VList/HList2/VList3/Panel" unique_id=1327511212]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Lane_2_Depth" parent="MiningPanel/VList/HList2/VList3/Panel/VBoxContainer" unique_id=306738254 instance=ExtResource("4_vr6j5")]
+custom_minimum_size = Vector2(115, 20)
+layout_mode = 2
+hash_tag_color = "BLUE"
+hash_tag_text = "100M"
+hashtag_icon = ExtResource("5_131td")
+hide_bg = true
+text_direction = "MIDDLE"
+is_currency = false
+
+[node name="LaneDepthUpdate" parent="MiningPanel/VList/HList2/VList3/Panel/VBoxContainer/Lane_2_Depth" unique_id=2133176978 instance=ExtResource("6_8n6rl")]
+
+[node name="DigBotSlot" parent="MiningPanel/VList/HList2/VList3/Panel/VBoxContainer" unique_id=1132631927 instance=ExtResource("2_b4o7w")]
+layout_mode = 2
+mouse_filter = 2
+cur_lane = 2
+
+[node name="Control" type="Control" parent="MiningPanel/VList/HList2/VList3/Panel/VBoxContainer" unique_id=727724188]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Lane_2_List" type="VBoxContainer" parent="MiningPanel/VList/HList2/VList3/Panel/VBoxContainer" unique_id=1254573439]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="VList4" type="VBoxContainer" parent="MiningPanel/VList/HList2" unique_id=1341555731]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="MiningPanel/VList/HList2/VList4" unique_id=709274258]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_type_variation = &"PanelWithWhiteBG"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MiningPanel/VList/HList2/VList4/Panel" unique_id=783700082]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Lane_3_Depth" parent="MiningPanel/VList/HList2/VList4/Panel/VBoxContainer" unique_id=326009567 instance=ExtResource("4_vr6j5")]
+custom_minimum_size = Vector2(115, 20)
+layout_mode = 2
+hash_tag_color = "BLUE"
+hash_tag_text = "100M"
+hashtag_icon = ExtResource("5_131td")
+hide_bg = true
+text_direction = "MIDDLE"
+is_currency = false
+
+[node name="LaneDepthUpdate" parent="MiningPanel/VList/HList2/VList4/Panel/VBoxContainer/Lane_3_Depth" unique_id=1063287346 instance=ExtResource("6_8n6rl")]
+
+[node name="DigBotSlot" parent="MiningPanel/VList/HList2/VList4/Panel/VBoxContainer" unique_id=759063312 instance=ExtResource("2_b4o7w")]
+layout_mode = 2
+mouse_filter = 2
+cur_lane = 3
+
+[node name="Control" type="Control" parent="MiningPanel/VList/HList2/VList4/Panel/VBoxContainer" unique_id=1625963593]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Lane_3_List" type="VBoxContainer" parent="MiningPanel/VList/HList2/VList4/Panel/VBoxContainer" unique_id=1493458771]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="VList5" type="VBoxContainer" parent="MiningPanel/VList/HList2" unique_id=617770273]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="MiningPanel/VList/HList2/VList5" unique_id=765736633]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_type_variation = &"PanelWithWhiteBG"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MiningPanel/VList/HList2/VList5/Panel" unique_id=1963346120]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Lane_4_Depth" parent="MiningPanel/VList/HList2/VList5/Panel/VBoxContainer" unique_id=951973235 instance=ExtResource("4_vr6j5")]
+custom_minimum_size = Vector2(115, 20)
+layout_mode = 2
+hash_tag_color = "BLUE"
+hash_tag_text = "100M"
+hashtag_icon = ExtResource("5_131td")
+hide_bg = true
+text_direction = "MIDDLE"
+is_currency = false
+
+[node name="LaneDepthUpdate" parent="MiningPanel/VList/HList2/VList5/Panel/VBoxContainer/Lane_4_Depth" unique_id=1457944446 instance=ExtResource("6_8n6rl")]
+
+[node name="DigBotSlot" parent="MiningPanel/VList/HList2/VList5/Panel/VBoxContainer" unique_id=461067637 instance=ExtResource("2_b4o7w")]
+layout_mode = 2
+mouse_filter = 2
+cur_lane = 4
+
+[node name="Control" type="Control" parent="MiningPanel/VList/HList2/VList5/Panel/VBoxContainer" unique_id=867431007]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Lane_4_List" type="VBoxContainer" parent="MiningPanel/VList/HList2/VList5/Panel/VBoxContainer" unique_id=2104611412]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Control3" type="Control" parent="." unique_id=115570880]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HList4" type="HBoxContainer" parent="." unique_id=517077393]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 20
+
+[node name="DailyTasks" type="Panel" parent="HList4" unique_id=285374393]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_type_variation = &"PanelPurpleBorder"
+
+[node name="VList" type="VBoxContainer" parent="HList4/DailyTasks" unique_id=1372318764]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="HList4/DailyTasks/VList" unique_id=832151970]
+layout_mode = 2
+theme_type_variation = &"LabelDailyPurple"
+text = "DAILY TASKS"
+
+[node name="Control" type="Control" parent="HList4/DailyTasks/VList" unique_id=1378331768]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Label2" type="Label" parent="HList4/DailyTasks/VList" unique_id=2065718126]
+layout_mode = 2
+theme_type_variation = &"LabelDailyTasks"
+text = "Dig 10 alloy blocks"
+autowrap_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="HList4/DailyTasks/VList" unique_id=1699369267]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+theme_type_variation = &"ProgressBarPurple"
+value = 70.0
+show_percentage = false
+
+[node name="Label3" type="Label" parent="HList4/DailyTasks/VList" unique_id=2090530661]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "75% complete"
+
+[node name="Panel2" type="Panel" parent="HList4" unique_id=2063050503]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_type_variation = &"PanelBlueBorder"
+
+[node name="VList" type="VBoxContainer" parent="HList4/Panel2" unique_id=1565824999]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="HList4/Panel2/VList" unique_id=516029338]
+layout_mode = 2
+theme_type_variation = &"LabelDailyBlue"
+text = "ACTIVE BOOST"
+
+[node name="Control" type="Control" parent="HList4/Panel2/VList" unique_id=2012572583]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Label2" type="Label" parent="HList4/Panel2/VList" unique_id=2094930114]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_Blue"
+text = "x2.4"
+autowrap_mode = 2
+
+[node name="Label3" type="Label" parent="HList4/Panel2/VList" unique_id=598357039]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "Ore yield - 14m left"
+
+[node name="Panel3" type="Panel" parent="HList4" unique_id=2101102234]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_type_variation = &"PanelGoldBorder"
+
+[node name="VList" type="VBoxContainer" parent="HList4/Panel3" unique_id=882728460]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="HList4/Panel3/VList" unique_id=1175342176]
+layout_mode = 2
+theme_type_variation = &"LabelDailyGold"
+text = "NEXT MILESTONE"
+
+[node name="Control" type="Control" parent="HList4/Panel3/VList" unique_id=1254459716]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Label2" type="Label" parent="HList4/Panel3/VList" unique_id=1330378048]
+layout_mode = 2
+theme_type_variation = &"LabelDailyTasks"
+text = "1,500m unlocks boss block"
+autowrap_mode = 2
+
+[node name="Label3" type="Label" parent="HList4/Panel3/VList" unique_id=1697776307]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "50m remaining"
+
+[node name="Control4" type="Control" parent="." unique_id=1742842293]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HList5" type="HBoxContainer" parent="." unique_id=112388191]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="WatchAdBtn" parent="HList5" unique_id=664760665 instance=ExtResource("2_8q4ji")]
+layout_mode = 2
+btn_text = "Watch Ad"
+
+[node name="SmartButton2" parent="HList5" unique_id=258191787 instance=ExtResource("2_8q4ji")]
+layout_mode = 2
+btn_text = "Open chest"
+button_color = "PURPLE_MARGIN"
+
+[node name="SmartButton3" parent="HList5" unique_id=66758420 instance=ExtResource("2_8q4ji")]
+layout_mode = 2
+btn_text = "View quests"
+button_color = "WHITE_MARGIN"
+
+[node name="Control5" type="Control" parent="." unique_id=751154632]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[connection signal="timeout" from="HList3/IncomePanel/VList/income_ps/incone_counter" to="HList3/IncomePanel/VList/income_ps" method="_on_incone_counter_timeout"]
+[connection signal="child_exiting_tree" from="MiningPanel/VList/HList2/VList1/Panel/VBoxContainer/Lane_0_List" to="." method="_on_lane_1_list_child_exiting_tree"]
+[connection signal="child_exiting_tree" from="MiningPanel/VList/HList2/VList2/Panel/VBoxContainer/Lane_1_List" to="." method="_on_lane_2_list_child_exiting_tree"]
+[connection signal="child_exiting_tree" from="MiningPanel/VList/HList2/VList3/Panel/VBoxContainer/Lane_2_List" to="." method="_on_lane_3_list_child_exiting_tree"]
+[connection signal="child_exiting_tree" from="MiningPanel/VList/HList2/VList4/Panel/VBoxContainer/Lane_3_List" to="." method="_on_lane_4_list_child_exiting_tree"]
+[connection signal="child_exiting_tree" from="MiningPanel/VList/HList2/VList5/Panel/VBoxContainer/Lane_4_List" to="." method="_on_lane_5_list_child_exiting_tree"]
+[connection signal="BtnPressed" from="HList5/WatchAdBtn" to="." method="_on_watch_ad_btn_btn_pressed"]

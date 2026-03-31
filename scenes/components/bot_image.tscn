@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dbb7264ypuqrj"]
+
+[ext_resource type="Texture2D" uid="uid://d0lo33f440v64" path="res://art/bots/bot_set_1.png" id="1_pm0lq"]
+[ext_resource type="Script" uid="uid://bvc8qrcqym56s" path="res://scenes/components/bot_image.gd" id="2_03vqk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_03vqk"]
+atlas = ExtResource("1_pm0lq")
+region = Rect2(58, 52, 129, 107)
+
+[node name="BotImage" type="TextureRect" unique_id=2022498304]
+texture = SubResource("AtlasTexture_03vqk")
+script = ExtResource("2_03vqk")

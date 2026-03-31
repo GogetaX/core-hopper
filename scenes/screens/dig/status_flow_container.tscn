@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cv4nidwf6xdti"]
+
+[ext_resource type="PackedScene" uid="uid://ds2fs82ijg3xn" path="res://scenes/components/status_label.tscn" id="1_lxmth"]
+
+[node name="StatusFlowContainer" type="HFlowContainer" unique_id=1008374012]
+
+[node name="StatusLabel" parent="." unique_id=2088306964 instance=ExtResource("1_lxmth")]
+custom_minimum_size = Vector2(256, 30)
+layout_mode = 2
+panel_color = "BLUE"
+status_text = "DIGGING INACTIVE"

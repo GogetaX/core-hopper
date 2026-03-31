@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://dk2ys8k4etgng"]
+
+[ext_resource type="Script" uid="uid://bu8eufb1cbn23" path="res://scenes/components/smart_button.gd" id="1_5lauu"]
+[ext_resource type="Texture2D" uid="uid://bg18vum2cai3c" path="res://art/icons/rocket.png" id="1_crr8x"]
+
+[node name="SmartButton" type="Control" unique_id=664760665]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 504.0
+offset_bottom = 120.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_horizontal = 3
+mouse_filter = 1
+script = ExtResource("1_5lauu")
+btn_text = "Test "
+btn_icon = ExtResource("1_crr8x")
+
+[node name="Panel" type="Panel" parent="." unique_id=272776267]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_type_variation = &"PanelBlueBorder"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel" unique_id=1581387820]
+modulate = Color(0.81960785, 0.98039216, 1, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/HBoxContainer" unique_id=1559249099]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_crr8x")
+expand_mode = 3
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="Panel/HBoxContainer" unique_id=1972893777]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_type_variation = &"LabelButtonWhite"
+text = "Test "
+autowrap_mode = 2

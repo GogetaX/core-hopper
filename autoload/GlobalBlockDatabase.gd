@@ -1,0 +1,379 @@
+extends Node
+class_name BlockDatabase
+
+const ARCHETYPES_PATH := "res://data/blocks/block_archetypes.json"
+const DEPTH_BANDS_PATH := "res://data/blocks/depth_bands.json"
+
+var archetypes: Dictionary = {}
+var depth_bands: Array = []
+
+var _rng := RandomNumberGenerator.new()
+var _spawn_serial: int = 0
+
+
+func _ready() -> void:
+	_rng.randomize()
+	load_data()
+
+
+func load_data() -> void:
+	archetypes.clear()
+	depth_bands.clear()
+
+	archetypes = _load_json_dictionary(ARCHETYPES_PATH)
+	depth_bands = _load_json_array(DEPTH_BANDS_PATH)
+
+	_validate_archetypes()
+	_validate_depth_bands()
+	_validate_depth_band_ranges()
+
+
+func reload_data() -> void:
+	load_data()
+
+
+func is_loaded() -> bool:
+	return not archetypes.is_empty() and not depth_bands.is_empty()
+
+
+func get_archetype(block_id: String) -> Dictionary:
+	if not archetypes.has(block_id):
+		push_warning("BlockDatabase: Missing archetype for id '%s'" % block_id)
+		return {}
+	return archetypes[block_id]
+
+
+func get_band_for_depth(depth: int) -> Dictionary:
+	for band in depth_bands:
+		var min_depth: int = int(band.get("min_depth", 0))
+		var max_depth: int = int(band.get("max_depth", -1))
+
+		if depth >= min_depth and depth <= max_depth:
+			return band
+
+	# Fallback: if depth is beyond all defined bands, use the last valid band
+	if depth_bands.size() > 0:
+		return depth_bands[depth_bands.size() - 1]
+
+	push_error("BlockDatabase: No depth band found and no fallback available.")
+	return {}
+
+
+func spawn_block(depth: int, lane_index: int = -1) -> Dictionary:
+	if not is_loaded():
+		push_warning("BlockDatabase: Data not loaded. Attempting to load now.")
+		load_data()
+
+	var band := get_band_for_depth(depth)
+	if band.is_empty():
+		return {}
+
+	var spawn_pool: Array = band.get("spawn_pool", [])
+	if spawn_pool.is_empty():
+		push_error("BlockDatabase: spawn_pool is empty for depth %d" % depth)
+		return {}
+
+	var block_id := roll_block_id(spawn_pool)
+	if block_id.is_empty():
+		push_error("BlockDatabase: Failed to roll block id for depth %d" % depth)
+		return {}
+
+	var archetype := get_archetype(block_id)
+	if archetype.is_empty():
+		return {}
+
+	var base_hp: float = float(band.get("base_hp", 1))
+	var hp_multiplier: float = float(archetype.get("hp_multiplier", 1.0))
+	var reward_multiplier: float = float(band.get("reward_multiplier", 1.0))
+	var reward_amount_base: float = float(archetype.get("reward_amount", 1))
+	var band_start_depth: int = int(band.get("min_depth", depth))
+	var depth_in_band := depth - band_start_depth
+	var depth_growth := pow(1.01, depth_in_band)
+	var final_hp: int = max(1, roundi(base_hp * hp_multiplier * depth_growth))
+	var final_reward = max(1, reward_amount_base * reward_multiplier)
+
+	_spawn_serial += 1
+
+	var runtime_block := {
+		"uid": get_next_block_uid(depth,lane_index),
+		"id": block_id,
+		"name": String(archetype.get("name", block_id.capitalize())),
+		"max_hp": final_hp,
+		"hp": final_hp,
+		"reward_type": String(archetype.get("reward_type", "coins")),
+		"reward_amount": final_reward,
+		"base_reward_amount": reward_amount_base,
+		"rarity": String(archetype.get("rarity", "common")),
+		"depth": depth,
+		"lane_index": lane_index,
+		"color": String(archetype.get("color", "gray")),
+		"tags": archetype.get("tags", []).duplicate(true),
+		"base_hp": base_hp,
+		"hp_multiplier": hp_multiplier,
+		"reward_multiplier": reward_multiplier
+	}
+
+	return runtime_block
+
+
+func get_next_block_uid(depth: int, lane_index: int) -> String:
+	GlobalSave.save_data.meta.block_uid_serial += 1
+	return "%s_%s_%s" % [str(depth), str(lane_index), str(GlobalSave.save_data.meta.block_uid_serial)]
+	
+func roll_block_id(spawn_pool: Array) -> String:
+	if spawn_pool.is_empty():
+		return ""
+
+	var total_weight: int = 0
+
+	for entry in spawn_pool:
+		if typeof(entry) != TYPE_DICTIONARY:
+			continue
+
+		var weight: int = int(entry.get("weight", 0))
+		if weight > 0:
+			total_weight += weight
+
+	if total_weight <= 0:
+		push_error("BlockDatabase: spawn_pool total_weight <= 0")
+		return ""
+
+	var roll: int = _rng.randi_range(1, total_weight)
+	var running_total: int = 0
+
+	for entry in spawn_pool:
+		if typeof(entry) != TYPE_DICTIONARY:
+			continue
+
+		var weight: int = int(entry.get("weight", 0))
+		if weight <= 0:
+			continue
+
+		running_total += weight
+		if roll <= running_total:
+			return String(entry.get("id", ""))
+
+	push_warning("BlockDatabase: Weighted roll fell through. Using last valid entry.")
+	for i in range(spawn_pool.size() - 1, -1, -1):
+		var entry = spawn_pool[i]
+		if typeof(entry) == TYPE_DICTIONARY and int(entry.get("weight", 0)) > 0:
+			return String(entry.get("id", ""))
+
+	return ""
+
+
+func preview_blocks_for_depth(depth: int, count: int = 10) -> Array:
+	var results: Array = []
+	for i in count:
+		results.append(spawn_block(depth))
+	return results
+
+
+func get_depth_band_index(depth: int) -> int:
+	for i in depth_bands.size():
+		var band: Dictionary = depth_bands[i]
+		var min_depth: int = int(band.get("min_depth", 0))
+		var max_depth: int = int(band.get("max_depth", -1))
+		if depth >= min_depth and depth <= max_depth:
+			return i
+
+	if depth_bands.size() > 0:
+		return depth_bands.size() - 1
+
+	return -1
+	
+func _validate_depth_band_ranges() -> void:
+	for i in range(depth_bands.size()):
+		var band = depth_bands[i]
+		var min_depth := int(band.get("min_depth", 0))
+		var max_depth := int(band.get("max_depth", -1))
+
+		if min_depth > max_depth:
+			push_error("Depth band %d has min_depth > max_depth" % i)
+
+		if i > 0:
+			var prev = depth_bands[i - 1]
+			var prev_max := int(prev.get("max_depth", -1))
+			if min_depth > prev_max + 1:
+				push_warning("Gap between depth bands %d and %d" % [i - 1, i])
+			elif min_depth <= prev_max:
+				push_error("Overlap between depth bands %d and %d" % [i - 1, i])
+
+func _validate_archetypes() -> void:
+	for block_id in archetypes.keys():
+		var data = archetypes[block_id]
+
+		if typeof(data) != TYPE_DICTIONARY:
+			push_error("BlockDatabase: Archetype '%s' is not a dictionary." % block_id)
+			continue
+
+		if not data.has("name"):
+			push_warning("BlockDatabase: Archetype '%s' missing 'name'." % block_id)
+		if not data.has("hp_multiplier"):
+			push_warning("BlockDatabase: Archetype '%s' missing 'hp_multiplier'." % block_id)
+		if not data.has("reward_type"):
+			push_warning("BlockDatabase: Archetype '%s' missing 'reward_type'." % block_id)
+		if not data.has("reward_amount"):
+			push_warning("BlockDatabase: Archetype '%s' missing 'reward_amount'." % block_id)
+		if not data.has("rarity"):
+			push_warning("BlockDatabase: Archetype '%s' missing 'rarity'." % block_id)
+
+
+func _validate_depth_bands() -> void:
+	if depth_bands.is_empty():
+		push_error("BlockDatabase: depth_bands is empty.")
+		return
+
+	for i in depth_bands.size():
+		var band = depth_bands[i]
+
+		if typeof(band) != TYPE_DICTIONARY:
+			push_error("BlockDatabase: Depth band at index %d is not a dictionary." % i)
+			continue
+
+		if not band.has("min_depth"):
+			push_warning("BlockDatabase: Depth band %d missing 'min_depth'." % i)
+		if not band.has("max_depth"):
+			push_warning("BlockDatabase: Depth band %d missing 'max_depth'." % i)
+		if not band.has("base_hp"):
+			push_warning("BlockDatabase: Depth band %d missing 'base_hp'." % i)
+		if not band.has("reward_multiplier"):
+			push_warning("BlockDatabase: Depth band %d missing 'reward_multiplier'." % i)
+		if not band.has("spawn_pool"):
+			push_warning("BlockDatabase: Depth band %d missing 'spawn_pool'." % i)
+
+		var spawn_pool: Array = band.get("spawn_pool", [])
+		for j in spawn_pool.size():
+			var entry = spawn_pool[j]
+			if typeof(entry) != TYPE_DICTIONARY:
+				push_error("BlockDatabase: spawn_pool entry %d in band %d is not a dictionary." % [j, i])
+				continue
+
+			var block_id: String = String(entry.get("id", ""))
+			if block_id.is_empty():
+				push_warning("BlockDatabase: spawn_pool entry %d in band %d missing 'id'." % [j, i])
+				continue
+
+			if not archetypes.has(block_id):
+				push_error("BlockDatabase: spawn_pool entry references missing archetype '%s'." % block_id)
+
+
+func _load_json_dictionary(path: String) -> Dictionary:
+	var data = _load_json(path)
+	if typeof(data) != TYPE_DICTIONARY:
+		push_error("BlockDatabase: Expected dictionary JSON at %s" % path)
+		return {}
+	return data
+
+
+func _load_json_array(path: String) -> Array:
+	var data = _load_json(path)
+	if typeof(data) != TYPE_ARRAY:
+		push_error("BlockDatabase: Expected array JSON at %s" % path)
+		return []
+	return data
+
+
+func _load_json(path: String) -> Variant:
+	if not FileAccess.file_exists(path):
+		push_error("BlockDatabase: File does not exist: %s" % path)
+		return null
+
+	var file := FileAccess.open(path, FileAccess.READ)
+	if file == null:
+		push_error("BlockDatabase: Failed to open file: %s" % path)
+		return null
+
+	var text := file.get_as_text()
+	file.close()
+
+	var json := JSON.new()
+	var error := json.parse(text)
+
+	if error != OK:
+		push_error(
+			"BlockDatabase: JSON parse error in %s at line %d: %s" %
+			[path, json.get_error_line(), json.get_error_message()]
+		)
+		return null
+
+	return json.data
+
+func CreateBlockForLane(depth: int, lane_index: int) -> Dictionary:
+	var band = _GetDepthBand(depth)
+	if band.is_empty():
+		push_error("No depth band found for depth %d" % depth)
+		return {}
+
+	var block_id := _PickBlockIdFromSpawnPool(band.spawn_pool)
+	if block_id == "":
+		push_error("Failed picking block id for depth %d" % depth)
+		return {}
+
+	var archetype: Dictionary = archetypes.get(block_id, {})
+	if archetype.is_empty():
+		push_error("Missing archetype for id: %s" % block_id)
+		return {}
+
+	var base_hp := int(band.base_hp)
+	var hp_multiplier := float(archetype.hp_multiplier)
+	var reward_multiplier := float(band.reward_multiplier)
+	var reward_amount_base := int(archetype.reward_amount)
+
+	var final_hp = max(1, roundi(base_hp * hp_multiplier))
+	var final_reward = max(1, roundi(reward_amount_base * reward_multiplier))
+
+	return {
+		"uid": _BuildBlockUid(depth, lane_index),
+		"id": block_id,
+		"name": str(archetype.name),
+		"depth": depth,
+		"lane_index": lane_index,
+		"base_hp": base_hp,
+		"hp_multiplier": hp_multiplier,
+		"max_hp": final_hp,
+		"hp": final_hp,
+		"reward_type": str(archetype.reward_type),
+		"base_reward_amount": reward_amount_base,
+		"reward_multiplier": reward_multiplier,
+		"reward_amount": final_reward,
+		"rarity": str(archetype.rarity),
+		"color": str(archetype.color),
+		"tags": archetype.tags.duplicate()
+	}
+	
+func _GetDepthBand(depth: int) -> Dictionary:
+	for band in depth_bands:
+		if depth >= int(band.min_depth) and depth <= int(band.max_depth):
+			return band
+	return {}
+
+
+func _PickBlockIdFromSpawnPool(spawn_pool: Array) -> String:
+	if spawn_pool.is_empty():
+		return ""
+
+	var total_weight := 0
+	for entry in spawn_pool:
+		total_weight += int(entry.weight)
+
+	if total_weight <= 0:
+		return ""
+
+	var roll := randi_range(1, total_weight)
+	var running := 0
+
+	for entry in spawn_pool:
+		running += int(entry.weight)
+		if roll <= running:
+			return str(entry.id)
+
+	return str(spawn_pool[0].id)
+
+func _BuildBlockUid(depth: int, lane_index: int) -> String:
+	GlobalSave.save_data.meta.block_uid_serial = int(GlobalSave.save_data.meta.get("block_uid_serial", 0)) + 1
+	return "%s_%s_%s" % [
+		str(depth),
+		str(lane_index),
+		str(GlobalSave.save_data.meta.block_uid_serial)
+	]

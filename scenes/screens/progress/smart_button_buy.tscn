@@ -1,0 +1,99 @@
+[gd_scene format=3 uid="uid://njxlv6dxrlwj"]
+
+[ext_resource type="Script" uid="uid://dnfuitmjg31ft" path="res://scenes/screens/progress/smart_button_buy.gd" id="1_kdsiy"]
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="2_kdsiy"]
+[ext_resource type="PackedScene" uid="uid://d32v5pknv4vq0" path="res://scenes/components/currency_icon.tscn" id="3_00fbv"]
+
+[node name="SmartButtonBuy" type="Control" unique_id=664760665]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 419.0
+offset_bottom = 100.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_horizontal = 3
+mouse_filter = 1
+script = ExtResource("1_kdsiy")
+btn_type = "WITH_PRICE"
+
+[node name="NO_PRICE" parent="." unique_id=892379017 instance=ExtResource("2_kdsiy")]
+visible = false
+layout_mode = 1
+panel_type = "INSIDE_ONLY"
+set_border_as_bg = true
+
+[node name="Label" type="Label" parent="NO_PRICE" unique_id=352021334]
+self_modulate = Color(0.14117648, 0.08627451, 0.23921569, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "NEW UNIT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WITH_PRICE" parent="." unique_id=2056804648 instance=ExtResource("2_kdsiy")]
+layout_mode = 1
+panel_type = "INSIDE_ONLY"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="WITH_PRICE" unique_id=436535058]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="WITH_PRICE/HBoxContainer" unique_id=940213473]
+self_modulate = Color(0.7607843, 0.43529412, 1, 1)
+layout_mode = 2
+text = "NEW UNIT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="WITH_PRICE/HBoxContainer" unique_id=993057667]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VList" type="VBoxContainer" parent="WITH_PRICE/HBoxContainer" unique_id=922498758]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="SmartPanel" parent="WITH_PRICE/HBoxContainer/VList" unique_id=480250099 instance=ExtResource("2_kdsiy")]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+panel_type = "INSIDE_ONLY"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="WITH_PRICE/HBoxContainer/VList/SmartPanel" unique_id=2005427471]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="CurrencyIcon" parent="WITH_PRICE/HBoxContainer/VList/SmartPanel/HBoxContainer" unique_id=529445326 instance=ExtResource("3_00fbv")]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+mouse_filter = 2
+icon_type = "COIN_SMALL"
+
+[node name="value_str" type="Label" parent="WITH_PRICE/HBoxContainer/VList/SmartPanel/HBoxContainer" unique_id=745035320]
+layout_mode = 2
+text = "150K AU"

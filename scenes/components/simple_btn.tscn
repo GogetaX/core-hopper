@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://chefrk8nptnii"]
+
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="1_bl1fh"]
+[ext_resource type="Script" uid="uid://c5we650whdaxt" path="res://scenes/components/simple_btn.gd" id="1_qfh7j"]
+
+[node name="SimpleBtn" type="Control" unique_id=8150277]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 583.0
+offset_bottom = 120.0
+script = ExtResource("1_qfh7j")
+
+[node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("1_bl1fh")]
+layout_mode = 1
+panel_type = "BORDER_ONLY"
+panel_color = "BLUE"
+
+[node name="title" type="Label" parent="SmartPanel" unique_id=1832714229]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"LabelTitle_Blue"
+theme_override_font_sizes/font_size = 40
+text = "COLLECT NORMAL"
+horizontal_alignment = 1
+vertical_alignment = 1

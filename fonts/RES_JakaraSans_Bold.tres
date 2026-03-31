@@ -1,0 +1,9 @@
+[gd_resource type="FontVariation" format=3 uid="uid://bbgny2bpigrdg"]
+
+[ext_resource type="FontFile" uid="uid://c7lcpg0hc4w6j" path="res://fonts/BeVietnamPro-Bold.ttf" id="1_h7mlc"]
+
+[resource]
+base_font = ExtResource("1_h7mlc")
+opentype_features = {
+1667329140: 0
+}

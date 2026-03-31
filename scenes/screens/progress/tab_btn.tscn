@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://bl0egobmu4a73"]
+
+[ext_resource type="Script" uid="uid://dwgi0qssjxys7" path="res://scenes/screens/progress/tab_btn.gd" id="1_qoiet"]
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="2_vcli7"]
+
+[node name="TabBtn" type="Control" unique_id=1499070817]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 316.0
+offset_bottom = 96.0
+script = ExtResource("1_qoiet")
+
+[node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("2_vcli7")]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+panel_type = "BORDER_ONLY"
+panel_color = "BLUE"
+
+[node name="HList" type="HBoxContainer" parent="." unique_id=836013241]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="HList" unique_id=776178116]
+layout_mode = 2
+text = "UPGRADES"
+
+[node name="Control" type="Control" parent="HList" unique_id=1373271710]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="new_notif_count" type="Label" parent="HList" unique_id=328319199]
+layout_mode = 2
+theme_type_variation = &"LabelBottomWhite"
+text = "4"
+
+[node name="SmartPanel" parent="HList/new_notif_count" unique_id=1048976832 instance=ExtResource("2_vcli7")]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+offset_left = -10.0
+offset_right = 10.0

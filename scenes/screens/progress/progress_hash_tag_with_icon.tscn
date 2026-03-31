@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://cyrssis6jwdc2"]
+
+[ext_resource type="Script" uid="uid://4pemwq13lmv5" path="res://scenes/screens/progress/progress_hash_tag_with_icon.gd" id="1_dhuuj"]
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="2_2xauu"]
+[ext_resource type="Texture2D" uid="uid://bg18vum2cai3c" path="res://art/icons/rocket.png" id="2_dhuuj"]
+[ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="2_iru2d"]
+
+[node name="ProgressHashTagWithIcon" type="Control" unique_id=2003499456]
+self_modulate = Color(0.9490196, 0.8392157, 1, 1)
+custom_minimum_size = Vector2(156, 33)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 156.0
+offset_bottom = 33.0
+mouse_filter = 2
+script = ExtResource("1_dhuuj")
+hashtag_icon = ExtResource("2_dhuuj")
+is_currency = null
+
+[node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("2_2xauu")]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+offset_left = -10.0
+offset_top = -5.0
+offset_right = -10.0
+offset_bottom = 5.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=698413014]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="HBoxContainer" unique_id=932687345]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Control" unique_id=1992750027]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_dhuuj")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ProgressHashTag" parent="HBoxContainer" unique_id=713365230 instance=ExtResource("2_iru2d")]
+self_modulate = Color(0.8627451, 0.9098039, 1, 1)
+layout_mode = 2
+text = "Text here"
+horizontal_alignment = 1
+hash_tag_color = "WHITE"
+no_bg = true
+
+[connection signal="resized" from="HBoxContainer/ProgressHashTag" to="." method="_on_progress_hash_tag_resized"]

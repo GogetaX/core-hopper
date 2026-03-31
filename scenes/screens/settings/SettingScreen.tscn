@@ -1,0 +1,198 @@
+[gd_scene format=3 uid="uid://dy1adjsaaep6a"]
+
+[ext_resource type="PackedScene" uid="uid://6lyj7dbwtwau" path="res://scenes/screens/settings/setting_toggle_button.tscn" id="1_5w3by"]
+[ext_resource type="Texture2D" uid="uid://bg18vum2cai3c" path="res://art/icons/rocket.png" id="2_ubxnx"]
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="3_dvw0c"]
+[ext_resource type="PackedScene" uid="uid://dha8wrkx0hxow" path="res://scenes/screens/settings/clound_synced.tscn" id="4_vu2ht"]
+[ext_resource type="PackedScene" uid="uid://bvpwx7yevqtth" path="res://scenes/screens/shop/smart_button_buy_with_icon.tscn" id="5_4wy23"]
+[ext_resource type="PackedScene" uid="uid://cyrssis6jwdc2" path="res://scenes/screens/progress/progress_hash_tag_with_icon.tscn" id="6_cf0sl"]
+[ext_resource type="PackedScene" uid="uid://cq0mfpilaq47g" path="res://scenes/screens/settings/social_button.tscn" id="7_xvaex"]
+[ext_resource type="PackedScene" uid="uid://dnh4f6s25edjy" path="res://scenes/screens/settings/expand_to_right_button.tscn" id="8_vu2ht"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4wy23"]
+draw_center = false
+border_width_top = 2
+border_color = Color(0.30980393, 0.89411765, 1, 0.38039216)
+shadow_size = 40
+
+[node name="SettingScreen" type="VBoxContainer" unique_id=98053023]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="." unique_id=2048580658]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_Blue"
+text = "CONTROLS"
+
+[node name="SettingToggleButton" parent="." unique_id=1965808763 instance=ExtResource("1_5w3by")]
+layout_mode = 2
+panel_color = "BLUE"
+setting_icon = ExtResource("2_ubxnx")
+auto_selected = true
+
+[node name="SettingToggleButton2" parent="." unique_id=1000947284 instance=ExtResource("1_5w3by")]
+layout_mode = 2
+panel_color = "BLUE"
+setting_icon = ExtResource("2_ubxnx")
+setting_title = "SFX"
+setting_subtitle = "Action Feedback"
+auto_selected = true
+
+[node name="SettingToggleButton3" parent="." unique_id=406346671 instance=ExtResource("1_5w3by")]
+layout_mode = 2
+setting_icon = ExtResource("2_ubxnx")
+setting_title = "Haptics"
+setting_subtitle = "Tactile Sensations"
+
+[node name="Control" type="Control" parent="." unique_id=442620051]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label2" type="Label" parent="." unique_id=2077729196]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_Blue"
+text = "ACCOUNT"
+
+[node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("3_dvw0c")]
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 2
+panel_type = "INSIDE_ONLY"
+panel_color = "TAB_BG"
+darken_bg = true
+
+[node name="VList" type="VBoxContainer" parent="SmartPanel" unique_id=462209511]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="HList" type="HBoxContainer" parent="SmartPanel/VList" unique_id=177625065]
+layout_mode = 2
+
+[node name="VList" type="VBoxContainer" parent="SmartPanel/VList/HList" unique_id=577119443]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="SmartPanel/VList/HList/VList" unique_id=1141229849]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "PLAYER ID"
+
+[node name="player_id" type="Label" parent="SmartPanel/VList/HList/VList" unique_id=752418846]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_Blue"
+text = "CH-8839-XP"
+
+[node name="VList2" type="VBoxContainer" parent="SmartPanel/VList/HList" unique_id=1581724926]
+layout_mode = 2
+alignment = 1
+
+[node name="CloundSynced" parent="SmartPanel/VList/HList/VList2" unique_id=811458978 instance=ExtResource("4_vu2ht")]
+layout_mode = 2
+set_synced = true
+
+[node name="Control" type="Control" parent="SmartPanel/VList/HList" unique_id=1305564137]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+
+[node name="SmartButtonBuyWithIcon" parent="SmartPanel/VList" unique_id=664760665 instance=ExtResource("5_4wy23")]
+layout_mode = 2
+buy_btn_title = "SIGN IN WITH GOOGLE"
+panel_color = "WHITE"
+buy_btn_icon = ExtResource("2_ubxnx")
+
+[node name="SmartButtonBuyWithIcon2" parent="SmartPanel/VList" unique_id=1339023201 instance=ExtResource("5_4wy23")]
+layout_mode = 2
+buy_btn_title = "SIGN IN WITH APPLE"
+panel_color = "WHITE"
+buy_btn_icon = ExtResource("2_ubxnx")
+
+[node name="LastSync" type="Panel" parent="SmartPanel" unique_id=1067900664]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_type_variation = &"PanelBottomBar"
+theme_override_styles/panel = SubResource("StyleBoxFlat_4wy23")
+
+[node name="ProgressHashTagWithIcon" parent="SmartPanel/LastSync" unique_id=2003499456 instance=ExtResource("6_cf0sl")]
+custom_minimum_size = Vector2(381, 33)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+hash_tag_type = "BORDER_ONLY"
+hash_tag_text = "Last backup: 2 minutes ago"
+hashtag_icon = ExtResource("2_ubxnx")
+hide_bg = true
+text_direction = "MIDDLE"
+
+[node name="Control2" type="Control" parent="." unique_id=1465047943]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label3" type="Label" parent="." unique_id=1223180702]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_Blue"
+text = "SOCIAL & LEGAL"
+
+[node name="HFlow" type="HFlowContainer" parent="." unique_id=1817949412]
+layout_mode = 2
+
+[node name="SocialButton" parent="HFlow" unique_id=2047336654 instance=ExtResource("7_xvaex")]
+layout_mode = 2
+size_flags_horizontal = 3
+panel_color = "BLUE"
+icon = ExtResource("2_ubxnx")
+
+[node name="SocialButton2" parent="HFlow" unique_id=1383634219 instance=ExtResource("7_xvaex")]
+layout_mode = 2
+size_flags_horizontal = 3
+icon = ExtResource("2_ubxnx")
+text = "Help / Support"
+
+[node name="ExpandToRightButton" parent="." unique_id=566290834 instance=ExtResource("8_vu2ht")]
+layout_mode = 2
+button_icon = ExtResource("2_ubxnx")
+
+[node name="Control3" type="Control" parent="." unique_id=425249951]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="game_build_version" type="Label" parent="." unique_id=157175839]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "Build v2.4.0-Final
+© 2026 CORE HOPPER STUDIOS"
+horizontal_alignment = 1
+
+[node name="Control4" type="Control" parent="." unique_id=280221859]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+mouse_filter = 2

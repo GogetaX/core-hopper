@@ -1,0 +1,604 @@
+[gd_scene format=3 uid="uid://cucvyll2nduxn"]
+
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="1_1pkcy"]
+[ext_resource type="Script" uid="uid://dl6m0ax8j3mci" path="res://scenes/screens/progress/progress_screen.gd" id="1_c4mrb"]
+[ext_resource type="PackedScene" uid="uid://bl0egobmu4a73" path="res://scenes/screens/progress/tab_btn.tscn" id="1_gg677"]
+[ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="3_4nere"]
+[ext_resource type="PackedScene" uid="uid://bsv1pqeyc0h4m" path="res://scenes/screens/progress/progress_skill.tscn" id="4_0fuef"]
+[ext_resource type="Texture2D" uid="uid://bg18vum2cai3c" path="res://art/icons/rocket.png" id="5_3f4or"]
+[ext_resource type="PackedScene" uid="uid://cyrssis6jwdc2" path="res://scenes/screens/progress/progress_hash_tag_with_icon.tscn" id="6_neoah"]
+[ext_resource type="PackedScene" uid="uid://cvul7nt3js8au" path="res://scenes/screens/progress/quest_item.tscn" id="7_u200v"]
+[ext_resource type="PackedScene" uid="uid://cec3m3dpceceo" path="res://scenes/screens/progress/smart_single_row_btn.tscn" id="8_yhu24"]
+[ext_resource type="PackedScene" uid="uid://dtuuq8uy378eb" path="res://scenes/screens/progress/relic_item.tscn" id="9_tsw2o"]
+[ext_resource type="PackedScene" uid="uid://byej242eayu0l" path="res://scenes/screens/progress/locked_relic_item.tscn" id="10_nipnh"]
+
+[node name="ProgressScreen" type="VBoxContainer" unique_id=1963313650]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_c4mrb")
+
+[node name="Control" type="Control" parent="." unique_id=1398190519]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ProgressTopPanel" type="Panel" parent="." unique_id=1545174428]
+custom_minimum_size = Vector2(0, 570)
+layout_mode = 2
+theme_type_variation = &"PanelDimmedBG"
+
+[node name="VList" type="VBoxContainer" parent="ProgressTopPanel" unique_id=414405590]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HList" type="HBoxContainer" parent="ProgressTopPanel/VList" unique_id=364746771]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="ProgressTopPanel/VList/HList" unique_id=2045431992]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="ProgressTopPanel/VList/HList/VBox" unique_id=1192912141]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "PROGRESS"
+
+[node name="Label2" type="Label" parent="ProgressTopPanel/VList/HList/VBox" unique_id=16044000]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_White"
+text = "Upgrade and plan your next run"
+autowrap_mode = 2
+
+[node name="Label3" type="Label" parent="ProgressTopPanel/VList/HList/VBox" unique_id=1116740871]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "This hub groups global upgrades, quests, and relics under one stable tab so the bottom navigation stays consistent.
+"
+autowrap_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ProgressTopPanel/VList/HList" unique_id=2035193776]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="ProgressTopPanel/VList/HList/VBoxContainer" unique_id=1065397053]
+custom_minimum_size = Vector2(300, 290)
+layout_mode = 2
+theme_type_variation = &"PanelPurpleBorder"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ProgressTopPanel/VList/HList/VBoxContainer/Panel" unique_id=1482817855]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ProgressTopPanel/VList/HList/VBoxContainer/Panel/VBoxContainer" unique_id=604542258]
+layout_mode = 2
+theme_type_variation = &"LabelDailyPurple"
+text = "NEXT UNLOCK"
+horizontal_alignment = 2
+
+[node name="Label2" type="Label" parent="ProgressTopPanel/VList/HList/VBoxContainer/Panel/VBoxContainer" unique_id=1268893165]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_Purple"
+theme_override_font_sizes/font_size = 40
+text = "Core Depth 1,500m"
+horizontal_alignment = 2
+autowrap_mode = 2
+
+[node name="Label3" type="Label" parent="ProgressTopPanel/VList/HList/VBoxContainer/Panel/VBoxContainer" unique_id=394927183]
+layout_mode = 2
+theme_type_variation = &"LabelDailyPurple"
+text = "NEXT UNLOCK"
+horizontal_alignment = 2
+
+[node name="Label4" type="Label" parent="ProgressTopPanel/VList/HList/VBoxContainer/Panel/VBoxContainer" unique_id=1424025178]
+layout_mode = 2
+theme_type_variation = &"LabelGrayHint"
+text = "Boss block and +1 module slot"
+horizontal_alignment = 2
+autowrap_mode = 2
+
+[node name="Control" type="Control" parent="ProgressTopPanel/VList/HList/VBoxContainer" unique_id=1240926569]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="ProgressTopPanel/VList" unique_id=1516350454]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Tabs" parent="ProgressTopPanel/VList" unique_id=892379017 instance=ExtResource("1_1pkcy")]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+panel_color = "TAB_BG"
+
+[node name="TabList" type="HBoxContainer" parent="ProgressTopPanel/VList/Tabs" unique_id=1483895962]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TAB_Upgrades" parent="ProgressTopPanel/VList/Tabs/TabList" unique_id=1499070817 instance=ExtResource("1_gg677")]
+layout_mode = 2
+size_flags_horizontal = 3
+tab_name = "UPGRADES"
+btn_style = "BLUE"
+default_selected = true
+
+[node name="TAB_Quests" parent="ProgressTopPanel/VList/Tabs/TabList" unique_id=431081608 instance=ExtResource("1_gg677")]
+layout_mode = 2
+size_flags_horizontal = 3
+tab_name = "QUESTS"
+btn_style = "PURPLE"
+
+[node name="TAB_Relics" parent="ProgressTopPanel/VList/Tabs/TabList" unique_id=226629524 instance=ExtResource("1_gg677")]
+layout_mode = 2
+size_flags_horizontal = 3
+tab_name = "RELICS"
+btn_style = "GOLD"
+
+[node name="Control2" type="Control" parent="ProgressTopPanel/VList" unique_id=1396446115]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HashTags" type="HFlowContainer" parent="ProgressTopPanel/VList" unique_id=11774418]
+layout_mode = 2
+theme_override_constants/h_separation = 25
+theme_override_constants/v_separation = 25
+
+[node name="Control" type="Control" parent="ProgressTopPanel/VList/HashTags" unique_id=1132160651]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ProgressHashTag" parent="ProgressTopPanel/VList/HashTags" unique_id=713365230 instance=ExtResource("3_4nere")]
+self_modulate = Color(0.81960785, 0.98039216, 1, 1)
+layout_mode = 2
+hash_tag_color = "BLUE"
+
+[node name="ProgressHashTag2" parent="ProgressTopPanel/VList/HashTags" unique_id=831183487 instance=ExtResource("3_4nere")]
+layout_mode = 2
+text = "SPEED"
+
+[node name="ProgressHashTag3" parent="ProgressTopPanel/VList/HashTags" unique_id=1938173101 instance=ExtResource("3_4nere")]
+self_modulate = Color(0.81960785, 0.98039216, 1, 1)
+layout_mode = 2
+text = "DURABILITY"
+hash_tag_color = "BLUE"
+
+[node name="ProgressHashTag4" parent="ProgressTopPanel/VList/HashTags" unique_id=565481457 instance=ExtResource("3_4nere")]
+self_modulate = Color(1, 0.90588236, 0.65882355, 1)
+layout_mode = 2
+text = "ECONOMY"
+hash_tag_color = "GOLD"
+
+[node name="ProgressHashTag5" parent="ProgressTopPanel/VList/HashTags" unique_id=513544290 instance=ExtResource("3_4nere")]
+self_modulate = Color(1, 0.827451, 0.6313726, 1)
+layout_mode = 2
+text = "LUCK"
+hash_tag_color = "ORANGE"
+
+[node name="ProgressHashTag6" parent="ProgressTopPanel/VList/HashTags" unique_id=121935060 instance=ExtResource("3_4nere")]
+self_modulate = Color(0.95686275, 0.972549, 1, 1)
+layout_mode = 2
+text = "OFFLINE"
+hash_tag_color = "WHITE"
+
+[node name="Control2" type="Control" parent="." unique_id=516283580]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HFlowContainer" type="HFlowContainer" parent="." unique_id=1713463129]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+
+[node name="SmartPanel" parent="HFlowContainer" unique_id=1581752751 instance=ExtResource("1_1pkcy")]
+custom_minimum_size = Vector2(350, 170)
+layout_mode = 2
+size_flags_horizontal = 3
+panel_type = "BORDER_ONLY"
+panel_color = "WHITE"
+
+[node name="VBox" type="VBoxContainer" parent="HFlowContainer/SmartPanel" unique_id=1334914423]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HFlowContainer/SmartPanel/VBox" unique_id=1076181574]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "TOTAL POWER"
+
+[node name="Label2" type="Label" parent="HFlowContainer/SmartPanel/VBox" unique_id=893829135]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_Blue"
+text = "842.1K"
+
+[node name="Label3" type="Label" parent="HFlowContainer/SmartPanel/VBox" unique_id=1927048159]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "Global bot output"
+
+[node name="SmartPanel2" parent="HFlowContainer" unique_id=1038386867 instance=ExtResource("1_1pkcy")]
+custom_minimum_size = Vector2(350, 170)
+layout_mode = 2
+size_flags_horizontal = 3
+panel_type = "BORDER_ONLY"
+panel_color = "WHITE"
+
+[node name="VBox" type="VBoxContainer" parent="HFlowContainer/SmartPanel2" unique_id=942415570]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HFlowContainer/SmartPanel2/VBox" unique_id=1176618600]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "MINING SPEED"
+
+[node name="Label2" type="Label" parent="HFlowContainer/SmartPanel2/VBox" unique_id=1046503208]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_Purple"
+text = "0.45s"
+
+[node name="Label3" type="Label" parent="HFlowContainer/SmartPanel2/VBox" unique_id=323031056]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "Current interval"
+
+[node name="SmartPanel3" parent="HFlowContainer" unique_id=1983765711 instance=ExtResource("1_1pkcy")]
+custom_minimum_size = Vector2(350, 170)
+layout_mode = 2
+size_flags_horizontal = 3
+panel_type = "BORDER_ONLY"
+panel_color = "WHITE"
+
+[node name="VBox" type="VBoxContainer" parent="HFlowContainer/SmartPanel3" unique_id=1978755722]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HFlowContainer/SmartPanel3/VBox" unique_id=181374477]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "DROP MULTIPLIER"
+
+[node name="Label2" type="Label" parent="HFlowContainer/SmartPanel3/VBox" unique_id=1999582746]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_Gold"
+text = "x12.4"
+
+[node name="Label3" type="Label" parent="HFlowContainer/SmartPanel3/VBox" unique_id=4683611]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "Ore value boosted"
+
+[node name="SmartPanel4" parent="HFlowContainer" unique_id=488895178 instance=ExtResource("1_1pkcy")]
+custom_minimum_size = Vector2(350, 170)
+layout_mode = 2
+size_flags_horizontal = 3
+panel_type = "BORDER_ONLY"
+panel_color = "WHITE"
+
+[node name="VBox" type="VBoxContainer" parent="HFlowContainer/SmartPanel4" unique_id=690597303]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HFlowContainer/SmartPanel4/VBox" unique_id=109693052]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "TOTAL POWER"
+
+[node name="Label2" type="Label" parent="HFlowContainer/SmartPanel4/VBox" unique_id=1628367376]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_Orange"
+text = "842.1K"
+
+[node name="Label3" type="Label" parent="HFlowContainer/SmartPanel4/VBox" unique_id=1388907250]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "420% crit dmg"
+
+[node name="Control3" type="Control" parent="." unique_id=185290730]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Menu_Upgrades" parent="." unique_id=538357802 instance=ExtResource("1_1pkcy")]
+custom_minimum_size = Vector2(0, 1800)
+layout_mode = 2
+panel_type = "BORDER_ONLY"
+panel_color = "WHITE"
+
+[node name="VList" type="VBoxContainer" parent="Menu_Upgrades" unique_id=1022241819]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="Menu_Upgrades/VList" unique_id=1654671664]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "UPGRADES"
+
+[node name="HList" type="HBoxContainer" parent="Menu_Upgrades/VList" unique_id=1993276487]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label2" type="Label" parent="Menu_Upgrades/VList/HList" unique_id=897665926]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"LabelTitle_White"
+theme_override_font_sizes/font_size = 40
+text = "Global mining systems"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu_Upgrades/VList/HList" unique_id=586645886]
+layout_mode = 2
+alignment = 1
+
+[node name="ProgressHashTagWithIcon" parent="Menu_Upgrades/VList/HList/VBoxContainer" unique_id=2003499456 instance=ExtResource("6_neoah")]
+custom_minimum_size = Vector2(208, 33)
+layout_mode = 2
+hash_tag_type = "INSIDE_ONLY"
+hash_tag_color = "BLUE"
+hash_tag_text = "PRIMARY TAB"
+is_currency = false
+
+[node name="Control" type="Control" parent="Menu_Upgrades/VList/HList" unique_id=1545620159]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="Menu_Upgrades/VList" unique_id=1552065971]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ProgressSkillList" type="HFlowContainer" parent="Menu_Upgrades/VList" unique_id=1114425859]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+
+[node name="ProgressSkill" parent="Menu_Upgrades/VList/ProgressSkillList" unique_id=1768715333 instance=ExtResource("4_0fuef")]
+layout_mode = 2
+
+[node name="Menu_Quests" parent="." unique_id=499770405 instance=ExtResource("1_1pkcy")]
+custom_minimum_size = Vector2(0, 610)
+layout_mode = 2
+panel_type = "BORDER_ONLY"
+panel_color = "WHITE"
+
+[node name="VList" type="VBoxContainer" parent="Menu_Quests" unique_id=611007920]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="HList2" type="HBoxContainer" parent="Menu_Quests/VList" unique_id=384472691]
+layout_mode = 2
+
+[node name="ProgressHashTag" parent="Menu_Quests/VList/HList2" unique_id=1420189942 instance=ExtResource("3_4nere")]
+self_modulate = Color(0.7607843, 0.43529412, 1, 1)
+layout_mode = 2
+text = "QUEST PREVIEW"
+hash_tag_type = "BORDER_ONLY"
+no_bg = true
+
+[node name="HList" type="HBoxContainer" parent="Menu_Quests/VList" unique_id=489865813]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label2" type="Label" parent="Menu_Quests/VList/HList" unique_id=2006964215]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"LabelTitle_White"
+theme_override_font_sizes/font_size = 40
+text = "Priority rewards"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu_Quests/VList/HList" unique_id=856068199]
+layout_mode = 2
+alignment = 1
+
+[node name="ProgressHashTagWithIcon" parent="Menu_Quests/VList/HList/VBoxContainer" unique_id=88007381 instance=ExtResource("6_neoah")]
+custom_minimum_size = Vector2(215, 33)
+layout_mode = 2
+hash_tag_type = "INSIDE_ONLY"
+hash_tag_text = "7 DAY STREAK"
+is_currency = false
+
+[node name="Control" type="Control" parent="Menu_Quests/VList/HList" unique_id=1527543111]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="Menu_Quests/VList" unique_id=1902989184]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VList" type="VBoxContainer" parent="Menu_Quests/VList" unique_id=2027696789]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="QuestItem" parent="Menu_Quests/VList/VList" unique_id=688889240 instance=ExtResource("7_u200v")]
+layout_mode = 2
+skill_color = "GOLD"
+quest_title = "Extract 500 rare void crystals"
+progrss_cur_max = Vector2i(342, 500)
+
+[node name="QuestItem2" parent="Menu_Quests/VList/VList" unique_id=1933049177 instance=ExtResource("7_u200v")]
+layout_mode = 2
+skill_color = "BLUE"
+quest_title = "Reach core depth level 50"
+progrss_cur_max = Vector2i(12, 50)
+reward_txt = "1 Shard"
+
+[node name="SmartSingleRowBtn" parent="Menu_Quests/VList/VList" unique_id=1442770830 instance=ExtResource("8_yhu24")]
+layout_mode = 2
+btn_text = "Open full quest list"
+
+[node name="Menu_Relics" parent="." unique_id=355060216 instance=ExtResource("1_1pkcy")]
+custom_minimum_size = Vector2(0, 800)
+layout_mode = 2
+panel_type = "BORDER_ONLY"
+panel_color = "WHITE"
+
+[node name="VList" type="VBoxContainer" parent="Menu_Relics" unique_id=561574587]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="HList2" type="HBoxContainer" parent="Menu_Relics/VList" unique_id=436919781]
+layout_mode = 2
+
+[node name="ProgressHashTag" parent="Menu_Relics/VList/HList2" unique_id=1198231238 instance=ExtResource("3_4nere")]
+self_modulate = Color(1, 0.74509805, 0.23137255, 1)
+layout_mode = 2
+text = "QUEST PREVIEW"
+hash_tag_type = "BORDER_ONLY"
+hash_tag_color = "GOLD"
+no_bg = true
+
+[node name="HList" type="HBoxContainer" parent="Menu_Relics/VList" unique_id=963332718]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label2" type="Label" parent="Menu_Relics/VList/HList" unique_id=1574641170]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"LabelTitle_White"
+theme_override_font_sizes/font_size = 40
+text = "Active relic shelf"
+
+[node name="VList" type="VBoxContainer" parent="Menu_Relics/VList/HList" unique_id=1699463512]
+layout_mode = 2
+alignment = 1
+
+[node name="ProgressHashTagWithIcon" parent="Menu_Relics/VList/HList/VList" unique_id=938022395 instance=ExtResource("6_neoah")]
+custom_minimum_size = Vector2(169, 33)
+layout_mode = 2
+hash_tag_type = "INSIDE_ONLY"
+hash_tag_color = "GOLD"
+hash_tag_text = "8 OWNED"
+is_currency = false
+
+[node name="Control" type="Control" parent="Menu_Relics/VList/HList" unique_id=1730527215]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="Menu_Relics/VList" unique_id=761385346]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VList" type="VBoxContainer" parent="Menu_Relics/VList" unique_id=251269701]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="HFlow" type="HFlowContainer" parent="Menu_Relics/VList/VList" unique_id=1043495580]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+
+[node name="RelicItem" parent="Menu_Relics/VList/VList/HFlow" unique_id=58938028 instance=ExtResource("9_tsw2o")]
+layout_mode = 2
+icon = ExtResource("5_3f4or")
+relic_name = "Ancient Gear"
+relic_stat = "+15% speed"
+
+[node name="RelicItem2" parent="Menu_Relics/VList/VList/HFlow" unique_id=393756306 instance=ExtResource("9_tsw2o")]
+layout_mode = 2
+panel_color = "BLUE"
+icon = ExtResource("5_3f4or")
+relic_name = "Crystal Shard"
+
+[node name="LockedRelicItem" parent="Menu_Relics/VList/VList/HFlow" unique_id=1128639073 instance=ExtResource("10_nipnh")]
+layout_mode = 2
+
+[node name="LockedRelicItem2" parent="Menu_Relics/VList/VList/HFlow" unique_id=1938993788 instance=ExtResource("10_nipnh")]
+layout_mode = 2
+
+[node name="SmartSingleRowBtn" parent="Menu_Relics/VList/VList" unique_id=698052773 instance=ExtResource("8_yhu24")]
+layout_mode = 2
+button_color = "GOLD"
+btn_text = "Open relic inventory"
+
+[connection signal="OnPressed" from="ProgressTopPanel/VList/Tabs/TabList/TAB_Upgrades" to="." method="_on_tab_upgrades_on_pressed"]
+[connection signal="OnPressed" from="ProgressTopPanel/VList/Tabs/TabList/TAB_Quests" to="." method="_on_tab_quests_on_pressed"]
+[connection signal="OnPressed" from="ProgressTopPanel/VList/Tabs/TabList/TAB_Relics" to="." method="_on_tab_relics_on_pressed"]
+[connection signal="resized" from="Menu_Upgrades/VList" to="." method="UpgradeListResized"]
