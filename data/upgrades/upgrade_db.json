@@ -1,0 +1,67 @@
+{
+  "tap_damage": {
+    "title": "Tap Damage",
+    "group": "power",
+    "icon":"tap_damage",
+    "level": 0,
+    "max_level": -1,
+    "base_cost": 35,
+    "cost_scale": 1.8,
+    "effect_type": "mult_pow",
+    "effect_base": 1.25,
+    "unlock_type": "default",
+    "unlock_value": 0
+  },
+  "drill_power": {
+    "title": "Drill Power",
+    "group": "power",
+    "icon":"dig_power",
+    "level": 0,
+    "max_level": -1,
+    "base_cost": 25,
+    "cost_scale": 1.75,
+    "effect_type": "mult_pow",
+    "effect_base": 1.2,
+    "unlock_type": "default",
+    "unlock_value": 0
+  },
+  "drill_speed": {
+    "title": "Drill Speed",
+    "group": "speed",
+    "icon":"dig_speed",
+    "level": 0,
+    "max_level": -1,
+    "base_cost": 40,
+    "cost_scale": 1.8,
+    "effect_type": "mult_pow",
+    "effect_base": 1.12,
+    "unlock_type": "default",
+    "unlock_value": 0
+  },
+  "coin_yield": {
+    "title": "Coin Yield",
+    "group": "economy",
+    "icon":"coin_gain",
+    "level": 0,
+    "max_level": -1,
+    "base_cost": 60,
+    "cost_scale": 1.82,
+    "effect_type": "mult_pow",
+    "effect_base": 1.15,
+    "unlock_type": "default",
+    "unlock_value": 0
+  },
+  "offline_efficiency": {
+    "title": "Offline Efficiency",
+    "group": "offline",
+    "icon":"offline_time",
+    "level": 0,
+    "max_level": -1,
+    "base_cost": 150,
+    "cost_scale": 2.0,
+    "effect_type": "linear",
+    "effect_base": 0.15,
+    "unlock_type": "total_upgrade_level",
+    "unlock_value": 5
+  }
+}

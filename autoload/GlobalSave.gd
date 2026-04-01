@@ -4,6 +4,7 @@ const CUR_SAVE_VERSION = 0.1
 
 
 const SAVE_FILE = "user://savegame.json"
+const UPGRADE_DATA = "res://data/upgrades/upgrade_db.json"
 
 
 var save_data := {}
@@ -11,6 +12,7 @@ var save_data := {}
 var save_timer : Timer = null
 
 func _ready() -> void:
+	
 	CreateSaveTimer()
 	LoadFromSave()
 	RepapulateAllLaneBlocks()
@@ -127,71 +129,31 @@ func BuildCleanSaveData():
 			"killed_depths": [],
 			"killed_ids":[]
 		}
-	res["upgrades"] = {
-		"tap_damage": {
-			"title": "Tap Damage",
-			"group": "power",
-			"level": 0,
-			"max_level": -1,
-			"base_cost": 35,
-			"cost_scale": 1.80,
-			"effect_type": "mult_pow",
-			"effect_base": 1.25,
-			"unlock_type": "default",
-			"unlock_value": 0
-		},
-		"drill_power": {
-			"title": "Drill Power",
-			"group": "power",
-			"level": 0,
-			"max_level": -1,
-			"base_cost": 25,
-			"cost_scale": 1.75,
-			"effect_type": "mult_pow",
-			"effect_base": 1.20,
-			"unlock_type": "default",
-			"unlock_value": 0
-		},
-		"drill_speed": {
-			"title": "Drill Speed",
-			"group": "speed",
-			"level": 0,
-			"max_level": -1,
-			"base_cost": 40,
-			"cost_scale": 1.80,
-			"effect_type": "mult_pow",
-			"effect_base": 1.12,
-			"unlock_type": "default",
-			"unlock_value": 0
-		},
-		"coin_yield": {
-			"title": "Coin Yield",
-			"group": "economy",
-			"level": 0,
-			"max_level": -1,
-			"base_cost": 60,
-			"cost_scale": 1.82,
-			"effect_type": "mult_pow",
-			"effect_base": 1.15,
-			"unlock_type": "default",
-			"unlock_value": 0
-		},
-		"offline_efficiency": {
-			"title": "Offline Efficiency",
-			"group": "offline",
-			"level": 0,
-			"max_level": -1,
-			"base_cost": 150,
-			"cost_scale": 2.0,
-			"effect_type": "linear",
-			"effect_base": 0.15,
-			"unlock_type": "total_upgrade_level",
-			"unlock_value": 5
-		}
-	}
+	res["upgrades"] = LoadUpgrades()
 	return res
 
 
+func LoadUpgrades():
+	var s = FileAccess.open(UPGRADE_DATA,FileAccess.READ)
+	var json_text = s.get_as_text()
+	s.close()
+	var json := JSON.new()
+	var error := json.parse(json_text)
+
+	if error != OK:
+		push_error("SaveManager: JSON parse error at line %d: %s" % [
+			json.get_error_line(),
+			json.get_error_message()
+		])
+		
+		return
+		
+	if typeof(json.data) != TYPE_DICTIONARY:
+		push_error("SaveManager: Save file root is not a Dictionary.")
+		return
+
+	return json.data
+	
 func GetLaneData(lane_index:int)->Dictionary:
 	for x in save_data.lanes:
 		if x.lane_index == lane_index:

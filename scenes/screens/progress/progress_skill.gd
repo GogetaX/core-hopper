@@ -27,6 +27,9 @@ func InitUpgradeItem(key:String,data:Dictionary):
 	$SmartPanel/VList/SmartButtonBuy.buy_btn_title = "UPGRADE"
 	$SmartPanel/VList/SmartButtonBuy.price_text = Global.CurrencyToString(GlobalStats.GetUpgradeCost(cur_key))
 	
+	#Icons
+	$SmartPanel/VList/HList/IconBG.icon = Global.GetIconFromStr(cur_data.icon)
+	$SmartPanel/IconBG.texture = Global.GetIconFromStr(cur_data.icon)
 	
 	#Smart cur_value display
 	var cur_value = GlobalStats.GetUpgradeValue(cur_key)

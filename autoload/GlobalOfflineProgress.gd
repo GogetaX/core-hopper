@@ -91,6 +91,11 @@ func _SimulateLaneOffline(lane_index: int, lane_dps: float, seconds: int, reward
 			lane.block_data.append(new_block)
 
 		var block = lane.block_data[0]
+
+		# bosses are online-only
+		if bool(block.get("is_boss", false)):
+			return
+
 		var block_hp := float(block.hp)
 
 		if remaining_damage >= block_hp:

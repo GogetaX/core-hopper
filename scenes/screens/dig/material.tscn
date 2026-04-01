@@ -102,6 +102,7 @@ value = 75.0
 show_percentage = false
 
 [node name="Particles" type="Node2D" parent="." unique_id=2081440569]
+visible = false
 position = Vector2(75, 50)
 
 [node name="DirtParticles" type="GPUParticles2D" parent="Particles" unique_id=1320681379]

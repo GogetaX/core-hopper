@@ -72,3 +72,6 @@ func CurrencyToString(value: float) -> String:
 			formatted = formatted.left(formatted.length() - 1)
 
 	return _sign + formatted + suffixes[idx]
+
+func GetIconFromStr(icon_str:String)->Texture2D:
+	return load("res://data/icons/"+icon_str+".tres")
