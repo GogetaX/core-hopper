@@ -116,6 +116,7 @@ mouse_filter = 2
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 size_flags_horizontal = 1
+btn_type = "WITH_PRICE"
 buy_btn_title = "UPGRADE"
 
 [connection signal="BtnPressedWithPrice" from="SmartPanel/VList/SmartButtonBuy" to="." method="_on_smart_button_buy_btn_pressed_with_price"]

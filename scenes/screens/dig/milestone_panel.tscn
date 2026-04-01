@@ -1,0 +1,148 @@
+[gd_scene format=3 uid="uid://bjyvsqllfsb14"]
+
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="1_u4gin"]
+[ext_resource type="Script" uid="uid://dopph7v7mm1wf" path="res://scenes/screens/dig/milestone_panel.gd" id="1_wkfjo"]
+[ext_resource type="PackedScene" uid="uid://bybqm5b1ucfxl" path="res://scenes/screens/dig/milestone_reward_item.tscn" id="3_6etbr"]
+[ext_resource type="PackedScene" uid="uid://njxlv6dxrlwj" path="res://scenes/screens/progress/smart_button_buy.tscn" id="4_6etbr"]
+[ext_resource type="PackedScene" uid="uid://b8mon6416thj7" path="res://scenes/components/small_notif_counter.tscn" id="5_ajrku"]
+
+[node name="MilestonePanel" type="Control" unique_id=1184951305]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 382.0
+offset_bottom = 242.0
+size_flags_horizontal = 3
+script = ExtResource("1_wkfjo")
+
+[node name="Milestone_Incomplete" parent="." unique_id=892379017 instance=ExtResource("1_u4gin")]
+visible = false
+layout_mode = 1
+panel_color = "GOLD"
+darken_bg = true
+
+[node name="VList" type="VBoxContainer" parent="Milestone_Incomplete" unique_id=1825938844]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Milestone_Incomplete/VList" unique_id=1304081754]
+layout_mode = 2
+theme_type_variation = &"LabelDailyGold"
+text = "NEXT MILESTONE"
+
+[node name="Control" type="Control" parent="Milestone_Incomplete/VList" unique_id=2066800847]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="title" type="Label" parent="Milestone_Incomplete/VList" unique_id=1781413649]
+layout_mode = 2
+theme_type_variation = &"LabelDailyTasks"
+text = "1,500m unlocks boss block"
+autowrap_mode = 2
+
+[node name="description" type="Label" parent="Milestone_Incomplete/VList" unique_id=1959641737]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "50m remaining"
+autowrap_mode = 2
+
+[node name="Milestone_Completed" parent="." unique_id=852632016 instance=ExtResource("1_u4gin")]
+layout_mode = 1
+panel_color = "GOLD"
+darken_bg = true
+
+[node name="VList" type="VBoxContainer" parent="Milestone_Completed" unique_id=2090258785]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Milestone_Completed/VList" unique_id=1255876680]
+layout_mode = 2
+theme_type_variation = &"LabelDailyGold"
+text = "COMPLETED"
+
+[node name="Control" type="Control" parent="Milestone_Completed/VList" unique_id=1916281483]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="title" type="Label" parent="Milestone_Completed/VList" unique_id=1285848746]
+layout_mode = 2
+theme_type_variation = &"LabelDailyTasks"
+theme_override_font_sizes/font_size = 24
+text = "1,500m unlocks boss block"
+autowrap_mode = 2
+
+[node name="RewardContainer" type="HBoxContainer" parent="Milestone_Completed/VList" unique_id=853548670]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="MilestoneRewardItem" parent="Milestone_Completed/VList/RewardContainer" unique_id=1001953382 instance=ExtResource("3_6etbr")]
+layout_mode = 2
+
+[node name="Control2" type="Control" parent="Milestone_Completed/VList" unique_id=842002386]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ClaimBtn" parent="Milestone_Completed/VList" unique_id=664760665 instance=ExtResource("4_6etbr")]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+buy_btn_title = "CLAIM"
+
+[node name="SmallNotifCounter" parent="Milestone_Completed" unique_id=1772552382 instance=ExtResource("5_ajrku")]
+layout_mode = 0
+offset_left = -15.0
+offset_top = -15.0
+offset_right = 15.0
+offset_bottom = 15.0
+panel_color = "ORANGE"
+notif_count = 1
+
+[node name="Milestone_NoMilestoneLeft" parent="." unique_id=1297659044 instance=ExtResource("1_u4gin")]
+visible = false
+layout_mode = 1
+panel_color = "GOLD"
+darken_bg = true
+
+[node name="VList" type="VBoxContainer" parent="Milestone_NoMilestoneLeft" unique_id=1083624149]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Milestone_NoMilestoneLeft/VList" unique_id=1069132024]
+layout_mode = 2
+theme_type_variation = &"LabelDailyGold"
+text = "NO MORE MILESTONES"
+horizontal_alignment = 1
+
+[connection signal="OnPressed" from="Milestone_Completed/VList/ClaimBtn" to="." method="_on_claim_btn_on_pressed"]

@@ -1,6 +1,8 @@
 extends Control
 class_name MaterialClass
 
+@onready var time_before_idle = $time_before_idle
+
 var cur_data = {}
 func _ready() -> void:
 	GlobalDiggingProcess.block_hp_updated.connect(_on_block_hp_updated)
@@ -8,6 +10,7 @@ func _ready() -> void:
 	SetPartilces()
 	GlobalBtn.AddBtnPress(self)
 	GlobalBtn.BtnPress.connect(OnTap)
+	$BG/VList/Status/StatusBoss.visible = false
 
 func OnTap(node_control:Control):
 	if node_control != self:
@@ -15,6 +18,7 @@ func OnTap(node_control:Control):
 	if $tap_timer.is_stopped():
 		GlobalDiggingProcess.ApplyTapDamage(cur_data.uid)
 		$tap_timer.start()
+		$time_before_idle.start()
 	
 
 
@@ -29,6 +33,8 @@ func _on_block_hp_updated(_lane_index: int, block_uid: String, hp: float, max_hp
 		var t = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
 		t.tween_property($BG/VList/ProgressBar,"value",hp,0.2)
 		TakeDmgAnimation()
+	if time_before_idle:
+		time_before_idle.start()
 
 
 func TakeDmgAnimation():
@@ -43,6 +49,10 @@ func _on_block_destroyed(_lane_index: int, block_uid: String) -> void:
 	if block_uid != cur_data.uid:
 		return
 	GlobalSignals.ShowCurrencyAnimation.emit(global_position+(size/2.0),cur_data.reward_type,2)
+	if cur_data.has("first_boss") && cur_data.is_boss:
+		GlobalSave.SetTotalBossKills()
+	
+	
 	SetAsMining(false)
 	AnimateColapseAndFree()
 	
@@ -53,25 +63,27 @@ func AnimateColapseAndFree():
 	t.finished.connect(func(): queue_free())
 	
 func InitData(data):
-	if data.has("is_boss") && data.is_boss:
-		InitAsBossMine(data)
-	else:
-		InitAsNormalMine(data)
-
-func InitAsBossMine(data):
-	SetAsMining(false)
+	if !NeedsRefresh(data):
+		return
 	cur_data = data.duplicate()
+	if cur_data.has("is_boss") && cur_data.is_boss:
+		InitAsBossMine()
+	else:
+		InitAsNormalMine()
+
+func InitAsBossMine():
+	SetAsMining(false)
+	$BG/VList/Status/StatusBoss.visible = true
 	$BG/BossIcon.visible = true
 	$BG/VList/ProgressBar.theme_type_variation = "ProgressBarPurple"
 	$BG/VList/name.text = cur_data.name
 	$BG.self_modulate = GlobalColor.COLOR_BG_PURPLE
 	$BG/VList/name.self_modulate = GlobalColor.GetReadableTextColor($BG.self_modulate)
-	$BG/BossIcon.InitBossIcon(data.id)
+	$BG/BossIcon.InitBossIcon(cur_data.id)
 	#$BG/BossIcon.modulate = GlobalColor.COLOR_TEXT_PURPLE
 	
-func InitAsNormalMine(data):
+func InitAsNormalMine():
 	SetAsMining(false)
-	cur_data = data.duplicate()
 	$BG/VList/name.text = cur_data.name
 	$BG/VList/ProgressBar.max_value = cur_data.max_hp
 	$BG/VList/ProgressBar.value = cur_data.hp
@@ -87,13 +99,41 @@ func InitAsNormalMine(data):
 func SetAsMining(is_mining):
 	if is_mining:
 		$BG/VList/ProgressBar.visible = true
-		$BG/VList/StatusMining.visible = true
+		$BG/VList/Status/StatusMining.visible = true
 	else:
 		$BG/VList/ProgressBar.visible = false
-		$BG/VList/StatusMining.visible = false
+		$BG/VList/Status/StatusMining.visible = false
 
 func SetPartilces():
 	$Particles.visible = true
 	$Particles/DirtParticles.emitting = false
 	$Particles/DirtParticles.one_shot = true
 	
+
+
+func _on_time_before_idle_timeout() -> void:
+	SetAsMining(false)
+
+func GetUID() -> String:
+	return str(cur_data.get("uid", ""))
+	
+func GetLaneIndex() -> int:
+	return int(cur_data.get("lane_index", -1))
+
+func NeedsRefresh(new_data: Dictionary) -> bool:
+	if str(cur_data.get("uid", "")) != str(new_data.get("uid", "")):
+		return true
+	
+	if float(cur_data.get("hp", -1.0)) != float(new_data.get("hp", -1.0)):
+		return false
+	
+	if float(cur_data.get("max_hp", -1.0)) != float(new_data.get("max_hp", -1.0)):
+		return true
+	
+	if bool(cur_data.get("is_boss", false)) != bool(new_data.get("is_boss", false)):
+		return true
+	
+	if str(cur_data.get("block_id", "")) != str(new_data.get("block_id", "")):
+		return true
+	
+	return false

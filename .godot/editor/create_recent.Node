@@ -1,11 +1,11 @@
-TextureRect
-Control
-Node
-Label
 HBoxContainer
+Label
+Control
+Timer
+TextureRect
+Node
 VBoxContainer
 HFlowContainer
-Timer
 AnimationPlayer
 Sprite2D
 Panel

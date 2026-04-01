@@ -194,6 +194,7 @@ theme_override_constants/separation = 20
 
 [node name="SmartButtonBuy" parent="VList" unique_id=664760665 instance=ExtResource("2_2m8po")]
 layout_mode = 2
+btn_type = "WITH_PRICE"
 panel_color = "BLUE"
 price_text = "25"
 

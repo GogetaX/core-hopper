@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://bybqm5b1ucfxl"]
+
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="1_bl085"]
+[ext_resource type="Script" uid="uid://doh01357ml3eb" path="res://scenes/screens/dig/milestone_reward_item.gd" id="1_hfey4"]
+[ext_resource type="PackedScene" uid="uid://d32v5pknv4vq0" path="res://scenes/components/currency_icon.tscn" id="2_hfey4"]
+
+[node name="MilestoneRewardItem" type="Control" unique_id=1001953382]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 124.0
+offset_bottom = 51.0
+script = ExtResource("1_hfey4")
+
+[node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("1_bl085")]
+layout_mode = 1
+panel_type = "INSIDE_ONLY"
+panel_color = "BLUE"
+
+[node name="HList" type="HBoxContainer" parent="." unique_id=1088862095]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 2.0
+offset_right = -5.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CurrencyIcon" parent="HList" unique_id=529445326 instance=ExtResource("2_hfey4")]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+icon_type = "COIN_SMALL"
+
+[node name="value" type="Label" parent="HList" unique_id=789944294]
+layout_mode = 2
+theme_type_variation = &"LabelGrayHint"
+text = "100"

@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://b1boirxy3j4fm" path="res://scenes/screens/dig/drop_bonus.gd" id="9_acvec"]
 [ext_resource type="Script" uid="uid://bb6aobrm7ji1h" path="res://scenes/screens/dig/drop_bonus_value.gd" id="9_elpyf"]
 [ext_resource type="Script" uid="uid://cpesek5rxsldo" path="res://scenes/screens/dig/next_boss_in_helper.gd" id="11_55ggj"]
+[ext_resource type="PackedScene" uid="uid://bjyvsqllfsb14" path="res://scenes/screens/dig/milestone_panel.tscn" id="16_wjarc"]
 
 [node name="DigScreen" type="VBoxContainer" unique_id=594767936]
 anchors_preset = 15
@@ -705,47 +706,8 @@ layout_mode = 2
 theme_type_variation = &"LabelGray"
 text = "Ore yield - 14m left"
 
-[node name="Panel3" type="Panel" parent="HList4" unique_id=2101102234]
-custom_minimum_size = Vector2(0, 220)
+[node name="MilestonePanel" parent="HList4" unique_id=1184951305 instance=ExtResource("16_wjarc")]
 layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 2
-theme_type_variation = &"PanelGoldBorder"
-
-[node name="VList" type="VBoxContainer" parent="HList4/Panel3" unique_id=882728460]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = 20.0
-offset_right = -20.0
-offset_bottom = -20.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="HList4/Panel3/VList" unique_id=1175342176]
-layout_mode = 2
-theme_type_variation = &"LabelDailyGold"
-text = "NEXT MILESTONE"
-
-[node name="Control" type="Control" parent="HList4/Panel3/VList" unique_id=1254459716]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-
-[node name="Label2" type="Label" parent="HList4/Panel3/VList" unique_id=1330378048]
-layout_mode = 2
-theme_type_variation = &"LabelDailyTasks"
-text = "1,500m unlocks boss block"
-autowrap_mode = 2
-
-[node name="Label3" type="Label" parent="HList4/Panel3/VList" unique_id=1697776307]
-layout_mode = 2
-theme_type_variation = &"LabelGray"
-text = "50m remaining"
 
 [node name="Control4" type="Control" parent="." unique_id=1742842293]
 custom_minimum_size = Vector2(0, 40)

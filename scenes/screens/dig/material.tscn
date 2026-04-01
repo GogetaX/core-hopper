@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://vpiw0ovundyf" path="res://art/icons/status_circle.png" id="2_itj41"]
 [ext_resource type="Texture2D" uid="uid://drtj871naoig5" path="res://art/particles/dirt_03.png" id="3_c4gli"]
 [ext_resource type="FontVariation" uid="uid://bbgny2bpigrdg" path="res://fonts/RES_JakaraSans_Bold.tres" id="4_0eb3b"]
+[ext_resource type="Texture2D" uid="uid://dp3n7fugeo42n" path="res://art/bosses/status_boss.png" id="4_rrn61"]
 
 [sub_resource type="Gradient" id="Gradient_c4gli"]
 offsets = PackedFloat32Array(0, 0.07467532, 0.24025974, 1)
@@ -36,6 +37,10 @@ offset_bottom = 100.0
 mouse_filter = 1
 theme_type_variation = &"PanelMaterialWhite"
 script = ExtResource("1_itj41")
+
+[node name="time_before_idle" type="Timer" parent="." unique_id=1624794652]
+wait_time = 3.0
+one_shot = true
 
 [node name="BG" type="Panel" parent="." unique_id=229068662]
 self_modulate = Color(0.14117648, 0.08627451, 0.23921569, 1)
@@ -75,11 +80,24 @@ mouse_filter = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="StatusMining" type="TextureRect" parent="BG/VList" unique_id=1592450106]
+[node name="Status" type="HBoxContainer" parent="BG/VList" unique_id=1717556344]
+layout_mode = 2
+alignment = 1
+
+[node name="StatusMining" type="TextureRect" parent="BG/VList/Status" unique_id=1592450106]
 self_modulate = Color(0, 1, 0.12565732, 1)
+custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("2_itj41")
+stretch_mode = 5
+
+[node name="StatusBoss" type="TextureRect" parent="BG/VList/Status" unique_id=472886654]
+self_modulate = Color(0.7607843, 0.43529412, 1, 1)
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_rrn61")
 stretch_mode = 5
 
 [node name="name" type="Label" parent="BG/VList" unique_id=1367922622]
@@ -116,3 +134,5 @@ process_material = SubResource("ParticleProcessMaterial_at2nx")
 [node name="tap_timer" type="Timer" parent="." unique_id=445185701]
 wait_time = 0.1
 one_shot = true
+
+[connection signal="timeout" from="time_before_idle" to="." method="_on_time_before_idle_timeout"]

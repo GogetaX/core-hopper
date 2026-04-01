@@ -54,6 +54,7 @@ func EvaluateReleaseStateFromDigbot():
 				GlobalSave.SyncSave()
 			elif target_merge.cur_bot_data.level == source_bot_data.level:
 				GlobalSave.MergeFromDigBotToMerge(source_dig.cur_lane_data.bot_uid,target_merge.cur_bot_data.uid)
+				GlobalSave.SetTotalMerges(1)
 				GlobalSave.SyncSave()
 				#print("mouse in, dig-bot and merge bot has same level, should merge them togeather into MERGE slot.")
 			else:
@@ -76,8 +77,9 @@ func EvaluateReleaseStateFromDigbot():
 			
 		elif orig_bot_data.level == target_bot_data.level:
 			target_bot_data.level += 1
+			GlobalSave.SetHighestBotLevel(target_bot_data.level)
 			GlobalSave.RemoveBotByID(orig_bot.cur_lane_data.bot_uid)
-
+			GlobalSave.SetTotalMerges(1)
 			GlobalSave.SyncSave()
 			print("Merge between DigBot -> DigBot")
 		else:
@@ -112,6 +114,7 @@ func EvaluateReleaseStateFromMerge():
 						var orig_merge_node :MergeItemClass = Global.cur_dragging_node.cur_dragging_merge_node
 						var target_merge_node : MergeItemClass = merge_node
 						GlobalSave.CombineBetween2MergeNodes(orig_merge_node.cur_bot_data.uid,target_merge_node.cur_bot_data.uid)
+						GlobalSave.SetTotalMerges(1)
 						GlobalSave.SyncSave()
 					else:
 						var orig_merge_node :MergeItemClass = Global.cur_dragging_node.cur_dragging_merge_node
@@ -145,6 +148,7 @@ func EvaluateReleaseStateFromMerge():
 					var source_merge : MergeItemClass = merge_drag_node.cur_dragging_merge_node
 					var target_digbot : DigBotClass = dig_node
 					GlobalSave.MergeFromMergeToDigBot(source_merge.cur_bot_data.uid,target_digbot.cur_lane_data.bot_uid)
+					GlobalSave.SetTotalMerges(1)
 					GlobalSave.SyncSave()
 					print("mouse in, should merge from MergeItem -> BotItem")
 				else:

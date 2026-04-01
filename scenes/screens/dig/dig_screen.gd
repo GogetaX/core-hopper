@@ -22,20 +22,24 @@ func SyncLane(lane_list: VBoxContainer) -> void:
 	var lane_data = GlobalSave.GetLaneData(lane_index)
 
 	var need_rebuild := false
-
+	
 	if lane_list.get_child_count() != lane_data.block_data.size():
 		need_rebuild = true
+		
 	else:
+		
 		for i in range(lane_data.block_data.size()):
 			var block_data = lane_data.block_data[i]
 			var child = lane_list.get_child(i)
 
 			if !child.has_method("GetUID"):
 				need_rebuild = true
+				
 				break
 
 			if str(child.GetUID()) != str(block_data.uid):
 				need_rebuild = true
+				
 				break
 
 	if need_rebuild:
@@ -44,8 +48,9 @@ func SyncLane(lane_list: VBoxContainer) -> void:
 
 		for block_data in lane_data.block_data:
 			var b = BlockMaterial.instantiate() as MaterialClass
-			b.InitData(block_data)
 			lane_list.add_child(b)
+			b.InitData(block_data)
+			
 	else:
 		for i in range(lane_data.block_data.size()):
 			var block_data = lane_data.block_data[i]

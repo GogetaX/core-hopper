@@ -41,8 +41,19 @@ func InitUpgradeItem(key:String,data:Dictionary):
 	
 	match cur_key:
 		"tap_damage":
-			$SmartPanel/VList/HList2/cur_value.text = Global.CurrencyToString(GlobalStats.GetTapDamage()) + " DPC"
+			$SmartPanel/VList/HList2/cur_value.text = Global.CurrencyToString(GlobalStats.GetTapDamage()) + " DPT"
+		"offline_efficiency":
+			$SmartPanel/VList/HList2/cur_value.text = Global.SecondsToPrettyTimeString(GlobalOfflineProgress.GetOfflineCapSeconds())
 func _on_smart_button_buy_btn_pressed_with_price(currency: String, price: int) -> void:
 	GlobalSave.RemoveCurrency(currency,price)
 	cur_data.level = int(cur_data.level + 1)
+	match cur_key:
+		"tap_damage":
+			if !GlobalSave.SetMilestoneToCompleted("tap_damage_5"):
+				if cur_data.level >= GlobalMilestone.GetMilestoneFromID("tap_damage_5").target_value:
+					GlobalSave.SetMilestoneToCompleted("tap_damage_5")
+		"drill_power":
+			if !GlobalSave.IsMilestoneCompleted("drill_power_10"):
+				if cur_data.level >= GlobalMilestone.GetMilestoneFromID("drill_power_10").target_value:
+					GlobalSave.SetMilestoneToCompleted("drill_power_10")
 	GlobalSave.SyncSave()

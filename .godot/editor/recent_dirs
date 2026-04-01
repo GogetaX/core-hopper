@@ -1,9 +1,9 @@
-res://data/icons/
-res://shaders/
-res://data/bosses/
 res://scenes/components/
 res://scenes/screens/dig/
 res://autoload/
+res://data/icons/
+res://shaders/
+res://data/bosses/
 res://scenes/label_data_scripts/
 res://scenes/screens/merge/
 res://data/bot_atlas/

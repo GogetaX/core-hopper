@@ -103,7 +103,7 @@ func State_Reach150M():
 	$State_Reach150m.visible = true
 	
 func OnBuyStateBtn(control:Control):
-	if control  == $State_BuyBot:
+	if control == $State_BuyBot:
 		var currency = GlobalSave.GetCurrency("coins")
 		if currency>=100:
 			GlobalBtn.AnimateBtnPressed($State_BuyBot)

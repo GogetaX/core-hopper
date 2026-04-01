@@ -3,6 +3,7 @@ extends Control
 class_name SmartBuyBtn
 
 signal BtnPressedWithPrice(currency:String,price:int)
+signal OnPressed()
 
 @export_enum("NO_PRICE","WITH_PRICE") var btn_type := "NO_PRICE":
 	set(value):
@@ -44,18 +45,28 @@ signal BtnPressedWithPrice(currency:String,price:int)
 	get:
 		return price_text
 		
-@export var price_int :int = 25
+@export var price_int :int = 25:
+	set(value):
+		price_int = value
+		if is_node_ready():
+			_ready()
+	get:
+		return price_int
 
 var _disabled_because_of_price = false
 
+var already_inited = false
 func _ready() -> void:
 	SyncTool()
 	if !Engine.is_editor_hint():
+		
 		CheckForCurrency()
-		GlobalBtn.AddBtnPress(self)
-		GlobalBtn.AddBtnMouseInOut(self,[$NO_PRICE,$WITH_PRICE])
-		GlobalBtn.BtnPress.connect(OnBtnPressed)
-		GlobalSignals.DataSaved.connect(CheckForCurrency)
+		if !already_inited:
+			GlobalBtn.AddBtnPress(self)
+			GlobalBtn.AddBtnMouseInOut(self,[$NO_PRICE,$WITH_PRICE])
+			GlobalBtn.BtnPress.connect(OnBtnPressed)
+			GlobalSignals.DataSaved.connect(CheckForCurrency)
+			already_inited = true
 
 func SyncTool():
 	$NO_PRICE.visible = false
@@ -106,4 +117,6 @@ func OnBtnPressed(btn_node:Control):
 	match btn_type:
 		"WITH_PRICE":
 			BtnPressedWithPrice.emit(currency_type,price_int)
+		"NO_PRICE":
+			OnPressed.emit()
 	

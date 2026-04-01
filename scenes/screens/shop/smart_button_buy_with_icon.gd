@@ -1,5 +1,6 @@
 @tool
 extends Control
+signal OnPress()
 
 @export var buy_btn_title := "NEW UNIT":
 	set(value):
@@ -54,6 +55,7 @@ func OnBtnPressed(btn_node:Control):
 	if btn_node != self:
 		return
 	GlobalBtn.AnimateBtnPressed($Background)
+	OnPress.emit()
 	
 func OnMergeBtnPressed(btn_node:Control):
 	if btn_node != self:

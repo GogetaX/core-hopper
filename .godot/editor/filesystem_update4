@@ -97,3 +97,14 @@ res://data/icons/magnet.tres
 res://data/icons/merge.tres
 res://scenes/components/bottom_button.tscn
 res://scenes/components/bottom_button.gd
+res://autoload/GlobalMilestone.gd
+res://scenes/screens/dig/milestone_panel.tscn
+res://scenes/components/smart_panel.gd
+res://scenes/screens/dig/milestone_panel.gd
+res://scenes/screens/merge/merge_screen.gd
+res://scenes/screens/dig/milestone_reward_item.tscn
+res://scenes/screens/dig/milestone_reward_item.gd
+res://scenes/screens/shop/smart_button_buy_with_icon.tscn
+res://scenes/screens/shop/smart_button_buy_with_icon.gd
+res://scenes/components/small_notif_counter.tscn
+res://scenes/components/small_notif_counter.gd

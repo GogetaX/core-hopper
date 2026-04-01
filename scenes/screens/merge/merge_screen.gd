@@ -20,6 +20,9 @@ func _on_smart_button_buy_btn_pressed_with_price(currency: String, price: int) -
 	#Store bot to bot_db
 	GlobalSave.StoreUpdateBotData(new_bot)
 	
+	#Milestone: first_bot (Own your first digging bot.)
+	GlobalSave.SetMilestoneToCompleted("first_bot")
+	
 	#Save all
 	GlobalSave.SyncSave()
 	

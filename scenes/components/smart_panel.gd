@@ -92,7 +92,7 @@ func _ready():
 				$BorderOnly.self_modulate = GlobalColor.COLOR_BG_ORANGE
 	if darken_bg:
 		#var relic_bg_color = Color(0.1,0.1,0.1,0.5)
-		$BGOnly.self_modulate.a = 0.5
+		$BGOnly.self_modulate = GlobalColor.COLOR_DISABLED_BG_WHITE / 2.0
 
 func GetTextColor():
 	match panel_color:

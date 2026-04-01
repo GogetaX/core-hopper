@@ -12,7 +12,6 @@ var save_data := {}
 var save_timer : Timer = null
 
 func _ready() -> void:
-	
 	CreateSaveTimer()
 	LoadFromSave()
 	RepapulateAllLaneBlocks()
@@ -91,7 +90,7 @@ func LoadFromSave():
 
 func BuildCleanSaveData():
 	var res = {}
-	res["currencies"] = {"coins":0,"crystals":0,"energy":0} #default coins 0
+	res["currencies"] = {"coins":25,"crystals":0,"energy":0} #default coins 0
 	res["bot_inventory"]={
 		"bot_db": [],
 		"merge_free_slots":4
@@ -110,10 +109,19 @@ func BuildCleanSaveData():
 		"block_uid_serial": int(0)
 		}
 	res["progress"] = {
-		"best_depth":0,
-		"core_resets":0,
 		"efficiency_mult": 1.0,
 		"global_depth":0
+	}
+	res["milestones"] = {
+		"completed_ids": [],
+		"claimed_ids": []
+	}
+	res["player_stats"] = {
+		"total_merges": 0,
+		"boss_kills": 0,
+		"max_depth_reached": 0,
+		"highest_bot_level_ever": 0,
+		"core_resets":0
 	}
 	res["settings"] = {
 		"music_enabled":true,
@@ -176,6 +184,15 @@ func ActivateLane(lane_index:int):
 	for x in save_data.lanes:
 		if x.lane_index == lane_index:
 			x.auto_dig_unlocked = true
+			if lane_index == 1:
+				if !IsMilestoneCompleted("unlock_lane_2"):
+					SetMilestoneToCompleted("unlock_lane_2")
+			if lane_index == 2:
+				if !IsMilestoneCompleted("unlock_lane_3"):
+					SetMilestoneToCompleted("unlock_lane_3")
+			if lane_index == 4:
+				if !IsMilestoneCompleted("unlock_lane_5"):
+					SetMilestoneToCompleted("unlock_lane_5")
 			return
 	
 func GetBotDataFromMergeSlot(merge_slot)->Dictionary:
@@ -272,10 +289,12 @@ func CombineBetween2MergeNodes(old_uid: int, new_uid: int) -> void:
 				new_merge_data.stats[stat] += old_merge_data.stats[stat]
 
 	new_merge_data.level = int(new_merge_data.level + 1)
-
+	GlobalSave.SetHighestBotLevel(new_merge_data.level)
 	# clear old slot ownership before removing
 	old_merge_data.merge_slot_id = -1
-
+	if new_merge_data.level == 3:
+		if !GlobalSave.IsMilestoneCompleted("bot_level_3"):
+			GlobalSave.SetMilestoneToCompleted("bot_level_3")
 	RemoveBotByID(old_uid)
 	SyncSave()
 	
@@ -324,6 +343,10 @@ func MergeFromMergeToDigBot(merge_uid:int,digbot_uid:int):
 		else:
 			digbot_data.stats[stat] += old_bot_stats[stat]
 	digbot_data.level = int(digbot_data.level + 1)
+	if digbot_data.level == 3:
+		if !GlobalSave.IsMilestoneCompleted("bot_level_3"):
+			GlobalSave.SetMilestoneToCompleted("bot_level_3")
+	GlobalSave.SetHighestBotLevel(digbot_data.level)
 	RemoveBotByID(merge_uid)
 	
 func MergeFromDigBotToMerge(digbot_uid: int, merge_uid: int) -> void:
@@ -348,7 +371,10 @@ func MergeFromDigBotToMerge(digbot_uid: int, merge_uid: int) -> void:
 
 	# level up the target bot that stays in the merge slot
 	merge_bot_data.level = int(merge_bot_data.level + 1)
-
+	if merge_bot_data.level == 3:
+		if !GlobalSave.IsMilestoneCompleted("bot_level_3"):
+			GlobalSave.SetMilestoneToCompleted("bot_level_3")
+	GlobalSave.SetHighestBotLevel(merge_bot_data.level)
 	# remove dragged dig-bot from inventory and lane
 	RemoveBotByID(digbot_uid)
 
@@ -363,3 +389,64 @@ func SetGlobalDepth(glob_depth:int):
 	var best_depth = max(glob_depth, int(cur_global_depth))
 	if best_depth > save_data.progress.global_depth:
 		save_data.progress.global_depth = best_depth
+	if save_data.player_stats.max_depth_reached < best_depth:
+		save_data.player_stats.max_depth_reached = best_depth
+	if !IsMilestoneCompleted("depth_10"):
+		#GetMIlestoneValueFromID
+		if GlobalMilestone.GetMilestoneFromID("depth_10").target_value <= save_data.player_stats.max_depth_reached:
+			SetMilestoneToCompleted("depth_10")
+	if !IsMilestoneCompleted("depth_25"):
+		#GetMIlestoneValueFromID
+		if GlobalMilestone.GetMilestoneFromID("depth_25").target_value <= save_data.player_stats.max_depth_reached:
+			SetMilestoneToCompleted("depth_25")
+	if !IsMilestoneCompleted("depth_50"):
+		#GetMIlestoneValueFromID
+		if GlobalMilestone.GetMilestoneFromID("depth_50").target_value <= save_data.player_stats.max_depth_reached:
+			SetMilestoneToCompleted("depth_50")
+	if !IsMilestoneCompleted("depth_100"):
+		#GetMIlestoneValueFromID
+		if GlobalMilestone.GetMilestoneFromID("depth_100").target_value <= save_data.player_stats.max_depth_reached:
+			SetMilestoneToCompleted("depth_100")
+	if !IsMilestoneCompleted("depth_250"):
+		#GetMIlestoneValueFromID
+		if GlobalMilestone.GetMilestoneFromID("depth_250").target_value <= save_data.player_stats.max_depth_reached:
+			SetMilestoneToCompleted("depth_250")
+func SetHighestBotLevel(new_level:int)->void:
+	if new_level > save_data.player_stats.highest_bot_level_ever:
+		save_data.player_stats.highest_bot_level_ever = new_level
+
+func SetTotalMerges(plus_merge:int =1)->void:
+	save_data.player_stats.total_merges += plus_merge
+	if !IsMilestoneCompleted("first_merge"):
+		#GetMIlestoneValueFromID
+		if GlobalMilestone.GetMilestoneFromID("first_merge").target_value <= save_data.player_stats.total_merges:
+			SetMilestoneToCompleted("first_merge")
+
+func SetTotalBossKills(plus_bosses:int =1)->void:
+	save_data.player_stats.boss_kills += plus_bosses
+	if !GlobalSave.IsMilestoneCompleted("first_boss"):
+		GlobalSave.SetMilestoneToCompleted("first_boss")
+	if !GlobalSave.IsMilestoneCompleted("boss_3_kills"):
+		if save_data.player_stats.boss_kills >= 3:
+			GlobalSave.SetMilestoneToCompleted("boss_3_kills")
+
+func SetMilestoneToCompleted(milestone_key):
+	#Check if completed
+	if save_data.milestones.completed_ids.has(milestone_key):
+		return
+	#check if claimed
+	if save_data.milestones.claimed_ids.has(milestone_key):
+		return
+	save_data.milestones.completed_ids.append(milestone_key)
+
+func SetMilestoneToClaimed(milestone_key)->void:
+	#Check if completed
+	if save_data.milestones.completed_ids.has(milestone_key):
+		save_data.milestones.claimed_ids.append(milestone_key)
+		#save_data.milestones.completed_ids.erase(milestone_key)
+func IsMilestoneCompleted(milestone_key):
+	if save_data.milestones.completed_ids.has(milestone_key):
+		return true
+	if save_data.milestones.claimed_ids.has(milestone_key):
+		return true
+	return false
