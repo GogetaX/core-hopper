@@ -3,7 +3,7 @@
     {
       "id": "stone_titan",
       "name": "Stone Titan",
-      "spawn_depth": 6,
+      "spawn_depth": 150,
       "boss_icon":"boss_06_stone_titan",
       "tier": 1,
       "hp_multiplier": 25.0,

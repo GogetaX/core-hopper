@@ -10,6 +10,7 @@ func _ready() -> void:
 	
 	GlobalSignals.OnTabBtnpressed.connect(OnBottomTabPressed)
 	GlobalSignals.OpenCloseSettingMenu.connect(OnSettingBtnPress)
+	GlobalSignals.OpenTabFromStr.connect(show_tab)
 	show_tab("DIG")
 	InitOfflineData()
 	

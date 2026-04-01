@@ -17,6 +17,7 @@ func _ready() -> void:
 	$State_DigBot/IsDragIn.visible = false
 	GlobalSignals.DataSaved.connect(SyncLaneData)
 	GlobalBtn.AddBtnPress($State_BuyBot)
+	GlobalBtn.AddBtnPress($State_DigBot)
 	GlobalBtn.BtnPress.connect(OnBuyStateBtn)
 	SyncLaneData()
 	
@@ -102,14 +103,19 @@ func State_Reach150M():
 	$State_Reach150m.visible = true
 	
 func OnBuyStateBtn(control:Control):
-	if control != $State_BuyBot:
-		return
-	var currency = GlobalSave.GetCurrency("coins")
-	if currency>=100:
-		GlobalBtn.AnimateBtnPressed($State_BuyBot)
-		GlobalSave.RemoveCurrency("coins",100)
-		GlobalSave.ActivateLane(cur_lane)
-		GlobalSave.SyncSave()
+	if control  == $State_BuyBot:
+		var currency = GlobalSave.GetCurrency("coins")
+		if currency>=100:
+			GlobalBtn.AnimateBtnPressed($State_BuyBot)
+			GlobalSave.RemoveCurrency("coins",100)
+			GlobalSave.ActivateLane(cur_lane)
+			GlobalSave.SyncSave()
+	elif control == $State_DigBot:
+		if cur_lane_data.is_empty():
+			return
+		if cur_lane_data.auto_dig_unlocked && cur_lane_data.bot_uid == -1:
+			GlobalBtn.AnimateBtnPressed($State_DigBot)
+			GlobalSignals.OpenTabFromStr.emit("MERGE")
 		
 func State_BuyBot():
 	$State_BuyBot.visible = true

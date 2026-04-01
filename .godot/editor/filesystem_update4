@@ -95,3 +95,5 @@ res://data/icons/depth.tres
 res://data/icons/luck.tres
 res://data/icons/magnet.tres
 res://data/icons/merge.tres
+res://scenes/components/bottom_button.tscn
+res://scenes/components/bottom_button.gd

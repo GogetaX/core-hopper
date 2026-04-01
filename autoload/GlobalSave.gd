@@ -91,7 +91,7 @@ func LoadFromSave():
 
 func BuildCleanSaveData():
 	var res = {}
-	res["currencies"] = {"coins":30000,"crystals":0,"energy":0} #default coins 25
+	res["currencies"] = {"coins":0,"crystals":0,"energy":0} #default coins 0
 	res["bot_inventory"]={
 		"bot_db": [],
 		"merge_free_slots":4

@@ -22,9 +22,15 @@ func _ready() -> void:
 		GlobalBtn.AddBtnPress(self)
 		GlobalBtn.BtnPress.connect(OnBtnPressed)
 		GlobalSignals.OnTabBtnpressed.connect(OnTabPressed)
+		GlobalSignals.OpenTabFromStr.connect(OnForceTabFromStr)
 		if is_default:
 			AnimatePressed()
 
+func OnForceTabFromStr(tab_name:String):
+	if btn_name == tab_name:
+		AnimatePressed()
+	else:
+		AnimateUnpressed()
 func OnTabPressed(btn_node:ButtonTabClass):
 	if btn_node == self:
 		AnimatePressed()
