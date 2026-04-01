@@ -196,15 +196,16 @@ func _FinishFrontBlock(lane_index: int) -> void:
 	var lane = GlobalSave.save_data.lanes[lane_index]
 	if lane.block_data.is_empty():
 		return
+
 	var finished_block = lane.block_data[0]
-	
+
 	if bool(finished_block.get("is_boss", false)):
 		_HandleBossBlockFinished(finished_block)
 	else:
-		
 		var final_coins = finished_block.reward_amount
 		if finished_block.reward_type == "coins":
 			final_coins = int(round(finished_block.reward_amount * GlobalStats.GetCoinYieldMultiplier()))
+
 		GlobalSave.AddCurrency(
 			str(finished_block.reward_type),
 			int(final_coins)
@@ -215,7 +216,7 @@ func _FinishFrontBlock(lane_index: int) -> void:
 	lane.block_data.remove_at(0)
 
 	if lane.block_data.is_empty():
-		CreateGeneratedBlockForDepth(lane_index,GlobalSave.save_data.progress.global_depth)
+		GenerateNextBlocksForLane(lane_index)
 
 	RefreshLaneDigging(lane_index)
 	GlobalSave.SyncSave()
@@ -546,3 +547,17 @@ func GetLaneCurrentBlockType(lane_index: int) -> String:
 	if bool(block.get("is_boss", false)):
 		return "boss"
 	return str(block.get("type", "block"))
+
+func GenerateNextBlocksForLane(lane_index: int) -> void:
+	if lane_index < 0 or lane_index >= GlobalSave.save_data.lanes.size():
+		return
+
+	var lane = GlobalSave.save_data.lanes[lane_index]
+	var blocks_to_generate := 5
+	var start_depth := int(lane.lane_depth)
+
+	for i in range(blocks_to_generate):
+		var block_depth := start_depth + i
+		var new_block = CreateGeneratedBlockForDepth(lane_index, block_depth)
+		if !new_block.is_empty():
+			lane.block_data.append(new_block)
