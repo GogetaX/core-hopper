@@ -53,7 +53,6 @@ func AnimateColapseAndFree():
 	t.finished.connect(func(): queue_free())
 	
 func InitData(data):
-
 	SetAsMining(false)
 	cur_data = data.duplicate()
 	$BG/VList/name.text = cur_data.name

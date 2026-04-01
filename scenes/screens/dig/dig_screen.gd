@@ -10,52 +10,90 @@ const MAX_BLOCKS_PER_SPAWM = 5
 @onready var lane_3_list = $MiningPanel/VList/HList2/VList4/Panel/VBoxContainer/Lane_3_List
 @onready var lane_4_list = $MiningPanel/VList/HList2/VList5/Panel/VBoxContainer/Lane_4_List
 
+var _shown_boss_uid_by_lane := {}
+
 func _ready() -> void:
 	GlobalSignals.DataSaved.connect(OnDataUpdated)
 	OnDataUpdated()
 	
 
+func SyncLane(lane_list: VBoxContainer) -> void:
+	var lane_index = int(str(lane_list.name).split("_")[1])
+	var lane_data = GlobalSave.GetLaneData(lane_index)
+
+	var need_rebuild := false
+
+	if lane_list.get_child_count() != lane_data.block_data.size():
+		need_rebuild = true
+	else:
+		for i in range(lane_data.block_data.size()):
+			var block_data = lane_data.block_data[i]
+			var child = lane_list.get_child(i)
+
+			if !child.has_method("GetUID"):
+				need_rebuild = true
+				break
+
+			if str(child.GetUID()) != str(block_data.uid):
+				need_rebuild = true
+				break
+
+	if need_rebuild:
+		for c in lane_list.get_children():
+			c.queue_free()
+
+		for block_data in lane_data.block_data:
+			var b = BlockMaterial.instantiate() as MaterialClass
+			b.InitData(block_data)
+			lane_list.add_child(b)
+	else:
+		for i in range(lane_data.block_data.size()):
+			var block_data = lane_data.block_data[i]
+			var child = lane_list.get_child(i)
+			if child.has_method("InitData"):
+				child.InitData(block_data)
+
+	_CheckBossRevealForLane(lane_index, lane_data)
+	
 func OnDataUpdated():
 	#Find a lane that has no data left, populate it based on current depth of the lane
-	PopulateLane(lane_0_list)
-	PopulateLane(lane_1_list)
-	PopulateLane(lane_2_list)
-	PopulateLane(lane_3_list)
-	PopulateLane(lane_4_list)
-	
+	SyncLane(lane_0_list)
+	SyncLane(lane_1_list)
+	SyncLane(lane_2_list)
+	SyncLane(lane_3_list)
+	SyncLane(lane_4_list)
 
-	
-func PopulateLane(lane_list:VBoxContainer):
-	await get_tree().process_frame
-	var lane_index = int(str(lane_list.name).split("_")[1])
-
-	var lane_data = GlobalSave.GetLaneData(lane_index)
-	if lane_list.get_child_count() == 0:
-		for x in lane_data.block_data:
-			var b = BlockMaterial.instantiate() as MaterialClass
-			b.InitData(x)
-			lane_list.add_child(b)
-			
 	
 func _on_watch_ad_btn_btn_pressed() -> void:
 	GlobalSignals.ShowPopup.emit("WATCH_AD_POPUP",{})
 
 
-func _on_lane_1_list_child_exiting_tree(_node: Node) -> void:
-	PopulateLane(lane_0_list)
+func _CheckBossRevealForLane(lane_index: int, lane_data: Dictionary) -> void:
+	if lane_data.block_data.is_empty():
+		_shown_boss_uid_by_lane.erase(lane_index)
+		return
 
+	var front_block = lane_data.block_data[0]
+	print("lane ", lane_index, " front block: ", front_block.get("name", "?"), " is_boss=", front_block.get("is_boss", false), " uid=", front_block.get("uid", ""))
 
-func _on_lane_2_list_child_exiting_tree(_node: Node) -> void:
-	PopulateLane(lane_1_list)
+	if !bool(front_block.get("is_boss", false)):
+		_shown_boss_uid_by_lane.erase(lane_index)
+		return
 
+	var boss_uid := str(front_block.get("uid", ""))
+	if boss_uid == "":
+		return
 
-func _on_lane_3_list_child_exiting_tree(_node: Node) -> void:
-	PopulateLane(lane_2_list)
+	if _shown_boss_uid_by_lane.get(lane_index, "") == boss_uid:
+		return
 
-
-func _on_lane_4_list_child_exiting_tree(_node: Node) -> void:
-	PopulateLane(lane_3_list)
-
-
-func _on_lane_5_list_child_exiting_tree(_node: Node) -> void:
-	PopulateLane(lane_4_list)
+	_shown_boss_uid_by_lane[lane_index] = boss_uid
+	ShowBossIntro(lane_index, front_block)
+	
+func ShowBossIntro(lane_index: int, boss_block: Dictionary) -> void:
+	print("Boss appeared on lane ", lane_index, ": ", boss_block.get("name", "Boss"))
+	
+	# Example UI:
+	# $BossBanner.show()
+	# $BossBanner/NameLabel.text = str(boss_block.get("name", "Boss"))
+	# $BossBanner/DepthLabel.text = str(boss_block.get("depth", 0)) + "m"

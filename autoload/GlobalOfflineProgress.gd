@@ -82,7 +82,7 @@ func _SimulateLaneOffline(lane_index: int, lane_dps: float, seconds: int, reward
 
 	while remaining_damage > 0.0:
 		if lane.block_data.is_empty():
-			GlobalDiggingProcess.GenerateNextBlocksForLane(lane_index)
+			GlobalDiggingProcess.CreateGeneratedBlockForDepth(lane_index,GlobalSave.save_data.progress.global_depth)
 			if lane.block_data.is_empty():
 				return
 

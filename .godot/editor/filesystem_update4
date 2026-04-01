@@ -55,3 +55,7 @@ res://scenes/screens/dig/offline_cap.gd
 res://scenes/screens/dig/drop_bonus.gd
 res://scenes/screens/dig/drop_bonus_value.gd
 res://scenes/screens/dig/global_deapth.gd
+res://autoload/GlobalBossDB.gd
+res://autoload/GlobalBlockDatabase.gd
+res://scenes/screens/dig/next_boss_in_helper.gd
+res://scenes/screens/dig/dig_screen.gd

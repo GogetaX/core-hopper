@@ -176,19 +176,9 @@ func _ProcessLane(lane_index: int, delta: float) -> void:
 	while runtime["hit_progress"] >= hit_interval and lane.block_data.size() > 0:
 		runtime["hit_progress"] -= hit_interval
 
-		current_block.hp = max(
-			0.0,
-			float(current_block.hp) - float(runtime["dig_power"])
-		)
+		var block_was_destroyed = _ApplyDamageToFrontBlock(lane_index, float(runtime["dig_power"]))
 
-		_EmitBlockHpUpdated(lane_index)
-
-		if current_block.hp <= 0.0:
-			var destroyed_uid := str(current_block.uid)
-			block_destroyed.emit(lane_index, destroyed_uid)
-
-			_FinishFrontBlock(lane_index)
-
+		if block_was_destroyed:
 			if lane.block_data.is_empty():
 				_lane_runtime.erase(lane_index)
 				return
@@ -196,35 +186,36 @@ func _ProcessLane(lane_index: int, delta: float) -> void:
 			current_block = lane.block_data[0]
 			runtime["current_block_uid"] = str(current_block.uid)
 			runtime["hit_progress"] = 0.0
-
-			# optional: emit once for the new front block
-			_EmitBlockHpUpdated(lane_index)
-			
 			break
 
 	_lane_runtime[lane_index] = runtime
+
 
 
 func _FinishFrontBlock(lane_index: int) -> void:
 	var lane = GlobalSave.save_data.lanes[lane_index]
 	if lane.block_data.is_empty():
 		return
-
 	var finished_block = lane.block_data[0]
-	var final_coins = finished_block.reward_amount
-	if finished_block.reward_type == "coins":
-		final_coins = int(round(finished_block.reward_amount * GlobalStats.GetCoinYieldMultiplier()))
-	GlobalSave.AddCurrency(
-		str(finished_block.reward_type),
-		int(final_coins)
-	)
+	
+	if bool(finished_block.get("is_boss", false)):
+		_HandleBossBlockFinished(finished_block)
+	else:
+		
+		var final_coins = finished_block.reward_amount
+		if finished_block.reward_type == "coins":
+			final_coins = int(round(finished_block.reward_amount * GlobalStats.GetCoinYieldMultiplier()))
+		GlobalSave.AddCurrency(
+			str(finished_block.reward_type),
+			int(final_coins)
+		)
 
 	lane.lane_depth = int(lane.lane_depth) + 1
 	GlobalSave.SetGlobalDepth(lane.lane_depth)
 	lane.block_data.remove_at(0)
 
 	if lane.block_data.is_empty():
-		GenerateNextBlocksForLane(lane_index)
+		CreateGeneratedBlockForDepth(lane_index,GlobalSave.save_data.progress.global_depth)
 
 	RefreshLaneDigging(lane_index)
 	GlobalSave.SyncSave()
@@ -379,19 +370,31 @@ func RefreshLaneDigging(lane_index: int) -> void:
 	_EmitBlockHpUpdated(lane_index)
 
 
-func GenerateNextBlocksForLane(lane_index: int) -> void:
-	if lane_index < 0 or lane_index >= GlobalSave.save_data.lanes.size():
-		return
+func CreateGeneratedBlockForDepth(lane_index: int, block_depth: int) -> Dictionary:
+	var normal_block = GlobalBlockDatabase.CreateBlockForLane(block_depth, lane_index)
+	if normal_block.is_empty():
+		return {}
 
-	var lane = GlobalSave.save_data.lanes[lane_index]
+	var normal_hp := float(normal_block.get("max_hp", normal_block.get("hp", 1.0)))
+	var normal_reward := int(normal_block.get("reward_amount", 0))
 
-	var blocks_to_generate := 5
-	var start_depth := int(lane.lane_depth)
+	var boss_block = GlobalBossDb.TryGenerateBossBlock(
+		block_depth,
+		lane_index,
+		normal_hp,
+		normal_reward
+	)
 
-	for i in range(blocks_to_generate):
-		var block_depth := start_depth + i
-		var new_block = GlobalBlockDatabase.CreateBlockForLane(block_depth, lane_index)
-		lane.block_data.append(new_block)
+	if !boss_block.is_empty():
+		if !boss_block.has("id"):
+			boss_block["id"] = str(boss_block.get("boss_id", "boss"))
+		if !boss_block.has("reward_type"):
+			boss_block["reward_type"] = "coins"
+		if !boss_block.has("reward_amount"):
+			boss_block["reward_amount"] = int(boss_block.get("reward_coins", 0))
+		return boss_block
+
+	return normal_block
 		
 func ApplyTapDamage(block_uid: String) -> void:
 	var lane_index := _FindLaneIndexByFrontBlockUid(block_uid)
@@ -399,8 +402,6 @@ func ApplyTapDamage(block_uid: String) -> void:
 		return
 
 	var lane_data = GlobalSave.save_data.lanes[lane_index]
-	if lane_data.is_empty():
-		return
 	if !lane_data.auto_dig_unlocked:
 		return
 	if int(lane_data.bot_uid) == -1:
@@ -416,6 +417,16 @@ func ApplyTapDamage(block_uid: String) -> void:
 
 	var bot_stats = GlobalStats.GetBotStats(int(bot_data.level))
 	var tap_dps = float(bot_stats.dig_power) * float(GlobalStats.GetUpgradeValue("tap_damage"))
+
+	# optional future boss special: tap resistance
+	var front_block = lane_data.block_data[0]
+	if bool(front_block.get("is_boss", false)):
+		var boss_id = str(front_block.get("boss_id", ""))
+		var boss_data = GlobalBossDb.GetBossDataByID(boss_id)
+		if !boss_data.is_empty():
+			if str(boss_data.get("special_type", "none")) == "tap_resist":
+				var mult = float(boss_data.get("special_values", {}).get("tap_damage_multiplier", 1.0))
+				tap_dps *= mult
 
 	_ApplyDamageToFrontBlock(lane_index, tap_dps)
 
@@ -459,3 +470,79 @@ func _ApplyDamageToFrontBlock(lane_index: int, damage: float) -> bool:
 
 	_EmitBlockHpUpdated(lane_index)
 	return true
+
+func _CreateGeneratedBlockForDepth(lane_index: int, block_depth: int) -> Dictionary:
+	var normal_block = GlobalBlockDatabase.CreateBlockForLane(block_depth, lane_index)
+	if normal_block.is_empty():
+		return {}
+
+	var normal_hp := float(normal_block.get("max_hp", normal_block.get("hp", 1.0)))
+	var normal_reward := int(normal_block.get("reward_amount", 0))
+
+	var boss_block = GlobalBossDb.TryGenerateBossBlock(
+		block_depth,
+		lane_index,
+		normal_hp,
+		normal_reward
+	)
+
+	if !boss_block.is_empty():
+		# keep a few fields consistent with normal block handling / UI
+		if !boss_block.has("id"):
+			boss_block["id"] = str(boss_block.get("boss_id", "boss"))
+		if !boss_block.has("reward_type"):
+			boss_block["reward_type"] = "coins"
+		if !boss_block.has("reward_amount"):
+			boss_block["reward_amount"] = int(boss_block.get("reward_coins", 0))
+		return boss_block
+
+	return normal_block
+	
+	
+func IsLaneCurrentBlockBoss(lane_index: int) -> bool:
+	var block = GetLaneCurrentBlock(lane_index)
+	if block.is_empty():
+		return false
+	return bool(block.get("is_boss", false))
+	
+func GetLaneCurrentBossID(lane_index: int) -> String:
+	var block = GetLaneCurrentBlock(lane_index)
+	if block.is_empty():
+		return ""
+	if !bool(block.get("is_boss", false)):
+		return ""
+	return str(block.get("boss_id", ""))
+
+func _HandleBossBlockFinished(finished_block: Dictionary) -> void:
+	var rewards = GlobalBossDb.OnBossKilled(finished_block)
+	if rewards.is_empty():
+		return
+
+	if int(rewards.get("coins", 0)) > 0:
+		GlobalSave.AddCurrency("coins", int(rewards["coins"]))
+
+	if int(rewards.get("crystals", 0)) > 0:
+		GlobalSave.AddCurrency("crystals", int(rewards["crystals"]))
+
+	if int(rewards.get("energy", 0)) > 0:
+		GlobalSave.AddCurrency("energy", int(rewards["energy"]))
+
+	# optional later:
+	# _HandleBossDrops(rewards.get("drop_table", []))
+	# _HandleBossUnlocks(rewards.get("unlocks_on_kill", []))
+
+func GetLaneCurrentBlockDisplayName(lane_index: int) -> String:
+	var block = GetLaneCurrentBlock(lane_index)
+	if block.is_empty():
+		return ""
+	if bool(block.get("is_boss", false)):
+		return "BOSS: " + str(block.get("name", "Unknown Boss"))
+	return str(block.get("name", ""))
+	
+func GetLaneCurrentBlockType(lane_index: int) -> String:
+	var block = GetLaneCurrentBlock(lane_index)
+	if block.is_empty():
+		return ""
+	if bool(block.get("is_boss", false)):
+		return "boss"
+	return str(block.get("type", "block"))

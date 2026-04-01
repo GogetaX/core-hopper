@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://d3une2dqopjgs" path="res://scenes/screens/dig/offline_level.gd" id="7_davrd"]
 [ext_resource type="Script" uid="uid://b1boirxy3j4fm" path="res://scenes/screens/dig/drop_bonus.gd" id="9_acvec"]
 [ext_resource type="Script" uid="uid://bb6aobrm7ji1h" path="res://scenes/screens/dig/drop_bonus_value.gd" id="9_elpyf"]
+[ext_resource type="Script" uid="uid://cpesek5rxsldo" path="res://scenes/screens/dig/next_boss_in_helper.gd" id="11_55ggj"]
 
 [node name="DigScreen" type="VBoxContainer" unique_id=594767936]
 anchors_preset = 15
@@ -329,6 +330,9 @@ custom_minimum_size = Vector2(281, 35)
 layout_mode = 2
 panel_color = "BLUE"
 status_text = "BOSS BLOCK IN 50M"
+
+[node name="NextBossInHelper" type="Node" parent="MiningPanel/VList/HList/VList2/StatusLabel" unique_id=1136479917]
+script = ExtResource("11_55ggj")
 
 [node name="Control2" type="Control" parent="MiningPanel/VList/HList" unique_id=454992255]
 custom_minimum_size = Vector2(20, 0)
@@ -771,9 +775,4 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
 [connection signal="timeout" from="HList3/IncomePanel/VList/income_ps/incone_counter" to="HList3/IncomePanel/VList/income_ps" method="_on_incone_counter_timeout"]
-[connection signal="child_exiting_tree" from="MiningPanel/VList/HList2/VList1/Panel/VBoxContainer/Lane_0_List" to="." method="_on_lane_1_list_child_exiting_tree"]
-[connection signal="child_exiting_tree" from="MiningPanel/VList/HList2/VList2/Panel/VBoxContainer/Lane_1_List" to="." method="_on_lane_2_list_child_exiting_tree"]
-[connection signal="child_exiting_tree" from="MiningPanel/VList/HList2/VList3/Panel/VBoxContainer/Lane_2_List" to="." method="_on_lane_3_list_child_exiting_tree"]
-[connection signal="child_exiting_tree" from="MiningPanel/VList/HList2/VList4/Panel/VBoxContainer/Lane_3_List" to="." method="_on_lane_4_list_child_exiting_tree"]
-[connection signal="child_exiting_tree" from="MiningPanel/VList/HList2/VList5/Panel/VBoxContainer/Lane_4_List" to="." method="_on_lane_5_list_child_exiting_tree"]
 [connection signal="BtnPressed" from="HList5/WatchAdBtn" to="." method="_on_watch_ad_btn_btn_pressed"]

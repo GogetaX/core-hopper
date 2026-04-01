@@ -123,6 +123,10 @@ func BuildCleanSaveData():
 		"global_dig_speed_level":0,
 		"offline_gain_level":0.0,
 	}
+	res["boss_progress"] = {
+			"killed_depths": [],
+			"killed_ids":[]
+		}
 	res["upgrades"] = {
 		"tap_damage": {
 			"title": "Tap Damage",

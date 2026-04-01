@@ -1,3 +1,4 @@
+Node
 Label
 HBoxContainer
 VBoxContainer
@@ -10,5 +11,4 @@ TextureRect
 Panel
 GPUParticles2D
 Node2D
-Node
 AnimatedSprite2D
