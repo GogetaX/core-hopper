@@ -21,7 +21,7 @@ var _is_syncing := false
 func _ready() -> void:
 	GlobalSignals.DataSaved.connect(SyncDiggingLanes)
 	GlobalOfflineProgress.ProcessOfflineProgress()
-	GlobalDiggingProcess.SyncDiggingLanes()
+	SyncDiggingLanes()
 	set_process(true)
 
 
@@ -144,7 +144,7 @@ func _SyncLaneRuntime(lane_index: int) -> void:
 
 	_lane_runtime[lane_index] = new_runtime
 
-func _ProcessLane(lane_index: int, _delta: float) -> void:
+func _ProcessLane(lane_index: int, delta: float) -> void:
 	if lane_index < 0 or lane_index >= GlobalSave.save_data.lanes.size():
 		_lane_runtime.erase(lane_index)
 		return
@@ -160,6 +160,41 @@ func _ProcessLane(lane_index: int, _delta: float) -> void:
 		if lane.block_data.is_empty():
 			_lane_runtime.erase(lane_index)
 			return
+
+	if !_lane_runtime.has(lane_index):
+		_SyncLaneRuntime(lane_index)
+		if !_lane_runtime.has(lane_index):
+			return
+
+	var runtime: Dictionary = _lane_runtime[lane_index]
+
+	# block changed externally
+	if str(runtime.get("current_block_uid", "")) != str(lane.block_data[0].uid):
+		runtime["current_block_uid"] = str(lane.block_data[0].uid)
+		runtime["hit_progress"] = 0.0
+
+	runtime["hit_progress"] += delta
+
+	var hit_interval := _GetHitInterval(float(runtime.get("dig_speed", 1.0)))
+	while float(runtime["hit_progress"]) >= hit_interval:
+		runtime["hit_progress"] -= hit_interval
+
+		var did_destroy := _ApplyDamageToFrontBlock(
+			lane_index,
+			float(runtime.get("dig_power", 1.0))
+		)
+
+		if did_destroy:
+			if !_lane_runtime.has(lane_index):
+				return
+			if lane_index >= GlobalSave.save_data.lanes.size():
+				return
+			lane = GlobalSave.save_data.lanes[lane_index]
+			if lane.block_data.is_empty():
+				return
+
+			runtime = _lane_runtime[lane_index]
+			runtime["current_block_uid"] = str(lane.block_data[0].uid)
 
 func _FinishFrontBlock(lane_index: int) -> void:
 	var lane = GlobalSave.save_data.lanes[lane_index]

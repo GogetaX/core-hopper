@@ -8,7 +8,7 @@
 
 [sub_resource type="Gradient" id="Gradient_c4gli"]
 offsets = PackedFloat32Array(0, 0.07467532, 0.24025974, 1)
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.425, 1, 1, 1, 0.51500005, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_at2nx"]
 gradient = SubResource("Gradient_c4gli")
@@ -72,6 +72,7 @@ offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme_override_constants/separation = 0
 alignment = 1
 
 [node name="StatusMining" type="TextureRect" parent="BG/VList" unique_id=1592450106]
@@ -84,12 +85,13 @@ stretch_mode = 5
 [node name="name" type="Label" parent="BG/VList" unique_id=1367922622]
 layout_mode = 2
 theme_type_variation = &"LabelGrayHint"
-theme_override_constants/outline_size = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_0eb3b")
 theme_override_font_sizes/font_size = 24
 text = "DIRT"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="ProgressBar" type="ProgressBar" parent="BG/VList" unique_id=1156711730]
 custom_minimum_size = Vector2(0, 10)
@@ -100,11 +102,11 @@ value = 75.0
 show_percentage = false
 
 [node name="Particles" type="Node2D" parent="." unique_id=2081440569]
-visible = false
 position = Vector2(75, 50)
 
 [node name="DirtParticles" type="GPUParticles2D" parent="Particles" unique_id=1320681379]
-amount = 20
+z_as_relative = false
+amount = 10
 texture = ExtResource("3_c4gli")
 lifetime = 0.5
 preprocess = 0.5
