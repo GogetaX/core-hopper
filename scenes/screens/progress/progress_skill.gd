@@ -38,7 +38,10 @@ func InitUpgradeItem(key:String,data:Dictionary):
 	
 	$SmartPanel/VList/HList2/cur_value.text = "x"+Global.FloatToStr(cur_value)
 	$SmartPanel/VList/HList2/VList/per_level_hint.text = "+"+Global.FloatToStr(diff_value*100.0).pad_decimals(0)+"%"
-
+	
+	match cur_key:
+		"tap_damage":
+			$SmartPanel/VList/HList2/cur_value.text = Global.CurrencyToString(GlobalStats.GetTapDamage()) + " DPC"
 func _on_smart_button_buy_btn_pressed_with_price(currency: String, price: int) -> void:
 	GlobalSave.RemoveCurrency(currency,price)
 	cur_data.level = int(cur_data.level + 1)

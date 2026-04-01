@@ -5,13 +5,13 @@
     "icon":"tap_damage",
     "level": 0,
     "max_level": -1,
-    "base_cost": 35,
-    "cost_scale": 1.8,
+    "base_cost": 20,
+    "cost_scale": 1.7,
     "effect_type": "mult_pow",
-    "effect_base": 1.25,
+    "effect_base": 1.2,
     "unlock_type": "default",
     "unlock_value": 0
-  },
+    },
   "drill_power": {
     "title": "Drill Power",
     "group": "power",

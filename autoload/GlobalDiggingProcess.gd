@@ -411,23 +411,21 @@ func ApplyTapDamage(block_uid: String) -> void:
 		return
 
 	var lane_data = GlobalSave.save_data.lanes[lane_index]
+
+	# tapping only cares if the lane itself is unlocked
 	if !lane_data.auto_dig_unlocked:
 		return
-	if int(lane_data.bot_uid) == -1:
-		return
+
 	if lane_data.block_data.is_empty():
 		return
+
+	# only allow tapping the current front block
 	if str(lane_data.block_data[0].uid) != str(block_uid):
 		return
 
-	var bot_data = GlobalSave.GetBotDataFromUID(int(lane_data.bot_uid))
-	if bot_data.is_empty():
-		return
+	var tap_damage := float(GlobalStats.GetUpgradeValue("tap_damage"))
 
-	var bot_stats = GlobalStats.GetBotStats(int(bot_data.level))
-	var tap_dps = float(bot_stats.dig_power) * float(GlobalStats.GetUpgradeValue("tap_damage"))
-
-	# optional future boss special: tap resistance
+	# optional boss modifier stays
 	var front_block = lane_data.block_data[0]
 	if bool(front_block.get("is_boss", false)):
 		var boss_id = str(front_block.get("boss_id", ""))
@@ -435,9 +433,9 @@ func ApplyTapDamage(block_uid: String) -> void:
 		if !boss_data.is_empty():
 			if str(boss_data.get("special_type", "none")) == "tap_resist":
 				var mult = float(boss_data.get("special_values", {}).get("tap_damage_multiplier", 1.0))
-				tap_dps *= mult
+				tap_damage *= mult
 
-	_ApplyDamageToFrontBlock(lane_index, tap_dps)
+	_ApplyDamageToFrontBlock(lane_index, tap_damage)
 
 func _FindLaneIndexByFrontBlockUid(block_uid: String) -> int:
 	for i in range(GlobalSave.save_data.lanes.size()):

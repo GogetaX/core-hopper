@@ -91,3 +91,6 @@ func GetUpgradeValue(upgrade_id: String,next_level:int = 0) -> float:
 			return 1.0 + up.effect_base * (up.level+next_level)
 		_:
 			return 1.0
+			
+func GetTapDamage() -> float:
+	return max(1.0, float(GetUpgradeValue("tap_damage")))
