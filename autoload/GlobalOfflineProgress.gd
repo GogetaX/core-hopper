@@ -82,9 +82,13 @@ func _SimulateLaneOffline(lane_index: int, lane_dps: float, seconds: int, reward
 
 	while remaining_damage > 0.0:
 		if lane.block_data.is_empty():
-			GlobalDiggingProcess.CreateGeneratedBlockForDepth(lane_index,GlobalSave.save_data.progress.global_depth)
-			if lane.block_data.is_empty():
+			var new_block := GlobalDiggingProcess.CreateGeneratedBlockForDepth(
+				lane_index,
+				int(lane.lane_depth)
+			)
+			if new_block.is_empty():
 				return
+			lane.block_data.append(new_block)
 
 		var block = lane.block_data[0]
 		var block_hp := float(block.hp)
@@ -100,12 +104,12 @@ func _SimulateLaneOffline(lane_index: int, lane_dps: float, seconds: int, reward
 			else:
 				rewards[reward_type] = reward_amount
 
+			lane.lane_depth = int(lane.lane_depth) + 1
+			GlobalSave.SetGlobalDepth(int(lane.lane_depth))
 			lane.block_data.remove_at(0)
 		else:
 			block.hp = block_hp - remaining_damage
 			remaining_damage = 0.0
-
-
 func _FindBotByUid(bot_uid: int) -> Dictionary:
 	for bot in GlobalSave.save_data.bot_inventory.bot_db:
 		if int(bot.uid) == bot_uid:

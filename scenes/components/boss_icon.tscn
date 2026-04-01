@@ -8,7 +8,7 @@
 shader = ExtResource("1_he5vi")
 shader_parameter/boss_color = Color(0.14117648, 0.08627451, 0.23921569, 1)
 shader_parameter/outline_color = Color(0.59051526, 0.30728316, 0.65341157, 1)
-shader_parameter/outline_size = 3.0
+shader_parameter/outline_size = 4.0
 
 [node name="BossIcon" type="Control" unique_id=1123311594]
 custom_minimum_size = Vector2(50, 50)

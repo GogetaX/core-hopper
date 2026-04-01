@@ -152,45 +152,10 @@ func _ProcessLane(lane_index: int, delta: float) -> void:
 		return
 
 	if lane.block_data.is_empty():
-		_lane_runtime.erase(lane_index)
-		return
-
-	if !_lane_runtime.has(lane_index):
-		_SyncLaneRuntime(lane_index)
-		if !_lane_runtime.has(lane_index):
+		GenerateNextBlocksForLane(lane_index)
+		if lane.block_data.is_empty():
+			_lane_runtime.erase(lane_index)
 			return
-
-	var runtime: Dictionary = _lane_runtime[lane_index]
-	var current_block = lane.block_data[0]
-
-	if str(current_block.uid) != str(runtime["current_block_uid"]):
-		_SyncLaneRuntime(lane_index)
-		if !_lane_runtime.has(lane_index):
-			return
-		runtime = _lane_runtime[lane_index]
-		current_block = lane.block_data[0]
-
-	var hit_interval := _GetHitInterval(float(runtime["dig_speed"]))
-	runtime["hit_progress"] += delta
-
-	while runtime["hit_progress"] >= hit_interval and lane.block_data.size() > 0:
-		runtime["hit_progress"] -= hit_interval
-
-		var block_was_destroyed = _ApplyDamageToFrontBlock(lane_index, float(runtime["dig_power"]))
-
-		if block_was_destroyed:
-			if lane.block_data.is_empty():
-				_lane_runtime.erase(lane_index)
-				return
-
-			current_block = lane.block_data[0]
-			runtime["current_block_uid"] = str(current_block.uid)
-			runtime["hit_progress"] = 0.0
-			break
-
-	_lane_runtime[lane_index] = runtime
-
-
 
 func _FinishFrontBlock(lane_index: int) -> void:
 	var lane = GlobalSave.save_data.lanes[lane_index]
@@ -360,16 +325,20 @@ func RefreshLaneDigging(lane_index: int) -> void:
 	_lane_runtime.erase(lane_index)
 
 	var lane = GlobalSave.save_data.lanes[lane_index]
+
 	if !lane.auto_dig_unlocked:
 		return
 	if int(lane.bot_uid) == -1:
 		return
+
+	if lane.block_data.is_empty():
+		GenerateNextBlocksForLane(lane_index)
+
 	if lane.block_data.is_empty():
 		return
 
 	_SyncLaneRuntime(lane_index)
 	_EmitBlockHpUpdated(lane_index)
-
 
 func CreateGeneratedBlockForDepth(lane_index: int, block_depth: int) -> Dictionary:
 	var normal_block = GlobalBlockDatabase.CreateBlockForLane(block_depth, lane_index)
