@@ -13,7 +13,7 @@ func _ready() -> void:
 func GenerateSpawnMap():
 	boss_depth_map.clear()
 	for x in boss_db:
-		boss_depth_map[str(int(boss_db[x].spawn_depth))] = x
+		boss_depth_map[int(boss_db[x].spawn_depth)] = x
 
 func LoadBossDatabase(path: String = BOSS_DB_PATH) -> bool:
 	boss_db.clear()

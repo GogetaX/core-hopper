@@ -53,6 +53,23 @@ func AnimateColapseAndFree():
 	t.finished.connect(func(): queue_free())
 	
 func InitData(data):
+	if data.has("is_boss") && data.is_boss:
+		InitAsBossMine(data)
+	else:
+		InitAsNormalMine(data)
+
+func InitAsBossMine(data):
+	SetAsMining(false)
+	cur_data = data.duplicate()
+	$BG/BossIcon.visible = true
+	$BG/VList/ProgressBar.theme_type_variation = "ProgressBarPurple"
+	$BG/VList/name.text = cur_data.name
+	$BG.self_modulate = GlobalColor.COLOR_BG_PURPLE
+	$BG/VList/name.self_modulate = GlobalColor.GetReadableTextColor($BG.self_modulate)
+	$BG/BossIcon.InitBossIcon(data.id)
+	#$BG/BossIcon.modulate = GlobalColor.COLOR_TEXT_PURPLE
+	
+func InitAsNormalMine(data):
 	SetAsMining(false)
 	cur_data = data.duplicate()
 	$BG/VList/name.text = cur_data.name
@@ -61,6 +78,7 @@ func InitData(data):
 	$BG.self_modulate = GlobalColor.GetBlockColorFromKey(cur_data.color)
 	$Particles.modulate = $BG.self_modulate*1.1
 	$BG/VList/name.self_modulate = GlobalColor.GetReadableTextColor($BG.self_modulate)
+	$BG/BossIcon.visible = false
 	var cur_block = GlobalDiggingProcess.GetLaneCurrentBlock(cur_data.lane_index)
 	if cur_block != {}:
 		if GlobalDiggingProcess.IsLaneDigging(cur_data.lane_index):

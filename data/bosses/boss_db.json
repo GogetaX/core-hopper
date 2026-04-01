@@ -4,6 +4,7 @@
       "id": "stone_titan",
       "name": "Stone Titan",
       "spawn_depth": 6,
+      "boss_icon":"boss_06_stone_titan",
       "tier": 1,
       "hp_multiplier": 25.0,
       "coin_reward_multiplier": 8.0,
@@ -27,6 +28,7 @@
     {
       "id": "magma_maw",
       "name": "Magma Maw",
+      "boss_icon":"boss_03_magma_maw",
       "spawn_depth": 300,
       "tier": 2,
       "hp_multiplier": 40.0,
@@ -54,6 +56,7 @@
     {
       "id": "crystal_beast",
       "name": "Crystal Beast",
+      "boss_icon":"boss_02_crystal_beast",
       "spawn_depth": 600,
       "tier": 3,
       "hp_multiplier": 60.0,
@@ -82,6 +85,7 @@
     {
       "id": "iron_crusher",
       "name": "Iron Crusher",
+      "boss_icon":"boss_05_icon_crusher",
       "spawn_depth": 1000,
       "tier": 4,
       "hp_multiplier": 90.0,
@@ -110,6 +114,7 @@
     {
       "id": "void_driller",
       "name": "Void Driller",
+      "boss_icon":"boss_01_void_driller",
       "spawn_depth": 1500,
       "tier": 5,
       "hp_multiplier": 130.0,
@@ -139,6 +144,7 @@
     {
       "id": "core_serpent",
       "name": "Core Serpent",
+      "boss_icon":"boss_04_core_serpent",
       "spawn_depth": 2200,
       "tier": 6,
       "hp_multiplier": 180.0,

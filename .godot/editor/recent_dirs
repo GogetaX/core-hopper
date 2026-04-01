@@ -1,12 +1,13 @@
+res://shaders/
+res://data/bosses/
+res://scenes/components/
 res://scenes/screens/dig/
 res://autoload/
 res://scenes/label_data_scripts/
-res://scenes/components/
 res://scenes/screens/merge/
 res://data/bot_atlas/
 res://art/bots/
 res://scenes/popups/
-res://shaders/
 res://scenes/app/
 res://scenes/screens/settings/
 res://scenes/screens/shop/

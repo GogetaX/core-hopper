@@ -74,7 +74,6 @@ func _CheckBossRevealForLane(lane_index: int, lane_data: Dictionary) -> void:
 		return
 
 	var front_block = lane_data.block_data[0]
-	print("lane ", lane_index, " front block: ", front_block.get("name", "?"), " is_boss=", front_block.get("is_boss", false), " uid=", front_block.get("uid", ""))
 
 	if !bool(front_block.get("is_boss", false)):
 		_shown_boss_uid_by_lane.erase(lane_index)
