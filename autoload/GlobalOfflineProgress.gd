@@ -110,6 +110,7 @@ func _SimulateLaneOffline(lane_index: int, lane_dps: float, seconds: int, reward
 		else:
 			block.hp = block_hp - remaining_damage
 			remaining_damage = 0.0
+			
 func _FindBotByUid(bot_uid: int) -> Dictionary:
 	for bot in GlobalSave.save_data.bot_inventory.bot_db:
 		if int(bot.uid) == bot_uid:

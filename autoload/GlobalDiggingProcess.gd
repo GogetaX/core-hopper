@@ -20,11 +20,15 @@ var _is_syncing := false
 
 func _ready() -> void:
 	GlobalSignals.DataSaved.connect(SyncDiggingLanes)
-	SyncDiggingLanes()
+	GlobalOfflineProgress.ProcessOfflineProgress()
+	GlobalDiggingProcess.SyncDiggingLanes()
 	set_process(true)
 
 
 func _process(delta: float) -> void:
+	if _lane_runtime.is_empty():
+		SyncDiggingLanes()
+
 	for lane_index in _lane_runtime.keys().duplicate():
 		_ProcessLane(int(lane_index), delta)
 
@@ -140,7 +144,7 @@ func _SyncLaneRuntime(lane_index: int) -> void:
 
 	_lane_runtime[lane_index] = new_runtime
 
-func _ProcessLane(lane_index: int, delta: float) -> void:
+func _ProcessLane(lane_index: int, _delta: float) -> void:
 	if lane_index < 0 or lane_index >= GlobalSave.save_data.lanes.size():
 		_lane_runtime.erase(lane_index)
 		return
