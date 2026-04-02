@@ -391,26 +391,13 @@ func SetGlobalDepth(glob_depth:int):
 		save_data.progress.global_depth = best_depth
 	if save_data.player_stats.max_depth_reached < best_depth:
 		save_data.player_stats.max_depth_reached = best_depth
-	if !IsMilestoneCompleted("depth_10"):
-		#GetMIlestoneValueFromID
-		if GlobalMilestone.GetMilestoneFromID("depth_10").target_value <= save_data.player_stats.max_depth_reached:
-			SetMilestoneToCompleted("depth_10")
-	if !IsMilestoneCompleted("depth_25"):
-		#GetMIlestoneValueFromID
-		if GlobalMilestone.GetMilestoneFromID("depth_25").target_value <= save_data.player_stats.max_depth_reached:
-			SetMilestoneToCompleted("depth_25")
-	if !IsMilestoneCompleted("depth_50"):
-		#GetMIlestoneValueFromID
-		if GlobalMilestone.GetMilestoneFromID("depth_50").target_value <= save_data.player_stats.max_depth_reached:
-			SetMilestoneToCompleted("depth_50")
-	if !IsMilestoneCompleted("depth_100"):
-		#GetMIlestoneValueFromID
-		if GlobalMilestone.GetMilestoneFromID("depth_100").target_value <= save_data.player_stats.max_depth_reached:
-			SetMilestoneToCompleted("depth_100")
-	if !IsMilestoneCompleted("depth_250"):
-		#GetMIlestoneValueFromID
-		if GlobalMilestone.GetMilestoneFromID("depth_250").target_value <= save_data.player_stats.max_depth_reached:
-			SetMilestoneToCompleted("depth_250")
+	
+	var cur_milestone = GlobalMilestone.GetMilestoneFromTargetType("reach_depth")
+	if !IsMilestoneCompleted(cur_milestone.id):
+		if cur_milestone.data.target_value <= save_data.player_stats.max_depth_reached:
+			SetMilestoneToCompleted(cur_milestone.id)
+	
+	
 func SetHighestBotLevel(new_level:int)->void:
 	if new_level > save_data.player_stats.highest_bot_level_ever:
 		save_data.player_stats.highest_bot_level_ever = new_level
