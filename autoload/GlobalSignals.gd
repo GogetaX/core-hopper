@@ -32,3 +32,5 @@ signal ShowCurrencyAnimation(from_glob_pos:Vector2,currency_type:String,value:in
 signal CurrencyAdded(currency_type:String,currency_amount:int)
 @warning_ignore("unused_signal")
 signal OpenTabFromStr(tab_name:String)
+@warning_ignore("unused_signal")
+signal AllQuestsInited()

@@ -14,17 +14,15 @@ var _quest_pool: Array = []
 var _quest_by_id: Dictionary = {}
 var _rng := RandomNumberGenerator.new()
 
-
 func _ready() -> void:
-	call_deferred("_InitDailyQuestSystem")
-
-
-func _InitDailyQuestSystem() -> void:
 	_rng.randomize()
+
+func InitDailyQuestSystem() -> void:
 	LoadQuestDatabase()
 	_EnsureSaveSection()
 	_ConnectRuntimeSignals()
 	RefreshForToday()
+	GlobalSignals.AllQuestsInited.emit()
 
 
 func LoadQuestDatabase() -> bool:
@@ -78,8 +76,9 @@ func RefreshForToday() -> void:
 
 	var section := _GetSaveSection()
 	var today_key := _GetTodayKey()
+	var active_ids: Array = section.get("active_ids", [])
 
-	if str(section.get("day_key", "")) != today_key:
+	if str(section.get("day_key", "")) != today_key or active_ids.is_empty():
 		GenerateNewSet()
 
 
@@ -130,7 +129,7 @@ func GenerateNewSet() -> void:
 	for quest_id in selected_ids:
 		section["progress"][quest_id] = 0
 
-	GlobalSave.SyncSave()
+	GlobalSave.SyncSave(false)
 	daily_quests_generated.emit(str(section["day_key"]))
 
 
@@ -272,7 +271,6 @@ func ClaimQuest(quest_id: String) -> bool:
 		claimed_ids.append(quest_id)
 		section["claimed_ids"] = claimed_ids
 
-	GlobalSave.SyncSave()
 	daily_quest_claimed.emit(quest_id)
 	return true
 
@@ -289,16 +287,62 @@ func RegisterUpgradeBought(upgrade_id: String, upgrade_group: String) -> void:
 		"upgrade_group": upgrade_group
 	})
 
+func RegisterBlockBroken(block_id: String = "", block_type: String = "") -> void:
+	AddProgress("break_blocks", 1, {
+		"block_id": block_id,
+		"block_type": block_type
+	})
 
+
+func RegisterBlocksBroken(amount: int, block_id: String = "", block_type: String = "") -> void:
+	AddProgress("break_blocks", amount, {
+		"block_id": block_id,
+		"block_type": block_type
+	})
+
+
+
+func RegisterMergeCount(amount: int = 1) -> void:
+	AddProgress("merge_bots", amount, {})
+
+
+
+func RegisterUpgradeGroupBought(upgrade_group: String, amount: int = 1) -> void:
+	AddProgress("buy_upgrades", amount, {
+		"upgrade_group": upgrade_group
+	})
+
+
+func RegisterTap(amount: int = 1) -> void:
+	AddProgress("tap_times", amount, {})
+
+
+func RegisterDamageDealt(amount: int) -> void:
+	AddProgress("deal_damage", amount, {})
+
+
+func RegisterCoinsEarned(amount: int) -> void:
+	AddProgress("earn_coins", amount, {})
+
+
+func RegisterBossDefeated(boss_id: String = "", boss_type: String = "") -> void:
+	AddProgress("defeat_bosses", 1, {
+		"boss_id": boss_id,
+		"boss_type": boss_type
+	})
+
+
+func RegisterLaneUnlocked(lane_index: int) -> void:
+	AddProgress("unlock_lanes", 1, {
+		"lane_index": lane_index
+	})
+	
 func DebugForceGenerateNewSet() -> void:
 	_EnsureSaveSection()
 	_GetSaveSection()["day_key"] = ""
 	GenerateNewSet()
 
 
-# -------------------------------------------------------------------
-# internal helpers
-# -------------------------------------------------------------------
 
 func _EnsureSaveSection() -> void:
 	if typeof(GlobalSave.save_data) != TYPE_DICTIONARY:
@@ -530,6 +574,49 @@ func _OnBlockDestroyed(lane_index: int, _block_uid: String) -> void:
 		"block_type": block_type
 	})
 
+func GetMostProgressedActiveQuest(include_completed: bool = true, include_claimed: bool = false) -> Dictionary:
+	RefreshForToday()
+
+	var best_quest: Dictionary = {}
+	var best_ratio := -1.0
+	var zero_progress_quests: Array = []
+
+	for quest_id_variant in GetActiveQuestIds():
+		var quest_id := str(quest_id_variant)
+		var quest := GetQuest(quest_id)
+
+		if quest.is_empty():
+			continue
+
+		if !include_completed and bool(quest.get("is_complete", false)):
+			continue
+
+		if !include_claimed and bool(quest.get("is_claimed", false)):
+			continue
+
+		var target = max(1, int(quest.get("target", 1)))
+		var progress := int(quest.get("progress", 0))
+		var ratio := float(progress) / float(target)
+
+		if progress <= 0:
+			zero_progress_quests.append(quest)
+
+		if ratio > best_ratio:
+			best_ratio = ratio
+			best_quest = quest
+
+	# if all eligible quests are still at 0 progress,
+	# return a random zero-progress quest instead
+	if best_ratio <= 0.0 and !zero_progress_quests.is_empty():
+		var random_index := _rng.randi_range(0, zero_progress_quests.size() - 1)
+		var random_quest: Dictionary = zero_progress_quests[random_index]
+		random_quest["progress_ratio"] = 0.0
+		return random_quest
+
+	if !best_quest.is_empty():
+		best_quest["progress_ratio"] = best_ratio
+	return best_quest
+	
 
 #USE SYSTEM LIKE THIS:
 # when merge succeeds

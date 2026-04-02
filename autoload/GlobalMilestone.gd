@@ -102,12 +102,12 @@ func is_milestone_claimed(milestone_id: String) -> bool:
 func GetMilestoneFromID(milestone_id:String)->Dictionary:
 	return milestone_db.milestones[milestone_id]
 
-func GetMilestoneFromTargetType(target_type:String)->Dictionary:
+func GetMilestoneFromTargetTypeArray(target_type:String)->Array:
+	var res_data = []
 	for x in milestone_db.milestones:
 		if milestone_db.milestones[x].target_type == target_type:
-			
-			return {"data":milestone_db.milestones[x],"id":x}
-	return {}
+			res_data.append({"data":milestone_db.milestones[x],"id":x})
+	return res_data
 
 func get_milestone_current_value(data: Dictionary) -> float:
 	var target_type: String = data.get("target_type", "")

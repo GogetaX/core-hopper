@@ -491,10 +491,12 @@ func _ApplyDamageToFrontBlock(lane_index: int, damage: float, is_tap_damage: boo
 
 	if current_block.hp > 0.0:
 		return false
-
+	
 	var destroyed_uid := str(current_block.uid)
 	block_destroyed.emit(lane_index, destroyed_uid)
-
+	if current_block.has("is_boss") && current_block.is_boss:
+		GlobalSave.SetTotalBossKills(1)
+	GlobalDailyQuest.RegisterBlockBroken(current_block.id,current_block.id)
 	_FinishFrontBlock(lane_index)
 
 	if lane.block_data.is_empty():

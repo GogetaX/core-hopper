@@ -47,13 +47,15 @@ func InitUpgradeItem(key:String,data:Dictionary):
 func _on_smart_button_buy_btn_pressed_with_price(currency: String, price: int) -> void:
 	GlobalSave.RemoveCurrency(currency,price)
 	cur_data.level = int(cur_data.level + 1)
-	match cur_key:
-		"tap_damage":
-			if !GlobalSave.SetMilestoneToCompleted("tap_damage_5"):
-				if cur_data.level >= GlobalMilestone.GetMilestoneFromID("tap_damage_5").target_value:
-					GlobalSave.SetMilestoneToCompleted("tap_damage_5")
-		"drill_power":
-			if !GlobalSave.IsMilestoneCompleted("drill_power_10"):
-				if cur_data.level >= GlobalMilestone.GetMilestoneFromID("drill_power_10").target_value:
-					GlobalSave.SetMilestoneToCompleted("drill_power_10")
+	var group_list = cur_data.group.split(",")
+	for x in group_list:
+		GlobalDailyQuest.RegisterUpgradeBought(cur_key, x)
+	
+	var cur_milestone_list = GlobalMilestone.GetMilestoneFromTargetTypeArray("upgrade_level")
+	if !cur_milestone_list.is_empty():
+		for x in cur_milestone_list:
+			if x.data.target_key == cur_key && !GlobalSave.IsMilestoneCompleted(x.id):
+				if x.data.target_value <= cur_data.level:
+					GlobalSave.SetMilestoneToCompleted(x.id)
+			
 	GlobalSave.SyncSave()

@@ -13,6 +13,7 @@ func _ready() -> void:
 	GlobalSignals.OpenTabFromStr.connect(show_tab)
 	show_tab("DIG")
 	InitOfflineData()
+	GlobalDailyQuest.InitDailyQuestSystem()
 	
 func InitOfflineData():
 	var offline_data = GlobalOfflineProgress.ProcessOfflineProgress()

@@ -18,6 +18,8 @@ func _ready() -> void:
 	GlobalSignals.DataSaved.connect(SyncLaneData)
 	GlobalBtn.AddBtnPress($State_BuyBot)
 	GlobalBtn.AddBtnPress($State_DigBot)
+	GlobalBtn.AddBtnPress($State_Reach2kAnd25Crystals)
+	GlobalBtn.AddBtnPress($State_Reach10kAnd100CrystalsAndPrestiege)
 	GlobalBtn.BtnPress.connect(OnBuyStateBtn)
 	SyncLaneData()
 	
@@ -79,6 +81,21 @@ func GetCurState():
 				GlobalSave.ActivateLane(cur_lane)
 				GlobalSave.SyncSave()
 				return "State_DigBot"
+		3:
+			if GlobalSave.save_data.progress.global_depth < 2000 || GlobalSave.GetCurrency("crystals") < 25:
+				return "State_Reach2kAnd25Crystals"
+			else:
+				GlobalSave.ActivateLane(cur_lane)
+				GlobalSave.SyncSave()
+				return "State_DigBot"
+		4:
+			if GlobalSave.save_data.progress.global_depth < 10000 || GlobalSave.GetCurrency("crystals") < 100:
+				return "State_Reach10kAnd100Crystals"
+			else:
+				GlobalSave.ActivateLane(cur_lane)
+				GlobalSave.SyncSave()
+				return "State_DigBot"
+				
 	return "State_DigBot"
 	
 func HideAllStates():
@@ -94,11 +111,20 @@ func SyncLaneData():
 		"State_BuySlot":
 			State_BuyBot()
 		"State_Reach150m":
-			return State_Reach150M()
+			State_Reach150M()
+		"State_Reach2kAnd25Crystals":
+			State_Lane4Unlock()
+		"State_Reach10kAnd100Crystals":
+			State_Lane5Unlock()
 		_:
 			print_debug("Unknown state: ",cur_state)
 		
 
+func State_Lane5Unlock():
+	$State_Reach10kAnd100CrystalsAndPrestiege.visible = true
+func State_Lane4Unlock():
+	$State_Reach2kAnd25Crystals.visible = true
+	
 func State_Reach150M():
 	$State_Reach150m.visible = true
 	
@@ -108,6 +134,24 @@ func OnBuyStateBtn(control:Control):
 		if currency>=100:
 			GlobalBtn.AnimateBtnPressed($State_BuyBot)
 			GlobalSave.RemoveCurrency("coins",100)
+			GlobalSave.ActivateLane(cur_lane)
+			GlobalSave.SyncSave()
+			
+	elif control == $State_Reach2kAnd25Crystals:
+		var crystal_currency = GlobalSave.GetCurrency("crystals")
+		var cur_depth = GlobalSave.save_data.progress.global_depth
+		if crystal_currency >= 25 && cur_depth >= 2000:
+			GlobalBtn.AnimateBtnPressed($State_Reach2kAnd25Crystals)
+			GlobalSave.RemoveCurrency("crystals",25)
+			GlobalSave.ActivateLane(cur_lane)
+			GlobalSave.SyncSave()
+	elif control == $State_Reach10kAnd100CrystalsAndPrestiege:
+		var crystal_currency = GlobalSave.GetCurrency("crystals")
+		var cur_depth = GlobalSave.save_data.progress.global_depth
+		var cur_prestiege = GlobalSave.save_data.player_stats.current_prestige
+		if crystal_currency >= 100 && cur_depth >= 10000 && cur_prestiege >= 1:
+			GlobalBtn.AnimateBtnPressed($State_Reach10kAnd100CrystalsAndPrestiege)
+			GlobalSave.RemoveCurrency("crystals",100)
 			GlobalSave.ActivateLane(cur_lane)
 			GlobalSave.SyncSave()
 	elif control == $State_DigBot:
@@ -120,8 +164,8 @@ func OnBuyStateBtn(control:Control):
 func State_BuyBot():
 	$State_BuyBot.visible = true
 	#Check if i have 100 money
-	var currency = GlobalSave.GetCurrency("coins")
-	if currency<100:
+	var coin_currency = GlobalSave.GetCurrency("coins")
+	if coin_currency<100:
 		$State_BuyBot.modulate = BUY_STATE_DISABLED
 	else:
 		$State_BuyBot.modulate = BUY_STATE_ENABLED

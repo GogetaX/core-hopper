@@ -13,11 +13,12 @@ func OnDataUpdated():
 	CleanRewardContainer()
 	cur_milestone_data = GlobalMilestone.get_next_milestone()
 	#print(cur_milestone_data)
+	#print(cur_milestone_data)
 	if cur_milestone_data.is_empty():
 		$Milestone_NoMilestoneLeft.visible = true
 	elif cur_milestone_data.is_completed:
 		$Milestone_Completed.visible = true
-		$Milestone_Completed/VList/title.text = cur_milestone_data.title
+		$Milestone_Completed/VList/description.text = cur_milestone_data.description
 		match cur_milestone_data.reward_type:
 			"coins","energy","crystals":
 				var c : MilestoneCurrencyClass = currency_reward_item.instantiate()
@@ -33,6 +34,7 @@ func OnDataUpdated():
 func CleanRewardContainer():
 	for x in $Milestone_Completed/VList/RewardContainer.get_children():
 		x.queue_free()
+		
 func HideAllMilestones():
 	for x in get_children():
 		x.visible = false

@@ -53,9 +53,6 @@ func _on_block_destroyed(_lane_index: int, block_uid: String) -> void:
 	if block_uid != cur_data.uid:
 		return
 	GlobalSignals.ShowCurrencyAnimation.emit(global_position+(size/2.0),cur_data.reward_type,2)
-	if cur_data.has("first_boss") && cur_data.is_boss:
-		GlobalSave.SetTotalBossKills()
-	
 	
 	SetAsMining(false)
 	AnimateColapseAndFree()

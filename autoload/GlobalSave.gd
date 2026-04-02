@@ -38,11 +38,12 @@ func CreateSaveTimer():
 	save_timer.timeout.connect(ForceSave)
 	add_child(save_timer)
 	
-func SyncSave():
+func SyncSave(emit_data_saved:=true):
 	if save_timer.is_stopped():
 		ForceSave()
 		save_timer.start()
-	GlobalSignals.DataSaved.emit()
+	if emit_data_saved:
+		GlobalSignals.DataSaved.emit()
 	
 func ForceSave():
 	var f = FileAccess.open(SAVE_FILE,FileAccess.WRITE)
@@ -121,7 +122,8 @@ func BuildCleanSaveData():
 		"boss_kills": 0,
 		"max_depth_reached": 0,
 		"highest_bot_level_ever": 0,
-		"core_resets":0
+		"core_resets":0,
+		"current_prestige":0
 	}
 	res["settings"] = {
 		"music_enabled":true,
@@ -297,6 +299,7 @@ func CombineBetween2MergeNodes(old_uid: int, new_uid: int) -> void:
 
 	new_merge_data.level = int(new_merge_data.level + 1)
 	GlobalSave.SetHighestBotLevel(new_merge_data.level)
+	GlobalDailyQuest.RegisterMergeCreated(new_merge_data.level)
 	# clear old slot ownership before removing
 	old_merge_data.merge_slot_id = -1
 	if new_merge_data.level == 3:
@@ -353,6 +356,7 @@ func MergeFromMergeToDigBot(merge_uid:int,digbot_uid:int):
 	if digbot_data.level == 3:
 		if !GlobalSave.IsMilestoneCompleted("bot_level_3"):
 			GlobalSave.SetMilestoneToCompleted("bot_level_3")
+	GlobalDailyQuest.RegisterMergeCreated(digbot_data.level)
 	GlobalSave.SetHighestBotLevel(digbot_data.level)
 	RemoveBotByID(merge_uid)
 	
@@ -382,6 +386,7 @@ func MergeFromDigBotToMerge(digbot_uid: int, merge_uid: int) -> void:
 		if !GlobalSave.IsMilestoneCompleted("bot_level_3"):
 			GlobalSave.SetMilestoneToCompleted("bot_level_3")
 	GlobalSave.SetHighestBotLevel(merge_bot_data.level)
+	GlobalDailyQuest.RegisterMergeCreated(merge_bot_data.level)
 	# remove dragged dig-bot from inventory and lane
 	RemoveBotByID(digbot_uid)
 
@@ -399,10 +404,14 @@ func SetGlobalDepth(glob_depth:int):
 	if save_data.player_stats.max_depth_reached < best_depth:
 		save_data.player_stats.max_depth_reached = best_depth
 	
-	var cur_milestone = GlobalMilestone.GetMilestoneFromTargetType("reach_depth")
-	if !IsMilestoneCompleted(cur_milestone.id):
-		if cur_milestone.data.target_value <= save_data.player_stats.max_depth_reached:
-			SetMilestoneToCompleted(cur_milestone.id)
+	var cur_milestone_list = GlobalMilestone.GetMilestoneFromTargetTypeArray("reach_depth")
+	if !cur_milestone_list.is_empty():
+		
+		for x in cur_milestone_list:
+			
+			if x.data.target_type == "reach_depth" && !IsMilestoneCompleted(x.id):
+				if x.data.target_value <= save_data.player_stats.max_depth_reached:
+					SetMilestoneToCompleted(x.id)
 	
 	
 func SetHighestBotLevel(new_level:int)->void:
@@ -411,18 +420,24 @@ func SetHighestBotLevel(new_level:int)->void:
 
 func SetTotalMerges(plus_merge:int =1)->void:
 	save_data.player_stats.total_merges += plus_merge
-	if !IsMilestoneCompleted("first_merge"):
-		#GetMIlestoneValueFromID
-		if GlobalMilestone.GetMilestoneFromID("first_merge").target_value <= save_data.player_stats.total_merges:
-			SetMilestoneToCompleted("first_merge")
+	
+	var cur_milestone_list = GlobalMilestone.GetMilestoneFromTargetTypeArray("merge_count")
+	if !cur_milestone_list.is_empty():
+		for x in cur_milestone_list:
+			if x.data.target_type == "merge_count" && !IsMilestoneCompleted(x.id):
+				if x.data.target_value <= save_data.player_stats.total_merges:
+					SetMilestoneToCompleted(x.id)
 
 func SetTotalBossKills(plus_bosses:int =1)->void:
 	save_data.player_stats.boss_kills += plus_bosses
-	if !GlobalSave.IsMilestoneCompleted("first_boss"):
-		GlobalSave.SetMilestoneToCompleted("first_boss")
-	if !GlobalSave.IsMilestoneCompleted("boss_3_kills"):
-		if save_data.player_stats.boss_kills >= 3:
-			GlobalSave.SetMilestoneToCompleted("boss_3_kills")
+	var cur_milestone_list = GlobalMilestone.GetMilestoneFromTargetTypeArray("boss_kill_count")
+	if !cur_milestone_list.is_empty():
+		for x in cur_milestone_list:
+			if x.data.target_key == "boss_kill_count" && !IsMilestoneCompleted(x.id):
+				if x.data.target_value <= save_data.player_stats.boss_kills:
+					SetMilestoneToCompleted(x.id)
+	
+
 
 func SetMilestoneToCompleted(milestone_key):
 	#Check if completed

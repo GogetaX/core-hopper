@@ -4,7 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://d0xkehgu1rebj" path="res://scenes/screens/merge/merge_item.tscn" id="1_odqub"]
 [ext_resource type="PackedScene" uid="uid://njxlv6dxrlwj" path="res://scenes/screens/progress/smart_button_buy.tscn" id="2_2m8po"]
 [ext_resource type="PackedScene" uid="uid://ck6fuim6hek81" path="res://scenes/screens/dig/dig_bot_slot.tscn" id="2_ad68v"]
+[ext_resource type="Script" uid="uid://bloevasmaqx74" path="res://scenes/label_data_scripts/total_dps.gd" id="2_afpfk"]
 [ext_resource type="PackedScene" uid="uid://dpo46sl5j3kcq" path="res://scenes/screens/merge/smart_button_merge.tscn" id="2_imfux"]
+[ext_resource type="Script" uid="uid://bnypytdg7otdp" path="res://scenes/label_data_scripts/active_bot_slots.gd" id="2_yawsl"]
 [ext_resource type="Texture2D" uid="uid://bg18vum2cai3c" path="res://art/icons/rocket.png" id="3_um6mi"]
 [ext_resource type="Script" uid="uid://bg68ksebamcji" path="res://scenes/screens/merge/drag_drop_handler.gd" id="7_lfmeh"]
 
@@ -54,11 +56,12 @@ theme_type_variation = &"LabelGrayHint"
 text = "TOTAL DPS"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="HList/Panel/HList/VList" unique_id=2134051860]
+[node name="total_dps" type="Label" parent="HList/Panel/HList/VList" unique_id=2134051860]
 layout_mode = 2
 theme_type_variation = &"LabelTitle_Blue"
 text = "14.2K"
 horizontal_alignment = 1
+script = ExtResource("2_afpfk")
 
 [node name="VList2" type="VBoxContainer" parent="HList/Panel/HList" unique_id=1180102577]
 layout_mode = 2
@@ -71,11 +74,12 @@ theme_type_variation = &"LabelGrayHint"
 text = "BOT SLOTS"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="HList/Panel/HList/VList2" unique_id=647084552]
+[node name="active_bot_slots" type="Label" parent="HList/Panel/HList/VList2" unique_id=647084552]
 layout_mode = 2
 theme_type_variation = &"LabelTitle_White"
 text = "12/16"
 horizontal_alignment = 1
+script = ExtResource("2_yawsl")
 
 [node name="Control2" type="Control" parent="." unique_id=710313240]
 custom_minimum_size = Vector2(0, 40)

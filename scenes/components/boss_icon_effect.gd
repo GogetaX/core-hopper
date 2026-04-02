@@ -17,6 +17,8 @@ func InitIconFromEffect(special_type:String)->void:
 		"shield_cycle":
 			texture = load("res://art/particles/shield_circle.png")
 			self_modulate = GlobalColor.COLOR_BORDER_ORANGE
+		"none":
+			texture = null
 		_:
 			texture = null
 			print_debug("Unknown special_type: ",special_type)

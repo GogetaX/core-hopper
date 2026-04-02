@@ -16,7 +16,9 @@
 [ext_resource type="Script" uid="uid://b1boirxy3j4fm" path="res://scenes/screens/dig/drop_bonus.gd" id="9_acvec"]
 [ext_resource type="Script" uid="uid://bb6aobrm7ji1h" path="res://scenes/screens/dig/drop_bonus_value.gd" id="9_elpyf"]
 [ext_resource type="Script" uid="uid://cpesek5rxsldo" path="res://scenes/screens/dig/next_boss_in_helper.gd" id="11_55ggj"]
+[ext_resource type="PackedScene" uid="uid://x5j6celmf4at" path="res://scenes/screens/dig/current_daily_task.tscn" id="16_nk4bl"]
 [ext_resource type="PackedScene" uid="uid://bjyvsqllfsb14" path="res://scenes/screens/dig/milestone_panel.tscn" id="16_wjarc"]
+[ext_resource type="Script" uid="uid://bg68ksebamcji" path="res://scenes/screens/merge/drag_drop_handler.gd" id="19_ddijn"]
 
 [node name="DigScreen" type="VBoxContainer" unique_id=594767936]
 anchors_preset = 15
@@ -610,59 +612,13 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="HList4" type="HBoxContainer" parent="." unique_id=517077393]
+custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 20
 
-[node name="DailyTasks" type="Panel" parent="HList4" unique_id=285374393]
-custom_minimum_size = Vector2(0, 220)
+[node name="CurrentDailyTask" parent="HList4" unique_id=424199579 instance=ExtResource("16_nk4bl")]
 layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 2
-theme_type_variation = &"PanelPurpleBorder"
-
-[node name="VList" type="VBoxContainer" parent="HList4/DailyTasks" unique_id=1372318764]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = 20.0
-offset_right = -20.0
-offset_bottom = -20.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="HList4/DailyTasks/VList" unique_id=832151970]
-layout_mode = 2
-theme_type_variation = &"LabelDailyPurple"
-text = "DAILY TASKS"
-
-[node name="Control" type="Control" parent="HList4/DailyTasks/VList" unique_id=1378331768]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-
-[node name="Label2" type="Label" parent="HList4/DailyTasks/VList" unique_id=2065718126]
-layout_mode = 2
-theme_type_variation = &"LabelDailyTasks"
-text = "Dig 10 alloy blocks"
-autowrap_mode = 2
-
-[node name="ProgressBar" type="ProgressBar" parent="HList4/DailyTasks/VList" unique_id=1699369267]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-mouse_filter = 2
-theme_type_variation = &"ProgressBarPurple"
-value = 70.0
-show_percentage = false
-
-[node name="Label3" type="Label" parent="HList4/DailyTasks/VList" unique_id=2090530661]
-layout_mode = 2
-theme_type_variation = &"LabelGray"
-text = "75% complete"
 
 [node name="Panel2" type="Panel" parent="HList4" unique_id=2063050503]
 custom_minimum_size = Vector2(0, 220)
@@ -735,6 +691,9 @@ button_color = "WHITE_MARGIN"
 [node name="Control5" type="Control" parent="." unique_id=751154632]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
+
+[node name="DragDropHandler" type="Node" parent="." unique_id=398312624]
+script = ExtResource("19_ddijn")
 
 [connection signal="timeout" from="HList3/IncomePanel/VList/income_ps/incone_counter" to="HList3/IncomePanel/VList/income_ps" method="_on_incone_counter_timeout"]
 [connection signal="BtnPressed" from="HList5/WatchAdBtn" to="." method="_on_watch_ad_btn_btn_pressed"]

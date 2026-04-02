@@ -48,6 +48,7 @@ mouse_filter = 2
 [node name="title" type="Label" parent="Milestone_Incomplete/VList" unique_id=1781413649]
 layout_mode = 2
 theme_type_variation = &"LabelDailyTasks"
+theme_override_font_sizes/font_size = 24
 text = "1,500m unlocks boss block"
 autowrap_mode = 2
 
@@ -86,15 +87,14 @@ layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="title" type="Label" parent="Milestone_Completed/VList" unique_id=1285848746]
+[node name="description" type="Label" parent="Milestone_Completed/VList" unique_id=406144842]
 layout_mode = 2
-theme_type_variation = &"LabelDailyTasks"
-theme_override_font_sizes/font_size = 24
-text = "1,500m unlocks boss block"
+theme_type_variation = &"LabelGray"
+text = "50m remaining"
 autowrap_mode = 2
 
 [node name="RewardContainer" type="HBoxContainer" parent="Milestone_Completed/VList" unique_id=853548670]
-custom_minimum_size = Vector2(0, 40)
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
 [node name="MilestoneRewardItem" parent="Milestone_Completed/VList/RewardContainer" unique_id=1001953382 instance=ExtResource("3_6etbr")]
@@ -109,13 +109,17 @@ mouse_filter = 2
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 buy_btn_title = "CLAIM"
+panel_color = "GOLD"
 
 [node name="SmallNotifCounter" parent="Milestone_Completed" unique_id=1772552382 instance=ExtResource("5_ajrku")]
-layout_mode = 0
-offset_left = -15.0
-offset_top = -15.0
-offset_right = 15.0
-offset_bottom = 15.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -30.0
+offset_right = 0.0
+offset_bottom = 30.0
+grow_horizontal = 0
 panel_color = "ORANGE"
 notif_count = 1
 

@@ -1,11 +1,11 @@
-Control
+VBoxContainer
 TextureRect
 HBoxContainer
+Control
 Timer
 GPUParticles2D
 Label
 Node
-VBoxContainer
 HFlowContainer
 AnimationPlayer
 Sprite2D

@@ -11,13 +11,13 @@ signal OnPressed()
 	get:
 		return tab_name
 		
-@export_enum("WHITE","BLUE","PURPLE","GOLD") var btn_style := "WHITE":
+@export_enum("WHITE","BLUE","PURPLE","GOLD") var panel_color := "WHITE":
 	set(value):
-		btn_style = value
+		panel_color = value
 		if is_node_ready():
 			_ready()
 	get:
-		return btn_style
+		return panel_color
 		
 @export var tab_group := "progress_tab_group"
 @export var default_selected := false:
@@ -27,15 +27,22 @@ signal OnPressed()
 			_ready()
 	get:
 		return default_selected
+		
+@export var notif_counter := 4:
+	set(value):
+		notif_counter = value
+		if is_node_ready():
+			_ready()
+	get:
+		return notif_counter
 
 var _is_selected = false
+var already_loaded = false
 
 func _ready() -> void:
 	$HList/Label.text = tab_name
-	$SmartPanel.panel_color = btn_style
-	$HList/new_notif_count/SmartPanel.panel_color = btn_style
-	$HList/new_notif_count.self_modulate = $HList/new_notif_count/SmartPanel.GetTextColor()
-	
+	$SmartPanel.panel_color = panel_color
+	$HList/VBoxContainer/SmallNotifCounter.notif_count = notif_counter
 	if default_selected:
 		$SmartPanel.modulate.a = 1.0
 		$HList/Label.self_modulate = GlobalColor.COLOR_TEXT_WHITE
@@ -43,11 +50,12 @@ func _ready() -> void:
 		$SmartPanel.modulate.a = 0.0
 		$HList/Label.self_modulate = GlobalColor.COLOR_DISABLED_TEXT_WHITE
 		
-	if !Engine.is_editor_hint():
+	if !Engine.is_editor_hint() && !already_loaded:
 		GlobalBtn.AddBtnPress(self)
 		GlobalBtn.BtnPress.connect(OnBtnPressed)
 		GlobalSignals.OnProgressTabPressed.connect(OnProgressTabPressed)
 		_is_selected = default_selected
+		already_loaded = true
 
 func OnBtnPressed(btn_control:Control):
 	if btn_control != self:

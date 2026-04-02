@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="4_lruj6"]
 [ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="5_u8qxv"]
 [ext_resource type="PackedScene" uid="uid://d32v5pknv4vq0" path="res://scenes/components/currency_icon.tscn" id="6_ff87c"]
+[ext_resource type="Texture2D" uid="uid://bisqfreq6vd5f" path="res://art/icons/20_px/depth_icon.png" id="7_ldo8n"]
+[ext_resource type="Texture2D" uid="uid://cl1g53qyb2nu0" path="res://data/icons/prestiege.tres" id="8_nel8w"]
 
 [node name="DigBotSlot" type="Panel" unique_id=1867726318]
 custom_minimum_size = Vector2(150, 150)
@@ -126,6 +128,7 @@ text = "Unlock"
 horizontal_alignment = 1
 
 [node name="State_Reach150m" type="Control" parent="." unique_id=1817242878]
+visible = false
 modulate = Color(0.23403707, 0.23403707, 0.23403707, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -160,6 +163,151 @@ self_modulate = Color(0.30980393, 0.89411765, 1, 1)
 layout_mode = 2
 text = "REACH
 150M"
+horizontal_alignment = 1
+hash_tag_color = "BLUE"
+no_bg = true
+
+[node name="State_Reach2kAnd25Crystals" type="Control" parent="." unique_id=1838847763]
+visible = false
+modulate = Color(0.23403707, 0.23403707, 0.23403707, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 1
+
+[node name="SmartPanel" parent="State_Reach2kAnd25Crystals" unique_id=495449566 instance=ExtResource("5_u8qxv")]
+layout_mode = 1
+panel_type = "INSIDE_ONLY"
+panel_color = "BLUE"
+darken_bg = true
+
+[node name="VList" type="VBoxContainer" parent="State_Reach2kAnd25Crystals" unique_id=1701784153]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="State_Reach2kAnd25Crystals/VList" unique_id=153981279]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="State_Reach2kAnd25Crystals/VList/HBoxContainer" unique_id=2050467252]
+layout_mode = 2
+texture = ExtResource("7_ldo8n")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="ProgressHashTag2" parent="State_Reach2kAnd25Crystals/VList/HBoxContainer" unique_id=822767426 instance=ExtResource("4_lruj6")]
+self_modulate = Color(0.30980393, 0.89411765, 1, 1)
+layout_mode = 2
+text = "2K"
+horizontal_alignment = 1
+hash_tag_color = "BLUE"
+no_bg = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="State_Reach2kAnd25Crystals/VList" unique_id=1691564967]
+layout_mode = 2
+alignment = 1
+
+[node name="CurrencyIcon" parent="State_Reach2kAnd25Crystals/VList/HBoxContainer2" unique_id=1962915535 instance=ExtResource("6_ff87c")]
+layout_mode = 2
+
+[node name="ProgressHashTag2" parent="State_Reach2kAnd25Crystals/VList/HBoxContainer2" unique_id=1548097212 instance=ExtResource("4_lruj6")]
+self_modulate = Color(0.30980393, 0.89411765, 1, 1)
+layout_mode = 2
+text = "25"
+horizontal_alignment = 1
+hash_tag_color = "BLUE"
+no_bg = true
+
+[node name="State_Reach10kAnd100CrystalsAndPrestiege" type="Control" parent="." unique_id=1712844576]
+modulate = Color(0.23403707, 0.23403707, 0.23403707, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 1
+
+[node name="SmartPanel" parent="State_Reach10kAnd100CrystalsAndPrestiege" unique_id=708589260 instance=ExtResource("5_u8qxv")]
+layout_mode = 1
+panel_type = "INSIDE_ONLY"
+panel_color = "BLUE"
+darken_bg = true
+
+[node name="VList" type="VBoxContainer" parent="State_Reach10kAnd100CrystalsAndPrestiege" unique_id=1923094640]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="State_Reach10kAnd100CrystalsAndPrestiege/VList" unique_id=1310484775]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="State_Reach10kAnd100CrystalsAndPrestiege/VList/HBoxContainer" unique_id=967602642]
+layout_mode = 2
+texture = ExtResource("8_nel8w")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="ProgressHashTag2" parent="State_Reach10kAnd100CrystalsAndPrestiege/VList/HBoxContainer" unique_id=1316184301 instance=ExtResource("4_lruj6")]
+self_modulate = Color(0.30980393, 0.89411765, 1, 1)
+layout_mode = 2
+text = "1"
+horizontal_alignment = 1
+hash_tag_color = "BLUE"
+no_bg = true
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="State_Reach10kAnd100CrystalsAndPrestiege/VList" unique_id=1598106665]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="State_Reach10kAnd100CrystalsAndPrestiege/VList/HBoxContainer3" unique_id=814391663]
+layout_mode = 2
+texture = ExtResource("7_ldo8n")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="ProgressHashTag2" parent="State_Reach10kAnd100CrystalsAndPrestiege/VList/HBoxContainer3" unique_id=1770295415 instance=ExtResource("4_lruj6")]
+self_modulate = Color(0.30980393, 0.89411765, 1, 1)
+layout_mode = 2
+text = "10K"
+horizontal_alignment = 1
+hash_tag_color = "BLUE"
+no_bg = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="State_Reach10kAnd100CrystalsAndPrestiege/VList" unique_id=100053726]
+layout_mode = 2
+alignment = 1
+
+[node name="CurrencyIcon" parent="State_Reach10kAnd100CrystalsAndPrestiege/VList/HBoxContainer2" unique_id=956377145 instance=ExtResource("6_ff87c")]
+layout_mode = 2
+
+[node name="ProgressHashTag2" parent="State_Reach10kAnd100CrystalsAndPrestiege/VList/HBoxContainer2" unique_id=210343090 instance=ExtResource("4_lruj6")]
+self_modulate = Color(0.30980393, 0.89411765, 1, 1)
+layout_mode = 2
+text = "100"
 horizontal_alignment = 1
 hash_tag_color = "BLUE"
 no_bg = true

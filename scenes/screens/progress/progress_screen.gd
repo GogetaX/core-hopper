@@ -49,3 +49,13 @@ func _on_tab_relics_on_pressed() -> void:
 func UpgradeListResized() -> void:
 	var max_y = $Menu_Upgrades/VList.get_minimum_size().y
 	$Menu_Upgrades.custom_minimum_size.y = max_y + 30
+
+
+func _on_quest_v_list_resized() -> void:
+	var max_y = $Menu_Quests/QuestVList.get_minimum_size().y
+	$Menu_Quests.custom_minimum_size.y = max_y + 30
+
+
+func _on_relic_v_list_resized() -> void:
+	var max_y = $Menu_Relics/RelicVList.get_minimum_size().y
+	$Menu_Relics.custom_minimum_size.y = max_y + 30

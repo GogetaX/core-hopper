@@ -40,6 +40,8 @@ func GetCoinYieldMultiplier(next_level :int = 0) -> float:
 	var lvl = GlobalSave.save_data.upgrades["coin_yield"].level + next_level
 	return pow(1.10, lvl)
 	
+func GetGlobalCoinYieldMultiplayer():
+	return GetCoinYieldMultiplier()
 
 func GetBotFinalDigPower(level: int) -> float:
 	return GetBotBaseDigPower(level) * GetGlobalPowerMultiplier()
@@ -53,6 +55,10 @@ func GetBotFinalDps(level: int) -> float:
 func GetBotFinalDPSWithGobal(level:int) -> float:
 	var final_dps = GetBotFinalDps(level)
 	return final_dps * GlobalStats.GetUpgradeValue("drill_power")
+	
+func GetBotFinalDigSpeedWithGlobal(level: int) -> float:
+	var final_speed = GetBotFinalDigSpeed(level)
+	return final_speed * GlobalStats.GetUpgradeValue("drill_speed")
 	
 func GetBotStats(level: int) -> Dictionary:
 	var base_power := maxi(1, int(round(pow(1.9, level - 1))))

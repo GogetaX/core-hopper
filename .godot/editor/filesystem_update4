@@ -114,3 +114,12 @@ res://scenes/components/boss_icon_effect.tscn
 res://scenes/components/boss_icon_effect.gd
 res://scenes/popups/WatchAdPopup.tscn
 res://autoload/GlobalDailyQuest.gd
+res://scenes/screens/dig/current_daily_task.tscn
+res://scenes/screens/dig/current_daily_task.gd
+res://scenes/label_data_scripts/active_bot_slots.gd
+res://scenes/label_data_scripts/total_dps.gd
+res://data/icons/prestiege.tres
+res://scenes/screens/progress/tab_btn.tscn
+res://scenes/screens/progress/tab_btn.gd
+res://scenes/label_data_scripts/mining_speed.gd
+res://scenes/label_data_scripts/drop_multiplayer.gd

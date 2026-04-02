@@ -75,7 +75,10 @@ func GetBlockColorFromKey(color_key: String) -> Color:
 			return Color("#FFFFFF")
 
 func SkillUpgradeTextToColor(skill_group:String)->String:
-	match skill_group:
+	var group = skill_group
+	if skill_group.contains(","):
+		group = skill_group.split(",")[0]
+	match group:
 		"power":
 			return "ORANGE"
 		"speed":

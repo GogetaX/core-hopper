@@ -1,7 +1,7 @@
 {
   "tap_damage": {
     "title": "Tap Damage",
-    "group": "power",
+    "group": "power,tap",
     "icon":"tap_damage",
     "level": 0,
     "max_level": -1,
