@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://drtj871naoig5" path="res://art/particles/dirt_03.png" id="3_c4gli"]
 [ext_resource type="FontVariation" uid="uid://bbgny2bpigrdg" path="res://fonts/RES_JakaraSans_Bold.tres" id="4_0eb3b"]
 [ext_resource type="Texture2D" uid="uid://dp3n7fugeo42n" path="res://art/bosses/status_boss.png" id="4_rrn61"]
+[ext_resource type="PackedScene" uid="uid://c3x0t52p0r112" path="res://scenes/components/boss_icon_effect.tscn" id="5_6tlod"]
 
 [sub_resource type="Gradient" id="Gradient_c4gli"]
 offsets = PackedFloat32Array(0, 0.07467532, 0.24025974, 1)
@@ -29,7 +30,7 @@ color_ramp = SubResource("GradientTexture1D_at2nx")
 
 [node name="Material" type="Control" unique_id=812286270]
 self_modulate = Color(0.34216362, 0.01806524, 0.01806524, 1)
-custom_minimum_size = Vector2(0, 100)
+custom_minimum_size = Vector2(0, 160)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 150.0
@@ -65,13 +66,48 @@ offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Status" type="HBoxContainer" parent="BG" unique_id=1717556344]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 1
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 140.0
+offset_bottom = 25.0
+
+[node name="StatusMining" type="TextureRect" parent="BG/Status" unique_id=1592450106]
+self_modulate = Color(0, 1, 0.12565732, 1)
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_itj41")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="StatusBoss" type="TextureRect" parent="BG/Status" unique_id=472886654]
+self_modulate = Color(0.7607843, 0.43529412, 1, 1)
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_rrn61")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Control" type="Control" parent="BG/Status" unique_id=337974764]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="BossIconEffect" parent="BG/Status" unique_id=1111673599 instance=ExtResource("5_6tlod")]
+layout_mode = 2
+texture = null
+
 [node name="VList" type="VBoxContainer" parent="BG" unique_id=69812055]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 10.0
-offset_top = 10.0
+offset_top = 30.0
 offset_right = -10.0
 offset_bottom = -10.0
 grow_horizontal = 2
@@ -79,26 +115,6 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 alignment = 1
-
-[node name="Status" type="HBoxContainer" parent="BG/VList" unique_id=1717556344]
-layout_mode = 2
-alignment = 1
-
-[node name="StatusMining" type="TextureRect" parent="BG/VList/Status" unique_id=1592450106]
-self_modulate = Color(0, 1, 0.12565732, 1)
-custom_minimum_size = Vector2(15, 15)
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("2_itj41")
-stretch_mode = 5
-
-[node name="StatusBoss" type="TextureRect" parent="BG/VList/Status" unique_id=472886654]
-self_modulate = Color(0.7607843, 0.43529412, 1, 1)
-custom_minimum_size = Vector2(15, 15)
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("4_rrn61")
-stretch_mode = 5
 
 [node name="name" type="Label" parent="BG/VList" unique_id=1367922622]
 layout_mode = 2
@@ -111,6 +127,11 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
+[node name="Control" type="Control" parent="BG/VList" unique_id=1830862094]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
 [node name="ProgressBar" type="ProgressBar" parent="BG/VList" unique_id=1156711730]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
@@ -120,10 +141,10 @@ value = 75.0
 show_percentage = false
 
 [node name="Particles" type="Node2D" parent="." unique_id=2081440569]
-visible = false
-position = Vector2(75, 50)
+position = Vector2(75, 79)
 
 [node name="DirtParticles" type="GPUParticles2D" parent="Particles" unique_id=1320681379]
+visible = false
 z_as_relative = false
 amount = 10
 texture = ExtResource("3_c4gli")

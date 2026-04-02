@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://c3x0t52p0r112"]
+
+[ext_resource type="Texture2D" uid="uid://cabgj3uys0mr5" path="res://art/particles/shield_icon.png" id="1_104al"]
+[ext_resource type="Script" uid="uid://dqkt3ehdgwyky" path="res://scenes/components/boss_icon_effect.gd" id="2_cr2y7"]
+
+[node name="BossIconEffect" type="TextureRect" unique_id=1111673599]
+custom_minimum_size = Vector2(15, 15)
+offset_right = 15.0
+offset_bottom = 15.0
+mouse_filter = 2
+texture = ExtResource("1_104al")
+expand_mode = 3
+stretch_mode = 5
+script = ExtResource("2_cr2y7")

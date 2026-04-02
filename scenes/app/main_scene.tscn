@@ -11,9 +11,9 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_whjeo"]
 shader = ExtResource("5_ajjm1")
 shader_parameter/blur_lod = 3.50000016625
-shader_parameter/tint = Color(0.08, 0.11, 0.2, 0.35)
+shader_parameter/tint = Color(0.07846785, 0.11207495, 0.19966345, 0.045)
 shader_parameter/saturation = 0.400000019
-shader_parameter/brightness = 0.10000000405148
+shader_parameter/brightness = 1.0
 
 [node name="App" type="Control" unique_id=1304418827]
 layout_mode = 3
@@ -76,7 +76,6 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="OverlayLayer" type="CanvasLayer" parent="." unique_id=286303035]
-visible = false
 script = ExtResource("4_u2ckv")
 
 [node name="BlurBG" type="ColorRect" parent="OverlayLayer" unique_id=1018703847]
@@ -100,6 +99,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Scroll" type="ScrollContainer" parent="OverlayLayer/Popups" unique_id=1103177396]
+clip_contents = false
 layout_mode = 2
 mouse_filter = 2
 

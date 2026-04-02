@@ -3,7 +3,7 @@
     {
       "id": "stone_titan",
       "name": "Stone Titan",
-      "spawn_depth": 150,
+      "spawn_depth": 6,
       "boss_icon":"boss_06_stone_titan",
       "tier": 1,
       "hp_multiplier": 25.0,
@@ -16,8 +16,11 @@
       "drop_table": [
         "boss_core_1"
       ],
-      "special_type": "none",
-      "special_values": {},
+     "special_type": "shield_cycle",
+      "special_values": {
+        "shield_duration_sec": 4.0,
+        "shield_cooldown_sec": 12.0
+      },
       "icon_key": "stone_titan",
       "bg_color": "#6B7280",
       "title_color": "#FFFFFF",
@@ -102,7 +105,7 @@
       ],
       "special_type": "tap_resist",
       "special_values": {
-        "tap_damage_multiplier": 0.5
+        "tap_damage_multiplier": 0.0
       },
       "icon_key": "iron_crusher",
       "bg_color": "#374151",

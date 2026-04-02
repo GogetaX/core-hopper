@@ -24,7 +24,7 @@ script = ExtResource("1_iikkl")
 [node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("2_hv715")]
 layout_mode = 1
 panel_type = "INSIDE_ONLY"
-panel_color = "TAB_BG"
+panel_color = "WHITE"
 darken_bg = true
 
 [node name="ClosePopup" parent="SmartPanel" unique_id=1682398798 instance=ExtResource("6_xukwe")]
@@ -32,8 +32,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -100.0
-offset_bottom = 100.0
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
 grow_horizontal = 0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 panel_type = "INSIDE_ONLY"
@@ -65,7 +67,7 @@ custom_minimum_size = Vector2(295, 33)
 layout_mode = 2
 hash_tag_type = "INSIDE_ONLY"
 hash_tag_text = "LIMITED TIME OFFER"
-hashtag_icon = ExtResource("3_6ym58")
+is_currency = false
 
 [node name="Control" type="Control" parent="SmartPanel/VBoxContainer" unique_id=333208509]
 custom_minimum_size = Vector2(0, 20)

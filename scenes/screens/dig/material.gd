@@ -2,6 +2,7 @@ extends Control
 class_name MaterialClass
 
 @onready var time_before_idle = $time_before_idle
+@onready var shield_particle = preload("res://scenes/screens/particles/shield_particle.tscn")
 
 var cur_data = {}
 func _ready() -> void:
@@ -10,7 +11,7 @@ func _ready() -> void:
 	SetPartilces()
 	GlobalBtn.AddBtnPress(self)
 	GlobalBtn.BtnPress.connect(OnTap)
-	$BG/VList/Status/StatusBoss.visible = false
+	$BG/Status/StatusBoss.visible = false
 
 func OnTap(node_control:Control):
 	if node_control != self:
@@ -25,14 +26,17 @@ func OnTap(node_control:Control):
 func _on_block_hp_updated(_lane_index: int, block_uid: String, hp: float, max_hp: float, _hp_percent: float) -> void:
 	if block_uid != cur_data.uid:
 		return
+	
 	SetAsMining(true)
 	$BG/VList/ProgressBar.max_value = max_hp
 	if hp == max_hp:
 		$BG/VList/ProgressBar.value = hp
 	else:
+		
 		var t = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
 		t.tween_property($BG/VList/ProgressBar,"value",hp,0.2)
-		TakeDmgAnimation()
+		if hp <$BG/VList/ProgressBar.value:
+			TakeDmgAnimation()
 	if time_before_idle:
 		time_before_idle.start()
 
@@ -73,14 +77,16 @@ func InitData(data):
 
 func InitAsBossMine():
 	SetAsMining(false)
-	$BG/VList/Status/StatusBoss.visible = true
+	$BG/Status/StatusBoss.visible = true
 	$BG/BossIcon.visible = true
 	$BG/VList/ProgressBar.theme_type_variation = "ProgressBarPurple"
 	$BG/VList/name.text = cur_data.name
 	$BG.self_modulate = GlobalColor.COLOR_BG_PURPLE
 	$BG/VList/name.self_modulate = GlobalColor.GetReadableTextColor($BG.self_modulate)
 	$BG/BossIcon.InitBossIcon(cur_data.id)
+	$BG/Status/BossIconEffect.InitIconFromEffect(cur_data.special_type)
 	#$BG/BossIcon.modulate = GlobalColor.COLOR_TEXT_PURPLE
+	
 	
 func InitAsNormalMine():
 	SetAsMining(false)
@@ -99,10 +105,10 @@ func InitAsNormalMine():
 func SetAsMining(is_mining):
 	if is_mining:
 		$BG/VList/ProgressBar.visible = true
-		$BG/VList/Status/StatusMining.visible = true
+		$BG/Status/StatusMining.visible = true
 	else:
 		$BG/VList/ProgressBar.visible = false
-		$BG/VList/Status/StatusMining.visible = false
+		$BG/Status/StatusMining.visible = false
 
 func SetPartilces():
 	$Particles.visible = true
@@ -122,18 +128,26 @@ func GetLaneIndex() -> int:
 
 func NeedsRefresh(new_data: Dictionary) -> bool:
 	if str(cur_data.get("uid", "")) != str(new_data.get("uid", "")):
+		if !cur_data.is_empty()  && cur_data.lane_index == 0:
+			print("1")
 		return true
 	
 	if float(cur_data.get("hp", -1.0)) != float(new_data.get("hp", -1.0)):
 		return false
 	
 	if float(cur_data.get("max_hp", -1.0)) != float(new_data.get("max_hp", -1.0)):
+		if !cur_data.is_empty()  && cur_data.lane_index == 0:
+			print("2")
 		return true
 	
 	if bool(cur_data.get("is_boss", false)) != bool(new_data.get("is_boss", false)):
+		if !cur_data.is_empty()  && cur_data.lane_index == 0:
+			print("3")
 		return true
 	
 	if str(cur_data.get("block_id", "")) != str(new_data.get("block_id", "")):
+		if !cur_data.is_empty()  && cur_data.lane_index == 0:
+			print("4")
 		return true
 	
 	return false

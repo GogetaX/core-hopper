@@ -108,3 +108,8 @@ res://scenes/screens/shop/smart_button_buy_with_icon.tscn
 res://scenes/screens/shop/smart_button_buy_with_icon.gd
 res://scenes/components/small_notif_counter.tscn
 res://scenes/components/small_notif_counter.gd
+res://scenes/screens/particles/shield_particle.tscn
+res://scenes/screens/particles/shield_particle.gd
+res://scenes/components/boss_icon_effect.tscn
+res://scenes/components/boss_icon_effect.gd
+res://scenes/popups/WatchAdPopup.tscn

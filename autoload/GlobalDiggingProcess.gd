@@ -2,6 +2,7 @@ extends Node
 
 signal block_hp_updated(lane_index: int, block_uid: String, hp: float, max_hp: float, hp_percent: float)
 signal block_destroyed(lane_index: int, block_uid: String)
+signal boss_special_blocked_hit(lane_index: int, block_uid: String, reason: String)
 
 const BASE_HIT_INTERVAL := 1.0
 
@@ -29,10 +30,28 @@ func _process(delta: float) -> void:
 	if _lane_runtime.is_empty():
 		SyncDiggingLanes()
 
+	_ProcessBossPassiveLanes(delta)
+
 	for lane_index in _lane_runtime.keys().duplicate():
 		_ProcessLane(int(lane_index), delta)
 
 
+func _ProcessBossPassiveLanes(delta: float) -> void:
+	for lane_index in range(GlobalSave.save_data.lanes.size()):
+		var lane = GlobalSave.save_data.lanes[lane_index]
+
+		if !lane.auto_dig_unlocked:
+			continue
+
+		if lane.block_data.is_empty():
+			continue
+
+		var front_block = lane.block_data[0]
+		if !bool(front_block.get("is_boss", false)):
+			continue
+
+		_ProcessBossSpecial(lane_index, delta)
+		
 func SyncDiggingLanes() -> void:
 	if _is_syncing:
 		return
@@ -67,6 +86,8 @@ func _EmitBlockHpUpdated(lane_index: int) -> void:
 	var hp := float(block.hp)
 	var max_hp := float(block.max_hp)
 	var hp_percent = hp / max(max_hp, 0.001)
+
+	#print("EMIT hp update lane=", lane_index, " uid=", str(block.uid), " hp=", hp)
 
 	block_hp_updated.emit(
 		lane_index,
@@ -173,6 +194,10 @@ func _ProcessLane(lane_index: int, delta: float) -> void:
 		runtime["current_block_uid"] = str(lane.block_data[0].uid)
 		runtime["hit_progress"] = 0.0
 
+	# boss passive specials tick here
+	if bool(lane.block_data[0].get("is_boss", false)):
+		_ProcessBossSpecial(lane_index, delta)
+
 	runtime["hit_progress"] += delta
 
 	var hit_interval := _GetHitInterval(float(runtime.get("dig_speed", 1.0)))
@@ -181,7 +206,8 @@ func _ProcessLane(lane_index: int, delta: float) -> void:
 
 		var did_destroy := _ApplyDamageToFrontBlock(
 			lane_index,
-			float(runtime.get("dig_power", 1.0))
+			float(runtime.get("dig_power", 1.0)),
+			false
 		)
 
 		if did_destroy:
@@ -195,7 +221,7 @@ func _ProcessLane(lane_index: int, delta: float) -> void:
 
 			runtime = _lane_runtime[lane_index]
 			runtime["current_block_uid"] = str(lane.block_data[0].uid)
-
+			
 func _FinishFrontBlock(lane_index: int) -> void:
 	var lane = GlobalSave.save_data.lanes[lane_index]
 	if lane.block_data.is_empty():
@@ -377,6 +403,7 @@ func RefreshLaneDigging(lane_index: int) -> void:
 		return
 
 	_SyncLaneRuntime(lane_index)
+	
 	_EmitBlockHpUpdated(lane_index)
 
 func CreateGeneratedBlockForDepth(lane_index: int, block_depth: int) -> Dictionary:
@@ -412,30 +439,17 @@ func ApplyTapDamage(block_uid: String) -> void:
 
 	var lane_data = GlobalSave.save_data.lanes[lane_index]
 
-	# tapping only cares if the lane itself is unlocked
 	if !lane_data.auto_dig_unlocked:
 		return
 
 	if lane_data.block_data.is_empty():
 		return
 
-	# only allow tapping the current front block
 	if str(lane_data.block_data[0].uid) != str(block_uid):
 		return
 
 	var tap_damage := float(GlobalStats.GetUpgradeValue("tap_damage"))
-
-	# optional boss modifier stays
-	var front_block = lane_data.block_data[0]
-	if bool(front_block.get("is_boss", false)):
-		var boss_id = str(front_block.get("boss_id", ""))
-		var boss_data = GlobalBossDb.GetBossDataByID(boss_id)
-		if !boss_data.is_empty():
-			if str(boss_data.get("special_type", "none")) == "tap_resist":
-				var mult = float(boss_data.get("special_values", {}).get("tap_damage_multiplier", 1.0))
-				tap_damage *= mult
-
-	_ApplyDamageToFrontBlock(lane_index, tap_damage)
+	_ApplyDamageToFrontBlock(lane_index, tap_damage, true)
 
 func _FindLaneIndexByFrontBlockUid(block_uid: String) -> int:
 	for i in range(GlobalSave.save_data.lanes.size()):
@@ -446,7 +460,7 @@ func _FindLaneIndexByFrontBlockUid(block_uid: String) -> int:
 			return i
 	return -1
 	
-func _ApplyDamageToFrontBlock(lane_index: int, damage: float) -> bool:
+func _ApplyDamageToFrontBlock(lane_index: int, damage: float, is_tap_damage: bool = false) -> bool:
 	if lane_index < 0 or lane_index >= GlobalSave.save_data.lanes.size():
 		return false
 
@@ -455,8 +469,24 @@ func _ApplyDamageToFrontBlock(lane_index: int, damage: float) -> bool:
 		return false
 
 	var current_block = lane.block_data[0]
-	current_block.hp = max(0.0, float(current_block.hp) - float(damage))
 
+	if bool(current_block.get("is_boss", false)):
+		var damage_result := _GetBossDamageResult(current_block, damage, is_tap_damage)
+		damage = float(damage_result.get("damage", 0.0))
+
+		if bool(damage_result.get("blocked", false)):
+			boss_special_blocked_hit.emit(
+				lane_index,
+				str(current_block.get("uid", "")),
+				str(damage_result.get("reason", ""))
+			)
+			return false
+
+	if damage <= 0.0:
+		return false
+
+	current_block.hp = max(0.0, float(current_block.hp) - float(damage))
+	
 	_EmitBlockHpUpdated(lane_index)
 
 	if current_block.hp > 0.0:
@@ -474,10 +504,10 @@ func _ApplyDamageToFrontBlock(lane_index: int, damage: float) -> bool:
 	if _lane_runtime.has(lane_index):
 		_lane_runtime[lane_index]["current_block_uid"] = str(lane.block_data[0].uid)
 		_lane_runtime[lane_index]["hit_progress"] = 0.0
-
+	
 	_EmitBlockHpUpdated(lane_index)
 	return true
-
+	
 func _CreateGeneratedBlockForDepth(lane_index: int, block_depth: int) -> Dictionary:
 	var normal_block = GlobalBlockDatabase.CreateBlockForLane(block_depth, lane_index)
 	if normal_block.is_empty():
@@ -567,3 +597,161 @@ func GenerateNextBlocksForLane(lane_index: int) -> void:
 		var new_block = CreateGeneratedBlockForDepth(lane_index, block_depth)
 		if !new_block.is_empty():
 			lane.block_data.append(new_block)
+
+func _EnsureBossRuntime(block: Dictionary, boss_data: Dictionary) -> Dictionary:
+	if !block.has("boss_runtime") or typeof(block["boss_runtime"]) != TYPE_DICTIONARY:
+		block["boss_runtime"] = {}
+
+	var runtime: Dictionary = block["boss_runtime"]
+	var special_values: Dictionary = boss_data.get("special_values", {})
+
+	if !runtime.has("elapsed_sec"):
+		runtime["elapsed_sec"] = 0.0
+
+	if !runtime.has("enraged"):
+		runtime["enraged"] = false
+
+	if !runtime.has("shield_active"):
+		runtime["shield_active"] = false
+
+	if !runtime.has("shield_time_left"):
+		runtime["shield_time_left"] = 0.0
+
+	if !runtime.has("shield_cooldown_left"):
+		runtime["shield_cooldown_left"] = float(special_values.get("shield_cooldown_sec", 0.0))
+
+	return runtime
+	
+func _ProcessBossSpecial(lane_index: int, delta: float) -> void:
+	if lane_index < 0 or lane_index >= GlobalSave.save_data.lanes.size():
+		return
+
+	var lane = GlobalSave.save_data.lanes[lane_index]
+	if lane.block_data.is_empty():
+		return
+
+	var block = lane.block_data[0]
+	if !bool(block.get("is_boss", false)):
+		return
+
+	var boss_id := str(block.get("boss_id", ""))
+	var boss_data: Dictionary = GlobalBossDb.GetBossDataByID(boss_id)
+	if boss_data.is_empty():
+		return
+
+	var special_type := str(boss_data.get("special_type", "none"))
+	var special_values: Dictionary = boss_data.get("special_values", {})
+
+	if !block.has("boss_runtime") or typeof(block["boss_runtime"]) != TYPE_DICTIONARY:
+		block["boss_runtime"] = {}
+
+	var runtime: Dictionary = block["boss_runtime"]
+
+	if !runtime.has("elapsed_sec"):
+		runtime["elapsed_sec"] = 0.0
+	if !runtime.has("enraged"):
+		runtime["enraged"] = false
+	if !runtime.has("shield_active"):
+		runtime["shield_active"] = false
+	if !runtime.has("shield_time_left"):
+		runtime["shield_time_left"] = 0.0
+	if !runtime.has("shield_cooldown_left"):
+		runtime["shield_cooldown_left"] = float(special_values.get("shield_cooldown_sec", 0.0))
+
+	runtime["elapsed_sec"] = float(runtime.get("elapsed_sec", 0.0)) + delta
+
+	var old_hp := float(block.get("hp", 0.0))
+	var max_hp := float(block.get("max_hp", 1.0))
+	var new_hp := old_hp
+
+	match special_type:
+		"regen":
+			var regen_percent := float(special_values.get("regen_percent_per_sec", 0.0))
+			new_hp += max_hp * regen_percent * delta
+
+		"timer_enrage":
+			var enrage_after := float(special_values.get("enrage_after_sec", 999999.0))
+
+			if float(runtime.get("elapsed_sec", 0.0)) >= enrage_after:
+				runtime["enraged"] = true
+
+			if bool(runtime.get("enraged", false)):
+				var extra_regen := float(special_values.get("extra_regen_percent_per_sec", 0.0))
+				new_hp += max_hp * extra_regen * delta
+
+		"shield_cycle":
+			if bool(runtime.get("shield_active", false)):
+				runtime["shield_time_left"] = max(0.0, float(runtime.get("shield_time_left", 0.0)) - delta)
+				if float(runtime["shield_time_left"]) <= 0.0:
+					runtime["shield_active"] = false
+					runtime["shield_cooldown_left"] = float(special_values.get("shield_cooldown_sec", 0.0))
+			else:
+				runtime["shield_cooldown_left"] = max(0.0, float(runtime.get("shield_cooldown_left", 0.0)) - delta)
+				if float(runtime["shield_cooldown_left"]) <= 0.0:
+					runtime["shield_active"] = true
+					runtime["shield_time_left"] = float(special_values.get("shield_duration_sec", 0.0))
+
+		_:
+			return
+
+	new_hp = clamp(new_hp, 0.0, max_hp)
+
+	if special_type == "timer_enrage":
+		if is_equal_approx(new_hp, max_hp):
+			runtime["elapsed_sec"] = 0.0
+			runtime["enraged"] = false
+
+	if !is_equal_approx(new_hp, old_hp):
+		block["hp"] = new_hp
+		_EmitBlockHpUpdated(lane_index)
+
+	new_hp = clamp(new_hp, 0.0, max_hp)
+	if special_type == "timer_enrage":
+		if is_equal_approx(new_hp, max_hp):
+			runtime["elapsed_sec"] = 0.0
+			runtime["enraged"] = false
+
+	if !is_equal_approx(new_hp, old_hp):
+		block["hp"] = new_hp
+		_EmitBlockHpUpdated(lane_index)
+		
+func _GetBossDamageResult(block: Dictionary, damage: float, is_tap_damage: bool) -> Dictionary:
+	var boss_id := str(block.get("boss_id", ""))
+	var boss_data: Dictionary = GlobalBossDb.GetBossDataByID(boss_id)
+	if boss_data.is_empty():
+		return {
+			"damage": damage,
+			"blocked": false,
+			"reason": ""
+		}
+
+	var runtime := _EnsureBossRuntime(block, boss_data)
+	var special_type := str(boss_data.get("special_type", "none"))
+	var special_values: Dictionary = boss_data.get("special_values", {})
+
+	match special_type:
+		"armor":
+			var reduction := float(special_values.get("damage_reduction_percent", 0.0))
+			damage *= max(0.0, 1.0 - reduction)
+
+		"tap_resist":
+			if is_tap_damage:
+				var tap_mult := float(special_values.get("tap_damage_multiplier", 1.0))
+				damage *= tap_mult
+
+		"shield_cycle":
+			if bool(runtime.get("shield_active", false)):
+				return {
+					"damage": 0.0,
+					"blocked": true,
+					"reason": "shield"
+				}
+
+		_:
+			pass
+
+	return {
+		"damage": max(0.0, damage),
+		"blocked": false,
+		"reason": ""
+	}

@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://dhpk8tprd4lsn"]
+
+[ext_resource type="Texture2D" uid="uid://cabgj3uys0mr5" path="res://art/particles/shield_icon.png" id="1_7jsj5"]
+[ext_resource type="Script" uid="uid://c510fu607y36a" path="res://scenes/screens/particles/shield_particle.gd" id="2_ag3x5"]
+
+[sub_resource type="Gradient" id="Gradient_wupot"]
+offsets = PackedFloat32Array(0, 0.103896104, 0.8863636, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_h2dg2"]
+gradient = SubResource("Gradient_wupot")
+
+[sub_resource type="Curve" id="Curve_df0vt"]
+_data = [Vector2(0, 0.20392394), 0.0, 0.0, 0, 0, Vector2(0.17964073, 1), 1.4216689, 1.4216689, 0, 0, Vector2(1, 0.111177206), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_xc1dg"]
+curve = SubResource("Curve_df0vt")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wupot"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 30.0
+initial_velocity_max = 60.0
+angular_velocity_min = -20.000015
+angular_velocity_max = 19.999983
+gravity = Vector3(0, 0, 0)
+damping_min = 30.000002
+damping_max = 30.000002
+scale_min = 0.5
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_xc1dg")
+color = Color(0.30980393, 0.89411765, 1, 1)
+color_ramp = SubResource("GradientTexture1D_h2dg2")
+
+[node name="ShieldParticle" type="GPUParticles2D" unique_id=617984945]
+amount = 1
+texture = ExtResource("1_7jsj5")
+process_material = SubResource("ParticleProcessMaterial_wupot")
+script = ExtResource("2_ag3x5")
+
+[node name="free_timer" type="Timer" parent="." unique_id=1718906520]
+one_shot = true
+
+[connection signal="timeout" from="free_timer" to="." method="_on_free_timer_timeout"]
