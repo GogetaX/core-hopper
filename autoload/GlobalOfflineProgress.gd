@@ -58,6 +58,7 @@ func _SimulateOfflineSeconds(seconds: int, efficiency: float) -> Dictionary:
 
 		if !lane.auto_dig_unlocked:
 			continue
+
 		if int(lane.bot_uid) == -1:
 			continue
 
@@ -66,8 +67,7 @@ func _SimulateOfflineSeconds(seconds: int, efficiency: float) -> Dictionary:
 			continue
 
 		var level := int(bot.get("level", 1))
-		var lane_dps = GlobalStats.GetBotStats(level).dig_power * efficiency
-
+		var lane_dps := GlobalStats.GetBotExpectedDps(level) * efficiency
 		_SimulateLaneOffline(lane_index, lane_dps, seconds, rewards)
 
 	return rewards
@@ -82,7 +82,7 @@ func _SimulateLaneOffline(lane_index: int, lane_dps: float, seconds: int, reward
 
 	while remaining_damage > 0.0:
 		if lane.block_data.is_empty():
-			var new_block := GlobalDiggingProcess.CreateGeneratedBlockForDepth(
+			var new_block = GlobalDiggingProcess.CreateGeneratedBlockForDepth(
 				lane_index,
 				int(lane.lane_depth)
 			)

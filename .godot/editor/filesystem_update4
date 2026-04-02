@@ -123,3 +123,4 @@ res://scenes/screens/progress/tab_btn.tscn
 res://scenes/screens/progress/tab_btn.gd
 res://scenes/label_data_scripts/mining_speed.gd
 res://scenes/label_data_scripts/drop_multiplayer.gd
+res://data/upgrades/upgrade_db.json

@@ -1,5 +1,5 @@
 extends Node
-const CUR_SAVE_VERSION = 0.1
+const CUR_SAVE_VERSION = 0.2
 
 
 
@@ -8,7 +8,6 @@ const UPGRADE_DATA = "res://data/upgrades/upgrade_db.json"
 
 
 var save_data := {}
-
 var save_timer : Timer = null
 
 func _ready() -> void:
@@ -65,10 +64,11 @@ func LoadFromSave():
 	if !FileAccess.file_exists(SAVE_FILE):
 		save_data = BuildCleanSaveData()
 		return
-	var f = FileAccess.open(SAVE_FILE,FileAccess.READ)
+
+	var f = FileAccess.open(SAVE_FILE, FileAccess.READ)
 	var json_text = f.get_as_text()
 	f.close()
-	
+
 	var json := JSON.new()
 	var error := json.parse(json_text)
 
@@ -79,19 +79,40 @@ func LoadFromSave():
 		])
 		save_data = BuildCleanSaveData()
 		return
-		
+
 	if typeof(json.data) != TYPE_DICTIONARY:
 		push_error("SaveManager: Save file root is not a Dictionary.")
 		save_data = BuildCleanSaveData()
 		return
 
 	save_data = json.data
+	EnsureUpgradeSchema()
 
+func EnsureUpgradeSchema() -> void:
+	var latest_upgrades = LoadUpgrades()
+	if typeof(latest_upgrades) != TYPE_DICTIONARY:
+		return
+
+	if !save_data.has("upgrades") or typeof(save_data.upgrades) != TYPE_DICTIONARY:
+		save_data["upgrades"] = latest_upgrades.duplicate(true)
+		return
+
+	for upgrade_id in latest_upgrades.keys():
+		var latest_upgrade: Dictionary = latest_upgrades[upgrade_id]
+
+		if !save_data.upgrades.has(upgrade_id):
+			save_data.upgrades[upgrade_id] = latest_upgrade.duplicate(true)
+			continue
+
+		var current_upgrade: Dictionary = save_data.upgrades[upgrade_id]
+		for key in latest_upgrade.keys():
+			if !current_upgrade.has(key):
+				current_upgrade[key] = latest_upgrade[key]
 
 
 func BuildCleanSaveData():
 	var res = {}
-	res["currencies"] = {"coins":25,"crystals":0,"energy":0} #default coins 0
+	res["currencies"] = {"coins":5000,"crystals":0,"energy":0} #default coins 25
 	res["bot_inventory"]={
 		"bot_db": [],
 		"merge_free_slots":4

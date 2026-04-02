@@ -438,7 +438,6 @@ func ApplyTapDamage(block_uid: String) -> void:
 		return
 
 	var lane_data = GlobalSave.save_data.lanes[lane_index]
-
 	if !lane_data.auto_dig_unlocked:
 		return
 
@@ -448,7 +447,7 @@ func ApplyTapDamage(block_uid: String) -> void:
 	if str(lane_data.block_data[0].uid) != str(block_uid):
 		return
 
-	var tap_damage := float(GlobalStats.GetUpgradeValue("tap_damage"))
+	var tap_damage := GlobalStats.GetTapDamage()
 	_ApplyDamageToFrontBlock(lane_index, tap_damage, true)
 
 func _FindLaneIndexByFrontBlockUid(block_uid: String) -> int:
@@ -485,18 +484,22 @@ func _ApplyDamageToFrontBlock(lane_index: int, damage: float, is_tap_damage: boo
 	if damage <= 0.0:
 		return false
 
+	var crit_result := GlobalStats.ApplyCritToDamage(damage)
+	damage = float(crit_result.get("damage", damage))
+
 	current_block.hp = max(0.0, float(current_block.hp) - float(damage))
-	
 	_EmitBlockHpUpdated(lane_index)
 
 	if current_block.hp > 0.0:
 		return false
-	
+
 	var destroyed_uid := str(current_block.uid)
 	block_destroyed.emit(lane_index, destroyed_uid)
+
 	if current_block.has("is_boss") && current_block.is_boss:
 		GlobalSave.SetTotalBossKills(1)
-	GlobalDailyQuest.RegisterBlockBroken(current_block.id,current_block.id)
+
+	GlobalDailyQuest.RegisterBlockBroken(current_block.id, current_block.id)
 	_FinishFrontBlock(lane_index)
 
 	if lane.block_data.is_empty():
@@ -506,7 +509,7 @@ func _ApplyDamageToFrontBlock(lane_index: int, damage: float, is_tap_damage: boo
 	if _lane_runtime.has(lane_index):
 		_lane_runtime[lane_index]["current_block_uid"] = str(lane.block_data[0].uid)
 		_lane_runtime[lane_index]["hit_progress"] = 0.0
-	
+
 	_EmitBlockHpUpdated(lane_index)
 	return true
 	

@@ -45,13 +45,13 @@ func GetGlobalCoinYieldMultiplayer():
 
 func GetBotFinalDigPower(level: int) -> float:
 	return GetBotBaseDigPower(level) * GetGlobalPowerMultiplier()
-
+	
 func GetBotFinalDigSpeed(level: int) -> float:
 	return GetBotBaseDigSpeed(level) * GetGlobalSpeedMultiplier()
-
+	
 func GetBotFinalDps(level: int) -> float:
 	return GetBotFinalDigPower(level) * GetBotFinalDigSpeed(level)
-
+	
 func GetBotFinalDPSWithGobal(level:int) -> float:
 	var final_dps = GetBotFinalDps(level)
 	return final_dps * GlobalStats.GetUpgradeValue("drill_power")
@@ -63,10 +63,8 @@ func GetBotFinalDigSpeedWithGlobal(level: int) -> float:
 func GetBotStats(level: int) -> Dictionary:
 	var base_power := maxi(1, int(round(pow(1.9, level - 1))))
 	var base_speed = min(3.0, snapped(pow(1.12, level - 1), 0.01))
-
 	var power_mult = 1.0 + (GlobalSave.save_data.global_upgrades.global_dig_power_level * 0.15)
 	var speed_mult = 1.0 + (GlobalSave.save_data.global_upgrades.global_dig_speed_level * 0.08)
-
 	var final_power = base_power * power_mult * GetUpgradeValue("drill_power")
 	var final_speed = base_speed * speed_mult * GetUpgradeValue("drill_speed")
 	var dps = final_power * final_speed
@@ -77,26 +75,71 @@ func GetBotStats(level: int) -> Dictionary:
 		"dig_power": final_power,
 		"dig_speed": final_speed,
 		"dps": dps,
+		"expected_dps": dps * GetExpectedCritDamageMultiplier(),
 		"hit_interval": hit_interval,
+		"crit_chance": GetCritChance(),
+		"crit_multiplier": GetCritMultiplier(),
 		"merge_value": maxi(1, int(round(10.0 * pow(2.35, level - 1)))),
 		"sell_value": int(round((10.0 * pow(2.35, level - 1)) * 0.6))
 	}
 	
 
 func GetUpgradeCost(upgrade_id: String) -> int:
+	if !GlobalSave.save_data.has("upgrades") or !GlobalSave.save_data.upgrades.has(upgrade_id):
+		return 0
+
 	var up = GlobalSave.save_data.upgrades[upgrade_id]
 	return int(round(up.base_cost * pow(up.cost_scale, up.level)))
+	
 
-func GetUpgradeValue(upgrade_id: String,next_level:int = 0) -> float:
+func GetUpgradeValue(upgrade_id: String, next_level:int = 0) -> float:
+	if !GlobalSave.save_data.has("upgrades") or !GlobalSave.save_data.upgrades.has(upgrade_id):
+		if upgrade_id == "crit_chance" or upgrade_id == "crit_multiplier":
+			return 0.0
+		return 1.0
+
 	var up = GlobalSave.save_data.upgrades[upgrade_id]
+	var level := int(up.level) + next_level
 
-	match up.effect_type:
+	match str(up.effect_type):
 		"mult_pow":
-			return pow(up.effect_base, up.level+next_level)
+			return pow(up.effect_base, level)
 		"linear":
-			return 1.0 + up.effect_base * (up.level+next_level)
+			return 1.0 + up.effect_base * level
+		"flat":
+			return up.effect_base * level
 		_:
 			return 1.0
-			
+
 func GetTapDamage() -> float:
 	return max(1.0, float(GetUpgradeValue("tap_damage")))
+
+
+func GetCritChance(next_level: int = 0) -> float:
+	return clamp(float(GetUpgradeValue("crit_chance", next_level)), 0.0, 1.0)
+	
+func GetCritMultiplier(next_level: int = 0) -> float:
+	return max(1.0, 1.0 + float(GetUpgradeValue("crit_multiplier", next_level)))
+
+func GetExpectedCritDamageMultiplier() -> float:
+	var chance := GetCritChance()
+	var crit_mult := GetCritMultiplier()
+	return 1.0 + (chance * (crit_mult - 1.0))
+
+func GetBotExpectedDps(level: int) -> float:
+	return float(GetBotStats(level).expected_dps)
+
+func RollCrit() -> bool:
+	return randf() < GetCritChance()
+
+func ApplyCritToDamage(base_damage: float) -> Dictionary:
+	var final_damage = max(0.0, float(base_damage))
+	var did_crit := RollCrit()
+
+	if did_crit:
+		final_damage *= GetCritMultiplier()
+
+	return {
+		"damage": final_damage,
+		"did_crit": did_crit
+	}
