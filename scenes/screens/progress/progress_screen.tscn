@@ -11,7 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://cyrssis6jwdc2" path="res://scenes/screens/progress/progress_hash_tag_with_icon.tscn" id="6_neoah"]
 [ext_resource type="Script" uid="uid://d16g0t4dgw61l" path="res://scenes/label_data_scripts/drop_multiplayer.gd" id="7_eprg4"]
 [ext_resource type="PackedScene" uid="uid://cvul7nt3js8au" path="res://scenes/screens/progress/quest_item.tscn" id="7_u200v"]
+[ext_resource type="Script" uid="uid://knj8e2s80rh0" path="res://scenes/label_data_scripts/crit_damage.gd" id="8_ikkfs"]
 [ext_resource type="PackedScene" uid="uid://cec3m3dpceceo" path="res://scenes/screens/progress/smart_single_row_btn.tscn" id="8_yhu24"]
+[ext_resource type="Script" uid="uid://cupvfi5pnvw3u" path="res://scenes/label_data_scripts/crit_chance.gd" id="9_i8y5d"]
 [ext_resource type="PackedScene" uid="uid://dtuuq8uy378eb" path="res://scenes/screens/progress/relic_item.tscn" id="9_tsw2o"]
 [ext_resource type="PackedScene" uid="uid://byej242eayu0l" path="res://scenes/screens/progress/locked_relic_item.tscn" id="10_nipnh"]
 
@@ -33,6 +35,7 @@ mouse_filter = 2
 [node name="ProgressTopPanel" type="Panel" parent="." unique_id=1545174428]
 custom_minimum_size = Vector2(0, 570)
 layout_mode = 2
+mouse_filter = 2
 theme_type_variation = &"PanelDimmedBG"
 
 [node name="VList" type="VBoxContainer" parent="ProgressTopPanel" unique_id=414405590]
@@ -46,13 +49,16 @@ offset_right = -20.0
 offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="HList" type="HBoxContainer" parent="ProgressTopPanel/VList" unique_id=364746771]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="VBox" type="VBoxContainer" parent="ProgressTopPanel/VList/HList" unique_id=2045431992]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="ProgressTopPanel/VList/HList/VBox" unique_id=1192912141]
 layout_mode = 2
@@ -74,10 +80,12 @@ autowrap_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ProgressTopPanel/VList/HList" unique_id=2035193776]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Panel" type="Panel" parent="ProgressTopPanel/VList/HList/VBoxContainer" unique_id=1065397053]
 custom_minimum_size = Vector2(300, 290)
 layout_mode = 2
+mouse_filter = 2
 theme_type_variation = &"PanelPurpleBorder"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ProgressTopPanel/VList/HList/VBoxContainer/Panel" unique_id=1482817855]
@@ -91,6 +99,7 @@ offset_right = -20.0
 offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="ProgressTopPanel/VList/HList/VBoxContainer/Panel/VBoxContainer" unique_id=604542258]
 layout_mode = 2
@@ -132,6 +141,7 @@ mouse_filter = 2
 [node name="Tabs" parent="ProgressTopPanel/VList" unique_id=892379017 instance=ExtResource("1_1pkcy")]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
+mouse_filter = 1
 panel_color = "TAB_BG"
 
 [node name="TabList" type="HBoxContainer" parent="ProgressTopPanel/VList/Tabs" unique_id=1483895962]
@@ -165,7 +175,7 @@ panel_color = "GOLD"
 [node name="Control2" type="Control" parent="ProgressTopPanel/VList" unique_id=1396446115]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
-mouse_filter = 2
+mouse_filter = 1
 
 [node name="HashTags" type="HFlowContainer" parent="ProgressTopPanel/VList" unique_id=11774418]
 layout_mode = 2
@@ -349,15 +359,17 @@ layout_mode = 2
 theme_type_variation = &"LabelGray"
 text = "CRIT MATRIX"
 
-[node name="Label2" type="Label" parent="HFlowContainer/SmartPanel4/VBox" unique_id=1628367376]
+[node name="crit_damage" type="Label" parent="HFlowContainer/SmartPanel4/VBox" unique_id=1628367376]
 layout_mode = 2
 theme_type_variation = &"LabelTitle_Orange"
 text = "?"
+script = ExtResource("8_ikkfs")
 
-[node name="Label3" type="Label" parent="HFlowContainer/SmartPanel4/VBox" unique_id=1388907250]
+[node name="crit_chance" type="Label" parent="HFlowContainer/SmartPanel4/VBox" unique_id=1388907250]
 layout_mode = 2
 theme_type_variation = &"LabelGray"
-text = "420% crit dmg (not finished)"
+text = "420% crit chance"
+script = ExtResource("9_i8y5d")
 
 [node name="Control3" type="Control" parent="." unique_id=185290730]
 custom_minimum_size = Vector2(0, 20)
@@ -365,7 +377,7 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="Menu_Upgrades" parent="." unique_id=538357802 instance=ExtResource("1_1pkcy")]
-custom_minimum_size = Vector2(0, 1800)
+custom_minimum_size = Vector2(0, 550)
 layout_mode = 2
 panel_type = "BORDER_ONLY"
 panel_color = "WHITE"

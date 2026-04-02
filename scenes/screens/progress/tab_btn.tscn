@@ -10,6 +10,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 316.0
 offset_bottom = 96.0
+mouse_filter = 1
 script = ExtResource("1_qoiet")
 panel_color = null
 
