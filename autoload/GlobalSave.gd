@@ -138,6 +138,13 @@ func BuildCleanSaveData():
 			"killed_ids":[]
 		}
 	res["upgrades"] = LoadUpgrades()
+	res["daily_quests"] = {
+		"day_key": "",
+		"active_ids": [],
+		"progress": {},
+		"claimed_ids": [],
+		"completed_ids": []
+	}
 	return res
 
 

@@ -113,3 +113,4 @@ res://scenes/screens/particles/shield_particle.gd
 res://scenes/components/boss_icon_effect.tscn
 res://scenes/components/boss_icon_effect.gd
 res://scenes/popups/WatchAdPopup.tscn
+res://autoload/GlobalDailyQuest.gd
