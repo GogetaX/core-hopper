@@ -34,4 +34,4 @@ func _on_close_setting_menu_btn_pressed() -> void:
 	GlobalSignals.OpenCloseSettingMenu.emit(false)
 	$HBoxContainer/SettingButton.visible = true
 	$HBoxContainer/CloseSettingMenu.visible = false
-	$HBoxContainer/CurrencyCointainer.visible = true
+	$HBoxContainer/VList/CurrencyCointainer.visible = false

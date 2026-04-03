@@ -1,7 +1,7 @@
 @tool
 extends Label
 
-
+class_name HashtagClass
 
 @export_enum("BORDER_ONLY","INSIDE_ONLY","BORDER_AND_INSIDE") var hash_tag_type = "BORDER_AND_INSIDE":
 	set(value):

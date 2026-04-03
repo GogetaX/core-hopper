@@ -442,6 +442,7 @@ theme_override_constants/v_separation = 20
 layout_mode = 2
 
 [node name="Menu_Quests" parent="." unique_id=499770405 instance=ExtResource("1_1pkcy")]
+clip_contents = true
 custom_minimum_size = Vector2(0, 630)
 layout_mode = 2
 panel_type = "BORDER_ONLY"
@@ -502,24 +503,17 @@ custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="VList" type="VBoxContainer" parent="Menu_Quests/QuestVList" unique_id=2027696789]
+[node name="QuestList" type="VBoxContainer" parent="Menu_Quests/QuestVList" unique_id=2027696789]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="QuestItem" parent="Menu_Quests/QuestVList/VList" unique_id=688889240 instance=ExtResource("7_u200v")]
+[node name="QuestItem" parent="Menu_Quests/QuestVList/QuestList" unique_id=688889240 instance=ExtResource("7_u200v")]
 layout_mode = 2
-skill_color = "GOLD"
-quest_title = "Extract 500 rare void crystals"
-progrss_cur_max = Vector2i(342, 500)
 
-[node name="QuestItem2" parent="Menu_Quests/QuestVList/VList" unique_id=1933049177 instance=ExtResource("7_u200v")]
+[node name="QuestItem2" parent="Menu_Quests/QuestVList/QuestList" unique_id=1933049177 instance=ExtResource("7_u200v")]
 layout_mode = 2
-skill_color = "BLUE"
-quest_title = "Reach core depth level 50"
-progrss_cur_max = Vector2i(12, 50)
-reward_txt = "1 Shard"
 
-[node name="SmartSingleRowBtn" parent="Menu_Quests/QuestVList/VList" unique_id=1442770830 instance=ExtResource("8_yhu24")]
+[node name="SmartSingleRowBtn" parent="Menu_Quests/QuestVList/QuestList" unique_id=1442770830 instance=ExtResource("8_yhu24")]
 layout_mode = 2
 btn_text = "Open full quest list"
 

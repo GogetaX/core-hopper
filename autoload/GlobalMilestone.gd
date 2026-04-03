@@ -27,6 +27,41 @@ func LoadMilestoneDB():
 
 	return json.data
 
+func GetAllActiveMilestones():
+	var milestone_dict: Dictionary = milestone_db.get("milestones", {})
+	var milestone_list: Array = []
+	for milestone_id in milestone_dict.keys():
+		var data: Dictionary = milestone_dict[milestone_id]
+		milestone_list.append({
+			"id": milestone_id,
+			"data": data
+		})
+	# 1) completed but not claimed
+	var res = []
+	for entry in milestone_list:
+		var milestone_id: String = entry["id"]
+		var data: Dictionary = entry["data"]
+
+		if is_milestone_completed(milestone_id) and not is_milestone_claimed(milestone_id):
+			
+			res.append( {
+				"id": milestone_id,
+				"title": data.get("title", ""),
+				"description": data.get("description", ""),
+				"order": data.get("order", 0),
+				"category": data.get("category", ""),
+				"target_type": data.get("target_type", ""),
+				"target_key": data.get("target_key", ""),
+				"target_value": data.get("target_value", 0),
+				"is_completed": true,
+				"is_claimed": false,
+				"can_claim": true,
+				"reward_type": data.get("reward_type", ""),
+				"reward_value": data.get("reward_value", 0),
+				"auto_claim": data.get("auto_claim", true)
+			})
+	return milestone_list
+	
 func get_next_milestone() -> Dictionary:
 	var milestone_dict: Dictionary = milestone_db.get("milestones", {})
 	var milestone_list: Array = []

@@ -1,5 +1,7 @@
 @tool
 extends Control
+class_name ExpandRowButtonClass
+signal OnPress()
 
 @export_enum("PURPLE","ORANGE","BLUE","GOLD") var button_color = "PURPLE":
 	set(value):
@@ -30,7 +32,6 @@ func _ready() -> void:
 func OnBtnPressed(btn_node:Control):
 	if btn_node != self:
 		return
-	var t = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
-	t.tween_property($SmartPanel,"scale",Vector2(0.9,0.9),0.05)
-	t.tween_property($SmartPanel,"scale",Vector2(1.0,1.0),0.05)
+	GlobalBtn.AnimateBtnPressed($SmartPanel)
+	OnPress.emit()
 	

@@ -1,6 +1,8 @@
 @tool
 extends Control
 
+signal OnPress()
+
 @export var button_icon : Texture2D = null:
 	set(value):
 		button_icon = value
@@ -29,4 +31,5 @@ func OnBtnPressed(btn_node:Control):
 	if btn_node != self:
 		return
 	GlobalBtn.AnimateBtnPressed($SmartPanel2)
+	OnPress.emit()
 	

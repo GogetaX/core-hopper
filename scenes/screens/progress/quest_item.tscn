@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="1_60bcs"]
 [ext_resource type="Script" uid="uid://ble41vn5n6xm0" path="res://scenes/screens/progress/quest_item.gd" id="1_ly53i"]
-[ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="2_ly53i"]
+[ext_resource type="PackedScene" uid="uid://njxlv6dxrlwj" path="res://scenes/screens/progress/smart_button_buy.tscn" id="3_ly53i"]
 
 [node name="QuestItem" type="Control" unique_id=688889240]
 custom_minimum_size = Vector2(0, 150)
@@ -12,15 +12,15 @@ offset_right = 811.0
 offset_bottom = 150.0
 mouse_filter = 2
 script = ExtResource("1_ly53i")
-skill_color = null
 
-[node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("1_60bcs")]
-custom_minimum_size = Vector2(0, 140)
+[node name="QuestItem_Incomplete" parent="." unique_id=892379017 instance=ExtResource("1_60bcs")]
+visible = false
+custom_minimum_size = Vector2(0, 160)
 layout_mode = 1
 panel_type = "INSIDE_ONLY"
 panel_color = "TAB_BG"
 
-[node name="VList" type="VBoxContainer" parent="SmartPanel" unique_id=213400839]
+[node name="VList" type="VBoxContainer" parent="QuestItem_Incomplete" unique_id=213400839]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -34,34 +34,34 @@ grow_vertical = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="HList" type="HBoxContainer" parent="SmartPanel/VList" unique_id=1170391134]
+[node name="HList" type="HBoxContainer" parent="QuestItem_Incomplete/VList" unique_id=1170391134]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="VList" type="VBoxContainer" parent="SmartPanel/VList/HList" unique_id=1134436040]
+[node name="VList" type="VBoxContainer" parent="QuestItem_Incomplete/VList/HList" unique_id=1134436040]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="quest_title" type="Label" parent="SmartPanel/VList/HList/VList" unique_id=638401876]
+[node name="quest_desc" type="Label" parent="QuestItem_Incomplete/VList/HList/VList" unique_id=638401876]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"LabelTitle_White"
 theme_override_font_sizes/font_size = 32
 text = "Extract 500 rare void crystals"
 
-[node name="progress_text" type="Label" parent="SmartPanel/VList/HList/VList" unique_id=701490249]
+[node name="progress_text" type="Label" parent="QuestItem_Incomplete/VList/HList/VList" unique_id=701490249]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"LabelGray"
 theme_override_font_sizes/font_size = 32
 text = "342 / 500 complete"
 
-[node name="VList2" type="VBoxContainer" parent="SmartPanel/VList/HList" unique_id=2112799177]
+[node name="VList2" type="VBoxContainer" parent="QuestItem_Incomplete/VList/HList" unique_id=2112799177]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Label3" type="Label" parent="SmartPanel/VList/HList/VList2" unique_id=1694215178]
+[node name="Label3" type="Label" parent="QuestItem_Incomplete/VList/HList/VList2" unique_id=1694215178]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"LabelGray"
@@ -69,18 +69,248 @@ theme_override_font_sizes/font_size = 32
 text = "REWARD"
 horizontal_alignment = 2
 
-[node name="RewardText" parent="SmartPanel/VList/HList/VList2" unique_id=713365230 instance=ExtResource("2_ly53i")]
-self_modulate = Color(0.30980393, 0.89411765, 1, 1)
+[node name="Control" type="Control" parent="QuestItem_Incomplete/VList/HList/VList2" unique_id=771860713]
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
-text = "50.0K AU"
-horizontal_alignment = 2
-hash_tag_color = "BLUE"
-no_bg = true
 
-[node name="ProgressBar" type="ProgressBar" parent="SmartPanel/VList" unique_id=1988521567]
+[node name="RewardContainer" type="HBoxContainer" parent="QuestItem_Incomplete/VList/HList/VList2" unique_id=1634342029]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="QuestItem_Incomplete/VList" unique_id=458925802]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="QuestItem_Incomplete/VList" unique_id=1988521567]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 mouse_filter = 2
 theme_type_variation = &"ProgressBarGold"
 value = 75.0
 show_percentage = false
+
+[node name="QuestItem_Complete" parent="." unique_id=1224417790 instance=ExtResource("1_60bcs")]
+visible = false
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 1
+panel_type = "INSIDE_ONLY"
+panel_color = "TAB_BG"
+
+[node name="VList" type="VBoxContainer" parent="QuestItem_Complete" unique_id=1422777944]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="HList" type="HBoxContainer" parent="QuestItem_Complete/VList" unique_id=1461617262]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VList" type="VBoxContainer" parent="QuestItem_Complete/VList/HList" unique_id=1215658970]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="quest_desc" type="Label" parent="QuestItem_Complete/VList/HList/VList" unique_id=242909305]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"LabelTitle_White"
+theme_override_font_sizes/font_size = 32
+text = "Extract 500 rare void crystals"
+
+[node name="Control" type="Control" parent="QuestItem_Complete/VList/HList/VList" unique_id=941313259]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HList2" type="HBoxContainer" parent="QuestItem_Complete/VList/HList/VList" unique_id=1122273375]
+layout_mode = 2
+
+[node name="DailyQuestCompleteBtn" parent="QuestItem_Complete/VList/HList/VList/HList2" unique_id=664760665 instance=ExtResource("3_ly53i")]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+buy_btn_title = "CLAIM"
+panel_color = "BLUE"
+
+[node name="Control" type="Control" parent="QuestItem_Complete/VList/HList/VList/HList2" unique_id=293017606]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VList2" type="VBoxContainer" parent="QuestItem_Complete/VList/HList" unique_id=841145153]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label3" type="Label" parent="QuestItem_Complete/VList/HList/VList2" unique_id=1616927114]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"LabelGray"
+theme_override_font_sizes/font_size = 32
+text = "REWARD"
+horizontal_alignment = 2
+
+[node name="Control" type="Control" parent="QuestItem_Complete/VList/HList/VList2" unique_id=43463063]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="RewardContainer" type="HBoxContainer" parent="QuestItem_Complete/VList/HList/VList2" unique_id=1196433876]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="QuestItem_Complete/VList" unique_id=199422179]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="MilestoneItem_Incomplete" parent="." unique_id=1938631027 instance=ExtResource("1_60bcs")]
+visible = false
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 1
+panel_type = "INSIDE_ONLY"
+panel_color = "BLUE"
+
+[node name="VList" type="VBoxContainer" parent="MilestoneItem_Incomplete" unique_id=1621684829]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="HList" type="HBoxContainer" parent="MilestoneItem_Incomplete/VList" unique_id=1545812131]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VList" type="VBoxContainer" parent="MilestoneItem_Incomplete/VList/HList" unique_id=819083900]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="milestone_title" type="Label" parent="MilestoneItem_Incomplete/VList/HList/VList" unique_id=1497528401]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"LabelTitle_White"
+theme_override_font_sizes/font_size = 32
+text = "Extract 500 rare void crystals"
+
+[node name="milestone_subtitle" type="Label" parent="MilestoneItem_Incomplete/VList/HList/VList" unique_id=2146748294]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"LabelGray"
+theme_override_font_sizes/font_size = 32
+text = "342 / 500 complete"
+
+[node name="VList2" type="VBoxContainer" parent="MilestoneItem_Incomplete/VList/HList" unique_id=1706623570]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label3" type="Label" parent="MilestoneItem_Incomplete/VList/HList/VList2" unique_id=207729263]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"LabelGray"
+theme_override_font_sizes/font_size = 32
+text = "REWARD"
+horizontal_alignment = 2
+
+[node name="Control" type="Control" parent="MilestoneItem_Incomplete/VList/HList/VList2" unique_id=1528039247]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="RewardContainer" type="HBoxContainer" parent="MilestoneItem_Incomplete/VList/HList/VList2" unique_id=1731860912]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="MilestoneItem_Incomplete/VList" unique_id=1323944683]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="MilestoneItem_Complete" parent="." unique_id=531124647 instance=ExtResource("1_60bcs")]
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 1
+panel_type = "INSIDE_ONLY"
+panel_color = "BLUE"
+
+[node name="VList" type="VBoxContainer" parent="MilestoneItem_Complete" unique_id=22477704]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="HList" type="HBoxContainer" parent="MilestoneItem_Complete/VList" unique_id=1199468382]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VList" type="VBoxContainer" parent="MilestoneItem_Complete/VList/HList" unique_id=660720790]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="milestone_title" type="Label" parent="MilestoneItem_Complete/VList/HList/VList" unique_id=1579478442]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"LabelTitle_White"
+theme_override_font_sizes/font_size = 32
+text = "Extract 500 rare void crystals"
+
+[node name="Control" type="Control" parent="MilestoneItem_Complete/VList/HList/VList" unique_id=1406400570]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HList" type="HBoxContainer" parent="MilestoneItem_Complete/VList/HList/VList" unique_id=2141351609]
+layout_mode = 2
+
+[node name="MilestoneBtnComplete" parent="MilestoneItem_Complete/VList/HList/VList/HList" unique_id=372829613 instance=ExtResource("3_ly53i")]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+buy_btn_title = "CLAIM"
+panel_color = "GOLD"
+
+[node name="Control" type="Control" parent="MilestoneItem_Complete/VList/HList/VList/HList" unique_id=1338153037]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VList2" type="VBoxContainer" parent="MilestoneItem_Complete/VList/HList" unique_id=58284894]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label3" type="Label" parent="MilestoneItem_Complete/VList/HList/VList2" unique_id=1042748347]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"LabelGray"
+theme_override_font_sizes/font_size = 32
+text = "REWARD"
+horizontal_alignment = 2
+
+[node name="Control" type="Control" parent="MilestoneItem_Complete/VList/HList/VList2" unique_id=965554454]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="RewardContainer" type="HBoxContainer" parent="MilestoneItem_Complete/VList/HList/VList2" unique_id=1693862899]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="MilestoneItem_Complete/VList" unique_id=180217715]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[connection signal="OnPressed" from="QuestItem_Complete/VList/HList/VList/HList2/DailyQuestCompleteBtn" to="." method="_on_daily_quest_complete_btn_on_pressed"]
+[connection signal="OnPressed" from="MilestoneItem_Complete/VList/HList/VList/HList/MilestoneBtnComplete" to="." method="_on_milestone_btn_complete_on_pressed"]

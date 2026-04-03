@@ -454,7 +454,7 @@ func SetTotalBossKills(plus_bosses:int =1)->void:
 	var cur_milestone_list = GlobalMilestone.GetMilestoneFromTargetTypeArray("boss_kill_count")
 	if !cur_milestone_list.is_empty():
 		for x in cur_milestone_list:
-			if x.data.target_key == "boss_kill_count" && !IsMilestoneCompleted(x.id):
+			if x.data.target_type == "boss_kill_count" && !IsMilestoneCompleted(x.id):
 				if x.data.target_value <= save_data.player_stats.boss_kills:
 					SetMilestoneToCompleted(x.id)
 	

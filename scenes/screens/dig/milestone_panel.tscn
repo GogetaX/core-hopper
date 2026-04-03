@@ -120,7 +120,6 @@ offset_left = -30.0
 offset_right = 0.0
 offset_bottom = 30.0
 grow_horizontal = 0
-panel_color = "ORANGE"
 notif_count = 1
 
 [node name="Milestone_NoMilestoneLeft" parent="." unique_id=1297659044 instance=ExtResource("1_u4gin")]

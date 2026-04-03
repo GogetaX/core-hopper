@@ -1,7 +1,7 @@
+Control
+HBoxContainer
 VBoxContainer
 TextureRect
-HBoxContainer
-Control
 Timer
 GPUParticles2D
 Label
