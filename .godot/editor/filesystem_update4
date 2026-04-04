@@ -33,3 +33,5 @@ res://autoload/GlobalStats.gd
 res://scenes/screens/merge/merge_screen.gd
 res://scenes/screens/merge/merge_screen.tscn
 res://scenes/label_data_scripts/total_dps.gd
+res://autoload/GlobalDiggingProcess.gd
+res://data/bosses/boss_db.json

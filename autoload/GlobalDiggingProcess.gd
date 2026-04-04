@@ -470,6 +470,9 @@ func _ApplyDamageToFrontBlock(lane_index: int, damage: float, is_tap_damage: boo
 	var current_block = lane.block_data[0]
 
 	if bool(current_block.get("is_boss", false)):
+		# relic-only boss bonus, like titan_shard
+		damage = GlobalStats.ApplyBossDamageMultiplier(damage)
+
 		var damage_result := _GetBossDamageResult(current_block, damage, is_tap_damage)
 		damage = float(damage_result.get("damage", 0.0))
 
@@ -502,16 +505,8 @@ func _ApplyDamageToFrontBlock(lane_index: int, damage: float, is_tap_damage: boo
 	GlobalDailyQuest.RegisterBlockBroken(current_block.id, current_block.id)
 	_FinishFrontBlock(lane_index)
 
-	if lane.block_data.is_empty():
-		_lane_runtime.erase(lane_index)
-		return true
-
-	if _lane_runtime.has(lane_index):
-		_lane_runtime[lane_index]["current_block_uid"] = str(lane.block_data[0].uid)
-		_lane_runtime[lane_index]["hit_progress"] = 0.0
-
-	_EmitBlockHpUpdated(lane_index)
 	return true
+
 	
 func _CreateGeneratedBlockForDepth(lane_index: int, block_depth: int) -> Dictionary:
 	var normal_block = GlobalBlockDatabase.CreateBlockForLane(block_depth, lane_index)
@@ -560,8 +555,10 @@ func _HandleBossBlockFinished(finished_block: Dictionary) -> void:
 	if rewards.is_empty():
 		return
 
-	if int(rewards.get("coins", 0)) > 0:
-		GlobalSave.AddCurrency("coins", int(rewards["coins"]))
+	var final_coins := int(rewards.get("coins", 0))
+	if final_coins > 0:
+		final_coins = int(round(final_coins * GlobalStats.GetCoinYieldMultiplier()))
+		GlobalSave.AddCurrency("coins", final_coins)
 
 	if int(rewards.get("crystals", 0)) > 0:
 		GlobalSave.AddCurrency("crystals", int(rewards["crystals"]))

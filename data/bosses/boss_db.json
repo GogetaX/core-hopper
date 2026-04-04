@@ -1,177 +1,177 @@
 {
   "bosses": [
-    {
-      "id": "stone_titan",
-      "name": "Stone Titan",
-      "spawn_depth": 100,
-      "boss_icon":"boss_06_stone_titan",
-      "tier": 1,
-      "hp_multiplier": 25.0,
-      "coin_reward_multiplier": 8.0,
-      "guaranteed_rewards": {
-        "coins": 250,
-        "crystals": 0,
-        "energy": 0
-      },
-      "drop_table": [
+	{
+	  "id": "stone_titan",
+	  "name": "Stone Titan",
+	  "spawn_depth": 100,
+	  "boss_icon":"boss_06_stone_titan",
+	  "tier": 1,
+	  "hp_multiplier": 25.0,
+	  "coin_reward_multiplier": 8.0,
+	  "guaranteed_rewards": {
+		"coins": 250,
+		"crystals": 0,
+		"energy": 0
+	  },
+	  "drop_table": [
         "boss_core_1"
-      ],
-     "special_type": "none",
-      "special_values": {
-      },
-      "icon_key": "stone_titan",
-      "bg_color": "#6B7280",
-      "title_color": "#FFFFFF",
-      "unlocks_on_kill": [
+	  ],
+	 "special_type": "none",
+	  "special_values": {
+	  },
+	  "icon_key": "stone_titan",
+	  "bg_color": "#6B7280",
+	  "title_color": "#FFFFFF",
+	  "unlocks_on_kill": [
         "boss_tab_hint"
-      ]
-    },
-    {
-      "id": "magma_maw",
-      "name": "Magma Maw",
-      "boss_icon":"boss_03_magma_maw",
-      "spawn_depth": 300,
-      "tier": 2,
-      "hp_multiplier": 40.0,
-      "coin_reward_multiplier": 12.0,
-      "guaranteed_rewards": {
-        "coins": 600,
-        "crystals": 2,
-        "energy": 0
-      },
-      "drop_table": [
-        "boss_core_2",
+	  ]
+	},
+	{
+	  "id": "magma_maw",
+	  "name": "Magma Maw",
+	  "boss_icon":"boss_03_magma_maw",
+	  "spawn_depth": 300,
+	  "tier": 2,
+	  "hp_multiplier": 40.0,
+	  "coin_reward_multiplier": 12.0,
+	  "guaranteed_rewards": {
+		"coins": 600,
+		"crystals": 2,
+		"energy": 0
+	  },
+	  "drop_table": [
+		"boss_core_2",
         "lava_shard"
-      ],
-      "special_type": "regen",
-      "special_values": {
-        "regen_percent_per_sec": 0.01
-      },
-      "icon_key": "magma_maw",
-      "bg_color": "#EF6C00",
-      "title_color": "#FFFFFF",
-      "unlocks_on_kill": [
+	  ],
+	  "special_type": "regen",
+	  "special_values": {
+		"regen_percent_per_sec": 0.01
+	  },
+	  "icon_key": "magma_maw",
+	  "bg_color": "#EF6C00",
+	  "title_color": "#FFFFFF",
+	  "unlocks_on_kill": [
         "lane_slot_2"
-      ]
-    },
-    {
-      "id": "crystal_beast",
-      "name": "Crystal Beast",
-      "boss_icon":"boss_02_crystal_beast",
-      "spawn_depth": 600,
-      "tier": 3,
-      "hp_multiplier": 60.0,
-      "coin_reward_multiplier": 16.0,
-      "guaranteed_rewards": {
-        "coins": 1400,
-        "crystals": 5,
-        "energy": 0
-      },
-      "drop_table": [
-        "boss_core_3",
-        "crystal_fragment",
+	  ]
+	},
+	{
+	  "id": "crystal_beast",
+	  "name": "Crystal Beast",
+	  "boss_icon":"boss_02_crystal_beast",
+	  "spawn_depth": 600,
+	  "tier": 3,
+	  "hp_multiplier": 60.0,
+	  "coin_reward_multiplier": 16.0,
+	  "guaranteed_rewards": {
+		"coins": 1400,
+		"crystals": 5,
+		"energy": 0
+	  },
+	  "drop_table": [
+		"boss_core_3",
+		"crystal_fragment",
         "crystal_fragment"
-      ],
-      "special_type": "armor",
-      "special_values": {
-        "damage_reduction_percent": 0.2
-      },
-      "icon_key": "crystal_beast",
-      "bg_color": "#7C3AED",
-      "title_color": "#FFFFFF",
-      "unlocks_on_kill": [
+	  ],
+	  "special_type": "armor",
+	  "special_values": {
+		"damage_reduction_percent": 0.2
+	  },
+	  "icon_key": "crystal_beast",
+	  "bg_color": "#7C3AED",
+	  "title_color": "#FFFFFF",
+	  "unlocks_on_kill": [
         "merge_slot_5"
-      ]
-    },
-    {
-      "id": "iron_crusher",
-      "name": "Iron Crusher",
-      "boss_icon":"boss_05_icon_crusher",
-      "spawn_depth": 1000,
-      "tier": 4,
-      "hp_multiplier": 90.0,
-      "coin_reward_multiplier": 22.0,
-      "guaranteed_rewards": {
-        "coins": 3200,
-        "crystals": 10,
-        "energy": 1
-      },
-      "drop_table": [
-        "boss_core_4",
-        "iron_plate",
+	  ]
+	},
+	{
+	  "id": "iron_crusher",
+	  "name": "Iron Crusher",
+	  "boss_icon":"boss_05_icon_crusher",
+	  "spawn_depth": 1000,
+	  "tier": 4,
+	  "hp_multiplier": 90.0,
+	  "coin_reward_multiplier": 22.0,
+	  "guaranteed_rewards": {
+		"coins": 3200,
+		"crystals": 10,
+		"energy": 1
+	  },
+	  "drop_table": [
+		"boss_core_4",
+		"iron_plate",
         "iron_plate"
-      ],
-      "special_type": "tap_resist",
-      "special_values": {
-        "tap_damage_multiplier": 0.0
-      },
-      "icon_key": "iron_crusher",
-      "bg_color": "#374151",
-      "title_color": "#FFFFFF",
-      "unlocks_on_kill": [
+	  ],
+	  "special_type": "tap_resist",
+	  "special_values": {
+		"tap_damage_multiplier": 0.0
+	  },
+	  "icon_key": "iron_crusher",
+	  "bg_color": "#374151",
+	  "title_color": "#FFFFFF",
+	  "unlocks_on_kill": [
         "progress_skill_row_2"
-      ]
-    },
-    {
-      "id": "void_driller",
-      "name": "Void Driller",
-      "boss_icon":"boss_01_void_driller",
-      "spawn_depth": 1500,
-      "tier": 5,
-      "hp_multiplier": 130.0,
-      "coin_reward_multiplier": 30.0,
-      "guaranteed_rewards": {
-        "coins": 7000,
-        "crystals": 20,
-        "energy": 2
-      },
-      "drop_table": [
-        "boss_core_5",
-        "void_scrap",
+	  ]
+	},
+	{
+	  "id": "void_driller",
+	  "name": "Void Driller",
+	  "boss_icon":"boss_01_void_driller",
+	  "spawn_depth": 1500,
+	  "tier": 5,
+	  "hp_multiplier": 130.0,
+	  "coin_reward_multiplier": 30.0,
+	  "guaranteed_rewards": {
+		"coins": 7000,
+		"crystals": 20,
+		"energy": 2
+	  },
+	  "drop_table": [
+		"boss_core_5",
+		"void_scrap",
         "void_scrap"
-      ],
-      "special_type": "timer_enrage",
-      "special_values": {
-        "enrage_after_sec": 20.0,
-        "extra_regen_percent_per_sec": 0.03
-      },
-      "icon_key": "void_driller",
-      "bg_color": "#111827",
-      "title_color": "#A78BFA",
-      "unlocks_on_kill": [
+	  ],
+	  "special_type": "timer_enrage",
+	  "special_values": {
+		"enrage_after_sec": 20.0,
+		"extra_regen_percent_per_sec": 0.03
+	  },
+	  "icon_key": "void_driller",
+	  "bg_color": "#111827",
+	  "title_color": "#A78BFA",
+	  "unlocks_on_kill": [
         "dig_lane_3"
-      ]
-    },
-    {
-      "id": "core_serpent",
-      "name": "Core Serpent",
-      "boss_icon":"boss_04_core_serpent",
-      "spawn_depth": 2200,
-      "tier": 6,
-      "hp_multiplier": 180.0,
-      "coin_reward_multiplier": 42.0,
-      "guaranteed_rewards": {
-        "coins": 15000,
-        "crystals": 35,
-        "energy": 4
-      },
-      "drop_table": [
-        "boss_core_6",
-        "serpent_scale",
-        "serpent_scale",
+	  ]
+	},
+	{
+	  "id": "core_serpent",
+	  "name": "Core Serpent",
+	  "boss_icon":"boss_04_core_serpent",
+	  "spawn_depth": 2200,
+	  "tier": 6,
+	  "hp_multiplier": 180.0,
+	  "coin_reward_multiplier": 42.0,
+	  "guaranteed_rewards": {
+		"coins": 15000,
+		"crystals": 35,
+		"energy": 4
+	  },
+	  "drop_table": [
+		"boss_core_6",
+		"serpent_scale",
+		"serpent_scale",
         "ancient_relic_part"
-      ],
-      "special_type": "shield_cycle",
-      "special_values": {
-        "shield_duration_sec": 4.0,
-        "shield_cooldown_sec": 12.0
-      },
-      "icon_key": "core_serpent",
-      "bg_color": "#0F766E",
-      "title_color": "#FFFFFF",
-      "unlocks_on_kill": [
+	  ],
+	  "special_type": "shield_cycle",
+	  "special_values": {
+		"shield_duration_sec": 4.0,
+		"shield_cooldown_sec": 12.0
+	  },
+	  "icon_key": "core_serpent",
+	  "bg_color": "#0F766E",
+	  "title_color": "#FFFFFF",
+	  "unlocks_on_kill": [
         "relics_tab"
-      ]
-    }
+	  ]
+	}
   ]
 }
