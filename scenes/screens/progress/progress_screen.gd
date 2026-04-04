@@ -149,6 +149,7 @@ func _on_tab_relics_on_pressed() -> void:
 		r.InitItem(x,{"inv_mode":"from_equipment","cur_empty_slot":cur_slot})
 		r.OnEquip.connect(OnRelicUnequip)
 		cur_slot += 1
+
 	
 	for x in range(cur_slot,max_slots):
 		var r = relic_item.instantiate() as RelicItemClass

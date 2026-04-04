@@ -38,7 +38,7 @@ func GetGlobalSpeedMultiplier(next_level : int = 0) -> float:
 	
 func GetCoinYieldMultiplier(next_level :int = 0) -> float:
 	var lvl = GlobalSave.save_data.upgrades["coin_yield"].level + next_level
-	return pow(1.10, lvl)
+	return pow(1.10, lvl) * GetRelicMultiplierTotal("coin_gain_mult")
 	
 func GetGlobalCoinYieldMultiplayer():
 	return GetCoinYieldMultiplier()
@@ -54,7 +54,8 @@ func GetBotFinalDps(level: int) -> float:
 	
 func GetBotFinalDPSWithGobal(level:int) -> float:
 	var final_dps = GetBotFinalDps(level)
-	return final_dps * GlobalStats.GetUpgradeValue("drill_power")
+	return final_dps * GetBotDamageMultiplier()
+	
 	
 func GetBotFinalDigSpeedWithGlobal(level: int) -> float:
 	var final_speed = GetBotFinalDigSpeed(level)
@@ -63,10 +64,13 @@ func GetBotFinalDigSpeedWithGlobal(level: int) -> float:
 func GetBotStats(level: int) -> Dictionary:
 	var base_power := maxi(1, int(round(pow(1.9, level - 1))))
 	var base_speed = min(3.0, snapped(pow(1.12, level - 1), 0.01))
+
 	var power_mult = 1.0 + (GlobalSave.save_data.global_upgrades.global_dig_power_level * 0.15)
 	var speed_mult = 1.0 + (GlobalSave.save_data.global_upgrades.global_dig_speed_level * 0.08)
-	var final_power = base_power * power_mult * GetUpgradeValue("drill_power")
+
+	var final_power = base_power * power_mult * GetBotDamageMultiplier()
 	var final_speed = base_speed * speed_mult * GetUpgradeValue("drill_speed")
+
 	var dps = final_power * final_speed
 	var hit_interval = 1.0 / max(final_speed, 0.001)
 
@@ -82,7 +86,6 @@ func GetBotStats(level: int) -> Dictionary:
 		"merge_value": maxi(1, int(round(10.0 * pow(2.35, level - 1)))),
 		"sell_value": int(round((10.0 * pow(2.35, level - 1)) * 0.6))
 	}
-	
 
 func GetUpgradeCost(upgrade_id: String) -> int:
 	if !GlobalSave.save_data.has("upgrades") or !GlobalSave.save_data.upgrades.has(upgrade_id):
@@ -112,15 +115,20 @@ func GetUpgradeValue(upgrade_id: String, next_level:int = 0) -> float:
 			return 1.0
 
 func GetTapDamage() -> float:
-	return max(1.0, float(GetUpgradeValue("tap_damage")))
+	return max(1.0, float(GetUpgradeValue("tap_damage")) * GetTapDamageMultiplier())
+
 
 
 func GetCritChance(next_level: int = 0) -> float:
-	return clamp(float(GetUpgradeValue("crit_chance", next_level)), 0.0, 1.0)
-	
-func GetCritMultiplier(next_level: int = 0) -> float:
-	return max(1.0, 1.0 + float(GetUpgradeValue("crit_multiplier", next_level)))
+	var base_chance := float(GetUpgradeValue("crit_chance", next_level))
+	var relic_bonus := GetRelicFlatTotal("crit_chance_flat")
+	return clamp(base_chance + relic_bonus, 0.0, 1.0)
 
+
+func GetCritMultiplier(next_level: int = 0) -> float:
+	var base_mult = max(1.0, 1.0 + float(GetUpgradeValue("crit_multiplier", next_level)))
+	return max(1.0, base_mult * GetRelicMultiplierTotal("crit_mult_mult"))
+	
 func GetExpectedCritDamageMultiplier() -> float:
 	var chance := GetCritChance()
 	var crit_mult := GetCritMultiplier()
@@ -143,3 +151,64 @@ func ApplyCritToDamage(base_damage: float) -> Dictionary:
 		"damage": final_damage,
 		"did_crit": did_crit
 	}
+
+#Relics
+func GetRelicMultiplierTotal(effect_type: String) -> float:
+	var total := 1.0
+
+	for relic_entry in GlobalRelicDb.GetAllEquippedRelics():
+		var db_data = relic_entry.get("db_data", {})
+		if typeof(db_data) != TYPE_DICTIONARY:
+			continue
+		if str(db_data.get("effect_type", "")) != effect_type:
+			continue
+		if str(db_data.get("effect_format", "")) != "multiplier":
+			continue
+
+		var rank_data = relic_entry.get("rank_data", {})
+		if typeof(rank_data) != TYPE_DICTIONARY:
+			continue
+
+		total *= float(rank_data.get("effect_value", 1.0))
+
+	return max(0.0, total)
+
+
+func GetRelicFlatTotal(effect_type: String) -> float:
+	var total := 0.0
+
+	for relic_entry in GlobalRelicDb.GetAllEquippedRelics():
+		var db_data = relic_entry.get("db_data", {})
+		if typeof(db_data) != TYPE_DICTIONARY:
+			continue
+		if str(db_data.get("effect_type", "")) != effect_type:
+			continue
+		if str(db_data.get("effect_format", "")) != "flat":
+			continue
+
+		var rank_data = relic_entry.get("rank_data", {})
+		if typeof(rank_data) != TYPE_DICTIONARY:
+			continue
+
+		total += float(rank_data.get("effect_value", 0.0))
+
+	return total
+
+
+func GetBotDamageMultiplier() -> float:
+	return float(GetUpgradeValue("drill_power")) * GetRelicMultiplierTotal("bot_damage_mult")
+
+
+func GetTapDamageMultiplier() -> float:
+	return GetRelicMultiplierTotal("tap_damage_mult")
+
+
+func GetBossDamageMultiplier() -> float:
+	return GetRelicMultiplierTotal("boss_damage_mult")
+
+
+func GetOfflineGainMultiplier() -> float:
+	return GetRelicMultiplierTotal("offline_gain_mult")
+
+func ApplyBossDamageMultiplier(base_damage: float) -> float:
+	return max(0.0, float(base_damage) * GetBossDamageMultiplier())

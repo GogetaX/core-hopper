@@ -13,5 +13,5 @@ func SyncData():
 		else:
 			dps_value += GlobalStats.GetBotFinalDps(x.level)
 		
-	text = Global.CurrencyToString(dps_value) + end_text
+	text = Global.CurrencyToString(int(dps_value)) + end_text
 	

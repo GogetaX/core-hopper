@@ -29,3 +29,7 @@ res://art/relics/deep_scanner.tres
 res://data/relics/relic_db.json
 res://scenes/screens/progress/quest_item.tscn
 res://scenes/screens/progress/quest_item.gd
+res://autoload/GlobalStats.gd
+res://scenes/screens/merge/merge_screen.gd
+res://scenes/screens/merge/merge_screen.tscn
+res://scenes/label_data_scripts/total_dps.gd
