@@ -230,3 +230,7 @@ func GetNextBossDepth(from_depth: int) -> int:
 				next_depth = d
 
 	return next_depth
+
+func GetBossIcon(boss_id):
+	var boss_data = GlobalBossDb.GetBossDataByID(boss_id)
+	return load("res://data/boss_icons/"+boss_data.boss_icon+".tres")

@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://x5j6celmf4at" path="res://scenes/screens/dig/current_daily_task.tscn" id="16_nk4bl"]
 [ext_resource type="PackedScene" uid="uid://bjyvsqllfsb14" path="res://scenes/screens/dig/milestone_panel.tscn" id="16_wjarc"]
 [ext_resource type="Script" uid="uid://bg68ksebamcji" path="res://scenes/screens/merge/drag_drop_handler.gd" id="19_ddijn"]
+[ext_resource type="PackedScene" uid="uid://duvnpggfd3idr" path="res://scenes/screens/dig/notif_for_chests.tscn" id="19_ga47w"]
 
 [node name="DigScreen" type="VBoxContainer" unique_id=594767936]
 anchors_preset = 15
@@ -678,12 +679,14 @@ theme_override_constants/separation = 20
 layout_mode = 2
 btn_text = "Watch Ad"
 
-[node name="SmartButton2" parent="HList5" unique_id=258191787 instance=ExtResource("2_8q4ji")]
+[node name="ShowChestsBtn" parent="HList5" unique_id=258191787 instance=ExtResource("2_8q4ji")]
 layout_mode = 2
 btn_text = "Open chest"
 button_color = "PURPLE_MARGIN"
 
-[node name="SmartButton3" parent="HList5" unique_id=66758420 instance=ExtResource("2_8q4ji")]
+[node name="NotifForChests" parent="HList5/ShowChestsBtn" unique_id=607369676 instance=ExtResource("19_ga47w")]
+
+[node name="ViewQuestsBtn" parent="HList5" unique_id=66758420 instance=ExtResource("2_8q4ji")]
 layout_mode = 2
 btn_text = "View quests"
 button_color = "WHITE_MARGIN"
@@ -697,3 +700,5 @@ script = ExtResource("19_ddijn")
 
 [connection signal="timeout" from="HList3/IncomePanel/VList/income_ps/incone_counter" to="HList3/IncomePanel/VList/income_ps" method="_on_incone_counter_timeout"]
 [connection signal="BtnPressed" from="HList5/WatchAdBtn" to="." method="_on_watch_ad_btn_btn_pressed"]
+[connection signal="BtnPressed" from="HList5/ShowChestsBtn" to="." method="_on_show_chests_btn_btn_pressed"]
+[connection signal="BtnPressed" from="HList5/ViewQuestsBtn" to="." method="_on_view_quests_btn_btn_pressed"]

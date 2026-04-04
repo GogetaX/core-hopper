@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://btlewfqj1pc7p"]
+
+[ext_resource type="Script" uid="uid://bc4a5oiwe7ng0" path="res://scenes/popups/chest_popup.gd" id="1_g3as3"]
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="2_g3as3"]
+[ext_resource type="PackedScene" uid="uid://b2qghfcexq01t" path="res://scenes/components/icon_bg_circle.tscn" id="3_byn0b"]
+[ext_resource type="Texture2D" uid="uid://8d4xunnuoyea" path="res://art/icons/20_px/close_icon.png" id="4_apcm5"]
+[ext_resource type="PackedScene" uid="uid://2ftvvopgyw0e" path="res://scenes/components/chest_reward.tscn" id="4_o210y"]
+[ext_resource type="PackedScene" uid="uid://njxlv6dxrlwj" path="res://scenes/screens/progress/smart_button_buy.tscn" id="5_o210y"]
+
+[node name="ChestPopup" type="Control" unique_id=1294155484]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("1_g3as3")
+
+[node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("2_g3as3")]
+layout_mode = 1
+panel_type = "INSIDE_ONLY"
+panel_color = "GOLD"
+darken_bg = true
+
+[node name="ClosePopup" parent="SmartPanel" unique_id=1682398798 instance=ExtResource("3_byn0b")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+panel_type = "INSIDE_ONLY"
+panel_color = "BLUE"
+icon = ExtResource("4_apcm5")
+as_button = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SmartPanel" unique_id=274183451]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HList2" type="HBoxContainer" parent="SmartPanel/VBoxContainer" unique_id=61304949]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="SmartPanel/VBoxContainer/HList2" unique_id=2046432609]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_White"
+text = "REWARD CHESTS"
+
+[node name="Label2" type="Label" parent="SmartPanel/VBoxContainer" unique_id=509960664]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "UNDERGROUD SPOILS"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Control2" type="Control" parent="SmartPanel/VBoxContainer" unique_id=841437587]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Scroll" type="ScrollContainer" parent="SmartPanel/VBoxContainer" unique_id=1945268617]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HList" type="VBoxContainer" parent="SmartPanel/VBoxContainer/Scroll" unique_id=1408259358]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="ChestReward" parent="SmartPanel/VBoxContainer/Scroll/HList" unique_id=542781187 instance=ExtResource("4_o210y")]
+layout_mode = 2
+
+[node name="OpenAllBtn" parent="SmartPanel/VBoxContainer" unique_id=506836531 instance=ExtResource("5_o210y")]
+layout_mode = 2
+buy_btn_title = "OPEN ALL"
+
+[node name="pendin_amount" type="Label" parent="SmartPanel/VBoxContainer" unique_id=1807867284]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "4 PENDING REWARDS"
+horizontal_alignment = 1
+
+[connection signal="BtnPressed" from="SmartPanel/ClosePopup" to="." method="_on_close_popup_btn_pressed"]

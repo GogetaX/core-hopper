@@ -14,7 +14,19 @@ func _ready() -> void:
 	HideAllMenus()
 	TriggerDefaultSelectedTab()
 	InitUpgradeSkillList()
+	ShowDifferentTab()
 	
+func ShowDifferentTab():
+	if Global.progress_menu_show_tab == "":
+		return
+	match Global.progress_menu_show_tab:
+		"QUESTS":
+			$ProgressTopPanel/VList/Tabs/TabList/TAB_Upgrades.AnimateUnSelected()
+			$ProgressTopPanel/VList/Tabs/TabList/TAB_Quests.AnimateSelected()
+			_on_tab_quests_on_pressed()
+		_:
+			print_debug("Unknown Global.progress_menu_show_tab: ",Global.progress_menu_show_tab)
+	Global.progress_menu_show_tab = ""
 func SyncData():
 	if $Menu_Relics.visible:
 		_on_tab_relics_on_pressed()

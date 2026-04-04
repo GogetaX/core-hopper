@@ -1,10 +1,10 @@
+res://scenes/screens/dig/
+res://scenes/components/
+res://autoload/
 res://art/relics/
 res://scenes/screens/progress/
 /home/sergio/GitHub/core-hopper/data/relics/
-res://autoload/
 res://scenes/label_data_scripts/
-res://scenes/screens/dig/
-res://scenes/components/
 res://scenes/screens/particles/
 res://data/icons/
 res://shaders/

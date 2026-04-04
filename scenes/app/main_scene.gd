@@ -7,7 +7,6 @@ var cur_screen_text = ""
 var last_opened_scene_str = ""
 
 func _ready() -> void:
-	
 	GlobalSignals.OnTabBtnpressed.connect(OnBottomTabPressed)
 	GlobalSignals.OpenCloseSettingMenu.connect(OnSettingBtnPress)
 	GlobalSignals.OpenTabFromStr.connect(show_tab)

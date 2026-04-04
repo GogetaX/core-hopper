@@ -552,10 +552,7 @@ func GetLaneCurrentBossID(lane_index: int) -> String:
 
 func _HandleBossBlockFinished(finished_block: Dictionary) -> void:
 	var boss_id := str(finished_block.get("boss_id", ""))
-	var is_first_kill := false
-
-	if boss_id != "":
-		is_first_kill = !GlobalBossDb.HasBossBeenKilledByID(boss_id)
+	var boss_name := str(finished_block.get("name", boss_id))
 
 	var rewards = GlobalBossDb.OnBossKilled(finished_block)
 	if rewards.is_empty():
@@ -564,22 +561,24 @@ func _HandleBossBlockFinished(finished_block: Dictionary) -> void:
 	var final_coins := int(rewards.get("coins", 0))
 	if final_coins > 0:
 		final_coins = int(round(final_coins * GlobalStats.GetCoinYieldMultiplier()))
-		GlobalSave.AddCurrency("coins", final_coins)
+		rewards["coins"] = final_coins
 
-	if int(rewards.get("crystals", 0)) > 0:
-		GlobalSave.AddCurrency("crystals", int(rewards["crystals"]))
+	var relic_ids: Array = []
 
-	if int(rewards.get("energy", 0)) > 0:
-		GlobalSave.AddCurrency("energy", int(rewards["energy"]))
+	# future-safe if you still want boss drop handling
+	# example: relic_ids.append_array(_RollBossRelics(rewards.get("drop_table", [])))
 
-	var bonus_relic_id := ""
-	if is_first_kill:
-		bonus_relic_id = _GrantFirstKillRandomRelic(boss_id)
+	# optional first kill random relic bonus
+	if !GlobalBossDb.HasBossBeenKilledByID(boss_id):
+		var bonus_relic_id := GlobalRelicDb.GetRandomRelicID()
+		if bonus_relic_id != "":
+			relic_ids.append(bonus_relic_id)
 
-	if bonus_relic_id != "":
-		print("First kill relic bonus: ", boss_id, " -> ", bonus_relic_id)
+	rewards["relic_ids"] = relic_ids
 
-	GlobalSave.SyncSave()
+
+	var chest_data = GlobalRewardChest.MakeBossRewardChest(boss_id, boss_name, rewards)
+	GlobalRewardChest.AddChest(chest_data)
 
 func GetLaneCurrentBlockDisplayName(lane_index: int) -> String:
 	var block = GetLaneCurrentBlock(lane_index)

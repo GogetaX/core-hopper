@@ -38,3 +38,17 @@ res://data/bosses/boss_db.json
 res://autoload/GlobalBossDB.gd
 res://data/blocks/depth_bands.json
 res://scenes/screens/dig/dig_screen.tscn
+res://scenes/screens/dig/dig_screen.gd
+res://autoload/Global.gd
+res://autoload/GlobalSave.gd
+res://autoload/GlobalRewardChest.gd
+res://scenes/popups/OfflineDropPopup.tscn
+res://scenes/popups/ChestPopup.tscn
+res://scenes/components/icon_bg.tscn
+res://scenes/components/chest_reward.tscn
+res://scenes/popups/chest_popup.gd
+res://scenes/components/chest_reward.gd
+res://scenes/components/smart_button.tscn
+res://scenes/components/smart_button.gd
+res://scenes/screens/dig/notif_for_chests.tscn
+res://scenes/screens/dig/notif_for_chests.gd

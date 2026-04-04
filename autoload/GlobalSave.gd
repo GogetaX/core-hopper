@@ -173,7 +173,10 @@ func BuildCleanSaveData():
 			"owned" : {},
 			"dust": 18,
 			"unlocked_slots": 2
-		}
+	}
+	res["reward_chests"] = {
+		"queue": []
+	}
 	return res
 
 

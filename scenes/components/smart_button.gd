@@ -26,10 +26,13 @@ signal BtnPressed()
 			_ready()
 	get:
 		return button_color
+		
+var _notif_counter = 0
 
 func _ready() -> void:
 	$Panel/HBoxContainer/Label.text = btn_text
 	$Panel/HBoxContainer/TextureRect.texture = btn_icon
+	$SmallNotifCounter.visible = false
 	match button_color:
 		"BLUE_MARGIN":
 			$Panel.theme_type_variation = "PanelBlueBorder"
@@ -49,6 +52,14 @@ func _ready() -> void:
 		mouse_entered.connect(OnMouseEntered)
 		mouse_exited.connect(OnMouseExited)
 
+func SetNotifCounter(to_num:int):
+	_notif_counter = to_num
+	$SmallNotifCounter.notif_count = to_num
+	if to_num == 0:
+		$SmallNotifCounter.visible = false
+	else:
+		$SmallNotifCounter.visible = true
+		
 func OnMouseExited():
 	var t = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
 	t.tween_property($Panel,"modulate",Color.WHITE,0.05)

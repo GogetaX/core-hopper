@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://2ftvvopgyw0e"]
+
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="1_5buij"]
+[ext_resource type="Script" uid="uid://lrregs6pio35" path="res://scenes/components/chest_reward.gd" id="1_hc4e1"]
+[ext_resource type="PackedScene" uid="uid://drlay20xc5ihb" path="res://scenes/components/icon_bg.tscn" id="2_hc4e1"]
+[ext_resource type="Texture2D" uid="uid://chfv57immwhak" path="res://data/boss_icons/boss_01_void_driller.tres" id="3_ndkmo"]
+[ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="4_5le8b"]
+[ext_resource type="PackedScene" uid="uid://njxlv6dxrlwj" path="res://scenes/screens/progress/smart_button_buy.tscn" id="5_vt8dr"]
+
+[node name="ChestReward" type="Control" unique_id=542781187]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 667.0
+offset_bottom = 200.0
+size_flags_horizontal = 3
+script = ExtResource("1_hc4e1")
+
+[node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("1_5buij")]
+layout_mode = 1
+panel_color = "DISABLED"
+darken_bg = true
+
+[node name="HBox" type="HBoxContainer" parent="SmartPanel" unique_id=481088847]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Control" type="Control" parent="SmartPanel/HBox" unique_id=2007556985]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="IconBG" parent="SmartPanel/HBox/Control" unique_id=1682398798 instance=ExtResource("2_hc4e1")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+panel_type = "INSIDE_ONLY"
+icon = ExtResource("3_ndkmo")
+
+[node name="VList" type="VBoxContainer" parent="SmartPanel/HBox" unique_id=707647023]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="source_type" parent="SmartPanel/HBox/VList" unique_id=713365230 instance=ExtResource("4_5le8b")]
+self_modulate = Color(0.30980393, 0.89411765, 1, 1)
+layout_mode = 2
+text = "BOSS"
+hash_tag_color = "BLUE"
+no_bg = true
+
+[node name="source_name" parent="SmartPanel/HBox/VList" unique_id=1766046756 instance=ExtResource("4_5le8b")]
+self_modulate = Color(0.8627451, 0.9098039, 1, 1)
+layout_mode = 2
+text = "STONE TITAN"
+hash_tag_color = "WHITE"
+no_bg = true
+
+[node name="HList" type="HBoxContainer" parent="SmartPanel/HBox/VList" unique_id=1119057385]
+layout_mode = 2
+alignment = 2
+
+[node name="Control" type="Control" parent="SmartPanel/HBox/VList/HList" unique_id=770150412]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ClaimBtn" parent="SmartPanel/HBox/VList/HList" unique_id=664760665 instance=ExtResource("5_vt8dr")]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+buy_btn_title = "OPEN"

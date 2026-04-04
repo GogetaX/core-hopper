@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bu8eufb1cbn23" path="res://scenes/components/smart_button.gd" id="1_5lauu"]
 [ext_resource type="Texture2D" uid="uid://bg18vum2cai3c" path="res://art/icons/rocket.png" id="1_crr8x"]
+[ext_resource type="PackedScene" uid="uid://b8mon6416thj7" path="res://scenes/components/small_notif_counter.tscn" id="3_n6ow7"]
 
 [node name="SmartButton" type="Control" unique_id=664760665]
 custom_minimum_size = Vector2(0, 120)
@@ -55,3 +56,13 @@ layout_mode = 2
 theme_type_variation = &"LabelButtonWhite"
 text = "Test "
 autowrap_mode = 2
+
+[node name="SmallNotifCounter" parent="." unique_id=1772552382 instance=ExtResource("3_n6ow7")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -30.0
+offset_right = 0.0
+offset_bottom = 30.0
+grow_horizontal = 0

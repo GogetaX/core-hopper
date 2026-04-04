@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://duvnpggfd3idr"]
+
+[ext_resource type="Script" uid="uid://ccywk7kso3xia" path="res://scenes/screens/dig/notif_for_chests.gd" id="1_fmm3s"]
+
+[node name="NotifForChests" type="Node" unique_id=607369676]
+script = ExtResource("1_fmm3s")
