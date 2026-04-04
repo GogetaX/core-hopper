@@ -42,7 +42,7 @@ func InitMilestoneItem(data):
 	HideAllPanels()
 	if data.has("is_completed") && data.is_completed:
 		$MilestoneItem_Complete.visible = true
-		$MilestoneItem_Complete/VList/HList/VList/milestone_title.text = data.title
+		$MilestoneItem_Complete/VList/HList/VList/milestone_title.text = data.description
 		#Clearing reward container
 		for x in $MilestoneItem_Complete/VList/HList/VList2/RewardContainer.get_children():
 			x.queue_free()

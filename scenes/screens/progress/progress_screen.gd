@@ -97,8 +97,8 @@ func OnQuestExpand():
 				$Menu_Quests/QuestVList/QuestList.add_child(q)
 				q.InitDailyQuestItem(x)
 	
-	#Show only 1 milestone quest
-	var daily_milestone_list = GlobalMilestone.GetAllActiveMilestones()
+	#Show all active milestone quest
+	var daily_milestone_list = GlobalMilestone.get_active_milestones()
 	if !daily_milestone_list.is_empty():
 		var l = hashtag_label.instantiate() as HashtagClass
 		l.hash_tag_color = "GOLD"
@@ -108,9 +108,10 @@ func OnQuestExpand():
 		$Menu_Quests/QuestVList/QuestList.add_child(l)
 			
 		for x in daily_milestone_list:
-			var q = quest_item.instantiate() as QuestItemClass
-			$Menu_Quests/QuestVList/QuestList.add_child(q)
-			q.InitMilestoneItem(x.data)
+			if !x.is_claimed:
+				var q = quest_item.instantiate() as QuestItemClass
+				$Menu_Quests/QuestVList/QuestList.add_child(q)
+				q.InitMilestoneItem(x)
 	
 	#Show purple button: Open full quest list
 	var e = expand_btn.instantiate() as ExpandRowButtonClass

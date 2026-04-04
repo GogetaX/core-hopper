@@ -26,41 +26,48 @@ func LoadMilestoneDB():
 		return
 
 	return json.data
-
-func GetAllActiveMilestones():
+	
+func get_active_milestones() -> Array:
 	var milestone_dict: Dictionary = milestone_db.get("milestones", {})
 	var milestone_list: Array = []
+	var result: Array = []
+
 	for milestone_id in milestone_dict.keys():
 		var data: Dictionary = milestone_dict[milestone_id]
 		milestone_list.append({
 			"id": milestone_id,
 			"data": data
 		})
-	# 1) completed but not claimed
-	var res = []
+
+	milestone_list.sort_custom(func(a, b):
+		return int(a["data"].get("order", 999999)) < int(b["data"].get("order", 999999))
+	)
+
 	for entry in milestone_list:
 		var milestone_id: String = entry["id"]
 		var data: Dictionary = entry["data"]
 
-		if is_milestone_completed(milestone_id) and not is_milestone_claimed(milestone_id):
-			
-			res.append( {
-				"id": milestone_id,
-				"title": data.get("title", ""),
-				"description": data.get("description", ""),
-				"order": data.get("order", 0),
-				"category": data.get("category", ""),
-				"target_type": data.get("target_type", ""),
-				"target_key": data.get("target_key", ""),
-				"target_value": data.get("target_value", 0),
-				"is_completed": true,
-				"is_claimed": false,
-				"can_claim": true,
-				"reward_type": data.get("reward_type", ""),
-				"reward_value": data.get("reward_value", 0),
-				"auto_claim": data.get("auto_claim", true)
-			})
-	return milestone_list
+		if is_milestone_claimed(milestone_id):
+			continue
+
+		result.append({
+			"id": milestone_id,
+			"title": data.get("title", ""),
+			"description": data.get("description", ""),
+			"order": data.get("order", 0),
+			"category": data.get("category", ""),
+			"target_type": data.get("target_type", ""),
+			"target_key": data.get("target_key", ""),
+			"target_value": data.get("target_value", 0),
+			"is_completed": is_milestone_completed(milestone_id),
+			"is_claimed": false,
+			"can_claim": is_milestone_completed(milestone_id),
+			"reward_type": data.get("reward_type", ""),
+			"reward_value": data.get("reward_value", 0),
+			"auto_claim": data.get("auto_claim", true)
+		})
+
+	return result
 	
 func get_next_milestone() -> Dictionary:
 	var milestone_dict: Dictionary = milestone_db.get("milestones", {})

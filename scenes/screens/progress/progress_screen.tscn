@@ -542,7 +542,7 @@ layout_mode = 2
 [node name="ProgressHashTag" parent="Menu_Relics/RelicVList/HList2" unique_id=1198231238 instance=ExtResource("3_4nere")]
 self_modulate = Color(1, 0.74509805, 0.23137255, 1)
 layout_mode = 2
-text = "QUEST PREVIEW"
+text = "EQUIPET RELICS"
 hash_tag_type = "BORDER_ONLY"
 hash_tag_color = "GOLD"
 no_bg = true
