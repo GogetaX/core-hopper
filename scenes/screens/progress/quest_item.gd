@@ -36,9 +36,8 @@ func InitDailyQuestItem(data):
 				$QuestItem_Incomplete/VList/HList/VList2/RewardContainer.add_child(r)
 		
 func InitMilestoneItem(data):
-	print("Milestone Item: ")
-	print(data)
 	cur_data = data
+	print(cur_data)
 	HideAllPanels()
 	if data.has("is_completed") && data.is_completed:
 		$MilestoneItem_Complete.visible = true

@@ -4,35 +4,45 @@
 [ext_resource type="Script" uid="uid://dgkrnsogho86w" path="res://scenes/screens/progress/relic_item.gd" id="1_xbwj4"]
 [ext_resource type="PackedScene" uid="uid://b2qghfcexq01t" path="res://scenes/components/icon_bg_circle.tscn" id="2_xbwj4"]
 [ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="4_ysijg"]
+[ext_resource type="Texture2D" uid="uid://c46w0fgjdmgy3" path="res://art/icons/20_px/plus_icon.png" id="5_xbwj4"]
+[ext_resource type="PackedScene" uid="uid://njxlv6dxrlwj" path="res://scenes/screens/progress/smart_button_buy.tscn" id="5_ysijg"]
+[ext_resource type="Texture2D" uid="uid://52wk4te2cs6e" path="res://art/icons/20_px/lock_icon.png" id="6_om82t"]
 
 [node name="RelicItem" type="Control" unique_id=58938028]
-custom_minimum_size = Vector2(350, 250)
+custom_minimum_size = Vector2(350, 260)
 layout_mode = 3
 anchors_preset = 0
 size_flags_horizontal = 3
-mouse_filter = 2
+mouse_filter = 1
 script = ExtResource("1_xbwj4")
 
-[node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("1_a4rcp")]
+[node name="RelicItem" parent="." unique_id=892379017 instance=ExtResource("1_a4rcp")]
 layout_mode = 1
 darken_bg = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SmartPanel" unique_id=453275545]
+[node name="VBoxContainer" type="VBoxContainer" parent="RelicItem" unique_id=453275545]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="Control" type="Control" parent="SmartPanel/VBoxContainer" unique_id=1857785109]
-custom_minimum_size = Vector2(0, 100)
+[node name="HList" type="HBoxContainer" parent="RelicItem/VBoxContainer" unique_id=969194632]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="RelicItem/VBoxContainer/HList" unique_id=1857785109]
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="IconBGCircle" parent="SmartPanel/VBoxContainer/Control" unique_id=1682398798 instance=ExtResource("2_xbwj4")]
+[node name="IconBGCircle" parent="RelicItem/VBoxContainer/HList/Control" unique_id=1682398798 instance=ExtResource("2_xbwj4")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -47,17 +57,109 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="relic_name" type="Label" parent="SmartPanel/VBoxContainer" unique_id=588654321]
+[node name="VList" type="VBoxContainer" parent="RelicItem/VBoxContainer/HList" unique_id=134837387]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="relic_name" type="Label" parent="RelicItem/VBoxContainer/HList/VList" unique_id=588654321]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"LabelTitle_White"
 theme_override_font_sizes/font_size = 24
 text = "Relic Name"
-horizontal_alignment = 1
 
-[node name="ProgressHashTag" parent="SmartPanel/VBoxContainer" unique_id=713365230 instance=ExtResource("4_ysijg")]
+[node name="relic_desc" type="Label" parent="RelicItem/VBoxContainer/HList/VList" unique_id=585534831]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"LabelGray"
+theme_override_font_sizes/font_size = 24
+text = "Relic Name"
+autowrap_mode = 2
+
+[node name="HBox" type="HBoxContainer" parent="RelicItem/VBoxContainer" unique_id=219712239]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="relic_dupes" parent="RelicItem/VBoxContainer/HBox" unique_id=713365230 instance=ExtResource("4_ysijg")]
+self_modulate = Color(0.8627451, 0.9098039, 1, 1)
+layout_mode = 2
+text = "Next Lv 2/3"
+horizontal_alignment = 2
+hash_tag_color = "WHITE"
+no_bg = true
+
+[node name="Control" type="Control" parent="RelicItem/VBoxContainer/HBox" unique_id=1718156163]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="relic_stat" parent="RelicItem/VBoxContainer/HBox" unique_id=786638208 instance=ExtResource("4_ysijg")]
 self_modulate = Color(0.7607843, 0.43529412, 1, 1)
 layout_mode = 2
-text = "+10% power"
-horizontal_alignment = 1
+text = "+10%"
+horizontal_alignment = 2
 no_bg = true
+
+[node name="Control" type="Control" parent="RelicItem/VBoxContainer" unique_id=2042736551]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="RelicBtn" parent="RelicItem/VBoxContainer" unique_id=664760665 instance=ExtResource("5_ysijg")]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+buy_btn_title = "EQUIPED"
+
+[node name="relic_rank" parent="RelicItem" unique_id=1361408738 instance=ExtResource("4_ysijg")]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 10.0
+offset_right = 31.0
+offset_bottom = 43.0
+text = "5"
+hash_tag_type = "INSIDE_ONLY"
+
+[node name="EmptyItem" parent="." unique_id=1085167403 instance=ExtResource("1_a4rcp")]
+visible = false
+layout_mode = 1
+panel_color = "WHITE"
+darken_bg = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EmptyItem" unique_id=1970249636]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="EmptyItem/VBoxContainer" unique_id=1333476422]
+layout_mode = 2
+texture = ExtResource("5_xbwj4")
+stretch_mode = 5
+
+[node name="LockedItem" parent="." unique_id=1222747643 instance=ExtResource("1_a4rcp")]
+visible = false
+layout_mode = 1
+panel_color = "TAB_BG"
+darken_bg = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LockedItem" unique_id=792678318]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="LockedItem/VBoxContainer" unique_id=718824433]
+self_modulate = Color(1, 1, 1, 0.53800005)
+layout_mode = 2
+texture = ExtResource("6_om82t")
+stretch_mode = 5
+
+[connection signal="resized" from="RelicItem/VBoxContainer" to="." method="_on_v_box_container_resized"]
+[connection signal="OnPressed" from="RelicItem/VBoxContainer/RelicBtn" to="." method="_on_relic_btn_on_pressed"]

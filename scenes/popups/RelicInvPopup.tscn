@@ -1,0 +1,99 @@
+[gd_scene format=3 uid="uid://cjwi16aw5iu5"]
+
+[ext_resource type="Script" uid="uid://buy2bnidfltpo" path="res://scenes/popups/relic_inv_popup.gd" id="1_r432d"]
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="2_3i71g"]
+[ext_resource type="PackedScene" uid="uid://b2qghfcexq01t" path="res://scenes/components/icon_bg_circle.tscn" id="3_p27o2"]
+[ext_resource type="Texture2D" uid="uid://8d4xunnuoyea" path="res://art/icons/20_px/close_icon.png" id="4_k8l62"]
+[ext_resource type="PackedScene" uid="uid://dtuuq8uy378eb" path="res://scenes/screens/progress/relic_item.tscn" id="4_lqtxv"]
+
+[node name="RelicInvPopup" type="Control" unique_id=1294155484]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("1_r432d")
+
+[node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("2_3i71g")]
+layout_mode = 1
+panel_type = "INSIDE_ONLY"
+panel_color = "GOLD"
+darken_bg = true
+
+[node name="ClosePopup" parent="SmartPanel" unique_id=1682398798 instance=ExtResource("3_p27o2")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+panel_type = "INSIDE_ONLY"
+panel_color = "BLUE"
+icon = ExtResource("4_k8l62")
+as_button = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SmartPanel" unique_id=274183451]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HList2" type="HBoxContainer" parent="SmartPanel/VBoxContainer" unique_id=61304949]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="SmartPanel/VBoxContainer/HList2" unique_id=2046432609]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_White"
+text = "RELIC INVENTORY"
+
+[node name="Label2" type="Label" parent="SmartPanel/VBoxContainer" unique_id=509960664]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "AVAILABLE ARTIFACTS"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Control2" type="Control" parent="SmartPanel/VBoxContainer" unique_id=841437587]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Scroll" type="ScrollContainer" parent="SmartPanel/VBoxContainer" unique_id=1945268617]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HFlow" type="HFlowContainer" parent="SmartPanel/VBoxContainer/Scroll" unique_id=1845142426]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+
+[node name="RelicItem" parent="SmartPanel/VBoxContainer/Scroll/HFlow" unique_id=58938028 instance=ExtResource("4_lqtxv")]
+layout_mode = 2
+
+[node name="RelicItem2" parent="SmartPanel/VBoxContainer/Scroll/HFlow" unique_id=2094918138 instance=ExtResource("4_lqtxv")]
+layout_mode = 2
+
+[node name="RelicItem3" parent="SmartPanel/VBoxContainer/Scroll/HFlow" unique_id=449712666 instance=ExtResource("4_lqtxv")]
+layout_mode = 2
+
+[connection signal="BtnPressed" from="SmartPanel/ClosePopup" to="." method="_on_close_popup_btn_pressed"]

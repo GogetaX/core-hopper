@@ -37,16 +37,23 @@ func show_tab(tab_name:String,data:Dictionary) -> void:
 			new_screen = preload("res://scenes/popups/WatchAdPopup.tscn")
 		"SHOW_OFFLINE_REWARD":
 			new_screen = preload("res://scenes/popups/OfflineDropPopup.tscn")
-			
+		"SHOW_RELIC_INV":
+			new_screen = preload("res://scenes/popups/RelicInvPopup.tscn")
 		_:
 			print_debug("unknown tab: ",tab_name)
 	current_screen = new_screen.instantiate()
 	current_screen.modulate.a = 0.0
 	
+	if tab_name == "SHOW_RELIC_INV":
+		current_screen.InitCurPopupData(data)
+		
 	screen_host.add_child(current_screen)
+	
 	if tab_name == "SHOW_OFFLINE_REWARD":
 		current_screen.InitOfflineReward(data)
-		
+	
+	
+	
 	$BlurBG.visible = true
 	var t = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
 	t.tween_property(current_screen,"modulate:a",1.0,0.2)

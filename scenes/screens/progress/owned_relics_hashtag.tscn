@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cd1h4fd8nlefg"]
+
+[ext_resource type="Script" uid="uid://y4nudlhhmwdb" path="res://scenes/screens/progress/owned_relics_hashtag.gd" id="1_s1jlt"]
+
+[node name="OwnedRelicsHashtag" type="Node" unique_id=1612433376]
+script = ExtResource("1_s1jlt")

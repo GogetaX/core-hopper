@@ -5,12 +5,20 @@ extends VBoxContainer
 @onready var expand_btn = preload("res://scenes/screens/progress/smart_single_row_btn.tscn")
 @onready var hashtag_label = preload("res://scenes/screens/progress/progress_hash_tag.tscn")
 
+@onready var relic_item = preload("res://scenes/screens/progress/relic_item.tscn")
+@onready var locked_relic_item = preload("res://scenes/screens/progress/locked_relic_item.tscn")
+
 var quest_y_size_aim = 0.0
 func _ready() -> void:
+	GlobalSignals.DataSaved.connect(SyncData)
 	HideAllMenus()
 	TriggerDefaultSelectedTab()
 	InitUpgradeSkillList()
 	
+func SyncData():
+	if $Menu_Relics.visible:
+		_on_tab_relics_on_pressed()
+		
 func InitUpgradeSkillList():
 	#Clear upgrade list 
 	for x in $Menu_Upgrades/VList/ProgressSkillList.get_children():
@@ -126,13 +134,43 @@ func ClearAllQuestsItems():
 		
 
 func _on_tab_relics_on_pressed() -> void:
-	ShowOnlyMenu($Menu_Relics)
+	#Remove all relics slots
+	for x in $Menu_Relics/RelicVList/RelicVList/HFlow.get_children():
+		x.queue_free()
 
+	#Populate the unlocked relics
+	var avilable_slots = GlobalRelicDb.GetUnlockedRelicSlots()
+	var equiped_relics = GlobalRelicDb.GetAllEquippedRelics()
+	var max_slots = GlobalRelicDb.MAX_ACTIVE_RELIC_SLOTS
+	var cur_slot = 0
+	for x in equiped_relics:
+		var r = relic_item.instantiate() as RelicItemClass
+		$Menu_Relics/RelicVList/RelicVList/HFlow.add_child(r)
+		r.InitItem(x,{"inv_mode":"from_equipment","cur_empty_slot":cur_slot})
+		r.OnEquip.connect(OnRelicUnequip)
+		cur_slot += 1
+	
+	for x in range(cur_slot,max_slots):
+		var r = relic_item.instantiate() as RelicItemClass
+		$Menu_Relics/RelicVList/RelicVList/HFlow.add_child(r)
+		if x+1 <= avilable_slots:
+			r.SetAsEmpty(x)
+		else:
+			r.SetAsLocked()
+		
+
+	ShowOnlyMenu($Menu_Relics)
+	
+func OnRelicUnequip(is_equiped):
+	if !is_equiped:
+		GlobalSave.SyncSave()
+		
 func _process(delta: float) -> void:
 	if $Menu_Quests.visible:
 		if quest_y_size_aim != $Menu_Quests.size.y:
 			$Menu_Quests.custom_minimum_size.y = lerp($Menu_Quests.custom_minimum_size.y,quest_y_size_aim+30,delta * 10.0)
 			$Menu_Quests.size.y = $Menu_Quests.custom_minimum_size.y
+
 func UpgradeListResized() -> void:
 	var max_y = $Menu_Upgrades/VList.get_minimum_size().y
 	$Menu_Upgrades.custom_minimum_size.y = max_y + 30
@@ -146,3 +184,7 @@ func _on_quest_v_list_resized() -> void:
 func _on_relic_v_list_resized() -> void:
 	var max_y = $Menu_Relics/RelicVList.get_minimum_size().y
 	$Menu_Relics.custom_minimum_size.y = max_y + 30
+
+
+func _on_open_relic_inv_btn_on_press() -> void:
+	GlobalSignals.ShowPopup.emit("SHOW_RELIC_INV",{"inv_mode":"show_inv"})

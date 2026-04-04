@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" format=3 uid="uid://cl7iy17t6o7ys"]
+
+[ext_resource type="Texture2D" uid="uid://bqnn1dphocqvl" path="res://art/relics/relic_icons.png" id="1_5l8se"]
+
+[resource]
+atlas = ExtResource("1_5l8se")
+region = Rect2(0, 0, 136, 136)

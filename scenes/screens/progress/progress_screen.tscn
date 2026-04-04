@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://bl0egobmu4a73" path="res://scenes/screens/progress/tab_btn.tscn" id="1_gg677"]
 [ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="3_4nere"]
 [ext_resource type="PackedScene" uid="uid://bsv1pqeyc0h4m" path="res://scenes/screens/progress/progress_skill.tscn" id="4_0fuef"]
-[ext_resource type="Texture2D" uid="uid://bg18vum2cai3c" path="res://art/icons/rocket.png" id="5_3f4or"]
 [ext_resource type="Script" uid="uid://bloevasmaqx74" path="res://scenes/label_data_scripts/total_dps.gd" id="5_uqert"]
 [ext_resource type="Script" uid="uid://dy7foox2mx1bs" path="res://scenes/label_data_scripts/mining_speed.gd" id="6_k3jfa"]
 [ext_resource type="PackedScene" uid="uid://cyrssis6jwdc2" path="res://scenes/screens/progress/progress_hash_tag_with_icon.tscn" id="6_neoah"]
@@ -16,6 +15,8 @@
 [ext_resource type="Script" uid="uid://cupvfi5pnvw3u" path="res://scenes/label_data_scripts/crit_chance.gd" id="9_i8y5d"]
 [ext_resource type="PackedScene" uid="uid://dtuuq8uy378eb" path="res://scenes/screens/progress/relic_item.tscn" id="9_tsw2o"]
 [ext_resource type="PackedScene" uid="uid://byej242eayu0l" path="res://scenes/screens/progress/locked_relic_item.tscn" id="10_nipnh"]
+[ext_resource type="Texture2D" uid="uid://b7xf4f3dspkbe" path="res://data/icons/relic_icon.tres" id="14_ag5h6"]
+[ext_resource type="PackedScene" uid="uid://cd1h4fd8nlefg" path="res://scenes/screens/progress/owned_relics_hashtag.tscn" id="14_i8y5d"]
 
 [node name="ProgressScreen" type="VBoxContainer" unique_id=1963313650]
 anchors_preset = 15
@@ -562,13 +563,16 @@ text = "Active relic shelf"
 layout_mode = 2
 alignment = 1
 
-[node name="ProgressHashTagWithIcon" parent="Menu_Relics/RelicVList/HList/VList" unique_id=938022395 instance=ExtResource("6_neoah")]
+[node name="OwnedRelics" parent="Menu_Relics/RelicVList/HList/VList" unique_id=938022395 instance=ExtResource("6_neoah")]
 custom_minimum_size = Vector2(169, 33)
 layout_mode = 2
 hash_tag_type = "INSIDE_ONLY"
 hash_tag_color = "GOLD"
 hash_tag_text = "8 OWNED"
+hashtag_icon = ExtResource("14_ag5h6")
 is_currency = false
+
+[node name="OwnedRelicsHashtag" parent="Menu_Relics/RelicVList/HList/VList/OwnedRelics" unique_id=1612433376 instance=ExtResource("14_i8y5d")]
 
 [node name="Control" type="Control" parent="Menu_Relics/RelicVList/HList" unique_id=1730527215]
 custom_minimum_size = Vector2(15, 0)
@@ -580,34 +584,28 @@ custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="VList" type="VBoxContainer" parent="Menu_Relics/RelicVList" unique_id=251269701]
+[node name="RelicVList" type="VBoxContainer" parent="Menu_Relics/RelicVList" unique_id=251269701]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="HFlow" type="HFlowContainer" parent="Menu_Relics/RelicVList/VList" unique_id=1043495580]
+[node name="HFlow" type="HFlowContainer" parent="Menu_Relics/RelicVList/RelicVList" unique_id=1043495580]
 layout_mode = 2
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 
-[node name="RelicItem" parent="Menu_Relics/RelicVList/VList/HFlow" unique_id=58938028 instance=ExtResource("9_tsw2o")]
-layout_mode = 2
-icon = ExtResource("5_3f4or")
-relic_name = "Ancient Gear"
-relic_stat = "+15% speed"
-
-[node name="RelicItem2" parent="Menu_Relics/RelicVList/VList/HFlow" unique_id=393756306 instance=ExtResource("9_tsw2o")]
-layout_mode = 2
-panel_color = "BLUE"
-icon = ExtResource("5_3f4or")
-relic_name = "Crystal Shard"
-
-[node name="LockedRelicItem" parent="Menu_Relics/RelicVList/VList/HFlow" unique_id=1128639073 instance=ExtResource("10_nipnh")]
+[node name="RelicItem" parent="Menu_Relics/RelicVList/RelicVList/HFlow" unique_id=58938028 instance=ExtResource("9_tsw2o")]
 layout_mode = 2
 
-[node name="LockedRelicItem2" parent="Menu_Relics/RelicVList/VList/HFlow" unique_id=1938993788 instance=ExtResource("10_nipnh")]
+[node name="RelicItem2" parent="Menu_Relics/RelicVList/RelicVList/HFlow" unique_id=393756306 instance=ExtResource("9_tsw2o")]
 layout_mode = 2
 
-[node name="SmartSingleRowBtn" parent="Menu_Relics/RelicVList/VList" unique_id=698052773 instance=ExtResource("8_yhu24")]
+[node name="LockedRelicItem" parent="Menu_Relics/RelicVList/RelicVList/HFlow" unique_id=1128639073 instance=ExtResource("10_nipnh")]
+layout_mode = 2
+
+[node name="LockedRelicItem2" parent="Menu_Relics/RelicVList/RelicVList/HFlow" unique_id=1938993788 instance=ExtResource("10_nipnh")]
+layout_mode = 2
+
+[node name="OpenRelicInvBtn" parent="Menu_Relics/RelicVList/RelicVList" unique_id=698052773 instance=ExtResource("8_yhu24")]
 layout_mode = 2
 button_color = "GOLD"
 btn_text = "Open relic inventory"
@@ -617,4 +615,5 @@ btn_text = "Open relic inventory"
 [connection signal="OnPressed" from="ProgressTopPanel/VList/Tabs/TabList/TAB_Relics" to="." method="_on_tab_relics_on_pressed"]
 [connection signal="resized" from="Menu_Upgrades/VList" to="." method="UpgradeListResized"]
 [connection signal="resized" from="Menu_Quests/QuestVList" to="." method="_on_quest_v_list_resized"]
-[connection signal="resized" from="Menu_Relics/RelicVList" to="." method="_on_relic_v_list_resized"]
+[connection signal="resized" from="Menu_Relics/RelicVList/RelicVList" to="." method="_on_relic_v_list_resized"]
+[connection signal="OnPress" from="Menu_Relics/RelicVList/RelicVList/OpenRelicInvBtn" to="." method="_on_open_relic_inv_btn_on_press"]

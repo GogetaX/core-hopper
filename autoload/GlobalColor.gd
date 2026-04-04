@@ -96,3 +96,19 @@ func SkillUpgradeTextToColor(skill_group:String)->String:
 func GetReadableTextColor(bg: Color) -> Color:
 	var luminance = 0.299 * bg.r + 0.587 * bg.g + 0.114 * bg.b
 	return Color(0, 0, 0, bg.a) if luminance > 0.5 else Color(1, 1, 1, bg.a)
+
+func GetRelicRankColor(rank: int) -> String:
+	var clamped_rank := maxi(1, rank)
+
+	if clamped_rank >= 5:
+		return "ORANGE"
+
+	match clamped_rank:
+		1, 2:
+			return "WHITE"
+		3:
+			return "PURPLE"
+		4:
+			return "GOLD"
+
+	return "WHITE"

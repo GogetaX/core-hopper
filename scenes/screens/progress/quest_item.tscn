@@ -274,9 +274,11 @@ text = "Extract 500 rare void crystals"
 [node name="Control" type="Control" parent="MilestoneItem_Complete/VList/HList/VList" unique_id=1406400570]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="HList" type="HBoxContainer" parent="MilestoneItem_Complete/VList/HList/VList" unique_id=2141351609]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="MilestoneBtnComplete" parent="MilestoneItem_Complete/VList/HList/VList/HList" unique_id=372829613 instance=ExtResource("3_ly53i")]
 custom_minimum_size = Vector2(0, 50)
@@ -287,6 +289,7 @@ panel_color = "GOLD"
 [node name="Control" type="Control" parent="MilestoneItem_Complete/VList/HList/VList/HList" unique_id=1338153037]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="VList2" type="VBoxContainer" parent="MilestoneItem_Complete/VList/HList" unique_id=58284894]
 layout_mode = 2

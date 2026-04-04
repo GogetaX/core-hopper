@@ -1,3 +1,5 @@
+res://art/relics/
+res://scenes/screens/progress/
 /home/sergio/GitHub/core-hopper/data/relics/
 res://autoload/
 res://scenes/label_data_scripts/
@@ -15,7 +17,6 @@ res://scenes/app/
 res://scenes/screens/settings/
 res://scenes/screens/shop/
 res://scenes/screens/skills/
-res://scenes/screens/progress/
 res://scenes/ui/
 res://art/theme/
 res://fonts/
