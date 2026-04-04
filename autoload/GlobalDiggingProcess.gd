@@ -551,6 +551,12 @@ func GetLaneCurrentBossID(lane_index: int) -> String:
 	return str(block.get("boss_id", ""))
 
 func _HandleBossBlockFinished(finished_block: Dictionary) -> void:
+	var boss_id := str(finished_block.get("boss_id", ""))
+	var is_first_kill := false
+
+	if boss_id != "":
+		is_first_kill = !GlobalBossDb.HasBossBeenKilledByID(boss_id)
+
 	var rewards = GlobalBossDb.OnBossKilled(finished_block)
 	if rewards.is_empty():
 		return
@@ -566,9 +572,14 @@ func _HandleBossBlockFinished(finished_block: Dictionary) -> void:
 	if int(rewards.get("energy", 0)) > 0:
 		GlobalSave.AddCurrency("energy", int(rewards["energy"]))
 
-	# optional later:
-	# _HandleBossDrops(rewards.get("drop_table", []))
-	# _HandleBossUnlocks(rewards.get("unlocks_on_kill", []))
+	var bonus_relic_id := ""
+	if is_first_kill:
+		bonus_relic_id = _GrantFirstKillRandomRelic(boss_id)
+
+	if bonus_relic_id != "":
+		print("First kill relic bonus: ", boss_id, " -> ", bonus_relic_id)
+
+	GlobalSave.SyncSave()
 
 func GetLaneCurrentBlockDisplayName(lane_index: int) -> String:
 	var block = GetLaneCurrentBlock(lane_index)
@@ -757,3 +768,41 @@ func _GetBossDamageResult(block: Dictionary, damage: float, is_tap_damage: bool)
 		"blocked": false,
 		"reason": ""
 	}
+
+func _RollBossRelicDrop(drop_table: Array) -> String:
+	if drop_table.is_empty():
+		return ""
+
+	var valid_ids: Array = []
+	for entry in drop_table:
+		var relic_id := str(entry)
+		if relic_id == "":
+			continue
+		if !GlobalRelicDb.HasRelicData(relic_id):
+			continue
+		valid_ids.append(relic_id)
+
+	if valid_ids.is_empty():
+		return ""
+
+	return str(valid_ids[randi() % valid_ids.size()])
+
+
+func _HandleBossDrops(drop_table: Array) -> String:
+	var relic_id := _RollBossRelicDrop(drop_table)
+	if relic_id == "":
+		return ""
+
+	GlobalRelicDb.AddOwnedRelic(relic_id, 1)
+	return relic_id
+
+func _GrantFirstKillRandomRelic(boss_id: String) -> String:
+	if boss_id == "":
+		return ""
+
+	var relic_id := GlobalRelicDb.GetRandomRelicID()
+	if relic_id == "":
+		return ""
+
+	GlobalRelicDb.AddOwnedRelic(relic_id, 1)
+	return relic_id

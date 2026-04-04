@@ -35,3 +35,6 @@ res://scenes/screens/merge/merge_screen.tscn
 res://scenes/label_data_scripts/total_dps.gd
 res://autoload/GlobalDiggingProcess.gd
 res://data/bosses/boss_db.json
+res://autoload/GlobalBossDB.gd
+res://data/blocks/depth_bands.json
+res://scenes/screens/dig/dig_screen.tscn

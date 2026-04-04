@@ -108,7 +108,6 @@ func HasBossBeenKilledByID(boss_id: String) -> bool:
 
 func MarkBossKilled(depth: int, boss_id: String) -> void:
 	_EnsureBossProgress()
-
 	if !(depth in GlobalSave.save_data.boss_progress.killed_depths):
 		GlobalSave.save_data.boss_progress.killed_depths.append(depth)
 
@@ -188,7 +187,7 @@ func GetBossRewardsByID(boss_id: String) -> Dictionary:
 		"crystals": int(guaranteed_rewards.get("crystals", 0)),
 		"energy": int(guaranteed_rewards.get("energy", 0)),
 		"drop_table": boss_data.get("drop_table", []).duplicate(true),
-		"unlocks_on_kill": boss_data.get("unlocks_on_kill", []).duplicate(true)
+		"unlocks_on_kill": []
 	}
 
 

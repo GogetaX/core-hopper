@@ -1,67 +1,67 @@
 [
   {
-    "min_depth": 0,
-    "max_depth": 49,
-    "base_hp": 10,
-    "reward_multiplier": 1.0,
-    "spawn_pool": [
-      { "id": "dirt", "weight": 50 },
-      { "id": "soft_stone", "weight": 35 },
-      { "id": "coal", "weight": 15 }
-    ]
+	"min_depth": 0,
+	"max_depth": 49,
+	"base_hp": 10,
+	"reward_multiplier": 1.0,
+	"spawn_pool": [
+	  { "id": "dirt", "weight": 50 },
+	  { "id": "soft_stone", "weight": 35 },
+	  { "id": "coal", "weight": 15 }
+	]
   },
   {
-    "min_depth": 50,
-    "max_depth": 149,
-    "base_hp": 18,
-    "reward_multiplier": 1.15,
-    "spawn_pool": [
-      { "id": "soft_stone", "weight": 40 },
-      { "id": "coal", "weight": 25 },
-      { "id": "copper_ore", "weight": 20 },
-      { "id": "iron_ore", "weight": 10 },
-      { "id": "crystal_shard", "weight": 5 }
-    ]
+	"min_depth": 50,
+	"max_depth": 149,
+	"base_hp": 18,
+	"reward_multiplier": 1.15,
+	"spawn_pool": [
+	  { "id": "soft_stone", "weight": 40 },
+	  { "id": "coal", "weight": 25 },
+	  { "id": "copper_ore", "weight": 20 },
+	  { "id": "iron_ore", "weight": 10 },
+	  { "id": "crystal_shard", "weight": 5 }
+	]
   },
   {
-    "min_depth": 150,
-    "max_depth": 299,
-    "base_hp": 30,
-    "reward_multiplier": 1.35,
-    "spawn_pool": [
-      { "id": "coal", "weight": 25 },
-      { "id": "copper_ore", "weight": 25 },
-      { "id": "iron_ore", "weight": 20 },
-      { "id": "crystal_shard", "weight": 15 },
-      { "id": "rare_vein", "weight": 10 },
-      { "id": "energy_pocket", "weight": 5 }
-    ]
+	"min_depth": 150,
+	"max_depth": 299,
+	"base_hp": 30,
+	"reward_multiplier": 1.35,
+	"spawn_pool": [
+	  { "id": "coal", "weight": 25 },
+	  { "id": "copper_ore", "weight": 25 },
+	  { "id": "iron_ore", "weight": 20 },
+	  { "id": "crystal_shard", "weight": 15 },
+	  { "id": "rare_vein", "weight": 10 },
+	  { "id": "energy_pocket", "weight": 5 }
+	]
   },
   {
-    "min_depth": 300,
-    "max_depth": 499,
-    "base_hp": 48,
-    "reward_multiplier": 1.65,
-    "spawn_pool": [
-      { "id": "iron_ore", "weight": 25 },
-      { "id": "crystal_shard", "weight": 20 },
-      { "id": "rare_vein", "weight": 20 },
-      { "id": "energy_pocket", "weight": 15 },
-      { "id": "obsidian", "weight": 15 },
-      { "id": "core_fragment", "weight": 5 }
-    ]
+	"min_depth": 300,
+	"max_depth": 499,
+	"base_hp": 48,
+	"reward_multiplier": 1.65,
+	"spawn_pool": [
+	  { "id": "iron_ore", "weight": 25 },
+	  { "id": "crystal_shard", "weight": 20 },
+	  { "id": "rare_vein", "weight": 20 },
+	  { "id": "energy_pocket", "weight": 15 },
+	  { "id": "obsidian", "weight": 15 },
+	  { "id": "core_fragment", "weight": 5 }
+	]
   },
   {
-    "min_depth": 500,
-    "max_depth": 999,
-    "base_hp": 75,
-    "reward_multiplier": 2.0,
-    "spawn_pool": [
-      { "id": "crystal_shard", "weight": 20 },
-      { "id": "rare_vein", "weight": 25 },
-      { "id": "energy_pocket", "weight": 20 },
-      { "id": "obsidian", "weight": 25 },
-      { "id": "core_fragment", "weight": 10 }
-    ]
+	"min_depth": 500,
+	"max_depth": 999,
+	"base_hp": 75,
+	"reward_multiplier": 2.0,
+	"spawn_pool": [
+	  { "id": "crystal_shard", "weight": 20 },
+	  { "id": "rare_vein", "weight": 25 },
+	  { "id": "energy_pocket", "weight": 20 },
+	  { "id": "obsidian", "weight": 25 },
+	  { "id": "core_fragment", "weight": 10 }
+	]
   }
 ]

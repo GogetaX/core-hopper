@@ -318,3 +318,55 @@ func ToggleRelicEquipped(relic_id: String) -> bool:
 func UnequipAllRelics() -> void:
 	_EnsureRelicInventory()
 	GlobalSave.save_data.relic_inv.equipped_ids.clear()
+
+
+func GetAllRelicIDs() -> Array:
+	var result: Array = []
+
+	for relic_id in relic_db.keys():
+		result.append(str(relic_id))
+
+	return result
+
+
+func GetRandomRelicID() -> String:
+	var relic_ids := GetAllRelicIDs()
+	if relic_ids.is_empty():
+		return ""
+
+	return str(relic_ids[randi() % relic_ids.size()])
+
+
+func AddOwnedRelic(relic_id: String, amount: int = 1) -> Dictionary:
+	_EnsureRelicInventory()
+
+	if relic_id == "" or amount <= 0:
+		return {}
+
+	if !HasRelicData(relic_id):
+		return {}
+
+	if !GlobalSave.save_data.relic_inv.owned.has(relic_id):
+		GlobalSave.save_data.relic_inv.owned[relic_id] = {
+			"rank": 1,
+			"dupes": 0
+		}
+
+		var extra_dupes := maxi(0, amount - 1)
+		if extra_dupes > 0:
+			GlobalSave.save_data.relic_inv.owned[relic_id]["dupes"] = extra_dupes
+
+		return {
+			"relic_id": relic_id,
+			"is_new": true,
+			"added_dupes": extra_dupes
+		}
+
+	var current_dupes := int(GlobalSave.save_data.relic_inv.owned[relic_id].get("dupes", 0))
+	GlobalSave.save_data.relic_inv.owned[relic_id]["dupes"] = current_dupes + amount
+
+	return {
+		"relic_id": relic_id,
+		"is_new": false,
+		"added_dupes": amount
+	}
