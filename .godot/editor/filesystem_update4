@@ -18,3 +18,4 @@ res://scenes/screens/settings/expand_to_right_button.gd
 res://autoload/GlobalMilestone.gd
 res://scenes/screens/progress/smart_single_row_btn.tscn
 res://autoload/GlobalSave.gd
+res://data/relics/relic_db.json

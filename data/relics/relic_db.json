@@ -1,0 +1,313 @@
+{
+  "relics": {
+	"cracked_core": {
+	  "title": "Cracked Core",
+	  "group": "combat",
+	  "rarity": "common",
+	  "icon": "res://assets/relics/cracked_core.png",
+	  "description": "Increases bot damage.",
+	  "max_rank": 5,
+	  "effect_type": "bot_damage_mult",
+	  "effect_format": "multiplier",
+	  "rank_data": {
+		"1": {
+		  "effect_value": 1.10,
+		  "dupes_required": 1,
+		  "upgrade_cost": {
+			"coins": 100,
+			"crystals": 0,
+			"dust": 5
+		  }
+		},
+		"2": {
+		  "effect_value": 1.20,
+		  "dupes_required": 1,
+		  "upgrade_cost": {
+			"coins": 250,
+			"crystals": 0,
+			"dust": 10
+		  }
+		},
+		"3": {
+		  "effect_value": 1.35,
+		  "dupes_required": 2,
+		  "upgrade_cost": {
+			"coins": 600,
+			"crystals": 1,
+			"dust": 20
+		  }
+		},
+		"4": {
+		  "effect_value": 1.55,
+		  "dupes_required": 2,
+		  "upgrade_cost": {
+			"coins": 1400,
+			"crystals": 2,
+			"dust": 35
+		  }
+		},
+		"5": {
+		  "effect_value": 1.80,
+		  "dupes_required": 0,
+		  "upgrade_cost": {
+			"coins": 0,
+			"crystals": 0,
+			"dust": 0
+		  }
+		}
+	  },
+	  "unlock_type": "boss_kill",
+	  "unlock_value": 1,
+	  "drop_weight": 100,
+	  "salvage_dust": 8
+	},
+
+	"combo_finger": {
+	  "title": "Combo Finger",
+	  "group": "combat",
+	  "rarity": "rare",
+	  "icon": "res://assets/relics/combo_finger.png",
+	  "description": "Increases tap damage.",
+	  "max_rank": 5,
+	  "effect_type": "tap_damage_mult",
+	  "effect_format": "multiplier",
+	  "rank_data": {
+		"1": {
+		  "effect_value": 1.15,
+		  "dupes_required": 1,
+		  "upgrade_cost": {
+			"coins": 200,
+			"crystals": 0,
+			"dust": 8
+		  }
+		},
+		"2": {
+		  "effect_value": 1.30,
+		  "dupes_required": 1,
+		  "upgrade_cost": {
+			"coins": 450,
+			"crystals": 1,
+			"dust": 15
+		  }
+		},
+		"3": {
+		  "effect_value": 1.50,
+		  "dupes_required": 2,
+		  "upgrade_cost": {
+			"coins": 1000,
+			"crystals": 2,
+			"dust": 28
+		  }
+		},
+		"4": {
+		  "effect_value": 1.75,
+		  "dupes_required": 2,
+		  "upgrade_cost": {
+			"coins": 2200,
+			"crystals": 3,
+			"dust": 45
+		  }
+		},
+		"5": {
+		  "effect_value": 2.05,
+		  "dupes_required": 0,
+		  "upgrade_cost": {
+			"coins": 0,
+			"crystals": 0,
+			"dust": 0
+		  }
+		}
+	  },
+	  "unlock_type": "depth",
+	  "unlock_value": 100,
+	  "drop_weight": 70,
+	  "salvage_dust": 14
+	},
+
+	"lucky_nail": {
+	  "title": "Lucky Nail",
+	  "group": "crit",
+	  "rarity": "rare",
+	  "icon": "res://assets/relics/lucky_nail.png",
+	  "description": "Increases crit chance.",
+	  "max_rank": 5,
+	  "effect_type": "crit_chance_flat",
+	  "effect_format": "flat",
+	  "rank_data": {
+		"1": {
+		  "effect_value": 0.02,
+		  "dupes_required": 1,
+		  "upgrade_cost": {
+			"coins": 250,
+			"crystals": 1,
+			"dust": 10
+		  }
+		},
+		"2": {
+		  "effect_value": 0.04,
+		  "dupes_required": 1,
+		  "upgrade_cost": {
+			"coins": 500,
+			"crystals": 1,
+			"dust": 18
+		  }
+		},
+		"3": {
+		  "effect_value": 0.06,
+		  "dupes_required": 2,
+		  "upgrade_cost": {
+			"coins": 1100,
+			"crystals": 2,
+			"dust": 30
+		  }
+		},
+		"4": {
+		  "effect_value": 0.09,
+		  "dupes_required": 2,
+		  "upgrade_cost": {
+			"coins": 2400,
+			"crystals": 3,
+			"dust": 48
+		  }
+		},
+		"5": {
+		  "effect_value": 0.12,
+		  "dupes_required": 0,
+		  "upgrade_cost": {
+			"coins": 0,
+			"crystals": 0,
+			"dust": 0
+		  }
+		}
+	  },
+	  "unlock_type": "depth",
+	  "unlock_value": 150,
+	  "drop_weight": 60,
+	  "salvage_dust": 16
+	},
+
+	"titan_shard": {
+	  "title": "Titan Shard",
+	  "group": "boss",
+	  "rarity": "epic",
+	  "icon": "res://assets/relics/titan_shard.png",
+	  "description": "Increases boss damage.",
+	  "max_rank": 5,
+	  "effect_type": "boss_damage_mult",
+	  "effect_format": "multiplier",
+	  "rank_data": {
+		"1": {
+		  "effect_value": 1.20,
+		  "dupes_required": 1,
+		  "upgrade_cost": {
+			"coins": 400,
+			"crystals": 2,
+			"dust": 12
+		  }
+		},
+		"2": {
+		  "effect_value": 1.40,
+		  "dupes_required": 1,
+		  "upgrade_cost": {
+			"coins": 850,
+			"crystals": 3,
+			"dust": 22
+		  }
+		},
+		"3": {
+		  "effect_value": 1.70,
+		  "dupes_required": 2,
+		  "upgrade_cost": {
+			"coins": 1800,
+			"crystals": 4,
+			"dust": 38
+		  }
+		},
+		"4": {
+		  "effect_value": 2.05,
+		  "dupes_required": 2,
+		  "upgrade_cost": {
+			"coins": 3600,
+			"crystals": 5,
+			"dust": 58
+		  }
+		},
+		"5": {
+		  "effect_value": 2.50,
+		  "dupes_required": 0,
+		  "upgrade_cost": {
+			"coins": 0,
+			"crystals": 0,
+			"dust": 0
+		  }
+		}
+	  },
+	  "unlock_type": "boss_kill",
+	  "unlock_value": 3,
+	  "drop_weight": 35,
+	  "salvage_dust": 28
+	},
+
+	"idle_battery": {
+	  "title": "Idle Battery",
+	  "group": "offline",
+	  "rarity": "epic",
+	  "icon": "res://assets/relics/idle_battery.png",
+	  "description": "Increases offline rewards.",
+	  "max_rank": 5,
+	  "effect_type": "offline_gain_mult",
+	  "effect_format": "multiplier",
+	  "rank_data": {
+		"1": {
+		  "effect_value": 1.20,
+		  "dupes_required": 1,
+		  "upgrade_cost": {
+			"coins": 350,
+			"crystals": 2,
+			"dust": 12
+		  }
+		},
+		"2": {
+		  "effect_value": 1.35,
+		  "dupes_required": 1,
+		  "upgrade_cost": {
+			"coins": 700,
+			"crystals": 3,
+			"dust": 22
+		  }
+		},
+		"3": {
+		  "effect_value": 1.55,
+		  "dupes_required": 2,
+		  "upgrade_cost": {
+			"coins": 1500,
+			"crystals": 4,
+			"dust": 36
+		  }
+		},
+		"4": {
+		  "effect_value": 1.80,
+		  "dupes_required": 2,
+		  "upgrade_cost": {
+			"coins": 3000,
+			"crystals": 5,
+			"dust": 54
+		  }
+		},
+		"5": {
+		  "effect_value": 2.10,
+		  "dupes_required": 0,
+		  "upgrade_cost": {
+			"coins": 0,
+			"crystals": 0,
+			"dust": 0
+		  }
+		}
+	  },
+	  "unlock_type": "depth",
+	  "unlock_value": 250,
+	  "drop_weight": 30,
+	  "salvage_dust": 26
+	}
+  }
+}

@@ -168,6 +168,12 @@ func BuildCleanSaveData():
 		"claimed_ids": [],
 		"completed_ids": []
 	}
+	res["relic_inv"]={
+			"equipped_ids" = [],
+			"owned" = {},
+			"dust"= 18,
+			"unlocked_slots"= 2
+		}
 	return res
 
 
