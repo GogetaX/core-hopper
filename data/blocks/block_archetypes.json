@@ -1,92 +1,92 @@
 {
   "dirt": {
-    "name": "Dirt",
-    "hp_multiplier": 1.0,
-    "reward_type": "coins",
-    "reward_amount": 1,
-    "rarity": "common",
-    "color": "brown",
-    "tags": ["basic", "soft"]
+	"name": "Dirt",
+	"hp_multiplier": 1.0,
+	"reward_type": "coins",
+	"reward_amount": 1,
+	"rarity": "common",
+	"color": "brown",
+	"tags": ["basic", "soft"]
   },
   "soft_stone": {
-    "name": "Soft Stone",
-    "hp_multiplier": 1.35,
-    "reward_type": "coins",
-    "reward_amount": 2,
-    "rarity": "common",
-    "color": "gray",
-    "tags": ["stone"]
+	"name": "Soft Stone",
+	"hp_multiplier": 1.35,
+	"reward_type": "coins",
+	"reward_amount": 2,
+	"rarity": "common",
+	"color": "gray",
+	"tags": ["stone"]
   },
   "coal": {
-    "name": "Coal Vein",
-    "hp_multiplier": 1.6,
-    "reward_type": "coins",
-    "reward_amount": 3,
-    "rarity": "common",
-    "color": "dark_gray",
-    "tags": ["ore"]
+	"name": "Coal Vein",
+	"hp_multiplier": 1.6,
+	"reward_type": "coins",
+	"reward_amount": 3,
+	"rarity": "common",
+	"color": "dark_gray",
+	"tags": ["ore"]
   },
   "iron_ore": {
-    "name": "Iron Ore",
-    "hp_multiplier": 2.0,
-    "reward_type": "coins",
-    "reward_amount": 5,
-    "rarity": "uncommon",
-    "color": "steel",
-    "tags": ["ore", "metal"]
+	"name": "Iron Ore",
+	"hp_multiplier": 2.0,
+	"reward_type": "coins",
+	"reward_amount": 5,
+	"rarity": "uncommon",
+	"color": "steel",
+	"tags": ["ore", "metal"]
   },
   "copper_ore": {
-    "name": "Copper Ore",
-    "hp_multiplier": 1.8,
-    "reward_type": "coins",
-    "reward_amount": 5,
-    "rarity": "uncommon",
-    "color": "orange",
-    "tags": ["ore", "metal"]
+	"name": "Copper Ore",
+	"hp_multiplier": 1.8,
+	"reward_type": "coins",
+	"reward_amount": 5,
+	"rarity": "uncommon",
+	"color": "orange",
+	"tags": ["ore", "metal"]
   },
   "crystal_shard": {
-    "name": "Crystal Shard",
-    "hp_multiplier": 2.4,
-    "reward_type": "crystals",
-    "reward_amount": 1,
-    "rarity": "rare",
-    "color": "cyan",
-    "tags": ["crystal"]
+	"name": "Crystal Shard",
+	"hp_multiplier": 2.4,
+	"reward_type": "crystals",
+	"reward_amount": 1,
+	"rarity": "rare",
+	"color": "cyan",
+	"tags": ["crystal"]
   },
   "rare_vein": {
-    "name": "Rare Vein",
-    "hp_multiplier": 3.0,
-    "reward_type": "crystals",
-    "reward_amount": 3,
-    "rarity": "rare",
-    "color": "purple",
-    "tags": ["vein", "rare"]
+	"name": "Rare Vein",
+	"hp_multiplier": 3.0,
+	"reward_type": "crystals",
+	"reward_amount": 3,
+	"rarity": "rare",
+	"color": "purple",
+	"tags": ["vein", "rare"]
   },
   "energy_pocket": {
-    "name": "Energy Pocket",
-    "hp_multiplier": 2.8,
-    "reward_type": "energy",
-    "reward_amount": 1,
-    "rarity": "rare",
-    "color": "green",
-    "tags": ["energy"]
+	"name": "Energy Pocket",
+	"hp_multiplier": 2.8,
+	"reward_type": "energy",
+	"reward_amount": 1,
+	"rarity": "rare",
+	"color": "green",
+	"tags": ["energy"]
   },
   "obsidian": {
-    "name": "Obsidian",
-    "hp_multiplier": 4.0,
-    "reward_type": "coins",
-    "reward_amount": 10,
-    "rarity": "epic",
-    "color": "black",
-    "tags": ["hard", "stone"]
+	"name": "Obsidian",
+	"hp_multiplier": 4.0,
+	"reward_type": "coins",
+	"reward_amount": 10,
+	"rarity": "epic",
+	"color": "black",
+	"tags": ["hard", "stone"]
   },
   "core_fragment": {
-    "name": "Core Fragment",
-    "hp_multiplier": 5.5,
-    "reward_type": "crystals",
-    "reward_amount": 8,
-    "rarity": "epic",
-    "color": "gold",
-    "tags": ["core", "fragment"]
+	"name": "Core Fragment",
+	"hp_multiplier": 5.5,
+	"reward_type": "crystals",
+	"reward_amount": 8,
+	"rarity": "epic",
+	"color": "gold",
+	"tags": ["core", "fragment"]
   }
 }

@@ -50,13 +50,14 @@ func show_tab(tab_name:String,data:Dictionary) -> void:
 	
 	if tab_name == "SHOW_RELIC_INV":
 		current_screen.InitCurPopupData(data)
-	elif tab_name == "SHOW_CHEST_DROP":
-		current_screen.InitChest(data)
+	
 		
 	screen_host.add_child(current_screen)
 	
 	if tab_name == "SHOW_OFFLINE_REWARD":
 		current_screen.InitOfflineReward(data)
+	elif tab_name == "SHOW_CHEST_DROP":
+		current_screen.InitChest(data)
 	
 	
 	

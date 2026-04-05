@@ -470,7 +470,6 @@ func _ApplyDamageToFrontBlock(lane_index: int, damage: float, is_tap_damage: boo
 	var current_block = lane.block_data[0]
 
 	if bool(current_block.get("is_boss", false)):
-		# relic-only boss bonus, like titan_shard
 		damage = GlobalStats.ApplyBossDamageMultiplier(damage)
 
 		var damage_result := _GetBossDamageResult(current_block, damage, is_tap_damage)
@@ -483,6 +482,10 @@ func _ApplyDamageToFrontBlock(lane_index: int, damage: float, is_tap_damage: boo
 				str(damage_result.get("reason", ""))
 			)
 			return false
+
+	var min_hit_damage := float(current_block.get("min_hit_damage", 0.0))
+	if min_hit_damage > 0.0 and damage < min_hit_damage:
+		return false
 
 	if damage <= 0.0:
 		return false
@@ -499,12 +502,11 @@ func _ApplyDamageToFrontBlock(lane_index: int, damage: float, is_tap_damage: boo
 	var destroyed_uid := str(current_block.uid)
 	block_destroyed.emit(lane_index, destroyed_uid)
 
-	if current_block.has("is_boss") && current_block.is_boss:
+	if current_block.has("is_boss") and current_block.is_boss:
 		GlobalSave.SetTotalBossKills(1)
 
 	GlobalDailyQuest.RegisterBlockBroken(current_block.id, current_block.id)
 	_FinishFrontBlock(lane_index)
-
 	return true
 
 	

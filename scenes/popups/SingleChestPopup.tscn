@@ -66,14 +66,14 @@ custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Label2" type="Label" parent="SmartPanel/VBoxContainer" unique_id=509960664]
+[node name="harvest_from" type="Label" parent="SmartPanel/VBoxContainer" unique_id=509960664]
 layout_mode = 2
 theme_type_variation = &"LabelGray"
 text = "BOSS DEFEATED"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="ProgressHashTag" parent="SmartPanel/VBoxContainer" unique_id=713365230 instance=ExtResource("4_uy1nd")]
+[node name="enemy_name" parent="SmartPanel/VBoxContainer" unique_id=713365230 instance=ExtResource("4_uy1nd")]
 self_modulate = Color(0.30980393, 0.89411765, 1, 1)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_lrf3n")

@@ -300,7 +300,7 @@ func _load_json(path: String) -> Variant:
 	return json.data
 
 func CreateBlockForLane(depth: int, lane_index: int) -> Dictionary:
-	var band = _GetDepthBand(depth)
+	var band := get_band_for_depth(depth)
 	if band.is_empty():
 		push_error("No depth band found for depth %d" % depth)
 		return {}
@@ -315,38 +315,42 @@ func CreateBlockForLane(depth: int, lane_index: int) -> Dictionary:
 		push_error("Missing archetype for id: %s" % block_id)
 		return {}
 
-	var base_hp := int(band.base_hp)
-	var hp_multiplier := float(archetype.hp_multiplier)
-	var reward_multiplier := float(band.reward_multiplier)
-	var reward_amount_base := int(archetype.reward_amount)
+	var base_hp := float(band.get("base_hp", 1))
+	var hp_multiplier := float(archetype.get("hp_multiplier", 1.0))
+	var reward_multiplier := float(band.get("reward_multiplier", 1.0))
+	var reward_amount_base := int(archetype.get("reward_amount", 1))
 
-	var final_hp = max(1, roundi(base_hp * hp_multiplier))
-	var final_reward = max(1, roundi(reward_amount_base * reward_multiplier))
+	var band_start_depth := int(band.get("min_depth", depth))
+	var depth_in_band = max(0, depth - band_start_depth)
+	var depth_growth := float(band.get("depth_growth", 1.01))
+	var min_hit_damage := float(band.get("min_hit_damage", 0.0))
+
+	var final_hp = max(1, roundi(base_hp * hp_multiplier * pow(depth_growth, depth_in_band)))
+	var final_reward = max(1, roundi(float(reward_amount_base) * reward_multiplier))
 
 	return {
 		"uid": _BuildBlockUid(depth, lane_index),
 		"id": block_id,
-		"name": str(archetype.name),
+		"name": str(archetype.get("name", block_id)),
 		"depth": depth,
 		"lane_index": lane_index,
 		"base_hp": base_hp,
 		"hp_multiplier": hp_multiplier,
 		"max_hp": final_hp,
 		"hp": final_hp,
-		"reward_type": str(archetype.reward_type),
+		"reward_type": str(archetype.get("reward_type", "coins")),
 		"base_reward_amount": reward_amount_base,
 		"reward_multiplier": reward_multiplier,
 		"reward_amount": final_reward,
-		"rarity": str(archetype.rarity),
-		"color": str(archetype.color),
-		"tags": archetype.tags.duplicate()
+		"rarity": str(archetype.get("rarity", "common")),
+		"color": str(archetype.get("color", "gray")),
+		"tags": archetype.get("tags", []).duplicate(),
+		"depth_growth": depth_growth,
+		"min_hit_damage": min_hit_damage
 	}
 	
 func _GetDepthBand(depth: int) -> Dictionary:
-	for band in depth_bands:
-		if depth >= int(band.min_depth) and depth <= int(band.max_depth):
-			return band
-	return {}
+	return get_band_for_depth(depth)
 
 
 func _PickBlockIdFromSpawnPool(spawn_pool: Array) -> String:

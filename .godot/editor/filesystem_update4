@@ -18,3 +18,7 @@ res://scenes/components/chest_reward.tscn
 res://scenes/popups/chest_popup.gd
 res://scenes/app/main_scene.tscn
 res://scenes/app/overlay_layer.gd
+res://autoload/GlobalBlockDatabase.gd
+res://data/blocks/block_archetypes.json
+res://data/blocks/depth_bands.json
+res://autoload/GlobalDiggingProcess.gd
