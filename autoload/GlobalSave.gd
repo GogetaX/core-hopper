@@ -118,11 +118,11 @@ func BuildCleanSaveData():
 		"merge_free_slots":4
 	}
 	res["lanes"] = []
-	res["lanes"].append({"auto_dig_unlocked":true,"bot_uid":int(-1),"dig_power":1.0,"dig_speed":1.0,"lane_index":int(0),"block_data":[],"lane_depth":int(0)})
-	res["lanes"].append({"auto_dig_unlocked":false,"bot_uid":int(-1),"dig_power":1.0,"dig_speed":1.0,"lane_index":int(1),"block_data":[],"lane_depth":int(0)})
-	res["lanes"].append({"auto_dig_unlocked":false,"bot_uid":int(-1),"dig_power":1.0,"dig_speed":1.0,"lane_index":int(2),"block_data":[],"lane_depth":int(0)})
-	res["lanes"].append({"auto_dig_unlocked":false,"bot_uid":int(-1),"dig_power":1.0,"dig_speed":1.0,"lane_index":int(3),"block_data":[],"lane_depth":int(0)})
-	res["lanes"].append({"auto_dig_unlocked":false,"bot_uid":int(-1),"dig_power":1.0,"dig_speed":1.0,"lane_index":int(4),"block_data":[],"lane_depth":int(0)})
+	res["lanes"].append({"auto_dig_unlocked":true,"bot_uid":int(-1),"dig_power":1.0,"dig_speed":1.0,"lane_index":int(0),"block_data":[],"lane_depth":int(0),"last_cleared_depth":int(0)})
+	res["lanes"].append({"auto_dig_unlocked":false,"bot_uid":int(-1),"dig_power":1.0,"dig_speed":1.0,"lane_index":int(1),"block_data":[],"lane_depth":int(0),"last_cleared_depth":int(0)})
+	res["lanes"].append({"auto_dig_unlocked":false,"bot_uid":int(-1),"dig_power":1.0,"dig_speed":1.0,"lane_index":int(2),"block_data":[],"lane_depth":int(0),"last_cleared_depth":int(0)})
+	res["lanes"].append({"auto_dig_unlocked":false,"bot_uid":int(-1),"dig_power":1.0,"dig_speed":1.0,"lane_index":int(3),"block_data":[],"lane_depth":int(0),"last_cleared_depth":int(0)})
+	res["lanes"].append({"auto_dig_unlocked":false,"bot_uid":int(-1),"dig_power":1.0,"dig_speed":1.0,"lane_index":int(4),"block_data":[],"lane_depth":int(0),"last_cleared_depth":int(0)})
 	res["meta"] = {
 		"created_unix":Time.get_unix_time_from_system(),
 		"last_saved_unix":Time.get_unix_time_from_system(),

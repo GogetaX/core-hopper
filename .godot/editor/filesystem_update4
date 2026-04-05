@@ -22,3 +22,4 @@ res://autoload/GlobalBlockDatabase.gd
 res://data/blocks/block_archetypes.json
 res://data/blocks/depth_bands.json
 res://autoload/GlobalDiggingProcess.gd
+res://autoload/GlobalSave.gd
