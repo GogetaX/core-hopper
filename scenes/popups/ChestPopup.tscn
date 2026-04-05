@@ -101,3 +101,4 @@ text = "4 PENDING REWARDS"
 horizontal_alignment = 1
 
 [connection signal="BtnPressed" from="SmartPanel/ClosePopup" to="." method="_on_close_popup_btn_pressed"]
+[connection signal="OnPressed" from="SmartPanel/VBoxContainer/OpenAllBtn" to="." method="_on_open_all_btn_on_pressed"]

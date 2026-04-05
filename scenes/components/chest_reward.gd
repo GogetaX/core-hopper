@@ -3,9 +3,11 @@ class_name ChestItemClass
 signal OnPress(item_data:Dictionary)
 
 var cur_item_data = {}
+var cur_chest_id = -1
 
-func InitItem(item_data):
+func InitItem(item_data:Dictionary,chest_id:int):
 	cur_item_data = item_data
+	cur_chest_id = chest_id
 	match item_data.source_type:
 		"boss":
 			$SmartPanel/HBox/VList/source_type.text = "BOSS"
@@ -18,4 +20,4 @@ func InitItem(item_data):
 
 
 func _on_claim_btn_on_pressed() -> void:
-	OnPress.emit(cur_item_data)
+	OnPress.emit(cur_item_data,cur_chest_id)

@@ -81,7 +81,7 @@ func EvaluateReleaseStateFromDigbot():
 			GlobalSave.RemoveBotByID(orig_bot.cur_lane_data.bot_uid)
 			GlobalSave.SetTotalMerges(1)
 			GlobalSave.SyncSave()
-			print("Merge between DigBot -> DigBot")
+			#print("Merge between DigBot -> DigBot")
 		else:
 			var orig_bot_uid = orig_bot.cur_lane_data.bot_uid
 			var target_bot_uid = target_bot.cur_lane_data.bot_uid

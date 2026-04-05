@@ -13,12 +13,12 @@ offset_right = 688.0
 offset_bottom = 160.0
 script = ExtResource("1_xmg18")
 
-[node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("1_sft1r")]
+[node name="RelicContainer" parent="." unique_id=892379017 instance=ExtResource("1_sft1r")]
 layout_mode = 1
 panel_type = "INSIDE_ONLY"
 panel_color = "DISABLED"
 
-[node name="HList" type="HBoxContainer" parent="SmartPanel" unique_id=962093882]
+[node name="HList" type="HBoxContainer" parent="RelicContainer" unique_id=962093882]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -31,41 +31,41 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
 
-[node name="IconBG" parent="SmartPanel/HList" unique_id=1682398798 instance=ExtResource("2_xmg18")]
+[node name="IconBG" parent="RelicContainer/HList" unique_id=1682398798 instance=ExtResource("2_xmg18")]
 custom_minimum_size = Vector2(120, 100)
 layout_mode = 2
 
-[node name="VList" type="VBoxContainer" parent="SmartPanel/HList" unique_id=1480928770]
+[node name="VList" type="VBoxContainer" parent="RelicContainer/HList" unique_id=1480928770]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SmartPanel/HList/VList" unique_id=1658460484]
+[node name="HBoxContainer" type="HBoxContainer" parent="RelicContainer/HList/VList" unique_id=1658460484]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="SmartPanel/HList/VList/HBoxContainer" unique_id=1064815765]
+[node name="relic_name" type="Label" parent="RelicContainer/HList/VList/HBoxContainer" unique_id=1064815765]
 layout_mode = 2
 theme_type_variation = &"LabelTitle_White"
 theme_override_font_sizes/font_size = 48
 text = "Cracked Core"
 
-[node name="Control" type="Control" parent="SmartPanel/HList/VList/HBoxContainer" unique_id=807586565]
+[node name="Control" type="Control" parent="RelicContainer/HList/VList/HBoxContainer" unique_id=807586565]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ProgressHashTag" parent="SmartPanel/HList/VList/HBoxContainer" unique_id=713365230 instance=ExtResource("3_s1f6e")]
+[node name="ProgressHashTag" parent="RelicContainer/HList/VList/HBoxContainer" unique_id=713365230 instance=ExtResource("3_s1f6e")]
 layout_mode = 2
 text = "RELIC"
 hash_tag_type = "INSIDE_ONLY"
 
-[node name="Control2" type="Control" parent="SmartPanel/HList/VList/HBoxContainer" unique_id=269359670]
+[node name="Control2" type="Control" parent="RelicContainer/HList/VList/HBoxContainer" unique_id=269359670]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
-[node name="Control" type="Control" parent="SmartPanel/HList/VList" unique_id=78324098]
+[node name="Control" type="Control" parent="RelicContainer/HList/VList" unique_id=78324098]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label2" type="Label" parent="SmartPanel/HList/VList" unique_id=1553924428]
+[node name="relic_stat" type="Label" parent="RelicContainer/HList/VList" unique_id=1553924428]
 layout_mode = 2
 theme_type_variation = &"LabelGray"
 text = "+15% Energy Regen"

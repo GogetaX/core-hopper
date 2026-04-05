@@ -138,3 +138,4 @@ layout_mode = 2
 buy_btn_title = "CLAIM"
 
 [connection signal="BtnPressed" from="SmartPanel/VBoxContainer/HList2/ReturnBack" to="." method="_on_return_back_btn_pressed"]
+[connection signal="OnPressed" from="SmartPanel/VBoxContainer/OpenAllBtn" to="." method="_on_open_all_btn_on_pressed"]

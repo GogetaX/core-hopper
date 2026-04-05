@@ -565,6 +565,8 @@ func _HandleBossBlockFinished(finished_block: Dictionary) -> void:
 	var boss_id := str(finished_block.get("boss_id", ""))
 	var boss_name := str(finished_block.get("name", boss_id))
 
+	var is_first_kill_by_id := !GlobalBossDb.HasBossBeenKilledByID(boss_id)
+
 	var rewards = GlobalBossDb.OnBossKilled(finished_block)
 	if rewards.is_empty():
 		return
@@ -576,20 +578,12 @@ func _HandleBossBlockFinished(finished_block: Dictionary) -> void:
 
 	var relic_ids: Array = []
 
-	# future-safe if you still want boss drop handling
-	# example: relic_ids.append_array(_RollBossRelics(rewards.get("drop_table", [])))
-
-	# optional first kill random relic bonus
-	print("first boss kill 1")
-	if !GlobalBossDb.HasBossBeenKilledByID(boss_id):
+	if is_first_kill_by_id:
 		var bonus_relic_id := GlobalRelicDb.GetRandomRelicID()
-		print("first boss kill 2")
 		if bonus_relic_id != "":
-			print("first boss kill 3: ",bonus_relic_id)
 			relic_ids.append(bonus_relic_id)
 
 	rewards["relic_ids"] = relic_ids
-
 
 	var chest_data = GlobalRewardChest.MakeBossRewardChest(boss_id, boss_name, rewards)
 	GlobalRewardChest.AddChest(chest_data)
