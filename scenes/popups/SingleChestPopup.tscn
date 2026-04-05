@@ -1,0 +1,140 @@
+[gd_scene format=3 uid="uid://e3civjg1g67c"]
+
+[ext_resource type="Script" uid="uid://cxrp41dxc1d56" path="res://scenes/popups/single_chest_popup.gd" id="1_7yeaw"]
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="2_e04dx"]
+[ext_resource type="Texture2D" uid="uid://dkipcb22lyo1q" path="res://art/ui/arrow_left.png" id="3_8hyjs"]
+[ext_resource type="PackedScene" uid="uid://b2qghfcexq01t" path="res://scenes/components/icon_bg_circle.tscn" id="3_kl5vh"]
+[ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="4_uy1nd"]
+[ext_resource type="FontVariation" uid="uid://bbgny2bpigrdg" path="res://fonts/RES_JakaraSans_Bold.tres" id="5_lrf3n"]
+[ext_resource type="PackedScene" uid="uid://njxlv6dxrlwj" path="res://scenes/screens/progress/smart_button_buy.tscn" id="6_aw6ry"]
+[ext_resource type="PackedScene" uid="uid://t4mnroqon2jo" path="res://scenes/components/chest_animated_icon.tscn" id="6_e04dx"]
+[ext_resource type="PackedScene" uid="uid://hgf1ed6wts6n" path="res://scenes/components/reward_currency.tscn" id="8_kl5vh"]
+[ext_resource type="PackedScene" uid="uid://dabmthxba6ecu" path="res://scenes/components/reward_item.tscn" id="8_wcb1a"]
+
+[node name="SingleChestPopup" type="Control" unique_id=1294155484]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("1_7yeaw")
+
+[node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("2_e04dx")]
+layout_mode = 1
+panel_type = "INSIDE_ONLY"
+panel_color = "GOLD"
+darken_bg = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SmartPanel" unique_id=274183451]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 20
+
+[node name="HList2" type="HBoxContainer" parent="SmartPanel/VBoxContainer" unique_id=61304949]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 20
+
+[node name="ReturnBack" parent="SmartPanel/VBoxContainer/HList2" unique_id=1682398798 instance=ExtResource("3_kl5vh")]
+layout_mode = 2
+panel_type = "INSIDE_ONLY"
+panel_color = "BLUE"
+icon = ExtResource("3_8hyjs")
+as_button = true
+
+[node name="Label" type="Label" parent="SmartPanel/VBoxContainer/HList2" unique_id=2046432609]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_White"
+text = "CHEST OPENED"
+
+[node name="Control2" type="Control" parent="SmartPanel/VBoxContainer" unique_id=841437587]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label2" type="Label" parent="SmartPanel/VBoxContainer" unique_id=509960664]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "BOSS DEFEATED"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ProgressHashTag" parent="SmartPanel/VBoxContainer" unique_id=713365230 instance=ExtResource("4_uy1nd")]
+self_modulate = Color(0.30980393, 0.89411765, 1, 1)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_lrf3n")
+theme_override_font_sizes/font_size = 42
+text = "Stone Titan"
+horizontal_alignment = 1
+hash_tag_color = "BLUE"
+no_bg = true
+
+[node name="Control" type="Control" parent="SmartPanel/VBoxContainer" unique_id=610809796]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="ChestControl" type="Control" parent="SmartPanel/VBoxContainer" unique_id=1097045702]
+custom_minimum_size = Vector2(0, 600)
+layout_mode = 2
+
+[node name="ChestAnimatedIcon" parent="SmartPanel/VBoxContainer/ChestControl" unique_id=523060189 instance=ExtResource("6_e04dx")]
+custom_minimum_size = Vector2(600, 600)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -108.5
+offset_top = -115.0
+offset_right = 108.5
+offset_bottom = 115.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CurrencyList" type="HFlowContainer" parent="SmartPanel/VBoxContainer" unique_id=1294879154]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+alignment = 1
+
+[node name="RewardCurrency" parent="SmartPanel/VBoxContainer/CurrencyList" unique_id=939363394 instance=ExtResource("8_kl5vh")]
+layout_mode = 2
+
+[node name="RewardCurrency2" parent="SmartPanel/VBoxContainer/CurrencyList" unique_id=1891475497 instance=ExtResource("8_kl5vh")]
+layout_mode = 2
+currency_type = "CRYSTALS"
+
+[node name="Scroll" type="ScrollContainer" parent="SmartPanel/VBoxContainer" unique_id=1157295857]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RewardContainer" type="VBoxContainer" parent="SmartPanel/VBoxContainer/Scroll" unique_id=84892650]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="RewardItem" parent="SmartPanel/VBoxContainer/Scroll/RewardContainer" unique_id=2083054868 instance=ExtResource("8_wcb1a")]
+layout_mode = 2
+
+[node name="OpenAllBtn" parent="SmartPanel/VBoxContainer" unique_id=506836531 instance=ExtResource("6_aw6ry")]
+layout_mode = 2
+buy_btn_title = "CLAIM"
+
+[connection signal="BtnPressed" from="SmartPanel/VBoxContainer/HList2/ReturnBack" to="." method="_on_return_back_btn_pressed"]

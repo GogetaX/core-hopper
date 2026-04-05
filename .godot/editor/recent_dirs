@@ -1,5 +1,6 @@
-res://scenes/screens/dig/
 res://scenes/components/
+res://art/chests/
+res://scenes/screens/dig/
 res://autoload/
 res://art/relics/
 res://scenes/screens/progress/

@@ -41,6 +41,8 @@ func show_tab(tab_name:String,data:Dictionary) -> void:
 			new_screen = preload("res://scenes/popups/RelicInvPopup.tscn")
 		"SHOW_CHESTS":
 			new_screen = preload("res://scenes/popups/ChestPopup.tscn")
+		"SHOW_CHEST_DROP":
+			new_screen = preload("res://scenes/popups/SingleChestPopup.tscn")
 		_:
 			print_debug("unknown tab: ",tab_name)
 	current_screen = new_screen.instantiate()
@@ -48,6 +50,8 @@ func show_tab(tab_name:String,data:Dictionary) -> void:
 	
 	if tab_name == "SHOW_RELIC_INV":
 		current_screen.InitCurPopupData(data)
+	elif tab_name == "SHOW_CHEST_DROP":
+		current_screen.InitChest(data)
 		
 	screen_host.add_child(current_screen)
 	

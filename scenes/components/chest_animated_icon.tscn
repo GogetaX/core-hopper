@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://t4mnroqon2jo"]
+
+[ext_resource type="Texture2D" uid="uid://bleaq7fw0qioq" path="res://art/chests/boss_chest.tres" id="1_kqi3r"]
+[ext_resource type="Script" uid="uid://bx3obckgqq40q" path="res://scenes/components/chest_animated_icon.gd" id="1_s31df"]
+[ext_resource type="Texture2D" uid="uid://daon63dkc3rg8" path="res://art/particles/dust.png" id="2_1g2n3"]
+
+[sub_resource type="Gradient" id="Gradient_s31df"]
+offsets = PackedFloat32Array(0, 0.14716981, 0.81509435, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2ovs5"]
+gradient = SubResource("Gradient_s31df")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xssh4"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(80, 60, 1)
+angle_min = 1.0728835e-05
+angle_max = 180.00002
+gravity = Vector3(0, -98, 0)
+scale_min = 0.19999999
+scale_max = 0.5
+color = Color(1.075888, 0.26749146, 1.2982324, 0.49300003)
+color_ramp = SubResource("GradientTexture1D_2ovs5")
+
+[node name="ChestAnimatedIcon" type="Control" unique_id=523060189]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 217.0
+offset_bottom = 230.0
+script = ExtResource("1_s31df")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=120194079]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_kqi3r")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1012111880]
+position = Vector2(112, 129)
+amount = 10
+texture = ExtResource("2_1g2n3")
+process_material = SubResource("ParticleProcessMaterial_xssh4")
+
+[connection signal="resized" from="." to="." method="_on_resized"]

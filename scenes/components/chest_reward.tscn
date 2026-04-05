@@ -78,3 +78,5 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 buy_btn_title = "OPEN"
+
+[connection signal="OnPressed" from="SmartPanel/HBox/VList/HList/ClaimBtn" to="." method="_on_claim_btn_on_pressed"]

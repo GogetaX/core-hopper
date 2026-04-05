@@ -1,13 +1,13 @@
-Node
 Control
 HBoxContainer
-VBoxContainer
-TextureRect
 Label
+VBoxContainer
 ScrollContainer
 HFlowContainer
-Timer
 GPUParticles2D
+TextureRect
+Node
+Timer
 AnimationPlayer
 Sprite2D
 Panel
