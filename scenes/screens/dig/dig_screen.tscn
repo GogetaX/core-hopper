@@ -701,4 +701,5 @@ script = ExtResource("19_ddijn")
 [connection signal="timeout" from="HList3/IncomePanel/VList/income_ps/incone_counter" to="HList3/IncomePanel/VList/income_ps" method="_on_incone_counter_timeout"]
 [connection signal="BtnPressed" from="HList5/WatchAdBtn" to="." method="_on_watch_ad_btn_btn_pressed"]
 [connection signal="BtnPressed" from="HList5/ShowChestsBtn" to="." method="_on_show_chests_btn_btn_pressed"]
+[connection signal="tree_exiting" from="HList5/ShowChestsBtn/NotifForChests" to="HList5/ShowChestsBtn/NotifForChests" method="_on_tree_exiting"]
 [connection signal="BtnPressed" from="HList5/ViewQuestsBtn" to="." method="_on_view_quests_btn_btn_pressed"]

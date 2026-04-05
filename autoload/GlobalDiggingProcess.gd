@@ -228,13 +228,21 @@ func _FinishFrontBlock(lane_index: int) -> void:
 		return
 
 	var finished_block = lane.block_data[0]
+	var finished_depth := int(finished_block.get("depth", int(lane.lane_depth)))
+	lane.last_cleared_depth = max(
+		int(lane.get("last_cleared_depth", -1)),
+		finished_depth
+	)
 
 	if bool(finished_block.get("is_boss", false)):
 		_HandleBossBlockFinished(finished_block)
 	else:
 		var final_coins = finished_block.reward_amount
+
 		if finished_block.reward_type == "coins":
-			final_coins = int(round(finished_block.reward_amount * GlobalStats.GetCoinYieldMultiplier()))
+			final_coins = int(round(
+				finished_block.reward_amount * GlobalStats.GetCoinYieldMultiplier()
+			))
 
 		GlobalSave.AddCurrency(
 			str(finished_block.reward_type),
@@ -243,6 +251,7 @@ func _FinishFrontBlock(lane_index: int) -> void:
 
 	lane.lane_depth = int(lane.lane_depth) + 1
 	GlobalSave.SetGlobalDepth(lane.lane_depth)
+
 	lane.block_data.remove_at(0)
 
 	if lane.block_data.is_empty():
@@ -571,9 +580,12 @@ func _HandleBossBlockFinished(finished_block: Dictionary) -> void:
 	# example: relic_ids.append_array(_RollBossRelics(rewards.get("drop_table", [])))
 
 	# optional first kill random relic bonus
+	print("first boss kill 1")
 	if !GlobalBossDb.HasBossBeenKilledByID(boss_id):
 		var bonus_relic_id := GlobalRelicDb.GetRandomRelicID()
+		print("first boss kill 2")
 		if bonus_relic_id != "":
+			print("first boss kill 3: ",bonus_relic_id)
 			relic_ids.append(bonus_relic_id)
 
 	rewards["relic_ids"] = relic_ids

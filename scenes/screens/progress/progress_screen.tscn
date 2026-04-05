@@ -5,9 +5,13 @@
 [ext_resource type="PackedScene" uid="uid://bl0egobmu4a73" path="res://scenes/screens/progress/tab_btn.tscn" id="1_gg677"]
 [ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="3_4nere"]
 [ext_resource type="PackedScene" uid="uid://bsv1pqeyc0h4m" path="res://scenes/screens/progress/progress_skill.tscn" id="4_0fuef"]
+[ext_resource type="PackedScene" uid="uid://duvnpggfd3idr" path="res://scenes/screens/dig/notif_for_chests.tscn" id="4_a7wrj"]
 [ext_resource type="Script" uid="uid://bloevasmaqx74" path="res://scenes/label_data_scripts/total_dps.gd" id="5_uqert"]
+[ext_resource type="Script" uid="uid://drbgwydlww1ma" path="res://scenes/components/notif_for_upgrade_tab.gd" id="5_w4vm7"]
 [ext_resource type="Script" uid="uid://dy7foox2mx1bs" path="res://scenes/label_data_scripts/mining_speed.gd" id="6_k3jfa"]
 [ext_resource type="PackedScene" uid="uid://cyrssis6jwdc2" path="res://scenes/screens/progress/progress_hash_tag_with_icon.tscn" id="6_neoah"]
+[ext_resource type="Script" uid="uid://dak5u54k17bns" path="res://scenes/components/NotifForQuestTab.gd" id="6_w4vm7"]
+[ext_resource type="Script" uid="uid://bcqxenuod0kjc" path="res://scenes/components/NotifForRelicTab.gd" id="7_60kmq"]
 [ext_resource type="Script" uid="uid://d16g0t4dgw61l" path="res://scenes/label_data_scripts/drop_multiplayer.gd" id="7_eprg4"]
 [ext_resource type="PackedScene" uid="uid://cvul7nt3js8au" path="res://scenes/screens/progress/quest_item.tscn" id="7_u200v"]
 [ext_resource type="Script" uid="uid://knj8e2s80rh0" path="res://scenes/label_data_scripts/crit_damage.gd" id="8_ikkfs"]
@@ -161,17 +165,26 @@ panel_color = "BLUE"
 default_selected = true
 notif_counter = 5
 
+[node name="NotifForUpgradeTab" parent="ProgressTopPanel/VList/Tabs/TabList/TAB_Upgrades" unique_id=607369676 instance=ExtResource("4_a7wrj")]
+script = ExtResource("5_w4vm7")
+
 [node name="TAB_Quests" parent="ProgressTopPanel/VList/Tabs/TabList" unique_id=431081608 instance=ExtResource("1_gg677")]
 layout_mode = 2
 size_flags_horizontal = 3
 tab_name = "QUESTS"
 panel_color = "PURPLE"
 
+[node name="NotifForQuestTab" parent="ProgressTopPanel/VList/Tabs/TabList/TAB_Quests" unique_id=1747954780 instance=ExtResource("4_a7wrj")]
+script = ExtResource("6_w4vm7")
+
 [node name="TAB_Relics" parent="ProgressTopPanel/VList/Tabs/TabList" unique_id=226629524 instance=ExtResource("1_gg677")]
 layout_mode = 2
 size_flags_horizontal = 3
 tab_name = "RELICS"
 panel_color = "GOLD"
+
+[node name="NotifForRelicTab" parent="ProgressTopPanel/VList/Tabs/TabList/TAB_Relics" unique_id=1391386783 instance=ExtResource("4_a7wrj")]
+script = ExtResource("7_60kmq")
 
 [node name="Control2" type="Control" parent="ProgressTopPanel/VList" unique_id=1396446115]
 custom_minimum_size = Vector2(0, 20)
@@ -611,8 +624,11 @@ button_color = "GOLD"
 btn_text = "Open relic inventory"
 
 [connection signal="OnPressed" from="ProgressTopPanel/VList/Tabs/TabList/TAB_Upgrades" to="." method="_on_tab_upgrades_on_pressed"]
+[connection signal="tree_exiting" from="ProgressTopPanel/VList/Tabs/TabList/TAB_Upgrades/NotifForUpgradeTab" to="ProgressTopPanel/VList/Tabs/TabList/TAB_Upgrades/NotifForUpgradeTab" method="_on_tree_exiting"]
 [connection signal="OnPressed" from="ProgressTopPanel/VList/Tabs/TabList/TAB_Quests" to="." method="_on_tab_quests_on_pressed"]
+[connection signal="tree_exiting" from="ProgressTopPanel/VList/Tabs/TabList/TAB_Quests/NotifForQuestTab" to="ProgressTopPanel/VList/Tabs/TabList/TAB_Quests/NotifForQuestTab" method="_on_tree_exiting"]
 [connection signal="OnPressed" from="ProgressTopPanel/VList/Tabs/TabList/TAB_Relics" to="." method="_on_tab_relics_on_pressed"]
+[connection signal="tree_exiting" from="ProgressTopPanel/VList/Tabs/TabList/TAB_Relics/NotifForRelicTab" to="ProgressTopPanel/VList/Tabs/TabList/TAB_Relics/NotifForRelicTab" method="_on_tree_exiting"]
 [connection signal="resized" from="Menu_Upgrades/VList" to="." method="UpgradeListResized"]
 [connection signal="resized" from="Menu_Quests/QuestVList" to="." method="_on_quest_v_list_resized"]
 [connection signal="resized" from="Menu_Relics/RelicVList/RelicVList" to="." method="_on_relic_v_list_resized"]

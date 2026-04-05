@@ -123,9 +123,11 @@ func EvaluateReleaseStateFromMerge():
 						GlobalSave.SyncSave()
 						#print("mouse in, should swap between them")
 		else:
-			print("mouse in, but merge bot is Locked.")
+			return
+			#print("mouse in, but merge bot is Locked.")
 	elif Global.cur_drag_data.has("at_self_dig_bot"):
-		print("mouse in at same DigBot, should not do anything.")
+		#print("mouse in at same DigBot, should not do anything.")
+		return
 	elif Global.cur_drag_data.has("at_other_dig_bot"):
 		var dig_node = Global.cur_drag_data.at_other_dig_bot as DigBotClass
 		var is_mouse_in = dig_node.get_global_rect().has_point(get_viewport().get_mouse_position())
@@ -143,14 +145,15 @@ func EvaluateReleaseStateFromMerge():
 			else:
 				var bot_data = GlobalSave.GetBotDataFromUID(dig_node.cur_lane_data.bot_uid)
 				if bot_data == {}:
-					print("has uid but no data about it?! ",dig_node.cur_lane_data.bot_uid)
+					return
+					#print("has uid but no data about it?! ",dig_node.cur_lane_data.bot_uid)
 				elif bot_data.level == Global.cur_dragging_node.cur_dragging_merge_node.cur_bot_data.level:
 					var source_merge : MergeItemClass = merge_drag_node.cur_dragging_merge_node
 					var target_digbot : DigBotClass = dig_node
 					GlobalSave.MergeFromMergeToDigBot(source_merge.cur_bot_data.uid,target_digbot.cur_lane_data.bot_uid)
 					GlobalSave.SetTotalMerges(1)
 					GlobalSave.SyncSave()
-					print("mouse in, should merge from MergeItem -> BotItem")
+					#print("mouse in, should merge from MergeItem -> BotItem")
 				else:
 					#print("mouse in, should swap MergeItem -> BotItem")
 					var selected_merge_item : MergeItemClass = Global.cur_dragging_node.cur_dragging_merge_node

@@ -75,3 +75,8 @@ func OnBtnPress(btn_node:Control):
 	t.tween_property($Panel,"scale",Vector2(0.9,0.9),0.05)
 	t.tween_property($Panel,"scale",Vector2(1.0,1.0),0.05)
 	BtnPressed.emit()
+
+func AnimateCurrencyIn():
+	var t = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	t.tween_property($Panel,"scale",Vector2(1.15,1.15),0.1)
+	t.tween_property($Panel,"scale",Vector2(1.0,1.0),0.1)

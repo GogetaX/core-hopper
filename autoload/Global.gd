@@ -4,6 +4,7 @@ const ACTIVE_DRAG_AFTER_DISTANCE = 30
 
 var merge_drag_at_other_merge_slot:MergeItemClass= null
 var cur_dragging_node = null
+var chest_btn_node = null
 
 
 #On what kind of node the drag is in

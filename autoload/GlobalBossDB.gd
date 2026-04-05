@@ -103,7 +103,18 @@ func HasBossBeenKilledAtDepth(depth: int) -> bool:
 
 func HasBossBeenKilledByID(boss_id: String) -> bool:
 	_EnsureBossProgress()
-	return boss_id in GlobalSave.save_data.boss_progress.killed_ids
+
+	var id := boss_id.strip_edges()
+	
+	if id == "":
+		return false
+
+	var killed_ids = GlobalSave.save_data.get("boss_progress", {}).get("killed_ids", [])
+	print("CHECK boss_id=", id, " killed_ids=", killed_ids)
+	if typeof(killed_ids) != TYPE_ARRAY:
+		return false
+
+	return killed_ids.has(id)
 
 
 func MarkBossKilled(depth: int, boss_id: String) -> void:

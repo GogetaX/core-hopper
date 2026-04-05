@@ -28,17 +28,19 @@ signal OnPressed()
 	get:
 		return default_selected
 		
-@export var notif_counter := 4:
-	set(value):
-		notif_counter = value
-		if is_node_ready():
-			_ready()
-	get:
-		return notif_counter
-
+@export var notif_counter := 4
 var _is_selected = false
 var already_loaded = false
 
+
+func SetNotifCounter(count:int):
+	notif_counter = count
+	if notif_counter == 0:
+		$HList/VBoxContainer/SmallNotifCounter.visible = false
+	else:
+		$HList/VBoxContainer/SmallNotifCounter.visible = true
+		$HList/VBoxContainer/SmallNotifCounter.notif_count = notif_counter
+	
 func _ready() -> void:
 	$HList/Label.text = tab_name
 	$SmartPanel.panel_color = panel_color

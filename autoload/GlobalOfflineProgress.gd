@@ -28,17 +28,17 @@ func ProcessOfflineProgress() -> Dictionary:
 	result["did_collect"] = true
 	result["offline_seconds"] = offline_seconds
 	result["capped_seconds"] = capped_seconds
-	
+
+	# keep your current final coin multiplier behavior
 	result.coins = int(result.coins * GlobalStats.GetCoinYieldMultiplier())
-	
+
 	return result
 
 
-func GetOfflineCapSeconds(plus_level:int = 0) -> int:
-	var level := int(GlobalSave.save_data.global_upgrades.offline_gain_level)+plus_level
-	var res : int = OFFLINE_BASE_CAP_SECONDS + (level * 1800)
-	return int(res*GlobalStats.GetUpgradeValue("offline_efficiency"))
-
+func GetOfflineCapSeconds(plus_level: int = 0) -> int:
+	var level := int(GlobalSave.save_data.global_upgrades.offline_gain_level) + plus_level
+	var res: int = OFFLINE_BASE_CAP_SECONDS + (level * 1800)
+	return int(res * GlobalStats.GetUpgradeValue("offline_efficiency"))
 
 func GetOfflineEfficiency() -> float:
 	var level := int(GlobalSave.save_data.global_upgrades.offline_gain_level)
@@ -62,13 +62,18 @@ func _SimulateOfflineSeconds(seconds: int, efficiency: float) -> Dictionary:
 		if int(lane.bot_uid) == -1:
 			continue
 
+		var harvest_depth := int(lane.get("last_cleared_depth", -1))
+		if harvest_depth < 0:
+			continue
+
 		var bot = _FindBotByUid(int(lane.bot_uid))
 		if bot.is_empty():
 			continue
 
 		var level := int(bot.get("level", 1))
 		var lane_dps := GlobalStats.GetBotExpectedDps(level) * efficiency
-		_SimulateLaneOffline(lane_index, lane_dps, seconds, rewards)
+
+		_HarvestLaneOffline(lane_index, harvest_depth, lane_dps, seconds, rewards)
 
 	return rewards
 
@@ -115,7 +120,50 @@ func _SimulateLaneOffline(lane_index: int, lane_dps: float, seconds: int, reward
 		else:
 			block.hp = block_hp - remaining_damage
 			remaining_damage = 0.0
-			
+
+
+func _HarvestLaneOffline(
+	lane_index: int,
+	harvest_depth: int,
+	lane_dps: float,
+	seconds: int,
+	rewards: Dictionary
+) -> void:
+	if lane_dps <= 0.0 or seconds <= 0:
+		return
+
+	# IMPORTANT:
+	# Use the normal block database directly.
+	# This avoids boss generation and keeps offline as passive harvest only.
+	var sample_block := GlobalBlockDatabase.CreateBlockForLane(harvest_depth, lane_index)
+	if sample_block.is_empty():
+		return
+
+	var virtual_hp = max(
+		1.0,
+		float(sample_block.get("max_hp", sample_block.get("hp", 1.0)))
+	)
+
+	var reward_per_block := float(sample_block.get("reward_amount", 0))
+	if reward_per_block <= 0.0:
+		return
+
+	var total_damage := lane_dps * float(seconds)
+	var harvest_ratio = total_damage / virtual_hp
+	if harvest_ratio <= 0.0:
+		return
+
+	var reward_type := str(sample_block.get("reward_type", "coins"))
+	var total_reward = max(0, roundi(reward_per_block * harvest_ratio))
+
+	if total_reward <= 0:
+		return
+
+	if rewards.has(reward_type):
+		rewards[reward_type] += total_reward
+	else:
+		rewards[reward_type] = total_reward
+
 func _FindBotByUid(bot_uid: int) -> Dictionary:
 	for bot in GlobalSave.save_data.bot_inventory.bot_db:
 		if int(bot.uid) == bot_uid:

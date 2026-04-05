@@ -10,7 +10,7 @@
 
 [sub_resource type="Gradient" id="Gradient_c4gli"]
 offsets = PackedFloat32Array(0, 0.07467532, 0.24025974, 1)
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.425, 1, 1, 1, 0.51500005, 1, 1, 1, 0)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_at2nx"]
 gradient = SubResource("Gradient_c4gli")
@@ -26,6 +26,7 @@ spread = 180.0
 gravity = Vector3(0, 200, 0)
 scale_min = 0.099999994
 scale_max = 0.19999999
+color = Color(1.1638972, 1.1638972, 1.1638972, 0.878)
 color_ramp = SubResource("GradientTexture1D_at2nx")
 
 [node name="Material" type="Control" unique_id=812286270]
@@ -141,11 +142,12 @@ value = 75.0
 show_percentage = false
 
 [node name="Particles" type="Node2D" parent="." unique_id=2081440569]
+visible = false
 position = Vector2(75, 79)
 
 [node name="DirtParticles" type="GPUParticles2D" parent="Particles" unique_id=1320681379]
-visible = false
 z_as_relative = false
+position = Vector2(0, 21)
 amount = 10
 texture = ExtResource("3_c4gli")
 lifetime = 0.5

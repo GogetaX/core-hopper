@@ -1,5 +1,6 @@
 @tool
 extends Control
+class_name CurrencyIconClass
 
 @export_enum("CRYSTAL_BIG_ANIMATED","COIN_SMALL","ENERGY_SMALL","ENERGY_SMALL_ANIMATED","CRYSTAL_SMALL") var icon_type := "CRYSTAL_BIG_ANIMATED":
 	set(value):
