@@ -112,7 +112,7 @@ func EnsureUpgradeSchema() -> void:
 
 func BuildCleanSaveData():
 	var res = {}
-	res["currencies"] = {"coins":200,"crystals":200,"energy":0} #default coins 0
+	res["currencies"] = {"coins":200,"crystals":30000,"energy":0} #default coins 0
 	res["bot_inventory"]={
 		"bot_db": [],
 		"merge_free_slots":4

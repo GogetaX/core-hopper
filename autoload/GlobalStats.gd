@@ -212,3 +212,6 @@ func GetOfflineGainMultiplier() -> float:
 
 func ApplyBossDamageMultiplier(base_damage: float) -> float:
 	return max(0.0, float(base_damage) * GetBossDamageMultiplier())
+
+func GetFreeMergeSlots():
+	return GlobalSave.save_data.bot_inventory.merge_free_slots-1 + GlobalSkillTree.skill_summary.stats.merge_slot_bonus

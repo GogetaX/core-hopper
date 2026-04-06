@@ -8,10 +8,15 @@ const SKILL_TREE_PATH := "res://data/skill_tree/skill_tree.json"
 var _skill_tree_data: Dictionary = {}
 var _skill_nodes: Dictionary = {}
 
+var skill_summary = {}
 
 func _ready() -> void:
 	LoadSkillTree()
+	UpdateSkillSummary("")
+	GlobalSignals.OnSkillLevelUpdated.connect(UpdateSkillSummary)
 
+func UpdateSkillSummary(_skill_id:String):
+	skill_summary = BuildAcquiredSkillSummary()
 
 func LoadSkillTree() -> void:
 	_skill_tree_data.clear()
@@ -452,7 +457,7 @@ func GetSkillEffectLine(skill_id: String, level: int = -1) -> String:
 		if text != "":
 			parts.append(text)
 
-	return " • ".join(parts)
+	return "\n".join(parts)
 
 
 func GetSkillCurrentEffectLine(skill_id: String) -> String:
@@ -582,3 +587,219 @@ func _FormatSecondsShort(seconds: int) -> String:
 	if hours > 0:
 		return "%dh" % hours
 	return "%dm" % minutes
+
+func BuildAcquiredSkillSummary() -> Dictionary:
+	_EnsureLoaded()
+	_EnsureSkillTreeSaveData()
+
+	var summary: Dictionary = {
+		"stats": {},
+		"unlock_features": {},
+		"node_levels": GetAllAcquiredSkillLevels(),
+		"acquired_skill_ids": GetAllAcquiredSkillIDs()
+	}
+
+	_InitSkillSummaryDefaults(summary)
+
+	var node_levels: Dictionary = summary.get("node_levels", {})
+	for skill_id in node_levels.keys():
+		var level := int(node_levels.get(skill_id, 0))
+		if level <= 0:
+			continue
+
+		var effects = GetSkillEffects(str(skill_id))
+		if typeof(effects) != TYPE_ARRAY:
+			continue
+
+		for effect in effects:
+			if typeof(effect) != TYPE_DICTIONARY:
+				continue
+
+			var kind := str(effect.get("kind", ""))
+			match kind:
+				"stat":
+					_ApplyStatEffectToSummary(summary, effect, level)
+				"unlock":
+					_ApplyUnlockEffectToSummary(summary, effect)
+
+	_FinalizeSkillSummary(summary)
+	return summary
+	
+func _ApplyStatEffectToSummary(summary: Dictionary, effect: Dictionary, level: int) -> void:
+	var stats: Dictionary = summary.get("stats", {})
+
+	var stat_name := str(effect.get("stat", ""))
+	if stat_name == "":
+		return
+
+	var value_per_level := float(effect.get("value_per_level", 0.0))
+	var add_value := value_per_level * level
+
+	if !stats.has(stat_name):
+		stats[stat_name] = 0.0
+
+	stats[stat_name] = float(stats.get(stat_name, 0.0)) + add_value
+	summary["stats"] = stats
+	
+func _InitSkillSummaryDefaults(summary: Dictionary) -> void:
+	var stats: Dictionary = summary.get("stats", {})
+	var unlock_features: Dictionary = summary.get("unlock_features", {})
+
+	for skill_id in _skill_nodes.keys():
+		var skill_data = _skill_nodes.get(skill_id, {})
+		if typeof(skill_data) != TYPE_DICTIONARY:
+			continue
+
+		var effects = skill_data.get("effects", [])
+		if typeof(effects) != TYPE_ARRAY:
+			continue
+
+		for effect in effects:
+			if typeof(effect) != TYPE_DICTIONARY:
+				continue
+
+			var kind := str(effect.get("kind", ""))
+
+			if kind == "stat":
+				var stat_name := str(effect.get("stat", ""))
+				if stat_name != "" and !stats.has(stat_name):
+					stats[stat_name] = 0.0
+
+			elif kind == "unlock":
+				var feature := str(effect.get("feature", ""))
+				if feature == "":
+					continue
+
+				match feature:
+					"direct_bot_buy_level":
+						if !unlock_features.has(feature):
+							unlock_features[feature] = {
+								"unlocked": false,
+								"max_level": 0,
+								"unlocked_levels": [],
+								"cost_multiplier_by_level": {}
+							}
+
+						var feature_data: Dictionary = unlock_features[feature]
+						var buy_level := int(effect.get("level", 0))
+						var base_cost_multiplier := float(effect.get("base_cost_multiplier", 0.0))
+						if buy_level > 0:
+							feature_data["cost_multiplier_by_level"][str(buy_level)] = base_cost_multiplier
+						unlock_features[feature] = feature_data
+
+					"tap_execute":
+						if !unlock_features.has(feature):
+							unlock_features[feature] = {
+								"unlocked": false,
+								"target": str(effect.get("target", "")),
+								"base_threshold": float(effect.get("threshold", 0.0)),
+								"threshold_bonus": 0.0,
+								"threshold_total": 0.0
+							}
+						else:
+							var execute_data: Dictionary = unlock_features[feature]
+							if str(execute_data.get("target", "")) == "":
+								execute_data["target"] = str(effect.get("target", ""))
+							if float(execute_data.get("base_threshold", 0.0)) <= 0.0:
+								execute_data["base_threshold"] = float(effect.get("threshold", 0.0))
+							unlock_features[feature] = execute_data
+
+					_:
+						if !unlock_features.has(feature):
+							unlock_features[feature] = {
+								"unlocked": false
+							}
+
+	summary["stats"] = stats
+	summary["unlock_features"] = unlock_features
+	
+func _ApplyUnlockEffectToSummary(summary: Dictionary, effect: Dictionary) -> void:
+	var unlock_features: Dictionary = summary.get("unlock_features", {})
+
+	var feature := str(effect.get("feature", ""))
+	if feature == "":
+		return
+
+	if !unlock_features.has(feature):
+		unlock_features[feature] = {
+			"unlocked": false
+		}
+
+	var feature_data: Dictionary = unlock_features[feature]
+	feature_data["unlocked"] = true
+
+	match feature:
+		"direct_bot_buy_level":
+			var buy_level := int(effect.get("level", 0))
+			if buy_level > int(feature_data.get("max_level", 0)):
+				feature_data["max_level"] = buy_level
+
+			var unlocked_levels: Array = feature_data.get("unlocked_levels", [])
+			if !unlocked_levels.has(buy_level):
+				unlocked_levels.append(buy_level)
+				unlocked_levels.sort()
+			feature_data["unlocked_levels"] = unlocked_levels
+
+			var cost_map: Dictionary = feature_data.get("cost_multiplier_by_level", {})
+			cost_map[str(buy_level)] = float(effect.get("base_cost_multiplier", 0.0))
+			feature_data["cost_multiplier_by_level"] = cost_map
+
+		"tap_execute":
+			feature_data["target"] = str(effect.get("target", feature_data.get("target", "")))
+			feature_data["base_threshold"] = float(effect.get("threshold", feature_data.get("base_threshold", 0.0)))
+
+	unlock_features[feature] = feature_data
+	summary["unlock_features"] = unlock_features
+	
+func _FinalizeSkillSummary(summary: Dictionary) -> void:
+	var stats: Dictionary = summary.get("stats", {})
+	var unlock_features: Dictionary = summary.get("unlock_features", {})
+
+	if unlock_features.has("tap_execute"):
+		var execute_data: Dictionary = unlock_features.get("tap_execute", {})
+		var bonus := float(stats.get("tap_execute_threshold", 0.0))
+		execute_data["threshold_bonus"] = bonus
+
+		if bool(execute_data.get("unlocked", false)):
+			execute_data["threshold_total"] = float(execute_data.get("base_threshold", 0.0)) + bonus
+		else:
+			execute_data["threshold_total"] = 0.0
+
+		unlock_features["tap_execute"] = execute_data
+
+	summary["stats"] = stats
+	summary["unlock_features"] = unlock_features
+	
+func BuildFlatAcquiredSkillStats() -> Dictionary:
+	var summary := BuildAcquiredSkillSummary()
+	var result: Dictionary = {}
+
+	var stats: Dictionary = summary.get("stats", {})
+	for stat_name in stats.keys():
+		result[stat_name] = stats[stat_name]
+
+	var unlock_features: Dictionary = summary.get("unlock_features", {})
+
+	if unlock_features.has("direct_bot_buy_level"):
+		var direct_buy: Dictionary = unlock_features["direct_bot_buy_level"]
+		result["direct_bot_buy_level"] = int(direct_buy.get("max_level", 0))
+		result["direct_bot_buy_unlocked_levels"] = direct_buy.get("unlocked_levels", []).duplicate()
+		result["direct_bot_buy_cost_multiplier_by_level"] = direct_buy.get("cost_multiplier_by_level", {}).duplicate(true)
+	else:
+		result["direct_bot_buy_level"] = 0
+		result["direct_bot_buy_unlocked_levels"] = []
+		result["direct_bot_buy_cost_multiplier_by_level"] = {}
+
+	if unlock_features.has("tap_execute"):
+		var execute_data: Dictionary = unlock_features["tap_execute"]
+		result["tap_execute_unlocked"] = bool(execute_data.get("unlocked", false))
+		result["tap_execute_target"] = str(execute_data.get("target", ""))
+		result["tap_execute_base_threshold"] = float(execute_data.get("base_threshold", 0.0))
+		result["tap_execute_threshold_total"] = float(execute_data.get("threshold_total", 0.0))
+	else:
+		result["tap_execute_unlocked"] = false
+		result["tap_execute_target"] = ""
+		result["tap_execute_base_threshold"] = 0.0
+		result["tap_execute_threshold_total"] = 0.0
+	
+	return result

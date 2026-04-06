@@ -49,3 +49,6 @@ res://scenes/screens/progress/smart_button_buy.tscn
 res://scenes/screens/progress/smart_button_buy.gd
 res://autoload/GlobalSave.gd
 res://scenes/app/main_scene.tscn
+res://scenes/screens/merge/merge_screen.tscn
+res://autoload/GlobalStats.gd
+res://scenes/screens/merge/merge_item.gd

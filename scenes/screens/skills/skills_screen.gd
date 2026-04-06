@@ -43,6 +43,8 @@ func OnSkillClassSelected(skill_class:WorldSkillClass):
 			$SelectedSkill/VList/UpgradeSkillBtn.price_text = Global.CurrencyToString(upgrade_pice)
 			$SelectedSkill/VList/UpgradeSkillBtn.price_int = upgrade_pice
 			$SelectedSkill/VList/UpgradeSkillBtn.visible = true
+			
+	print(GlobalSkillTree.skill_summary)
 	
 func SyncCurStateBtn():
 	$SelectedSkill/VList/HList/Control/HBoxContainer/ScrollDownBtn.visible = false

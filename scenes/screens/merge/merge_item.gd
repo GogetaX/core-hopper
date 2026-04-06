@@ -29,7 +29,7 @@ func OnParentReady():
 func SyncBotData():
 	_has_bot_to_drag = false
 	#Unlock cell
-	if cur_bot_id <= GlobalSave.save_data.bot_inventory.merge_free_slots-1:
+	if cur_bot_id <= GlobalStats.GetFreeMergeSlots():
 		SetUnlocked(true)
 	else:
 		SetUnlocked(false)
