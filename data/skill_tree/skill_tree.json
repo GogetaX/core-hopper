@@ -1,0 +1,641 @@
+{
+  "version": 1,
+  "tree_id": "core_hopper_main",
+  "title": "Core Hopper Skill Tree",
+  "currency_type": "crystals",
+  "start_node_id": "core_link",
+  "branches": {
+	"merge": {
+	  "title": "Merge",
+	  "color": "#F39A32"
+	},
+	"boss": {
+	  "title": "Boss",
+	  "color": "#FF5C7A"
+	},
+	"offline": {
+	  "title": "Offline",
+	  "color": "#44D7FF"
+	},
+	"bot_shop": {
+	  "title": "Bot Shop",
+	  "color": "#7ED957"
+	},
+	"tap": {
+	  "title": "Tap",
+	  "color": "#B36CFF"
+	}
+  },
+  "nodes": {
+	"core_link": {
+	  "title": "Core Link",
+	  "branch": "core",
+	  "node_type": "root",
+	  "max_level": 1,
+	  "costs": [0],
+	  "prereq_ids": [],
+	  "pos": { "x": 0, "y": 0 },
+	  "icon": "skill_core_link",
+	  "effects": []
+	},
+
+	"merge_slot_1": {
+	  "title": "Merge Slot I",
+	  "branch": "merge",
+	  "node_type": "unlock",
+	  "max_level": 1,
+	  "costs": [40],
+	  "prereq_ids": ["core_link"],
+	  "pos": { "x": -220, "y": 0 },
+	  "icon": "skill_merge_slot",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "merge_slot_bonus",
+		  "op": "add",
+		  "value_per_level": 1
+		}
+	  ]
+	},
+	"merge_slot_2": {
+	  "title": "Merge Slot II",
+	  "branch": "merge",
+	  "node_type": "unlock",
+	  "max_level": 1,
+	  "costs": [80],
+	  "prereq_ids": ["merge_slot_1"],
+	  "pos": { "x": -380, "y": 0 },
+	  "icon": "skill_merge_slot",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "merge_slot_bonus",
+		  "op": "add",
+		  "value_per_level": 1
+		}
+	  ]
+	},
+	"merge_slot_3": {
+	  "title": "Merge Slot III",
+	  "branch": "merge",
+	  "node_type": "unlock",
+	  "max_level": 1,
+	  "costs": [140],
+	  "prereq_ids": ["merge_slot_2"],
+	  "pos": { "x": -540, "y": 0 },
+	  "icon": "skill_merge_slot",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "merge_slot_bonus",
+		  "op": "add",
+		  "value_per_level": 1
+		}
+	  ]
+	},
+	"merge_slot_4": {
+	  "title": "Merge Slot IV",
+	  "branch": "merge",
+	  "node_type": "unlock",
+	  "max_level": 1,
+	  "costs": [220],
+	  "prereq_ids": ["merge_slot_3"],
+	  "pos": { "x": -700, "y": 0 },
+	  "icon": "skill_merge_slot",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "merge_slot_bonus",
+		  "op": "add",
+		  "value_per_level": 1
+		}
+	  ]
+	},
+	"merge_slot_5": {
+	  "title": "Merge Slot V",
+	  "branch": "merge",
+	  "node_type": "unlock",
+	  "max_level": 1,
+	  "costs": [320],
+	  "prereq_ids": ["merge_slot_4"],
+	  "pos": { "x": -860, "y": 0 },
+	  "icon": "skill_merge_slot",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "merge_slot_bonus",
+		  "op": "add",
+		  "value_per_level": 1
+		}
+	  ]
+	},
+	"merge_efficiency_1": {
+	  "title": "Merge Efficiency",
+	  "branch": "merge",
+	  "node_type": "stat",
+	  "max_level": 5,
+	  "costs": [45, 90, 150, 230, 330],
+	  "prereq_ids": ["merge_slot_2"],
+	  "pos": { "x": -520, "y": -140 },
+	  "icon": "skill_merge_efficiency",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "merge_output_power_mult",
+		  "op": "add",
+		  "value_per_level": 0.05
+		}
+	  ]
+	},
+	"master_workshop": {
+	  "title": "Master Workshop",
+	  "branch": "merge",
+	  "node_type": "keystone",
+	  "max_level": 1,
+	  "costs": [520],
+	  "prereq_ids": ["merge_slot_5", "merge_efficiency_1"],
+	  "pos": { "x": -1020, "y": -140 },
+	  "icon": "skill_master_workshop",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "merge_output_power_mult",
+		  "op": "add",
+		  "value_per_level": 0.10
+		},
+		{
+		  "kind": "stat",
+		  "stat": "merge_refund_chance",
+		  "op": "add",
+		  "value_per_level": 0.10
+		}
+	  ]
+	},
+
+	"boss_damage_1": {
+	  "title": "Boss Damage",
+	  "branch": "boss",
+	  "node_type": "stat",
+	  "max_level": 5,
+	  "costs": [35, 70, 115, 170, 240],
+	  "prereq_ids": ["core_link"],
+	  "pos": { "x": -120, "y": -200 },
+	  "icon": "skill_boss_damage",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "boss_damage_mult",
+		  "op": "add",
+		  "value_per_level": 0.12
+		}
+	  ]
+	},
+	"boss_rewards_1": {
+	  "title": "Boss Rewards",
+	  "branch": "boss",
+	  "node_type": "stat",
+	  "max_level": 5,
+	  "costs": [40, 80, 130, 195, 280],
+	  "prereq_ids": ["boss_damage_1"],
+	  "pos": { "x": -240, "y": -340 },
+	  "icon": "skill_boss_rewards",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "boss_reward_mult",
+		  "op": "add",
+		  "value_per_level": 0.08
+		}
+	  ]
+	},
+	"boss_relic_find_1": {
+	  "title": "Relic Find",
+	  "branch": "boss",
+	  "node_type": "stat",
+	  "max_level": 5,
+	  "costs": [50, 95, 150, 225, 320],
+	  "prereq_ids": ["boss_rewards_1"],
+	  "pos": { "x": -120, "y": -380 },
+	  "icon": "skill_relic_find",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "boss_relic_drop_chance",
+		  "op": "add",
+		  "value_per_level": 0.03
+		}
+	  ]
+	},
+	"boss_rare_relic_1": {
+	  "title": "Rare Relic Find",
+	  "branch": "boss",
+	  "node_type": "stat",
+	  "max_level": 3,
+	  "costs": [140, 260, 420],
+	  "prereq_ids": ["boss_relic_find_1"],
+	  "pos": { "x": -240, "y": -520 },
+	  "icon": "skill_rare_relic_find",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "boss_rare_relic_drop_chance",
+		  "op": "add",
+		  "value_per_level": 0.02
+		}
+	  ]
+	},
+	"anti_regen_1": {
+	  "title": "Anti-Regen",
+	  "branch": "boss",
+	  "node_type": "stat",
+	  "max_level": 3,
+	  "costs": [90, 170, 280],
+	  "prereq_ids": ["boss_damage_1"],
+	  "pos": { "x": 0, "y": -340 },
+	  "icon": "skill_anti_regen",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "boss_regen_reduction",
+		  "op": "add",
+		  "value_per_level": 0.10
+		}
+	  ]
+	},
+	"relic_hunter": {
+	  "title": "Relic Hunter",
+	  "branch": "boss",
+	  "node_type": "keystone",
+	  "max_level": 1,
+	  "costs": [650],
+	  "prereq_ids": ["boss_rare_relic_1", "anti_regen_1"],
+	  "pos": { "x": -120, "y": -640 },
+	  "icon": "skill_relic_hunter",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "boss_reward_mult",
+		  "op": "add",
+		  "value_per_level": 0.15
+		},
+		{
+		  "kind": "stat",
+		  "stat": "boss_relic_drop_chance",
+		  "op": "add",
+		  "value_per_level": 0.05
+		},
+		{
+		  "kind": "stat",
+		  "stat": "boss_rare_relic_drop_chance",
+		  "op": "add",
+		  "value_per_level": 0.05
+		}
+	  ]
+	},
+
+	"offline_time_1": {
+	  "title": "Offline Time",
+	  "branch": "offline",
+	  "node_type": "stat",
+	  "max_level": 5,
+	  "costs": [25, 50, 85, 130, 190],
+	  "prereq_ids": ["core_link"],
+	  "pos": { "x": 120, "y": -200 },
+	  "icon": "skill_offline_time",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "max_offline_seconds",
+		  "op": "add",
+		  "value_per_level": 1800
+		}
+	  ]
+	},
+	"offline_efficiency_1": {
+	  "title": "Offline Efficiency",
+	  "branch": "offline",
+	  "node_type": "stat",
+	  "max_level": 5,
+	  "costs": [35, 70, 115, 170, 240],
+	  "prereq_ids": ["offline_time_1"],
+	  "pos": { "x": 240, "y": -340 },
+	  "icon": "skill_offline_efficiency",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "offline_gain_mult",
+		  "op": "add",
+		  "value_per_level": 0.06
+		}
+	  ]
+	},
+	"offline_coin_gain_1": {
+	  "title": "Offline Coin Gain",
+	  "branch": "offline",
+	  "node_type": "stat",
+	  "max_level": 5,
+	  "costs": [35, 75, 125, 190, 270],
+	  "prereq_ids": ["offline_efficiency_1"],
+	  "pos": { "x": 120, "y": -380 },
+	  "icon": "skill_offline_coin_gain",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "offline_coin_gain_mult",
+		  "op": "add",
+		  "value_per_level": 0.08
+		}
+	  ]
+	},
+	"offline_crystal_gain_1": {
+	  "title": "Offline Crystal Gain",
+	  "branch": "offline",
+	  "node_type": "stat",
+	  "max_level": 5,
+	  "costs": [45, 90, 145, 220, 310],
+	  "prereq_ids": ["offline_efficiency_1"],
+	  "pos": { "x": 360, "y": -380 },
+	  "icon": "skill_offline_crystal_gain",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "offline_crystal_gain_mult",
+		  "op": "add",
+		  "value_per_level": 0.05
+		}
+	  ]
+	},
+	"offline_chest_queue_1": {
+	  "title": "Offline Chest Queue",
+	  "branch": "offline",
+	  "node_type": "stat",
+	  "max_level": 3,
+	  "costs": [70, 140, 250],
+	  "prereq_ids": ["offline_time_1"],
+	  "pos": { "x": 360, "y": -260 },
+	  "icon": "skill_offline_chest_queue",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "offline_chest_queue_capacity",
+		  "op": "add",
+		  "value_per_level": 1
+		}
+	  ]
+	},
+	"deep_sleep": {
+	  "title": "Deep Sleep",
+	  "branch": "offline",
+	  "node_type": "keystone",
+	  "max_level": 1,
+	  "costs": [560],
+	  "prereq_ids": ["offline_coin_gain_1", "offline_crystal_gain_1"],
+	  "pos": { "x": 240, "y": -520 },
+	  "icon": "skill_deep_sleep",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "max_offline_seconds",
+		  "op": "add",
+		  "value_per_level": 7200
+		},
+		{
+		  "kind": "stat",
+		  "stat": "offline_gain_mult",
+		  "op": "add",
+		  "value_per_level": 0.15
+		}
+	  ]
+	},
+
+	"buy_bot_lv2": {
+	  "title": "Buy Level 2 Bots",
+	  "branch": "bot_shop",
+	  "node_type": "unlock",
+	  "max_level": 1,
+	  "costs": [60],
+	  "prereq_ids": ["core_link"],
+	  "pos": { "x": -140, "y": 180 },
+	  "icon": "skill_buy_bot_lv2",
+	  "effects": [
+		{
+		  "kind": "unlock",
+		  "feature": "direct_bot_buy_level",
+		  "level": 2,
+		  "base_cost_multiplier": 5.0
+		}
+	  ]
+	},
+	"buy_bot_lv3": {
+	  "title": "Buy Level 3 Bots",
+	  "branch": "bot_shop",
+	  "node_type": "unlock",
+	  "max_level": 1,
+	  "costs": [130],
+	  "prereq_ids": ["buy_bot_lv2"],
+	  "pos": { "x": -280, "y": 320 },
+	  "icon": "skill_buy_bot_lv3",
+	  "effects": [
+		{
+		  "kind": "unlock",
+		  "feature": "direct_bot_buy_level",
+		  "level": 3,
+		  "base_cost_multiplier": 14.0
+		}
+	  ]
+	},
+	"buy_bot_lv4": {
+	  "title": "Buy Level 4 Bots",
+	  "branch": "bot_shop",
+	  "node_type": "unlock",
+	  "max_level": 1,
+	  "costs": [260],
+	  "prereq_ids": ["buy_bot_lv3"],
+	  "pos": { "x": -420, "y": 460 },
+	  "icon": "skill_buy_bot_lv4",
+	  "effects": [
+		{
+		  "kind": "unlock",
+		  "feature": "direct_bot_buy_level",
+		  "level": 4,
+		  "base_cost_multiplier": 40.0
+		}
+	  ]
+	},
+	"buy_bot_lv5": {
+	  "title": "Buy Level 5 Bots",
+	  "branch": "bot_shop",
+	  "node_type": "unlock",
+	  "max_level": 1,
+	  "costs": [460],
+	  "prereq_ids": ["buy_bot_lv4"],
+	  "pos": { "x": -560, "y": 600 },
+	  "icon": "skill_buy_bot_lv5",
+	  "effects": [
+		{
+		  "kind": "unlock",
+		  "feature": "direct_bot_buy_level",
+		  "level": 5,
+		  "base_cost_multiplier": 110.0
+		}
+	  ]
+	},
+	"direct_buy_discount_1": {
+	  "title": "Direct Buy Discount",
+	  "branch": "bot_shop",
+	  "node_type": "stat",
+	  "max_level": 5,
+	  "costs": [50, 95, 150, 220, 310],
+	  "prereq_ids": ["buy_bot_lv2"],
+	  "pos": { "x": -60, "y": 340 },
+	  "icon": "skill_direct_buy_discount",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "direct_bot_buy_cost_reduction",
+		  "op": "add",
+		  "value_per_level": 0.05
+		}
+	  ]
+	},
+	"premium_assembly": {
+	  "title": "Premium Assembly",
+	  "branch": "bot_shop",
+	  "node_type": "keystone",
+	  "max_level": 1,
+	  "costs": [700],
+	  "prereq_ids": ["buy_bot_lv5", "direct_buy_discount_1"],
+	  "pos": { "x": -360, "y": 720 },
+	  "icon": "skill_premium_assembly",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "bought_bot_power_mult",
+		  "op": "add",
+		  "value_per_level": 0.20
+		},
+		{
+		  "kind": "stat",
+		  "stat": "direct_bot_buy_cost_reduction",
+		  "op": "add",
+		  "value_per_level": 0.10
+		}
+	  ]
+	},
+
+	"tap_damage_1": {
+	  "title": "Tap Damage",
+	  "branch": "tap",
+	  "node_type": "stat",
+	  "max_level": 5,
+	  "costs": [30, 60, 100, 150, 210],
+	  "prereq_ids": ["core_link"],
+	  "pos": { "x": 140, "y": 180 },
+	  "icon": "skill_tap_damage",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "tap_damage_mult",
+		  "op": "add",
+		  "value_per_level": 0.10
+		}
+	  ]
+	},
+	"tap_execute_unlock": {
+	  "title": "Execute Protocol",
+	  "branch": "tap",
+	  "node_type": "unlock",
+	  "max_level": 1,
+	  "costs": [120],
+	  "prereq_ids": ["tap_damage_1"],
+	  "pos": { "x": 280, "y": 320 },
+	  "icon": "skill_tap_execute",
+	  "effects": [
+		{
+		  "kind": "unlock",
+		  "feature": "tap_execute",
+		  "target": "non_boss_front_block",
+		  "threshold": 0.05
+		}
+	  ]
+	},
+	"execute_threshold_1": {
+	  "title": "Execute Threshold",
+	  "branch": "tap",
+	  "node_type": "stat",
+	  "max_level": 4,
+	  "costs": [70, 140, 240, 360],
+	  "prereq_ids": ["tap_execute_unlock"],
+	  "pos": { "x": 420, "y": 460 },
+	  "icon": "skill_execute_threshold",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "tap_execute_threshold",
+		  "op": "add",
+		  "value_per_level": 0.025
+		}
+	  ]
+	},
+	"tap_crit_chance_1": {
+	  "title": "Tap Crit Chance",
+	  "branch": "tap",
+	  "node_type": "stat",
+	  "max_level": 5,
+	  "costs": [40, 80, 130, 195, 280],
+	  "prereq_ids": ["tap_damage_1"],
+	  "pos": { "x": 80, "y": 360 },
+	  "icon": "skill_tap_crit_chance",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "tap_crit_chance",
+		  "op": "add",
+		  "value_per_level": 0.03
+		}
+	  ]
+	},
+	"tap_crit_mult_1": {
+	  "title": "Tap Crit Multiplier",
+	  "branch": "tap",
+	  "node_type": "stat",
+	  "max_level": 5,
+	  "costs": [50, 95, 150, 225, 320],
+	  "prereq_ids": ["tap_crit_chance_1"],
+	  "pos": { "x": 200, "y": 500 },
+	  "icon": "skill_tap_crit_mult",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "tap_crit_mult",
+		  "op": "add",
+		  "value_per_level": 0.10
+		}
+	  ]
+	},
+	"precision_break": {
+	  "title": "Precision Break",
+	  "branch": "tap",
+	  "node_type": "keystone",
+	  "max_level": 1,
+	  "costs": [620],
+	  "prereq_ids": ["execute_threshold_1", "tap_crit_mult_1"],
+	  "pos": { "x": 340, "y": 640 },
+	  "icon": "skill_precision_break",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "tap_execute_reward_mult",
+		  "op": "add",
+		  "value_per_level": 0.20
+		},
+		{
+		  "kind": "stat",
+		  "stat": "front_block_tap_damage_mult",
+		  "op": "add",
+		  "value_per_level": 0.25
+		}
+	  ]
+	}
+  }
+}

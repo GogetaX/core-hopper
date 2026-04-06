@@ -624,11 +624,8 @@ button_color = "GOLD"
 btn_text = "Open relic inventory"
 
 [connection signal="OnPressed" from="ProgressTopPanel/VList/Tabs/TabList/TAB_Upgrades" to="." method="_on_tab_upgrades_on_pressed"]
-[connection signal="tree_exiting" from="ProgressTopPanel/VList/Tabs/TabList/TAB_Upgrades/NotifForUpgradeTab" to="ProgressTopPanel/VList/Tabs/TabList/TAB_Upgrades/NotifForUpgradeTab" method="_on_tree_exiting"]
 [connection signal="OnPressed" from="ProgressTopPanel/VList/Tabs/TabList/TAB_Quests" to="." method="_on_tab_quests_on_pressed"]
-[connection signal="tree_exiting" from="ProgressTopPanel/VList/Tabs/TabList/TAB_Quests/NotifForQuestTab" to="ProgressTopPanel/VList/Tabs/TabList/TAB_Quests/NotifForQuestTab" method="_on_tree_exiting"]
 [connection signal="OnPressed" from="ProgressTopPanel/VList/Tabs/TabList/TAB_Relics" to="." method="_on_tab_relics_on_pressed"]
-[connection signal="tree_exiting" from="ProgressTopPanel/VList/Tabs/TabList/TAB_Relics/NotifForRelicTab" to="ProgressTopPanel/VList/Tabs/TabList/TAB_Relics/NotifForRelicTab" method="_on_tree_exiting"]
 [connection signal="resized" from="Menu_Upgrades/VList" to="." method="UpgradeListResized"]
 [connection signal="resized" from="Menu_Quests/QuestVList" to="." method="_on_quest_v_list_resized"]
 [connection signal="resized" from="Menu_Relics/RelicVList/RelicVList" to="." method="_on_relic_v_list_resized"]
