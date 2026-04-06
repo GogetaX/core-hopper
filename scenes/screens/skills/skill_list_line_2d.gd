@@ -1,29 +1,13 @@
-@tool
 extends Line2D
+class_name SkillLineClass
 
-@export_enum("WHITE","GOLD","PURPLE","BLUE","DISABLED","TAB_BG","ORANGE") var start_color := "PURPLE":
-	set(value):
-		start_color = value
-		if is_node_ready():
-			_ready()
-	get:
-		return start_color
 
-@export_enum("WHITE","GOLD","PURPLE","BLUE","DISABLED","TAB_BG","ORANGE") var end_color := "PURPLE":
-	set(value):
-		end_color = value
-		if is_node_ready():
-			_ready()
-	get:
-		return end_color
-
-func _ready() -> void:
-	if gradient.get_point_count() == 2:
-		gradient.set_color(0,FromColorTextBorderToColor(start_color))
-		gradient.set_color(1,FromColorTextBorderToColor(end_color))
-	else:
-		for x in gradient.get_point_count():
-			gradient.set_color(x,Color.WHITE)
+func InitLine(from_glob_pos:Vector2,to_glob_pos:Vector2,from_color_str:String,to_color_str:String):
+	points[0] = from_glob_pos
+	points[1] = to_glob_pos
+	gradient.set_color(0,FromColorTextBorderToColor(from_color_str))
+	gradient.set_color(1,FromColorTextBorderToColor(to_color_str))
+	
 			
 func FromColorTextBorderToColor(color_text:String):
 	#"WHITE","GOLD","PURPLE","BLUE","DISABLED","TAB_BG","ORANGE"

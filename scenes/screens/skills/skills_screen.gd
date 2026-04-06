@@ -3,7 +3,46 @@ extends Control
 var cur_skill_state = "SELECTED_UP"
 
 func _ready() -> void:
+	GlobalSignals.OnWorldSkillClassSelected.connect(OnSkillClassSelected)
+	_on_v_list_resized()
 	SyncCurStateBtn()
+	
+func OnSkillClassSelected(skill_class:WorldSkillClass):
+	$SelectedSkill/VList/HList/VList/skill_name.text = skill_class.cur_skill_data.title.to_upper()
+	var cur_level = GlobalSkillTree.GetAccuredSkillLevel(skill_class.cur_skill_key)
+	var max_level = skill_class.cur_skill_data.max_level
+	$SelectedSkill/VList/HList/VList/skill_level.text = "LEVEL "+str(cur_level).pad_decimals(0)+" / "+str(max_level).pad_decimals(0)
+	$SelectedSkill/VList/description.text = skill_class.cur_skill_data.description
+	$SelectedSkill/skill_icon.texture = skill_class.GetSkillIcon()
+	$SelectedSkill/VList/HList/Control/HBoxContainer/IconBGCircle.icon = skill_class.GetSkillIcon()
+	#Cur Level Effect
+	if cur_level == 0:
+		$SelectedSkill/VList/cur_level_row.visible = false
+	else:
+		$SelectedSkill/VList/cur_level_row.visible = true
+	#Next level effect
+	if cur_level < max_level:
+		$SelectedSkill/VList/next_level_row.visible = true
+		if skill_class.cur_skill_data.effects.is_empty():
+			$SelectedSkill/VList/next_level_row/next_level_effect.text = skill_class.cur_skill_data.description
+		else:
+			$SelectedSkill/VList/cur_level_row/cur_level_effect.text = GlobalSkillTree.GetSkillCurrentEffectLine(skill_class.cur_skill_key)
+			$SelectedSkill/VList/next_level_row/next_level_effect.text = GlobalSkillTree.GetSkillNextEffectLine(skill_class.cur_skill_key)
+	else:
+		$SelectedSkill/VList/next_level_row.visible = false
+	#UpgradeSkillBtn rules
+	$SelectedSkill/VList/UpgradeSkillBtn.visible = false
+	if cur_level == 0 && skill_class.cur_skill_data.effects.is_empty():
+		var upgrade_pice = GlobalSkillTree.GetSkillNextCost(skill_class.cur_skill_key)
+		$SelectedSkill/VList/UpgradeSkillBtn.price_text = Global.CurrencyToString(upgrade_pice)
+		$SelectedSkill/VList/UpgradeSkillBtn.price_int = upgrade_pice
+		$SelectedSkill/VList/UpgradeSkillBtn.visible = true
+	elif cur_level < max_level:
+		if GlobalSkillTree.AreSkillPrereqsMet(skill_class.cur_skill_key):
+			var upgrade_pice = GlobalSkillTree.GetSkillNextCost(skill_class.cur_skill_key)
+			$SelectedSkill/VList/UpgradeSkillBtn.price_text = Global.CurrencyToString(upgrade_pice)
+			$SelectedSkill/VList/UpgradeSkillBtn.price_int = upgrade_pice
+			$SelectedSkill/VList/UpgradeSkillBtn.visible = true
 	
 func SyncCurStateBtn():
 	$SelectedSkill/VList/HList/Control/HBoxContainer/ScrollDownBtn.visible = false
@@ -40,3 +79,24 @@ func _on_reset_camera_btn_pressed() -> void:
 
 func _on_center_selected_skill_btn_pressed() -> void:
 	GlobalSignals.CenterCameraCurSelectedSkill.emit()
+
+
+func _on_v_list_resized() -> void:
+	await get_tree().process_frame
+	var max_y = $SelectedSkill/VList.get_minimum_size().y
+	$SelectedSkill.custom_minimum_size.y = max_y +30
+	$SelectedSkill.size.y = $SelectedSkill.custom_minimum_size.y
+	#if cur_skill_state == "SELECTED_UP":
+		#$SelectedSkill.position.y = get_viewport_rect().size.y - $SelectedSkill.size.y-350
+	if cur_skill_state == "SELECTED_DOWN":
+		cur_skill_state = "SELECTED_UP"
+	SyncCurStateBtn()
+	AnimateBasedOnState()
+
+func _on_upgrade_skill_btn_btn_pressed_with_price(_currency: String, _price: int) -> void:
+	var cur_selected_skill = Global.last_skill_key_selected
+	if cur_selected_skill == "":
+		return
+	GlobalSkillTree.AccureSkill(cur_selected_skill)
+	GlobalSignals.OnSkillLevelUpdated.emit(cur_selected_skill)
+	GlobalSave.SyncSave()

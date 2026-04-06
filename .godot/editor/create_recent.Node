@@ -1,3 +1,4 @@
+TextureRect
 Control
 HBoxContainer
 Label
@@ -5,7 +6,6 @@ VBoxContainer
 ScrollContainer
 HFlowContainer
 GPUParticles2D
-TextureRect
 Node
 Timer
 AnimationPlayer

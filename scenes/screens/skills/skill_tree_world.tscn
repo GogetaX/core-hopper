@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cawapxracrhht" path="res://scenes/screens/skills/skill_tree_world_item.tscn" id="2_mtsct"]
 [ext_resource type="Script" uid="uid://coi3iswylkb6y" path="res://scenes/screens/skills/camera_2d.gd" id="2_of02k"]
 [ext_resource type="PackedScene" uid="uid://dlja5pqp8h372" path="res://scenes/screens/skills/skill_list_line_2d.tscn" id="2_uywm7"]
-[ext_resource type="Texture2D" uid="uid://bg18vum2cai3c" path="res://art/icons/rocket.png" id="3_nn7iw"]
+[ext_resource type="Script" uid="uid://djcjdvqx7whmk" path="res://scenes/screens/skills/line_2d_list.gd" id="3_of02k"]
 
 [sub_resource type="Gradient" id="Gradient_of02k"]
 resource_local_to_scene = true
@@ -39,86 +39,53 @@ position_smoothing_speed = 20.0
 script = ExtResource("2_of02k")
 
 [node name="Line2DList" type="Node2D" parent="." unique_id=500391358]
+script = ExtResource("3_of02k")
 
 [node name="SkillListLine2D" parent="Line2DList" unique_id=1493765897 instance=ExtResource("2_uywm7")]
 gradient = SubResource("Gradient_of02k")
-start_color = "BLUE"
-end_color = "ORANGE"
 
 [node name="SkillListLine2D2" parent="Line2DList" unique_id=1080568150 instance=ExtResource("2_uywm7")]
 points = PackedVector2Array(0, 0, 250, -250)
 gradient = SubResource("Gradient_riwsr")
-start_color = "BLUE"
-end_color = "BLUE"
 
 [node name="SkillListLine2D3" parent="Line2DList" unique_id=1301931035 instance=ExtResource("2_uywm7")]
 points = PackedVector2Array(0, 0, 250, 250)
 gradient = SubResource("Gradient_rtfpf")
-start_color = "BLUE"
 
 [node name="SkillListLine2D4" parent="Line2DList" unique_id=334497999 instance=ExtResource("2_uywm7")]
 points = PackedVector2Array(0, 0, -250, 250)
 gradient = SubResource("Gradient_7kmma")
-start_color = "BLUE"
-end_color = "ORANGE"
 
 [node name="SkillListLine2D5" parent="Line2DList" unique_id=113989674 instance=ExtResource("2_uywm7")]
 position = Vector2(-250, 2)
 points = PackedVector2Array(0, -252, -500, -252)
 gradient = SubResource("Gradient_n230n")
-start_color = "ORANGE"
-end_color = "ORANGE"
 
 [node name="SkillListLine2D6" parent="Line2DList" unique_id=1793415060 instance=ExtResource("2_uywm7")]
 position = Vector2(-250, 2)
 points = PackedVector2Array(0, -252, -250, -752)
 gradient = SubResource("Gradient_4akja")
-start_color = "ORANGE"
-end_color = "ORANGE"
 
 [node name="SkillList" type="Node2D" parent="." unique_id=2053335399]
 
 [node name="SkillTreeWorld_Item" parent="SkillList" unique_id=1311420417 instance=ExtResource("2_mtsct")]
-panel_color = "BLUE"
-icon = ExtResource("3_nn7iw")
-skill_visible = true
 
 [node name="SkillTreeWorld_Item4" parent="SkillList" unique_id=941876219 instance=ExtResource("2_mtsct")]
 position = Vector2(-250, 250)
-panel_color = "GOLD"
-icon = ExtResource("3_nn7iw")
-skill_visible = true
 
 [node name="SkillTreeWorld_Item5" parent="SkillList" unique_id=673726891 instance=ExtResource("2_mtsct")]
 position = Vector2(250, 250)
-icon = ExtResource("3_nn7iw")
-skill_visible = true
 
 [node name="SkillTreeWorld_Item2" parent="SkillList" unique_id=1419843912 instance=ExtResource("2_mtsct")]
 position = Vector2(250, -250)
-panel_color = "BLUE"
-icon = ExtResource("3_nn7iw")
-skill_visible = true
 
 [node name="SkillTreeWorld_Item3" parent="SkillList" unique_id=1908662113 instance=ExtResource("2_mtsct")]
 position = Vector2(-250, -250)
-panel_color = "ORANGE"
-icon = ExtResource("3_nn7iw")
-skill_name = "MINING POWER"
-skill_visible = true
 
 [node name="SkillTreeWorld_Item6" parent="SkillList" unique_id=2134364579 instance=ExtResource("2_mtsct")]
 modulate = Color(1, 1, 1, 0.1)
 position = Vector2(-750, -250)
-panel_color = "ORANGE"
-icon = ExtResource("3_nn7iw")
-skill_name = "MINING POWER"
-skill_visible = false
 
 [node name="SkillTreeWorld_Item7" parent="SkillList" unique_id=248303519 instance=ExtResource("2_mtsct")]
 modulate = Color(1, 1, 1, 0.1)
 position = Vector2(-500, -750)
-panel_color = "ORANGE"
-icon = ExtResource("3_nn7iw")
-skill_name = "MINING POWER"
-skill_visible = false

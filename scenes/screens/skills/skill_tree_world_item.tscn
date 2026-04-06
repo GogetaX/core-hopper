@@ -6,7 +6,6 @@
 
 [node name="SkillTreeWorld_Item" type="Node2D" unique_id=941876219]
 script = ExtResource("1_fcdfo")
-skill_visible = null
 
 [node name="SmartPanelCircleSkill" parent="." unique_id=892379017 instance=ExtResource("1_y078m")]
 custom_minimum_size = Vector2(100, 100)
@@ -29,6 +28,21 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="skill_name" parent="SmartPanelCircleSkill" unique_id=713365230 instance=ExtResource("4_xk3wr")]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.5
+offset_top = -145.0
+offset_right = -25.5
+offset_bottom = -112.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "test"
+horizontal_alignment = 1
+
+[node name="skill_level" parent="SmartPanelCircleSkill" unique_id=1462728872 instance=ExtResource("4_xk3wr")]
 self_modulate = Color(0.7607843, 0.43529412, 1, 1)
 layout_mode = 1
 anchors_preset = 12
@@ -36,9 +50,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -202.0
-offset_top = 15.0
+offset_top = 23.0
 offset_right = 202.0
-offset_bottom = 48.0
+offset_bottom = 56.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "AUTO-COLLECTOR"

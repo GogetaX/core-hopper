@@ -76,6 +76,13 @@ func SyncTool():
 			$NO_PRICE.visible = true
 		"WITH_PRICE":
 			$WITH_PRICE.visible = true
+			match currency_type:
+				"coins":
+					$WITH_PRICE/HBoxContainer/VList/SmartPanel/HBoxContainer/CurrencyIcon.icon_type = "COIN_SMALL"
+				"crystals":
+					$WITH_PRICE/HBoxContainer/VList/SmartPanel/HBoxContainer/CurrencyIcon.icon_type = "CRYSTAL_SMALL"
+				"energy":
+					$WITH_PRICE/HBoxContainer/VList/SmartPanel/HBoxContainer/CurrencyIcon.icon_type = "ENERGY_SMALL"
 			
 	$NO_PRICE/Label.text = buy_btn_title
 	$WITH_PRICE/HBoxContainer/Label.text = buy_btn_title

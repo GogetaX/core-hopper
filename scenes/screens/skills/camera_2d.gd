@@ -18,15 +18,20 @@ var _last_pinch_distance: float = 0.0
 func _ready() -> void:
 	GlobalSignals.ResetSkillCamera.connect(OnResetSkillCamera)
 	GlobalSignals.CenterCameraCurSelectedSkill.connect(OnCurSelectedSkill)
+	GlobalSignals.SkillsFinishedCreating.connect(OnSetCameraLimits)
 	OnResetSkillCamera()
 	
+	
+
+func OnSetCameraLimits():
+	await get_tree().process_frame
 	#Setting camera limits
 	var limits : Rect2i = get_parent().GetSkillLimitRect()
 	limit_left = limits.position.x-LIMIT_OFFSET
 	limit_right = limits.position.y+LIMIT_OFFSET
 	limit_top = limits.size.x-LIMIT_OFFSET
 	limit_bottom = limits.size.y+LIMIT_OFFSET
-
+	
 func OnCurSelectedSkill():
 	var cur_skill = get_parent().GetCurSelectedSkill() as WorldSkillClass
 	if cur_skill:

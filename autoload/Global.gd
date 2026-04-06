@@ -16,6 +16,8 @@ var top_currency_node_crystal = null
 
 var progress_menu_show_tab = ""
 
+var last_skill_key_selected : String = ""
+
 func CurrencyToIcon(currency_str:String):
 	match currency_str:
 		"coins":

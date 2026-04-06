@@ -112,7 +112,7 @@ func EnsureUpgradeSchema() -> void:
 
 func BuildCleanSaveData():
 	var res = {}
-	res["currencies"] = {"coins":200,"crystals":0,"energy":0} #default coins 0
+	res["currencies"] = {"coins":200,"crystals":200,"energy":0} #default coins 0
 	res["bot_inventory"]={
 		"bot_db": [],
 		"merge_free_slots":4
@@ -177,6 +177,11 @@ func BuildCleanSaveData():
 	res["reward_chests"] = {
 		"queue": []
 	}
+	res["skill_tree"] = {
+		"tree_id":"",
+		"version":1,
+		"node_levels": {}
+	}
 	return res
 
 
@@ -207,17 +212,25 @@ func GetLaneData(lane_index:int)->Dictionary:
 			return x
 	return {}
 
-func GetCurrency(currency_type:String)->int:
-	return save_data.currencies[currency_type]
+func GetCurrency(currency_type: String) -> int:
+	if !save_data.has("currencies"):
+		return 0
+	if !save_data.currencies.has(currency_type):
+		return 0
+	return int(save_data.currencies[currency_type])
 
 func RemoveCurrency(currency_type:String,value:int) -> void:
 	save_data.currencies[currency_type] = int(save_data.currencies[currency_type] - value)
 	return
 	
-func AddCurrency(currency_type:String,value:int) -> void:
+func AddCurrency(currency_type:String, value:int) -> void:
+	if !save_data.has("currencies"):
+		save_data["currencies"] = {}
+	if !save_data.currencies.has(currency_type):
+		save_data.currencies[currency_type] = 0
+
 	save_data.currencies[currency_type] = int(save_data.currencies[currency_type] + value)
-	GlobalSignals.CurrencyAdded.emit(currency_type,value)
-	return
+	GlobalSignals.CurrencyAdded.emit(currency_type, value)
 	
 func ActivateLane(lane_index:int):
 	for x in save_data.lanes:

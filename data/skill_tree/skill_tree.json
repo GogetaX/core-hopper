@@ -32,22 +32,34 @@
 	  "branch": "core",
 	  "node_type": "root",
 	  "max_level": 1,
-	  "costs": [0],
+	  "costs": [
+		0
+	  ],
 	  "prereq_ids": [],
-	  "pos": { "x": 0, "y": 0 },
-	  "icon": "skill_core_link",
-	  "effects": []
+	  "pos": {
+		"x": 0,
+		"y": 0
+	  },
+	  "icon": "core_link",
+	  "effects": [],
+	  "description": "Unlocks the core skill tree."
 	},
-
 	"merge_slot_1": {
 	  "title": "Merge Slot I",
 	  "branch": "merge",
 	  "node_type": "unlock",
 	  "max_level": 1,
-	  "costs": [40],
-	  "prereq_ids": ["core_link"],
-	  "pos": { "x": -220, "y": 0 },
-	  "icon": "skill_merge_slot",
+	  "costs": [
+		40
+	  ],
+	  "prereq_ids": [
+        "core_link"
+	  ],
+	  "pos": {
+		"x": -220,
+		"y": 0
+	  },
+	  "icon": "merge_slot",
 	  "effects": [
 		{
 		  "kind": "stat",
@@ -55,17 +67,25 @@
 		  "op": "add",
 		  "value_per_level": 1
 		}
-	  ]
+	  ],
+	  "description": "Unlocks 1 additional merge slot."
 	},
 	"merge_slot_2": {
 	  "title": "Merge Slot II",
 	  "branch": "merge",
 	  "node_type": "unlock",
 	  "max_level": 1,
-	  "costs": [80],
-	  "prereq_ids": ["merge_slot_1"],
-	  "pos": { "x": -380, "y": 0 },
-	  "icon": "skill_merge_slot",
+	  "costs": [
+		80
+	  ],
+	  "prereq_ids": [
+        "merge_slot_1"
+	  ],
+	  "pos": {
+		"x": -380,
+		"y": 0
+	  },
+	  "icon": "merge_slot",
 	  "effects": [
 		{
 		  "kind": "stat",
@@ -73,17 +93,25 @@
 		  "op": "add",
 		  "value_per_level": 1
 		}
-	  ]
+	  ],
+	  "description": "Unlocks 1 additional merge slot."
 	},
 	"merge_slot_3": {
 	  "title": "Merge Slot III",
 	  "branch": "merge",
 	  "node_type": "unlock",
 	  "max_level": 1,
-	  "costs": [140],
-	  "prereq_ids": ["merge_slot_2"],
-	  "pos": { "x": -540, "y": 0 },
-	  "icon": "skill_merge_slot",
+	  "costs": [
+		140
+	  ],
+	  "prereq_ids": [
+        "merge_slot_2"
+	  ],
+	  "pos": {
+		"x": -540,
+		"y": 0
+	  },
+	  "icon": "merge_slot",
 	  "effects": [
 		{
 		  "kind": "stat",
@@ -91,17 +119,25 @@
 		  "op": "add",
 		  "value_per_level": 1
 		}
-	  ]
+	  ],
+	  "description": "Unlocks 1 additional merge slot."
 	},
 	"merge_slot_4": {
 	  "title": "Merge Slot IV",
 	  "branch": "merge",
 	  "node_type": "unlock",
 	  "max_level": 1,
-	  "costs": [220],
-	  "prereq_ids": ["merge_slot_3"],
-	  "pos": { "x": -700, "y": 0 },
-	  "icon": "skill_merge_slot",
+	  "costs": [
+		220
+	  ],
+	  "prereq_ids": [
+        "merge_slot_3"
+	  ],
+	  "pos": {
+		"x": -700,
+		"y": 0
+	  },
+	  "icon": "merge_slot",
 	  "effects": [
 		{
 		  "kind": "stat",
@@ -109,17 +145,25 @@
 		  "op": "add",
 		  "value_per_level": 1
 		}
-	  ]
+	  ],
+	  "description": "Unlocks 1 additional merge slot."
 	},
 	"merge_slot_5": {
 	  "title": "Merge Slot V",
 	  "branch": "merge",
 	  "node_type": "unlock",
 	  "max_level": 1,
-	  "costs": [320],
-	  "prereq_ids": ["merge_slot_4"],
-	  "pos": { "x": -860, "y": 0 },
-	  "icon": "skill_merge_slot",
+	  "costs": [
+		320
+	  ],
+	  "prereq_ids": [
+        "merge_slot_4"
+	  ],
+	  "pos": {
+		"x": -860,
+		"y": 0
+	  },
+	  "icon": "merge_slot",
 	  "effects": [
 		{
 		  "kind": "stat",
@@ -127,17 +171,29 @@
 		  "op": "add",
 		  "value_per_level": 1
 		}
-	  ]
+	  ],
+	  "description": "Unlocks 1 additional merge slot."
 	},
 	"merge_efficiency_1": {
 	  "title": "Merge Efficiency",
 	  "branch": "merge",
 	  "node_type": "stat",
 	  "max_level": 5,
-	  "costs": [45, 90, 150, 230, 330],
-	  "prereq_ids": ["merge_slot_2"],
-	  "pos": { "x": -520, "y": -140 },
-	  "icon": "skill_merge_efficiency",
+	  "costs": [
+		45,
+		90,
+		150,
+		230,
+		330
+	  ],
+	  "prereq_ids": [
+        "merge_slot_2"
+	  ],
+	  "pos": {
+		"x": -520,
+		"y": -140
+	  },
+	  "icon": "merge_efficiency",
 	  "effects": [
 		{
 		  "kind": "stat",
@@ -145,42 +201,62 @@
 		  "op": "add",
 		  "value_per_level": 0.05
 		}
-	  ]
+	  ],
+	  "description": "Merged bots gain extra power."
 	},
 	"master_workshop": {
 	  "title": "Master Workshop",
 	  "branch": "merge",
 	  "node_type": "keystone",
 	  "max_level": 1,
-	  "costs": [520],
-	  "prereq_ids": ["merge_slot_5", "merge_efficiency_1"],
-	  "pos": { "x": -1020, "y": -140 },
-	  "icon": "skill_master_workshop",
+	  "costs": [
+		520
+	  ],
+	  "prereq_ids": [
+		"merge_slot_5",
+        "merge_efficiency_1"
+	  ],
+	  "pos": {
+		"x": -1020,
+		"y": -140
+	  },
+	  "icon": "master_workshop",
 	  "effects": [
 		{
 		  "kind": "stat",
 		  "stat": "merge_output_power_mult",
 		  "op": "add",
-		  "value_per_level": 0.10
+		  "value_per_level": 0.1
 		},
 		{
 		  "kind": "stat",
 		  "stat": "merge_refund_chance",
 		  "op": "add",
-		  "value_per_level": 0.10
+		  "value_per_level": 0.1
 		}
-	  ]
+	  ],
+	  "description": "Greatly improves merge results and adds a refund chance."
 	},
-
 	"boss_damage_1": {
 	  "title": "Boss Damage",
 	  "branch": "boss",
 	  "node_type": "stat",
 	  "max_level": 5,
-	  "costs": [35, 70, 115, 170, 240],
-	  "prereq_ids": ["core_link"],
-	  "pos": { "x": -120, "y": -200 },
-	  "icon": "skill_boss_damage",
+	  "costs": [
+		35,
+		70,
+		115,
+		170,
+		240
+	  ],
+	  "prereq_ids": [
+        "core_link"
+	  ],
+	  "pos": {
+		"x": -120,
+		"y": -200
+	  },
+	  "icon": "boss_damage",
 	  "effects": [
 		{
 		  "kind": "stat",
@@ -188,17 +264,29 @@
 		  "op": "add",
 		  "value_per_level": 0.12
 		}
-	  ]
+	  ],
+	  "description": "Increases damage dealt to bosses."
 	},
 	"boss_rewards_1": {
 	  "title": "Boss Rewards",
 	  "branch": "boss",
 	  "node_type": "stat",
 	  "max_level": 5,
-	  "costs": [40, 80, 130, 195, 280],
-	  "prereq_ids": ["boss_damage_1"],
-	  "pos": { "x": -240, "y": -340 },
-	  "icon": "skill_boss_rewards",
+	  "costs": [
+		40,
+		80,
+		130,
+		195,
+		280
+	  ],
+	  "prereq_ids": [
+        "boss_damage_1"
+	  ],
+	  "pos": {
+		"x": -240,
+		"y": -340
+	  },
+	  "icon": "boss_rewards",
 	  "effects": [
 		{
 		  "kind": "stat",
@@ -206,17 +294,29 @@
 		  "op": "add",
 		  "value_per_level": 0.08
 		}
-	  ]
+	  ],
+	  "description": "Increases rewards gained from bosses."
 	},
 	"boss_relic_find_1": {
 	  "title": "Relic Find",
 	  "branch": "boss",
 	  "node_type": "stat",
 	  "max_level": 5,
-	  "costs": [50, 95, 150, 225, 320],
-	  "prereq_ids": ["boss_rewards_1"],
-	  "pos": { "x": -120, "y": -380 },
-	  "icon": "skill_relic_find",
+	  "costs": [
+		50,
+		95,
+		150,
+		225,
+		320
+	  ],
+	  "prereq_ids": [
+        "boss_rewards_1"
+	  ],
+	  "pos": {
+		"x": -120,
+		"y": -380
+	  },
+	  "icon": "relic_find",
 	  "effects": [
 		{
 		  "kind": "stat",
@@ -224,17 +324,27 @@
 		  "op": "add",
 		  "value_per_level": 0.03
 		}
-	  ]
+	  ],
+	  "description": "Improves relic drop chance from bosses."
 	},
 	"boss_rare_relic_1": {
 	  "title": "Rare Relic Find",
 	  "branch": "boss",
 	  "node_type": "stat",
 	  "max_level": 3,
-	  "costs": [140, 260, 420],
-	  "prereq_ids": ["boss_relic_find_1"],
-	  "pos": { "x": -240, "y": -520 },
-	  "icon": "skill_rare_relic_find",
+	  "costs": [
+		140,
+		260,
+		420
+	  ],
+	  "prereq_ids": [
+        "boss_relic_find_1"
+	  ],
+	  "pos": {
+		"x": -240,
+		"y": -520
+	  },
+	  "icon": "rare_relic_find",
 	  "effects": [
 		{
 		  "kind": "stat",
@@ -242,35 +352,54 @@
 		  "op": "add",
 		  "value_per_level": 0.02
 		}
-	  ]
+	  ],
+	  "description": "Improves rare relic drop chance from bosses."
 	},
 	"anti_regen_1": {
 	  "title": "Anti-Regen",
 	  "branch": "boss",
 	  "node_type": "stat",
 	  "max_level": 3,
-	  "costs": [90, 170, 280],
-	  "prereq_ids": ["boss_damage_1"],
-	  "pos": { "x": 0, "y": -340 },
-	  "icon": "skill_anti_regen",
+	  "costs": [
+		90,
+		170,
+		280
+	  ],
+	  "prereq_ids": [
+        "boss_damage_1"
+	  ],
+	  "pos": {
+		"x": 0,
+		"y": -340
+	  },
+	  "icon": "anti_regen",
 	  "effects": [
 		{
 		  "kind": "stat",
 		  "stat": "boss_regen_reduction",
 		  "op": "add",
-		  "value_per_level": 0.10
+		  "value_per_level": 0.1
 		}
-	  ]
+	  ],
+	  "description": "Reduces boss regeneration."
 	},
 	"relic_hunter": {
 	  "title": "Relic Hunter",
 	  "branch": "boss",
 	  "node_type": "keystone",
 	  "max_level": 1,
-	  "costs": [650],
-	  "prereq_ids": ["boss_rare_relic_1", "anti_regen_1"],
-	  "pos": { "x": -120, "y": -640 },
-	  "icon": "skill_relic_hunter",
+	  "costs": [
+		650
+	  ],
+	  "prereq_ids": [
+		"boss_rare_relic_1",
+        "anti_regen_1"
+	  ],
+	  "pos": {
+		"x": -120,
+		"y": -640
+	  },
+	  "icon": "relic_hunter",
 	  "effects": [
 		{
 		  "kind": "stat",
@@ -290,18 +419,29 @@
 		  "op": "add",
 		  "value_per_level": 0.05
 		}
-	  ]
+	  ],
+	  "description": "Massively improves boss rewards and relic drops."
 	},
-
 	"offline_time_1": {
 	  "title": "Offline Time",
 	  "branch": "offline",
 	  "node_type": "stat",
 	  "max_level": 5,
-	  "costs": [25, 50, 85, 130, 190],
-	  "prereq_ids": ["core_link"],
-	  "pos": { "x": 120, "y": -200 },
-	  "icon": "skill_offline_time",
+	  "costs": [
+		25,
+		50,
+		85,
+		130,
+		190
+	  ],
+	  "prereq_ids": [
+        "core_link"
+	  ],
+	  "pos": {
+		"x": 120,
+		"y": -200
+	  },
+	  "icon": "offline_time",
 	  "effects": [
 		{
 		  "kind": "stat",
@@ -309,17 +449,29 @@
 		  "op": "add",
 		  "value_per_level": 1800
 		}
-	  ]
+	  ],
+	  "description": "Increases maximum offline time."
 	},
 	"offline_efficiency_1": {
 	  "title": "Offline Efficiency",
 	  "branch": "offline",
 	  "node_type": "stat",
 	  "max_level": 5,
-	  "costs": [35, 70, 115, 170, 240],
-	  "prereq_ids": ["offline_time_1"],
-	  "pos": { "x": 240, "y": -340 },
-	  "icon": "skill_offline_efficiency",
+	  "costs": [
+		35,
+		70,
+		115,
+		170,
+		240
+	  ],
+	  "prereq_ids": [
+        "offline_time_1"
+	  ],
+	  "pos": {
+		"x": 240,
+		"y": -340
+	  },
+	  "icon": "offline_efficiency",
 	  "effects": [
 		{
 		  "kind": "stat",
@@ -327,17 +479,29 @@
 		  "op": "add",
 		  "value_per_level": 0.06
 		}
-	  ]
+	  ],
+	  "description": "Improves total offline gains."
 	},
 	"offline_coin_gain_1": {
 	  "title": "Offline Coin Gain",
 	  "branch": "offline",
 	  "node_type": "stat",
 	  "max_level": 5,
-	  "costs": [35, 75, 125, 190, 270],
-	  "prereq_ids": ["offline_efficiency_1"],
-	  "pos": { "x": 120, "y": -380 },
-	  "icon": "skill_offline_coin_gain",
+	  "costs": [
+		35,
+		75,
+		125,
+		190,
+		270
+	  ],
+	  "prereq_ids": [
+        "offline_efficiency_1"
+	  ],
+	  "pos": {
+		"x": 120,
+		"y": -380
+	  },
+	  "icon": "offline_coin_gain",
 	  "effects": [
 		{
 		  "kind": "stat",
@@ -345,17 +509,29 @@
 		  "op": "add",
 		  "value_per_level": 0.08
 		}
-	  ]
+	  ],
+	  "description": "Increases coins earned while offline."
 	},
 	"offline_crystal_gain_1": {
 	  "title": "Offline Crystal Gain",
 	  "branch": "offline",
 	  "node_type": "stat",
 	  "max_level": 5,
-	  "costs": [45, 90, 145, 220, 310],
-	  "prereq_ids": ["offline_efficiency_1"],
-	  "pos": { "x": 360, "y": -380 },
-	  "icon": "skill_offline_crystal_gain",
+	  "costs": [
+		45,
+		90,
+		145,
+		220,
+		310
+	  ],
+	  "prereq_ids": [
+        "offline_efficiency_1"
+	  ],
+	  "pos": {
+		"x": 360,
+		"y": -380
+	  },
+	  "icon": "offline_crystal_gain",
 	  "effects": [
 		{
 		  "kind": "stat",
@@ -363,17 +539,27 @@
 		  "op": "add",
 		  "value_per_level": 0.05
 		}
-	  ]
+	  ],
+	  "description": "Increases crystals earned while offline."
 	},
 	"offline_chest_queue_1": {
 	  "title": "Offline Chest Queue",
 	  "branch": "offline",
 	  "node_type": "stat",
 	  "max_level": 3,
-	  "costs": [70, 140, 250],
-	  "prereq_ids": ["offline_time_1"],
-	  "pos": { "x": 360, "y": -260 },
-	  "icon": "skill_offline_chest_queue",
+	  "costs": [
+		70,
+		140,
+		250
+	  ],
+	  "prereq_ids": [
+        "offline_time_1"
+	  ],
+	  "pos": {
+		"x": 360,
+		"y": -260
+	  },
+	  "icon": "offline_chest_queue",
 	  "effects": [
 		{
 		  "kind": "stat",
@@ -381,17 +567,26 @@
 		  "op": "add",
 		  "value_per_level": 1
 		}
-	  ]
+	  ],
+	  "description": "Increases queued offline chest capacity."
 	},
 	"deep_sleep": {
 	  "title": "Deep Sleep",
 	  "branch": "offline",
 	  "node_type": "keystone",
 	  "max_level": 1,
-	  "costs": [560],
-	  "prereq_ids": ["offline_coin_gain_1", "offline_crystal_gain_1"],
-	  "pos": { "x": 240, "y": -520 },
-	  "icon": "skill_deep_sleep",
+	  "costs": [
+		560
+	  ],
+	  "prereq_ids": [
+		"offline_coin_gain_1",
+        "offline_crystal_gain_1"
+	  ],
+	  "pos": {
+		"x": 240,
+		"y": -520
+	  },
+	  "icon": "deep_sleep",
 	  "effects": [
 		{
 		  "kind": "stat",
@@ -405,18 +600,25 @@
 		  "op": "add",
 		  "value_per_level": 0.15
 		}
-	  ]
+	  ],
+	  "description": "Greatly boosts offline time and efficiency."
 	},
-
 	"buy_bot_lv2": {
 	  "title": "Buy Level 2 Bots",
 	  "branch": "bot_shop",
 	  "node_type": "unlock",
 	  "max_level": 1,
-	  "costs": [60],
-	  "prereq_ids": ["core_link"],
-	  "pos": { "x": -140, "y": 180 },
-	  "icon": "skill_buy_bot_lv2",
+	  "costs": [
+		60
+	  ],
+	  "prereq_ids": [
+        "core_link"
+	  ],
+	  "pos": {
+		"x": -140,
+		"y": 180
+	  },
+	  "icon": "buy_level_2_bots",
 	  "effects": [
 		{
 		  "kind": "unlock",
@@ -424,17 +626,25 @@
 		  "level": 2,
 		  "base_cost_multiplier": 5.0
 		}
-	  ]
+	  ],
+	  "description": "Unlocks direct purchase of level 2 bots."
 	},
 	"buy_bot_lv3": {
 	  "title": "Buy Level 3 Bots",
 	  "branch": "bot_shop",
 	  "node_type": "unlock",
 	  "max_level": 1,
-	  "costs": [130],
-	  "prereq_ids": ["buy_bot_lv2"],
-	  "pos": { "x": -280, "y": 320 },
-	  "icon": "skill_buy_bot_lv3",
+	  "costs": [
+		130
+	  ],
+	  "prereq_ids": [
+        "buy_bot_lv2"
+	  ],
+	  "pos": {
+		"x": -280,
+		"y": 320
+	  },
+	  "icon": "buy_level_3_bots",
 	  "effects": [
 		{
 		  "kind": "unlock",
@@ -442,17 +652,25 @@
 		  "level": 3,
 		  "base_cost_multiplier": 14.0
 		}
-	  ]
+	  ],
+	  "description": "Unlocks direct purchase of level 3 bots."
 	},
 	"buy_bot_lv4": {
 	  "title": "Buy Level 4 Bots",
 	  "branch": "bot_shop",
 	  "node_type": "unlock",
 	  "max_level": 1,
-	  "costs": [260],
-	  "prereq_ids": ["buy_bot_lv3"],
-	  "pos": { "x": -420, "y": 460 },
-	  "icon": "skill_buy_bot_lv4",
+	  "costs": [
+		260
+	  ],
+	  "prereq_ids": [
+        "buy_bot_lv3"
+	  ],
+	  "pos": {
+		"x": -420,
+		"y": 460
+	  },
+	  "icon": "buy_level_4_bots",
 	  "effects": [
 		{
 		  "kind": "unlock",
@@ -460,17 +678,25 @@
 		  "level": 4,
 		  "base_cost_multiplier": 40.0
 		}
-	  ]
+	  ],
+	  "description": "Unlocks direct purchase of level 4 bots."
 	},
 	"buy_bot_lv5": {
 	  "title": "Buy Level 5 Bots",
 	  "branch": "bot_shop",
 	  "node_type": "unlock",
 	  "max_level": 1,
-	  "costs": [460],
-	  "prereq_ids": ["buy_bot_lv4"],
-	  "pos": { "x": -560, "y": 600 },
-	  "icon": "skill_buy_bot_lv5",
+	  "costs": [
+		460
+	  ],
+	  "prereq_ids": [
+        "buy_bot_lv4"
+	  ],
+	  "pos": {
+		"x": -560,
+		"y": 600
+	  },
+	  "icon": "buy_level_5_bots",
 	  "effects": [
 		{
 		  "kind": "unlock",
@@ -478,17 +704,29 @@
 		  "level": 5,
 		  "base_cost_multiplier": 110.0
 		}
-	  ]
+	  ],
+	  "description": "Unlocks direct purchase of level 5 bots."
 	},
 	"direct_buy_discount_1": {
 	  "title": "Direct Buy Discount",
 	  "branch": "bot_shop",
 	  "node_type": "stat",
 	  "max_level": 5,
-	  "costs": [50, 95, 150, 220, 310],
-	  "prereq_ids": ["buy_bot_lv2"],
-	  "pos": { "x": -60, "y": 340 },
-	  "icon": "skill_direct_buy_discount",
+	  "costs": [
+		50,
+		95,
+		150,
+		220,
+		310
+	  ],
+	  "prereq_ids": [
+        "buy_bot_lv2"
+	  ],
+	  "pos": {
+		"x": -60,
+		"y": 340
+	  },
+	  "icon": "direct_buy_discount",
 	  "effects": [
 		{
 		  "kind": "stat",
@@ -496,60 +734,88 @@
 		  "op": "add",
 		  "value_per_level": 0.05
 		}
-	  ]
+	  ],
+	  "description": "Reduces the cost of directly bought bots."
 	},
 	"premium_assembly": {
 	  "title": "Premium Assembly",
 	  "branch": "bot_shop",
 	  "node_type": "keystone",
 	  "max_level": 1,
-	  "costs": [700],
-	  "prereq_ids": ["buy_bot_lv5", "direct_buy_discount_1"],
-	  "pos": { "x": -360, "y": 720 },
-	  "icon": "skill_premium_assembly",
+	  "costs": [
+		700
+	  ],
+	  "prereq_ids": [
+		"buy_bot_lv5",
+        "direct_buy_discount_1"
+	  ],
+	  "pos": {
+		"x": -360,
+		"y": 720
+	  },
+	  "icon": "premium_assembly",
 	  "effects": [
 		{
 		  "kind": "stat",
 		  "stat": "bought_bot_power_mult",
 		  "op": "add",
-		  "value_per_level": 0.20
+		  "value_per_level": 0.2
 		},
 		{
 		  "kind": "stat",
 		  "stat": "direct_bot_buy_cost_reduction",
 		  "op": "add",
-		  "value_per_level": 0.10
+		  "value_per_level": 0.1
 		}
-	  ]
+	  ],
+	  "description": "Bought bots are stronger and cheaper."
 	},
-
 	"tap_damage_1": {
 	  "title": "Tap Damage",
 	  "branch": "tap",
 	  "node_type": "stat",
 	  "max_level": 5,
-	  "costs": [30, 60, 100, 150, 210],
-	  "prereq_ids": ["core_link"],
-	  "pos": { "x": 140, "y": 180 },
-	  "icon": "skill_tap_damage",
+	  "costs": [
+		30,
+		60,
+		100,
+		150,
+		210
+	  ],
+	  "prereq_ids": [
+        "core_link"
+	  ],
+	  "pos": {
+		"x": 140,
+		"y": 180
+	  },
+	  "icon": "tap_damage",
 	  "effects": [
 		{
 		  "kind": "stat",
 		  "stat": "tap_damage_mult",
 		  "op": "add",
-		  "value_per_level": 0.10
+		  "value_per_level": 0.1
 		}
-	  ]
+	  ],
+	  "description": "Increases tap damage."
 	},
 	"tap_execute_unlock": {
 	  "title": "Execute Protocol",
 	  "branch": "tap",
 	  "node_type": "unlock",
 	  "max_level": 1,
-	  "costs": [120],
-	  "prereq_ids": ["tap_damage_1"],
-	  "pos": { "x": 280, "y": 320 },
-	  "icon": "skill_tap_execute",
+	  "costs": [
+		120
+	  ],
+	  "prereq_ids": [
+        "tap_damage_1"
+	  ],
+	  "pos": {
+		"x": 280,
+		"y": 320
+	  },
+	  "icon": "execute_protocol",
 	  "effects": [
 		{
 		  "kind": "unlock",
@@ -557,17 +823,28 @@
 		  "target": "non_boss_front_block",
 		  "threshold": 0.05
 		}
-	  ]
+	  ],
+	  "description": "Taps instantly break weak non-boss blocks."
 	},
 	"execute_threshold_1": {
 	  "title": "Execute Threshold",
 	  "branch": "tap",
 	  "node_type": "stat",
 	  "max_level": 4,
-	  "costs": [70, 140, 240, 360],
-	  "prereq_ids": ["tap_execute_unlock"],
-	  "pos": { "x": 420, "y": 460 },
-	  "icon": "skill_execute_threshold",
+	  "costs": [
+		70,
+		140,
+		240,
+		360
+	  ],
+	  "prereq_ids": [
+        "tap_execute_unlock"
+	  ],
+	  "pos": {
+		"x": 420,
+		"y": 460
+	  },
+	  "icon": "execute_threshold",
 	  "effects": [
 		{
 		  "kind": "stat",
@@ -575,17 +852,29 @@
 		  "op": "add",
 		  "value_per_level": 0.025
 		}
-	  ]
+	  ],
+	  "description": "Raises the HP threshold for execute taps."
 	},
 	"tap_crit_chance_1": {
 	  "title": "Tap Crit Chance",
 	  "branch": "tap",
 	  "node_type": "stat",
 	  "max_level": 5,
-	  "costs": [40, 80, 130, 195, 280],
-	  "prereq_ids": ["tap_damage_1"],
-	  "pos": { "x": 80, "y": 360 },
-	  "icon": "skill_tap_crit_chance",
+	  "costs": [
+		40,
+		80,
+		130,
+		195,
+		280
+	  ],
+	  "prereq_ids": [
+        "tap_damage_1"
+	  ],
+	  "pos": {
+		"x": 80,
+		"y": 360
+	  },
+	  "icon": "tap_cirt_chance",
 	  "effects": [
 		{
 		  "kind": "stat",
@@ -593,41 +882,62 @@
 		  "op": "add",
 		  "value_per_level": 0.03
 		}
-	  ]
+	  ],
+	  "description": "Increases tap critical hit chance."
 	},
 	"tap_crit_mult_1": {
 	  "title": "Tap Crit Multiplier",
 	  "branch": "tap",
 	  "node_type": "stat",
 	  "max_level": 5,
-	  "costs": [50, 95, 150, 225, 320],
-	  "prereq_ids": ["tap_crit_chance_1"],
-	  "pos": { "x": 200, "y": 500 },
-	  "icon": "skill_tap_crit_mult",
+	  "costs": [
+		50,
+		95,
+		150,
+		225,
+		320
+	  ],
+	  "prereq_ids": [
+        "tap_crit_chance_1"
+	  ],
+	  "pos": {
+		"x": 200,
+		"y": 500
+	  },
+	  "icon": "tap_crit_multiplier",
 	  "effects": [
 		{
 		  "kind": "stat",
 		  "stat": "tap_crit_mult",
 		  "op": "add",
-		  "value_per_level": 0.10
+		  "value_per_level": 0.1
 		}
-	  ]
+	  ],
+	  "description": "Increases tap critical damage."
 	},
 	"precision_break": {
 	  "title": "Precision Break",
 	  "branch": "tap",
 	  "node_type": "keystone",
 	  "max_level": 1,
-	  "costs": [620],
-	  "prereq_ids": ["execute_threshold_1", "tap_crit_mult_1"],
-	  "pos": { "x": 340, "y": 640 },
-	  "icon": "skill_precision_break",
+	  "costs": [
+		620
+	  ],
+	  "prereq_ids": [
+		"execute_threshold_1",
+        "tap_crit_mult_1"
+	  ],
+	  "pos": {
+		"x": 340,
+		"y": 640
+	  },
+	  "icon": "precision_break",
 	  "effects": [
 		{
 		  "kind": "stat",
 		  "stat": "tap_execute_reward_mult",
 		  "op": "add",
-		  "value_per_level": 0.20
+		  "value_per_level": 0.2
 		},
 		{
 		  "kind": "stat",
@@ -635,7 +945,8 @@
 		  "op": "add",
 		  "value_per_level": 0.25
 		}
-	  ]
+	  ],
+	  "description": "Boosts execute rewards and front block tap damage."
 	}
   }
 }
