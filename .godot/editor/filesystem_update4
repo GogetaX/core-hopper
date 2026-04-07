@@ -40,3 +40,11 @@ res://scenes/screens/progress/quest_count.gd
 res://data/upgrades/upgrade_db.json
 res://scenes/screens/progress/progress_skill.tscn
 res://scenes/screens/progress/progress_skill.gd
+res://scenes/screens/progress/quest_item.gd
+res://scenes/popups/single_chest_popup.gd
+res://scenes/screens/merge/merge_item.gd
+res://scenes/screens/merge/sell_node.tscn
+res://scenes/screens/merge/sell_node.gd
+res://autoload/Global.gd
+res://scenes/screens/merge/mergeitem_drag.tscn
+res://scenes/screens/merge/drag_drop_handler.gd

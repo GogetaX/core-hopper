@@ -25,7 +25,10 @@ func _process(_delta: float) -> void:
 	if merge_drag_node:
 		merge_drag_node.global_position = get_viewport().get_mouse_position()-(merge_drag_node.size / 2.0)
 		if !Input.is_action_pressed("ui_tap"):
-			if merge_drag_node.cur_dragging_merge_node:
+			
+			if Global.cur_drag_data.has("at_sell_node"):
+				EvaluateReleaseStateToSell()
+			elif merge_drag_node.cur_dragging_merge_node:
 				EvaluateReleaseStateFromMerge()
 			elif merge_drag_node.cur_dragging_bot_node:
 				EvaluateReleaseStateFromDigbot()
@@ -35,6 +38,9 @@ func _process(_delta: float) -> void:
 			Global.cur_drag_data = {}
 			Global.cur_dragging_node.queue_free()
 
+func EvaluateReleaseStateToSell():
+	print("sell?")
+	
 func EvaluateReleaseStateFromDigbot():
 	if Global.cur_drag_data.has("at_self_dig_bot"):
 		var is_mouse_in = merge_drag_node.cur_dragging_bot_node.get_global_rect().has_point(get_viewport().get_mouse_position())

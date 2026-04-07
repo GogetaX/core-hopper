@@ -1,3 +1,4 @@
+res://scenes/screens/merge/
 res://scenes/screens/progress/
 res://art/skills/
 res://autoload/
@@ -12,7 +13,6 @@ res://scenes/screens/particles/
 res://data/icons/
 res://shaders/
 res://data/bosses/
-res://scenes/screens/merge/
 res://data/bot_atlas/
 res://art/bots/
 res://scenes/popups/

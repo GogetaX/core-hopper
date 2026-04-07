@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://stbsi2oe8sia"]
+
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="1_77yp4"]
+[ext_resource type="Script" uid="uid://7ychjdvahny2" path="res://scenes/screens/merge/sell_node.gd" id="1_cecb1"]
+[ext_resource type="Texture2D" uid="uid://bk0nmpaugyn1k" path="res://art/ui/trash_icon.png" id="2_cecb1"]
+[ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="3_ex1cn"]
+
+[node name="SellNode" type="Control" unique_id=1110717194]
+z_index = 1
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_top = -104.0
+offset_bottom = 96.0
+grow_horizontal = 0
+mouse_filter = 1
+script = ExtResource("1_cecb1")
+
+[node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("1_77yp4")]
+layout_mode = 1
+panel_color = "ORANGE"
+darken_bg = true
+
+[node name="VList" type="VBoxContainer" parent="SmartPanel" unique_id=515391008]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="SmartPanel/VList" unique_id=1746284469]
+self_modulate = Color(1, 0.5411765, 0.16862746, 1)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+texture = ExtResource("2_cecb1")
+stretch_mode = 5
+
+[node name="ProgressHashTag" parent="SmartPanel/VList" unique_id=713365230 instance=ExtResource("3_ex1cn")]
+self_modulate = Color(1, 0.5411765, 0.16862746, 1)
+layout_mode = 2
+text = "SELL"
+horizontal_alignment = 1
+hash_tag_color = "ORANGE"
+no_bg = true
+
+[node name="wait_before_show" type="Timer" parent="." unique_id=1902233395]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="timeout" from="wait_before_show" to="." method="_on_wait_before_show_timeout"]

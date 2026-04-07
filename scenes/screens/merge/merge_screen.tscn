@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dpo46sl5j3kcq" path="res://scenes/screens/merge/smart_button_merge.tscn" id="2_imfux"]
 [ext_resource type="Script" uid="uid://bnypytdg7otdp" path="res://scenes/label_data_scripts/active_bot_slots.gd" id="2_yawsl"]
 [ext_resource type="Texture2D" uid="uid://bg18vum2cai3c" path="res://art/icons/rocket.png" id="3_um6mi"]
+[ext_resource type="PackedScene" uid="uid://stbsi2oe8sia" path="res://scenes/screens/merge/sell_node.tscn" id="6_vtb8o"]
 [ext_resource type="Script" uid="uid://bg68ksebamcji" path="res://scenes/screens/merge/drag_drop_handler.gd" id="7_lfmeh"]
 
 [node name="MergeScreen" type="VBoxContainer" unique_id=787988230]
@@ -191,6 +192,9 @@ layout_mode = 2
 [node name="Control3" type="Control" parent="." unique_id=881208437]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
+
+[node name="SellNode" parent="Control3" unique_id=1110717194 instance=ExtResource("6_vtb8o")]
+layout_mode = 1
 
 [node name="VList" type="VBoxContainer" parent="." unique_id=2002021898]
 layout_mode = 2

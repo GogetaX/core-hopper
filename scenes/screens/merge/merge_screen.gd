@@ -10,7 +10,6 @@ func SyncData():
 	$VList/BuyBotBtn.price_int = buy_level_data.price
 	$VList/BuyBotBtn.price_text = Global.CurrencyToString(buy_level_data.price)
 	$VList/BuyBotBtn.buy_btn_title = "NEW UNIT LV"+str(buy_level_data.level)
-	print(buy_level_data)
 	
 
 func _on_smart_button_buy_btn_pressed_with_price(currency: String, price: int) -> void:

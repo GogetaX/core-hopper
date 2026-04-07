@@ -129,26 +129,18 @@ func GetLaneIndex() -> int:
 
 func NeedsRefresh(new_data: Dictionary) -> bool:
 	if str(cur_data.get("uid", "")) != str(new_data.get("uid", "")):
-		if !cur_data.is_empty()  && cur_data.lane_index == 0:
-			print("1")
 		return true
 	
 	if float(cur_data.get("hp", -1.0)) != float(new_data.get("hp", -1.0)):
 		return false
 	
 	if float(cur_data.get("max_hp", -1.0)) != float(new_data.get("max_hp", -1.0)):
-		if !cur_data.is_empty()  && cur_data.lane_index == 0:
-			print("2")
 		return true
 	
 	if bool(cur_data.get("is_boss", false)) != bool(new_data.get("is_boss", false)):
-		if !cur_data.is_empty()  && cur_data.lane_index == 0:
-			print("3")
 		return true
 	
 	if str(cur_data.get("block_id", "")) != str(new_data.get("block_id", "")):
-		if !cur_data.is_empty()  && cur_data.lane_index == 0:
-			print("4")
 		return true
 	
 	return false

@@ -99,16 +99,22 @@ func GetUpgradeCost(upgrade_id: String) -> int:
 	return int(round(up.base_cost * pow(up.cost_scale, up.level)))
 	
 
-func GetUpgradeValue(upgrade_id: String, next_level:int = 0) -> float:
+func GetUpgradeValue(upgrade_id: String, next_level: int = 0) -> float:
 	if !GlobalSave.save_data.has("upgrades") or !GlobalSave.save_data.upgrades.has(upgrade_id):
-		if upgrade_id == "crit_chance" or upgrade_id == "crit_multiplier":
-			return 0.0
-		return 1.0
+		match upgrade_id:
+			"crit_chance", "crit_multiplier":
+				return 0.0
+			"tap_damage":
+				return 1.0
+			_:
+				return 1.0
 
 	var up = GlobalSave.save_data.upgrades[upgrade_id]
 	var level := int(up.level) + next_level
 
 	match str(up.effect_type):
+		"tap_curve":
+			return float(GetTapBaseDamageFromUpgradeLevel(level))
 		"mult_pow":
 			return pow(up.effect_base, level)
 		"linear":
@@ -120,6 +126,7 @@ func GetUpgradeValue(upgrade_id: String, next_level:int = 0) -> float:
 
 func GetTapDamage() -> float:
 	var base_tap_damage = max(1.0, float(GetUpgradeValue("tap_damage")))
+	
 	var upgrade_mult = max(1.0, GetTapDamageMultiplier())
 
 	var tap_skill_bonus := 0.0

@@ -47,6 +47,5 @@ func _on_open_all_btn_on_pressed() -> void:
 		if x is RewardCurrencyClass:
 			var coin_pos = x.GetCurrencyCenterGlobalPos()
 			GlobalSignals.ShowCurrencyAnimation.emit(coin_pos,x.currency_type.to_lower(),8)
-	print("id: ",cur_chest_data.chest_id)
 	GlobalRewardChest.OpenChest(cur_chest_data.chest_id)
 	GlobalSignals.ShowPopup.emit("SHOW_CHESTS",{})

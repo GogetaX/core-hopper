@@ -66,7 +66,7 @@ func _process(_delta: float) -> void:
 	#Handle already dragging? dragged into this node
 	var drag_in_visible = false
 	var default_unlocked_color = "BLUE"
-	if Global.cur_dragging_node:
+	if Global.cur_dragging_node && Global.mouse_at_sell_node == null:
 		if Input.is_action_pressed("ui_tap"):
 			#if dragging on self
 			if Global.cur_dragging_node.cur_dragging_merge_node == self:
@@ -88,8 +88,8 @@ func _process(_delta: float) -> void:
 	if $IsDragIn.visible != drag_in_visible:
 		$IsDragIn.visible = drag_in_visible
 	if $IsDragIn.panel_color != default_unlocked_color:
-		print("color: ",default_unlocked_color)
 		$IsDragIn.panel_color = default_unlocked_color
+		
 func SetUnlocked(is_unlocked):
 	_is_unlocked = is_unlocked
 	if _is_unlocked:

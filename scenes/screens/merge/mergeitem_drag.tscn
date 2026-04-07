@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://buga18o4gtaas" path="res://scenes/screens/merge/mergeitem_drag.gd" id="1_kae0p"]
 
 [node name="MergeitemDrag" type="Control" unique_id=776900001]
+z_index = 1
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 3
 anchors_preset = 0

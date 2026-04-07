@@ -110,7 +110,7 @@ func HasBossBeenKilledByID(boss_id: String) -> bool:
 		return false
 
 	var killed_ids = GlobalSave.save_data.get("boss_progress", {}).get("killed_ids", [])
-	print("CHECK boss_id=", id, " killed_ids=", killed_ids)
+
 	if typeof(killed_ids) != TYPE_ARRAY:
 		return false
 

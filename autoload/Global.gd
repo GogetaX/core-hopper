@@ -13,6 +13,7 @@ var cur_drag_data = {}
 var top_currency_node_coin = null
 var top_currency_node_energy = null
 var top_currency_node_crystal = null
+var mouse_at_sell_node : MergeSellClass = null
 
 var progress_menu_show_tab = ""
 
