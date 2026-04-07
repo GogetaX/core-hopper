@@ -112,7 +112,7 @@ func EnsureUpgradeSchema() -> void:
 
 func BuildCleanSaveData():
 	var res = {}
-	res["currencies"] = {"coins":200,"crystals":30000,"energy":0} #default coins 0
+	res["currencies"] = {"coins":0,"crystals":0,"energy":0} #default coins 0
 	res["bot_inventory"]={
 		"bot_db": [],
 		"merge_free_slots":4
@@ -341,6 +341,8 @@ func CombineBetween2MergeNodes(old_uid: int, new_uid: int) -> void:
 				new_merge_data.stats[stat] += old_merge_data.stats[stat]
 
 	new_merge_data.level = int(new_merge_data.level + 1)
+	if GlobalStats.HasChanceOfNextLevelBotOnMerge():
+		new_merge_data.level += 1
 	GlobalSave.SetHighestBotLevel(new_merge_data.level)
 	GlobalDailyQuest.RegisterMergeCreated(new_merge_data.level)
 	# clear old slot ownership before removing
@@ -348,9 +350,19 @@ func CombineBetween2MergeNodes(old_uid: int, new_uid: int) -> void:
 	if new_merge_data.level == 3:
 		if !GlobalSave.IsMilestoneCompleted("bot_level_3"):
 			GlobalSave.SetMilestoneToCompleted("bot_level_3")
+	
 	RemoveBotByID(old_uid)
+	CheckChanceForFreeBotOnMerge()
 	SyncSave()
 	
+func CheckChanceForFreeBotOnMerge():
+	if GlobalStats.HasChanceToSpawmNewBot():
+		var free_merge_slot = GlobalSave.FindFreeMergeSlot()
+		if free_merge_slot == -1:
+			return
+		var simple_bot = CreateSimpleBot()
+		GlobalSave.StoreUpdateBotData(simple_bot)
+		
 func SwapBetween2BotsMergeToMerge(old_uid: int, new_uid: int) -> void:
 	var old_bot = GetBotDataFromUID(old_uid)
 	var new_bot = GetBotDataFromUID(new_uid)
@@ -399,9 +411,13 @@ func MergeFromMergeToDigBot(merge_uid:int,digbot_uid:int):
 	if digbot_data.level == 3:
 		if !GlobalSave.IsMilestoneCompleted("bot_level_3"):
 			GlobalSave.SetMilestoneToCompleted("bot_level_3")
+			
+	if GlobalStats.HasChanceOfNextLevelBotOnMerge():
+		digbot_data.level += 1
 	GlobalDailyQuest.RegisterMergeCreated(digbot_data.level)
 	GlobalSave.SetHighestBotLevel(digbot_data.level)
 	RemoveBotByID(merge_uid)
+	CheckChanceForFreeBotOnMerge()
 	
 func MergeFromDigBotToMerge(digbot_uid: int, merge_uid: int) -> void:
 	var digbot_data = GetBotDataFromUID(digbot_uid)
@@ -428,10 +444,14 @@ func MergeFromDigBotToMerge(digbot_uid: int, merge_uid: int) -> void:
 	if merge_bot_data.level == 3:
 		if !GlobalSave.IsMilestoneCompleted("bot_level_3"):
 			GlobalSave.SetMilestoneToCompleted("bot_level_3")
+			
+	if GlobalStats.HasChanceOfNextLevelBotOnMerge():
+		merge_bot_data.level += 1
 	GlobalSave.SetHighestBotLevel(merge_bot_data.level)
 	GlobalDailyQuest.RegisterMergeCreated(merge_bot_data.level)
 	# remove dragged dig-bot from inventory and lane
 	RemoveBotByID(digbot_uid)
+	CheckChanceForFreeBotOnMerge()
 
 func GetLaneDataByIndex(lane_index:int) -> Dictionary:
 	for x in save_data.lanes:

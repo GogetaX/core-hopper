@@ -86,7 +86,7 @@ func GenerateNewSet() -> void:
 	_EnsureSaveSection()
 
 	var eligible_pool := _GetEligibleQuestPool()
-	var daily_count := int(_quest_db.get("daily_count", DEFAULT_DAILY_COUNT))
+	var daily_count := int(_quest_db.get("daily_count", DEFAULT_DAILY_COUNT)) + GlobalStats.GetAdditionalDailyQuestLimit()
 
 	var selected_ids: Array = []
 	var selected_lookup := {}

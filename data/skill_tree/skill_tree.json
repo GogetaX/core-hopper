@@ -174,69 +174,6 @@
 	  ],
 	  "description": "Unlocks 1 additional merge slot."
 	},
-	"merge_efficiency_1": {
-	  "title": "Merge Efficiency",
-	  "branch": "merge",
-	  "node_type": "stat",
-	  "max_level": 5,
-	  "costs": [
-		45,
-		90,
-		150,
-		230,
-		330
-	  ],
-	  "prereq_ids": [
-        "merge_slot_2"
-	  ],
-	  "pos": {
-		"x": -520,
-		"y": -140
-	  },
-	  "icon": "merge_efficiency",
-	  "effects": [
-		{
-		  "kind": "stat",
-		  "stat": "merge_output_power_mult",
-		  "op": "add",
-		  "value_per_level": 0.05
-		}
-	  ],
-	  "description": "Merged bots gain extra power."
-	},
-	"master_workshop": {
-	  "title": "Master Workshop",
-	  "branch": "merge",
-	  "node_type": "keystone",
-	  "max_level": 1,
-	  "costs": [
-		520
-	  ],
-	  "prereq_ids": [
-		"merge_slot_5",
-        "merge_efficiency_1"
-	  ],
-	  "pos": {
-		"x": -1020,
-		"y": -140
-	  },
-	  "icon": "master_workshop",
-	  "effects": [
-		{
-		  "kind": "stat",
-		  "stat": "merge_output_power_mult",
-		  "op": "add",
-		  "value_per_level": 0.1
-		},
-		{
-		  "kind": "stat",
-		  "stat": "merge_refund_chance",
-		  "op": "add",
-		  "value_per_level": 0.1
-		}
-	  ],
-	  "description": "Greatly improves merge results and adds a refund chance."
-	},
 	"boss_damage_1": {
 	  "title": "Boss Damage",
 	  "branch": "boss",
@@ -298,7 +235,7 @@
 	  "description": "Increases rewards gained from bosses."
 	},
 	"boss_relic_find_1": {
-	  "title": "Relic Find",
+	  "title": "Boss Crystal Cache",
 	  "branch": "boss",
 	  "node_type": "stat",
 	  "max_level": 5,
@@ -316,19 +253,19 @@
 		"x": -120,
 		"y": -380
 	  },
-	  "icon": "relic_find",
+	  "icon": "boss_crystal_cache",
 	  "effects": [
 		{
 		  "kind": "stat",
-		  "stat": "boss_relic_drop_chance",
+		  "stat": "boss_crystal_reward_mult",
 		  "op": "add",
-		  "value_per_level": 0.03
+		  "value_per_level": 0.08
 		}
 	  ],
-	  "description": "Improves relic drop chance from bosses."
+	  "description": "Increases crystals gained from bosses."
 	},
 	"boss_rare_relic_1": {
-	  "title": "Rare Relic Find",
+	  "title": "Boss Energy Cache",
 	  "branch": "boss",
 	  "node_type": "stat",
 	  "max_level": 3,
@@ -344,16 +281,16 @@
 		"x": -240,
 		"y": -520
 	  },
-	  "icon": "rare_relic_find",
+	  "icon": "boss_energy_cache",
 	  "effects": [
 		{
 		  "kind": "stat",
-		  "stat": "boss_rare_relic_drop_chance",
+		  "stat": "boss_energy_reward_mult",
 		  "op": "add",
-		  "value_per_level": 0.02
+		  "value_per_level": 0.2
 		}
 	  ],
-	  "description": "Improves rare relic drop chance from bosses."
+	  "description": "Increases energy gained from bosses."
 	},
 	"anti_regen_1": {
 	  "title": "Anti-Regen",
@@ -369,7 +306,7 @@
         "boss_damage_1"
 	  ],
 	  "pos": {
-		"x": 0,
+		"x": 20,
 		"y": -340
 	  },
 	  "icon": "anti_regen",
@@ -384,7 +321,7 @@
 	  "description": "Reduces boss regeneration."
 	},
 	"relic_hunter": {
-	  "title": "Relic Hunter",
+	  "title": "Titan Cache",
 	  "branch": "boss",
 	  "node_type": "keystone",
 	  "max_level": 1,
@@ -392,14 +329,13 @@
 		650
 	  ],
 	  "prereq_ids": [
-		"boss_rare_relic_1",
-        "anti_regen_1"
+        "boss_rare_relic_1"
 	  ],
 	  "pos": {
-		"x": -120,
-		"y": -640
+		"x": -360,
+		"y": -660
 	  },
-	  "icon": "relic_hunter",
+	  "icon": "titan_cache",
 	  "effects": [
 		{
 		  "kind": "stat",
@@ -409,18 +345,18 @@
 		},
 		{
 		  "kind": "stat",
-		  "stat": "boss_relic_drop_chance",
+		  "stat": "boss_crystal_reward_mult",
 		  "op": "add",
-		  "value_per_level": 0.05
+		  "value_per_level": 0.12
 		},
 		{
 		  "kind": "stat",
-		  "stat": "boss_rare_relic_drop_chance",
+		  "stat": "boss_energy_reward_mult",
 		  "op": "add",
-		  "value_per_level": 0.05
+		  "value_per_level": 0.3
 		}
 	  ],
-	  "description": "Massively improves boss rewards and relic drops."
+	  "description": "Massively improves boss currency rewards."
 	},
 	"offline_time_1": {
 	  "title": "Offline Time",
@@ -543,23 +479,34 @@
 	  "description": "Increases crystals earned while offline."
 	},
 	"offline_energy_gain_1": {
-	"title": "Offline Energy Gain",
-	"description": "Increases energy gained while offline.",
-	"branch": "offline",
-	"node_type": "stat",
-	"max_level": 5,
-	"costs": [55, 110, 170, 250, 360],
-	"prereq_ids": ["offline_time_1"],
-	"pos": { "x": 360, "y": -260 },
-	"icon": "energy_gain",
-	"effects": [
+	  "title": "Offline Energy Gain",
+	  "description": "Increases energy gained while offline.",
+	  "branch": "offline",
+	  "node_type": "stat",
+	  "max_level": 5,
+	  "costs": [
+		55,
+		110,
+		170,
+		250,
+		360
+	  ],
+	  "prereq_ids": [
+        "offline_efficiency_1"
+	  ],
+	  "pos": {
+		"x": 500,
+		"y": -300
+	  },
+	  "icon": "energy_gain",
+	  "effects": [
 		{
-		"kind": "stat",
-		"stat": "offline_energy_gain_mult",
-		"op": "add",
-		"value_per_level": 0.08
+		  "kind": "stat",
+		  "stat": "offline_energy_gain_mult",
+		  "op": "add",
+		  "value_per_level": 0.08
 		}
-	]
+	  ]
 	},
 	"deep_sleep": {
 	  "title": "Deep Sleep",
@@ -570,12 +517,11 @@
 		560
 	  ],
 	  "prereq_ids": [
-		"offline_coin_gain_1",
-        "offline_crystal_gain_1"
+        "offline_coin_gain_1"
 	  ],
 	  "pos": {
-		"x": 240,
-		"y": -520
+		"x": 180,
+		"y": -560
 	  },
 	  "icon": "deep_sleep",
 	  "effects": [
@@ -714,7 +660,7 @@
         "buy_bot_lv2"
 	  ],
 	  "pos": {
-		"x": -60,
+		"x": -40,
 		"y": 340
 	  },
 	  "icon": "direct_buy_discount",
@@ -737,29 +683,22 @@
 		700
 	  ],
 	  "prereq_ids": [
-		"buy_bot_lv5",
-        "direct_buy_discount_1"
+        "buy_bot_lv5"
 	  ],
 	  "pos": {
-		"x": -360,
-		"y": 720
+		"x": -720,
+		"y": 740
 	  },
 	  "icon": "premium_assembly",
 	  "effects": [
 		{
 		  "kind": "stat",
-		  "stat": "bought_bot_power_mult",
+		  "stat": "direct_bot_buy_bonus_level_chance",
 		  "op": "add",
-		  "value_per_level": 0.2
-		},
-		{
-		  "kind": "stat",
-		  "stat": "direct_bot_buy_cost_reduction",
-		  "op": "add",
-		  "value_per_level": 0.1
+		  "value_per_level": 0.12
 		}
 	  ],
-	  "description": "Bought bots are stronger and cheaper."
+	  "description": "Direct bot purchases have a chance to arrive 1 level higher."
 	},
 	"tap_damage_1": {
 	  "title": "Tap Damage",
@@ -862,8 +801,8 @@
         "tap_damage_1"
 	  ],
 	  "pos": {
-		"x": 80,
-		"y": 360
+		"x": 60,
+		"y": 340
 	  },
 	  "icon": "tap_cirt_chance",
 	  "effects": [
@@ -892,7 +831,7 @@
         "tap_crit_chance_1"
 	  ],
 	  "pos": {
-		"x": 200,
+		"x": 120,
 		"y": 500
 	  },
 	  "icon": "tap_crit_multiplier",
@@ -915,12 +854,11 @@
 		620
 	  ],
 	  "prereq_ids": [
-		"execute_threshold_1",
-        "tap_crit_mult_1"
+        "execute_threshold_1"
 	  ],
 	  "pos": {
-		"x": 340,
-		"y": 640
+		"x": 520,
+		"y": 620
 	  },
 	  "icon": "precision_break",
 	  "effects": [
@@ -938,6 +876,124 @@
 		}
 	  ],
 	  "description": "Boosts execute rewards and front block tap damage."
+	},
+	"daily_quest_limit_1": {
+	  "title": "Daily Quest Limit",
+	  "branch": "offline",
+	  "node_type": "stat",
+	  "max_level": 2,
+	  "costs": [
+		75,
+		165
+	  ],
+	  "prereq_ids": [
+        "offline_efficiency_1"
+	  ],
+	  "pos": {
+		"x": 520,
+		"y": -220
+	  },
+	  "icon": "daily_quest_limit",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "daily_quest_limit_bonus",
+		  "op": "add",
+		  "value_per_level": 1
+		}
+	  ],
+	  "description": "Adds 1 extra daily quest slot per level."
+	},
+	"merge_efficiency_1": {
+	  "title": "Merge Efficiency",
+	  "branch": "merge",
+	  "node_type": "stat",
+	  "max_level": 5,
+	  "costs": [
+		45,
+		90,
+		150,
+		230,
+		330
+	  ],
+	  "prereq_ids": [
+        "merge_slot_2"
+	  ],
+	  "pos": {
+		"x": -520,
+		"y": -140
+	  },
+	  "icon": "merge_efficiency",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "merge_bonus_level_chance",
+		  "op": "add",
+		  "value_per_level": 0.015
+		}
+	  ],
+	  "description": "Merges have a chance to create a +1 Level Bot."
+	},
+	"master_workshop": {
+	  "title": "Master Workshop",
+	  "branch": "merge",
+	  "node_type": "keystone",
+	  "max_level": 1,
+	  "costs": [
+		520
+	  ],
+	  "prereq_ids": [
+        "merge_efficiency_1"
+	  ],
+	  "pos": {
+		"x": -760,
+		"y": -140
+	  },
+	  "icon": "master_workshop",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "merge_bonus_level_chance",
+		  "op": "add",
+		  "value_per_level": 0.06
+		},
+		{
+		  "kind": "stat",
+		  "stat": "merge_spawn_base_bot_chance",
+		  "op": "add",
+		  "value_per_level": 0.12
+		}
+	  ],
+	  "description": "Merges have a higher chance to create a +1 Level Bot and may also produce a free Level 1 Bot."
+	},
+	"direct_buy_refund_1": {
+	  "title": "Lucky Purchase",
+	  "branch": "bot_shop",
+	  "node_type": "stat",
+	  "max_level": 4,
+	  "costs": [
+		75,
+		145,
+		240,
+		360
+	  ],
+	  "prereq_ids": [
+        "buy_bot_lv3"
+	  ],
+	  "pos": {
+		"x": -180,
+		"y": 500
+	  },
+	  "icon": "direct_buy_refund",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "direct_bot_buy_refund_chance",
+		  "op": "add",
+		  "value_per_level": 0.025
+		}
+	  ],
+	  "description": "Direct bot purchases have a chance to refund their coin cost."
 	}
   }
 }

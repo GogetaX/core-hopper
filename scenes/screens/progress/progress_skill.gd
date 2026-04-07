@@ -14,6 +14,7 @@ func UpdateCurItem():
 func InitUpgradeItem(key:String,data:Dictionary):
 	cur_key = key
 	cur_data = data
+	print(cur_data)
 	#Colors
 	$SmartPanel.panel_color = GlobalColor.SkillUpgradeTextToColor(cur_data.group)
 	$SmartPanel/VList/HList/IconBG.panel_color = GlobalColor.SkillUpgradeTextToColor(cur_data.group)
@@ -41,7 +42,7 @@ func InitUpgradeItem(key:String,data:Dictionary):
 	
 	match cur_key:
 		"tap_damage":
-			$SmartPanel/VList/HList2/cur_value.text = Global.CurrencyToString(GlobalStats.GetTapDamage()) + " DPT"
+			$SmartPanel/VList/HList2/cur_value.text = Global.CurrencyToString(GlobalStats.GetTapBaseDamageFromUpgradeLevel(cur_data.level)) + " DPT"
 		"offline_efficiency":
 			$SmartPanel/VList/HList2/cur_value.text = Global.SecondsToPrettyTimeString(GlobalOfflineProgress.GetOfflineCapSeconds())
 func _on_smart_button_buy_btn_pressed_with_price(currency: String, price: int) -> void:

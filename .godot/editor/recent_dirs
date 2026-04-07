@@ -1,3 +1,4 @@
+res://scenes/screens/progress/
 res://art/skills/
 res://autoload/
 /home/sergio/GitHub/core-hopper/data/skill_tree/
@@ -5,7 +6,6 @@ res://scenes/components/
 res://art/chests/
 res://scenes/screens/dig/
 res://art/relics/
-res://scenes/screens/progress/
 /home/sergio/GitHub/core-hopper/data/relics/
 res://scenes/label_data_scripts/
 res://scenes/screens/particles/

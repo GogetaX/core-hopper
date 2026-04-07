@@ -445,6 +445,11 @@ func ApplyTapDamage(block_uid: String) -> void:
 	if str(lane_data.block_data[0].uid) != str(block_uid):
 		return
 	var tap_damage := GlobalStats.GetTapDamage()
+	if !lane_data.block_data.has("is_boss"):
+		tap_damage = int(tap_damage * GlobalStats.GetFrontBlockTapDmgMulti())
+	elif !lane_data.block_data.is_boss:
+		tap_damage = int(tap_damage * GlobalStats.GetFrontBlockTapDmgMulti())
+	
 	_ApplyDamageToFrontBlock(lane_index, tap_damage, true)
 
 func _FindLaneIndexByFrontBlockUid(block_uid: String) -> int:
@@ -691,7 +696,7 @@ func _ProcessBossSpecial(lane_index: int, delta: float) -> void:
 
 	match special_type:
 		"regen":
-			var regen_percent := float(special_values.get("regen_percent_per_sec", 0.0))
+			var regen_percent := float(special_values.get("regen_percent_per_sec", 0.0) * GlobalStats.GetBossRegenReduction())
 			new_hp += max_hp * regen_percent * delta
 
 		"timer_enrage":
@@ -701,7 +706,7 @@ func _ProcessBossSpecial(lane_index: int, delta: float) -> void:
 				runtime["enraged"] = true
 
 			if bool(runtime.get("enraged", false)):
-				var extra_regen := float(special_values.get("extra_regen_percent_per_sec", 0.0))
+				var extra_regen := float(special_values.get("extra_regen_percent_per_sec", 0.0)* GlobalStats.GetBossRegenReduction())
 				new_hp += max_hp * extra_regen * delta
 
 		"shield_cycle":

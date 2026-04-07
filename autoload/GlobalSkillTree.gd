@@ -492,13 +492,16 @@ func _BuildStatEffectText(effect: Dictionary, level: int) -> String:
 	match stat:
 		"merge_slot_bonus":
 			return "+%d Merge Bot Slot" % int(total_value)
-
+		
+		"merge_bonus_level_chance":
+			return "+%d%% Chance for merges to create a +1 Level Bot" % _ToPercentInt(total_value)
+	
 		"merge_output_power_mult":
 			return "+%d%% Merge Output Power" % _ToPercentInt(total_value)
 
-		"merge_refund_chance":
-			return "+%d%% Merge Refund Chance" % _ToPercentInt(total_value)
-
+		"direct_bot_buy_refund_chance":
+			return "+%d%% Chance to refund Bot purchase cost" % _ToPercentInt(total_value)
+	
 		"boss_damage_mult":
 			return "+%d%% Boss Damage" % _ToPercentInt(total_value)
 
@@ -510,6 +513,10 @@ func _BuildStatEffectText(effect: Dictionary, level: int) -> String:
 
 		"boss_rare_relic_drop_chance":
 			return "+%d%% Rare Relic Drop Chance" % _ToPercentInt(total_value)
+		
+		"boss_crystal_reward_mult":
+			return "+%d%% Boss Crystal Reward Gains" % _ToPercentInt(total_value)
+
 
 		"boss_regen_reduction":
 			return "-%d%% Boss Regen" % _ToPercentInt(total_value)
@@ -555,7 +562,23 @@ func _BuildStatEffectText(effect: Dictionary, level: int) -> String:
 
 		"front_block_tap_damage_mult":
 			return "+%d%% Front Block Tap Damage" % _ToPercentInt(total_value)
+		
+		"boss_energy_reward_mult":
+			return "+%d%% Boss Energy Reward Gain" % _ToPercentInt(total_value)
+		
+		"direct_bot_buy_bonus_level_chance":
+			return "+%d%% Chance to buy a +1 Level Bot" % _ToPercentInt(total_value)
+		
+		"daily_quest_limit_bonus":
+			return "+%d Daily Quest Limit" % int(total_value)
+			
+		"merge_bonus_level_chance":
+			return "+%d%% Chance for merges to create a +1 Level Bot" % _ToPercentInt(total_value)
 
+		"merge_spawn_base_bot_chance":
+			return "+%d%% Chance for merges to spawn a free Level 1 Bot" % _ToPercentInt(total_value)
+		_:
+			print_debug("Unknown stat: ",stat)
 	return ""
 
 

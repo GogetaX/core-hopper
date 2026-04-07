@@ -217,6 +217,12 @@ func GetBossRewardsFromBlock(block_data: Dictionary) -> Dictionary:
 
 	# add scaled coin reward from block itself
 	rewards["coins"] += int(block_data.get("reward_coins", 0))
+	rewards["crystals"] = int(rewards["crystals"] * GlobalStats.GetBossRewardCrystalMulti())
+	
+	#boss_reward_mult
+	rewards["coins"] = int(rewards["coins"] * GlobalStats.GetBossRewardMulti())
+	rewards["energy"] = int(rewards["energy"] * GlobalStats.GetBossRewardMulti())
+	rewards["crystals"] = int(rewards["crystals"] * GlobalStats.GetBossRewardMulti())
 	return rewards
 
 

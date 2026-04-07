@@ -28,3 +28,15 @@ res://scenes/screens/dig/material.gd
 res://scenes/screens/skills/skill_tree_world.tscn
 res://scenes/screens/skills/skills_screen.tscn
 res://scenes/screens/skills/skills_screen.gd
+res://art/skills/boss_crystal_cache.tres
+res://art/skills/boss_energy_catche.tres
+res://art/skills/titan_cache.tres
+res://art/skills/daily_quest_limit.tres
+res://autoload/GlobalBossDB.gd
+res://autoload/GlobalDailyQuest.gd
+res://art/skills/direct_buy_refund.tres
+res://scenes/components/NotifForRelicTab.gd
+res://scenes/screens/progress/quest_count.gd
+res://data/upgrades/upgrade_db.json
+res://scenes/screens/progress/progress_skill.tscn
+res://scenes/screens/progress/progress_skill.gd

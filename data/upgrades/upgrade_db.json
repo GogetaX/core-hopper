@@ -1,17 +1,17 @@
 {
   "tap_damage": {
-	"title": "Tap Damage",
-	"group": "power,tap",
-	"icon": "tap_damage",
-	"level": 0,
-	"max_level": -1,
-	"base_cost": 20,
-	"cost_scale": 1.7,
-	"effect_type": "mult_pow",
-	"effect_base": 1.2,
-	"unlock_type": "default",
-	"unlock_value": 0
-  },
+  "title": "Tap Damage",
+  "group": "power,tap",
+  "icon": "tap_damage",
+  "level": 0,
+  "max_level": -1,
+  "base_cost": 20,
+  "cost_scale": 1.7,
+  "effect_type": "tap_curve",
+  "effect_base": 0.8,
+  "unlock_type": "default",
+  "unlock_value": 0
+},
   "drill_power": {
 	"title": "Drill Power",
 	"group": "power",

@@ -21,6 +21,8 @@
 [ext_resource type="PackedScene" uid="uid://byej242eayu0l" path="res://scenes/screens/progress/locked_relic_item.tscn" id="10_nipnh"]
 [ext_resource type="Texture2D" uid="uid://b7xf4f3dspkbe" path="res://data/icons/relic_icon.tres" id="14_ag5h6"]
 [ext_resource type="PackedScene" uid="uid://cd1h4fd8nlefg" path="res://scenes/screens/progress/owned_relics_hashtag.tscn" id="14_i8y5d"]
+[ext_resource type="Script" uid="uid://bty8m4gyqh6nd" path="res://scenes/screens/progress/quest_count.gd" id="16_sormt"]
+[ext_resource type="Texture2D" uid="uid://dwwkd07dwfbch" path="res://art/skills/daily_quest_limit.tres" id="16_vembr"]
 
 [node name="ProgressScreen" type="VBoxContainer" unique_id=1963313650]
 anchors_preset = 15
@@ -500,12 +502,16 @@ text = "Priority rewards"
 layout_mode = 2
 alignment = 1
 
-[node name="ProgressHashTagWithIcon" parent="Menu_Quests/QuestVList/HList/VBoxContainer" unique_id=88007381 instance=ExtResource("6_neoah")]
+[node name="quest_count" parent="Menu_Quests/QuestVList/HList/VBoxContainer" unique_id=88007381 instance=ExtResource("6_neoah")]
 custom_minimum_size = Vector2(215, 33)
 layout_mode = 2
 hash_tag_type = "INSIDE_ONLY"
 hash_tag_text = "7 DAY STREAK"
+hashtag_icon = ExtResource("16_vembr")
 is_currency = false
+
+[node name="quest_count" type="Node" parent="Menu_Quests/QuestVList/HList/VBoxContainer/quest_count" unique_id=450196084]
+script = ExtResource("16_sormt")
 
 [node name="Control" type="Control" parent="Menu_Quests/QuestVList/HList" unique_id=1527543111]
 custom_minimum_size = Vector2(15, 0)

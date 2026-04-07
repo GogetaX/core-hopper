@@ -31,11 +31,17 @@ func _on_smart_button_buy_btn_pressed_with_price(currency: String, price: int) -
 	var new_bot = GlobalSave.CreateSimpleBot()
 	new_bot.merge_slot_id = free_merge_slot
 	new_bot.level = buy_bot_data.level
+	if GlobalStats.HasChanceOfNextLevelBotOnBuy():
+		new_bot.level += 1
 	#Store bot to bot_db
 	GlobalSave.StoreUpdateBotData(new_bot)
 	
 	#Milestone: first_bot (Own your first digging bot.)
 	GlobalSave.SetMilestoneToCompleted("first_bot")
+	
+	#Check for Refund buying new bot chance
+	if GlobalStats.GetRefundChestOnBuy():
+		GlobalSave.AddCurrency(currency,price)
 	
 	#Save all
 	GlobalSave.SyncSave()

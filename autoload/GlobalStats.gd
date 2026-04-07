@@ -87,6 +87,10 @@ func GetBotStats(level: int) -> Dictionary:
 		"sell_value": int(round((10.0 * pow(2.35, level - 1)) * 0.6))
 	}
 
+func GetTapBaseDamageFromUpgradeLevel(level: int) -> int:
+	var effective_level = max(1, level + 1)
+	return maxi(1, int(round(pow(1.9, effective_level - 1) * 0.8)))
+	
 func GetUpgradeCost(upgrade_id: String) -> int:
 	if !GlobalSave.save_data.has("upgrades") or !GlobalSave.save_data.upgrades.has(upgrade_id):
 		return 0
@@ -115,9 +119,15 @@ func GetUpgradeValue(upgrade_id: String, next_level:int = 0) -> float:
 			return 1.0
 
 func GetTapDamage() -> float:
-	var tap_dmg_from_upgrade = max(1.0, float(GetUpgradeValue("tap_damage")) * GetTapDamageMultiplier())
-	var tap_dmg_from_skill_multi = (1.0 + GlobalSkillTree.skill_summary.stats.tap_damage_mult)
-	var res = tap_dmg_from_upgrade * tap_dmg_from_skill_multi
+	var base_tap_damage = max(1.0, float(GetUpgradeValue("tap_damage")))
+	var upgrade_mult = max(1.0, GetTapDamageMultiplier())
+
+	var tap_skill_bonus := 0.0
+	if GlobalSkillTree.skill_summary.stats.has("tap_damage_mult"):
+		tap_skill_bonus = float(GlobalSkillTree.skill_summary.stats.tap_damage_mult)
+
+	var skill_mult := 1.0 + tap_skill_bonus
+	var res = base_tap_damage * upgrade_mult * skill_mult
 	return max(1.0, res)
 
 
@@ -312,3 +322,55 @@ func GetTapExecuteThreshold() -> float:
 
 func GetTapExecuteRewardMultiplier() -> float:
 	return 1.0 + float(GlobalSkillTree.skill_summary.stats.get("tap_execute_reward_mult", 0.0))
+
+func GetBossRewardCrystalMulti():
+	var res = 1.0
+	res += GlobalSkillTree.skill_summary.stats.boss_crystal_reward_mult
+	return res
+	
+func GetBossRewardEnergyMulti():
+	var res = 1.0
+	res += GlobalSkillTree.skill_summary.stats.boss_energy_reward_mult
+	return res
+	
+func GetBossRegenReduction():
+	var ret = 1.0
+	ret -= GlobalSkillTree.skill_summary.stats.boss_regen_reduction
+	return max(0,ret)
+
+func GetBossRewardMulti():
+	var ret = 1.0
+	ret += GlobalSkillTree.skill_summary.stats.boss_reward_mult
+	return ret
+
+func HasChanceOfNextLevelBotOnBuy():
+	var chance = randf_range(0,1.0)
+	if chance <= GlobalSkillTree.skill_summary.stats.direct_bot_buy_bonus_level_chance:
+		return true
+	return false
+	
+func HasChanceOfNextLevelBotOnMerge():
+	var chance = randf_range(0,1.0)
+	if chance <= GlobalSkillTree.skill_summary.stats.merge_bonus_level_chance:
+		return true
+	return false
+	
+func HasChanceToSpawmNewBot():
+	var chance = randf_range(0,1.0)
+	if chance <= GlobalSkillTree.skill_summary.stats.merge_spawn_base_bot_chance:
+		return true
+	return false
+
+func GetAdditionalDailyQuestLimit()->int:
+	return int(GlobalSkillTree.skill_summary.stats.daily_quest_limit_bonus)
+
+func GetFrontBlockTapDmgMulti()->float:
+	var res = 1.0
+	res += GlobalSkillTree.skill_summary.stats.front_block_tap_damage_mult
+	return res
+	
+func GetRefundChestOnBuy():
+	var chance = randf_range(0,1.0)
+	if chance <= GlobalSkillTree.skill_summary.stats.direct_bot_buy_refund_chance:
+		return true
+	return false
