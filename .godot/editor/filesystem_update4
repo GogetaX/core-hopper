@@ -27,3 +27,4 @@ res://scenes/screens/dig/material.tscn
 res://scenes/screens/dig/material.gd
 res://scenes/screens/skills/skill_tree_world.tscn
 res://scenes/screens/skills/skills_screen.tscn
+res://scenes/screens/skills/skills_screen.gd
