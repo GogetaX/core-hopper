@@ -8,7 +8,6 @@ func _ready() -> void:
 	_on_offline_time_list_resized()
 	
 func InitOfflineReward(reward_data:Dictionary):
-	print(reward_data)
 	cur_rewards = reward_data.duplicate()
 	#set offline time
 	$SmartPanel/VBoxContainer/HList3/OfflinePanel/OfflineTimeList/offline_time_label.text = Global.SecondsToPrettyTimeString(reward_data.offline_seconds)

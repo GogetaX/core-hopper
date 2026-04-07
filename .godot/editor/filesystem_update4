@@ -21,3 +21,5 @@ res://scenes/app/main_scene.tscn
 res://art/skills/energy_gain.tres
 res://autoload/GlobalSkillTree.gd
 res://autoload/GlobalDiggingProcess.gd
+res://data/blocks/block_archetypes.json
+res://autoload/GlobalBlockDatabase.gd

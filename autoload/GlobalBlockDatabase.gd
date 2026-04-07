@@ -381,3 +381,23 @@ func _BuildBlockUid(depth: int, lane_index: int) -> String:
 		str(lane_index),
 		str(GlobalSave.save_data.meta.block_uid_serial)
 	]
+	
+func RollBlockDrops(block_id: String) -> Dictionary:
+	var data = archetypes.get(block_id, {})
+	var drops = data.get("drops", {})
+	var result := {
+		"coins": 0,
+		"crystals": 0,
+		"energy": 0
+	}
+
+	for currency in drops.keys():
+		var drop_data: Dictionary = drops[currency]
+		var weight := float(drop_data.get("weight", 0.0))
+		var min_amount := int(drop_data.get("min", 0))
+		var max_amount := int(drop_data.get("max", min_amount))
+
+		if randf() <= weight:
+			result[currency] = randi_range(min_amount, max_amount)
+
+	return result
