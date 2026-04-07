@@ -109,13 +109,8 @@ func _SimulateLaneOffline(lane_index: int, lane_dps: float, seconds: int, reward
 		if remaining_damage >= block_hp:
 			remaining_damage -= block_hp
 
-			var reward_type := str(block.reward_type)
-			var reward_amount := int(block.reward_amount)
-
-			if rewards.has(reward_type):
-				rewards[reward_type] += reward_amount
-			else:
-				rewards[reward_type] = reward_amount
+			var rolled_drops := GlobalBlockDatabase.RollBlockDrops(block, 1.0)
+			_AddRolledDropsToRewards(rewards, rolled_drops)
 
 			lane.lane_depth = int(lane.lane_depth) + 1
 			GlobalSave.SetGlobalDepth(int(lane.lane_depth))
@@ -147,28 +142,31 @@ func _HarvestLaneOffline(
 		float(sample_block.get("max_hp", sample_block.get("hp", 1.0)))
 	)
 
-	var reward_per_block := float(sample_block.get("reward_amount", 0))
-	if reward_per_block <= 0.0:
-		return
-
 	var total_damage := lane_dps * float(seconds)
 	var harvest_ratio = total_damage / virtual_hp
 	if harvest_ratio <= 0.0:
 		return
 
-	var reward_type := str(sample_block.get("reward_type", "coins"))
-	var total_reward = max(0, roundi(reward_per_block * harvest_ratio))
-
-	if total_reward <= 0:
+	# Only roll drops for whole completed blocks.
+	# Partial progress should not roll crystals/energy.
+	var whole_blocks := maxi(0, int(floor(harvest_ratio)))
+	if whole_blocks <= 0:
 		return
 
-	if rewards.has(reward_type):
-		rewards[reward_type] += total_reward
-	else:
-		rewards[reward_type] = total_reward
+	for i in range(whole_blocks):
+		var rolled_drops = GlobalBlockDatabase.RollBlockDrops(sample_block, 1.0)
+		_AddRolledDropsToRewards(rewards, rolled_drops)
 
 func _FindBotByUid(bot_uid: int) -> Dictionary:
 	for bot in GlobalSave.save_data.bot_inventory.bot_db:
 		if int(bot.uid) == bot_uid:
 			return bot
 	return {}
+	
+func _AddRolledDropsToRewards(rewards: Dictionary, rolled_drops: Dictionary) -> void:
+	for currency in rolled_drops.keys():
+		var amount := int(rolled_drops.get(currency, 0))
+		if amount <= 0:
+			continue
+
+		rewards[currency] = int(rewards.get(currency, 0)) + amount

@@ -228,7 +228,7 @@ func _FinishFrontBlock(lane_index: int, destroy_context: Dictionary = {}) -> voi
 	if lane.block_data.is_empty():
 		return
 
-	var finished_block = lane.block_data[0]
+	var finished_block: Dictionary = lane.block_data[0]
 	var finished_depth := int(finished_block.get("depth", int(lane.lane_depth)))
 
 	lane.last_cleared_depth = max(
@@ -240,19 +240,10 @@ func _FinishFrontBlock(lane_index: int, destroy_context: Dictionary = {}) -> voi
 		_HandleBossBlockFinished(finished_block)
 	else:
 		var reward_mult = max(1.0, float(destroy_context.get("reward_mult", 1.0)))
-		var final_reward := int(round(float(finished_block.get("reward_amount", 0)) * reward_mult))
-
-		if str(finished_block.get("reward_type", "")) == "coins":
-			final_reward = int(round(final_reward * GlobalStats.GetCoinYieldMultiplier()))
-
-		GlobalSave.AddCurrency(
-			str(finished_block.get("reward_type", "coins")),
-			int(final_reward)
-		)
+		_GrantRolledBlockDrops(finished_block, reward_mult)
 
 	lane.lane_depth = int(lane.lane_depth) + 1
 	GlobalSave.SetGlobalDepth(lane.lane_depth)
-
 	lane.block_data.remove_at(0)
 
 	if lane.block_data.is_empty():
@@ -446,17 +437,13 @@ func ApplyTapDamage(block_uid: String) -> void:
 	var lane_index := _FindLaneIndexByFrontBlockUid(block_uid)
 	if lane_index == -1:
 		return
-
 	var lane_data = GlobalSave.save_data.lanes[lane_index]
 	if !lane_data.auto_dig_unlocked:
 		return
-
 	if lane_data.block_data.is_empty():
 		return
-
 	if str(lane_data.block_data[0].uid) != str(block_uid):
 		return
-
 	var tap_damage := GlobalStats.GetTapDamage()
 	_ApplyDamageToFrontBlock(lane_index, tap_damage, true)
 
@@ -844,3 +831,20 @@ func _CanTapExecuteBlock(block: Dictionary) -> bool:
 	var current_hp = max(0.0, float(block.get("hp", 0.0)))
 
 	return current_hp <= max_hp * threshold
+
+func _GrantRolledBlockDrops(finished_block: Dictionary, reward_mult: float = 1.0) -> void:
+	var block_id := str(finished_block.get("id", ""))
+	if block_id == "":
+		return
+
+	var rolled_drops: Dictionary = GlobalBlockDatabase.RollBlockDrops(finished_block, reward_mult)
+
+	for currency in rolled_drops.keys():
+		var amount := int(rolled_drops.get(currency, 0))
+		if amount <= 0:
+			continue
+
+		if currency == "coins":
+			amount = int(round(float(amount) * GlobalStats.GetCoinYieldMultiplier()))
+
+		GlobalSave.AddCurrency(currency, amount)

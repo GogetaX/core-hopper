@@ -211,10 +211,6 @@ func _validate_archetypes() -> void:
 			push_warning("BlockDatabase: Archetype '%s' missing 'name'." % block_id)
 		if not data.has("hp_multiplier"):
 			push_warning("BlockDatabase: Archetype '%s' missing 'hp_multiplier'." % block_id)
-		if not data.has("reward_type"):
-			push_warning("BlockDatabase: Archetype '%s' missing 'reward_type'." % block_id)
-		if not data.has("reward_amount"):
-			push_warning("BlockDatabase: Archetype '%s' missing 'reward_amount'." % block_id)
 		if not data.has("rarity"):
 			push_warning("BlockDatabase: Archetype '%s' missing 'rarity'." % block_id)
 
@@ -382,22 +378,45 @@ func _BuildBlockUid(depth: int, lane_index: int) -> String:
 		str(GlobalSave.save_data.meta.block_uid_serial)
 	]
 	
-func RollBlockDrops(block_id: String) -> Dictionary:
-	var data = archetypes.get(block_id, {})
-	var drops = data.get("drops", {})
+func RollBlockDrops(block_data: Dictionary, reward_mult: float = 1.0) -> Dictionary:
 	var result := {
 		"coins": 0,
 		"crystals": 0,
 		"energy": 0
 	}
 
+	var block_id := str(block_data.get("id", ""))
+	if block_id == "":
+		return result
+
+	var archetype: Dictionary = archetypes.get(block_id, {})
+	if archetype.is_empty():
+		return result
+
+	var drops: Dictionary = archetype.get("drops", {})
+	if drops.is_empty():
+		return result
+
 	for currency in drops.keys():
-		var drop_data: Dictionary = drops[currency]
+		var drop_data: Dictionary = drops.get(currency, {})
 		var weight := float(drop_data.get("weight", 0.0))
+		if weight <= 0.0:
+			continue
+
+		if _rng.randf() > weight:
+			continue
+
 		var min_amount := int(drop_data.get("min", 0))
 		var max_amount := int(drop_data.get("max", min_amount))
+		var rolled_amount := _rng.randi_range(min_amount, max_amount)
 
-		if randf() <= weight:
-			result[currency] = randi_range(min_amount, max_amount)
+		if currency == "coins":
+			var reward_multiplier := float(block_data.get("reward_multiplier", 1.0))
+			rolled_amount = int(round(float(rolled_amount) * reward_multiplier))
+
+		rolled_amount = int(round(float(rolled_amount) * reward_mult))
+
+		if rolled_amount > 0:
+			result[currency] = int(result.get(currency, 0)) + rolled_amount
 
 	return result

@@ -19,6 +19,8 @@ func ShowOnly():
 	match icon_type:
 		"CRYSTAL_BIG_ANIMATED":
 			$Crystal_Big_Animated.visible = true
+			$Crystal_Big_Animated/center/GPUParticles2D.visible = true
+			#$Crystal_Big_Animated/center/GPUParticles2D.position = (size/2)
 		"CRYSTAL_SMALL":
 			$Crystal_Small.visible = true
 		"COIN_SMALL":
@@ -30,8 +32,8 @@ func ShowOnly():
 			$Energy_Small_Animated/AnimationPlayer.play("in_out")
 		"COIN_BIG_ANIMATED":
 			$Coin_Big_Animated.visible = true
-			$Coin_Big_Animated/GPUParticles2D.emitting = true
-			$Coin_Big_Animated/GPUParticles2D.position = (size/2)
+			$Coin_Big_Animated/center/GPUParticles2D.emitting = true
+			#$Coin_Big_Animated/center/GPUParticles2D.position = (size/2)
 
 func HideAllAndStopAnimation():
 	for x in get_children():

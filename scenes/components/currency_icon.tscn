@@ -52,8 +52,8 @@ initial_velocity_max = 10.0
 gravity = Vector3(0, -40, 0)
 damping_min = 20.0
 damping_max = 50.000004
-scale_min = 0.049999997
-scale_max = 0.049999997
+scale_min = 0.099999994
+scale_max = 0.099999994
 scale_curve = SubResource("CurveTexture_ey1vf")
 color = Color(0.30980393, 0.89411765, 1, 1)
 color_ramp = SubResource("GradientTexture1D_5ifti")
@@ -125,8 +125,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -1050.0
-offset_bottom = -1890.0
+offset_right = -1032.0
+offset_bottom = -1874.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1srcd")
@@ -146,9 +146,23 @@ texture = ExtResource("1_oacq6")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Crystal_Big_Animated" unique_id=1356405741]
-visible = false
-position = Vector2(25, 17)
+[node name="center" type="Control" parent="Crystal_Big_Animated" unique_id=863666692]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -0.5
+offset_right = 0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Crystal_Big_Animated/center" unique_id=1356405741]
+position = Vector2(1.5, -5.5)
 amount = 1
 texture = ExtResource("3_yw5ml")
 visibility_rect = Rect2(-50, -50, 100, 100)
@@ -181,10 +195,25 @@ texture = ExtResource("4_hffp4")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Coin_Big_Animated" unique_id=830798505]
-position = Vector2(14, 15)
+[node name="center" type="Control" parent="Coin_Big_Animated" unique_id=1741460063]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -0.5
+offset_right = 0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Coin_Big_Animated/center" unique_id=830798505]
 amount = 3
 texture = ExtResource("5_psxnm")
+lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_23gwi")
 
 [node name="Crystal_Small" type="TextureRect" parent="." unique_id=703525740]
