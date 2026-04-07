@@ -1,11 +1,11 @@
+GPUParticles2D
+HBoxContainer
 TextureRect
 Control
-HBoxContainer
 Label
 VBoxContainer
 ScrollContainer
 HFlowContainer
-GPUParticles2D
 Node
 Timer
 AnimationPlayer

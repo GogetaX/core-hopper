@@ -519,10 +519,13 @@ func _BuildStatEffectText(effect: Dictionary, level: int) -> String:
 
 		"offline_gain_mult":
 			return "+%d%% Offline Gains" % _ToPercentInt(total_value)
-
+	
 		"offline_coin_gain_mult":
 			return "+%d%% Offline Coin Gain" % _ToPercentInt(total_value)
-
+		
+		"offline_energy_gain_mult":
+			return "+%d%% Offline Energy Gain" % _ToPercentInt(total_value)
+			
 		"offline_crystal_gain_mult":
 			return "+%d%% Offline Crystal Gain" % _ToPercentInt(total_value)
 

@@ -17,7 +17,7 @@ class_name RewardCurrencyClass
 func _ready() -> void:
 	match currency_type:
 		"COINS":
-			$SmartPanel/VList/HList/CurrencyIcon.icon_type = "COIN_SMALL"
+			$SmartPanel/VList/HList/CurrencyIcon.icon_type = "COIN_BIG_ANIMATED"
 			$SmartPanel/VList/value.theme_type_variation = "LabelTitle_Blue"
 		"CRYSTALS":
 			$SmartPanel/VList/HList/CurrencyIcon.icon_type = "CRYSTAL_BIG_ANIMATED"

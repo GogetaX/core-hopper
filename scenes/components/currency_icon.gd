@@ -2,7 +2,7 @@
 extends Control
 class_name CurrencyIconClass
 
-@export_enum("CRYSTAL_BIG_ANIMATED","COIN_SMALL","ENERGY_SMALL","ENERGY_SMALL_ANIMATED","CRYSTAL_SMALL") var icon_type := "CRYSTAL_BIG_ANIMATED":
+@export_enum("CRYSTAL_BIG_ANIMATED","COIN_SMALL","ENERGY_SMALL","ENERGY_SMALL_ANIMATED","CRYSTAL_SMALL","COIN_BIG_ANIMATED") var icon_type := "CRYSTAL_BIG_ANIMATED":
 	set(value):
 		icon_type = value
 		if is_node_ready():
@@ -28,6 +28,10 @@ func ShowOnly():
 		"ENERGY_SMALL_ANIMATED":
 			$Energy_Small.visible = true
 			$Energy_Small_Animated/AnimationPlayer.play("in_out")
+		"COIN_BIG_ANIMATED":
+			$Coin_Big_Animated.visible = true
+			$Coin_Big_Animated/GPUParticles2D.emitting = true
+			$Coin_Big_Animated/GPUParticles2D.position = (size/2)
 
 func HideAllAndStopAnimation():
 	for x in get_children():

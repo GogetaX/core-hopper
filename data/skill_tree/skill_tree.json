@@ -542,33 +542,24 @@
 	  ],
 	  "description": "Increases crystals earned while offline."
 	},
-	"offline_chest_queue_1": {
-	  "title": "Offline Chest Queue",
-	  "branch": "offline",
-	  "node_type": "stat",
-	  "max_level": 3,
-	  "costs": [
-		70,
-		140,
-		250
-	  ],
-	  "prereq_ids": [
-        "offline_time_1"
-	  ],
-	  "pos": {
-		"x": 360,
-		"y": -260
-	  },
-	  "icon": "offline_chest_queue",
-	  "effects": [
+	"offline_energy_gain_1": {
+	"title": "Offline Energy Gain",
+	"description": "Increases energy gained while offline.",
+	"branch": "offline",
+	"node_type": "stat",
+	"max_level": 5,
+	"costs": [55, 110, 170, 250, 360],
+	"prereq_ids": ["offline_time_1"],
+	"pos": { "x": 360, "y": -260 },
+	"icon": "energy_gain",
+	"effects": [
 		{
-		  "kind": "stat",
-		  "stat": "offline_chest_queue_capacity",
-		  "op": "add",
-		  "value_per_level": 1
+		"kind": "stat",
+		"stat": "offline_energy_gain_mult",
+		"op": "add",
+		"value_per_level": 0.08
 		}
-	  ],
-	  "description": "Increases queued offline chest capacity."
+	]
 	},
 	"deep_sleep": {
 	  "title": "Deep Sleep",

@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" format=3 uid="uid://d2x6y8xd0s0tc"]
+
+[ext_resource type="Texture2D" uid="uid://don6dria8d6rp" path="res://art/currency/energy.png" id="1_cow38"]
+
+[resource]
+atlas = ExtResource("1_cow38")
+region = Rect2(0, 0, 47, 75)

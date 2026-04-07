@@ -11,7 +11,7 @@ func InitOfflineReward(reward_data:Dictionary):
 	cur_rewards = reward_data.duplicate()
 	#set offline time
 	$SmartPanel/VBoxContainer/HList3/OfflinePanel/OfflineTimeList/offline_time_label.text = Global.SecondsToPrettyTimeString(reward_data.offline_seconds)
-	$SmartPanel/VBoxContainer/HList3/OfflineCapTime/OfflineTimeList/offline_time_label.text = Global.SecondsToPrettyTimeString(GlobalOfflineProgress.GetOfflineCapSeconds())
+	$SmartPanel/VBoxContainer/HList3/OfflineCapTime/OfflineTimeList/offline_time_label.text = Global.SecondsToPrettyTimeString(GlobalStats.GetOfflineCapSeconds())
 	#clean currency list #
 	for x in $SmartPanel/VBoxContainer/CurrencyList.get_children():
 		x.queue_free()

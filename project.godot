@@ -25,6 +25,7 @@ GlobalSignals="*uid://cmudicfn21w14"
 GlobalColor="*uid://b4ma3ahiidw13"
 GlobalBlockDatabase="*uid://8pjyoan5v7el"
 GlobalSave="*uid://qsbxuirupeu8"
+GlobalSkillTree="*uid://cl2l6iqfj1upp"
 GlobalMilestone="*uid://kto0pid3hcyn"
 GlobalStats="*uid://v5bpgl13d7ji"
 GlobalDiggingProcess="*uid://6pyqjp3j8yqd"
@@ -33,7 +34,6 @@ GlobalBossDb="*uid://b54ndijbye8rc"
 GlobalDailyQuest="*uid://f1pknltsoi2r"
 GlobalRelicDb="*uid://krrnmsw78nt2"
 GlobalRewardChest="*uid://b8pr5ti500uf7"
-GlobalSkillTree="*uid://cl2l6iqfj1upp"
 
 [display]
 

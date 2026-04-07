@@ -18,7 +18,7 @@ layout_mode = 1
 panel_type = "INSIDE_ONLY"
 panel_color = "DISABLED"
 
-[node name="VList" type="VBoxContainer" parent="SmartPanel" unique_id=611853374]
+[node name="VList" type="HBoxContainer" parent="SmartPanel" unique_id=736535560]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -35,13 +35,9 @@ alignment = 1
 layout_mode = 2
 
 [node name="CurrencyIcon" parent="SmartPanel/VList/HList" unique_id=529445326 instance=ExtResource("2_y8n7i")]
+custom_minimum_size = Vector2(80, 50)
 layout_mode = 2
-icon_type = "COIN_SMALL"
-
-[node name="currency_type" type="Label" parent="SmartPanel/VList/HList" unique_id=1420553994]
-layout_mode = 2
-theme_type_variation = &"LabelGray"
-text = "CREDITS"
+icon_type = "COIN_BIG_ANIMATED"
 
 [node name="value" type="Label" parent="SmartPanel/VList" unique_id=698420767]
 layout_mode = 2

@@ -5,5 +5,5 @@ func _ready() -> void:
 	SyncData()
 	
 func SyncData():
-	var upgrade_value = GlobalOfflineProgress.GetOfflineCapSeconds()
+	var upgrade_value = GlobalStats.GetOfflineCapSeconds()
 	text = Global.SecondsToPrettyTimeString(upgrade_value)

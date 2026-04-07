@@ -196,7 +196,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="SmartButtonBuy" parent="VList" unique_id=664760665 instance=ExtResource("2_2m8po")]
+[node name="BuyBotBtn" parent="VList" unique_id=664760665 instance=ExtResource("2_2m8po")]
 layout_mode = 2
 btn_type = "WITH_PRICE"
 panel_color = "BLUE"
@@ -212,4 +212,4 @@ merge_btn_icon = ExtResource("3_um6mi")
 [node name="DragDropHandler" type="Node" parent="." unique_id=2044087815]
 script = ExtResource("7_lfmeh")
 
-[connection signal="BtnPressedWithPrice" from="VList/SmartButtonBuy" to="." method="_on_smart_button_buy_btn_pressed_with_price"]
+[connection signal="BtnPressedWithPrice" from="VList/BuyBotBtn" to="." method="_on_smart_button_buy_btn_pressed_with_price"]

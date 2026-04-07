@@ -115,7 +115,10 @@ func GetUpgradeValue(upgrade_id: String, next_level:int = 0) -> float:
 			return 1.0
 
 func GetTapDamage() -> float:
-	return max(1.0, float(GetUpgradeValue("tap_damage")) * GetTapDamageMultiplier())
+	var tap_dmg_from_upgrade = max(1.0, float(GetUpgradeValue("tap_damage")) * GetTapDamageMultiplier())
+	var tap_dmg_from_skill_multi = (1.0 + GlobalSkillTree.skill_summary.stats.tap_damage_mult)
+	var res = tap_dmg_from_upgrade * tap_dmg_from_skill_multi
+	return max(1.0, res)
 
 
 
@@ -215,3 +218,49 @@ func ApplyBossDamageMultiplier(base_damage: float) -> float:
 
 func GetFreeMergeSlots():
 	return GlobalSave.save_data.bot_inventory.merge_free_slots-1 + GlobalSkillTree.skill_summary.stats.merge_slot_bonus
+
+func BuyBotData():
+	#Base
+	var res = {
+		"price":25,
+		"level":1
+	}
+	#Apply new level and price
+	if GlobalSkillTree.skill_summary.unlock_features.direct_bot_buy_level.unlocked:
+		var unlocked_level_list = GlobalSkillTree.skill_summary.unlock_features.direct_bot_buy_level.unlocked_levels
+		if !unlocked_level_list.is_empty():
+			var unlocked_last_level = unlocked_level_list[unlocked_level_list.size()-1]
+			var cost_multiplayer = GlobalSkillTree.skill_summary.unlock_features.direct_bot_buy_level.cost_multiplier_by_level[str(unlocked_last_level).pad_decimals(0)]
+			res.level = res.level + int(unlocked_last_level-1)
+			res.price = int(res.price * cost_multiplayer)
+	#Bot Reduction price from skills
+	var reduction_percent = GlobalSkillTree.skill_summary.stats.direct_bot_buy_cost_reduction
+	res.price = int(res.price - (res.price * reduction_percent))
+	
+	return res
+
+func GetOfflineCapSeconds():
+	var cap_offline = GlobalOfflineProgress.GetOfflineCapSeconds()
+	var cap_skills = GlobalSkillTree.skill_summary.stats.max_offline_seconds
+	return cap_offline + cap_skills
+
+func GetOfflineEfficiency()->float:
+	var offline_efficiency = GlobalOfflineProgress.GetOfflineEfficiency()
+	var skill_efficiency = GlobalSkillTree.skill_summary.stats.offline_gain_mult
+	var res = offline_efficiency * (1.0 + skill_efficiency)
+	return res
+
+func GetOfflineCoinGain() -> float:
+	var res = 1.0
+	res += GlobalSkillTree.skill_summary.stats.offline_coin_gain_mult
+	return res
+
+func GetOfflineCrystalGain() -> float:
+	var res = 1.0
+	res += GlobalSkillTree.skill_summary.stats.offline_crystal_gain_mult
+	return res
+
+func GetOfflineEnergyGain() -> float:
+	var res = 1.0
+	res += GlobalSkillTree.skill_summary.stats.offline_energy_gain_mult
+	return res

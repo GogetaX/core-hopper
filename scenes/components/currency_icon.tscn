@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://xlueiw1ent7v" path="res://art/currency/crystal_plus.png" id="3_yw5ml"]
 [ext_resource type="Texture2D" uid="uid://bqomb6kaaaip" path="res://art/currency/coin.png" id="4_hffp4"]
 [ext_resource type="Texture2D" uid="uid://cfrmo2qtnksvg" path="res://art/currency/crystal_small.png" id="5_gjf62"]
+[ext_resource type="Texture2D" uid="uid://88ot8lfbupyo" path="res://art/particles/star_06.png" id="5_psxnm"]
 [ext_resource type="Texture2D" uid="uid://don6dria8d6rp" path="res://art/currency/energy.png" id="5_wkhfb"]
 [ext_resource type="Texture2D" uid="uid://biy4o4utcr7l" path="res://art/currency/energy_sun.png" id="6_aphy7"]
 
@@ -24,6 +25,38 @@ scale_min = 0.19999999
 scale_max = 0.7
 color = Color(0.7607843, 0.43529412, 1, 1)
 color_ramp = SubResource("GradientTexture1D_wkhfb")
+
+[sub_resource type="Gradient" id="Gradient_s11eb"]
+offsets = PackedFloat32Array(0, 0.09811321, 0.91320753, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5ifti"]
+gradient = SubResource("Gradient_s11eb")
+
+[sub_resource type="Curve" id="Curve_26253"]
+_data = [Vector2(0, 0.1875), 0.0, 0.0, 0, 0, Vector2(0.5223368, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.49789327), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ey1vf"]
+curve = SubResource("Curve_26253")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_23gwi"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(15, 15, 1)
+angle_min = 1.0728835e-05
+angle_max = 45.00001
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, -40, 0)
+damping_min = 20.0
+damping_max = 50.000004
+scale_min = 0.049999997
+scale_max = 0.049999997
+scale_curve = SubResource("CurveTexture_ey1vf")
+color = Color(0.30980393, 0.89411765, 1, 1)
+color_ramp = SubResource("GradientTexture1D_5ifti")
 
 [sub_resource type="Animation" id="Animation_aphy7"]
 length = 0.001
@@ -135,7 +168,27 @@ texture = ExtResource("4_hffp4")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="Coin_Big_Animated" type="TextureRect" parent="." unique_id=1189107683]
+self_modulate = Color(0.30980393, 0.89411765, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("4_hffp4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Coin_Big_Animated" unique_id=830798505]
+position = Vector2(14, 15)
+amount = 3
+texture = ExtResource("5_psxnm")
+process_material = SubResource("ParticleProcessMaterial_23gwi")
+
 [node name="Crystal_Small" type="TextureRect" parent="." unique_id=703525740]
+visible = false
 self_modulate = Color(0.7607843, 0.43529412, 1, 1)
 layout_mode = 1
 anchors_preset = 15

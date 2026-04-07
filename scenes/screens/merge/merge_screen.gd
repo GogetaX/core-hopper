@@ -1,5 +1,17 @@
 extends VBoxContainer
 
+func _ready() -> void:
+	GlobalSignals.DataSaved.connect(SyncData)
+	SyncData()
+	
+func SyncData():
+	#Set buy level
+	var buy_level_data = GlobalStats.BuyBotData()
+	$VList/BuyBotBtn.price_int = buy_level_data.price
+	$VList/BuyBotBtn.price_text = Global.CurrencyToString(buy_level_data.price)
+	$VList/BuyBotBtn.buy_btn_title = "NEW UNIT LV"+str(buy_level_data.level)
+	print(buy_level_data)
+	
 
 func _on_smart_button_buy_btn_pressed_with_price(currency: String, price: int) -> void:
 	#Find Free Merge Slot
@@ -15,8 +27,10 @@ func _on_smart_button_buy_btn_pressed_with_price(currency: String, price: int) -
 	GlobalSave.RemoveCurrency(currency,price)
 	
 	#Create Bot
+	var buy_bot_data = GlobalStats.BuyBotData()
 	var new_bot = GlobalSave.CreateSimpleBot()
 	new_bot.merge_slot_id = free_merge_slot
+	new_bot.level = buy_bot_data.level
 	#Store bot to bot_db
 	GlobalSave.StoreUpdateBotData(new_bot)
 	

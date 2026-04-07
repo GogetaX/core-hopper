@@ -21,10 +21,13 @@ func ProcessOfflineProgress() -> Dictionary:
 			"drop_data": []
 		}
 
-	var capped_seconds := mini(offline_seconds, GetOfflineCapSeconds())
-	var efficiency := GetOfflineEfficiency()
+	var capped_seconds := mini(offline_seconds, GlobalStats.GetOfflineCapSeconds())
+	var efficiency := GlobalStats.GetOfflineEfficiency()
 
 	var result := _SimulateOfflineSeconds(capped_seconds, efficiency)
+	result["coins"] = int(result["coins"] * GlobalStats.GetOfflineCoinGain())
+	result["crystals"] = int(result["crystals"] * GlobalStats.GetOfflineCrystalGain())
+	result["energy"] = int(result["energy"] * GlobalStats.GetOfflineEnergyGain())
 	result["did_collect"] = true
 	result["offline_seconds"] = offline_seconds
 	result["capped_seconds"] = capped_seconds
