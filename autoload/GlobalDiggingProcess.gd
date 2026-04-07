@@ -222,13 +222,15 @@ func _ProcessLane(lane_index: int, delta: float) -> void:
 			runtime = _lane_runtime[lane_index]
 			runtime["current_block_uid"] = str(lane.block_data[0].uid)
 			
-func _FinishFrontBlock(lane_index: int) -> void:
+func _FinishFrontBlock(lane_index: int, destroy_context: Dictionary = {}) -> void:
 	var lane = GlobalSave.save_data.lanes[lane_index]
+
 	if lane.block_data.is_empty():
 		return
 
 	var finished_block = lane.block_data[0]
 	var finished_depth := int(finished_block.get("depth", int(lane.lane_depth)))
+
 	lane.last_cleared_depth = max(
 		int(lane.get("last_cleared_depth", -1)),
 		finished_depth
@@ -237,16 +239,15 @@ func _FinishFrontBlock(lane_index: int) -> void:
 	if bool(finished_block.get("is_boss", false)):
 		_HandleBossBlockFinished(finished_block)
 	else:
-		var final_coins = finished_block.reward_amount
+		var reward_mult = max(1.0, float(destroy_context.get("reward_mult", 1.0)))
+		var final_reward := int(round(float(finished_block.get("reward_amount", 0)) * reward_mult))
 
-		if finished_block.reward_type == "coins":
-			final_coins = int(round(
-				finished_block.reward_amount * GlobalStats.GetCoinYieldMultiplier()
-			))
+		if str(finished_block.get("reward_type", "")) == "coins":
+			final_reward = int(round(final_reward * GlobalStats.GetCoinYieldMultiplier()))
 
 		GlobalSave.AddCurrency(
-			str(finished_block.reward_type),
-			int(final_coins)
+			str(finished_block.get("reward_type", "coins")),
+			int(final_reward)
 		)
 
 	lane.lane_depth = int(lane.lane_depth) + 1
@@ -477,8 +478,15 @@ func _ApplyDamageToFrontBlock(lane_index: int, damage: float, is_tap_damage: boo
 		return false
 
 	var current_block = lane.block_data[0]
+	var is_boss := bool(current_block.get("is_boss", false))
 
-	if bool(current_block.get("is_boss", false)):
+	var destroy_context := {
+		"reward_mult": 1.0,
+		"did_tap_execute": false,
+		"did_tap_crit": false
+	}
+
+	if is_boss:
 		damage = GlobalStats.ApplyBossDamageMultiplier(damage)
 
 		var damage_result := _GetBossDamageResult(current_block, damage, is_tap_damage)
@@ -499,8 +507,18 @@ func _ApplyDamageToFrontBlock(lane_index: int, damage: float, is_tap_damage: boo
 	if damage <= 0.0:
 		return false
 
-	var crit_result := GlobalStats.ApplyCritToDamage(damage)
-	damage = float(crit_result.get("damage", damage))
+	if is_tap_damage:
+		if !is_boss and _CanTapExecuteBlock(current_block):
+			damage = float(current_block.get("hp", 0.0))
+			destroy_context["did_tap_execute"] = true
+			destroy_context["reward_mult"] = GlobalStats.GetTapExecuteRewardMultiplier()
+		else:
+			var tap_crit_result := GlobalStats.ApplyTapCritToDamage(damage)
+			damage = float(tap_crit_result.get("damage", damage))
+			destroy_context["did_tap_crit"] = bool(tap_crit_result.get("did_crit", false))
+	else:
+		var crit_result := GlobalStats.ApplyCritToDamage(damage)
+		damage = float(crit_result.get("damage", damage))
 
 	current_block.hp = max(0.0, float(current_block.hp) - float(damage))
 	_EmitBlockHpUpdated(lane_index)
@@ -515,7 +533,7 @@ func _ApplyDamageToFrontBlock(lane_index: int, damage: float, is_tap_damage: boo
 		GlobalSave.SetTotalBossKills(1)
 
 	GlobalDailyQuest.RegisterBlockBroken(current_block.id, current_block.id)
-	_FinishFrontBlock(lane_index)
+	_FinishFrontBlock(lane_index, destroy_context)
 	return true
 
 	
@@ -813,3 +831,16 @@ func _GrantFirstKillRandomRelic(boss_id: String) -> String:
 
 	GlobalRelicDb.AddOwnedRelic(relic_id, 1)
 	return relic_id
+
+func _CanTapExecuteBlock(block: Dictionary) -> bool:
+	if bool(block.get("is_boss", false)):
+		return false
+
+	var threshold := GlobalStats.GetTapExecuteThreshold()
+	if threshold <= 0.0:
+		return false
+
+	var max_hp = max(1.0, float(block.get("max_hp", block.get("hp", 1.0))))
+	var current_hp = max(0.0, float(block.get("hp", 0.0)))
+
+	return current_hp <= max_hp * threshold

@@ -264,3 +264,51 @@ func GetOfflineEnergyGain() -> float:
 	var res = 1.0
 	res += GlobalSkillTree.skill_summary.stats.offline_energy_gain_mult
 	return res
+
+func GetTapCritChance() -> float:
+	var res := GetCritChance()
+	res += float(GlobalSkillTree.skill_summary.stats.get("tap_crit_chance", 0.0))
+	return clamp(res, 0.0, 1.0)
+
+
+func GetTapCritMultiplier() -> float:
+	var res := GetCritMultiplier()
+	res += float(GlobalSkillTree.skill_summary.stats.get("tap_crit_mult", 0.0))
+	return max(1.0, res)
+
+
+func RollTapCrit() -> bool:
+	return randf() < GetTapCritChance()
+
+
+func ApplyTapCritToDamage(base_damage: float) -> Dictionary:
+	var final_damage = max(0.0, float(base_damage))
+	var did_crit := RollTapCrit()
+
+	if did_crit:
+		final_damage *= GetTapCritMultiplier()
+
+	return {
+		"damage": final_damage,
+		"did_crit": did_crit
+	}
+
+
+func GetTapExecuteThreshold() -> float:
+	var res := 0.0
+
+	var unlock_features = GlobalSkillTree.skill_summary.get("unlock_features", {})
+	if typeof(unlock_features) == TYPE_DICTIONARY and unlock_features.has("tap_execute"):
+		var tap_execute = unlock_features.get("tap_execute", {})
+		if typeof(tap_execute) == TYPE_DICTIONARY and bool(tap_execute.get("unlocked", false)):
+			if tap_execute.has("threshold_total"):
+				res = float(tap_execute.get("threshold_total", 0.0))
+			else:
+				res = float(tap_execute.get("base_threshold", tap_execute.get("threshold", 0.0)))
+				res += float(GlobalSkillTree.skill_summary.stats.get("tap_execute_threshold", 0.0))
+
+	return clamp(res, 0.0, 0.95)
+
+
+func GetTapExecuteRewardMultiplier() -> float:
+	return 1.0 + float(GlobalSkillTree.skill_summary.stats.get("tap_execute_reward_mult", 0.0))

@@ -20,3 +20,4 @@ res://scenes/components/reward_currency.gd
 res://scenes/app/main_scene.tscn
 res://art/skills/energy_gain.tres
 res://autoload/GlobalSkillTree.gd
+res://autoload/GlobalDiggingProcess.gd
