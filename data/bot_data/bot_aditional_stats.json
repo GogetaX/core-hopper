@@ -31,22 +31,22 @@
   },
   "bot_rank_data": {
 	"0": {
-	  "title": "Common",
+	  "title": "Rusted",
 	  "weight": 60,
 	  "multiplier": 1.0
 	},
 	"1": {
-	  "title": "Rare",
+	  "title": "Refined",
 	  "weight": 25,
 	  "multiplier": 1.2
 	},
 	"2": {
-	  "title": "Epic",
+	  "title": "Elite",
 	  "weight": 10,
 	  "multiplier": 1.5
 	},
 	"3": {
-	  "title": "Legendary",
+	  "title": "Mythic",
 	  "weight": 5,
 	  "multiplier": 2.0
 	}
