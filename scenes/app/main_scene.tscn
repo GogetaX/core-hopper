@@ -15,6 +15,16 @@ shader_parameter/tint = Color(0.07846785, 0.11207495, 0.19966345, 0.045)
 shader_parameter/saturation = 0.400000019
 shader_parameter/brightness = 1.0
 
+[sub_resource type="Environment" id="Environment_whjeo"]
+background_mode = 3
+tonemap_mode = 1
+tonemap_exposure = 1.64
+glow_enabled = true
+glow_levels/1 = 1.0
+glow_levels/2 = 1.0
+glow_levels/3 = 1.0
+glow_intensity = 0.5
+
 [node name="App" type="Control" unique_id=1304418827]
 layout_mode = 3
 anchors_preset = 15
@@ -79,6 +89,7 @@ mouse_filter = 2
 script = ExtResource("4_u2ckv")
 
 [node name="BlurBG" type="ColorRect" parent="OverlayLayer" unique_id=1018703847]
+visible = false
 material = SubResource("ShaderMaterial_whjeo")
 anchors_preset = 15
 anchor_right = 1.0
@@ -121,3 +132,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("7_whjeo")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=780856415]
+environment = SubResource("Environment_whjeo")

@@ -224,7 +224,9 @@ func GetTapDamageMultiplier() -> float:
 
 
 func GetBossDamageMultiplier() -> float:
-	return GetRelicMultiplierTotal("boss_damage_mult")
+	var relic_multiplier = GetRelicMultiplierTotal("boss_damage_mult")
+	var skill_tree_multiplayer = GlobalSkillTree.skill_summary.stats.boss_damage_mult
+	return relic_multiplier+skill_tree_multiplayer
 
 
 func GetOfflineGainMultiplier() -> float:

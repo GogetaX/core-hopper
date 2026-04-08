@@ -289,7 +289,7 @@ func CreateSimpleBot() -> Dictionary:
 	var new_uid = FindFreeUID()
 	res["uid"] = new_uid
 	res["merge_slot_id"] = -1
-	res["stats"] = {} #Change this based on other global stats.
+	res["stats"] = GlobalBotStats.RollBotStats()
 	res["level"] = 1 #Change this based on other global stats.
 	return res
 

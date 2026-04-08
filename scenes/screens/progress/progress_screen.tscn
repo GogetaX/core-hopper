@@ -503,10 +503,10 @@ layout_mode = 2
 alignment = 1
 
 [node name="quest_count" parent="Menu_Quests/QuestVList/HList/VBoxContainer" unique_id=88007381 instance=ExtResource("6_neoah")]
-custom_minimum_size = Vector2(215, 33)
+custom_minimum_size = Vector2(244, 33)
 layout_mode = 2
 hash_tag_type = "INSIDE_ONLY"
-hash_tag_text = "7 DAY STREAK"
+hash_tag_text = "4 DAILY QUESTS"
 hashtag_icon = ExtResource("16_vembr")
 is_currency = false
 

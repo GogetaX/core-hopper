@@ -34,6 +34,7 @@ GlobalBossDb="*uid://b54ndijbye8rc"
 GlobalDailyQuest="*uid://f1pknltsoi2r"
 GlobalRelicDb="*uid://krrnmsw78nt2"
 GlobalRewardChest="*uid://b8pr5ti500uf7"
+GlobalBotStats="*uid://bwtswapp627e"
 
 [display]
 
@@ -73,4 +74,5 @@ pointing/emulate_touch_from_mouse=true
 
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="mobile"
+viewport/hdr_2d=true
 environment/defaults/default_clear_color=Color(0.039215688, 0.043137256, 0.105882354, 1)

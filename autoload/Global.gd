@@ -19,6 +19,15 @@ var progress_menu_show_tab = ""
 
 var last_skill_key_selected : String = ""
 
+func _ready() -> void:
+	GlobalSignals.DataSaved.connect(SyncData)
+	#This is just a test
+	
+func SyncData():
+	#here i test some stats that updating:
+	#eg. GlobalStats.GetBossDamageMultiplier()
+	return
+	
 func CurrencyToIcon(currency_str:String):
 	match currency_str:
 		"coins":
