@@ -2,7 +2,7 @@ extends Control
 
 var cur_dragging_merge_node : MergeItemClass = null
 var cur_dragging_bot_node : DigBotClass = null
-
+#
 func SetImageFromMergeItem(merge_node:MergeItemClass):
 	cur_dragging_merge_node = merge_node
 	$BotImage.SetImageFromBotNum(cur_dragging_merge_node.cur_bot_data.level)

@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://7ychjdvahny2" path="res://scenes/screens/merge/sell_node.gd" id="1_cecb1"]
 [ext_resource type="Texture2D" uid="uid://bk0nmpaugyn1k" path="res://art/ui/trash_icon.png" id="2_cecb1"]
 [ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="3_ex1cn"]
+[ext_resource type="PackedScene" uid="uid://d32v5pknv4vq0" path="res://scenes/components/currency_icon.tscn" id="5_ex1cn"]
 
 [node name="SellNode" type="Control" unique_id=1110717194]
 z_index = 1
@@ -56,5 +57,38 @@ no_bg = true
 [node name="wait_before_show" type="Timer" parent="." unique_id=1902233395]
 wait_time = 0.2
 one_shot = true
+
+[node name="SellPrice" parent="." unique_id=3042550 instance=ExtResource("1_77yp4")]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 1
+offset_left = 25.0
+offset_top = -4.0
+offset_right = -25.0
+offset_bottom = -154.0
+panel_type = "INSIDE_ONLY"
+panel_color = "BLUE"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SellPrice" unique_id=181700410]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="CurrencyIcon" parent="SellPrice/HBoxContainer" unique_id=529445326 instance=ExtResource("5_ex1cn")]
+layout_mode = 2
+mouse_filter = 2
+icon_type = "COIN_BIG_ANIMATED"
+
+[node name="sell_value" type="Label" parent="SellPrice/HBoxContainer" unique_id=1883135662]
+layout_mode = 2
+text = "100K"
 
 [connection signal="timeout" from="wait_before_show" to="." method="_on_wait_before_show_timeout"]

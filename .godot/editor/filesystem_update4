@@ -48,3 +48,4 @@ res://scenes/screens/merge/sell_node.gd
 res://autoload/Global.gd
 res://scenes/screens/merge/mergeitem_drag.tscn
 res://scenes/screens/merge/drag_drop_handler.gd
+res://scenes/screens/merge/mergeitem_drag.gd
