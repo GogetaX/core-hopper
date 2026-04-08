@@ -8,7 +8,7 @@
 	  "weight": 30,
 	  "min_value": 0.05,
 	  "max_value": 0.20,
-	  "decimals": 0
+	  "decimals": 2
 	},
 	"dig_speed_mult": {
 	  "title": "Dig Speed",
@@ -18,7 +18,7 @@
 	  "weight": 30,
 	  "min_value": 0.05,
 	  "max_value": 0.20,
-	  "decimals": 0
+	  "decimals": 2
 	},
 	"crit_chance": {
 	  "title": "Crit Chance",
@@ -28,7 +28,7 @@
 	  "weight": 20,
 	  "min_value": 0.02,
 	  "max_value": 0.10,
-	  "decimals": 0
+	  "decimals": 2
 	},
 	"crit_mult": {
 	  "title": "Crit Multiplier",
@@ -38,7 +38,7 @@
 	  "weight": 10,
 	  "min_value": 0.10,
 	  "max_value": 0.50,
-	  "decimals": 0
+	  "decimals": 2
 	}
   },
   "bot_rank_data": {

@@ -89,9 +89,9 @@ stretch_mode = 5
 layout_mode = 0
 offset_left = 24.0
 offset_top = 24.0
-offset_right = 90.0
+offset_right = 43.0
 offset_bottom = 57.0
-text = "RARE"
+text = "0"
 
 [node name="bot_level" parent="BotStatInfo/VList/SmartPanel" unique_id=486212889 instance=ExtResource("4_scqma")]
 self_modulate = Color(0.95686275, 0.972549, 1, 1)

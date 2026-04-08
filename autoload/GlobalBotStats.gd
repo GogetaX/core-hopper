@@ -183,16 +183,14 @@ func RollBotStats() -> Dictionary:
 	var stats := {}
 	var roll_count := _RollStatCount()
 
-	# no additional stats on this bot
 	if roll_count <= 0:
 		return {
 			"rank": 0,
 			"stats": {}
 		}
 
-	var rolled_rank := _RollRank()
-	var rank_mult := GetRankMultiplier(rolled_rank)
 	var used_ids: Array = []
+	var highest_rank := 0
 
 	for i in range(roll_count):
 		var stat_id := _RollWeightedStatId(used_ids)
@@ -205,21 +203,23 @@ func RollBotStats() -> Dictionary:
 
 		var min_value := float(stat_data.get("min_value", 0.0))
 		var max_value := float(stat_data.get("max_value", min_value))
-
 		if max_value < min_value:
 			var tmp := min_value
 			min_value = max_value
 			max_value = tmp
 
 		var value := _rng.randf_range(min_value, max_value)
-		value *= rank_mult
+		var spike01 := _CalcSpike01(value, min_value, max_value)
+		var stat_rank := _GetRankFromSpike01(spike01)
+
+		highest_rank = maxi(highest_rank, stat_rank)
 		value = _SnapStatValue(value, int(stat_data.get("decimals", 2)))
 
 		stats[stat_id] = value
 		used_ids.append(stat_id)
 
 	return {
-		"rank": rolled_rank,
+		"rank": highest_rank,
 		"stats": stats
 	}
 
@@ -369,3 +369,20 @@ func HasAdditionalStats(bot_data: Dictionary) -> bool:
 	var stats = bot_data.get("stats", {})
 	return typeof(stats) == TYPE_DICTIONARY and !stats.is_empty()
 	
+
+func _GetRankFromSpike01(spike01: float) -> int:
+	var t := clampf(spike01, 0.0, 1.0)
+
+	if t >= 0.93:
+		return 3 # Mythic
+	if t >= 0.75:
+		return 2 # Elite
+	if t >= 0.50:
+		return 1 # Refined
+	return 0 # Rusted
+
+
+func _CalcSpike01(value: float, min_value: float, max_value: float) -> float:
+	if is_equal_approx(min_value, max_value):
+		return 0.0
+	return clampf(inverse_lerp(min_value, max_value, value), 0.0, 1.0)
