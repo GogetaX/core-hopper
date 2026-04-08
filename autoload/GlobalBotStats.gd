@@ -134,6 +134,8 @@ func GetBotRank(bot_data: Dictionary) -> int:
 
 
 func GetBotRankTitle(bot_data: Dictionary) -> String:
+	if !HasAdditionalStats(bot_data):
+		return ""
 	return GetRankTitle(GetBotRank(bot_data))
 
 
@@ -178,42 +180,48 @@ func RollBotStats() -> Dictionary:
 			"stats": {}
 		}
 
+	var stats := {}
+	var roll_count := _RollStatCount()
+
+	# no additional stats on this bot
+	if roll_count <= 0:
+		return {
+			"rank": 0,
+			"stats": {}
+		}
+
 	var rolled_rank := _RollRank()
 	var rank_mult := GetRankMultiplier(rolled_rank)
-	var stats := {}
+	var used_ids: Array = []
 
-	var roll_count := _RollStatCount()
-	if roll_count > 0:
-		var used_ids: Array = []
+	for i in range(roll_count):
+		var stat_id := _RollWeightedStatId(used_ids)
+		if stat_id == "":
+			break
 
-		for i in range(roll_count):
-			var stat_id := _RollWeightedStatId(used_ids)
-			if stat_id == "":
-				break
+		var stat_data: Dictionary = bot_stats_db.get(stat_id, {})
+		if stat_data.is_empty():
+			continue
 
-			var stat_data: Dictionary = bot_stats_db.get(stat_id, {})
-			if stat_data.is_empty():
-				continue
+		var min_value := float(stat_data.get("min_value", 0.0))
+		var max_value := float(stat_data.get("max_value", min_value))
 
-			var min_value := float(stat_data.get("min_value", 0.0))
-			var max_value := float(stat_data.get("max_value", min_value))
-			if max_value < min_value:
-				var tmp := min_value
-				min_value = max_value
-				max_value = tmp
+		if max_value < min_value:
+			var tmp := min_value
+			min_value = max_value
+			max_value = tmp
 
-			var value := _rng.randf_range(min_value, max_value)
-			value *= rank_mult
-			value = _SnapStatValue(value, int(stat_data.get("decimals", 2)))
+		var value := _rng.randf_range(min_value, max_value)
+		value *= rank_mult
+		value = _SnapStatValue(value, int(stat_data.get("decimals", 2)))
 
-			stats[stat_id] = value
-			used_ids.append(stat_id)
+		stats[stat_id] = value
+		used_ids.append(stat_id)
 
 	return {
 		"rank": rolled_rank,
 		"stats": stats
 	}
-
 
 func _SnapStatValue(value: float, decimals: int) -> float:
 	if decimals <= 0:
@@ -314,3 +322,50 @@ func _RollWeightedStatId(excluded_ids: Array = []) -> String:
 			return str(stat_id)
 
 	return ""
+
+func GetStatDescription(stat_id: String, value: float) -> String:
+	var stat_data := GetStatData(stat_id)
+	if stat_data.is_empty():
+		return str(value)
+
+	var stat_type := str(stat_data.get("stat_type", "percent"))
+	var decimals := int(stat_data.get("decimals", 0))
+
+	match stat_type:
+		"percent":
+			var percent_value := value * 100.0
+			return _FormatSignedNumber(percent_value, decimals) + "%"
+
+		"multiplier":
+			return _FormatSignedNumber(value, decimals) + "x"
+
+		"flat":
+			return _FormatSignedNumber(value, decimals)
+
+		_:
+			var percent_value := value * 100.0
+			return _FormatSignedNumber(percent_value, decimals) + "%"
+
+
+func _FormatSignedNumber(value: float, decimals: int = 0) -> String:
+	var sign_value := "+"
+	if value < 0.0:
+		sign_value = "-"
+
+	var abs_value := absf(value)
+
+	if decimals <= 0:
+		return sign_value + str(int(round(abs_value)))
+
+	return sign_value + ("%.*f" % [decimals, abs_value])
+
+func GetIcon(icon_str):
+	return load("res://data/icons/"+icon_str+".tres")
+
+func HasAdditionalStats(bot_data: Dictionary) -> bool:
+	if typeof(bot_data) != TYPE_DICTIONARY:
+		return false
+
+	var stats = bot_data.get("stats", {})
+	return typeof(stats) == TYPE_DICTIONARY and !stats.is_empty()
+	

@@ -41,3 +41,9 @@ func _ready() -> void:
 	$SmartPanel/HBoxContainer/VBoxContainer/top_value.text = top_value
 	$SmartPanel/HBoxContainer/VBoxContainer/stat_name.text = stat_name
 	$SmartPanel/HBoxContainer/VBoxContainer/top_value.hash_tag_color = panel_color
+	await get_tree().process_frame
+	ResizeX()
+	
+func ResizeX():
+	var size_x = $SmartPanel/HBoxContainer.get_minimum_size().x
+	custom_minimum_size.x = size_x + 35

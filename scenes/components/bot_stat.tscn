@@ -2,13 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="1_05qxk"]
 [ext_resource type="Script" uid="uid://cuhcy0qlo6p1v" path="res://scenes/components/bot_stat.gd" id="1_qcwxn"]
-[ext_resource type="Texture2D" uid="uid://bg8gsnkslmr6t" path="res://data/icons/dig_power.tres" id="2_qcwxn"]
 [ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="4_8rc5v"]
 
 [node name="BotStat" type="Control" unique_id=587184023]
 custom_minimum_size = Vector2(180, 80)
 layout_mode = 3
 anchors_preset = 0
+size_flags_horizontal = 3
 script = ExtResource("1_qcwxn")
 
 [node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("1_05qxk")]
@@ -28,8 +28,8 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="icon" type="TextureRect" parent="SmartPanel/HBoxContainer" unique_id=1400833236]
+self_modulate = Color(0.9490196, 0.8392157, 1, 1)
 layout_mode = 2
-texture = ExtResource("2_qcwxn")
 expand_mode = 3
 stretch_mode = 5
 

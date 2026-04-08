@@ -16,7 +16,8 @@ func InitBotInfo(data):
 	$BotStatInfo/VList/SmartPanel/bot_level.text = "LVL "+str(bot_data.level).pad_decimals(0)
 	$BotStatInfo/VList/HFlow/BotStat_DPS.top_value = Global.CurrencyToString(GlobalStats.GetBotFinalDps(bot_data.level))
 	$BotStatInfo/VList/HFlow/BotStat_SPD.top_value = str(snapped(GlobalStats.GetBotFinalDigSpeed(bot_data.level),0.01))
-	
+	$BotStatInfo/VList/SmartPanel/rarity.hash_tag_color = GlobalColor.BotRankToColor(bot_data.rank)
+	print(bot_data)
 	#Clear additional stats
 	for x in $BotStatInfo/VList/AdditionalStats.get_children():
 		x.queue_free()
@@ -26,8 +27,12 @@ func InitBotInfo(data):
 		for x in bot_data.stats:
 			var s = stat_item.instantiate() as BotStatItemClass
 			$BotStatInfo/VList/AdditionalStats.add_child(s)
+			var val_str = GlobalBotStats.GetStatDescription(x,bot_data.stats[x])
+			s.top_value = val_str
 			var stat_data = GlobalBotStats.GetStatData(x)
-			print(stat_data)
+			s.stat_name = stat_data.title.to_upper()
+			s.icon = GlobalBotStats.GetIcon(stat_data.icon)
+			s.panel_color = "GOLD"
 			
 func _on_v_list_resized() -> void:
 	var max_y = $BotStatInfo/VList.get_minimum_size().y
