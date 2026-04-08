@@ -10,7 +10,6 @@ anchors_preset = 0
 script = ExtResource("1_bhobo")
 
 [node name="IconBG" parent="." unique_id=892379017 instance=ExtResource("1_fsg7g")]
-custom_minimum_size = Vector2(100, 100)
 layout_mode = 1
 
 [node name="SkillIcon" type="TextureRect" parent="IconBG" unique_id=1652363911]

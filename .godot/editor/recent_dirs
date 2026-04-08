@@ -1,10 +1,11 @@
+res://scenes/popups/
+res://scenes/components/
 res://autoload/
 /home/sergio/GitHub/core-hopper/data/bot_data/
 res://scenes/screens/merge/
 res://scenes/screens/progress/
 res://art/skills/
 /home/sergio/GitHub/core-hopper/data/skill_tree/
-res://scenes/components/
 res://art/chests/
 res://scenes/screens/dig/
 res://art/relics/
@@ -16,7 +17,6 @@ res://shaders/
 res://data/bosses/
 res://data/bot_atlas/
 res://art/bots/
-res://scenes/popups/
 res://scenes/app/
 res://scenes/screens/settings/
 res://scenes/screens/shop/

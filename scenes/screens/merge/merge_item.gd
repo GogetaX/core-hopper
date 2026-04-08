@@ -21,7 +21,17 @@ func _ready() -> void:
 	$IsDragIn.visible = false
 	$BotLevel.visible = false
 	$BotDPS.visible = false
+	$rank_color.visible = false
+	GlobalBtn.AddBtnPress(self)
+	GlobalBtn.BtnPress.connect(OnBotInspect)
 
+func OnBotInspect(control_node:Control):
+	
+	if control_node != self:
+		return
+	if !cur_bot_data.is_empty():
+		GlobalSignals.ShowPopup.emit("BOT_STAT_INFO",{"bot_uid":cur_bot_data.uid})
+	
 func OnParentReady():
 	cur_bot_id = get_index()
 	SyncBotData()
@@ -34,8 +44,10 @@ func SyncBotData():
 	else:
 		SetUnlocked(false)
 	cur_bot_data = GlobalSave.GetBotDataFromMergeSlot(cur_bot_id)
+	
 	if !cur_bot_data.is_empty():
-		
+		$rank_color.visible = true
+		$rank_color.panel_color = GlobalColor.BotRankToColor(cur_bot_data.rank)
 		_has_bot_to_drag = true
 		$BotLevel.visible = true
 		$BotImage.visible = true
@@ -43,7 +55,10 @@ func SyncBotData():
 		$BotImage.SetImageFromBotNum(cur_bot_data.level)
 		$BotLevel.text = "LV "+str(cur_bot_data.level).pad_decimals(0)
 		$BotDPS.text = str(GlobalStats.GetBotFinalDps(cur_bot_data.level)).pad_decimals(0)+" DPS"
+		mouse_filter = Control.MOUSE_FILTER_STOP
 	else:
+		mouse_filter = Control.MOUSE_FILTER_IGNORE
+		$rank_color.visible = false
 		$BotImage.visible = false
 		$BotDPS.visible = false
 		$BotLevel.visible = false

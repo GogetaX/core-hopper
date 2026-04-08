@@ -8,11 +8,11 @@
 
 [node name="MergeItem" type="Panel" unique_id=2143795646]
 custom_minimum_size = Vector2(100, 100)
-offset_right = 100.0
-offset_bottom = 100.0
+offset_right = 156.0
+offset_bottom = 138.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-mouse_filter = 2
+mouse_filter = 1
 theme_type_variation = &"PanelGridBG"
 script = ExtResource("1_ofani")
 
@@ -54,7 +54,7 @@ offset_left = 20.0
 offset_top = 20.0
 offset_right = -20.0
 offset_bottom = -20.0
-mouse_filter = 0
+mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
 
@@ -80,3 +80,7 @@ offset_bottom = -5.0
 panel_type = "INSIDE_ONLY"
 panel_color = "BLUE"
 darken_bg = true
+
+[node name="rank_color" parent="." unique_id=882323942 instance=ExtResource("5_s4g4a")]
+layout_mode = 1
+panel_type = "BORDER_ONLY"

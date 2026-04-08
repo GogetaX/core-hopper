@@ -129,3 +129,15 @@ func GetSkillBranchColor(branch: String) -> String:
 			return "WHITE"
 		_:
 			return "WHITE"
+
+func BotRankToColor(rank_num:int):
+	match rank_num:
+		0:
+			return "WHITE"
+		1:
+			return "BLUE"
+		2:
+			return "PURPLE"
+		3:
+			return "ORANGE"
+	return "WHITE"

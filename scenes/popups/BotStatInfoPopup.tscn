@@ -1,0 +1,171 @@
+[gd_scene format=3 uid="uid://cpfcsgcbx6eyi"]
+
+[ext_resource type="Script" uid="uid://qt0v233omgk7" path="res://scenes/app/bot_stat_info.gd" id="1_cq7b2"]
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="2_3ckm5"]
+[ext_resource type="PackedScene" uid="uid://dbb7264ypuqrj" path="res://scenes/components/bot_image.tscn" id="3_cq7b2"]
+[ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="4_scqma"]
+[ext_resource type="PackedScene" uid="uid://cvxyp16yctt7x" path="res://scenes/components/bot_stat.tscn" id="5_l8asv"]
+[ext_resource type="Texture2D" uid="uid://bg8gsnkslmr6t" path="res://data/icons/dig_power.tres" id="6_0f5q0"]
+[ext_resource type="Texture2D" uid="uid://bjp6u0fm74yb4" path="res://data/icons/dig_speed.tres" id="7_ncfw4"]
+[ext_resource type="PackedScene" uid="uid://njxlv6dxrlwj" path="res://scenes/screens/progress/smart_button_buy.tscn" id="8_dk0jt"]
+
+[node name="BotStatInfo" type="Control" unique_id=743967306]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_cq7b2")
+
+[node name="BotStatInfo" parent="." unique_id=892379017 instance=ExtResource("2_3ckm5")]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -219.0
+offset_top = -473.0
+offset_right = 219.0
+offset_bottom = 473.0
+panel_color = "TAB_BG"
+
+[node name="VList" type="VBoxContainer" parent="BotStatInfo" unique_id=184212293]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="BotStatInfo/VList" unique_id=991407099]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "UNIT SYSTEM STATUS"
+
+[node name="Label2" type="Label" parent="BotStatInfo/VList" unique_id=667764571]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_White"
+theme_override_font_sizes/font_size = 40
+text = "BOT INSPECTION"
+
+[node name="Control" type="Control" parent="BotStatInfo/VList" unique_id=1478349118]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="SmartPanel" parent="BotStatInfo/VList" unique_id=767093184 instance=ExtResource("2_3ckm5")]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+panel_type = "INSIDE_ONLY"
+panel_color = "TAB_BG"
+darken_bg = true
+
+[node name="BotImage" parent="BotStatInfo/VList/SmartPanel" unique_id=2022498304 instance=ExtResource("3_cq7b2")]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 3
+stretch_mode = 5
+
+[node name="rarity" parent="BotStatInfo/VList/SmartPanel" unique_id=713365230 instance=ExtResource("4_scqma")]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 90.0
+offset_bottom = 57.0
+text = "RARE"
+
+[node name="bot_level" parent="BotStatInfo/VList/SmartPanel" unique_id=486212889 instance=ExtResource("4_scqma")]
+self_modulate = Color(0.95686275, 0.972549, 1, 1)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -49.0
+offset_right = 82.0
+offset_bottom = -16.0
+grow_vertical = 0
+text = "LVL 4"
+hash_tag_type = "INSIDE_ONLY"
+hash_tag_color = "WHITE"
+
+[node name="Label4" type="Label" parent="BotStatInfo/VList" unique_id=401281629]
+layout_mode = 2
+text = "MAIN STATS"
+
+[node name="HFlow" type="HFlowContainer" parent="BotStatInfo/VList" unique_id=2022445329]
+layout_mode = 2
+
+[node name="BotStat_DPS" parent="BotStatInfo/VList/HFlow" unique_id=587184023 instance=ExtResource("5_l8asv")]
+layout_mode = 2
+size_flags_horizontal = 3
+panel_color = "BLUE"
+icon = ExtResource("6_0f5q0")
+
+[node name="BotStat_SPD" parent="BotStatInfo/VList/HFlow" unique_id=330855504 instance=ExtResource("5_l8asv")]
+layout_mode = 2
+size_flags_horizontal = 3
+icon = ExtResource("7_ncfw4")
+stat_name = "SPEED"
+
+[node name="Label3" type="Label" parent="BotStatInfo/VList" unique_id=1186941588]
+layout_mode = 2
+text = "ADDITIONAL STATS"
+
+[node name="AdditionalStats" type="HFlowContainer" parent="BotStatInfo/VList" unique_id=648477508]
+layout_mode = 2
+
+[node name="BotStat_DPS" parent="BotStatInfo/VList/AdditionalStats" unique_id=704584261 instance=ExtResource("5_l8asv")]
+layout_mode = 2
+size_flags_horizontal = 3
+panel_color = "BLUE"
+icon = ExtResource("6_0f5q0")
+
+[node name="BotStat_DPS2" parent="BotStatInfo/VList/AdditionalStats" unique_id=803214022 instance=ExtResource("5_l8asv")]
+layout_mode = 2
+size_flags_horizontal = 3
+icon = ExtResource("7_ncfw4")
+stat_name = "SPEED"
+
+[node name="Control4" type="Control" parent="BotStatInfo/VList" unique_id=8321090]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="SmartButtonBuy" parent="BotStatInfo/VList" unique_id=664760665 instance=ExtResource("8_dk0jt")]
+custom_minimum_size = Vector2(350, 80)
+layout_mode = 2
+size_flags_horizontal = 1
+btn_type = "WITH_PRICE"
+buy_btn_title = "SELL"
+panel_color = "ORANGE"
+
+[node name="CloseInfoBtn" parent="BotStatInfo/VList" unique_id=1702305444 instance=ExtResource("8_dk0jt")]
+custom_minimum_size = Vector2(350, 80)
+layout_mode = 2
+size_flags_horizontal = 1
+buy_btn_title = "CLOSE"
+panel_color = "ORANGE"
+
+[connection signal="resized" from="BotStatInfo/VList" to="." method="_on_v_list_resized"]
+[connection signal="OnPressed" from="BotStatInfo/VList/CloseInfoBtn" to="." method="_on_close_info_btn_on_pressed"]

@@ -43,6 +43,8 @@ func show_tab(tab_name:String,data:Dictionary) -> void:
 			new_screen = preload("res://scenes/popups/ChestPopup.tscn")
 		"SHOW_CHEST_DROP":
 			new_screen = preload("res://scenes/popups/SingleChestPopup.tscn")
+		"BOT_STAT_INFO":
+			new_screen = preload("res://scenes/popups/BotStatInfoPopup.tscn")
 		_:
 			print_debug("unknown tab: ",tab_name)
 	current_screen = new_screen.instantiate()
@@ -58,6 +60,8 @@ func show_tab(tab_name:String,data:Dictionary) -> void:
 		current_screen.InitOfflineReward(data)
 	elif tab_name == "SHOW_CHEST_DROP":
 		current_screen.InitChest(data)
+	elif tab_name == "BOT_STAT_INFO":
+		current_screen.InitBotInfo(data)
 	
 	
 	

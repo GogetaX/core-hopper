@@ -112,7 +112,7 @@ func EnsureUpgradeSchema() -> void:
 
 func BuildCleanSaveData():
 	var res = {}
-	res["currencies"] = {"coins":0,"crystals":0,"energy":0} #default coins 0
+	res["currencies"] = {"coins":20000,"crystals":0,"energy":0} #default coins 0
 	res["bot_inventory"]={
 		"bot_db": [],
 		"merge_free_slots":4
@@ -294,6 +294,8 @@ func CreateSimpleBot() -> Dictionary:
 	res["level"] = 1
 	res["rank"] = int(rolled_data.get("rank", 0))
 	res["stats"] = rolled_data.get("stats", {})
+	print("created bot data: ")
+	print(res)
 	return res
 
 func StoreUpdateBotData(new_bot_data:Dictionary) -> void:
@@ -332,31 +334,19 @@ func CombineBetween2MergeNodes(old_uid: int, new_uid: int) -> void:
 		push_warning("CombineBetween2MergeNodes: one of the bots was not found")
 		return
 
-	# Optional stats merge
-	if old_merge_data.has("stats") and typeof(old_merge_data.stats) == TYPE_DICTIONARY:
-		if !new_merge_data.has("stats") or typeof(new_merge_data.stats) != TYPE_DICTIONARY:
-			new_merge_data["stats"] = {}
+	_EnsureBotMergeFields(old_merge_data)
+	_EnsureBotMergeFields(new_merge_data)
 
-		for stat in old_merge_data.stats:
-			if !new_merge_data.stats.has(stat):
-				new_merge_data.stats[stat] = old_merge_data.stats[stat]
-			else:
-				new_merge_data.stats[stat] += old_merge_data.stats[stat]
+	new_merge_data["stats"] = _MergeBotStatsDict(new_merge_data.stats, old_merge_data.stats)
+	new_merge_data["rank"] = _GetMergedBotRank(
+		int(new_merge_data.get("rank", 0)),
+		int(old_merge_data.get("rank", 0))
+	)
 
-	new_merge_data.level = int(new_merge_data.level + 1)
-	if GlobalStats.HasChanceOfNextLevelBotOnMerge():
-		new_merge_data.level += 1
-	GlobalSave.SetHighestBotLevel(new_merge_data.level)
-	GlobalDailyQuest.RegisterMergeCreated(new_merge_data.level)
-	# clear old slot ownership before removing
-	old_merge_data.merge_slot_id = -1
-	if new_merge_data.level == 3:
-		if !GlobalSave.IsMilestoneCompleted("bot_level_3"):
-			GlobalSave.SetMilestoneToCompleted("bot_level_3")
-	
+	_ApplyMergedBotProgress(new_merge_data)
+
 	RemoveBotByID(old_uid)
 	CheckChanceForFreeBotOnMerge()
-	SyncSave()
 	
 func CheckChanceForFreeBotOnMerge():
 	if GlobalStats.HasChanceToSpawmNewBot():
@@ -401,24 +391,25 @@ func SwapBetween2BotsDigBoToMerge(old_uid: int, new_uid: int) -> void:
 	old_bot.merge_slot_id = int(new_bot.merge_slot_id)
 	new_bot.merge_slot_id = int(-1)
 	
-func MergeFromMergeToDigBot(merge_uid:int,digbot_uid:int):
+func MergeFromMergeToDigBot(merge_uid: int, digbot_uid: int) -> void:
 	var merge_old_bot_data = GetBotDataFromUID(merge_uid)
 	var digbot_data = GetBotDataFromUID(digbot_uid)
-	var old_bot_stats = merge_old_bot_data.stats.duplicate()
-	for stat in old_bot_stats:
-		if !digbot_data.has(stat):
-			digbot_data.stats[stat] = old_bot_stats[stat]
-		else:
-			digbot_data.stats[stat] += old_bot_stats[stat]
-	digbot_data.level = int(digbot_data.level + 1)
-	if digbot_data.level == 3:
-		if !GlobalSave.IsMilestoneCompleted("bot_level_3"):
-			GlobalSave.SetMilestoneToCompleted("bot_level_3")
-			
-	if GlobalStats.HasChanceOfNextLevelBotOnMerge():
-		digbot_data.level += 1
-	GlobalDailyQuest.RegisterMergeCreated(digbot_data.level)
-	GlobalSave.SetHighestBotLevel(digbot_data.level)
+
+	if merge_old_bot_data.is_empty() or digbot_data.is_empty():
+		push_warning("MergeFromMergeToDigBot: one of the bots was not found")
+		return
+
+	_EnsureBotMergeFields(merge_old_bot_data)
+	_EnsureBotMergeFields(digbot_data)
+
+	digbot_data["stats"] = _MergeBotStatsDict(digbot_data.stats, merge_old_bot_data.stats)
+	digbot_data["rank"] = _GetMergedBotRank(
+		int(digbot_data.get("rank", 0)),
+		int(merge_old_bot_data.get("rank", 0))
+	)
+
+	_ApplyMergedBotProgress(digbot_data)
+
 	RemoveBotByID(merge_uid)
 	CheckChanceForFreeBotOnMerge()
 	
@@ -430,29 +421,17 @@ func MergeFromDigBotToMerge(digbot_uid: int, merge_uid: int) -> void:
 		push_warning("MergeFromDigBotToMerge: one of the bots was not found")
 		return
 
-	# make sure target has stats dictionary
-	if !merge_bot_data.has("stats") or typeof(merge_bot_data.stats) != TYPE_DICTIONARY:
-		merge_bot_data["stats"] = {}
+	_EnsureBotMergeFields(digbot_data)
+	_EnsureBotMergeFields(merge_bot_data)
 
-	# merge stats from dragged dig-bot into target merge bot
-	if digbot_data.has("stats") and typeof(digbot_data.stats) == TYPE_DICTIONARY:
-		for stat in digbot_data.stats:
-			if !merge_bot_data.stats.has(stat):
-				merge_bot_data.stats[stat] = digbot_data.stats[stat]
-			else:
-				merge_bot_data.stats[stat] += digbot_data.stats[stat]
+	merge_bot_data["stats"] = _MergeBotStatsDict(merge_bot_data.stats, digbot_data.stats)
+	merge_bot_data["rank"] = _GetMergedBotRank(
+		int(merge_bot_data.get("rank", 0)),
+		int(digbot_data.get("rank", 0))
+	)
 
-	# level up the target bot that stays in the merge slot
-	merge_bot_data.level = int(merge_bot_data.level + 1)
-	if merge_bot_data.level == 3:
-		if !GlobalSave.IsMilestoneCompleted("bot_level_3"):
-			GlobalSave.SetMilestoneToCompleted("bot_level_3")
-			
-	if GlobalStats.HasChanceOfNextLevelBotOnMerge():
-		merge_bot_data.level += 1
-	GlobalSave.SetHighestBotLevel(merge_bot_data.level)
-	GlobalDailyQuest.RegisterMergeCreated(merge_bot_data.level)
-	# remove dragged dig-bot from inventory and lane
+	_ApplyMergedBotProgress(merge_bot_data)
+
 	RemoveBotByID(digbot_uid)
 	CheckChanceForFreeBotOnMerge()
 
@@ -525,3 +504,70 @@ func IsMilestoneCompleted(milestone_key):
 	if save_data.milestones.claimed_ids.has(milestone_key):
 		return true
 	return false
+
+func _EnsureBotMergeFields(bot_data: Dictionary) -> void:
+	if !bot_data.has("stats") or typeof(bot_data.stats) != TYPE_DICTIONARY:
+		bot_data["stats"] = {}
+
+	if !bot_data.has("rank"):
+		bot_data["rank"] = 0
+
+
+func _SnapBotStatValue(stat_id: String, value: float) -> float:
+	var stat_data := GlobalBotStats.GetStatData(stat_id)
+	var decimals := int(stat_data.get("decimals", 2))
+
+	if decimals <= 0:
+		return roundf(value)
+
+	var step := pow(0.1, decimals)
+	return snappedf(value, step)
+
+
+func _MergeSingleBotStat(stat_id: String, value_a: float, value_b: float) -> float:
+	var high = max(value_a, value_b)
+	var low = min(value_a, value_b)
+
+	# diminishing returns merge:
+	# strongest stat stays, weaker contributes 50%
+	var merged = high + low * 0.5
+	return _SnapBotStatValue(stat_id, merged)
+
+
+func _MergeBotStatsDict(stats_a: Dictionary, stats_b: Dictionary) -> Dictionary:
+	var result := {}
+
+	if typeof(stats_a) == TYPE_DICTIONARY:
+		for stat_id in stats_a.keys():
+			result[str(stat_id)] = float(stats_a[stat_id])
+
+	if typeof(stats_b) == TYPE_DICTIONARY:
+		for stat_id_value in stats_b.keys():
+			var stat_id := str(stat_id_value)
+			var value_b := float(stats_b[stat_id_value])
+
+			if result.has(stat_id):
+				result[stat_id] = _MergeSingleBotStat(stat_id, float(result[stat_id]), value_b)
+			else:
+				result[stat_id] = _SnapBotStatValue(stat_id, value_b)
+
+	return result
+
+
+func _GetMergedBotRank(rank_a: int, rank_b: int) -> int:
+	# keep the better rarity for now
+	return maxi(rank_a, rank_b)
+
+
+func _ApplyMergedBotProgress(target_bot: Dictionary) -> void:
+	target_bot.level = int(target_bot.level + 1)
+
+	if target_bot.level == 3:
+		if !GlobalSave.IsMilestoneCompleted("bot_level_3"):
+			GlobalSave.SetMilestoneToCompleted("bot_level_3")
+
+	if GlobalStats.HasChanceOfNextLevelBotOnMerge():
+		target_bot.level += 1
+
+	GlobalDailyQuest.RegisterMergeCreated(target_bot.level)
+	GlobalSave.SetHighestBotLevel(target_bot.level)

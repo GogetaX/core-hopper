@@ -7,3 +7,16 @@ res://scenes/screens/dig/material.tscn
 res://data/bot_data/bot_aditional_stats.json
 res://autoload/GlobalBotStats.gd
 res://autoload/GlobalSave.gd
+res://scenes/screens/merge/merge_item.tscn
+res://scenes/screens/merge/merge_item.gd
+res://autoload/GlobalColor.gd
+res://scenes/screens/merge/merge_screen.tscn
+res://scenes/app/bot_stat_info.gd
+res://scenes/components/smart_panel.tscn
+res://scenes/components/icon_bg.tscn
+res://scenes/components/bot_stat.tscn
+res://scenes/components/bot_stat.gd
+res://autoload/GlobalSignals.gd
+res://scenes/popups/ChestPopup.tscn
+res://scenes/app/overlay_layer.gd
+res://scenes/popups/BotStatInfoPopup.tscn
