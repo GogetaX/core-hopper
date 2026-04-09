@@ -1,6 +1,8 @@
 extends TextureRect
 
 func _NumToStr(_bot_num):
+	if _bot_num <= 0:
+		_bot_num = 1
 	var cur_num = str(_bot_num)
 	if cur_num.length() == 1:
 		cur_num = "0"+cur_num

@@ -24,6 +24,10 @@ grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 mouse_filter = 1
 
+[node name="rank_color" parent="State_DigBot" unique_id=892379017 instance=ExtResource("5_u8qxv")]
+layout_mode = 1
+panel_type = "BORDER_ONLY"
+
 [node name="VList" type="VBoxContainer" parent="State_DigBot" unique_id=1907269660]
 layout_mode = 1
 anchors_preset = -1
@@ -64,7 +68,7 @@ text = "LV 1"
 hash_tag_type = "INSIDE_ONLY"
 hash_tag_color = "WHITE"
 
-[node name="IsDragIn" parent="State_DigBot" unique_id=892379017 instance=ExtResource("5_u8qxv")]
+[node name="IsDragIn" parent="State_DigBot" unique_id=338598852 instance=ExtResource("5_u8qxv")]
 layout_mode = 1
 anchors_preset = -1
 offset_left = 5.0

@@ -1,0 +1,62 @@
+{
+  "double_dps": {
+	"title": "Overclock",
+	"description": "Bots deal x2 DPS for a limited time.",
+	"icon": "bonus_dps",
+	"group": "combat",
+	"effect_type": "dps_mult",
+	"effect_value": 2.0,
+	"duration_sec": 600,
+	"cost_currency": "energy",
+	"cost_amount": 20,
+	"stack_mode": "refresh",
+	"max_stacks": 1,
+	"unlock_type": "default",
+	"unlock_value": 0
+  },
+  "double_coins": {
+	"title": "Gold Rush",
+	"description": "Gain x2 more coins for a limited time.",
+	"icon": "bonus_coins",
+	"group": "economy",
+	"effect_type": "coin_mult",
+	"effect_value": 2.0,
+	"duration_sec": 600,
+	"cost_currency": "energy",
+	"cost_amount": 25,
+	"stack_mode": "refresh",
+	"max_stacks": 1,
+	"unlock_type": "default",
+	"unlock_value": 0
+  },
+  "bot_discount": {
+	"title": "Factory Sale",
+	"description": "Bot purchase costs are reduced for a limited time.",
+	"icon": "bonus_discount",
+	"group": "shop",
+	"effect_type": "bot_cost_mult",
+	"effect_value": 0.75,
+	"duration_sec": 600,
+	"cost_currency": "energy",
+	"cost_amount": 30,
+	"stack_mode": "refresh",
+	"max_stacks": 1,
+	"unlock_type": "default",
+	"unlock_value": 0
+  },
+  "auto_merge": {
+	"title": "Auto Merge",
+	"description": "Automatically merges matching bots for a limited time.",
+	"icon": "bonus_auto_merge",
+	"group": "merge",
+	"effect_type": "auto_merge",
+	"effect_value": 1.0,
+	"duration_sec": 600,
+	"cost_currency": "energy",
+	"cost_amount": 35,
+	"stack_mode": "refresh",
+	"max_stacks": 1,
+	"unlock_type": "default",
+	"unlock_value": 0
+  }
+}

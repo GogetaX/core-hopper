@@ -112,7 +112,7 @@ func EnsureUpgradeSchema() -> void:
 
 func BuildCleanSaveData():
 	var res = {}
-	res["currencies"] = {"coins":20000,"crystals":0,"energy":0} #default coins 0
+	res["currencies"] = {"coins":20000,"crystals":20000,"energy":0} #default coins 0
 	res["bot_inventory"]={
 		"bot_db": [],
 		"merge_free_slots":4
@@ -182,6 +182,7 @@ func BuildCleanSaveData():
 		"version":1,
 		"node_levels": {}
 	}
+	res["timed_bonuses"] = {"active":{}}
 	return res
 
 
@@ -254,7 +255,7 @@ func GetBotDataFromMergeSlot(merge_slot)->Dictionary:
 	return {}
 
 func FindFreeMergeSlot() -> int:
-	var max_merge_slots = int(save_data.bot_inventory.merge_free_slots)
+	var max_merge_slots = GlobalStats.GetFreeMergeSlots()
 
 	for slot_id in range(max_merge_slots):
 		var is_taken := false

@@ -152,7 +152,7 @@ layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="SmartButtonBuy" parent="BotStatInfo/VList" unique_id=664760665 instance=ExtResource("8_dk0jt")]
+[node name="SellBotBtn" parent="BotStatInfo/VList" unique_id=664760665 instance=ExtResource("8_dk0jt")]
 custom_minimum_size = Vector2(350, 80)
 layout_mode = 2
 size_flags_horizontal = 1
@@ -168,4 +168,5 @@ buy_btn_title = "CLOSE"
 panel_color = "ORANGE"
 
 [connection signal="resized" from="BotStatInfo/VList" to="." method="_on_v_list_resized"]
+[connection signal="BtnPressedWithPrice" from="BotStatInfo/VList/SellBotBtn" to="." method="_on_sell_bot_btn_btn_pressed_with_price"]
 [connection signal="OnPressed" from="BotStatInfo/VList/CloseInfoBtn" to="." method="_on_close_info_btn_on_pressed"]

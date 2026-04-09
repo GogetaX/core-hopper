@@ -160,6 +160,8 @@ func OnBuyStateBtn(control:Control):
 		if cur_lane_data.auto_dig_unlocked && cur_lane_data.bot_uid == -1:
 			GlobalBtn.AnimateBtnPressed($State_DigBot)
 			GlobalSignals.OpenTabFromStr.emit("MERGE")
+		elif cur_lane_data.bot_uid != -1:
+			GlobalSignals.ShowPopup.emit("BOT_STAT_INFO",{"bot_uid":cur_lane_data.bot_uid})
 		
 func State_BuyBot():
 	$State_BuyBot.visible = true
@@ -178,19 +180,24 @@ func State_DigBot():
 	$State_DigBot/VList/dps_label.visible = false
 	_has_bot_to_drag = false
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
 	if !cur_lane_data.auto_dig_unlocked:
 		$State_DigBot/VList/locked_icon.visible = true
 		$State_DigBot/VList/locked_icon.texture = preload("res://art/icons/20_px/lock_icon.png")
 		$State_DigBot/VList/locked_icon.self_modulate.a = 0.3
+		$State_DigBot/rank_color.visible = false
 	elif cur_lane_data.bot_uid == -1:
 		$State_DigBot/VList/locked_icon.texture = preload("res://art/icons/20_px/plus_icon.png")
 		$State_DigBot/VList/locked_icon.visible = true
+		$State_DigBot/rank_color.visible = false
 	else:
+		$State_DigBot/rank_color.visible = true
 		mouse_filter = Control.MOUSE_FILTER_STOP
 		_has_bot_to_drag = true
 		$State_DigBot/VList/bot_icon.visible = true
 		$State_DigBot/VList/dps_label.visible = true
 		var bot_data = GlobalSave.GetBotDataFromUID(cur_lane_data.bot_uid)
+		$State_DigBot/rank_color.panel_color = GlobalColor.BotRankToColor(bot_data.rank)
 		$State_DigBot/VList/bot_icon.SetImageFromBotNum(int(bot_data.level))
 		$State_DigBot/VList/dps_label.text = Global.CurrencyToString(GlobalStats.GetBotFinalDPSWithGlobalAndStats(bot_data,false,false))+ " DPS"
 		$State_DigBot/cur_lvl.visible = true

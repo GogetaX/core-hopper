@@ -73,9 +73,8 @@ func _SimulateOfflineSeconds(seconds: int, efficiency: float) -> Dictionary:
 		if bot.is_empty():
 			continue
 
-		var level := int(bot.get("level", 1))
-		var lane_dps := GlobalStats.GetBotExpectedDps(level) * efficiency
-
+		var lane_dps := GlobalStats.GetBotFinalDPSWithGlobalAndStats(bot, true, false) * efficiency
+		
 		_HarvestLaneOffline(lane_index, harvest_depth, lane_dps, seconds, rewards)
 
 	return rewards

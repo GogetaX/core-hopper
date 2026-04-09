@@ -272,22 +272,24 @@ func _FindBotByUid(bot_uid: int) -> Dictionary:
 	return {}
 
 
-func _GetBotDigPower(bot: Dictionary) -> float:
-	# replace with your real stat curve
-	if bot.has("stats") and bot["stats"].has("dig_power"):
-		return float(bot["stats"]["dig_power"])
-
-	var level := int(bot.get("level", 1))
-	return GlobalStats.GetBotStats(level).dig_power
-
-
 func _GetBotDigSpeed(bot: Dictionary) -> float:
-	# replace with your real stat curve
-	if bot.has("stats") and bot["stats"].has("dig_speed"):
-		return float(bot["stats"]["dig_speed"])
-
 	var level := int(bot.get("level", 1))
-	return GlobalStats.GetBotStats(level).dig_speed
+
+	var speed := float(GlobalStats.GetBotBaseDigSpeed(level))
+	speed += GlobalBotStats.GetBotStatValue(bot, "dig_speed")
+
+	speed *= GlobalStats.GetGlobalSpeedMultiplier()
+	speed *= GlobalBotStats.BotStatMultiplier(bot, "dig_speed_mult")
+	speed *= GlobalStats.GetUpgradeValue("drill_speed")
+
+	return max(0.001, speed)
+
+
+func _GetBotDigPower(bot: Dictionary) -> float:
+	var dps := float(GlobalStats.GetBotFinalDPSWithGlobalAndStats(bot, false, false))
+	var speed := _GetBotDigSpeed(bot)
+
+	return max(0.0, dps / max(speed, 0.001))
 
 
 func _GetHitInterval(dig_speed: float) -> float:

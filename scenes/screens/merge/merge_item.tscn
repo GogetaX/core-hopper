@@ -16,35 +16,6 @@ mouse_filter = 1
 theme_type_variation = &"PanelGridBG"
 script = ExtResource("1_ofani")
 
-[node name="BotLevel" parent="." unique_id=713365230 instance=ExtResource("3_kxkr3")]
-self_modulate = Color(0.81960785, 0.98039216, 1, 1)
-layout_mode = 1
-offset_left = 11.0
-offset_top = 6.0
-offset_right = 54.0
-offset_bottom = 39.0
-text = "LV 1"
-hash_tag_type = "INSIDE_ONLY"
-hash_tag_color = "BLUE"
-
-[node name="BotDPS" parent="." unique_id=229597826 instance=ExtResource("3_kxkr3")]
-self_modulate = Color(0.8627451, 0.9098039, 1, 1)
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -48.5
-offset_top = -33.0
-offset_right = 48.5
-grow_horizontal = 2
-grow_vertical = 0
-text = "DPS"
-horizontal_alignment = 1
-hash_tag_color = "WHITE"
-no_bg = true
-
 [node name="BotImage" parent="." unique_id=2022498304 instance=ExtResource("2_2tu7h")]
 layout_mode = 1
 anchors_preset = -1
@@ -80,6 +51,35 @@ offset_bottom = -5.0
 panel_type = "INSIDE_ONLY"
 panel_color = "BLUE"
 darken_bg = true
+
+[node name="BotLevel" parent="." unique_id=713365230 instance=ExtResource("3_kxkr3")]
+self_modulate = Color(0.81960785, 0.98039216, 1, 1)
+layout_mode = 1
+offset_left = 11.0
+offset_top = 6.0
+offset_right = 54.0
+offset_bottom = 39.0
+text = "LV 1"
+hash_tag_type = "INSIDE_ONLY"
+hash_tag_color = "BLUE"
+
+[node name="BotDPS" parent="." unique_id=229597826 instance=ExtResource("3_kxkr3")]
+self_modulate = Color(0.8627451, 0.9098039, 1, 1)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -48.5
+offset_top = -33.0
+offset_right = 48.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "DPS"
+horizontal_alignment = 1
+hash_tag_color = "WHITE"
+no_bg = true
 
 [node name="rank_color" parent="." unique_id=882323942 instance=ExtResource("5_s4g4a")]
 layout_mode = 1

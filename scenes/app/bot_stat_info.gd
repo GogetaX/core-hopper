@@ -14,7 +14,8 @@ func InitBotInfo(data):
 	$BotStatInfo/VList/SmartPanel/BotImage.SetImageFromBotNum(bot_data.level)
 	$BotStatInfo/VList/SmartPanel/rarity.text = GlobalBotStats.GetRankTitle(bot_data.rank)
 	$BotStatInfo/VList/SmartPanel/bot_level.text = "LVL "+str(bot_data.level).pad_decimals(0)
-	$BotStatInfo/VList/HFlow/BotStat_DPS.top_value = Global.CurrencyToString(GlobalStats.GetBotFinalDps(bot_data.level))
+	var bot_stat_dps = GlobalStats.GetBotFinalDPSWithGlobalAndStats(bot_data,false,false)
+	$BotStatInfo/VList/HFlow/BotStat_DPS.top_value = Global.CurrencyToString(bot_stat_dps)
 	$BotStatInfo/VList/HFlow/BotStat_SPD.top_value = str(snapped(GlobalStats.GetBotFinalDigSpeed(bot_data.level),0.01))
 	$BotStatInfo/VList/SmartPanel/rarity.hash_tag_color = GlobalColor.BotRankToColor(bot_data.rank)
 	print(bot_data)
@@ -33,6 +34,19 @@ func InitBotInfo(data):
 			s.stat_name = stat_data.title.to_upper()
 			s.icon = GlobalBotStats.GetIcon(stat_data.icon)
 			s.panel_color = "GOLD"
+		var dps_against_boss = GlobalStats.GetBotFinalDPSWithGlobalAndStats(bot_data,false,true)
+		if dps_against_boss != bot_stat_dps:
+			var s = stat_item.instantiate() as BotStatItemClass
+			$BotStatInfo/VList/AdditionalStats.add_child(s)
+			s.top_value = Global.CurrencyToString(dps_against_boss)
+			s.stat_name = "BOSS DPS"
+			s.icon = load("res://art/skills/boss_damage.tres")
+			s.panel_color = "GOLD"
+			
+	#Init Sell Price
+	var sell_price = GlobalStats.GetBotSellValue(bot_data.level)
+	$BotStatInfo/VList/SellBotBtn.price_text = Global.CurrencyToString(sell_price)
+	$BotStatInfo/VList/SellBotBtn.price_int = sell_price
 			
 func _on_v_list_resized() -> void:
 	var max_y = $BotStatInfo/VList.get_minimum_size().y
@@ -41,4 +55,11 @@ func _on_v_list_resized() -> void:
 
 	
 func _on_close_info_btn_on_pressed() -> void:
+	GlobalSignals.CloseCurPopup.emit()
+
+
+func _on_sell_bot_btn_btn_pressed_with_price(currency: String, price: int) -> void:
+	GlobalSave.AddCurrency(currency,price)
+	GlobalSave.RemoveBotByID(cur_data.bot_uid)
+	GlobalSave.SyncSave()
 	GlobalSignals.CloseCurPopup.emit()

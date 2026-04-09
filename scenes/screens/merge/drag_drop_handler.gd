@@ -39,8 +39,20 @@ func _process(_delta: float) -> void:
 			Global.cur_dragging_node.queue_free()
 
 func EvaluateReleaseStateToSell():
-	print("sell?")
-	
+	#var cur_dragging_merge_node : MergeItemClass = null
+	#var cur_dragging_bot_node : DigBotClass = null
+	if Global.cur_dragging_node.cur_dragging_merge_node:
+		var sell_value = GlobalStats.GetBotSellValue(Global.cur_dragging_node.cur_dragging_merge_node.cur_bot_data.level)
+		GlobalSave.AddCurrency("coins",sell_value)
+		GlobalSave.RemoveBotByID(Global.cur_dragging_node.cur_dragging_merge_node.cur_bot_data.uid)
+		GlobalSave.SyncSave()
+	elif Global.cur_dragging_node.cur_dragging_bot_node:
+		var bot_lane_data = Global.cur_dragging_node.cur_dragging_bot_node.cur_lane_data
+		var bot_data = GlobalSave.GetBotDataFromUID(bot_lane_data.bot_uid)
+		var bot_sell_value = GlobalStats.GetBotSellValue(bot_data.level)
+		GlobalSave.AddCurrency("coins",bot_sell_value)
+		GlobalSave.RemoveBotByID(Global.cur_dragging_node.cur_dragging_bot_node.cur_lane_data.bot_uid)
+		GlobalSave.SyncSave()
 func EvaluateReleaseStateFromDigbot():
 	if Global.cur_drag_data.has("at_self_dig_bot"):
 		var is_mouse_in = merge_drag_node.cur_dragging_bot_node.get_global_rect().has_point(get_viewport().get_mouse_position())
