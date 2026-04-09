@@ -6,9 +6,9 @@
 	  "icon": "dig_power",
 	  "stat_type": "flat",
 	  "weight": 30,
-	  "min_value": 2.0,
+	  "min_value": 0.05,
 	  "max_value": 4.0,
-	  "decimals": 0
+	  "decimals": 2
 	},
 	"dig_speed": {
 	  "title": "Dig Speed",
@@ -16,9 +16,9 @@
 	  "icon": "dig_speed",
 	  "stat_type": "flat",
 	  "weight": 30,
-	  "min_value": 2.0,
+	  "min_value": 0.5,
 	  "max_value": 4.0,
-	  "decimals": 0
+	  "decimals": 2
 	},
 	"dig_power_mult": {
 	  "title": "Dig Power",

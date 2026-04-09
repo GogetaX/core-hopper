@@ -285,13 +285,14 @@ func FindBotDBFromUID(uid) -> Dictionary:
 	return {}
 
 func CreateSimpleBot() -> Dictionary:
+	var cur_level := 1
 	var res = {}
 	var new_uid = FindFreeUID()
-	var rolled_data := GlobalBotStats.RollBotStats()
+	var rolled_data = GlobalBotStats.RollBotStats(cur_level)
 
 	res["uid"] = new_uid
 	res["merge_slot_id"] = -1
-	res["level"] = 1
+	res["level"] = cur_level
 	res["rank"] = int(rolled_data.get("rank", 0))
 	res["stats"] = rolled_data.get("stats", {})
 	print("created bot data: ")

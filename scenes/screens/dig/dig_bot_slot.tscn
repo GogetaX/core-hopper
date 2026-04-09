@@ -15,7 +15,6 @@ theme_type_variation = &"PanelWithWhiteBG"
 script = ExtResource("1_na4w1")
 
 [node name="State_DigBot" type="Control" parent="." unique_id=1511592070]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

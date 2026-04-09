@@ -56,6 +56,48 @@ func GetBotFinalDPSWithGobal(level:int) -> float:
 	var final_dps = GetBotFinalDps(level)
 	return final_dps * GetBotDamageMultiplier()
 	
+
+func GetBotFinalDPSWithGlobalAndStats(bot_data: Dictionary, include_expected_crit: bool = false, is_boss: bool = false) -> float:
+	var level := int(bot_data.get("level", 1))
+
+	var power := float(GetBotBaseDigPower(level))
+	var speed := float(GetBotBaseDigSpeed(level))
+
+	# flat bot stats
+	power += GlobalBotStats.GetBotStatValue(bot_data, "dig_power")
+	speed += GlobalBotStats.GetBotStatValue(bot_data, "dig_speed")
+
+	# global progression
+	power *= GetGlobalPowerMultiplier()
+	speed *= GetGlobalSpeedMultiplier()
+
+	# bot affix multipliers
+	power *= GlobalBotStats.BotStatMultiplier(bot_data, "dig_power_mult")
+	speed *= GlobalBotStats.BotStatMultiplier(bot_data, "dig_speed_mult")
+
+	# normal upgrades / relic multipliers already used in the game
+	power *= GetBotDamageMultiplier()
+	speed *= GetUpgradeValue("drill_speed")
+
+	var dps := power * speed
+
+	if include_expected_crit:
+		var crit_chance = clamp(
+			GetCritChance() + GlobalBotStats.GetBotStatValue(bot_data, "crit_chance"),
+			0.0,
+			1.0
+		)
+		var crit_mult = max(
+			1.0,
+			GetCritMultiplier() + GlobalBotStats.GetBotStatValue(bot_data, "crit_mult")
+		)
+
+		dps *= 1.0 + (crit_chance * (crit_mult - 1.0))
+
+	if is_boss:
+		dps *= GetBossDamageMultiplier()
+
+	return max(0.0, dps)
 	
 func GetBotFinalDigSpeedWithGlobal(level: int) -> float:
 	var final_speed = GetBotFinalDigSpeed(level)

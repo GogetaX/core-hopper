@@ -192,6 +192,6 @@ func State_DigBot():
 		$State_DigBot/VList/dps_label.visible = true
 		var bot_data = GlobalSave.GetBotDataFromUID(cur_lane_data.bot_uid)
 		$State_DigBot/VList/bot_icon.SetImageFromBotNum(int(bot_data.level))
-		$State_DigBot/VList/dps_label.text = str(GlobalStats.GetBotFinalDPSWithGobal(bot_data.level)).pad_decimals(0) + " DPS"
+		$State_DigBot/VList/dps_label.text = Global.CurrencyToString(GlobalStats.GetBotFinalDPSWithGlobalAndStats(bot_data,false,false))+ " DPS"
 		$State_DigBot/cur_lvl.visible = true
 		$State_DigBot/cur_lvl.text = "LV "+str(bot_data.level).pad_decimals(0)

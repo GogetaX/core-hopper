@@ -54,7 +54,7 @@ func SyncBotData():
 		$BotDPS.visible = true
 		$BotImage.SetImageFromBotNum(cur_bot_data.level)
 		$BotLevel.text = "LV "+str(cur_bot_data.level).pad_decimals(0)
-		$BotDPS.text = str(GlobalStats.GetBotFinalDps(cur_bot_data.level)).pad_decimals(0)+" DPS"
+		$BotDPS.text = Global.CurrencyToString((GlobalStats.GetBotFinalDPSWithGlobalAndStats(cur_bot_data,false,false)))+" DPS"
 		mouse_filter = Control.MOUSE_FILTER_STOP
 	else:
 		mouse_filter = Control.MOUSE_FILTER_IGNORE

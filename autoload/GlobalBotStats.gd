@@ -9,11 +9,14 @@ const DEFAULT_RANK_TITLES := {
 	3: "Mythic"
 }
 
-var bot_stats_db: Dictionary = {}
 var bot_rank_data: Dictionary = {}
+
+var bot_stats_db: Dictionary = {}
 var bot_stat_roll_rules: Dictionary = {}
 
 var _rng := RandomNumberGenerator.new()
+
+
 
 
 func _ready() -> void:
@@ -23,7 +26,6 @@ func _ready() -> void:
 
 func LoadBotStats(path: String = BOT_STATS_PATH) -> bool:
 	bot_stats_db.clear()
-	bot_rank_data.clear()
 	bot_stat_roll_rules.clear()
 
 	if !FileAccess.file_exists(path):
@@ -62,6 +64,8 @@ func LoadBotStats(path: String = BOT_STATS_PATH) -> bool:
 		var copy = stat_data.duplicate(true)
 		copy["id"] = str(stat_id)
 		copy["title"] = str(copy.get("title", stat_id))
+		copy["description"] = str(copy.get("description", ""))
+		copy["icon"] = str(copy.get("icon", ""))
 		copy["stat_type"] = str(copy.get("stat_type", "percent"))
 		copy["weight"] = int(copy.get("weight", 0))
 		copy["min_value"] = float(copy.get("min_value", 0.0))
@@ -70,6 +74,10 @@ func LoadBotStats(path: String = BOT_STATS_PATH) -> bool:
 
 		bot_stats_db[str(stat_id)] = copy
 
+	var rules_data = data.get("bot_stat_roll_rules", {})
+	if typeof(rules_data) == TYPE_DICTIONARY:
+		bot_stat_roll_rules = rules_data.duplicate(true)
+	
 	var rank_data = data.get("bot_rank_data", {})
 	if typeof(rank_data) == TYPE_DICTIONARY:
 		for rank_key in rank_data.keys():
@@ -81,15 +89,8 @@ func LoadBotStats(path: String = BOT_STATS_PATH) -> bool:
 			var copy = rank_info.duplicate(true)
 			copy["id"] = rank
 			copy["title"] = str(copy.get("title", DEFAULT_RANK_TITLES.get(rank, "Rusted")))
-			copy["weight"] = int(copy.get("weight", 0))
-			copy["multiplier"] = float(copy.get("multiplier", 1.0))
-
 			bot_rank_data[rank] = copy
-
-	var rules_data = data.get("bot_stat_roll_rules", {})
-	if typeof(rules_data) == TYPE_DICTIONARY:
-		bot_stat_roll_rules = rules_data.duplicate(true)
-
+		
 	return !bot_stats_db.is_empty()
 
 
@@ -101,46 +102,6 @@ func GetStatData(stat_id: String) -> Dictionary:
 	if bot_stats_db.has(stat_id):
 		return bot_stats_db[stat_id].duplicate(true)
 	return {}
-
-
-func HasStatData(stat_id: String) -> bool:
-	return bot_stats_db.has(stat_id)
-
-
-func GetRankData(rank: int) -> Dictionary:
-	if bot_rank_data.has(rank):
-		return bot_rank_data[rank].duplicate(true)
-	return {}
-
-
-func GetRankTitle(rank: int) -> String:
-	var data := GetRankData(rank)
-	if !data.is_empty():
-		return str(data.get("title", DEFAULT_RANK_TITLES.get(rank, "Rusted")))
-	return str(DEFAULT_RANK_TITLES.get(rank, "Rusted"))
-
-
-func GetRankMultiplier(rank: int) -> float:
-	var data := GetRankData(rank)
-	if !data.is_empty():
-		return float(data.get("multiplier", 1.0))
-	return 1.0
-
-
-func GetBotRank(bot_data: Dictionary) -> int:
-	if typeof(bot_data) != TYPE_DICTIONARY:
-		return 0
-	return int(bot_data.get("rank", 0))
-
-
-func GetBotRankTitle(bot_data: Dictionary) -> String:
-	if !HasAdditionalStats(bot_data):
-		return ""
-	return GetRankTitle(GetBotRank(bot_data))
-
-
-func GetBotRankMultiplier(bot_data: Dictionary) -> float:
-	return GetRankMultiplier(GetBotRank(bot_data))
 
 
 func GetBotStatValue(bot_data: Dictionary, stat_id: String) -> float:
@@ -170,7 +131,7 @@ func BotStatMultiplier(bot_data: Dictionary, stat_id: String) -> float:
 			return 1.0 + value
 
 
-func RollBotStats() -> Dictionary:
+func RollBotStats(level: int = 1) -> Dictionary:
 	if bot_stats_db.is_empty():
 		LoadBotStats()
 
@@ -179,6 +140,8 @@ func RollBotStats() -> Dictionary:
 			"rank": 0,
 			"stats": {}
 		}
+
+	level = maxi(1, level)
 
 	var stats := {}
 	var roll_count := _RollStatCount()
@@ -189,7 +152,7 @@ func RollBotStats() -> Dictionary:
 			"stats": {}
 		}
 
-	var used_ids: Array = []
+	var used_ids: Array[String] = []
 	var highest_rank := 0
 
 	for i in range(roll_count):
@@ -201,21 +164,12 @@ func RollBotStats() -> Dictionary:
 		if stat_data.is_empty():
 			continue
 
-		var min_value := float(stat_data.get("min_value", 0.0))
-		var max_value := float(stat_data.get("max_value", min_value))
-		if max_value < min_value:
-			var tmp := min_value
-			min_value = max_value
-			max_value = tmp
+		var rolled := _RollSingleStatValue(stat_id, stat_data, level)
+		if rolled.is_empty():
+			continue
 
-		var value := _rng.randf_range(min_value, max_value)
-		var spike01 := _CalcSpike01(value, min_value, max_value)
-		var stat_rank := _GetRankFromSpike01(spike01)
-
-		highest_rank = maxi(highest_rank, stat_rank)
-		value = _SnapStatValue(value, int(stat_data.get("decimals", 2)))
-
-		stats[stat_id] = value
+		stats[stat_id] = float(rolled.get("value", 0.0))
+		highest_rank = maxi(highest_rank, int(rolled.get("rank", 0)))
 		used_ids.append(stat_id)
 
 	return {
@@ -223,12 +177,126 @@ func RollBotStats() -> Dictionary:
 		"stats": stats
 	}
 
+
+func _RollSingleStatValue(stat_id: String, stat_data: Dictionary, level: int) -> Dictionary:
+	var stat_type := str(stat_data.get("stat_type", "percent"))
+	var min_value := float(stat_data.get("min_value", 0.0))
+	var max_value := float(stat_data.get("max_value", min_value))
+
+	if max_value < min_value:
+		var tmp := min_value
+		min_value = max_value
+		max_value = tmp
+
+	var rolled_source := _rng.randf_range(min_value, max_value)
+	var final_value := rolled_source
+
+	if stat_type == "flat":
+		final_value = _ConvertFlatRollToLevelScaledValue(stat_id, rolled_source, level)
+		var min_final := _ConvertFlatRollToLevelScaledValue(stat_id, min_value, level)
+		var max_final := _ConvertFlatRollToLevelScaledValue(stat_id, max_value, level)
+
+		var rank_spike_flat := _CalcSpike01(final_value, min_final, max_final)
+		var rank_flat := _GetRankFromSpike01(rank_spike_flat)
+
+		final_value = _SnapStatValue(final_value, int(stat_data.get("decimals", 2)))
+		return {
+			"value": final_value,
+			"rank": rank_flat
+		}
+
+	var rank_spike := _CalcSpike01(rolled_source, min_value, max_value)
+	var rank := _GetRankFromSpike01(rank_spike)
+
+	final_value = _SnapStatValue(final_value, int(stat_data.get("decimals", 2)))
+	return {
+		"value": final_value,
+		"rank": rank
+	}
+
+
+func _ConvertFlatRollToLevelScaledValue(stat_id: String, rolled_value: float, level: int) -> float:
+	level = maxi(1, level)
+
+	match stat_id:
+		"dig_power":
+			return _GetLevelCurveDeltaInt(level, rolled_value, "power")
+		"dig_speed":
+			return _GetLevelCurveDeltaFloat(level, rolled_value, "speed")
+		_:
+			return rolled_value
+
+
+func _GetLevelCurveDeltaInt(base_level: int, bonus_levels: float, mode: String) -> float:
+	bonus_levels = maxf(0.0, bonus_levels)
+
+	var low_bonus := int(floor(bonus_levels))
+	var high_bonus := int(ceil(bonus_levels))
+
+	var low_value := 0.0
+	var high_value := 0.0
+
+	match mode:
+		"power":
+			low_value = float(GlobalStats.GetBotBaseDigPower(base_level + low_bonus) - GlobalStats.GetBotBaseDigPower(base_level))
+			high_value = float(GlobalStats.GetBotBaseDigPower(base_level + high_bonus) - GlobalStats.GetBotBaseDigPower(base_level))
+		_:
+			return bonus_levels
+
+	if high_bonus == low_bonus:
+		return low_value
+
+	var t := bonus_levels - float(low_bonus)
+	return lerpf(low_value, high_value, t)
+
+
+func _GetLevelCurveDeltaFloat(base_level: int, bonus_levels: float, mode: String) -> float:
+	bonus_levels = maxf(0.0, bonus_levels)
+
+	var low_bonus := int(floor(bonus_levels))
+	var high_bonus := int(ceil(bonus_levels))
+
+	var low_value := 0.0
+	var high_value := 0.0
+
+	match mode:
+		"speed":
+			low_value = float(GlobalStats.GetBotBaseDigSpeed(base_level + low_bonus) - GlobalStats.GetBotBaseDigSpeed(base_level))
+			high_value = float(GlobalStats.GetBotBaseDigSpeed(base_level + high_bonus) - GlobalStats.GetBotBaseDigSpeed(base_level))
+		_:
+			return bonus_levels
+
+	if high_bonus == low_bonus:
+		return low_value
+
+	var t := bonus_levels - float(low_bonus)
+	return lerpf(low_value, high_value, t)
+
+
 func _SnapStatValue(value: float, decimals: int) -> float:
 	if decimals <= 0:
 		return roundf(value)
 
 	var step := pow(0.1, decimals)
 	return snappedf(value, step)
+
+
+func _CalcSpike01(value: float, min_value: float, max_value: float) -> float:
+	if is_equal_approx(min_value, max_value):
+		return 0.0
+	return clampf(inverse_lerp(min_value, max_value, value), 0.0, 1.0)
+
+
+func _GetRankFromSpike01(spike01: float) -> int:
+	var t := clampf(spike01, 0.0, 1.0)
+
+	if t >= 0.93:
+		return 3 # Mythic
+	if t >= 0.75:
+		return 2 # Elite
+	if t >= 0.50:
+		return 1 # Refined
+	return 0 # Rusted
 
 
 func _RollStatCount() -> int:
@@ -255,49 +323,19 @@ func _RollStatCount() -> int:
 
 		running += w
 		if roll <= running:
-			return maxi(0, int(str(key)))
+			return max(0, int(str(key)))
 
 	return 1
 
 
-func _RollRank() -> int:
-	if bot_rank_data.is_empty():
-		return 0
-
-	var total_weight := 0
-	for rank in bot_rank_data.keys():
-		var rank_info: Dictionary = bot_rank_data[rank]
-		var weight := int(rank_info.get("weight", 0))
-		if weight > 0:
-			total_weight += weight
-
-	if total_weight <= 0:
-		return 0
-
-	var roll := _rng.randi_range(1, total_weight)
-	var running := 0
-
-	for rank in bot_rank_data.keys():
-		var rank_info: Dictionary = bot_rank_data[rank]
-		var weight := int(rank_info.get("weight", 0))
-		if weight <= 0:
-			continue
-
-		running += weight
-		if roll <= running:
-			return int(rank)
-
-	return 0
-
-
-func _RollWeightedStatId(excluded_ids: Array = []) -> String:
+func _RollWeightedStatId(excluded_ids: Array[String] = []) -> String:
 	var total_weight := 0
 
 	for stat_id in bot_stats_db.keys():
 		if excluded_ids.has(stat_id):
 			continue
 
-		var stat_data: Dictionary = bot_stats_db[stat_id]
+		var stat_data = bot_stats_db[stat_id]
 		var weight := int(stat_data.get("weight", 0))
 		if weight > 0:
 			total_weight += weight
@@ -312,16 +350,47 @@ func _RollWeightedStatId(excluded_ids: Array = []) -> String:
 		if excluded_ids.has(stat_id):
 			continue
 
-		var stat_data: Dictionary = bot_stats_db[stat_id]
+		var stat_data = bot_stats_db[stat_id]
 		var weight := int(stat_data.get("weight", 0))
 		if weight <= 0:
 			continue
 
 		running += weight
 		if roll <= running:
-			return str(stat_id)
+			return stat_id
 
 	return ""
+
+func GetRankTitle(rank: int) -> String:
+	var data := GetRankData(rank)
+	if !data.is_empty():
+		return str(data.get("title", DEFAULT_RANK_TITLES.get(rank, "Rusted")))
+	return str(DEFAULT_RANK_TITLES.get(rank, "Rusted"))
+	
+func GetBotRankTitle(bot_data: Dictionary) -> String:
+	if !HasAdditionalStats(bot_data):
+		return ""
+	return GetRankTitle(GetBotRank(bot_data))
+
+func GetRankData(rank: int) -> Dictionary:
+	if bot_rank_data.has(rank):
+		return bot_rank_data[rank].duplicate(true)
+	return {}
+
+
+
+func GetBotRank(bot_data: Dictionary) -> int:
+	if typeof(bot_data) != TYPE_DICTIONARY:
+		return 0
+	return int(bot_data.get("rank", 0))
+
+
+func HasAdditionalStats(bot_data: Dictionary) -> bool:
+	if typeof(bot_data) != TYPE_DICTIONARY:
+		return false
+
+	var stats = bot_data.get("stats", {})
+	return typeof(stats) == TYPE_DICTIONARY and !stats.is_empty()
 
 func GetStatDescription(stat_id: String, value: float) -> String:
 	var stat_data := GetStatData(stat_id)
@@ -346,7 +415,6 @@ func GetStatDescription(stat_id: String, value: float) -> String:
 			var percent_value := value * 100.0
 			return _FormatSignedNumber(percent_value, decimals) + "%"
 
-
 func _FormatSignedNumber(value: float, decimals: int = 0) -> String:
 	var sign_value := "+"
 	if value < 0.0:
@@ -361,28 +429,3 @@ func _FormatSignedNumber(value: float, decimals: int = 0) -> String:
 
 func GetIcon(icon_str):
 	return load("res://data/icons/"+icon_str+".tres")
-
-func HasAdditionalStats(bot_data: Dictionary) -> bool:
-	if typeof(bot_data) != TYPE_DICTIONARY:
-		return false
-
-	var stats = bot_data.get("stats", {})
-	return typeof(stats) == TYPE_DICTIONARY and !stats.is_empty()
-	
-
-func _GetRankFromSpike01(spike01: float) -> int:
-	var t := clampf(spike01, 0.0, 1.0)
-
-	if t >= 0.93:
-		return 3 # Mythic
-	if t >= 0.75:
-		return 2 # Elite
-	if t >= 0.50:
-		return 1 # Refined
-	return 0 # Rusted
-
-
-func _CalcSpike01(value: float, min_value: float, max_value: float) -> float:
-	if is_equal_approx(min_value, max_value):
-		return 0.0
-	return clampf(inverse_lerp(min_value, max_value, value), 0.0, 1.0)
