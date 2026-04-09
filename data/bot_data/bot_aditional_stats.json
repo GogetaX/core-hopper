@@ -1,11 +1,31 @@
 {
   "bot_random_stats": {
+	"dig_power": {
+	  "title": "Dig Power",
+	  "description": "Increases this bot's damage dealt to blocks.",
+	  "icon": "dig_power",
+	  "stat_type": "flat",
+	  "weight": 30,
+	  "min_value": 2.0,
+	  "max_value": 4.0,
+	  "decimals": 0
+	},
+	"dig_speed": {
+	  "title": "Dig Speed",
+	  "description": "Increases this bot's damage dealt to blocks.",
+	  "icon": "dig_speed",
+	  "stat_type": "flat",
+	  "weight": 30,
+	  "min_value": 2.0,
+	  "max_value": 4.0,
+	  "decimals": 0
+	},
 	"dig_power_mult": {
 	  "title": "Dig Power",
 	  "description": "Increases this bot's damage dealt to blocks.",
 	  "icon": "dig_power",
 	  "stat_type": "percent",
-	  "weight": 30,
+	  "weight": 10,
 	  "min_value": 0.05,
 	  "max_value": 0.20,
 	  "decimals": 2
@@ -15,7 +35,7 @@
 	  "description": "Increases how fast this bot attacks blocks.",
 	  "icon": "dig_speed",
 	  "stat_type": "percent",
-	  "weight": 30,
+	  "weight": 10,
 	  "min_value": 0.05,
 	  "max_value": 0.20,
 	  "decimals": 2
@@ -25,7 +45,7 @@
 	  "description": "Gives this bot a chance to deal critical hits.",
 	  "icon": "crit_chance",
 	  "stat_type": "percent",
-	  "weight": 20,
+	  "weight": 15,
 	  "min_value": 0.02,
 	  "max_value": 0.10,
 	  "decimals": 2
@@ -35,7 +55,7 @@
 	  "description": "Increases the damage of this bot's critical hits.",
 	  "icon": "crit_multiplier",
 	  "stat_type": "percent",
-	  "weight": 10,
+	  "weight": 15,
 	  "min_value": 0.10,
 	  "max_value": 0.50,
 	  "decimals": 2
