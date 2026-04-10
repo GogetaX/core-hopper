@@ -7,13 +7,21 @@ func _ready() -> void:
 	$HBoxContainer/CloseSettingMenu.visible = false
 	Global.top_currency_node_coin = $HBoxContainer/VList/CurrencyCointainer/total_coins/HList/CurrencyIcon
 	Global.top_currency_node_crystal = $HBoxContainer/VList/CurrencyCointainer/total_crystals/HList/CurrencyIcon
-	Global.top_currency_node_energy = Global.top_currency_node_coin
+	Global.top_currency_node_energy = $HBoxContainer/VList/CurrencyCointainer/tot_energy/HList/CurrencyIcon
+	$HBoxContainer/VList/CurrencyCointainer/tot_energy.visible = false
 func OnTabPressed(_tab_btn:ButtonTabClass):
 	OnOpenCloseSettingMenu(false)
 	
 func TopSubTitleSync(sub_title:String):
 	$HBoxContainer/VBoxContainer/HBoxContainer/sub_title.text = sub_title
-
+	$HBoxContainer/VList/CurrencyCointainer/tot_energy.visible = false
+	$HBoxContainer/VList/CurrencyCointainer/total_coins.visible = true
+	$HBoxContainer/VList/CurrencyCointainer/total_crystals.visible = true
+	match sub_title:
+		"CORE MERCHANT SHOP":
+			$HBoxContainer/VList/CurrencyCointainer/total_coins.visible = false
+			$HBoxContainer/VList/CurrencyCointainer/tot_energy.visible = true
+	
 func OnOpenCloseSettingMenu(is_opened:bool):
 	if is_opened:
 		$HBoxContainer/SettingButton.visible = false

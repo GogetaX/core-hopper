@@ -49,6 +49,14 @@ extends Control
 	get:
 		return crystal_icon
 		
+@export_enum("REAL_MONEY","crystals","energy","coins") var currency_type := "REAL_MONEY":
+	set(value):
+		currency_type = value
+		if is_node_ready():
+			_ready()
+	get:
+		return currency_type
+		
 func _ready() -> void:
 	$SmartPanel/HList/IconBG.panel_color = panel_color
 	$SmartPanel/HList/BuyBtn.panel_color = panel_color
@@ -58,3 +66,18 @@ func _ready() -> void:
 	$MostPopular.visible = show_most_popular
 	$SmartPanel.panel_color = panel_color
 	$SmartPanel/HList/IconBG.icon = crystal_icon
+	
+	match currency_type:
+		"REAL_MONEY":
+			$SmartPanel/HList/BuyBtn.btn_type = "NO_PRICE"
+			$SmartPanel/HList/BuyBtn.custom_minimum_size.x = 200
+		_:
+			$SmartPanel/HList/BuyBtn.btn_type = "WITH_PRICE"
+			$SmartPanel/HList/BuyBtn.buy_btn_title = "BUY"
+			$SmartPanel/HList/BuyBtn.custom_minimum_size.x = 350
+			$SmartPanel/HList/BuyBtn.currency_type = currency_type
+			if !Engine.is_editor_hint():
+				$SmartPanel/HList/BuyBtn.price_text =  Global.CurrencyToString(int(item_price))
+			else:
+				$SmartPanel/HList/BuyBtn.price_text = item_price
+			$SmartPanel/HList/BuyBtn.price_int = int(item_price)

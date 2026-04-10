@@ -15,6 +15,7 @@ offset_bottom = 160.0
 size_flags_horizontal = 3
 mouse_filter = 1
 script = ExtResource("1_n8b7b")
+currency_type = null
 
 [node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("1_g4ys5")]
 layout_mode = 1

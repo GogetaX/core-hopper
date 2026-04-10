@@ -19,48 +19,93 @@ func SyncActivatedBooster(booster_id:String):
 	
 
 func InitDaily(data:Dictionary,watch_ads := false):
+	HideAll()
+	$DailyItem.visible = true
 	cur_data = data
 	cur_watch_ads = watch_ads
-	
 	#Set Colors
-	$SmartPanel.panel_color = GlobalColor.GetSkillBranchColor(cur_data.group)
-	$SmartPanel/VBoxContainer/BuyBtn.panel_color = GlobalColor.GetSkillBranchColor(cur_data.group)
-	$SmartPanel/VBoxContainer/HList/Control/IconBG.panel_color = GlobalColor.GetSkillBranchColor(cur_data.group)
-	$SmartPanel/VBoxContainer/time_left.hash_tag_color = GlobalColor.GetSkillBranchColor(cur_data.group)
+	$DailyItem.panel_color = GlobalColor.GetSkillBranchColor(cur_data.group)
+	$DailyItem/VBoxContainer/BuyBtn.panel_color = GlobalColor.GetSkillBranchColor(cur_data.group)
+	$DailyItem/VBoxContainer/HList/Control/IconBG.panel_color = GlobalColor.GetSkillBranchColor(cur_data.group)
+	$DailyItem/VBoxContainer/time_left.hash_tag_color = GlobalColor.GetSkillBranchColor(cur_data.group)
 	
 	#Set Data
-	$SmartPanel/VBoxContainer/HList/VList/item_title.text = cur_data.title
-	$SmartPanel/VBoxContainer/HList/VList/sub_title.text = cur_data.description
-	$SmartPanel/VBoxContainer/duration.text = Global.SecondsToPrettyTimeString(cur_data.duration_sec)
-	$SmartPanel/VBoxContainer/HList/Control/IconBG.icon = GlobalTimedBonus.GetIcon(cur_data.icon)
+	$DailyItem/VBoxContainer/HList/VList/item_title.text = cur_data.title
+	$DailyItem/VBoxContainer/HList/VList/sub_title.text = cur_data.description
+	$DailyItem/VBoxContainer/duration.text = Global.SecondsToPrettyTimeString(cur_data.duration_sec)
+	$DailyItem/VBoxContainer/HList/Control/IconBG.icon = GlobalTimedBonus.GetIcon(cur_data.icon)
 	
 	#Hide all the dynamic buttons
-	$SmartPanel/VBoxContainer/BuyBtn.visible = false
-	$SmartPanel/VBoxContainer/time_left.visible = false
+	$DailyItem/VBoxContainer/BuyBtn.visible = false
+	$DailyItem/VBoxContainer/time_left.visible = false
 	$count_down.stop()
 	#BuyBtn if !is_active
 	if !cur_data.is_active:
-		$SmartPanel/VBoxContainer/BuyBtn.visible = true
+		$DailyItem/VBoxContainer/BuyBtn.visible = true
 	elif cur_data.remaining_sec > 0:
-		$SmartPanel/VBoxContainer/time_left.visible = true
+		$DailyItem/VBoxContainer/time_left.visible = true
 		$count_down.start()
 		_on_count_down_timeout()
 	else:
-		$SmartPanel/VBoxContainer/time_left.visible = true
-		$SmartPanel/VBoxContainer/time_left.text = "CHECK BACK TOMORROW"
+		$DailyItem/VBoxContainer/time_left.visible = true
+		$DailyItem/VBoxContainer/time_left.text = "CHECK BACK TOMORROW"
 	
 	if watch_ads:
-		$SmartPanel/VBoxContainer/BuyBtn.buy_btn_title = "FREE"
-		$SmartPanel/VBoxContainer/BuyBtn.buy_btn_icon = load("res://art/icons/20_px/play_icon.png")
+		$DailyItem/VBoxContainer/BuyBtn.buy_btn_title = "FREE"
+		$DailyItem/VBoxContainer/BuyBtn.buy_btn_icon = load("res://art/icons/20_px/play_icon.png")
 	
 
+func InitTactical(data):
+	cur_data = data
+	cur_watch_ads = false
+	HideAll()
+	$BuyItem.visible = true
+	#Set Colors
+	$BuyItem.panel_color = GlobalColor.GetSkillBranchColor(cur_data.group)
+	$BuyItem/VBoxContainer/HList/Control/IconBG.panel_color = GlobalColor.GetSkillBranchColor(cur_data.group)
+	$BuyItem/VBoxContainer/time_left.hash_tag_color = GlobalColor.GetSkillBranchColor(cur_data.group)
+	$BuyItem/VBoxContainer/BuyWithCurrencyBtn.currency_type = cur_data.cost_currency
+	$BuyItem/VBoxContainer/BuyWithCurrencyBtn.panel_color = GlobalColor.GetSkillBranchColor(cur_data.group)
+	
+	#Set Data
+	$BuyItem/VBoxContainer/HList/VList/item_title.text = cur_data.title
+	$BuyItem/VBoxContainer/HList/VList/sub_title.text = cur_data.description
+	$BuyItem/VBoxContainer/duration.text = Global.SecondsToPrettyTimeString(cur_data.duration_sec)
+	$BuyItem/VBoxContainer/HList/Control/IconBG.icon = GlobalTimedBonus.GetIcon(cur_data.icon)
+	$BuyItem/VBoxContainer/BuyWithCurrencyBtn.price_text = Global.CurrencyToString(cur_data.cost_amount)
+	$BuyItem/VBoxContainer/BuyWithCurrencyBtn.price_int = Global.CurrencyToString(cur_data.cost_amount)
+	
+	#Hide all the dynamic buttons
+	$BuyItem/VBoxContainer/BuyWithCurrencyBtn.visible = false
+	$BuyItem/VBoxContainer/time_left.visible = false
+	$count_down.stop()
+	if !cur_data.is_active:
+		$BuyItem/VBoxContainer/BuyWithCurrencyBtn.visible = true
+	elif cur_data.remaining_sec > 0:
+		$BuyItem/VBoxContainer/time_left.visible = true
+		$count_down.start()
+		_on_count_down_timeout()
+	else:
+		$BuyItem/VBoxContainer/time_left.visible = true
+		$BuyItem/VBoxContainer/time_left.text = "CHECK BACK TOMORROW"
 
 func _on_buy_btn_on_press() -> void:
 	GlobalTimedBonus.ActivateBooster(cur_data.id,false)
 
-
+func HideAll():
+	for x in get_children():
+		if x is Control:
+			x.visible = false
+			
 func _on_count_down_timeout() -> void:
 	if !cur_data.is_empty():
 		var d = GlobalTimedBonus.GetActivatedBoosterData(cur_data.id)
-		$SmartPanel/VBoxContainer/time_left.text = "ACTIVE: "+Global.SecondsToPrettyTimeString(d.remaining_sec)
-	
+		$DailyItem/VBoxContainer/time_left.text = "ACTIVE: "+Global.SecondsToPrettyTimeString(d.remaining_sec)
+		$BuyItem/VBoxContainer/time_left.text = "ACTIVE: "+Global.SecondsToPrettyTimeString(d.remaining_sec)
+
+
+func _on_buy_with_currency_btn_btn_pressed_with_price(_currency: String, _price: int) -> void:
+	if GlobalTimedBonus.IsDailyBooster(cur_data.id):
+		GlobalTimedBonus.ActivateBooster(cur_data.id)
+	else:
+		GlobalTimedBonus.ActivateNonDailyBooster(cur_data.id)

@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://drlay20xc5ihb" path="res://scenes/components/icon_bg.tscn" id="2_ddhwx"]
 [ext_resource type="PackedScene" uid="uid://bvpwx7yevqtth" path="res://scenes/screens/shop/smart_button_buy_with_icon.tscn" id="3_6tqjt"]
 [ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="5_6tqjt"]
+[ext_resource type="PackedScene" uid="uid://njxlv6dxrlwj" path="res://scenes/screens/progress/smart_button_buy.tscn" id="6_oyli1"]
 
 [node name="DailyDealItem" type="Control" unique_id=737257032]
 custom_minimum_size = Vector2(400, 350)
@@ -14,12 +15,15 @@ size_flags_horizontal = 3
 mouse_filter = 2
 script = ExtResource("1_ddhwx")
 
-[node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("1_3xdhm")]
+[node name="count_down" type="Timer" parent="." unique_id=413526933]
+
+[node name="DailyItem" parent="." unique_id=892379017 instance=ExtResource("1_3xdhm")]
+visible = false
 layout_mode = 1
 panel_type = "INSIDE_ONLY"
 panel_color = "ORANGE"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SmartPanel" unique_id=1103733827]
+[node name="VBoxContainer" type="VBoxContainer" parent="DailyItem" unique_id=1103733827]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -34,16 +38,16 @@ mouse_filter = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="HList" type="HBoxContainer" parent="SmartPanel/VBoxContainer" unique_id=413420613]
+[node name="HList" type="HBoxContainer" parent="DailyItem/VBoxContainer" unique_id=413420613]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Control" type="Control" parent="SmartPanel/VBoxContainer/HList" unique_id=2085518447]
+[node name="Control" type="Control" parent="DailyItem/VBoxContainer/HList" unique_id=2085518447]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="IconBG" parent="SmartPanel/VBoxContainer/HList/Control" unique_id=1682398798 instance=ExtResource("2_ddhwx")]
+[node name="IconBG" parent="DailyItem/VBoxContainer/HList/Control" unique_id=1682398798 instance=ExtResource("2_ddhwx")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -58,40 +62,118 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="VList" type="VBoxContainer" parent="SmartPanel/VBoxContainer/HList" unique_id=1849368755]
+[node name="VList" type="VBoxContainer" parent="DailyItem/VBoxContainer/HList" unique_id=1849368755]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="item_title" type="Label" parent="SmartPanel/VBoxContainer/HList/VList" unique_id=392967085]
+[node name="item_title" type="Label" parent="DailyItem/VBoxContainer/HList/VList" unique_id=392967085]
 layout_mode = 2
 theme_type_variation = &"LabelDailyTasks"
 text = "Daily Crate"
 autowrap_mode = 2
 
-[node name="sub_title" type="Label" parent="SmartPanel/VBoxContainer/HList/VList" unique_id=1658357657]
+[node name="sub_title" type="Label" parent="DailyItem/VBoxContainer/HList/VList" unique_id=1658357657]
 layout_mode = 2
 theme_type_variation = &"LabelGrayHint"
 text = "COMMON LOOT"
 autowrap_mode = 2
 
-[node name="duration" type="Label" parent="SmartPanel/VBoxContainer" unique_id=589797077]
+[node name="duration" type="Label" parent="DailyItem/VBoxContainer" unique_id=589797077]
 layout_mode = 2
 theme_type_variation = &"LabelGray"
 text = "COMMON LOOT"
 horizontal_alignment = 1
 
-[node name="BuyBtn" parent="SmartPanel/VBoxContainer" unique_id=664760665 instance=ExtResource("3_6tqjt")]
+[node name="BuyBtn" parent="DailyItem/VBoxContainer" unique_id=664760665 instance=ExtResource("3_6tqjt")]
 layout_mode = 2
 buy_btn_title = "FREE"
 
-[node name="time_left" parent="SmartPanel/VBoxContainer" unique_id=713365230 instance=ExtResource("5_6tqjt")]
+[node name="time_left" parent="DailyItem/VBoxContainer" unique_id=713365230 instance=ExtResource("5_6tqjt")]
 self_modulate = Color(0.7607843, 0.43529412, 1, 1)
 layout_mode = 2
 text = "120m left"
 horizontal_alignment = 1
 no_bg = true
 
-[node name="count_down" type="Timer" parent="." unique_id=413526933]
+[node name="BuyItem" parent="." unique_id=1493214162 instance=ExtResource("1_3xdhm")]
+layout_mode = 1
+panel_type = "INSIDE_ONLY"
+panel_color = "ORANGE"
 
-[connection signal="OnPress" from="SmartPanel/VBoxContainer/BuyBtn" to="." method="_on_buy_btn_on_press"]
+[node name="VBoxContainer" type="VBoxContainer" parent="BuyItem" unique_id=667591676]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="HList" type="HBoxContainer" parent="BuyItem/VBoxContainer" unique_id=406248401]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Control" type="Control" parent="BuyItem/VBoxContainer/HList" unique_id=96209448]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="IconBG" parent="BuyItem/VBoxContainer/HList/Control" unique_id=1192522344 instance=ExtResource("2_ddhwx")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VList" type="VBoxContainer" parent="BuyItem/VBoxContainer/HList" unique_id=1175808492]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="item_title" type="Label" parent="BuyItem/VBoxContainer/HList/VList" unique_id=2016264455]
+layout_mode = 2
+theme_type_variation = &"LabelDailyTasks"
+text = "Daily Crate"
+autowrap_mode = 2
+
+[node name="sub_title" type="Label" parent="BuyItem/VBoxContainer/HList/VList" unique_id=146580366]
+layout_mode = 2
+theme_type_variation = &"LabelGrayHint"
+text = "COMMON LOOT"
+autowrap_mode = 2
+
+[node name="duration" type="Label" parent="BuyItem/VBoxContainer" unique_id=1467160096]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "COMMON LOOT"
+horizontal_alignment = 1
+
+[node name="BuyWithCurrencyBtn" parent="BuyItem/VBoxContainer" unique_id=1069049213 instance=ExtResource("6_oyli1")]
+layout_mode = 2
+btn_type = "WITH_PRICE"
+currency_type = "crystals"
+buy_btn_title = "BUY"
+
+[node name="time_left" parent="BuyItem/VBoxContainer" unique_id=1497206732 instance=ExtResource("5_6tqjt")]
+self_modulate = Color(0.7607843, 0.43529412, 1, 1)
+layout_mode = 2
+text = "120m left"
+horizontal_alignment = 1
+no_bg = true
+
 [connection signal="timeout" from="count_down" to="." method="_on_count_down_timeout"]
+[connection signal="OnPress" from="DailyItem/VBoxContainer/BuyBtn" to="." method="_on_buy_btn_on_press"]
+[connection signal="BtnPressedWithPrice" from="BuyItem/VBoxContainer/BuyWithCurrencyBtn" to="." method="_on_buy_with_currency_btn_btn_pressed_with_price"]

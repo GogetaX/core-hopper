@@ -337,3 +337,49 @@ func _GetDailyTargetCount(amount: int) -> int:
 
 func GetIcon(icon_str)->Texture2D:
 	return load("res://art/bonus/"+icon_str+".tres")
+
+func IsDailyBooster(booster_id: String) -> bool:
+	var bonus_data := _GetBonusById(booster_id)
+	if bonus_data.is_empty():
+		return false
+
+	return bool(bonus_data.get("show_in_daily_random", true))
+
+
+func GetBoosterDataById(booster_id: String) -> Dictionary:
+	_EnsureSaveSection()
+	CleanupExpiredBoosters()
+
+	var bonus_data := _GetBonusById(booster_id)
+	if bonus_data.is_empty():
+		return {}
+
+	var result := bonus_data.duplicate(true)
+	result["id"] = booster_id
+	result["is_active"] = IsBoosterActive(booster_id)
+	result["remaining_sec"] = GetBoosterRemainingSec(booster_id)
+	return result
+
+
+func GetNonDailyBoosterData(booster_id: String) -> Dictionary:
+	var bonus_data := GetBoosterDataById(booster_id)
+	if bonus_data.is_empty():
+		return {}
+
+	if IsDailyBooster(booster_id):
+		return {}
+
+	return bonus_data
+
+
+func ActivateNonDailyBooster(booster_id: String, spend_currency: bool = true) -> bool:
+	var bonus_data := _GetBonusById(booster_id)
+	if bonus_data.is_empty():
+		push_warning("GlobalTimedBonus: bonus_id not found: %s" % booster_id)
+		return false
+
+	if IsDailyBooster(booster_id):
+		push_warning("GlobalTimedBonus: booster is part of daily pool, use ActivateBooster instead: %s" % booster_id)
+		return false
+
+	return ActivateBooster(booster_id, spend_currency)

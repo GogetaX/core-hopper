@@ -25,3 +25,12 @@ res://scenes/screens/dig/dig_screen.tscn
 res://scenes/screens/merge/auto_merge.tscn
 res://scenes/screens/merge/auto_merge.gd
 res://scenes/screens/shop/shop_screen.tscn
+res://data/bonus/bonus_database.json
+res://scenes/screens/shop/shop_screen.gd
+res://autoload/GlobalTimedBonus.gd
+res://scenes/components/top_bar.tscn
+res://scenes/components/top_bar.gd
+res://autoload/GlobalSave.gd
+res://scenes/screens/shop/shop_crystal_button_with_currency.tscn
+res://scenes/screens/shop/shop_crystal_button.tscn
+res://scenes/screens/shop/shop_crystal_button.gd
