@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://cyf53aa2b84v2"]
+
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="1_tjdw5"]
+[ext_resource type="Script" uid="uid://bvj1jw0vdds72" path="res://scenes/screens/merge/merge_indicator.gd" id="1_vxes6"]
+[ext_resource type="PackedScene" uid="uid://drlay20xc5ihb" path="res://scenes/components/icon_bg.tscn" id="2_tjdw5"]
+[ext_resource type="Texture2D" uid="uid://dlm6uvfcpc8y4" path="res://art/bonus/auto_merge.tres" id="3_vxes6"]
+[ext_resource type="PackedScene" uid="uid://bvpwx7yevqtth" path="res://scenes/screens/shop/smart_button_buy_with_icon.tscn" id="5_648rj"]
+[ext_resource type="Texture2D" uid="uid://dveir84r8dkuf" path="res://art/icons/20_px/play_icon.png" id="6_hjmsh"]
+
+[node name="MergeIndicator" type="Control" unique_id=1300290453]
+custom_minimum_size = Vector2(400, 140)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 499.0
+offset_bottom = 140.0
+script = ExtResource("1_vxes6")
+
+[node name="MergeActive" parent="." unique_id=892379017 instance=ExtResource("1_tjdw5")]
+visible = false
+layout_mode = 1
+panel_color = "BLUE"
+darken_bg = true
+
+[node name="skill_tick" type="Timer" parent="MergeActive" unique_id=793923126]
+
+[node name="HList" type="HBoxContainer" parent="MergeActive" unique_id=603045012]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 18.5
+offset_right = -20.0
+offset_bottom = -18.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="IconBG" parent="MergeActive/HList" unique_id=1682398798 instance=ExtResource("2_tjdw5")]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+icon = ExtResource("3_vxes6")
+
+[node name="VList" type="VBoxContainer" parent="MergeActive/HList" unique_id=1314071127]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="title" type="Label" parent="MergeActive/HList/VList" unique_id=74076949]
+layout_mode = 2
+text = "AUTO MERGE "
+
+[node name="time_left" type="Label" parent="MergeActive/HList/VList" unique_id=1077620935]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "AUTO MERGE"
+
+[node name="MergeNotActive" parent="." unique_id=743962951 instance=ExtResource("1_tjdw5")]
+layout_mode = 1
+panel_color = "BLUE"
+darken_bg = true
+
+[node name="HList" type="HBoxContainer" parent="MergeNotActive" unique_id=1630120539]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 18.5
+offset_right = -20.0
+offset_bottom = -18.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="IconBG" parent="MergeNotActive/HList" unique_id=1105498723 instance=ExtResource("2_tjdw5")]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+panel_color = "BLUE"
+icon = ExtResource("3_vxes6")
+
+[node name="VList" type="VBoxContainer" parent="MergeNotActive/HList" unique_id=852488686]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="title" type="Label" parent="MergeNotActive/HList/VList" unique_id=227980961]
+layout_mode = 2
+text = "AUTO MERGE"
+
+[node name="ActivateMergeBtn" parent="MergeNotActive/HList/VList" unique_id=664760665 instance=ExtResource("5_648rj")]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 3
+buy_btn_title = "ACTIVATE"
+panel_color = "BLUE"
+buy_btn_icon = ExtResource("6_hjmsh")
+
+[connection signal="timeout" from="MergeActive/skill_tick" to="." method="_on_skill_tick_timeout"]
+[connection signal="OnPress" from="MergeNotActive/HList/VList/ActivateMergeBtn" to="." method="_on_activate_merge_btn_on_press"]

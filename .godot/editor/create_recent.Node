@@ -1,7 +1,8 @@
-Label
+Node
 Timer
-HBoxContainer
+Label
 Control
+HBoxContainer
 VBoxContainer
 ColorRect
 TextureRect
@@ -9,6 +10,5 @@ HFlowContainer
 Panel
 CanvasLayer
 WorldEnvironment
-Node
 GPUParticles2D
 ScrollContainer

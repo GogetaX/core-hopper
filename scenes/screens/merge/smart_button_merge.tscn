@@ -129,7 +129,6 @@ alignment = 1
 [node name="icon" type="TextureRect" parent="MergeBtn/HBoxContainer" unique_id=680987382]
 layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("2_k7dux")
 expand_mode = 3
 stretch_mode = 3
 
@@ -141,9 +140,9 @@ alignment = 1
 [node name="label_text" type="Label" parent="MergeBtn/HBoxContainer/VBoxContainer" unique_id=758646683]
 layout_mode = 2
 theme_type_variation = &"LabelButtonWhite"
-text = "BUY BOT"
+text = "AUTO-MERGE"
 
 [node name="label_sub_title" type="Label" parent="MergeBtn/HBoxContainer/VBoxContainer" unique_id=662845400]
 layout_mode = 2
 theme_type_variation = &"LabelGray"
-text = "NEW UNIT"
+text = "SYSTEM COOLDOWN: 12S"

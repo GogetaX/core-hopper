@@ -177,7 +177,7 @@ func State_DigBot():
 	$State_DigBot/VList/bot_icon.visible = false
 	$State_DigBot/VList/locked_icon.visible = false
 	$State_DigBot/cur_lvl.visible = false
-	$State_DigBot/VList/dps_label.visible = false
+	$State_DigBot/dps_label.visible = false
 	_has_bot_to_drag = false
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
@@ -195,10 +195,10 @@ func State_DigBot():
 		mouse_filter = Control.MOUSE_FILTER_STOP
 		_has_bot_to_drag = true
 		$State_DigBot/VList/bot_icon.visible = true
-		$State_DigBot/VList/dps_label.visible = true
+		$State_DigBot/dps_label.visible = true
 		var bot_data = GlobalSave.GetBotDataFromUID(cur_lane_data.bot_uid)
 		$State_DigBot/rank_color.panel_color = GlobalColor.BotRankToColor(bot_data.rank)
 		$State_DigBot/VList/bot_icon.SetImageFromBotNum(int(bot_data.level))
-		$State_DigBot/VList/dps_label.text = Global.CurrencyToString(GlobalStats.GetBotFinalDPSWithGlobalAndStats(bot_data,false,false))+ " DPS"
+		$State_DigBot/dps_label.text = Global.CurrencyToString(GlobalStats.GetBotFinalDPSWithGlobalAndStats(bot_data,false,false,true))+ " DPS"
 		$State_DigBot/cur_lvl.visible = true
 		$State_DigBot/cur_lvl.text = "LV "+str(bot_data.level).pad_decimals(0)

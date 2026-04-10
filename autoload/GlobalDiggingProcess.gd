@@ -286,7 +286,7 @@ func _GetBotDigSpeed(bot: Dictionary) -> float:
 
 
 func _GetBotDigPower(bot: Dictionary) -> float:
-	var dps := float(GlobalStats.GetBotFinalDPSWithGlobalAndStats(bot, false, false))
+	var dps := float(GlobalStats.GetBotFinalDPSWithGlobalAndStats(bot, false, false,true))
 	var speed := _GetBotDigSpeed(bot)
 
 	return max(0.0, dps / max(speed, 0.001))

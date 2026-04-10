@@ -17,7 +17,6 @@ func SyncBoost():
 		var cur_boost = activated_boost_id[0]
 		cur_boost_id = cur_boost
 		var active_boost = GlobalTimedBonus.GetActivatedBoosterData(cur_boost)
-		print(active_boost)
 		$CurActiveBoost/VList/HBoxContainer/boost_name.text = active_boost.title
 		$CurActiveBoost/VList/boost_value.text = "x"+str(active_boost.effect_value).pad_decimals(1)
 		$CurActiveBoost/VList/HBoxContainer/boost_time_left.text = Global.SecondsToPrettyTimeString(active_boost.remaining_sec)
@@ -35,3 +34,5 @@ func _on_active_boost_tick_timeout() -> void:
 		if GlobalTimedBonus.IsBoosterActive(cur_boost_id):
 			var active_boost = GlobalTimedBonus.GetActivatedBoosterData(cur_boost_id)
 			$CurActiveBoost/VList/HBoxContainer/boost_time_left.text = Global.SecondsToPrettyTimeString(active_boost.remaining_sec)
+		else:
+			SyncBoost()

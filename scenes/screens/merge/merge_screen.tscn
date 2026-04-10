@@ -5,11 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://njxlv6dxrlwj" path="res://scenes/screens/progress/smart_button_buy.tscn" id="2_2m8po"]
 [ext_resource type="PackedScene" uid="uid://ck6fuim6hek81" path="res://scenes/screens/dig/dig_bot_slot.tscn" id="2_ad68v"]
 [ext_resource type="Script" uid="uid://bloevasmaqx74" path="res://scenes/label_data_scripts/total_dps.gd" id="2_afpfk"]
-[ext_resource type="PackedScene" uid="uid://dpo46sl5j3kcq" path="res://scenes/screens/merge/smart_button_merge.tscn" id="2_imfux"]
+[ext_resource type="PackedScene" uid="uid://cyf53aa2b84v2" path="res://scenes/screens/merge/merge_indicator.tscn" id="2_vtb8o"]
 [ext_resource type="Script" uid="uid://bnypytdg7otdp" path="res://scenes/label_data_scripts/active_bot_slots.gd" id="2_yawsl"]
-[ext_resource type="Texture2D" uid="uid://bg18vum2cai3c" path="res://art/icons/rocket.png" id="3_um6mi"]
 [ext_resource type="PackedScene" uid="uid://stbsi2oe8sia" path="res://scenes/screens/merge/sell_node.tscn" id="6_vtb8o"]
 [ext_resource type="Script" uid="uid://bg68ksebamcji" path="res://scenes/screens/merge/drag_drop_handler.gd" id="7_lfmeh"]
+[ext_resource type="PackedScene" uid="uid://y856j8oug7lx" path="res://scenes/screens/merge/auto_merge.tscn" id="10_vtb8o"]
 
 [node name="MergeScreen" type="VBoxContainer" unique_id=787988230]
 anchors_preset = 15
@@ -29,12 +29,19 @@ layout_mode = 2
 layout_mode = 2
 alignment = 2
 
-[node name="Panel" type="Panel" parent="HList" unique_id=597920981]
+[node name="MergeIndicator" parent="HList" unique_id=1300290453 instance=ExtResource("2_vtb8o")]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="HList" unique_id=1855317162]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel2" type="Panel" parent="HList" unique_id=326137115]
 custom_minimum_size = Vector2(400, 140)
 layout_mode = 2
 theme_type_variation = &"PanelDimmedBG"
 
-[node name="HList" type="HBoxContainer" parent="HList/Panel" unique_id=1409080299]
+[node name="HList" type="HBoxContainer" parent="HList/Panel2" unique_id=882291616]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -46,36 +53,36 @@ offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VList" type="VBoxContainer" parent="HList/Panel/HList" unique_id=889713636]
+[node name="VList" type="VBoxContainer" parent="HList/Panel2/HList" unique_id=1549987243]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="Label" type="Label" parent="HList/Panel/HList/VList" unique_id=890810880]
+[node name="Label" type="Label" parent="HList/Panel2/HList/VList" unique_id=694878720]
 layout_mode = 2
 theme_type_variation = &"LabelGrayHint"
 text = "TOTAL DPS"
 horizontal_alignment = 1
 
-[node name="total_dps" type="Label" parent="HList/Panel/HList/VList" unique_id=2134051860]
+[node name="total_dps" type="Label" parent="HList/Panel2/HList/VList" unique_id=819768602]
 layout_mode = 2
 theme_type_variation = &"LabelTitle_Blue"
 text = "14.2K"
 horizontal_alignment = 1
 script = ExtResource("2_afpfk")
 
-[node name="VList2" type="VBoxContainer" parent="HList/Panel/HList" unique_id=1180102577]
+[node name="VList2" type="VBoxContainer" parent="HList/Panel2/HList" unique_id=1480491935]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="Label" type="Label" parent="HList/Panel/HList/VList2" unique_id=193002946]
+[node name="Label" type="Label" parent="HList/Panel2/HList/VList2" unique_id=1431664963]
 layout_mode = 2
 theme_type_variation = &"LabelGrayHint"
 text = "BOT SLOTS"
 horizontal_alignment = 1
 
-[node name="active_bot_slots" type="Label" parent="HList/Panel/HList/VList2" unique_id=647084552]
+[node name="active_bot_slots" type="Label" parent="HList/Panel2/HList/VList2" unique_id=1419577459]
 layout_mode = 2
 theme_type_variation = &"LabelTitle_White"
 text = "12/16"
@@ -206,14 +213,9 @@ btn_type = "WITH_PRICE"
 panel_color = "BLUE"
 price_text = "25"
 
-[node name="SmartButton2" parent="VList" unique_id=1762057336 instance=ExtResource("2_imfux")]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-btn_type = "MERGE_BTN"
-buy_btn_title = "NEW UNI"
-merge_btn_icon = ExtResource("3_um6mi")
-
 [node name="DragDropHandler" type="Node" parent="." unique_id=2044087815]
 script = ExtResource("7_lfmeh")
+
+[node name="AutoMerge" parent="." unique_id=888171057 instance=ExtResource("10_vtb8o")]
 
 [connection signal="BtnPressedWithPrice" from="VList/BuyBotBtn" to="." method="_on_smart_button_buy_btn_pressed_with_price"]

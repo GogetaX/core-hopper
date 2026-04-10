@@ -1,3 +1,4 @@
+res://scenes/screens/merge/
 res://scenes/screens/dig/
 res://art/bonus/
 res://autoload/
@@ -5,7 +6,6 @@ res://autoload/
 res://scenes/popups/
 res://scenes/components/
 /home/sergio/GitHub/core-hopper/data/bot_data/
-res://scenes/screens/merge/
 res://scenes/screens/progress/
 res://art/skills/
 /home/sergio/GitHub/core-hopper/data/skill_tree/

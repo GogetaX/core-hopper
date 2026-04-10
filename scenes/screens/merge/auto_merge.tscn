@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://y856j8oug7lx"]
+
+[ext_resource type="Script" uid="uid://ds6rekkm1pdf6" path="res://scenes/screens/merge/auto_merge.gd" id="1_2a041"]
+
+[node name="AutoMerge" type="Node" unique_id=888171057]
+script = ExtResource("1_2a041")

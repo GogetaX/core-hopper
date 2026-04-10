@@ -5,6 +5,7 @@ extends Node
 #bot base stuff
 const BOT_BASE_DPS := 1.0
 const BOT_DPS_GROWTH := 2.1
+const MAX_MERGE_SLOTS = 16
 
 func GetBotDPSFromLevel(level: int) -> float:
 	level = max(level, 1)
@@ -57,7 +58,12 @@ func GetBotFinalDPSWithGobal(level:int) -> float:
 	return final_dps * GetBotDamageMultiplier()
 	
 
-func GetBotFinalDPSWithGlobalAndStats(bot_data: Dictionary, include_expected_crit: bool = false, is_boss: bool = false) -> float:
+func GetBotFinalDPSWithGlobalAndStats(
+	bot_data: Dictionary,
+	include_expected_crit: bool = false,
+	is_boss: bool = false,
+	timed_stats: bool = true
+) -> float:
 	var level := int(bot_data.get("level", 1))
 
 	var power := float(GetBotBaseDigPower(level))
@@ -81,12 +87,19 @@ func GetBotFinalDPSWithGlobalAndStats(bot_data: Dictionary, include_expected_cri
 
 	var dps := power * speed
 
+	if timed_stats:
+		dps *= GetTimedBonusMultiplier([
+			"dps_mult",
+			"bot_dps_mult"
+		])
+
 	if include_expected_crit:
 		var crit_chance = clamp(
 			GetCritChance() + GlobalBotStats.GetBotStatValue(bot_data, "crit_chance"),
 			0.0,
 			1.0
 		)
+
 		var crit_mult = max(
 			1.0,
 			GetCritMultiplier() + GlobalBotStats.GetBotStatValue(bot_data, "crit_mult")
@@ -278,7 +291,7 @@ func ApplyBossDamageMultiplier(base_damage: float) -> float:
 	return max(0.0, float(base_damage) * GetBossDamageMultiplier())
 
 func GetFreeMergeSlots()->int:
-	return int(GlobalSave.save_data.bot_inventory.merge_free_slots + GlobalSkillTree.skill_summary.stats.merge_slot_bonus)
+	return min(int(GlobalSave.save_data.bot_inventory.merge_free_slots + GlobalSkillTree.skill_summary.stats.merge_slot_bonus),MAX_MERGE_SLOTS)
 
 func BuyBotData():
 	#Base
@@ -425,3 +438,31 @@ func GetRefundChestOnBuy():
 	if chance <= GlobalSkillTree.skill_summary.stats.direct_bot_buy_refund_chance:
 		return true
 	return false
+
+func _GetTimedBonusNode() -> Node:
+	return get_node_or_null("/root/GlobalTimedBonus")
+
+
+func GetTimedBonusMultiplier(effect_types: Array) -> float:
+	var timed_bonus = _GetTimedBonusNode()
+	if timed_bonus == null:
+		return 1.0
+
+	var total := 1.0
+	var active_ids: Array = timed_bonus.GetActivatedBoosterIds()
+
+	for booster_id in active_ids:
+		var booster_data: Dictionary = timed_bonus.GetActivatedBoosterData(str(booster_id))
+		if booster_data.is_empty():
+			continue
+
+		if !bool(booster_data.get("is_active", false)):
+			continue
+
+		var effect_type := str(booster_data.get("effect_type", ""))
+		if !effect_types.has(effect_type):
+			continue
+
+		total *= float(booster_data.get("effect_value", 1.0))
+
+	return max(0.0, total)

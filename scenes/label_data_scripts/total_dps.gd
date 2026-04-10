@@ -8,7 +8,7 @@ func _ready() -> void:
 func SyncData():
 	var dps_value = 0.0
 	for x in GlobalSave.save_data.bot_inventory.bot_db:
-		dps_value += GlobalStats.GetBotFinalDPSWithGlobalAndStats(x)
+		dps_value += GlobalStats.GetBotFinalDPSWithGlobalAndStats(x,false,false,true)
 		
 	text = Global.CurrencyToString(int(dps_value)) + end_text
 	
