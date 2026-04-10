@@ -1,60 +1,66 @@
 @tool
 extends Control
+class_name DailyDealClass
 
-@export_enum("WHITE","GOLD","PURPLE","BLUE","DISABLED","TAB_BG","ORANGE") var panel_color := "PURPLE":
-	set(value):
-		panel_color = value
-		if is_node_ready():
-			_ready()
-	get:
-		return panel_color
 
-@export var deal_big_icon : Texture2D = null:
-	set(value):
-		deal_big_icon = value
-		if is_node_ready():
-			_ready()
-	get:
-		return deal_big_icon
-		
+var cur_data := {}
+var cur_watch_ads := false
 
-@export var deal_small_icon : Texture2D = null:
-	set(value):
-		deal_small_icon = value
-		if is_node_ready():
-			_ready()
-	get:
-		return deal_small_icon
-
-@export var deal_title : String = "Daily Crate":
-	set(value):
-		deal_title = value
-		if is_node_ready():
-			_ready()
-	get:
-		return deal_title
-		
-@export var deal_sub_title : String = "COMMON LOOT":
-	set(value):
-		deal_sub_title = value
-		if is_node_ready():
-			_ready()
-	get:
-		return deal_sub_title
-		
-@export var btn_value_txt : String = "FREE":
-	set(value):
-		btn_value_txt = value
-		if is_node_ready():
-			_ready()
-	get:
-		return btn_value_txt
-			
 func _ready() -> void:
-	$SmartPanel/VBoxContainer/Control/IconBG.icon = deal_big_icon
-	$SmartPanel/VBoxContainer/Control/IconBG.panel_color = panel_color
-	$SmartPanel/VBoxContainer/BuyBtn.buy_btn_icon = deal_small_icon
-	$SmartPanel/VBoxContainer/BuyBtn.buy_btn_title = btn_value_txt
-	$SmartPanel/VBoxContainer/BuyBtn.panel_color = panel_color
-	$SmartPanel/VBoxContainer/item_title.text = deal_title
-	$SmartPanel/VBoxContainer/sub_title.text = deal_sub_title
+	if !Engine.is_editor_hint():
+		GlobalSignals.SyncActivatedBooster.connect(SyncActivatedBooster)
+
+func SyncActivatedBooster(booster_id:String):
+	if cur_data.is_empty():
+		return
+	if cur_data.id == booster_id:
+		var boost_data = GlobalTimedBonus.GetActivatedBoosterData(booster_id)
+		InitDaily(boost_data,cur_watch_ads)
+	
+
+func InitDaily(data:Dictionary,watch_ads := false):
+	cur_data = data
+	cur_watch_ads = watch_ads
+	
+	#Set Colors
+	$SmartPanel.panel_color = GlobalColor.GetSkillBranchColor(cur_data.group)
+	$SmartPanel/VBoxContainer/BuyBtn.panel_color = GlobalColor.GetSkillBranchColor(cur_data.group)
+	$SmartPanel/VBoxContainer/HList/Control/IconBG.panel_color = GlobalColor.GetSkillBranchColor(cur_data.group)
+	$SmartPanel/VBoxContainer/time_left.hash_tag_color = GlobalColor.GetSkillBranchColor(cur_data.group)
+	
+	#Set Data
+	$SmartPanel/VBoxContainer/HList/VList/item_title.text = cur_data.title
+	$SmartPanel/VBoxContainer/HList/VList/sub_title.text = cur_data.description
+	$SmartPanel/VBoxContainer/duration.text = Global.SecondsToPrettyTimeString(cur_data.duration_sec)
+	$SmartPanel/VBoxContainer/HList/Control/IconBG.icon = GlobalTimedBonus.GetIcon(cur_data.icon)
+	
+	#Hide all the dynamic buttons
+	$SmartPanel/VBoxContainer/BuyBtn.visible = false
+	$SmartPanel/VBoxContainer/time_left.visible = false
+	$count_down.stop()
+	#BuyBtn if !is_active
+	if !cur_data.is_active:
+		$SmartPanel/VBoxContainer/BuyBtn.visible = true
+	elif cur_data.remaining_sec > 0:
+		$SmartPanel/VBoxContainer/time_left.visible = true
+		$count_down.start()
+		_on_count_down_timeout()
+	else:
+		$SmartPanel/VBoxContainer/time_left.visible = true
+		$SmartPanel/VBoxContainer/time_left.text = "CHECK BACK TOMORROW"
+	
+	if watch_ads:
+		$SmartPanel/VBoxContainer/BuyBtn.buy_btn_title = "FREE"
+		$SmartPanel/VBoxContainer/BuyBtn.buy_btn_icon = load("res://art/icons/20_px/play_icon.png")
+	
+
+
+func _on_buy_btn_on_press() -> void:
+	GlobalTimedBonus.ActivateBooster(cur_data.id,false)
+
+
+func _on_count_down_timeout() -> void:
+	if !cur_data.is_empty():
+		var d = GlobalTimedBonus.GetActivatedBoosterData(cur_data.id)
+		$SmartPanel/VBoxContainer/time_left.text = "ACTIVE: "+Global.SecondsToPrettyTimeString(d.remaining_sec)
+	

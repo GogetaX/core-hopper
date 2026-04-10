@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://cpesek5rxsldo" path="res://scenes/screens/dig/next_boss_in_helper.gd" id="11_55ggj"]
 [ext_resource type="PackedScene" uid="uid://x5j6celmf4at" path="res://scenes/screens/dig/current_daily_task.tscn" id="16_nk4bl"]
 [ext_resource type="PackedScene" uid="uid://bjyvsqllfsb14" path="res://scenes/screens/dig/milestone_panel.tscn" id="16_wjarc"]
+[ext_resource type="PackedScene" uid="uid://b6wigw7uqkhg7" path="res://scenes/screens/dig/active_boost.tscn" id="17_h74tp"]
 [ext_resource type="Script" uid="uid://bg68ksebamcji" path="res://scenes/screens/merge/drag_drop_handler.gd" id="19_ddijn"]
 [ext_resource type="PackedScene" uid="uid://duvnpggfd3idr" path="res://scenes/screens/dig/notif_for_chests.tscn" id="19_ga47w"]
 
@@ -621,47 +622,8 @@ theme_override_constants/separation = 20
 [node name="CurrentDailyTask" parent="HList4" unique_id=424199579 instance=ExtResource("16_nk4bl")]
 layout_mode = 2
 
-[node name="Panel2" type="Panel" parent="HList4" unique_id=2063050503]
-custom_minimum_size = Vector2(0, 220)
+[node name="ActiveBoost" parent="HList4" unique_id=134081906 instance=ExtResource("17_h74tp")]
 layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 2
-theme_type_variation = &"PanelBlueBorder"
-
-[node name="VList" type="VBoxContainer" parent="HList4/Panel2" unique_id=1565824999]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = 20.0
-offset_right = -20.0
-offset_bottom = -20.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="HList4/Panel2/VList" unique_id=516029338]
-layout_mode = 2
-theme_type_variation = &"LabelDailyBlue"
-text = "ACTIVE BOOST"
-
-[node name="Control" type="Control" parent="HList4/Panel2/VList" unique_id=2012572583]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-
-[node name="Label2" type="Label" parent="HList4/Panel2/VList" unique_id=2094930114]
-layout_mode = 2
-theme_type_variation = &"LabelTitle_Blue"
-text = "x2.4"
-autowrap_mode = 2
-
-[node name="Label3" type="Label" parent="HList4/Panel2/VList" unique_id=598357039]
-layout_mode = 2
-theme_type_variation = &"LabelGray"
-text = "Ore yield - 14m left"
 
 [node name="MilestonePanel" parent="HList4" unique_id=1184951305 instance=ExtResource("16_wjarc")]
 layout_mode = 2

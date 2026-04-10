@@ -13,6 +13,7 @@ anchors_preset = 0
 offset_right = 382.0
 offset_bottom = 242.0
 size_flags_horizontal = 3
+mouse_filter = 2
 script = ExtResource("1_wkfjo")
 
 [node name="Milestone_Incomplete" parent="." unique_id=892379017 instance=ExtResource("1_u4gin")]
@@ -96,9 +97,11 @@ autowrap_mode = 2
 [node name="RewardContainer" type="HBoxContainer" parent="Milestone_Completed/VList" unique_id=853548670]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="MilestoneRewardItem" parent="Milestone_Completed/VList/RewardContainer" unique_id=1001953382 instance=ExtResource("3_6etbr")]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Control2" type="Control" parent="Milestone_Completed/VList" unique_id=842002386]
 custom_minimum_size = Vector2(0, 5)
@@ -120,6 +123,7 @@ offset_left = -30.0
 offset_right = 0.0
 offset_bottom = 30.0
 grow_horizontal = 0
+mouse_filter = 2
 notif_count = 1
 
 [node name="Milestone_NoMilestoneLeft" parent="." unique_id=1297659044 instance=ExtResource("1_u4gin")]

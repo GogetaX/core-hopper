@@ -41,6 +41,7 @@ render_target_update_mode = 4
 [node name="SkillTreeWorld" parent="SubViewportContainer/SubViewport" unique_id=249758520 instance=ExtResource("1_wroqw")]
 
 [node name="SelectedSkill" parent="." unique_id=892379017 instance=ExtResource("1_8oqqp")]
+clip_contents = true
 custom_minimum_size = Vector2(0, 650)
 layout_mode = 1
 anchors_preset = 12

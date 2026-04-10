@@ -1,10 +1,11 @@
-res://autoload/GlobalStats.gd
-res://scenes/screens/merge/merge_screen.tscn
+res://scenes/screens/dig/active_boost.gd
+res://scenes/screens/dig/active_boost.tscn
 res://art/theme/MainTheme.tres
 res://shaders/boss_outline.gdshader
 res://shaders/shop_screen.gdshader
 res://shaders/popup_blur.gdshader
-res://scenes/screens/merge/merge_item.gd
-res://autoload/GlobalSave.gd
-res://scenes/screens/progress/smart_button_buy.tscn
-res://data/bonus/bonus_database.json
+res://autoload/GlobalSignals.gd
+res://scenes/screens/dig/current_daily_task.tscn
+res://scenes/screens/dig/milestone_panel.tscn
+res://scenes/screens/shop/daily_deal_item.tscn
+res://scenes/screens/shop/daily_deal_item.gd

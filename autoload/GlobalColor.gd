@@ -8,6 +8,10 @@ const COLOR_TEXT_BLUE = Color("D1FAFF")
 const COLOR_BORDER_BLUE = Color("4FE4FF")
 const COLOR_BG_BLUE = Color("102339")
 
+const COLOR_TEXT_RED = Color("FFE1D6")
+const COLOR_BORDER_RED = Color("FF5A3B")
+const COLOR_BG_RED = Color("341610")
+
 const COLOR_TEXT_GOLD = Color("FFE7A8")
 const COLOR_BORDER_GOLD = Color("FFBE3B")
 const COLOR_BG_GOLD = Color("2A1D0F")
@@ -117,16 +121,22 @@ func GetSkillBranchColor(branch: String) -> String:
 	match branch.strip_edges().to_lower():
 		"merge":
 			return "ORANGE"
-		"boss":
-			return "GOLD"
-		"offline":
+
+		"boss", "combat":
+			return "RED"
+
+		"offline", "core":
 			return "WHITE"
-		"bot_shop":
+
+		"bot_shop", "shop":
 			return "PURPLE"
+
 		"tap":
 			return "PURPLE"
-		"core":
-			return "WHITE"
+
+		"economy":
+			return "GOLD"
+
 		_:
 			return "WHITE"
 

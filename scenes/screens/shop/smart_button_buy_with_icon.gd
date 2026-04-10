@@ -10,7 +10,7 @@ signal OnPress()
 	get:
 		return buy_btn_title
 
-@export_enum("WHITE","GOLD","PURPLE","BLUE","DISABLED","TAB_BG","ORANGE") var panel_color := "PURPLE":
+@export_enum("WHITE","GOLD","PURPLE","BLUE","DISABLED","TAB_BG","ORANGE","RED") var panel_color := "PURPLE":
 	set(value):
 		panel_color = value
 		if is_node_ready():

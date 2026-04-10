@@ -182,7 +182,11 @@ func BuildCleanSaveData():
 		"version":1,
 		"node_levels": {}
 	}
-	res["timed_bonuses"] = {"active":{}}
+	res["timed_bonuses"] = {
+		"active": {},
+		"daily_day_key": "",
+		"daily_ids": []
+	}
 	return res
 
 

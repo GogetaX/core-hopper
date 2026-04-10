@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cwyi44u4f6moj"]
 
 [ext_resource type="Shader" uid="uid://8ukb8nh4swmh" path="res://shaders/shop_screen.gdshader" id="1_bndor"]
+[ext_resource type="Script" uid="uid://4gwoxgu8g6iq" path="res://scenes/screens/shop/shop_screen.gd" id="1_ymuxk"]
 [ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="2_8j0y4"]
 [ext_resource type="PackedScene" uid="uid://cyrssis6jwdc2" path="res://scenes/screens/progress/progress_hash_tag_with_icon.tscn" id="3_nw37m"]
 [ext_resource type="PackedScene" uid="uid://drlay20xc5ihb" path="res://scenes/components/icon_bg.tscn" id="4_ok0ep"]
@@ -41,6 +42,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("1_ymuxk")
 
 [node name="SpecialOffser" type="Control" parent="." unique_id=1642414591]
 custom_minimum_size = Vector2(0, 520)
@@ -91,9 +93,7 @@ custom_minimum_size = Vector2(153, 33)
 layout_mode = 2
 hash_tag_type = "BORDER_ONLY"
 hash_tag_text = "04:22:15"
-hashtag_icon = ExtResource("8_3rjm8")
-hide_bg = false
-text_direction = "LEFT"
+is_currency = false
 
 [node name="HList2" type="HBoxContainer" parent="SpecialOffser/VList" unique_id=473406763]
 layout_mode = 2
@@ -191,28 +191,17 @@ custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HFlowContainer" type="HFlowContainer" parent="." unique_id=390821406]
+[node name="DailyDealList" type="HFlowContainer" parent="." unique_id=390821406]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 
-[node name="DailyDeal" parent="HFlowContainer" unique_id=737257032 instance=ExtResource("6_0o6hu")]
+[node name="DailyDeal" parent="DailyDealList" unique_id=737257032 instance=ExtResource("6_0o6hu")]
 layout_mode = 2
-size_flags_horizontal = 3
-panel_color = "BLUE"
-deal_big_icon = ExtResource("8_3rjm8")
-deal_small_icon = ExtResource("8_3rjm8")
 
-[node name="DailyDeal2" parent="HFlowContainer" unique_id=153683194 instance=ExtResource("6_0o6hu")]
+[node name="DailyDeal2" parent="DailyDealList" unique_id=153683194 instance=ExtResource("6_0o6hu")]
 layout_mode = 2
-size_flags_horizontal = 3
-panel_color = "GOLD"
-deal_big_icon = ExtResource("8_3rjm8")
-deal_small_icon = ExtResource("8_3rjm8")
-deal_title = "Speed Surge"
-deal_sub_title = "x2 SPEED (15M)"
-btn_value_txt = "50"
 
 [node name="Control2" type="Control" parent="." unique_id=910548509]
 custom_minimum_size = Vector2(0, 40)
@@ -295,30 +284,9 @@ theme_override_constants/v_separation = 20
 
 [node name="DailyDeal" parent="HFlowContainer2" unique_id=704533999 instance=ExtResource("6_0o6hu")]
 layout_mode = 2
-size_flags_horizontal = 3
-panel_color = "GOLD"
-deal_big_icon = ExtResource("8_3rjm8")
-deal_small_icon = ExtResource("8_3rjm8")
-deal_title = "Time Warp"
-deal_sub_title = "Instantly skip 4 hours of offline mining"
-btn_value_txt = "250"
 
 [node name="DailyDeal2" parent="HFlowContainer2" unique_id=1416245813 instance=ExtResource("6_0o6hu")]
 layout_mode = 2
-size_flags_horizontal = 3
-panel_color = "BLUE"
-deal_big_icon = ExtResource("8_3rjm8")
-deal_small_icon = ExtResource("8_3rjm8")
-deal_title = "Luck Core"
-deal_sub_title = "15% Rare drop chance for 1 hour"
-btn_value_txt = "150"
 
 [node name="DailyDeal3" parent="HFlowContainer2" unique_id=1781121777 instance=ExtResource("6_0o6hu")]
 layout_mode = 2
-size_flags_horizontal = 3
-panel_color = "BLUE"
-deal_big_icon = ExtResource("8_3rjm8")
-deal_small_icon = ExtResource("8_3rjm8")
-deal_title = "Auto-Merge Unit"
-deal_sub_title = "Automatically merges items in your grid for 2 hours."
-btn_value_txt = "400"

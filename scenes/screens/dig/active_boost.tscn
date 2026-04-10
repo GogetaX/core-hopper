@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://b6wigw7uqkhg7"]
+
+[ext_resource type="Script" uid="uid://csini3qyhmf1a" path="res://scenes/screens/dig/active_boost.gd" id="1_c3gn4"]
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="1_ib8av"]
+
+[node name="ActiveBoost" type="Control" unique_id=134081906]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 310.0
+offset_bottom = 231.0
+size_flags_horizontal = 3
+mouse_filter = 2
+script = ExtResource("1_c3gn4")
+
+[node name="CurActiveBoost" parent="." unique_id=892379017 instance=ExtResource("1_ib8av")]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+panel_color = "BLUE"
+darken_bg = true
+
+[node name="active_boost_tick" type="Timer" parent="CurActiveBoost" unique_id=1743239847]
+
+[node name="VList" type="VBoxContainer" parent="CurActiveBoost" unique_id=230699973]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CurActiveBoost/VList" unique_id=1579688871]
+layout_mode = 2
+theme_type_variation = &"LabelDailyBlue"
+text = "ACTIVE BOOST"
+
+[node name="boost_desc" type="Label" parent="CurActiveBoost/VList" unique_id=666315691]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"LabelGrayHint"
+autowrap_mode = 2
+
+[node name="boost_value" type="Label" parent="CurActiveBoost/VList" unique_id=1358991881]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_Blue"
+text = "x2.4"
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CurActiveBoost/VList" unique_id=2004781893]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="boost_name" type="Label" parent="CurActiveBoost/VList/HBoxContainer" unique_id=221390202]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "Ore yield"
+
+[node name="boost_spacer" type="Label" parent="CurActiveBoost/VList/HBoxContainer" unique_id=1199435988]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "-"
+
+[node name="boost_time_left" type="Label" parent="CurActiveBoost/VList/HBoxContainer" unique_id=1861956846]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "14m left"
+
+[node name="NoActiveBoost" parent="." unique_id=818189480 instance=ExtResource("1_ib8av")]
+visible = false
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+panel_color = "BLUE"
+darken_bg = true
+
+[node name="VList2" type="VBoxContainer" parent="NoActiveBoost" unique_id=1992987368]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 16.5
+offset_right = -20.0
+offset_bottom = -23.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="NoActiveBoost/VList2" unique_id=1826318751]
+layout_mode = 2
+theme_type_variation = &"LabelDailyBlue"
+text = "NO ACTIVE BOOSTS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="timeout" from="CurActiveBoost/active_boost_tick" to="." method="_on_active_boost_tick_timeout"]

@@ -9,7 +9,7 @@ extends Control
 	get:
 		return panel_type
 
-@export_enum("WHITE","GOLD","PURPLE","BLUE","DISABLED","TAB_BG","ORANGE") var panel_color := "PURPLE":
+@export_enum("WHITE","GOLD","PURPLE","BLUE","DISABLED","TAB_BG","ORANGE","RED") var panel_color := "PURPLE":
 	set(value):
 		panel_color = value
 		if is_node_ready():
@@ -90,6 +90,13 @@ func _ready():
 			if set_border_as_bg:
 				$BGOnly.self_modulate = GlobalColor.COLOR_TEXT_ORANGE
 				$BorderOnly.self_modulate = GlobalColor.COLOR_BG_ORANGE
+		"RED":
+			$BGOnly.self_modulate = GlobalColor.COLOR_BG_RED
+			$BorderOnly.self_modulate = GlobalColor.COLOR_BORDER_RED
+			if set_border_as_bg:
+				$BGOnly.self_modulate = GlobalColor.COLOR_TEXT_RED
+				$BorderOnly.self_modulate = GlobalColor.COLOR_BG_RED
+				
 	if darken_bg:
 		#var relic_bg_color = Color(0.1,0.1,0.1,0.5)
 		$BGOnly.self_modulate = GlobalColor.COLOR_DISABLED_BG_WHITE / 2.0
@@ -129,6 +136,11 @@ func GetTextColor():
 				return GlobalColor.COLOR_BORDER_WHITE
 			else:
 				return GlobalColor.COLOR_DISABLED_TEXT_WHITE
+		"RED":
+			if set_border_as_bg:
+				return GlobalColor.COLOR_BORDER_RED
+			else:
+				return GlobalColor.COLOR_TEXT_RED
 	print_debug("Unknown panel color: ",panel_color)
 	return Color.WHITE
 	
