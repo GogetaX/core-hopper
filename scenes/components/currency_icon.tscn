@@ -183,6 +183,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="Coin_Big_Animated" type="TextureRect" parent="." unique_id=1189107683]
+visible = false
 self_modulate = Color(0.30980393, 0.89411765, 1, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -217,7 +218,6 @@ lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_23gwi")
 
 [node name="Crystal_Small" type="TextureRect" parent="." unique_id=703525740]
-visible = false
 self_modulate = Color(0.7607843, 0.43529412, 1, 1)
 layout_mode = 1
 anchors_preset = 15

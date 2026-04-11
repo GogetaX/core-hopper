@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://d3us88jhniywe" path="res://scenes/screens/shop/daily_deal_item.tscn" id="6_0o6hu"]
 [ext_resource type="PackedScene" uid="uid://2qyad5tlekq8" path="res://scenes/screens/shop/shop_crystal_button.tscn" id="7_5vb6r"]
 [ext_resource type="Texture2D" uid="uid://bg18vum2cai3c" path="res://art/icons/rocket.png" id="8_3rjm8"]
+[ext_resource type="Texture2D" uid="uid://bmi0xl7ivgbdw" path="res://art/shop/shop_icons.png" id="10_nspte"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8j0y4"]
 shader = ExtResource("1_bndor")
@@ -33,6 +34,18 @@ shader_parameter/corner_radius = 0.02
 shader_parameter/edge_softness = 0.015
 shader_parameter/animate_strength = 0.015
 shader_parameter/animate_speed = 0.65
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c5hhf"]
+atlas = ExtResource("10_nspte")
+region = Rect2(0, 0, 57, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nspte"]
+atlas = ExtResource("10_nspte")
+region = Rect2(103, 1, 85, 99)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r2ylk"]
+atlas = ExtResource("10_nspte")
+region = Rect2(215, 4, 90, 93)
 
 [node name="ShopScreen" type="VBoxContainer" unique_id=1079346263]
 anchors_preset = 15
@@ -237,7 +250,6 @@ theme_override_constants/v_separation = 30
 layout_mode = 2
 panel_color = "BLUE"
 crystal_icon = ExtResource("8_3rjm8")
-currency_type = "REAL_MONEY"
 
 [node name="ShopCrystalButton2" parent="BuyWithMoney" unique_id=1010059706 instance=ExtResource("7_5vb6r")]
 layout_mode = 2
@@ -245,7 +257,6 @@ item_name = "Miner's Trove"
 item_subname = "2,500 Crystas + 400 Bonus"
 show_most_popular = true
 crystal_icon = ExtResource("8_3rjm8")
-currency_type = "REAL_MONEY"
 
 [node name="ShopCrystalButton3" parent="BuyWithMoney" unique_id=260196477 instance=ExtResource("7_5vb6r")]
 layout_mode = 2
@@ -254,7 +265,6 @@ item_name = "Valut of the Core"
 item_subname = "10,000 Crystals + 2,500 Bonus"
 item_price = "$49.99"
 crystal_icon = ExtResource("8_3rjm8")
-currency_type = "REAL_MONEY"
 
 [node name="BuyWithCurrency" type="HFlowContainer" parent="." unique_id=1070460387]
 layout_mode = 2
@@ -265,8 +275,9 @@ theme_override_constants/v_separation = 30
 layout_mode = 2
 panel_color = "BLUE"
 item_price = "100"
-crystal_icon = ExtResource("8_3rjm8")
+crystal_icon = SubResource("AtlasTexture_c5hhf")
 currency_type = "energy"
+get_currency_value = 550
 
 [node name="ShopCrystalButton2" parent="BuyWithCurrency" unique_id=470100034 instance=ExtResource("7_5vb6r")]
 layout_mode = 2
@@ -274,8 +285,9 @@ item_name = "Miner's Trove"
 item_subname = "2,500 Crystas + 400 Bonus"
 item_price = "500"
 show_most_popular = true
-crystal_icon = ExtResource("8_3rjm8")
+crystal_icon = SubResource("AtlasTexture_nspte")
 currency_type = "energy"
+get_currency_value = 2900
 
 [node name="ShopCrystalButton3" parent="BuyWithCurrency" unique_id=803753225 instance=ExtResource("7_5vb6r")]
 layout_mode = 2
@@ -283,8 +295,9 @@ panel_color = "BLUE"
 item_name = "Valut of the Core"
 item_subname = "10,000 Crystals + 2,500 Bonus"
 item_price = "2000"
-crystal_icon = ExtResource("8_3rjm8")
+crystal_icon = SubResource("AtlasTexture_r2ylk")
 currency_type = "energy"
+get_currency_value = 12500
 
 [node name="Control3" type="Control" parent="." unique_id=50843159]
 custom_minimum_size = Vector2(0, 40)

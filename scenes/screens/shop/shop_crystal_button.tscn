@@ -15,7 +15,6 @@ offset_bottom = 160.0
 size_flags_horizontal = 3
 mouse_filter = 1
 script = ExtResource("1_n8b7b")
-currency_type = null
 
 [node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("1_g4ys5")]
 layout_mode = 1
@@ -73,3 +72,5 @@ offset_right = 237.0
 offset_bottom = 17.0
 text = "MOST POPULAR"
 hash_tag_type = "INSIDE_ONLY"
+
+[connection signal="BtnPressedWithPrice" from="SmartPanel/HList/BuyBtn" to="." method="_on_buy_btn_btn_pressed_with_price"]

@@ -38,8 +38,14 @@ func GetGlobalSpeedMultiplier(next_level : int = 0) -> float:
 	return 1.0 + (level * 0.08)
 	
 func GetCoinYieldMultiplier(next_level :int = 0) -> float:
+	#coin yield from Upgrade stats
 	var lvl = GlobalSave.save_data.upgrades["coin_yield"].level + next_level
-	return pow(1.10, lvl) * GetRelicMultiplierTotal("coin_gain_mult")
+	var coint_multiplayer = pow(1.10, lvl) * GetRelicMultiplierTotal("coin_gain_mult")
+	
+	#double coin bonus from Timed Bonus
+	if GlobalTimedBonus.IsBoosterActive("double_coins"):
+		coint_multiplayer = coint_multiplayer * GlobalTimedBonus.GetBoosterDataById("double_coins").effect_value
+	return coint_multiplayer
 	
 func GetGlobalCoinYieldMultiplayer():
 	return GetCoinYieldMultiplier()
@@ -309,8 +315,16 @@ func BuyBotData():
 			res.price = int(res.price * cost_multiplayer)
 	#Bot Reduction price from skills
 	var reduction_percent = GlobalSkillTree.skill_summary.stats.direct_bot_buy_cost_reduction
-	res.price = int(res.price - (res.price * reduction_percent))
+	res.price = res.price - (res.price * reduction_percent)
 	
+	#Bot Reduction price from Timed Bonus
+	if GlobalTimedBonus.IsBoosterActive("bot_discount"):
+		var boost_data = GlobalTimedBonus.GetBoosterDataById("bot_discount")
+		res.price = res.price - (res.price * boost_data.effect_value)
+	
+	#converting from float back to int
+	res.price = int(res.price)
+	res.level = int(res.level)
 	return res
 
 func GetOfflineCapSeconds():

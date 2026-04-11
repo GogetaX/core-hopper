@@ -51,3 +51,6 @@ func AnimateCurrencyIn():
 		var t = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 		t.tween_property(cur_currency,"scale",Vector2(1.15,1.15),0.1)
 		t.tween_property(cur_currency,"scale",Vector2(1.0,1.0),0.1)
+
+func GetCoinCenterPos():
+	return global_position + (size / 2.0)

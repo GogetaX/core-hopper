@@ -57,6 +57,9 @@ extends Control
 	get:
 		return currency_type
 		
+@export_enum("crystals","energy","coins") var get_currency_type := "crystals"
+@export var get_currency_value := 2000
+		
 func _ready() -> void:
 	$SmartPanel/HList/IconBG.panel_color = panel_color
 	$SmartPanel/HList/BuyBtn.panel_color = panel_color
@@ -81,3 +84,10 @@ func _ready() -> void:
 			else:
 				$SmartPanel/HList/BuyBtn.price_text = item_price
 			$SmartPanel/HList/BuyBtn.price_int = int(item_price)
+
+
+func _on_buy_btn_btn_pressed_with_price(currency: String, price: int) -> void:
+	GlobalSave.RemoveCurrency(currency,price)
+	GlobalSave.AddCurrency(get_currency_type,get_currency_value)
+	GlobalSignals.ShowCurrencyAnimation.emit($SmartPanel/HList/BuyBtn.GetCoinGlobalPos(),get_currency_type,int(get_currency_value/50.0))
+	GlobalSave.SyncSave()

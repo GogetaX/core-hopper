@@ -5,5 +5,5 @@ func _ready() -> void:
 	SyncData()
 	
 func SyncData():
-	var upgrade_value = GlobalStats.GetUpgradeValue("coin_yield")
+	var upgrade_value = GlobalStats.GetCoinYieldMultiplier()
 	text = "x"+Global.FloatToStr(upgrade_value,0.01)

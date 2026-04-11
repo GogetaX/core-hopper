@@ -127,3 +127,5 @@ func OnBtnPressed(btn_node:Control):
 		"NO_PRICE":
 			OnPressed.emit()
 	
+func GetCoinGlobalPos():
+	return $WITH_PRICE/HBoxContainer/VList/SmartPanel/HBoxContainer/CurrencyIcon.GetCoinCenterPos()
