@@ -1,0 +1,393 @@
+[gd_scene format=3 uid="uid://j3an7e41nkn4"]
+
+[ext_resource type="Script" uid="uid://cpssteaggkt1x" path="res://scenes/popups/relic_upgrade_popup.gd" id="1_0bdbq"]
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="2_elmy5"]
+[ext_resource type="PackedScene" uid="uid://b2qghfcexq01t" path="res://scenes/components/icon_bg_circle.tscn" id="2_ng0as"]
+[ext_resource type="Texture2D" uid="uid://dkipcb22lyo1q" path="res://art/ui/arrow_left.png" id="3_elmy5"]
+[ext_resource type="Texture2D" uid="uid://cl7iy17t6o7ys" path="res://art/relics/cracked_core.tres" id="3_i0hsw"]
+[ext_resource type="PackedScene" uid="uid://drlay20xc5ihb" path="res://scenes/components/icon_bg.tscn" id="4_6ywa3"]
+[ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="4_fp6mu"]
+[ext_resource type="PackedScene" uid="uid://hgf1ed6wts6n" path="res://scenes/components/reward_currency.tscn" id="7_elmy5"]
+[ext_resource type="PackedScene" uid="uid://njxlv6dxrlwj" path="res://scenes/screens/progress/smart_button_buy.tscn" id="8_vveg0"]
+
+[node name="RelicUpgradePopup" type="Control" unique_id=743967306]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_0bdbq")
+
+[node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("2_elmy5")]
+layout_mode = 1
+panel_type = "INSIDE_ONLY"
+panel_color = "DISABLED"
+darken_bg = true
+
+[node name="HasRelics" type="VBoxContainer" parent="." unique_id=184212293]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 20
+
+[node name="HList3" type="HBoxContainer" parent="HasRelics" unique_id=1314459015]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 20
+
+[node name="ReturnBack" parent="HasRelics/HList3" unique_id=1682398798 instance=ExtResource("2_ng0as")]
+layout_mode = 2
+panel_type = "INSIDE_ONLY"
+panel_color = "BLUE"
+icon = ExtResource("3_elmy5")
+as_button = true
+
+[node name="Label" type="Label" parent="HasRelics/HList3" unique_id=371064586]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_White"
+text = "RELIC UPGRADE"
+
+[node name="Control" type="Control" parent="HasRelics" unique_id=1478349118]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Relic" type="Control" parent="HasRelics" unique_id=301873342]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+
+[node name="IconBG" parent="HasRelics/Relic" unique_id=436191145 instance=ExtResource("4_6ywa3")]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -150.0
+offset_right = 150.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+panel_type = "INSIDE_ONLY"
+
+[node name="relic_rank" parent="HasRelics/Relic/IconBG" unique_id=486212889 instance=ExtResource("4_fp6mu")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -66.0
+offset_top = -27.0
+offset_bottom = 6.0
+grow_horizontal = 0
+text = "LVL 4"
+horizontal_alignment = 2
+hash_tag_type = "INSIDE_ONLY"
+
+[node name="HList" type="HBoxContainer" parent="HasRelics" unique_id=1175489123]
+layout_mode = 2
+alignment = 1
+
+[node name="relic_rarity" parent="HasRelics/HList" unique_id=713365230 instance=ExtResource("4_fp6mu")]
+layout_mode = 2
+text = "RARE RELIC"
+hash_tag_type = "INSIDE_ONLY"
+
+[node name="HList2" type="HBoxContainer" parent="HasRelics" unique_id=1753626289]
+layout_mode = 2
+alignment = 1
+
+[node name="relic_name" type="Label" parent="HasRelics/HList2" unique_id=899239587]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_White"
+theme_override_font_sizes/font_size = 40
+text = "CRACKED CORE"
+
+[node name="Control2" type="Control" parent="HasRelics" unique_id=2145071936]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Control3" type="Control" parent="HasRelics" unique_id=2130623585]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VList" type="VBoxContainer" parent="HasRelics/Control3" unique_id=2082148625]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="dups" parent="HasRelics/Control3/VList" unique_id=118306385 instance=ExtResource("2_elmy5")]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+panel_color = "DISABLED"
+
+[node name="VList" type="VBoxContainer" parent="HasRelics/Control3/VList/dups" unique_id=1680889328]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HList" type="HBoxContainer" parent="HasRelics/Control3/VList/dups/VList" unique_id=938473408]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HasRelics/Control3/VList/dups/VList/HList" unique_id=545471949]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "DUPLICATES"
+
+[node name="Control" type="Control" parent="HasRelics/Control3/VList/dups/VList/HList" unique_id=19253442]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="cur_dups" parent="HasRelics/Control3/VList/dups/VList/HList" unique_id=1234220742 instance=ExtResource("4_fp6mu")]
+self_modulate = Color(0.30980393, 0.89411765, 1, 1)
+layout_mode = 2
+text = "3"
+hash_tag_color = "BLUE"
+no_bg = true
+
+[node name="Label2" type="Label" parent="HasRelics/Control3/VList/dups/VList/HList" unique_id=1708246113]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "/"
+
+[node name="max_dups" type="Label" parent="HasRelics/Control3/VList/dups/VList/HList" unique_id=1269853955]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "5"
+
+[node name="progress_bar" type="ProgressBar" parent="HasRelics/Control3/VList/dups/VList" unique_id=1357443369]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_type_variation = &"ProgressBarBlue"
+value = 50.0
+show_percentage = false
+
+[node name="relic_stat" parent="HasRelics/Control3/VList" unique_id=1173667796 instance=ExtResource("2_elmy5")]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+panel_type = "INSIDE_ONLY"
+panel_color = "DISABLED"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HasRelics/Control3/VList/relic_stat" unique_id=1234739187]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="effect_icon" parent="HasRelics/Control3/VList/relic_stat/HBoxContainer" unique_id=1772449079 instance=ExtResource("4_6ywa3")]
+layout_mode = 2
+panel_color = "BLUE"
+
+[node name="effect_name" type="Label" parent="HasRelics/Control3/VList/relic_stat/HBoxContainer" unique_id=1997513443]
+layout_mode = 2
+theme_type_variation = &"LabelWhiteTitle"
+theme_override_font_sizes/font_size = 34
+text = "Bot Damage"
+
+[node name="Control" type="Control" parent="HasRelics/Control3/VList/relic_stat/HBoxContainer" unique_id=214150925]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="from_stat" parent="HasRelics/Control3/VList/relic_stat/HBoxContainer" unique_id=868935174 instance=ExtResource("4_fp6mu")]
+self_modulate = Color(0.8627451, 0.9098039, 1, 1)
+layout_mode = 2
+size_flags_vertical = 5
+text = "15%"
+vertical_alignment = 1
+hash_tag_color = "DISABLED"
+no_bg = true
+
+[node name="ProgressHashTag" parent="HasRelics/Control3/VList/relic_stat/HBoxContainer" unique_id=782770141 instance=ExtResource("4_fp6mu")]
+self_modulate = Color(0.30980393, 0.89411765, 1, 1)
+layout_mode = 2
+size_flags_vertical = 5
+text = "»"
+vertical_alignment = 1
+hash_tag_color = "BLUE"
+no_bg = true
+
+[node name="to_stat" parent="HasRelics/Control3/VList/relic_stat/HBoxContainer" unique_id=1738897937 instance=ExtResource("4_fp6mu")]
+self_modulate = Color(0.30980393, 0.89411765, 1, 1)
+layout_mode = 2
+size_flags_vertical = 5
+text = "20%"
+vertical_alignment = 1
+hash_tag_color = "BLUE"
+no_bg = true
+
+[node name="Control2" type="Control" parent="HasRelics/Control3/VList" unique_id=54486635]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="HasRelics/Control3/VList" unique_id=1658323050]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_White"
+theme_override_font_sizes/font_size = 32
+text = "UPGRADE COST"
+
+[node name="UpgradeCost" type="HFlowContainer" parent="HasRelics/Control3/VList" unique_id=416849393]
+layout_mode = 2
+
+[node name="RewardCurrency" parent="HasRelics/Control3/VList/UpgradeCost" unique_id=939363394 instance=ExtResource("7_elmy5")]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+
+[node name="UpgradeBtn" parent="HasRelics/Control3/VList" unique_id=664760665 instance=ExtResource("8_vveg0")]
+custom_minimum_size = Vector2(350, 100)
+layout_mode = 2
+size_flags_horizontal = 1
+currency_type = "crystals"
+buy_btn_title = "UPGRADE"
+panel_color = "BLUE"
+
+[node name="Control" type="Control" parent="HasRelics/Control3/VList" unique_id=1348723865]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="HasRelics/Control3/VList" unique_id=844050727]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_White"
+theme_override_font_sizes/font_size = 32
+text = "YOUR RELIC VAULT"
+
+[node name="Scroll" type="ScrollContainer" parent="HasRelics/Control3/VList" unique_id=602772446]
+layout_mode = 2
+size_flags_vertical = 3
+vertical_scroll_mode = 0
+
+[node name="RelicFlow" type="HBoxContainer" parent="HasRelics/Control3/VList/Scroll" unique_id=557381072]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="RelicUpgradeItem" type="Control" parent="HasRelics/Control3/VList/Scroll/RelicFlow" unique_id=2001170205]
+custom_minimum_size = Vector2(200, 250)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HasRelics/Control3/VList/Scroll/RelicFlow/RelicUpgradeItem" unique_id=336654321]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="IconBG" parent="HasRelics/Control3/VList/Scroll/RelicFlow/RelicUpgradeItem/VBoxContainer" unique_id=2023547434 instance=ExtResource("4_6ywa3")]
+custom_minimum_size = Vector2(100, 200)
+layout_mode = 2
+panel_color = "BLUE"
+icon = ExtResource("3_i0hsw")
+
+[node name="ProgressHashTag" parent="HasRelics/Control3/VList/Scroll/RelicFlow/RelicUpgradeItem/VBoxContainer/IconBG" unique_id=1120306341 instance=ExtResource("4_fp6mu")]
+self_modulate = Color(0.81960785, 0.98039216, 1, 1)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+offset_right = -12.0
+offset_bottom = -7.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "x3"
+horizontal_alignment = 2
+hash_tag_type = "INSIDE_ONLY"
+hash_tag_color = "BLUE"
+
+[node name="ProgressHashTag2" parent="HasRelics/Control3/VList/Scroll/RelicFlow/RelicUpgradeItem/VBoxContainer" unique_id=960236166 instance=ExtResource("4_fp6mu")]
+self_modulate = Color(0.30980393, 0.89411765, 1, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "CRACKED CORE"
+horizontal_alignment = 1
+autowrap_mode = 2
+hash_tag_type = "INSIDE_ONLY"
+hash_tag_color = "BLUE"
+no_bg = true
+
+[node name="NoRelics" type="VBoxContainer" parent="." unique_id=745380186]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 20
+
+[node name="HList3" type="HBoxContainer" parent="NoRelics" unique_id=1660756215]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 20
+
+[node name="ReturnBack" parent="NoRelics/HList3" unique_id=133035125 instance=ExtResource("2_ng0as")]
+layout_mode = 2
+panel_type = "INSIDE_ONLY"
+panel_color = "BLUE"
+icon = ExtResource("3_elmy5")
+as_button = true
+
+[node name="Label" type="Label" parent="NoRelics/HList3" unique_id=635135764]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_White"
+text = "RELIC UPGRADE"
+
+[node name="Control" type="Control" parent="NoRelics" unique_id=1217858377]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ProgressHashTag" parent="NoRelics" unique_id=774768172 instance=ExtResource("4_fp6mu")]
+self_modulate = Color(1, 0.74509805, 0.23137255, 1)
+layout_mode = 2
+text = "NO AVAILABLE RELICS"
+horizontal_alignment = 1
+hash_tag_color = "GOLD"
+no_bg = true
+
+[connection signal="resized" from="HasRelics" to="." method="_on_v_list_resized"]
+[connection signal="BtnPressed" from="HasRelics/HList3/ReturnBack" to="." method="_on_return_back_btn_pressed"]
+[connection signal="resized" from="NoRelics" to="." method="_on_v_list_resized"]
+[connection signal="BtnPressed" from="NoRelics/HList3/ReturnBack" to="." method="_on_return_back_btn_pressed"]

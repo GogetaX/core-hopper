@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b2qghfcexq01t" path="res://scenes/components/icon_bg_circle.tscn" id="3_p27o2"]
 [ext_resource type="Texture2D" uid="uid://8d4xunnuoyea" path="res://art/icons/20_px/close_icon.png" id="4_k8l62"]
 [ext_resource type="PackedScene" uid="uid://dtuuq8uy378eb" path="res://scenes/screens/progress/relic_item.tscn" id="4_lqtxv"]
+[ext_resource type="PackedScene" uid="uid://cec3m3dpceceo" path="res://scenes/screens/progress/smart_single_row_btn.tscn" id="6_mavts"]
 
 [node name="RelicInvPopup" type="Control" unique_id=1294155484]
 layout_mode = 3
@@ -96,4 +97,11 @@ layout_mode = 2
 [node name="RelicItem3" parent="SmartPanel/VBoxContainer/Scroll/HFlow" unique_id=449712666 instance=ExtResource("4_lqtxv")]
 layout_mode = 2
 
+[node name="OpenRelicInvBtn" parent="SmartPanel/VBoxContainer" unique_id=1442770830 instance=ExtResource("6_mavts")]
+layout_mode = 2
+size_flags_horizontal = 3
+button_color = "GOLD"
+btn_text = "RELIC UPGRADE SCREEN"
+
 [connection signal="BtnPressed" from="SmartPanel/ClosePopup" to="." method="_on_close_popup_btn_pressed"]
+[connection signal="OnPress" from="SmartPanel/VBoxContainer/OpenRelicInvBtn" to="." method="_on_open_relic_inv_btn_on_press"]

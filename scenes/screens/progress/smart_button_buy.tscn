@@ -17,6 +17,7 @@ mouse_filter = 1
 script = ExtResource("1_kdsiy")
 
 [node name="NO_PRICE" parent="." unique_id=892379017 instance=ExtResource("2_kdsiy")]
+visible = false
 layout_mode = 1
 panel_type = "INSIDE_ONLY"
 set_border_as_bg = true
@@ -35,7 +36,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="WITH_PRICE" parent="." unique_id=2056804648 instance=ExtResource("2_kdsiy")]
-visible = false
 layout_mode = 1
 panel_type = "INSIDE_ONLY"
 

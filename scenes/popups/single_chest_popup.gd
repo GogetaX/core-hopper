@@ -16,9 +16,9 @@ func InitChest(data:Dictionary):
 		if ["coins","crystals","energy"].has(x) && cur_chest_data.data.rewards[x] > 0:
 			var r = reward_currency.instantiate() as RewardCurrencyClass
 			$SmartPanel/VBoxContainer/CurrencyList.add_child(r)
-			r.currency_type = x
+			r.currency_type = x.to_upper()
 			r.amount_str = Global.CurrencyToString(cur_chest_data.data.rewards[x])
-	
+
 	#Remove Reward Items
 	for x in $SmartPanel/VBoxContainer/Scroll/RewardContainer.get_children():
 		x.queue_free()

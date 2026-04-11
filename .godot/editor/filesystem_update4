@@ -12,3 +12,16 @@ res://scenes/components/currency_icon.tscn
 res://scenes/components/currency_icon.gd
 res://scenes/screens/progress/smart_button_buy.gd
 res://scenes/screens/progress/smart_button_buy.tscn
+res://scenes/popups/BotStatInfoPopup.tscn
+res://scenes/popups/RelicUpgradePopup.tscn
+res://scenes/popups/relic_upgrade_popup.gd
+res://scenes/app/main_scene.tscn
+res://scenes/app/overlay_layer.gd
+res://scenes/screens/progress/relic_item.tscn
+res://scenes/screens/progress/progress_screen.tscn
+res://scenes/popups/RelicInvPopup.tscn
+res://scenes/popups/relic_inv_popup.gd
+res://scenes/screens/progress/progress_screen.gd
+res://scenes/popups/SingleChestPopup.tscn
+res://scenes/popups/single_chest_popup.gd
+res://scenes/components/reward_currency.gd

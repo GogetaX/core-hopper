@@ -42,3 +42,7 @@ func OnRelicEquip(_is_equiped):
 
 func _on_close_popup_btn_pressed() -> void:
 	GlobalSignals.CloseCurPopup.emit()
+
+
+func _on_open_relic_inv_btn_on_press() -> void:
+	GlobalSignals.ShowPopup.emit("UPGRADE_RELIC_POPUP",{})

@@ -45,6 +45,8 @@ func show_tab(tab_name:String,data:Dictionary) -> void:
 			new_screen = preload("res://scenes/popups/SingleChestPopup.tscn")
 		"BOT_STAT_INFO":
 			new_screen = preload("res://scenes/popups/BotStatInfoPopup.tscn")
+		"UPGRADE_RELIC_POPUP":
+			new_screen = preload("res://scenes/popups/RelicUpgradePopup.tscn")
 		_:
 			print_debug("unknown tab: ",tab_name)
 	current_screen = new_screen.instantiate()
@@ -62,6 +64,8 @@ func show_tab(tab_name:String,data:Dictionary) -> void:
 		current_screen.InitChest(data)
 	elif tab_name == "BOT_STAT_INFO":
 		current_screen.InitBotInfo(data)
+	elif tab_name == "UPGRADE_RELIC_POPUP":
+		current_screen.InitPopup(data)
 	
 	
 	

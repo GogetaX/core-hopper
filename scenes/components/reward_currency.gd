@@ -11,7 +11,13 @@ class_name RewardCurrencyClass
 	get:
 		return currency_type
 		
-@export var amount_str := "123.5K"
+@export var amount_str := "123.5K":
+	set(value):
+		amount_str = value
+		if is_node_ready():
+			_ready()
+	get:
+		return amount_str
 
 
 func _ready() -> void:

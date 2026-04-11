@@ -13,7 +13,7 @@ shader = ExtResource("5_ajjm1")
 shader_parameter/blur_lod = 3.50000016625
 shader_parameter/tint = Color(0.07846785, 0.11207495, 0.19966345, 0.045)
 shader_parameter/saturation = 0.400000019
-shader_parameter/brightness = 1.0
+shader_parameter/brightness = 0.20000000880148
 
 [sub_resource type="Environment" id="Environment_whjeo"]
 background_mode = 3
@@ -88,7 +88,6 @@ mouse_filter = 2
 script = ExtResource("4_u2ckv")
 
 [node name="BlurBG" type="ColorRect" parent="OverlayLayer" unique_id=1018703847]
-visible = false
 material = SubResource("ShaderMaterial_whjeo")
 anchors_preset = 15
 anchor_right = 1.0

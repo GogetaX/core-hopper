@@ -626,6 +626,7 @@ layout_mode = 2
 
 [node name="OpenRelicInvBtn" parent="Menu_Relics/RelicVList/RelicVList" unique_id=698052773 instance=ExtResource("8_yhu24")]
 layout_mode = 2
+size_flags_horizontal = 3
 button_color = "GOLD"
 btn_text = "Open relic inventory"
 
