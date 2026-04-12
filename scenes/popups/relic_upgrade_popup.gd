@@ -91,4 +91,4 @@ func _on_return_back_btn_pressed() -> void:
 
 
 func _on_upgrade_btn_on_pressed() -> void:
-	
+	pass

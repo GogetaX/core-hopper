@@ -230,14 +230,18 @@ func RemoveCurrency(currency_type:String,value:int) -> void:
 	return
 	
 func AddCurrency(currency_type:String, value:int) -> void:
-	if !save_data.has("currencies"):
-		save_data["currencies"] = {}
-	if !save_data.currencies.has(currency_type):
-		save_data.currencies[currency_type] = 0
+	match currency_type:
+		"dust":
+			save_data.relic_inv.dust = int(save_data.relic_inv.dust + save_data.relic_inv.dust)
+		_:
+			if !save_data.has("currencies"):
+				save_data["currencies"] = {}
+			if !save_data.currencies.has(currency_type):
+				save_data.currencies[currency_type] = 0
 
-	save_data.currencies[currency_type] = int(save_data.currencies[currency_type] + value)
+			save_data.currencies[currency_type] = int(save_data.currencies[currency_type] + value)
 	GlobalSignals.CurrencyAdded.emit(currency_type, value)
-	
+			
 func ActivateLane(lane_index:int):
 	for x in save_data.lanes:
 		if x.lane_index == lane_index:
