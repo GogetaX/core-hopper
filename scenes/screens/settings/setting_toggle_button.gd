@@ -1,6 +1,8 @@
 @tool
 extends Control
 
+signal IsToggled(toggled_on:bool)
+
 @export_enum("WHITE","GOLD","PURPLE","BLUE","DISABLED","TAB_BG","ORANGE") var panel_color := "PURPLE":
 	set(value):
 		panel_color = value
@@ -33,8 +35,6 @@ extends Control
 	get:
 		return setting_subtitle
 		
-@export var auto_selected := false
-		
 func _ready() -> void:
 	$SmartPanel/HList/VList/setting_title.text = setting_title
 	$SmartPanel/HList/VList/setting_subtitle.text = setting_subtitle
@@ -42,4 +42,10 @@ func _ready() -> void:
 	$SmartPanel.panel_color = panel_color
 	$SmartPanel/HList/IconBG.icon = setting_icon
 	if !Engine.is_editor_hint():
-		$SmartPanel/HList/VList2/SettingToggle.SetEnabled(auto_selected)
+		$SmartPanel/HList/VList2/SettingToggle.IsToggled.connect(_SetAsToggled)
+
+func _SetAsToggled(is_toggled:bool):
+	IsToggled.emit(is_toggled)
+	
+func SetSelected(is_selected):
+	$SmartPanel/HList/VList2/SettingToggle.SetEnabled(is_selected)

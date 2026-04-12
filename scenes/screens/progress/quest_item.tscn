@@ -72,14 +72,17 @@ horizontal_alignment = 2
 [node name="Control" type="Control" parent="QuestItem_Incomplete/VList/HList/VList2" unique_id=771860713]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="RewardContainer" type="HBoxContainer" parent="QuestItem_Incomplete/VList/HList/VList2" unique_id=1634342029]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="Control" type="Control" parent="QuestItem_Incomplete/VList" unique_id=458925802]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="ProgressBar" type="ProgressBar" parent="QuestItem_Incomplete/VList" unique_id=1988521567]
 custom_minimum_size = Vector2(0, 20)
@@ -90,7 +93,6 @@ value = 75.0
 show_percentage = false
 
 [node name="QuestItem_Complete" parent="." unique_id=1224417790 instance=ExtResource("1_60bcs")]
-visible = false
 custom_minimum_size = Vector2(0, 160)
 layout_mode = 1
 panel_type = "INSIDE_ONLY"
@@ -129,6 +131,7 @@ text = "Extract 500 rare void crystals"
 [node name="Control" type="Control" parent="QuestItem_Complete/VList/HList/VList" unique_id=941313259]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="HList2" type="HBoxContainer" parent="QuestItem_Complete/VList/HList/VList" unique_id=1122273375]
 layout_mode = 2
@@ -142,6 +145,7 @@ panel_color = "BLUE"
 [node name="Control" type="Control" parent="QuestItem_Complete/VList/HList/VList/HList2" unique_id=293017606]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="VList2" type="VBoxContainer" parent="QuestItem_Complete/VList/HList" unique_id=841145153]
 layout_mode = 2
@@ -158,14 +162,17 @@ horizontal_alignment = 2
 [node name="Control" type="Control" parent="QuestItem_Complete/VList/HList/VList2" unique_id=43463063]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="RewardContainer" type="HBoxContainer" parent="QuestItem_Complete/VList/HList/VList2" unique_id=1196433876]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="Control" type="Control" parent="QuestItem_Complete/VList" unique_id=199422179]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="MilestoneItem_Incomplete" parent="." unique_id=1938631027 instance=ExtResource("1_60bcs")]
 visible = false
@@ -226,16 +233,20 @@ horizontal_alignment = 2
 [node name="Control" type="Control" parent="MilestoneItem_Incomplete/VList/HList/VList2" unique_id=1528039247]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="RewardContainer" type="HBoxContainer" parent="MilestoneItem_Incomplete/VList/HList/VList2" unique_id=1731860912]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="Control" type="Control" parent="MilestoneItem_Incomplete/VList" unique_id=1323944683]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="MilestoneItem_Complete" parent="." unique_id=531124647 instance=ExtResource("1_60bcs")]
+visible = false
 custom_minimum_size = Vector2(0, 160)
 layout_mode = 1
 panel_type = "INSIDE_ONLY"
@@ -307,13 +318,16 @@ horizontal_alignment = 2
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="RewardContainer" type="HBoxContainer" parent="MilestoneItem_Complete/VList/HList/VList2" unique_id=1693862899]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Control" type="Control" parent="MilestoneItem_Complete/VList" unique_id=180217715]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
+mouse_filter = 2
 
 [connection signal="OnPressed" from="QuestItem_Complete/VList/HList/VList/HList2/DailyQuestCompleteBtn" to="." method="_on_daily_quest_complete_btn_on_pressed"]
 [connection signal="OnPressed" from="MilestoneItem_Complete/VList/HList/VList/HList/MilestoneBtnComplete" to="." method="_on_milestone_btn_complete_on_pressed"]

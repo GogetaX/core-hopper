@@ -231,7 +231,7 @@ vertical_alignment = 1
 hash_tag_color = "DISABLED"
 no_bg = true
 
-[node name="ProgressHashTag" parent="HasRelics/Control3/VList/relic_stat/HBoxContainer" unique_id=782770141 instance=ExtResource("4_fp6mu")]
+[node name="double_arrow" parent="HasRelics/Control3/VList/relic_stat/HBoxContainer" unique_id=782770141 instance=ExtResource("4_fp6mu")]
 self_modulate = Color(0.30980393, 0.89411765, 1, 1)
 layout_mode = 2
 size_flags_vertical = 5
@@ -272,6 +272,17 @@ size_flags_horizontal = 1
 currency_type = "crystals"
 buy_btn_title = "UPGRADE"
 panel_color = "BLUE"
+
+[node name="relic_at_max_label" parent="HasRelics/Control3/VList" unique_id=652620379 instance=ExtResource("4_fp6mu")]
+self_modulate = Color(1, 0.3529412, 0.23137255, 1)
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "RELIC AT MAX LEVEL"
+horizontal_alignment = 1
+vertical_alignment = 1
+hash_tag_color = "RED"
+no_bg = true
 
 [node name="Control" type="Control" parent="HasRelics/Control3/VList" unique_id=1348723865]
 custom_minimum_size = Vector2(0, 30)

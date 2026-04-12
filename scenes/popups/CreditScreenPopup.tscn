@@ -1,0 +1,179 @@
+[gd_scene format=3 uid="uid://d2igvvxkx86xb"]
+
+[ext_resource type="Script" uid="uid://cv4ntip7ocwbn" path="res://scenes/popups/credit_screen_popup.gd" id="1_h1kls"]
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="2_mk7wx"]
+[ext_resource type="Texture2D" uid="uid://8gehs2jnoysm" path="res://art/particles/star_08.png" id="3_dxckv"]
+[ext_resource type="PackedScene" uid="uid://njxlv6dxrlwj" path="res://scenes/screens/progress/smart_button_buy.tscn" id="4_agsv0"]
+[ext_resource type="Texture2D" uid="uid://88ot8lfbupyo" path="res://art/particles/star_06.png" id="4_hcx7q"]
+
+[sub_resource type="Curve" id="Curve_cwrqk"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_i8kni"]
+curve = SubResource("Curve_cwrqk")
+
+[sub_resource type="Gradient" id="Gradient_cqnbw"]
+offsets = PackedFloat32Array(0, 0.13636364, 0.90909094, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0fv8i"]
+gradient = SubResource("Gradient_cqnbw")
+
+[sub_resource type="Curve" id="Curve_tn1xl"]
+_data = [Vector2(0, 0.026159286), 0.0, 0.0, 0, 0, Vector2(0.28143716, 0.76040435), 0.0, 0.0, 0, 0, Vector2(0.5299402, 0.28121287), 0.0, 0.0, 0, 0, Vector2(0.748503, 0.8531511), 0.0, 0.0, 0, 0, Vector2(1, 0.1420927), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_s5xh0"]
+curve = SubResource("Curve_tn1xl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pn5kr"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(400, 80, 1)
+angle_min = -179.99998
+angle_max = 180.00002
+angle_curve = SubResource("CurveTexture_i8kni")
+gravity = Vector3(0, -10, 0)
+radial_accel_min = 9.999997
+radial_accel_max = 9.999997
+scale_min = 0.19999999
+scale_max = 0.29999998
+scale_curve = SubResource("CurveTexture_s5xh0")
+color = Color(0.30980393, 0.89411765, 1, 1)
+color_ramp = SubResource("GradientTexture1D_0fv8i")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q0nnk"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(400, 80, 1)
+angle_min = -179.99998
+angle_max = 180.00002
+angle_curve = SubResource("CurveTexture_i8kni")
+gravity = Vector3(0, -10, 0)
+radial_accel_min = 9.999997
+radial_accel_max = 9.999997
+scale_min = 0.19999999
+scale_max = 0.29999998
+scale_curve = SubResource("CurveTexture_s5xh0")
+color = Color(0.7607843, 0.43529412, 1, 1)
+color_ramp = SubResource("GradientTexture1D_0fv8i")
+
+[node name="CreditScreenPopup" type="Control" unique_id=1294155484]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("1_h1kls")
+
+[node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("2_mk7wx")]
+layout_mode = 1
+panel_type = "INSIDE_ONLY"
+panel_color = "TAB_BG"
+darken_bg = true
+
+[node name="VList" type="VBoxContainer" parent="SmartPanel" unique_id=274183451]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 20
+
+[node name="HList" type="HBoxContainer" parent="SmartPanel/VList" unique_id=2091489790]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="HList2" type="HBoxContainer" parent="SmartPanel/VList" unique_id=61304949]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="SmartPanel/VList/HList2" unique_id=2046432609]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"LabelTitle_Blue"
+text = "CREDITS"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Control" type="Control" parent="SmartPanel/VList/HList2/Label" unique_id=264101415]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Stars_1" type="GPUParticles2D" parent="SmartPanel/VList/HList2/Label/Control" unique_id=1066113347]
+amount = 2
+texture = ExtResource("3_dxckv")
+lifetime = 4.0
+process_material = SubResource("ParticleProcessMaterial_pn5kr")
+
+[node name="Stars_2" type="GPUParticles2D" parent="SmartPanel/VList/HList2/Label/Control" unique_id=509511700]
+amount = 2
+texture = ExtResource("4_hcx7q")
+lifetime = 4.0
+process_material = SubResource("ParticleProcessMaterial_q0nnk")
+
+[node name="Control" type="Control" parent="SmartPanel/VList" unique_id=1920697517]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Scroll" type="ScrollContainer" parent="SmartPanel/VList" unique_id=120384261]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SmartPanel/VList/Scroll" unique_id=1138744346]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[center][b]Created by Sergio Kirienko[/b]
+
+[b]Game Design[/b]
+Sergio Kirienko
+
+[b]Programming[/b]
+Sergio Kirienko
+
+[b]UI / UX Design[/b]
+Sergio Kirienko
+
+[b]Built with[/b]
+Godot Engine
+
+[b]Special Thanks[/b]
+Thanks to everyone who played, tested, and supported the game during development.
+
+[i]Copyright
+© 2026 Sergio Kirienko. All rights reserved.[/i]"
+fit_content = true
+
+[node name="CloseBtn" parent="SmartPanel/VList" unique_id=664760665 instance=ExtResource("4_agsv0")]
+layout_mode = 2
+buy_btn_title = "CLOSE"
+
+[connection signal="resized" from="SmartPanel/VList" to="." method="_on_v_box_container_resized"]
+[connection signal="resized" from="SmartPanel/VList/HList2/Label" to="." method="SyncYSize"]
+[connection signal="OnPressed" from="SmartPanel/VList/CloseBtn" to="." method="_on_close_btn_on_pressed"]

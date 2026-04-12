@@ -90,3 +90,10 @@ func CurrencyToString(value: float) -> String:
 
 func GetIconFromStr(icon_str:String)->Texture2D:
 	return load("res://data/icons/"+icon_str+".tres")
+
+func GenerateGameVersion()->String:
+	#Build v2.4.0-Final
+	#© 2026 CORE HOPPER STUDIOS
+	var version = ProjectSettings.get_setting("application/config/version")
+	return "Build v"+version+"-BETA\n© 2026 CORE HOPPER STUDIOS"
+	

@@ -17,8 +17,6 @@ script = ExtResource("1_odbti")
 [node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("1_ohbqm")]
 layout_mode = 1
 panel_type = "INSIDE_ONLY"
-panel_color = "DISABLED"
-darken_bg = false
 
 [node name="HList" type="HBoxContainer" parent="SmartPanel" unique_id=1746223702]
 layout_mode = 1
@@ -38,7 +36,6 @@ theme_override_constants/separation = 20
 layout_mode = 2
 mouse_filter = 2
 panel_type = "INSIDE_ONLY"
-panel_color = "BLUE"
 
 [node name="VList" type="VBoxContainer" parent="SmartPanel/HList" unique_id=32656013]
 layout_mode = 2

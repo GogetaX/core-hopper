@@ -75,9 +75,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	# --- Mouse wheel zoom for editor / desktop testing ---
 	elif event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			_zoom_at_screen_point(zoom.x * (1.0 - wheel_zoom_step), event.position)
-		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			_zoom_at_screen_point(zoom.x * (1.0 + wheel_zoom_step), event.position)
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			_zoom_at_screen_point(zoom.x * (1.0 - wheel_zoom_step), event.position)
 
 
 func _pan_by_screen_delta(screen_delta: Vector2) -> void:

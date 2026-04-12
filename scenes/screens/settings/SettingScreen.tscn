@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dy1adjsaaep6a"]
 
 [ext_resource type="PackedScene" uid="uid://6lyj7dbwtwau" path="res://scenes/screens/settings/setting_toggle_button.tscn" id="1_5w3by"]
+[ext_resource type="Script" uid="uid://dnw2574n12y30" path="res://scenes/screens/settings/setting_screen.gd" id="1_oanar"]
 [ext_resource type="Texture2D" uid="uid://bg18vum2cai3c" path="res://art/icons/rocket.png" id="2_ubxnx"]
 [ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="3_dvw0c"]
 [ext_resource type="PackedScene" uid="uid://dha8wrkx0hxow" path="res://scenes/screens/settings/clound_synced.tscn" id="4_vu2ht"]
@@ -24,43 +25,45 @@ grow_vertical = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_constants/separation = 20
+script = ExtResource("1_oanar")
 
 [node name="Label" type="Label" parent="." unique_id=2048580658]
 layout_mode = 2
 theme_type_variation = &"LabelTitle_Blue"
 text = "CONTROLS"
 
-[node name="SettingToggleButton" parent="." unique_id=1965808763 instance=ExtResource("1_5w3by")]
+[node name="MusicToggleBtn" parent="." unique_id=1965808763 instance=ExtResource("1_5w3by")]
 layout_mode = 2
 panel_color = "BLUE"
 setting_icon = ExtResource("2_ubxnx")
-auto_selected = true
 
-[node name="SettingToggleButton2" parent="." unique_id=1000947284 instance=ExtResource("1_5w3by")]
+[node name="SFXToggleBtn" parent="." unique_id=1000947284 instance=ExtResource("1_5w3by")]
 layout_mode = 2
 panel_color = "BLUE"
 setting_icon = ExtResource("2_ubxnx")
 setting_title = "SFX"
 setting_subtitle = "Action Feedback"
-auto_selected = true
 
-[node name="SettingToggleButton3" parent="." unique_id=406346671 instance=ExtResource("1_5w3by")]
+[node name="HapticToggleBtn" parent="." unique_id=406346671 instance=ExtResource("1_5w3by")]
 layout_mode = 2
 setting_icon = ExtResource("2_ubxnx")
 setting_title = "Haptics"
 setting_subtitle = "Tactile Sensations"
 
 [node name="Control" type="Control" parent="." unique_id=442620051]
+visible = false
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 mouse_filter = 2
 
 [node name="Label2" type="Label" parent="." unique_id=2077729196]
+visible = false
 layout_mode = 2
 theme_type_variation = &"LabelTitle_Blue"
 text = "ACCOUNT"
 
 [node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("3_dvw0c")]
+visible = false
 custom_minimum_size = Vector2(0, 500)
 layout_mode = 2
 panel_type = "INSIDE_ONLY"
@@ -147,9 +150,9 @@ grow_horizontal = 2
 grow_vertical = 2
 hash_tag_type = "BORDER_ONLY"
 hash_tag_text = "Last backup: 2 minutes ago"
-hashtag_icon = ExtResource("2_ubxnx")
 hide_bg = true
 text_direction = "MIDDLE"
+is_currency = false
 
 [node name="Control2" type="Control" parent="." unique_id=1465047943]
 custom_minimum_size = Vector2(0, 40)
@@ -162,9 +165,10 @@ theme_type_variation = &"LabelTitle_Blue"
 text = "SOCIAL & LEGAL"
 
 [node name="HFlow" type="HFlowContainer" parent="." unique_id=1817949412]
+visible = false
 layout_mode = 2
 
-[node name="SocialButton" parent="HFlow" unique_id=2047336654 instance=ExtResource("7_xvaex")]
+[node name="JoinDiscord" parent="HFlow" unique_id=2047336654 instance=ExtResource("7_xvaex")]
 layout_mode = 2
 size_flags_horizontal = 3
 panel_color = "BLUE"
@@ -196,3 +200,8 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 mouse_filter = 2
+
+[connection signal="IsToggled" from="MusicToggleBtn" to="." method="_on_music_toggle_btn_is_toggled"]
+[connection signal="IsToggled" from="SFXToggleBtn" to="." method="_on_sfx_toggle_btn_is_toggled"]
+[connection signal="IsToggled" from="HapticToggleBtn" to="." method="_on_haptic_toggle_btn_is_toggled"]
+[connection signal="OnPress" from="ExpandToRightButton" to="." method="_on_expand_to_right_button_on_press"]

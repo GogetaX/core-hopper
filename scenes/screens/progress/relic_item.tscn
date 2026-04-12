@@ -88,6 +88,14 @@ horizontal_alignment = 2
 hash_tag_color = "WHITE"
 no_bg = true
 
+[node name="relic_max" parent="RelicItem/VBoxContainer/HBox" unique_id=971166747 instance=ExtResource("4_ysijg")]
+self_modulate = Color(1, 0.5411765, 0.16862746, 1)
+layout_mode = 2
+text = "MAX"
+horizontal_alignment = 2
+hash_tag_color = "ORANGE"
+no_bg = true
+
 [node name="Control" type="Control" parent="RelicItem/VBoxContainer/HBox" unique_id=1718156163]
 layout_mode = 2
 size_flags_horizontal = 3

@@ -3,7 +3,7 @@ extends Control
 @onready var upgrade_cost_item = preload("res://scenes/popups/upgrade_cost_item.tscn")
 @onready var relic_item = preload("res://scenes/popups/relic_upgrade_item.tscn")
 var cur_data := {}
-
+var cur_relic_id := ""
 func _ready() -> void:
 	GlobalSignals.OnRelicUpgradeSelected.connect(OnRelicSelected)
 	
@@ -26,6 +26,7 @@ func InitPopup(data:Dictionary):
 			ShowRelic(owned_relics[0].id)
 		
 func ShowRelic(relic_id:String):
+	cur_relic_id = relic_id
 	var owned_relic_data = GlobalRelicDb.GetOwnedRelicSaveData(relic_id)
 	var relic_data = GlobalRelicDb.GetRelicDataByID(relic_id)
 	var relic_rank_data = GlobalRelicDb.GetRelicRankData(relic_id,owned_relic_data.rank)
@@ -45,6 +46,7 @@ func ShowRelic(relic_id:String):
 	
 	$HasRelics/HList2/relic_name.text = relic_data.title
 	
+	$HasRelics/Control3/VList/dups/VList/HList/max_dups.text = str(relic_rank_data.dupes_required).pad_decimals(0)
 	$HasRelics/Control3/VList/dups/VList/HList/cur_dups.text = str(owned_relic_data.dupes).pad_decimals(0)
 	$HasRelics/Control3/VList/dups/VList/progress_bar.max_value = relic_rank_data.dupes_required
 	$HasRelics/Control3/VList/dups/VList/progress_bar.value = owned_relic_data.dupes
@@ -80,6 +82,16 @@ func ShowRelic(relic_id:String):
 		r.InitOwnedItem(x.id)
 		if relic_id == x.id:
 			r.SetAsSelected()
+	
+	$HasRelics/Control3/VList/UpgradeBtn.visible = false
+	$HasRelics/Control3/VList/relic_at_max_label.visible = false
+	$HasRelics/Control3/VList/relic_stat/HBoxContainer/double_arrow.visible = false
+	if GlobalRelicDb.CanUpgradeOwned(relic_id):
+		$HasRelics/Control3/VList/UpgradeBtn.visible = true
+		$HasRelics/Control3/VList/relic_stat/HBoxContainer/double_arrow.visible = true
+	else:
+		$HasRelics/Control3/VList/relic_at_max_label.visible = true
+		$HasRelics/Control3/VList/relic_stat/HBoxContainer/double_arrow.visible = false
 		
 func HideAll():
 	for x in get_children():
@@ -91,4 +103,7 @@ func _on_return_back_btn_pressed() -> void:
 
 
 func _on_upgrade_btn_on_pressed() -> void:
-	pass
+	if GlobalRelicDb.CanUpgradeOwned(cur_relic_id):
+		GlobalRelicDb.UpgradeRelicByID(cur_relic_id)
+		GlobalSave.SyncSave()
+		InitPopup({"selected_relic_id":cur_relic_id})

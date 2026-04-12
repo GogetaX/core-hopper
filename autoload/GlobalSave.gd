@@ -112,7 +112,7 @@ func EnsureUpgradeSchema() -> void:
 
 func BuildCleanSaveData():
 	var res = {}
-	res["currencies"] = {"coins":20000,"crystals":20000,"energy":10000} #default coins 0
+	res["currencies"] = {"coins":0,"crystals":0,"energy":0} #default coins 0
 	res["bot_inventory"]={
 		"bot_db": [],
 		"merge_free_slots":4
@@ -225,23 +225,36 @@ func GetCurrency(currency_type: String) -> int:
 			return int(save_data.get("currencies",0).get(currency_type,0))
 
 
-func RemoveCurrency(currency_type:String,value:int) -> void:
-	save_data.currencies[currency_type] = int(save_data.currencies[currency_type] - value)
-	return
-	
-func AddCurrency(currency_type:String, value:int) -> void:
+func RemoveCurrency(currency_type:String, value:int) -> void:
 	match currency_type:
 		"dust":
-			save_data.relic_inv.dust = int(save_data.relic_inv.dust + save_data.relic_inv.dust)
+			if !save_data.has("relic_inv") or typeof(save_data.relic_inv) != TYPE_DICTIONARY:
+				save_data["relic_inv"] = { "dust": 0 }
+			save_data.relic_inv["dust"] = maxi(0, int(save_data.relic_inv.get("dust", 0)) - value)
 		_:
 			if !save_data.has("currencies"):
 				save_data["currencies"] = {}
 			if !save_data.currencies.has(currency_type):
 				save_data.currencies[currency_type] = 0
+			save_data.currencies[currency_type] = maxi(0, int(save_data.currencies[currency_type]) - value)
 
+
+func AddCurrency(currency_type:String, value:int) -> void:
+	match currency_type:
+		"dust":
+			if !save_data.has("relic_inv") or typeof(save_data.relic_inv) != TYPE_DICTIONARY:
+				save_data["relic_inv"] = { "dust": 0 }
+			save_data.relic_inv["dust"] = int(save_data.relic_inv.get("dust", 0) + value)
+		_:
+			if !save_data.has("currencies"):
+				save_data["currencies"] = {}
+			if !save_data.currencies.has(currency_type):
+				save_data.currencies[currency_type] = 0
 			save_data.currencies[currency_type] = int(save_data.currencies[currency_type] + value)
+
 	GlobalSignals.CurrencyAdded.emit(currency_type, value)
-			
+	
+
 func ActivateLane(lane_index:int):
 	for x in save_data.lanes:
 		if x.lane_index == lane_index:
@@ -358,6 +371,7 @@ func CombineBetween2MergeNodes(old_uid: int, new_uid: int) -> void:
 
 	RemoveBotByID(old_uid)
 	CheckChanceForFreeBotOnMerge()
+	GlobalMusic.VibrationMed()
 	
 func CheckChanceForFreeBotOnMerge():
 	if GlobalStats.HasChanceToSpawmNewBot():
@@ -423,6 +437,7 @@ func MergeFromMergeToDigBot(merge_uid: int, digbot_uid: int) -> void:
 
 	RemoveBotByID(merge_uid)
 	CheckChanceForFreeBotOnMerge()
+	GlobalMusic.VibrationMed()
 	
 func MergeFromDigBotToMerge(digbot_uid: int, merge_uid: int) -> void:
 	var digbot_data = GetBotDataFromUID(digbot_uid)
@@ -445,6 +460,7 @@ func MergeFromDigBotToMerge(digbot_uid: int, merge_uid: int) -> void:
 
 	RemoveBotByID(digbot_uid)
 	CheckChanceForFreeBotOnMerge()
+	GlobalMusic.VibrationMed()
 
 func GetLaneDataByIndex(lane_index:int) -> Dictionary:
 	for x in save_data.lanes:

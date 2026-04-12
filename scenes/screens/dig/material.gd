@@ -17,6 +17,7 @@ func OnTap(node_control:Control):
 	if node_control != self:
 		return
 	if $tap_timer.is_stopped():
+		GlobalMusic.VibrateLow()
 		GlobalDiggingProcess.ApplyTapDamage(cur_data.uid)
 		$tap_timer.start()
 		$time_before_idle.start()

@@ -383,3 +383,128 @@ func GetEffectTypeDescription(effect_type: String) -> String:
 			return "Offline Rewards"
 		_:
 			return "Unknown Effect"
+
+func GetOwnedRelicUpgradeCost(relic_id: String) -> Dictionary:
+	if !IsRelicOwned(relic_id):
+		return {}
+
+	if !HasRelicData(relic_id):
+		return {}
+
+	var relic_data := GetRelicDataByID(relic_id)
+	var current_rank := GetOwnedRelicRank(relic_id)
+	var max_rank := maxi(1, int(relic_data.get("max_rank", 1)))
+
+	if current_rank >= max_rank:
+		return {}
+
+	var current_rank_data := GetRelicRankData(relic_id, current_rank)
+	if current_rank_data.is_empty():
+		return {}
+
+	var upgrade_cost = current_rank_data.get("upgrade_cost", {})
+	if typeof(upgrade_cost) != TYPE_DICTIONARY:
+		return {}
+
+	return upgrade_cost.duplicate(true)
+
+
+func _CanAffordRelicCost(cost: Dictionary) -> bool:
+	for currency_key in cost:
+		var currency_type := str(currency_key)
+		var needed := maxi(0, int(cost[currency_key]))
+
+		if needed <= 0:
+			continue
+
+		if GlobalSave.GetCurrency(currency_type) < needed:
+			return false
+
+	return true
+
+
+func _ConsumeRelicCost(cost: Dictionary) -> void:
+	for currency_key in cost:
+		var currency_type := str(currency_key)
+		var needed := maxi(0, int(cost[currency_key]))
+
+		if needed <= 0:
+			continue
+
+		match currency_type:
+			"dust":
+				_EnsureRelicInventory()
+				GlobalSave.save_data.relic_inv["dust"] = maxi(
+					0,
+					int(GlobalSave.save_data.relic_inv.get("dust", 0)) - needed
+				)
+			_:
+				GlobalSave.RemoveCurrency(currency_type, needed)
+
+
+func CanUpgradeOwned(relic_id: String) -> bool:
+	if !IsRelicOwned(relic_id):
+		return false
+
+	if !HasRelicData(relic_id):
+		return false
+
+	var relic_data := GetRelicDataByID(relic_id)
+	var owned_data := GetOwnedRelicSaveData(relic_id)
+
+	if relic_data.is_empty() or owned_data.is_empty():
+		return false
+
+	var current_rank := maxi(1, int(owned_data.get("rank", 1)))
+	var current_dupes := maxi(0, int(owned_data.get("dupes", 0)))
+	var max_rank := maxi(1, int(relic_data.get("max_rank", 1)))
+
+	if current_rank >= max_rank:
+		return false
+
+	var current_rank_data := GetRelicRankData(relic_id, current_rank)
+	if current_rank_data.is_empty():
+		return false
+
+	var dupes_required := maxi(0, int(current_rank_data.get("dupes_required", 0)))
+	if current_dupes < dupes_required:
+		return false
+
+	var upgrade_cost = current_rank_data.get("upgrade_cost", {})
+	if typeof(upgrade_cost) != TYPE_DICTIONARY:
+		upgrade_cost = {}
+
+	return _CanAffordRelicCost(upgrade_cost)
+
+
+func UpgradeRelicByID(relic_id: String) -> bool:
+	_EnsureRelicInventory()
+
+	if !CanUpgradeOwned(relic_id):
+		return false
+
+	var relic_data := GetRelicDataByID(relic_id)
+	var owned_data := GetOwnedRelicSaveData(relic_id)
+
+	if relic_data.is_empty() or owned_data.is_empty():
+		return false
+
+	var current_rank := maxi(1, int(owned_data.get("rank", 1)))
+	var max_rank := maxi(1, int(relic_data.get("max_rank", 1)))
+	var current_rank_data := GetRelicRankData(relic_id, current_rank)
+
+	if current_rank_data.is_empty():
+		return false
+
+	var dupes_required := maxi(0, int(current_rank_data.get("dupes_required", 0)))
+	var upgrade_cost = current_rank_data.get("upgrade_cost", {})
+	if typeof(upgrade_cost) != TYPE_DICTIONARY:
+		upgrade_cost = {}
+
+	_ConsumeRelicCost(upgrade_cost)
+
+	owned_data["dupes"] = maxi(0, int(owned_data.get("dupes", 0)) - dupes_required)
+	owned_data["rank"] = mini(current_rank + 1, max_rank)
+
+	GlobalSave.save_data.relic_inv.owned[relic_id] = owned_data
+	return true

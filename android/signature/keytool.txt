@@ -1,0 +1,1 @@
+keytool -v -genkey -keystore corehopper.keystore -alias COREHOPPER -keyalg RSA -validity 10000

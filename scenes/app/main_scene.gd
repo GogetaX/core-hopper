@@ -66,7 +66,7 @@ func show_tab(tab_name:String) -> void:
 		"SETTINGS":
 			new_screen = preload("res://scenes/screens/settings/SettingScreen.tscn")
 			GlobalSignals.SetTopSubTitle.emit("SETTINGS & ACCOUNT")
-		
+
 		_:
 			print_debug("unknown tab: ",tab_name)
 	current_screen = new_screen.instantiate()

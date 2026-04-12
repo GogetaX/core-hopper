@@ -159,4 +159,6 @@ process_material = SubResource("ParticleProcessMaterial_at2nx")
 wait_time = 0.1
 one_shot = true
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=572110263]
+
 [connection signal="timeout" from="time_before_idle" to="." method="_on_time_before_idle_timeout"]

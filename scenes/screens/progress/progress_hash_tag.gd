@@ -11,7 +11,7 @@ class_name HashtagClass
 	get:
 		return hash_tag_type
 
-@export_enum("WHITE","GOLD","PURPLE","BLUE","ORANGE","DISABLED") var hash_tag_color := "PURPLE":
+@export_enum("WHITE","GOLD","PURPLE","BLUE","ORANGE","DISABLED","RED") var hash_tag_color := "PURPLE":
 	set(value):
 		hash_tag_color = value
 		if is_node_ready():

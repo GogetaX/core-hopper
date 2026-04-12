@@ -15,6 +15,7 @@ func ShowCurrencyAnimation(from_glob_pos:Vector2,currency_type:String,value:int)
 		c.StartAnimation(currency_type)
 
 func ShowChestAnimation(from_glob_pos:Vector2,chest_type:String):
+	GlobalMusic.VibrationMed()
 	var c = chest_anim.instantiate()
 	c.global_position = from_glob_pos
 	add_child(c)

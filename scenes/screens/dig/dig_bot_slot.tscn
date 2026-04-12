@@ -11,10 +11,12 @@
 
 [node name="DigBotSlot" type="Panel" unique_id=1867726318]
 custom_minimum_size = Vector2(150, 150)
+mouse_filter = 1
 theme_type_variation = &"PanelWithWhiteBG"
 script = ExtResource("1_na4w1")
 
 [node name="State_DigBot" type="Control" parent="." unique_id=1511592070]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -87,7 +89,6 @@ panel_color = "BLUE"
 darken_bg = true
 
 [node name="State_BuyBot" type="Control" parent="." unique_id=1760469175]
-visible = false
 modulate = Color(0.23403707, 0.23403707, 0.23403707, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -115,15 +116,17 @@ offset_right = -10.0
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 alignment = 1
 
 [node name="HList" type="HBoxContainer" parent="State_BuyBot/VList" unique_id=1777250767]
 layout_mode = 2
+mouse_filter = 2
 alignment = 1
 
 [node name="CurrencyIcon" parent="State_BuyBot/VList/HList" unique_id=529445326 instance=ExtResource("6_ff87c")]
 layout_mode = 2
-icon_type = "COIN_SMALL"
+mouse_filter = 2
 
 [node name="ProgressHashTag" parent="State_BuyBot/VList/HList" unique_id=1259687563 instance=ExtResource("4_lruj6")]
 self_modulate = Color(0.30980393, 0.89411765, 1, 1)
@@ -166,6 +169,7 @@ offset_right = -10.0
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 alignment = 1
 
 [node name="ProgressHashTag" parent="State_Reach150m/VList" unique_id=1745162572 instance=ExtResource("4_lruj6")]
@@ -206,14 +210,17 @@ offset_right = -10.0
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="State_Reach2kAnd25Crystals/VList" unique_id=153981279]
 layout_mode = 2
+mouse_filter = 2
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="State_Reach2kAnd25Crystals/VList/HBoxContainer" unique_id=2050467252]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("7_ldo8n")
 expand_mode = 3
 stretch_mode = 5
@@ -228,10 +235,12 @@ no_bg = true
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="State_Reach2kAnd25Crystals/VList" unique_id=1691564967]
 layout_mode = 2
+mouse_filter = 2
 alignment = 1
 
 [node name="CurrencyIcon" parent="State_Reach2kAnd25Crystals/VList/HBoxContainer2" unique_id=1962915535 instance=ExtResource("6_ff87c")]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="ProgressHashTag2" parent="State_Reach2kAnd25Crystals/VList/HBoxContainer2" unique_id=1548097212 instance=ExtResource("4_lruj6")]
 self_modulate = Color(0.30980393, 0.89411765, 1, 1)
@@ -242,6 +251,7 @@ hash_tag_color = "BLUE"
 no_bg = true
 
 [node name="State_Reach10kAnd100CrystalsAndPrestiege" type="Control" parent="." unique_id=1712844576]
+visible = false
 modulate = Color(0.23403707, 0.23403707, 0.23403707, 1)
 layout_mode = 1
 anchors_preset = 15

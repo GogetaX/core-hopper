@@ -47,6 +47,8 @@ func show_tab(tab_name:String,data:Dictionary) -> void:
 			new_screen = preload("res://scenes/popups/BotStatInfoPopup.tscn")
 		"UPGRADE_RELIC_POPUP":
 			new_screen = preload("res://scenes/popups/RelicUpgradePopup.tscn")
+		"CREDIT_SCREEN":
+			new_screen = preload("res://scenes/popups/CreditScreenPopup.tscn")
 		_:
 			print_debug("unknown tab: ",tab_name)
 	current_screen = new_screen.instantiate()

@@ -46,7 +46,8 @@ func InitItem(item_data:Dictionary,popup_data:Dictionary):
 	$RelicItem/VBoxContainer/RelicBtn.panel_color = relic_color
 	var dupes = cur_data.save_data.dupes
 	$RelicItem/VBoxContainer/HBox/relic_dupes.visible = false
-	if cur_data.save_data.rank < 5:
+	$RelicItem/VBoxContainer/HBox/relic_max.visible = false
+	if GlobalRelicDb.CanUpgradeOwned(cur_data.id):
 		$RelicItem/VBoxContainer/HBox/relic_dupes.visible = true
 		var next_level_dupes = cur_data.db_data.rank_data[str(cur_data.save_data.rank+1).pad_decimals(0)]
 		if next_level_dupes.dupes_required <= dupes:
@@ -54,7 +55,8 @@ func InitItem(item_data:Dictionary,popup_data:Dictionary):
 			$RelicItem/VBoxContainer/HBox/relic_dupes.hash_tag_color = "PURPLE"
 		else:
 			$RelicItem/VBoxContainer/HBox/relic_dupes.text = "Next Lv "+str(dupes).pad_decimals(0)+"/"+str(next_level_dupes.dupes_required).pad_decimals(0)
-
+	else:
+		$RelicItem/VBoxContainer/HBox/relic_max.visible = true
 	if cur_data.is_equipped:
 		$RelicItem/VBoxContainer/RelicBtn.buy_btn_title = "UNEQUIP"
 	else:

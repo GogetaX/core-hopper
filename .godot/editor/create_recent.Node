@@ -1,14 +1,14 @@
+ScrollContainer
+RichTextLabel
+AudioStreamPlayer
 HBoxContainer
 Control
 HFlowContainer
 VFlowContainer
 VBoxContainer
-ScrollContainer
 Label
 ProgressBar
 TextureRect
 Node
 Timer
 ColorRect
-Panel
-CanvasLayer
