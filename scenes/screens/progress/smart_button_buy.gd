@@ -106,8 +106,14 @@ func CheckForCurrency():
 			modulate = Color.WHITE
 			_disabled_because_of_price = false
 
-	
-	
+func SetDisabled(_is_disabled:bool):
+	if _is_disabled:
+		_disabled_because_of_price = true
+		modulate = GlobalColor.PRICE_DISABLED_COLOR
+	else:
+		modulate = Color.WHITE
+		_disabled_because_of_price = false
+		
 func ShowOnly(show_btn:Control):
 	for x in get_children():
 		if x != show_btn:

@@ -2,7 +2,7 @@
 extends Control
 class_name CurrencyIconClass
 
-@export_enum("CRYSTAL_BIG_ANIMATED","COIN_SMALL","ENERGY_SMALL","ENERGY_SMALL_ANIMATED","CRYSTAL_SMALL","COIN_BIG_ANIMATED") var icon_type := "CRYSTAL_BIG_ANIMATED":
+@export_enum("CRYSTAL_BIG_ANIMATED","COIN_SMALL","ENERGY_SMALL","ENERGY_SMALL_ANIMATED","CRYSTAL_SMALL","COIN_BIG_ANIMATED","DUST_SMALL") var icon_type := "CRYSTAL_BIG_ANIMATED":
 	set(value):
 		icon_type = value
 		if is_node_ready():
@@ -34,6 +34,8 @@ func ShowOnly():
 			$Coin_Big_Animated.visible = true
 			$Coin_Big_Animated/center/GPUParticles2D.emitting = true
 			#$Coin_Big_Animated/center/GPUParticles2D.position = (size/2)
+		"DUST_SMALL":
+			$Dust_Small.visible = true
 
 func HideAllAndStopAnimation():
 	for x in get_children():
@@ -54,3 +56,16 @@ func AnimateCurrencyIn():
 
 func GetCoinCenterPos():
 	return global_position + (size / 2.0)
+
+func ShowSmallCurrency(currency:String):
+	match currency:
+		"coins":
+			icon_type = "COIN_SMALL"
+		"crystals":
+			icon_type = "CRYSTAL_SMALL"
+		"energy":
+			icon_type = "ENERGY_SMALL"
+		"dust":
+			icon_type = "DUST_SMALL"
+		_:
+			print_debug("Unknown Currency: ",currency)

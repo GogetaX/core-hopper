@@ -1,9 +1,10 @@
+res://scenes/popups/
+res://art/currency/
 res://scenes/screens/merge/
 res://scenes/screens/dig/
 res://art/bonus/
 res://autoload/
 /home/sergio/GitHub/core-hopper/data/bonus/
-res://scenes/popups/
 res://scenes/components/
 /home/sergio/GitHub/core-hopper/data/bot_data/
 res://scenes/screens/progress/
@@ -23,4 +24,3 @@ res://scenes/app/
 res://scenes/screens/settings/
 res://scenes/screens/shop/
 res://scenes/screens/skills/
-res://scenes/ui/

@@ -1,6 +1,14 @@
 extends Control
 
+@onready var upgrade_cost_item = preload("res://scenes/popups/upgrade_cost_item.tscn")
+@onready var relic_item = preload("res://scenes/popups/relic_upgrade_item.tscn")
 var cur_data := {}
+
+func _ready() -> void:
+	GlobalSignals.OnRelicUpgradeSelected.connect(OnRelicSelected)
+	
+func OnRelicSelected(relic_node:RelicUpgradeItemClass):
+	InitPopup({"selected_relic_id":relic_node.cur_relic_id})
 
 func InitPopup(data:Dictionary):
 	cur_data = data
@@ -10,8 +18,12 @@ func InitPopup(data:Dictionary):
 		$NoRelics.visible = true
 		
 	else:
-		$HasRelics.visible = true
-		ShowRelic(owned_relics[0].id)
+		if cur_data.has("selected_relic_id"):
+			$HasRelics.visible = true
+			ShowRelic(cur_data.selected_relic_id)
+		else:
+			$HasRelics.visible = true
+			ShowRelic(owned_relics[0].id)
 		
 func ShowRelic(relic_id:String):
 	var owned_relic_data = GlobalRelicDb.GetOwnedRelicSaveData(relic_id)
@@ -26,6 +38,7 @@ func ShowRelic(relic_id:String):
 	$HasRelics/Relic/IconBG/relic_rank.text = "RANK "+str(owned_relic_data.rank).pad_decimals(0)
 	$HasRelics/Relic/IconBG.icon = GlobalRelicDb.GetRelicIcon(relic_data.icon)
 	$HasRelics/Relic/IconBG.panel_color = relic_rank_color
+	$HasRelics/Relic/IconBG/relic_rank.hash_tag_color = relic_rank_color
 	
 	$HasRelics/HList/relic_rarity.hash_tag_color = relic_rank_color
 	$HasRelics/HList/relic_rarity.text = relic_data.rarity.to_upper() +" RELIC"
@@ -41,10 +54,32 @@ func ShowRelic(relic_id:String):
 	
 	$HasRelics/Control3/VList/relic_stat/HBoxContainer/effect_name.text = relic_data.effect_type
 	
-	#$HasRelics/Control3/VList/relic_stat/HBoxContainer/effect_icon.icon = GlobalRelicDb.GetEffectIcon(relic_data.effect_type)
-
-	#$HasRelics/Control3/VList/UpgradeBtn.price_text = Global.CurrencyToString(relic_rank_data.upgrade_cost.crystals)
-	
+	#Remove old upgrade cost
+	for x in $HasRelics/Control3/VList/UpgradeCost.get_children():
+		x.queue_free()
+	#Populate new upgrade cost items
+	var is_disabled = false
+	for x in relic_rank_data.upgrade_cost:
+		if relic_rank_data.upgrade_cost[x] > 0:
+			var u = upgrade_cost_item.instantiate() as UpgradeCostItemClass
+			$HasRelics/Control3/VList/UpgradeCost.add_child(u)
+			u.InitCost(x,relic_rank_data.upgrade_cost[x])
+			if !u.HasEnough():
+				is_disabled = true
+	$HasRelics/Control3/VList/UpgradeBtn.SetDisabled(is_disabled)
+ 	
+	#Remove all relic items
+	for x in $HasRelics/Control3/VList/Scroll/RelicFlow.get_children():
+		x.queue_free()
+	#Repopulate all the owned relics 
+	var owned_relic_list = GlobalRelicDb.GetAllOwnedRelics()
+	for x in owned_relic_list:
+		var r = relic_item.instantiate() as RelicUpgradeItemClass
+		$HasRelics/Control3/VList/Scroll/RelicFlow.add_child(r)
+		r.InitOwnedItem(x.id)
+		if relic_id == x.id:
+			r.SetAsSelected()
+		
 func HideAll():
 	for x in get_children():
 		if x is VBoxContainer:

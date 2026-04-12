@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://d32v5pknv4vq0"]
 
 [ext_resource type="Script" uid="uid://cg6wkmw2yluk8" path="res://scenes/components/currency_icon.gd" id="1_1srcd"]
-[ext_resource type="Texture2D" uid="uid://bin8843pp8ao1" path="res://art/currency/crystal.png" id="1_oacq6"]
+[ext_resource type="Texture2D" uid="uid://c7bumgwoipcdo" path="res://art/currency/currency_crystals.tres" id="2_psxnm"]
 [ext_resource type="Texture2D" uid="uid://xlueiw1ent7v" path="res://art/currency/crystal_plus.png" id="3_yw5ml"]
-[ext_resource type="Texture2D" uid="uid://bqomb6kaaaip" path="res://art/currency/coin.png" id="4_hffp4"]
-[ext_resource type="Texture2D" uid="uid://cfrmo2qtnksvg" path="res://art/currency/crystal_small.png" id="5_gjf62"]
+[ext_resource type="Texture2D" uid="uid://vh4nm1v02e04" path="res://art/currency/currency_coins.tres" id="4_s11eb"]
 [ext_resource type="Texture2D" uid="uid://88ot8lfbupyo" path="res://art/particles/star_06.png" id="5_psxnm"]
-[ext_resource type="Texture2D" uid="uid://don6dria8d6rp" path="res://art/currency/energy.png" id="5_wkhfb"]
+[ext_resource type="Texture2D" uid="uid://c05hifuypiqi2" path="res://art/currency/currency_dust.tres" id="5_s11eb"]
 [ext_resource type="Texture2D" uid="uid://biy4o4utcr7l" path="res://art/currency/energy_sun.png" id="6_aphy7"]
+[ext_resource type="Texture2D" uid="uid://dpgix2k5wrhmg" path="res://art/currency/currency_energy.tres" id="6_psxnm"]
 
 [sub_resource type="Gradient" id="Gradient_hffp4"]
 offsets = PackedFloat32Array(0, 0.13636364, 0.8701299, 1)
@@ -130,7 +130,7 @@ offset_bottom = -1874.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1srcd")
-icon_type = "CRYSTAL_SMALL"
+icon_type = "COIN_SMALL"
 
 [node name="Crystal_Big_Animated" type="TextureRect" parent="." unique_id=2101257494]
 visible = false
@@ -142,7 +142,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
-texture = ExtResource("1_oacq6")
+texture = ExtResource("2_psxnm")
 expand_mode = 1
 stretch_mode = 5
 
@@ -169,7 +169,6 @@ visibility_rect = Rect2(-50, -50, 100, 100)
 process_material = SubResource("ParticleProcessMaterial_aphy7")
 
 [node name="Coin_Small" type="TextureRect" parent="." unique_id=1781370266]
-visible = false
 self_modulate = Color(0.30980393, 0.89411765, 1, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -178,7 +177,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
-texture = ExtResource("4_hffp4")
+texture = ExtResource("4_s11eb")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Dust_Small" type="TextureRect" parent="." unique_id=561834584]
+visible = false
+self_modulate = Color(1, 0.5411765, 0.16862746, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("5_s11eb")
 expand_mode = 1
 stretch_mode = 5
 
@@ -192,7 +205,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
-texture = ExtResource("4_hffp4")
+texture = ExtResource("4_s11eb")
 expand_mode = 1
 stretch_mode = 5
 
@@ -218,6 +231,7 @@ lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_23gwi")
 
 [node name="Crystal_Small" type="TextureRect" parent="." unique_id=703525740]
+visible = false
 self_modulate = Color(0.7607843, 0.43529412, 1, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -226,7 +240,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
-texture = ExtResource("5_gjf62")
+texture = ExtResource("2_psxnm")
 expand_mode = 1
 stretch_mode = 5
 
@@ -240,7 +254,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
-texture = ExtResource("5_wkhfb")
+texture = ExtResource("6_psxnm")
 expand_mode = 1
 stretch_mode = 5
 
@@ -254,7 +268,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
-texture = ExtResource("5_wkhfb")
+texture = ExtResource("6_psxnm")
 expand_mode = 1
 stretch_mode = 5
 

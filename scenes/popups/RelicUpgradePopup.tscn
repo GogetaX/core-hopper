@@ -4,11 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="2_elmy5"]
 [ext_resource type="PackedScene" uid="uid://b2qghfcexq01t" path="res://scenes/components/icon_bg_circle.tscn" id="2_ng0as"]
 [ext_resource type="Texture2D" uid="uid://dkipcb22lyo1q" path="res://art/ui/arrow_left.png" id="3_elmy5"]
-[ext_resource type="Texture2D" uid="uid://cl7iy17t6o7ys" path="res://art/relics/cracked_core.tres" id="3_i0hsw"]
 [ext_resource type="PackedScene" uid="uid://drlay20xc5ihb" path="res://scenes/components/icon_bg.tscn" id="4_6ywa3"]
 [ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="4_fp6mu"]
-[ext_resource type="PackedScene" uid="uid://hgf1ed6wts6n" path="res://scenes/components/reward_currency.tscn" id="7_elmy5"]
+[ext_resource type="PackedScene" uid="uid://c13vkko7a4xld" path="res://scenes/popups/upgrade_cost_item.tscn" id="7_elmy5"]
 [ext_resource type="PackedScene" uid="uid://njxlv6dxrlwj" path="res://scenes/screens/progress/smart_button_buy.tscn" id="8_vveg0"]
+[ext_resource type="PackedScene" uid="uid://bp0oy7qtr8lf0" path="res://scenes/popups/relic_upgrade_item.tscn" id="9_elmy5"]
 
 [node name="RelicUpgradePopup" type="Control" unique_id=743967306]
 layout_mode = 3
@@ -262,8 +262,7 @@ text = "UPGRADE COST"
 [node name="UpgradeCost" type="HFlowContainer" parent="HasRelics/Control3/VList" unique_id=416849393]
 layout_mode = 2
 
-[node name="RewardCurrency" parent="HasRelics/Control3/VList/UpgradeCost" unique_id=939363394 instance=ExtResource("7_elmy5")]
-custom_minimum_size = Vector2(300, 100)
+[node name="UpgradeCostItem" parent="HasRelics/Control3/VList/UpgradeCost" unique_id=110700291 instance=ExtResource("7_elmy5")]
 layout_mode = 2
 
 [node name="UpgradeBtn" parent="HasRelics/Control3/VList" unique_id=664760665 instance=ExtResource("8_vveg0")]
@@ -294,53 +293,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="RelicUpgradeItem" type="Control" parent="HasRelics/Control3/VList/Scroll/RelicFlow" unique_id=2001170205]
-custom_minimum_size = Vector2(200, 250)
+[node name="RelicUpgradeItem" parent="HasRelics/Control3/VList/Scroll/RelicFlow" unique_id=1943960417 instance=ExtResource("9_elmy5")]
 layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HasRelics/Control3/VList/Scroll/RelicFlow/RelicUpgradeItem" unique_id=336654321]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="IconBG" parent="HasRelics/Control3/VList/Scroll/RelicFlow/RelicUpgradeItem/VBoxContainer" unique_id=2023547434 instance=ExtResource("4_6ywa3")]
-custom_minimum_size = Vector2(100, 200)
-layout_mode = 2
-panel_color = "BLUE"
-icon = ExtResource("3_i0hsw")
-
-[node name="ProgressHashTag" parent="HasRelics/Control3/VList/Scroll/RelicFlow/RelicUpgradeItem/VBoxContainer/IconBG" unique_id=1120306341 instance=ExtResource("4_fp6mu")]
-self_modulate = Color(0.81960785, 0.98039216, 1, 1)
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -40.0
-offset_right = -12.0
-offset_bottom = -7.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "x3"
-horizontal_alignment = 2
-hash_tag_type = "INSIDE_ONLY"
-hash_tag_color = "BLUE"
-
-[node name="ProgressHashTag2" parent="HasRelics/Control3/VList/Scroll/RelicFlow/RelicUpgradeItem/VBoxContainer" unique_id=960236166 instance=ExtResource("4_fp6mu")]
-self_modulate = Color(0.30980393, 0.89411765, 1, 1)
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "CRACKED CORE"
-horizontal_alignment = 1
-autowrap_mode = 2
-hash_tag_type = "INSIDE_ONLY"
-hash_tag_color = "BLUE"
-no_bg = true
 
 [node name="NoRelics" type="VBoxContainer" parent="." unique_id=745380186]
 visible = false

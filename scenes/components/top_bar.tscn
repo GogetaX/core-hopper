@@ -97,7 +97,6 @@ alignment = 1
 [node name="CurrencyIcon" parent="HBoxContainer/VList/CurrencyCointainer/total_coins/HList" unique_id=529445326 instance=ExtResource("4_glubf")]
 custom_minimum_size = Vector2(40, 30)
 layout_mode = 2
-icon_type = "COIN_SMALL"
 
 [node name="Value" type="Label" parent="HBoxContainer/VList/CurrencyCointainer/total_coins/HList" unique_id=1766494282]
 layout_mode = 2
@@ -130,6 +129,7 @@ alignment = 1
 [node name="CurrencyIcon" parent="HBoxContainer/VList/CurrencyCointainer/total_crystals/HList" unique_id=641878075 instance=ExtResource("4_glubf")]
 custom_minimum_size = Vector2(30, 25)
 layout_mode = 2
+icon_type = "CRYSTAL_SMALL"
 
 [node name="Value" type="Label" parent="HBoxContainer/VList/CurrencyCointainer/total_crystals/HList" unique_id=1283823263]
 layout_mode = 2

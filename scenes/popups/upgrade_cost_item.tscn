@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://c13vkko7a4xld"]
+
+[ext_resource type="PackedScene" uid="uid://d32v5pknv4vq0" path="res://scenes/components/currency_icon.tscn" id="1_5xqm1"]
+[ext_resource type="Script" uid="uid://dg2xrteacsdb7" path="res://scenes/popups/upgrade_cost_item.gd" id="1_m0nwl"]
+[ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="2_m0nwl"]
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="2_oqqcb"]
+
+[node name="UpgradeCostItem" type="Control" unique_id=110700291]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_m0nwl")
+
+[node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("2_oqqcb")]
+layout_mode = 1
+
+[node name="HList" type="HBoxContainer" parent="." unique_id=212352524]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="CurrencyIcon" parent="HList" unique_id=529445326 instance=ExtResource("1_5xqm1")]
+layout_mode = 2
+
+[node name="cur_value" parent="HList" unique_id=713365230 instance=ExtResource("2_m0nwl")]
+self_modulate = Color(0.7607843, 0.43529412, 1, 1)
+layout_mode = 2
+text = "10"
+no_bg = true
+
+[node name="ProgressHashTag2" parent="HList" unique_id=69116587 instance=ExtResource("2_m0nwl")]
+self_modulate = Color(0.7607843, 0.43529412, 1, 1)
+layout_mode = 2
+text = "/"
+no_bg = true
+
+[node name="max_value" parent="HList" unique_id=1250878035 instance=ExtResource("2_m0nwl")]
+self_modulate = Color(0.7607843, 0.43529412, 1, 1)
+layout_mode = 2
+text = "10k"
+no_bg = true
+
+[connection signal="resized" from="HList" to="." method="_on_h_list_resized"]

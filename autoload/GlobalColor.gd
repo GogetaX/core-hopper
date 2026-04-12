@@ -33,6 +33,19 @@ const COLOR_TAB_BORDER = Color("2A3650")
 
 const PRICE_DISABLED_COLOR = Color.DIM_GRAY
 
+
+func CurrencyToColorStr(currency_type:String)->String:
+	match currency_type:
+		"coins":
+			return "BLUE"
+		"crystals":
+			return "PURPLE"
+		"energy":
+			return "GOLD"
+		"dust":
+			return "ORANGE"
+		_:
+			return "WHITE"
 func FromColorTextBorderToColor(color_text:String):
 	#"WHITE","GOLD","PURPLE","BLUE","DISABLED","TAB_BG","ORANGE"
 	match color_text:
