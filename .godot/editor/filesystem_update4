@@ -20,3 +20,14 @@ res://scenes/screens/dig/dig_bot_slot.tscn
 res://scenes/screens/skills/skills_screen.tscn
 res://scenes/screens/skills/camera_2d.gd
 res://scenes/screens/skills/skill_tree_world.tscn
+res://scenes/screens/progress/relic_item.tscn
+res://scenes/screens/progress/relic_item.gd
+res://autoload/GlobalSave.gd
+res://autoload/GlobalSignals.gd
+res://scenes/screens/progress/progress_screen.gd
+res://scenes/screens/progress/progress_screen.tscn
+res://scenes/popups/relic_upgrade_popup.gd
+res://scenes/popups/RelicInvPopup.tscn
+res://scenes/popups/relic_inv_popup.gd
+res://scenes/screens/merge/drag_drop_handler.gd
+res://autoload/GlobalRelicDB.gd

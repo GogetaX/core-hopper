@@ -10,7 +10,7 @@ extends VBoxContainer
 
 var quest_y_size_aim = 0.0
 func _ready() -> void:
-	GlobalSignals.DataSaved.connect(SyncData)
+	GlobalSignals.OnRelicSynced.connect(SyncRelicData)
 	HideAllMenus()
 	TriggerDefaultSelectedTab()
 	InitUpgradeSkillList()
@@ -27,7 +27,8 @@ func ShowDifferentTab():
 		_:
 			print_debug("Unknown Global.progress_menu_show_tab: ",Global.progress_menu_show_tab)
 	Global.progress_menu_show_tab = ""
-func SyncData():
+	
+func SyncRelicData():
 	if $Menu_Relics.visible:
 		_on_tab_relics_on_pressed()
 		
@@ -177,6 +178,7 @@ func _on_tab_relics_on_pressed() -> void:
 func OnRelicUnequip(is_equiped):
 	if !is_equiped:
 		GlobalSave.SyncSave()
+		GlobalSignals.OnRelicSynced.emit()
 		
 func _process(delta: float) -> void:
 	if $Menu_Quests.visible:

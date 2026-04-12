@@ -86,7 +86,12 @@ func ShowRelic(relic_id:String):
 	$HasRelics/Control3/VList/UpgradeBtn.visible = false
 	$HasRelics/Control3/VList/relic_at_max_label.visible = false
 	$HasRelics/Control3/VList/relic_stat/HBoxContainer/double_arrow.visible = false
-	if GlobalRelicDb.CanUpgradeOwned(relic_id):
+	
+	if owned_relic_data.dupes >= relic_rank_data.dupes_required:
+		$HasRelics/Control3/VList/dups/VList/HList/cur_dups.hash_tag_color = "BLUE"
+	else:
+		$HasRelics/Control3/VList/dups/VList/HList/cur_dups.hash_tag_color = "RED"
+	if owned_relic_data.rank < relic_data.max_rank && owned_relic_data.dupes >= relic_rank_data.dupes_required:
 		$HasRelics/Control3/VList/UpgradeBtn.visible = true
 		$HasRelics/Control3/VList/relic_stat/HBoxContainer/double_arrow.visible = true
 	else:
@@ -107,3 +112,4 @@ func _on_upgrade_btn_on_pressed() -> void:
 		GlobalRelicDb.UpgradeRelicByID(cur_relic_id)
 		GlobalSave.SyncSave()
 		InitPopup({"selected_relic_id":cur_relic_id})
+		GlobalSignals.OnRelicSynced.emit()

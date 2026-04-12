@@ -6,6 +6,7 @@ signal OnEquip(is_equiped:bool)
 var cur_data = {}
 
 var cur_empty_slot = -1
+
 func SetAsEmpty(empty_slot):
 	cur_empty_slot = empty_slot
 	HideAllPanels()
@@ -47,7 +48,7 @@ func InitItem(item_data:Dictionary,popup_data:Dictionary):
 	var dupes = cur_data.save_data.dupes
 	$RelicItem/VBoxContainer/HBox/relic_dupes.visible = false
 	$RelicItem/VBoxContainer/HBox/relic_max.visible = false
-	if GlobalRelicDb.CanUpgradeOwned(cur_data.id):
+	if cur_data.save_data.rank < cur_data.db_data.max_rank:
 		$RelicItem/VBoxContainer/HBox/relic_dupes.visible = true
 		var next_level_dupes = cur_data.db_data.rank_data[str(cur_data.save_data.rank+1).pad_decimals(0)]
 		if next_level_dupes.dupes_required <= dupes:

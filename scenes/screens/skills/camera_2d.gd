@@ -67,7 +67,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif _touches.size() >= 2:
 			var new_distance := _get_pinch_distance()
 			if _last_pinch_distance > 0.0 and new_distance > 0.0:
-				var factor := _last_pinch_distance / new_distance
+				var factor := new_distance / _last_pinch_distance
 				var center := _get_pinch_center()
 				_zoom_at_screen_point(zoom.x * factor, center)
 			_last_pinch_distance = new_distance

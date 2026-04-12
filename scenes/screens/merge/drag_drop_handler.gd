@@ -78,7 +78,7 @@ func EvaluateReleaseStateFromDigbot():
 			else:
 				GlobalSave.SwapBetween2BotsDigBoToMerge(source_dig.cur_lane_data.bot_uid,target_merge.cur_bot_data.uid)
 				GlobalSave.SyncSave()
-				print("mouse in, should swap bots.")
+				#print("mouse in, should swap bots.")
 	elif Global.cur_drag_data.has("at_other_dig_bot"):
 		var orig_bot : DigBotClass = merge_drag_node.cur_dragging_bot_node
 		var target_bot : DigBotClass = Global.cur_drag_data.at_other_dig_bot
@@ -91,7 +91,7 @@ func EvaluateReleaseStateFromDigbot():
 			target_lane_data.bot_uid = orig_bot_data.uid
 			orig_lane_data.bot_uid = -1
 			GlobalSave.SyncSave()
-			print("Move to empty DigBot")
+			#print("Move to empty DigBot")
 			
 		elif orig_bot_data.level == target_bot_data.level:
 			target_bot_data.level += 1

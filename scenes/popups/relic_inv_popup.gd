@@ -39,6 +39,7 @@ func OnRelicEquip(_is_equiped):
 	SyncInvRelics()
 	GlobalSave.SyncSave()
 	_on_close_popup_btn_pressed()
+	GlobalSignals.OnRelicSynced.emit()
 
 func _on_close_popup_btn_pressed() -> void:
 	GlobalSignals.CloseCurPopup.emit()

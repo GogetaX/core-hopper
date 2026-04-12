@@ -318,8 +318,6 @@ func CreateSimpleBot() -> Dictionary:
 	res["level"] = cur_level
 	res["rank"] = int(rolled_data.get("rank", 0))
 	res["stats"] = rolled_data.get("stats", {})
-	print("created bot data: ")
-	print(res)
 	return res
 
 func StoreUpdateBotData(new_bot_data:Dictionary) -> void:

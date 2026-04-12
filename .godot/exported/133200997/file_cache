@@ -205,7 +205,7 @@ res://scenes/screens/shop/shop_screen.tscn::5cea5fef2f922216ed2aeae3de9ab4f3::17
 res://scenes/screens/shop/smart_button_buy_with_icon.tscn::f665a625e96d8ac3e936b25b755cfaae::1775767510::res://.godot/exported/133200997/export-4edd6b2a56aab3230b24cc0eabe8c5b9-smart_button_buy_with_icon.scn
 res://scenes/screens/skills/skills_screen.tscn::4e4a5f2fd20fc0ada7954e32e49eb2c7::1776021217::res://.godot/exported/133200997/export-546a7e497d3cdf1997b8cd439209b140-skills_screen.scn
 res://scenes/screens/skills/skill_list_line_2d.tscn::b0fd61f853fe493543de71668cd08b30::1774563605::res://.godot/exported/133200997/export-3f28146b1604962f81537883dd0c523d-skill_list_line_2d.scn
-res://scenes/screens/skills/skill_tree_world.tscn::31f7852abd9f8d7487335374032c0b0e::1776021307::res://.godot/exported/133200997/export-d07530195772912344538d9762c82203-skill_tree_world.scn
+res://scenes/screens/skills/skill_tree_world.tscn::31f7852abd9f8d7487335374032c0b0e::1776021742::res://.godot/exported/133200997/export-d07530195772912344538d9762c82203-skill_tree_world.scn
 res://scenes/screens/skills/skill_tree_world_item.tscn::604e7bc2ce5dfc696e5f7fcb7e9ef2a4::1775508635::res://.godot/exported/133200997/export-4622f4ee0949e6853c4111abd045cbcc-skill_tree_world_item.scn
 res://scenes/ui/border_btn.tscn::39d9a4d71e9c4fa5d39e01b1fb99ba3e::1774377512::res://.godot/exported/133200997/export-25006bb8178d8dda6c29111ab6976048-border_btn.scn
 res://default_bus_layout.tres::3d746ed11eca49534d030a5d8397b767::1776014591::res://.godot/exported/133200997/export-19246414aa9fb561ced4b8dce477acec-default_bus_layout.res

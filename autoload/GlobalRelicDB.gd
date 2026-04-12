@@ -444,15 +444,18 @@ func _ConsumeRelicCost(cost: Dictionary) -> void:
 
 func CanUpgradeOwned(relic_id: String) -> bool:
 	if !IsRelicOwned(relic_id):
+		print("1")
 		return false
 
 	if !HasRelicData(relic_id):
+		print("2")
 		return false
 
 	var relic_data := GetRelicDataByID(relic_id)
 	var owned_data := GetOwnedRelicSaveData(relic_id)
 
 	if relic_data.is_empty() or owned_data.is_empty():
+		print("3")
 		return false
 
 	var current_rank := maxi(1, int(owned_data.get("rank", 1)))
@@ -460,14 +463,17 @@ func CanUpgradeOwned(relic_id: String) -> bool:
 	var max_rank := maxi(1, int(relic_data.get("max_rank", 1)))
 
 	if current_rank >= max_rank:
+		print("4")
 		return false
 
 	var current_rank_data := GetRelicRankData(relic_id, current_rank)
 	if current_rank_data.is_empty():
+		print("5")
 		return false
 
 	var dupes_required := maxi(0, int(current_rank_data.get("dupes_required", 0)))
 	if current_dupes < dupes_required:
+		print("6")
 		return false
 
 	var upgrade_cost = current_rank_data.get("upgrade_cost", {})
