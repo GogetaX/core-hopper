@@ -343,5 +343,6 @@ no_bg = true
 
 [connection signal="resized" from="HasRelics" to="." method="_on_v_list_resized"]
 [connection signal="BtnPressed" from="HasRelics/HList3/ReturnBack" to="." method="_on_return_back_btn_pressed"]
+[connection signal="OnPressed" from="HasRelics/Control3/VList/UpgradeBtn" to="." method="_on_upgrade_btn_on_pressed"]
 [connection signal="resized" from="NoRelics" to="." method="_on_v_list_resized"]
 [connection signal="BtnPressed" from="NoRelics/HList3/ReturnBack" to="." method="_on_return_back_btn_pressed"]

@@ -52,7 +52,8 @@ func ShowRelic(relic_id:String):
 	$HasRelics/Control3/VList/relic_stat/HBoxContainer/from_stat.text = GlobalRelicDb.GetEffectStr(relic_id,owned_relic_data.rank)
 	$HasRelics/Control3/VList/relic_stat/HBoxContainer/to_stat.text = GlobalRelicDb.GetEffectStr(relic_id,owned_relic_data.rank+1)
 	
-	$HasRelics/Control3/VList/relic_stat/HBoxContainer/effect_name.text = relic_data.effect_type
+	$HasRelics/Control3/VList/relic_stat/HBoxContainer/effect_name.text = GlobalRelicDb.GetEffectTypeDescription(relic_data.effect_type)
+	$HasRelics/Control3/VList/relic_stat/HBoxContainer/effect_icon.icon = Global.GetIconFromStr(relic_data.effect_type)
 	
 	#Remove old upgrade cost
 	for x in $HasRelics/Control3/VList/UpgradeCost.get_children():
@@ -87,3 +88,7 @@ func HideAll():
 
 func _on_return_back_btn_pressed() -> void:
 	GlobalSignals.ShowPopup.emit("SHOW_RELIC_INV",{"inv_mode":"show_inv"})
+
+
+func _on_upgrade_btn_on_pressed() -> void:
+	

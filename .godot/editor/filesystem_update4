@@ -19,3 +19,6 @@ res://scenes/components/top_bar.tscn
 res://scenes/popups/relic_upgrade_item.tscn
 res://scenes/popups/relic_upgrade_item.gd
 res://autoload/GlobalSignals.gd
+res://autoload/GlobalRelicDB.gd
+res://data/relics/relic_db.json
+res://autoload/GlobalSave.gd

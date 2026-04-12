@@ -218,11 +218,12 @@ func GetLaneData(lane_index:int)->Dictionary:
 	return {}
 
 func GetCurrency(currency_type: String) -> int:
-	if !save_data.has("currencies"):
-		return 0
-	if !save_data.currencies.has(currency_type):
-		return 0
-	return int(save_data.currencies[currency_type])
+	match currency_type:
+		"dust":
+			return int(save_data.get("relic_inv",0).get("dust",0))
+		_: #int(save_data.currencies[currency_type])
+			return int(save_data.get("currencies",0).get(currency_type,0))
+
 
 func RemoveCurrency(currency_type:String,value:int) -> void:
 	save_data.currencies[currency_type] = int(save_data.currencies[currency_type] - value)

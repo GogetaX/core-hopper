@@ -109,8 +109,6 @@ func _EnsureRelicInventory() -> void:
 	if !GlobalSave.save_data.relic_inv.has("owned") or typeof(GlobalSave.save_data.relic_inv.owned) != TYPE_DICTIONARY:
 		GlobalSave.save_data.relic_inv["owned"] = {}
 
-	if !GlobalSave.save_data.relic_inv.has("dust") or typeof(GlobalSave.save_data.relic_inv.dust) != TYPE_INT:
-		GlobalSave.save_data.relic_inv["dust"] = 0
 
 	if !GlobalSave.save_data.relic_inv.has("unlocked_slots") or typeof(GlobalSave.save_data.relic_inv.unlocked_slots) != TYPE_INT:
 		GlobalSave.save_data.relic_inv["unlocked_slots"] = 2
@@ -370,3 +368,18 @@ func AddOwnedRelic(relic_id: String, amount: int = 1) -> Dictionary:
 		"is_new": false,
 		"added_dupes": amount
 	}
+
+func GetEffectTypeDescription(effect_type: String) -> String:
+	match effect_type.strip_edges().to_lower():
+		"bot_damage_mult":
+			return "Bot Damage"
+		"tap_damage_mult":
+			return "Tap Damage"
+		"crit_chance_flat":
+			return "Crit Chance"
+		"boss_damage_mult":
+			return "Boss Damage"
+		"offline_gain_mult":
+			return "Offline Rewards"
+		_:
+			return "Unknown Effect"
