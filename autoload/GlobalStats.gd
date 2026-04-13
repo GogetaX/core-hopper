@@ -6,7 +6,15 @@ extends Node
 const BOT_BASE_DPS := 1.0
 const BOT_DPS_GROWTH := 2.1
 const MAX_MERGE_SLOTS = 16
+const DAILY_FREE_BOT = 2
+const DAILY_MYTHIC_BOT = 1
 
+func InitDailyFreeBot():
+	if GlobalSave.save_data.daily_free_bot.day_key != _GetTodayKey():
+		GlobalSave.save_data.daily_free_bot.amount = DAILY_FREE_BOT
+		GlobalSave.save_data.daily_free_bot.mythic_amount = DAILY_MYTHIC_BOT
+		GlobalSave.save_data.daily_free_bot.day_key = _GetTodayKey()
+		
 func GetBotDPSFromLevel(level: int) -> float:
 	level = max(level, 1)
 	return BOT_BASE_DPS * pow(BOT_DPS_GROWTH, level - 1)
@@ -300,9 +308,10 @@ func GetFreeMergeSlots()->int:
 	return min(int(GlobalSave.save_data.bot_inventory.merge_free_slots + GlobalSkillTree.skill_summary.stats.merge_slot_bonus),MAX_MERGE_SLOTS)
 
 func BuyBotData():
+	var base_bot_price = 5 * pow(1.45,GlobalSave.save_data.player_stats.total_bots_bought)
 	#Base
 	var res = {
-		"price":25,
+		"price":base_bot_price,
 		"level":1
 	}
 	#Apply new level and price
@@ -480,3 +489,13 @@ func GetTimedBonusMultiplier(effect_types: Array) -> float:
 		total *= float(booster_data.get("effect_value", 1.0))
 
 	return max(0.0, total)
+
+
+
+func _GetTodayKey() -> String:
+	var d := Time.get_date_dict_from_system()
+	return "%04d-%02d-%02d" % [
+		int(d.get("year", 1970)),
+		int(d.get("month", 1)),
+		int(d.get("day", 1))
+	]

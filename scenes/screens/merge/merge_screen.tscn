@@ -9,6 +9,8 @@
 [ext_resource type="Script" uid="uid://bnypytdg7otdp" path="res://scenes/label_data_scripts/active_bot_slots.gd" id="2_yawsl"]
 [ext_resource type="PackedScene" uid="uid://stbsi2oe8sia" path="res://scenes/screens/merge/sell_node.tscn" id="6_vtb8o"]
 [ext_resource type="Script" uid="uid://bg68ksebamcji" path="res://scenes/screens/merge/drag_drop_handler.gd" id="7_lfmeh"]
+[ext_resource type="PackedScene" uid="uid://bvpwx7yevqtth" path="res://scenes/screens/shop/smart_button_buy_with_icon.tscn" id="9_grbnr"]
+[ext_resource type="Texture2D" uid="uid://dveir84r8dkuf" path="res://art/icons/20_px/play_icon.png" id="10_8ecmt"]
 [ext_resource type="PackedScene" uid="uid://y856j8oug7lx" path="res://scenes/screens/merge/auto_merge.tscn" id="10_vtb8o"]
 
 [node name="MergeScreen" type="VBoxContainer" unique_id=787988230]
@@ -213,9 +215,23 @@ btn_type = "WITH_PRICE"
 panel_color = "BLUE"
 price_text = "25"
 
+[node name="DailyFreeBot" parent="VList" unique_id=1797573628 instance=ExtResource("2_2m8po")]
+layout_mode = 2
+buy_btn_title = "DAILY FREE BOT (2)"
+panel_color = "BLUE"
+price_text = "25"
+
+[node name="DailyMythicBot" parent="VList" unique_id=880031611 instance=ExtResource("9_grbnr")]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+buy_btn_title = "DAILY Mythic Bot (1)"
+buy_btn_icon = ExtResource("10_8ecmt")
+
 [node name="DragDropHandler" type="Node" parent="." unique_id=2044087815]
 script = ExtResource("7_lfmeh")
 
 [node name="AutoMerge" parent="." unique_id=888171057 instance=ExtResource("10_vtb8o")]
 
 [connection signal="BtnPressedWithPrice" from="VList/BuyBotBtn" to="." method="_on_smart_button_buy_btn_pressed_with_price"]
+[connection signal="OnPressed" from="VList/DailyFreeBot" to="." method="_on_daily_free_bot_on_pressed"]
+[connection signal="OnPress" from="VList/DailyMythicBot" to="." method="_on_daily_mythic_bot_on_press"]

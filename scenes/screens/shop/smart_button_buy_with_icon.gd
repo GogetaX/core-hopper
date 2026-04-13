@@ -26,6 +26,7 @@ signal OnPress()
 	get:
 		return buy_btn_icon
 
+var _disabled_because_of_price = false
 
 func _ready() -> void:
 	SyncTool()
@@ -54,10 +55,23 @@ func ShowOnly(show_btn:Control):
 func OnBtnPressed(btn_node:Control):
 	if btn_node != self:
 		return
+	if _disabled_because_of_price:
+		return
 	GlobalBtn.AnimateBtnPressed($Background)
 	OnPress.emit()
 	
 func OnMergeBtnPressed(btn_node:Control):
 	if btn_node != self:
 		return
+	if _disabled_because_of_price:
+		return
+		
 	GlobalBtn.AnimateBtnPressed($Background)
+
+func SetDisabled(_is_disabled:bool):
+	if _is_disabled:
+		_disabled_because_of_price = true
+		modulate = GlobalColor.PRICE_DISABLED_COLOR
+	else:
+		modulate = Color.WHITE
+		_disabled_because_of_price = false

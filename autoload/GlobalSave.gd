@@ -144,7 +144,9 @@ func BuildCleanSaveData():
 		"max_depth_reached": 0,
 		"highest_bot_level_ever": 0,
 		"core_resets":0,
-		"current_prestige":0
+		"current_prestige":0,
+		"total_bots_bought": 0,
+		"total_bots_got_free":0
 	}
 	res["settings"] = {
 		"music_enabled":true,
@@ -156,6 +158,7 @@ func BuildCleanSaveData():
 		"global_dig_speed_level":0,
 		"offline_gain_level":0.0,
 	}
+	
 	res["boss_progress"] = {
 			"killed_depths": [],
 			"killed_ids":[]
@@ -187,9 +190,17 @@ func BuildCleanSaveData():
 		"daily_day_key": "",
 		"daily_ids": []
 	}
+	res["daily_free_bot"]={
+			"day_key":"",
+			"amount":2,
+			"mythic_amount":1
+		}
 	return res
 
-
+func GetDailyFreeBot():
+	return save_data.daily_free_bot
+	
+	
 func LoadUpgrades():
 	var s = FileAccess.open(UPGRADE_DATA,FileAccess.READ)
 	var json_text = s.get_as_text()
@@ -320,10 +331,14 @@ func CreateSimpleBot() -> Dictionary:
 	res["stats"] = rolled_data.get("stats", {})
 	return res
 
-func StoreUpdateBotData(new_bot_data:Dictionary) -> void:
+func StoreUpdateBotData(new_bot_data:Dictionary,free_bot := false) -> void:
 	var bot_data = FindBotDBFromUID(new_bot_data.uid)
 	if bot_data.is_empty():
 		save_data.bot_inventory.bot_db.append(new_bot_data)
+		if !free_bot:
+			save_data.player_stats.total_bots_bought += 1
+		else:
+			save_data.player_stats.total_bots_got_free += 1
 	else:
 		for x in new_bot_data:
 			bot_data[x] = new_bot_data[x]

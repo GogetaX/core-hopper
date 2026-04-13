@@ -13,6 +13,7 @@ func _ready() -> void:
 	show_tab("DIG")
 	InitOfflineData()
 	GlobalDailyQuest.InitDailyQuestSystem()
+	GlobalStats.InitDailyFreeBot()
 	
 func InitOfflineData():
 	var offline_data = GlobalOfflineProgress.ProcessOfflineProgress()
