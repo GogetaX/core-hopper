@@ -40,7 +40,7 @@ func _on_smart_button_buy_btn_pressed_with_price(currency: String, price: int) -
 	
 	#Create Bot
 	var buy_bot_data = GlobalStats.BuyBotData()
-	var new_bot = GlobalSave.CreateSimpleBot()
+	var new_bot = GlobalSave.CreateSimpleBot(GlobalStats.RollDirectBotBuyRank())
 	new_bot.merge_slot_id = free_merge_slot
 	new_bot.level = buy_bot_data.level
 	if GlobalStats.HasChanceOfNextLevelBotOnBuy():
@@ -73,7 +73,7 @@ func _on_daily_free_bot_on_pressed() -> void:
 		
 	#Create Bot
 	var buy_bot_data = GlobalStats.BuyBotData()
-	var new_bot = GlobalSave.CreateSimpleBot()
+	var new_bot = GlobalSave.CreateSimpleBot(GlobalStats.RollDirectBotBuyRank())
 	new_bot.merge_slot_id = free_merge_slot
 	new_bot.level = buy_bot_data.level
 	if GlobalStats.HasChanceOfNextLevelBotOnBuy():

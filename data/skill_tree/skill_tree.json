@@ -11,7 +11,7 @@
 	},
 	"boss": {
 	  "title": "Boss",
-	  "color": "#FF5C7A"
+	  "color": "#FF5A3B"
 	},
 	"offline": {
 	  "title": "Offline",
@@ -44,6 +44,90 @@
 	  "effects": [],
 	  "description": "Unlocks the core skill tree."
 	},
+	"daily_free_bot_levels_1": {
+  "title": "Charged Crate",
+  "branch": "bot_shop",
+  "node_type": "stat",
+  "max_level": 3,
+  "costs": [
+	120,
+	230,
+	390
+  ],
+  "prereq_ids": [
+    "quality_control_1"
+  ],
+  "pos": {
+	"x": -760,
+	"y": 920
+  },
+  "icon": "daily_free_bot_levels",
+  "effects": [
+	{
+	  "kind": "stat",
+	  "stat": "daily_free_bot_level_bonus",
+	  "op": "add",
+	  "value_per_level": 1
+	}
+  ],
+  "description": "Daily free bots gain +1 level per skill level."
+},
+"daily_mythic_bot_1": {
+  "title": "Mythic Voucher",
+  "branch": "bot_shop",
+  "node_type": "keystone",
+  "max_level": 1,
+  "costs": [
+	880
+  ],
+  "prereq_ids": [
+    "quality_control_1"
+  ],
+  "pos": {
+	"x": -1140,
+	"y": 900
+  },
+  "icon": "daily_mythic_bot",
+  "effects": [
+	{
+	  "kind": "stat",
+	  "stat": "daily_free_mythic_bot_limit_bonus",
+	  "op": "add",
+	  "value_per_level": 1
+	}
+  ],
+  "description": "Adds 1 daily free Mythic bot."
+},
+"quality_control_1": {
+	"title": "Quality Control",
+	"branch": "bot_shop",
+	"node_type": "stat",
+	"max_level": 5,
+  "costs": [
+	90,
+	160,
+	250,
+	360,
+	490
+  ],
+  "prereq_ids": [
+    "premium_assembly"
+  ],
+  "pos": {
+	"x": -940,
+	"y": 760
+  },
+  "icon": "quality_control",
+  "effects": [
+	{
+	  "kind": "stat",
+	  "stat": "direct_bot_buy_better_rank_chance",
+	  "op": "add",
+	  "value_per_level": 0.04
+	}
+  ],
+  "description": "Direct bot purchases have a chance to roll better bot stats."
+},
 	"merge_slot_1": {
 	  "title": "Merge Slot I",
 	  "branch": "merge",
@@ -135,32 +219,6 @@
 	  ],
 	  "pos": {
 		"x": -700,
-		"y": 0
-	  },
-	  "icon": "merge_slot",
-	  "effects": [
-		{
-		  "kind": "stat",
-		  "stat": "merge_slot_bonus",
-		  "op": "add",
-		  "value_per_level": 1
-		}
-	  ],
-	  "description": "Unlocks 1 additional merge slot."
-	},
-	"merge_slot_5": {
-	  "title": "Merge Slot V",
-	  "branch": "merge",
-	  "node_type": "unlock",
-	  "max_level": 1,
-	  "costs": [
-		320
-	  ],
-	  "prereq_ids": [
-        "merge_slot_4"
-	  ],
-	  "pos": {
-		"x": -860,
 		"y": 0
 	  },
 	  "icon": "merge_slot",
@@ -358,6 +416,32 @@
 	  ],
 	  "description": "Massively improves boss currency rewards."
 	},
+	"relic_slot_1": {
+  "title": "Relic Socket",
+  "branch": "boss",
+  "node_type": "unlock",
+  "max_level": 1,
+  "costs": [
+	760
+  ],
+  "prereq_ids": [
+    "relic_hunter"
+  ],
+  "pos": {
+	"x": -520,
+	"y": -760
+  },
+  "icon": "relic_slot",
+  "effects": [
+	{
+	  "kind": "stat",
+	  "stat": "relic_slot_bonus",
+	  "op": "add",
+	  "value_per_level": 1
+	}
+  ],
+  "description": "Unlocks 1 additional relic slot."
+},
 	"offline_time_1": {
 	  "title": "Offline Time",
 	  "branch": "offline",

@@ -29,6 +29,7 @@ func OnSkillClassSelected(skill_class:WorldSkillClass):
 			$SelectedSkill/VList/cur_level_row/cur_level_effect.text = GlobalSkillTree.GetSkillCurrentEffectLine(skill_class.cur_skill_key)
 			$SelectedSkill/VList/next_level_row/next_level_effect.text = GlobalSkillTree.GetSkillNextEffectLine(skill_class.cur_skill_key)
 	else:
+		$SelectedSkill/VList/cur_level_row/cur_level_effect.text = GlobalSkillTree.GetSkillCurrentEffectLine(skill_class.cur_skill_key)
 		$SelectedSkill/VList/next_level_row.visible = false
 	#UpgradeSkillBtn rules
 	$SelectedSkill/VList/UpgradeSkillBtn.visible = false
@@ -100,4 +101,13 @@ func _on_upgrade_skill_btn_btn_pressed_with_price(_currency: String, _price: int
 		return
 	GlobalSkillTree.AccureSkill(cur_selected_skill)
 	GlobalSignals.OnSkillLevelUpdated.emit(cur_selected_skill)
+	var skill_data = GlobalSkillTree.GetSkillData(Global.last_skill_key_selected)
+	if !skill_data.is_empty() && skill_data.has("effects"):
+		for x in skill_data.effects:
+			if x.has("stat"):
+				match x.stat:
+					"daily_free_mythic_bot_limit_bonus":
+						GlobalSave.save_data.daily_free_bot.mythic_amount += 1
+					"daily_free_bot_level_bonus":
+						GlobalSave.save_data.daily_free_bot.amount += 1
 	GlobalSave.SyncSave()

@@ -91,7 +91,7 @@ func OnBtnPress(control_node:Control):
 func AnimateIn():
 	if _is_selected:
 		return
-	
+	z_index = 1
 	_is_selected = true
 	var t = create_tween()
 	t.tween_property($SmartPanelCircleSkill,"modulate:a",1.0,0.2)
@@ -100,7 +100,7 @@ func AnimateIn():
 func AnimateOut():
 	if !_is_selected:
 		return
-		
+	z_index  = 0
 	_is_selected = false
 	var t = create_tween()
 	t.tween_property($SmartPanelCircleSkill,"modulate:a",0.3,0.2)

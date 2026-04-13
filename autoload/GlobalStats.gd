@@ -12,7 +12,7 @@ const DAILY_MYTHIC_BOT = 1
 func InitDailyFreeBot():
 	if GlobalSave.save_data.daily_free_bot.day_key != _GetTodayKey():
 		GlobalSave.save_data.daily_free_bot.amount = DAILY_FREE_BOT
-		GlobalSave.save_data.daily_free_bot.mythic_amount = DAILY_MYTHIC_BOT
+		GlobalSave.save_data.daily_free_bot.mythic_amount = DAILY_MYTHIC_BOT+GlobalSkillTree.skill_summary.stats.daily_free_mythic_bot_limit_bonus
 		GlobalSave.save_data.daily_free_bot.day_key = _GetTodayKey()
 		
 func GetBotDPSFromLevel(level: int) -> float:
@@ -308,7 +308,7 @@ func GetFreeMergeSlots()->int:
 	return min(int(GlobalSave.save_data.bot_inventory.merge_free_slots + GlobalSkillTree.skill_summary.stats.merge_slot_bonus),MAX_MERGE_SLOTS)
 
 func BuyBotData():
-	var base_bot_price = 5 * pow(1.45,GlobalSave.save_data.player_stats.total_bots_bought)
+	var base_bot_price = 5 * pow(1.12,GlobalSave.save_data.player_stats.total_bots_bought)
 	#Base
 	var res = {
 		"price":base_bot_price,
@@ -499,3 +499,20 @@ func _GetTodayKey() -> String:
 		int(d.get("month", 1)),
 		int(d.get("day", 1))
 	]
+
+func RollDirectBotBuyRank() -> int:
+	var chance = GlobalSkillTree.skill_summary.stats.direct_bot_buy_better_rank_chance
+	var better_rank_chance = clampf(chance, 0.0, 1.0)
+
+	var rank := 0
+
+	# Each success upgrades the bought bot by 1 rank.
+	# Max rank = 3
+	
+	for i in range(3):
+		if randf() <= better_rank_chance:
+			rank += 1
+		else:
+			break
+
+	return clampi(rank, 0, 3)

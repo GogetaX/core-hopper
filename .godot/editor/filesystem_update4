@@ -12,3 +12,13 @@ res://scenes/app/main_scene.gd
 res://scenes/screens/shop/smart_button_buy_with_icon.tscn
 res://scenes/screens/shop/smart_button_buy_with_icon.gd
 res://autoload/GlobalBotStats.gd
+res://data/skill_tree/skill_tree.json
+res://art/skills/relic_slot.tres
+res://autoload/GlobalSkillTree.gd
+res://scenes/screens/skills/skills_screen.tscn
+res://scenes/screens/skills/skills_screen.gd
+res://art/skills/daily_free_bot_levels.tres
+res://art/skills/daily_mythic_bot.tres
+res://art/skills/quality_control.tres
+res://scenes/screens/skills/skill_tree_world_item.tscn
+res://scenes/screens/skills/skill_tree_world_item.gd
