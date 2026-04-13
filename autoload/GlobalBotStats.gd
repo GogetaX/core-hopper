@@ -429,3 +429,151 @@ func _FormatSignedNumber(value: float, decimals: int = 0) -> String:
 
 func GetIcon(icon_str):
 	return load("res://data/icons/"+icon_str+".tres")
+
+func RollBotStatsByRank(target_rank: int, level: int = 1, max_attempts: int = 24) -> Dictionary:
+	if bot_stats_db.is_empty():
+		LoadBotStats()
+
+	if bot_stats_db.is_empty():
+		return {
+			"rank": 0,
+			"stats": {}
+		}
+
+	target_rank = clampi(target_rank, 0, 3)
+	level = maxi(1, level)
+	max_attempts = maxi(1, max_attempts)
+
+	var fallback := {
+		"rank": 0,
+		"stats": {}
+	}
+
+	for i in range(max_attempts):
+		var rolled := _RollBotStatsByRankAttempt(target_rank, level)
+		fallback = rolled
+		if int(rolled.get("rank", 0)) == target_rank:
+			return rolled
+
+	return fallback
+
+
+func _RollBotStatsByRankAttempt(target_rank: int, level: int) -> Dictionary:
+	var stats := {}
+	var roll_count := _RollStatCount()
+
+	if roll_count <= 0:
+		return {
+			"rank": 0,
+			"stats": {}
+		}
+
+	var used_ids: Array[String] = []
+	var highest_rank := 0
+
+	# For ranks above 0, force one stat to land in the target rank band.
+	# For Rusted (0), all stats just need to stay <= 0.
+	var forced_index := -1
+	if target_rank > 0:
+		forced_index = _rng.randi_range(0, roll_count - 1)
+
+	for i in range(roll_count):
+		var stat_id := _RollWeightedStatId(used_ids)
+		if stat_id == "":
+			break
+
+		var stat_data: Dictionary = bot_stats_db.get(stat_id, {})
+		if stat_data.is_empty():
+			continue
+
+		var rolled := {}
+
+		if i == forced_index:
+			rolled = _RollSingleStatValueForExactRank(stat_id, stat_data, level, target_rank)
+		else:
+			rolled = _RollSingleStatValueUpToRank(stat_id, stat_data, level, target_rank)
+
+		if rolled.is_empty():
+			continue
+
+		stats[stat_id] = float(rolled.get("value", 0.0))
+		highest_rank = maxi(highest_rank, int(rolled.get("rank", 0)))
+		used_ids.append(stat_id)
+
+	return {
+		"rank": highest_rank,
+		"stats": stats
+	}
+
+
+func _RollSingleStatValueUpToRank(stat_id: String, stat_data: Dictionary, level: int, max_rank: int, max_attempts: int = 12) -> Dictionary:
+	max_rank = clampi(max_rank, 0, 3)
+	max_attempts = maxi(1, max_attempts)
+
+	var fallback := {}
+
+	for i in range(max_attempts):
+		var rolled := _RollSingleStatValue(stat_id, stat_data, level)
+		if rolled.is_empty():
+			continue
+
+		fallback = rolled
+		if int(rolled.get("rank", 0)) <= max_rank:
+			return rolled
+
+	return fallback
+
+
+func _RollSingleStatValueForExactRank(stat_id: String, stat_data: Dictionary, level: int, target_rank: int) -> Dictionary:
+	target_rank = clampi(target_rank, 0, 3)
+
+	var stat_type := str(stat_data.get("stat_type", "percent"))
+	var min_value := float(stat_data.get("min_value", 0.0))
+	var max_value := float(stat_data.get("max_value", min_value))
+
+	if max_value < min_value:
+		var tmp := min_value
+		min_value = max_value
+		max_value = tmp
+
+	var rank_range := _GetRankSpikeRange(target_rank)
+	var spike_t := _rng.randf_range(rank_range.x, rank_range.y)
+
+	var rolled_source := min_value
+	if !is_equal_approx(min_value, max_value):
+		rolled_source = lerpf(min_value, max_value, spike_t)
+
+	var final_value := rolled_source
+	var final_rank := target_rank
+
+	if stat_type == "flat":
+		final_value = _ConvertFlatRollToLevelScaledValue(stat_id, rolled_source, level)
+
+		var min_final := _ConvertFlatRollToLevelScaledValue(stat_id, min_value, level)
+		var max_final := _ConvertFlatRollToLevelScaledValue(stat_id, max_value, level)
+		var rank_spike := _CalcSpike01(final_value, min_final, max_final)
+		final_rank = _GetRankFromSpike01(rank_spike)
+	else:
+		var rank_spike := _CalcSpike01(rolled_source, min_value, max_value)
+		final_rank = _GetRankFromSpike01(rank_spike)
+
+	final_value = _SnapStatValue(final_value, int(stat_data.get("decimals", 2)))
+
+	return {
+		"value": final_value,
+		"rank": final_rank
+	}
+
+
+func _GetRankSpikeRange(rank: int) -> Vector2:
+	match clampi(rank, 0, 3):
+		0:
+			return Vector2(0.0, 0.4999)
+		1:
+			return Vector2(0.50, 0.7499)
+		2:
+			return Vector2(0.75, 0.9299)
+		3:
+			return Vector2(0.93, 1.0)
+		_:
+			return Vector2(0.0, 0.4999)

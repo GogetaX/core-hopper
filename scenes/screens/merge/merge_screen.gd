@@ -99,7 +99,7 @@ func _on_daily_mythic_bot_on_press() -> void:
 		
 	#Create Bot
 	var buy_bot_data = GlobalStats.BuyBotData()
-	var new_bot = GlobalSave.CreateSimpleBot()
+	var new_bot = GlobalSave.CreateSimpleBot(3)
 	new_bot.merge_slot_id = free_merge_slot
 	new_bot.level = buy_bot_data.level
 	if GlobalStats.HasChanceOfNextLevelBotOnBuy():

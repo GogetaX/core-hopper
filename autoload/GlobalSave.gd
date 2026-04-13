@@ -318,11 +318,15 @@ func FindBotDBFromUID(uid) -> Dictionary:
 			return x
 	return {}
 
-func CreateSimpleBot() -> Dictionary:
+func CreateSimpleBot(by_rank:int=0) -> Dictionary:
 	var cur_level := 1
 	var res = {}
 	var new_uid = FindFreeUID()
-	var rolled_data = GlobalBotStats.RollBotStats(cur_level)
+	var rolled_data : Dictionary = {}
+	if by_rank == 0:
+		rolled_data = GlobalBotStats.RollBotStats(cur_level)
+	else:
+		rolled_data = GlobalBotStats.RollBotStatsByRank(by_rank,cur_level)
 
 	res["uid"] = new_uid
 	res["merge_slot_id"] = -1
@@ -330,6 +334,7 @@ func CreateSimpleBot() -> Dictionary:
 	res["rank"] = int(rolled_data.get("rank", 0))
 	res["stats"] = rolled_data.get("stats", {})
 	return res
+	
 
 func StoreUpdateBotData(new_bot_data:Dictionary,free_bot := false) -> void:
 	var bot_data = FindBotDBFromUID(new_bot_data.uid)

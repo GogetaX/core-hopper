@@ -11,3 +11,4 @@ res://scenes/app/main_scene.tscn
 res://scenes/app/main_scene.gd
 res://scenes/screens/shop/smart_button_buy_with_icon.tscn
 res://scenes/screens/shop/smart_button_buy_with_icon.gd
+res://autoload/GlobalBotStats.gd
