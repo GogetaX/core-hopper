@@ -54,7 +54,7 @@ layout_mode = 2
 panel_type = "INSIDE_ONLY"
 panel_color = "BLUE"
 icon = ExtResource("3_8hyjs")
-as_button = true
+btn_type = "AS_BUTTON"
 
 [node name="Label" type="Label" parent="SmartPanel/VBoxContainer/HList2" unique_id=2046432609]
 layout_mode = 2

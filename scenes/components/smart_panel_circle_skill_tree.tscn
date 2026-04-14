@@ -8,8 +8,8 @@ corner_radius_top_left = 100
 corner_radius_top_right = 100
 corner_radius_bottom_right = 100
 corner_radius_bottom_left = 100
-shadow_color = Color(0.21568628, 0.21568628, 0.21568628, 0.29411766)
-shadow_size = 10
+shadow_color = Color(1, 1, 1, 0.7294118)
+shadow_size = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d5h2c"]
 resource_local_to_scene = true
@@ -24,8 +24,6 @@ corner_radius_top_left = 100
 corner_radius_top_right = 100
 corner_radius_bottom_right = 100
 corner_radius_bottom_left = 100
-shadow_color = Color(1, 1, 1, 0.7294118)
-shadow_size = 20
 
 [node name="SmartPanelCircleSkill" type="Control" unique_id=892379017]
 layout_mode = 3
@@ -50,6 +48,7 @@ mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_efivy")
 
 [node name="BorderOnly" type="Panel" parent="." unique_id=1539343970]
+visible = false
 self_modulate = Color(0.7607843, 0.43529412, 1, 1)
 layout_mode = 1
 anchors_preset = 15

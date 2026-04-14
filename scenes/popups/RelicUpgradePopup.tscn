@@ -51,7 +51,7 @@ layout_mode = 2
 panel_type = "INSIDE_ONLY"
 panel_color = "BLUE"
 icon = ExtResource("3_elmy5")
-as_button = true
+btn_type = "AS_BUTTON"
 
 [node name="Label" type="Label" parent="HasRelics/HList3" unique_id=371064586]
 layout_mode = 2
@@ -332,7 +332,6 @@ layout_mode = 2
 panel_type = "INSIDE_ONLY"
 panel_color = "BLUE"
 icon = ExtResource("3_elmy5")
-as_button = true
 
 [node name="Label" type="Label" parent="NoRelics/HList3" unique_id=635135764]
 layout_mode = 2

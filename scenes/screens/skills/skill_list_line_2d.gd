@@ -26,5 +26,8 @@ func FromColorTextBorderToColor(color_text:String):
 			return GlobalColor.COLOR_TAB_BORDER
 		"ORANGE":
 			return GlobalColor.COLOR_BORDER_ORANGE
+		"RED":
+			return GlobalColor.COLOR_BORDER_RED
 		_:
+			print_debug("Unknown Color: ",color_text)
 			return Color.WHITE

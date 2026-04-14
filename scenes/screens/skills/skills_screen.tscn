@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://c0mptbryjpny4" path="res://art/ui/maximize.png" id="8_wute0"]
 [ext_resource type="Texture2D" uid="uid://cefyjvaviqiut" path="res://art/ui/center_screen.png" id="9_psedl"]
 [ext_resource type="Texture2D" uid="uid://b34dq7l4qyk6m" path="res://art/ui/center_node.png" id="10_7bcdg"]
+[ext_resource type="Texture2D" uid="uid://g8tfs6asrr8d" path="res://art/ui/visibility.png" id="13_fodwd"]
 
 [node name="SkillScreen" type="Control" unique_id=1295626318]
 layout_mode = 3
@@ -48,6 +49,7 @@ anchors_preset = 12
 anchor_top = 1.0
 offset_top = -650.0
 grow_vertical = 0
+panel_type = null
 panel_color = "WHITE"
 
 [node name="skill_icon" type="TextureRect" parent="SelectedSkill" unique_id=1391741583]
@@ -127,14 +129,12 @@ layout_mode = 2
 panel_type = "BORDER_ONLY"
 panel_color = "DISABLED"
 icon = ExtResource("7_ymlgm")
-as_button = true
 
 [node name="ScrollUpBtn" parent="SelectedSkill/VList/HList/Control/HBoxContainer" unique_id=1204389369 instance=ExtResource("2_37rvp")]
 layout_mode = 2
 panel_type = "BORDER_ONLY"
 panel_color = "DISABLED"
 icon = ExtResource("8_wute0")
-as_button = true
 
 [node name="description" type="Label" parent="SelectedSkill/VList" unique_id=178832608]
 layout_mode = 2
@@ -210,14 +210,21 @@ layout_mode = 2
 panel_type = "BORDER_ONLY"
 panel_color = "DISABLED"
 icon = ExtResource("9_psedl")
-as_button = true
+btn_type = "AS_BUTTON"
 
 [node name="CenterSelectedSkill" parent="VList" unique_id=101831475 instance=ExtResource("2_37rvp")]
 layout_mode = 2
 panel_type = "BORDER_ONLY"
 panel_color = "DISABLED"
 icon = ExtResource("10_7bcdg")
-as_button = true
+btn_type = "AS_BUTTON"
+
+[node name="ToggleVisibility" parent="VList" unique_id=1256947868 instance=ExtResource("2_37rvp")]
+layout_mode = 2
+panel_type = "BORDER_AND_INSIDE"
+panel_color = "DISABLED"
+icon = ExtResource("13_fodwd")
+btn_type = "AS_TOGGLE"
 
 [connection signal="resized" from="SelectedSkill/VList" to="." method="_on_v_list_resized"]
 [connection signal="BtnPressed" from="SelectedSkill/VList/HList/Control/HBoxContainer/ScrollDownBtn" to="." method="_on_scroll_down_btn_btn_pressed"]
@@ -225,3 +232,5 @@ as_button = true
 [connection signal="BtnPressedWithPrice" from="SelectedSkill/VList/UpgradeSkillBtn" to="." method="_on_upgrade_skill_btn_btn_pressed_with_price"]
 [connection signal="BtnPressed" from="VList/ResetCamera" to="." method="_on_reset_camera_btn_pressed"]
 [connection signal="BtnPressed" from="VList/CenterSelectedSkill" to="." method="_on_center_selected_skill_btn_pressed"]
+[connection signal="BtnPressed" from="VList/ToggleVisibility" to="." method="_on_center_selected_skill_btn_pressed"]
+[connection signal="BtnToggled" from="VList/ToggleVisibility" to="." method="_on_toggle_visibility_btn_toggled"]

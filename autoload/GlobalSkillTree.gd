@@ -841,3 +841,8 @@ func BuildFlatAcquiredSkillStats() -> Dictionary:
 		result["tap_execute_threshold_total"] = 0.0
 	
 	return result
+
+func GetBranchColorStr(branch_id:String)->String:
+	if !_skill_tree_data.branches.has(branch_id):
+		return "WHITE"
+	return _skill_tree_data.branches[branch_id].get("color","WHITE")

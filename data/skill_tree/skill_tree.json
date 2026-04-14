@@ -7,23 +7,23 @@
   "branches": {
 	"merge": {
 	  "title": "Merge",
-	  "color": "#F39A32"
+	  "color": "BLUE"
 	},
 	"boss": {
 	  "title": "Boss",
-	  "color": "#FF5A3B"
+	  "color": "RED"
 	},
 	"offline": {
 	  "title": "Offline",
-	  "color": "#44D7FF"
+	  "color": "WHITE"
 	},
 	"bot_shop": {
 	  "title": "Bot Shop",
-	  "color": "#7ED957"
+	  "color": "PURPLE"
 	},
 	"tap": {
 	  "title": "Tap",
-	  "color": "#B36CFF"
+	  "color": "ORANGE"
 	}
   },
   "nodes": {
@@ -548,8 +548,8 @@
         "offline_efficiency_1"
 	  ],
 	  "pos": {
-		"x": 360,
-		"y": -380
+		"x": 300,
+		"y": -500
 	  },
 	  "icon": "offline_crystal_gain",
 	  "effects": [
@@ -580,7 +580,7 @@
 	  ],
 	  "pos": {
 		"x": 500,
-		"y": -300
+		"y": -350
 	  },
 	  "icon": "energy_gain",
 	  "effects": [
@@ -744,7 +744,7 @@
         "buy_bot_lv2"
 	  ],
 	  "pos": {
-		"x": -40,
+		"x": -80,
 		"y": 340
 	  },
 	  "icon": "direct_buy_discount",

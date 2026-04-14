@@ -130,29 +130,6 @@ func GetRelicRankColor(rank: int) -> String:
 
 	return "WHITE"
 
-func GetSkillBranchColor(branch: String) -> String:
-	match branch.strip_edges().to_lower():
-		"merge":
-			return "ORANGE"
-
-		"boss", "combat":
-			return "RED"
-
-		"offline", "core":
-			return "WHITE"
-
-		"bot_shop", "shop":
-			return "PURPLE"
-
-		"tap":
-			return "PURPLE"
-
-		"economy":
-			return "GOLD"
-
-		_:
-			return "WHITE"
-
 func BotRankToColor(rank_num:int):
 	match rank_num:
 		0:
