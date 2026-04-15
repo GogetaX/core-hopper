@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "reset_id": "core_reset_main",
+  "title": "Core Reset",
+  "gate_type": "max_depth_reached",
+  "tiers": {
+	"1": {
+	  "required_depth": 1000,
+	  "title": "Core Reset I",
+	  "description": "Expand the workshop.",
+	  "effects": [
+		{ "kind": "stat", "stat": "merge_slot_bonus", "value": 2 }
+	  ]
+	},
+	"2": {
+	  "required_depth": 2500,
+	  "title": "Core Reset II",
+	  "description": "Start with stronger bots.",
+	  "effects": [
+		{ "kind": "stat", "stat": "bot_buy_start_level_bonus", "value": 1 }
+	  ]
+	},
+	"3": {
+	  "required_depth": 5000,
+	  "title": "Core Reset III",
+	  "description": "Unlock one more relic slot.",
+	  "effects": [
+		{ "kind": "stat", "stat": "relic_slot_bonus", "value": 1 }
+	  ]
+	},
+	"4": {
+	  "required_depth": 9000,
+	  "title": "Core Reset IV",
+	  "description": "Start with Level 3 bots.",
+	  "effects": [
+		{ "kind": "stat", "stat": "bot_buy_start_level_bonus", "value": 1 }
+	  ]
+	},
+	"5": {
+	  "required_depth": 14000,
+	  "title": "Core Reset V",
+	  "description": "Permanent bot power increase.",
+	  "effects": [
+		{ "kind": "stat", "stat": "bot_power_mult", "value": 0.15 }
+	  ]
+	},
+	"6": {
+	  "required_depth": 20000,
+	  "title": "Core Reset VI",
+	  "description": "One more merge slot.",
+	  "effects": [
+		{ "kind": "stat", "stat": "merge_slot_bonus", "value": 1 }
+	  ]
+	},
+	"7": {
+	  "required_depth": 28000,
+	  "title": "Core Reset VII",
+	  "description": "Start with Level 4 bots.",
+	  "effects": [
+		{ "kind": "stat", "stat": "bot_buy_start_level_bonus", "value": 1 }
+	  ]
+	},
+	"8": {
+	  "required_depth": 38000,
+	  "title": "Core Reset VIII",
+	  "description": "More value from block drops.",
+	  "effects": [
+		{ "kind": "stat", "stat": "resource_drop_mult", "value": 0.20 }
+	  ]
+	},
+	"9": {
+	  "required_depth": 50000,
+	  "title": "Core Reset IX",
+	  "description": "Unlock one more relic slot.",
+	  "effects": [
+		{ "kind": "stat", "stat": "relic_slot_bonus", "value": 1 }
+	  ]
+	},
+	"10": {
+	  "required_depth": 65000,
+	  "title": "Core Reset X",
+	  "description": "Start with Level 5 bots.",
+	  "effects": [
+		{ "kind": "stat", "stat": "bot_buy_start_level_bonus", "value": 1 }
+	  ]
+	},
+	"11": {
+	  "required_depth": 82000,
+	  "title": "Core Reset XI",
+	  "description": "Final merge slot bonus.",
+	  "effects": [
+		{ "kind": "stat", "stat": "merge_slot_bonus", "value": 1 }
+	  ]
+	},
+	"12": {
+	  "required_depth": 102000,
+	  "title": "Core Reset XII",
+	  "description": "Permanent bot power increase.",
+	  "effects": [
+		{ "kind": "stat", "stat": "bot_power_mult", "value": 0.20 }
+	  ]
+	},
+	"13": {
+	  "required_depth": 125000,
+	  "title": "Core Reset XIII",
+	  "description": "More value from all resource drops.",
+	  "effects": [
+		{ "kind": "stat", "stat": "resource_drop_mult", "value": 0.20 }
+	  ]
+	},
+	"14": {
+	  "required_depth": 150000,
+	  "title": "Core Reset XIV",
+	  "description": "Boss rewards become more valuable.",
+	  "effects": [
+		{ "kind": "stat", "stat": "boss_reward_mult", "value": 0.20 }
+	  ]
+	},
+	"15": {
+	  "required_depth": 180000,
+	  "title": "Core Reset XV",
+	  "description": "Manual tapping remains relevant late game.",
+	  "effects": [
+		{ "kind": "stat", "stat": "tap_damage_mult", "value": 0.25 }
+	  ]
+	}
+  }
+}

@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://caakrndjfym13"]
+
+[ext_resource type="Script" uid="uid://4wemxbiy6evq" path="res://scenes/screens/dig/next_core_reset.gd" id="1_wcvi3"]
+
+[node name="NextCoreReset" type="Panel" unique_id=852508425]
+custom_minimum_size = Vector2(300, 120)
+mouse_filter = 2
+theme_type_variation = &"PanelPurpleStatus"
+script = ExtResource("1_wcvi3")
+
+[node name="CoreResetInProgress" type="VBoxContainer" parent="." unique_id=746558821]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="HList" type="HBoxContainer" parent="CoreResetInProgress" unique_id=2058256835]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="CoreResetInProgress/HList" unique_id=344730233]
+layout_mode = 2
+theme_type_variation = &"LabelWithPurple"
+text = "CORE RESET"
+
+[node name="Control" type="Control" parent="CoreResetInProgress/HList" unique_id=1647190902]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="core_recent_percent" type="Label" parent="CoreResetInProgress/HList" unique_id=583179422]
+layout_mode = 2
+theme_type_variation = &"LabelWithPurple"
+text = "74"
+
+[node name="Label3" type="Label" parent="CoreResetInProgress/HList" unique_id=148140426]
+layout_mode = 2
+theme_type_variation = &"LabelWithPurple"
+text = "%"
+
+[node name="core_reset_progressbar" type="ProgressBar" parent="CoreResetInProgress" unique_id=1307898856]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+theme_type_variation = &"ProgressBarPurple"
+value = 75.0
+show_percentage = false
+
+[node name="core_reset_reward" type="Label" parent="CoreResetInProgress" unique_id=1657984254]
+layout_mode = 2
+theme_type_variation = &"LabelGrayHint"
+text = "+1 Core Shard next reset"
+horizontal_alignment = 2

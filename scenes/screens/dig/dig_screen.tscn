@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://drpo6jpqmbllk" path="res://scenes/label_data_scripts/income_ps.gd" id="4_tyi6r"]
 [ext_resource type="PackedScene" uid="uid://cyrssis6jwdc2" path="res://scenes/screens/progress/progress_hash_tag_with_icon.tscn" id="4_vr6j5"]
 [ext_resource type="Texture2D" uid="uid://bisqfreq6vd5f" path="res://art/icons/20_px/depth_icon.png" id="5_131td"]
+[ext_resource type="PackedScene" uid="uid://caakrndjfym13" path="res://scenes/screens/dig/next_core_reset.tscn" id="5_gh78i"]
 [ext_resource type="PackedScene" uid="uid://tunwhalbrg53" path="res://scenes/components/lane_depth_update.tscn" id="6_8n6rl"]
 [ext_resource type="Script" uid="uid://cq4k4opbybd6n" path="res://scenes/screens/dig/offline_cap.gd" id="7_5w0l6"]
 [ext_resource type="Script" uid="uid://d3une2dqopjgs" path="res://scenes/screens/dig/offline_level.gd" id="7_davrd"]
@@ -92,63 +93,8 @@ layout_mode = 2
 mouse_filter = 2
 alignment = 2
 
-[node name="Panel" type="Panel" parent="HList2/VList2" unique_id=603749544]
-custom_minimum_size = Vector2(300, 120)
+[node name="NextCoreReset" parent="HList2/VList2" unique_id=852508425 instance=ExtResource("5_gh78i")]
 layout_mode = 2
-mouse_filter = 2
-theme_type_variation = &"PanelPurpleStatus"
-
-[node name="VList" type="VBoxContainer" parent="HList2/VList2/Panel" unique_id=759020745]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = 20.0
-offset_right = -20.0
-offset_bottom = -20.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-alignment = 1
-
-[node name="HList" type="HBoxContainer" parent="HList2/VList2/Panel/VList" unique_id=880921548]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="HList2/VList2/Panel/VList/HList" unique_id=1784411160]
-layout_mode = 2
-theme_type_variation = &"LabelWithPurple"
-text = "CORE RESET"
-
-[node name="Control" type="Control" parent="HList2/VList2/Panel/VList/HList" unique_id=1154142246]
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 2
-
-[node name="Label2" type="Label" parent="HList2/VList2/Panel/VList/HList" unique_id=1392936091]
-layout_mode = 2
-theme_type_variation = &"LabelWithPurple"
-text = "74"
-
-[node name="Label3" type="Label" parent="HList2/VList2/Panel/VList/HList" unique_id=2132480027]
-layout_mode = 2
-theme_type_variation = &"LabelWithPurple"
-text = "%"
-
-[node name="ProgressBar" type="ProgressBar" parent="HList2/VList2/Panel/VList" unique_id=2112530983]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-mouse_filter = 2
-theme_type_variation = &"ProgressBarPurple"
-value = 75.0
-show_percentage = false
-
-[node name="Label" type="Label" parent="HList2/VList2/Panel/VList" unique_id=1854554546]
-layout_mode = 2
-theme_type_variation = &"LabelGrayHint"
-text = "+1 Core Shard next reset"
-horizontal_alignment = 2
 
 [node name="Control2" type="Control" parent="HList2/VList2" unique_id=9808653]
 custom_minimum_size = Vector2(0, 20)

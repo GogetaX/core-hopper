@@ -1,11 +1,12 @@
+res://scenes/screens/dig/
+res://autoload/
+/home/sergio/GitHub/core-hopper/data/core_reset/
 res://scenes/components/
 res://art/game_logos/
 /home/sergio/GitHub/core-hopper/android/signature/
-res://autoload/
 res://scenes/popups/
 res://art/currency/
 res://scenes/screens/merge/
-res://scenes/screens/dig/
 res://art/bonus/
 /home/sergio/GitHub/core-hopper/data/bonus/
 /home/sergio/GitHub/core-hopper/data/bot_data/

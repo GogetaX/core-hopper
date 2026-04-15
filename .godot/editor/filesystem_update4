@@ -29,3 +29,7 @@ res://scenes/screens/progress/relic_item.gd
 res://scenes/screens/dig/material.gd
 res://scenes/screens/dig/dig_screen.gd
 res://scenes/screens/skills/skill_tree_world_item.gd
+res://data/core_reset/core_reset.json
+res://scenes/screens/dig/next_core_reset.tscn
+res://scenes/screens/dig/next_core_reset.gd
+res://autoload/GlobalCoreResetDB.gd
