@@ -1,12 +1,9 @@
-res://scenes/screens/skills/skills_screen.gd
-res://scenes/screens/skills/skills_screen.tscn
+res://scenes/screens/skills/skill_tree_world.tscn
 res://art/theme/MainTheme.tres
 res://shaders/boss_outline.gdshader
 res://shaders/shop_screen.gdshader
 res://shaders/popup_blur.gdshader
-res://autoload/GlobalSignals.gd
-res://scenes/screens/skills/skill_tree_world.tscn
-res://scenes/screens/skills/line_2d_list.gd
-res://scenes/screens/skills/skill_tree_world.gd
-res://scenes/screens/skills/skill_tree_world_item.gd
-res://data/skill_tree/skill_tree.json
+res://scenes/screens/dig/next_boss_in_helper.gd
+res://scenes/screens/dig/dig_screen.tscn
+res://scenes/components/top_bar.tscn
+res://scenes/ui/border_btn.tscn

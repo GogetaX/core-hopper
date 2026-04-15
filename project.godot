@@ -16,6 +16,7 @@ run/main_scene="uid://vgy1fkq56ix"
 config/features=PackedStringArray("4.6", "Mobile")
 run/max_fps=60
 boot_splash/bg_color=Color(0.039215688, 0.043137256, 0.105882354, 1)
+boot_splash/image="res://art/game_logos/core_hopper_logo.png"
 config/icon="res://icon.svg"
 
 [audio]

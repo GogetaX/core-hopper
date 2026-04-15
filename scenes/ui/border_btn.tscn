@@ -1,22 +1,22 @@
 [gd_scene format=3 uid="uid://bw1pp5edaaob7"]
 
 [ext_resource type="Script" uid="uid://bmfnvw4tk87pk" path="res://scenes/ui/border_btn.gd" id="1_ja18r"]
-[ext_resource type="Texture2D" uid="uid://j71qyv0due28" path="res://art/icons/chip.png" id="2_7ailn"]
+[ext_resource type="Texture2D" uid="uid://h5f146aldh4x" path="res://art/game_logos/game_top_ico.png" id="2_7ailn"]
 
 [node name="BorderBtn" type="Panel" unique_id=1442847914]
 custom_minimum_size = Vector2(110, 110)
 script = ExtResource("1_ja18r")
+img = ExtResource("2_7ailn")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1206679014]
-self_modulate = Color(0.41568628, 0.7607843, 0.8235294, 1)
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = 20.0
-offset_right = -20.0
-offset_bottom = -20.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_7ailn")

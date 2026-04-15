@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://bw1pp5edaaob7" path="res://scenes/ui/border_btn.tscn" id="1_ijifo"]
 [ext_resource type="Script" uid="uid://d0lyap177ge73" path="res://scenes/components/top_bar.gd" id="1_k3yks"]
-[ext_resource type="Texture2D" uid="uid://j71qyv0due28" path="res://art/icons/chip.png" id="2_tmikl"]
 [ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="4_amswt"]
 [ext_resource type="PackedScene" uid="uid://b2qghfcexq01t" path="res://scenes/components/icon_bg_circle.tscn" id="4_bywe0"]
 [ext_resource type="PackedScene" uid="uid://d32v5pknv4vq0" path="res://scenes/components/currency_icon.tscn" id="4_glubf"]
@@ -44,7 +43,6 @@ theme_override_constants/separation = 20
 
 [node name="BorderBtn" parent="HBoxContainer" unique_id=1442847914 instance=ExtResource("1_ijifo")]
 layout_mode = 2
-img = ExtResource("2_tmikl")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=278734022]
 layout_mode = 2
@@ -184,7 +182,6 @@ layout_mode = 2
 panel_type = "BORDER_AND_INSIDE"
 panel_color = "BLUE"
 icon = ExtResource("5_bywe0")
-as_button = true
 
 [node name="CloseSettingMenu" parent="HBoxContainer" unique_id=759189028 instance=ExtResource("4_bywe0")]
 custom_minimum_size = Vector2(110, 100)
@@ -192,7 +189,6 @@ layout_mode = 2
 panel_type = "INSIDE_ONLY"
 panel_color = "BLUE"
 icon = ExtResource("6_p8s5q")
-as_button = true
 
 [connection signal="BtnPressed" from="HBoxContainer/SettingButton" to="." method="_on_setting_button_btn_pressed"]
 [connection signal="BtnPressed" from="HBoxContainer/CloseSettingMenu" to="." method="_on_close_setting_menu_btn_pressed"]
