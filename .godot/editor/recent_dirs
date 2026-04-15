@@ -1,3 +1,4 @@
+res://scenes/components/
 res://art/game_logos/
 /home/sergio/GitHub/core-hopper/android/signature/
 res://autoload/
@@ -7,7 +8,6 @@ res://scenes/screens/merge/
 res://scenes/screens/dig/
 res://art/bonus/
 /home/sergio/GitHub/core-hopper/data/bonus/
-res://scenes/components/
 /home/sergio/GitHub/core-hopper/data/bot_data/
 res://scenes/screens/progress/
 res://art/skills/

@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://byej242eayu0l"]
 
+[ext_resource type="Script" uid="uid://cl22ufbyoj0qp" path="res://scenes/screens/progress/locked_relic_item.gd" id="1_jrpn5"]
 [ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="2_41nmd"]
 [ext_resource type="Texture2D" uid="uid://bg18vum2cai3c" path="res://art/icons/rocket.png" id="2_welix"]
 
@@ -8,7 +9,8 @@ custom_minimum_size = Vector2(350, 250)
 layout_mode = 3
 anchors_preset = 0
 size_flags_horizontal = 3
-mouse_filter = 2
+mouse_filter = 1
+script = ExtResource("1_jrpn5")
 
 [node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("2_41nmd")]
 layout_mode = 1

@@ -18,6 +18,7 @@ var mouse_at_sell_node : MergeSellClass = null
 var progress_menu_show_tab = ""
 
 var last_skill_key_selected : String = ""
+var top_bar_y_pos = 0.0
 
 func _ready() -> void:
 	GlobalSignals.DataSaved.connect(SyncData)

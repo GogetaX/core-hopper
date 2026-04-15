@@ -13,6 +13,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 499.0
 offset_bottom = 140.0
+mouse_filter = 2
 script = ExtResource("1_vxes6")
 
 [node name="MergeActive" parent="." unique_id=892379017 instance=ExtResource("1_tjdw5")]
@@ -34,16 +35,19 @@ offset_right = -20.0
 offset_bottom = -18.5
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/separation = 20
 
 [node name="IconBG" parent="MergeActive/HList" unique_id=1682398798 instance=ExtResource("2_tjdw5")]
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
+mouse_filter = 2
 icon = ExtResource("3_vxes6")
 
 [node name="VList" type="VBoxContainer" parent="MergeActive/HList" unique_id=1314071127]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 alignment = 1
 
 [node name="title" type="Label" parent="MergeActive/HList/VList" unique_id=74076949]
@@ -71,17 +75,20 @@ offset_right = -20.0
 offset_bottom = -18.5
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/separation = 20
 
 [node name="IconBG" parent="MergeNotActive/HList" unique_id=1105498723 instance=ExtResource("2_tjdw5")]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+mouse_filter = 2
 panel_color = "BLUE"
 icon = ExtResource("3_vxes6")
 
 [node name="VList" type="VBoxContainer" parent="MergeNotActive/HList" unique_id=852488686]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 alignment = 1
 
 [node name="title" type="Label" parent="MergeNotActive/HList/VList" unique_id=227980961]

@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://k6olpxsddwvn"]
+
+[ext_resource type="Script" uid="uid://c3b27keck2d58" path="res://scenes/components/notification_item.gd" id="1_8pwri"]
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="1_hf1rj"]
+[ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="2_8pwri"]
+
+[node name="notification_item" type="Control" unique_id=708703639]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_8pwri")
+
+[node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("1_hf1rj")]
+layout_mode = 1
+panel_color = "BLUE"
+
+[node name="TextItem" type="VBoxContainer" parent="." unique_id=55951485]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="ProgressHashTag" parent="TextItem" unique_id=713365230 instance=ExtResource("2_8pwri")]
+self_modulate = Color(1, 0.3529412, 0.23137255, 1)
+layout_mode = 2
+text = "No free slots available"
+horizontal_alignment = 1
+autowrap_mode = 2
+hash_tag_color = "RED"
+no_bg = true
+
+[node name="notif_timer" type="Timer" parent="." unique_id=392133427]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="resized" from="TextItem" to="." method="_on_text_item_resized"]
+[connection signal="timeout" from="notif_timer" to="." method="_on_notif_timer_timeout"]

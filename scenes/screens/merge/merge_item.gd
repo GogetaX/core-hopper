@@ -26,12 +26,13 @@ func _ready() -> void:
 	GlobalBtn.BtnPress.connect(OnBotInspect)
 
 func OnBotInspect(control_node:Control):
-	
 	if control_node != self:
 		return
 	if !cur_bot_data.is_empty():
 		GlobalSignals.ShowPopup.emit("BOT_STAT_INFO",{"bot_uid":cur_bot_data.uid})
-	
+	if $locked_slot.visible:
+		GlobalSignals.AddNotification.emit({"type":"TEXT","description":"LOCKED SLOT\nUnlock: Skill tree and game progress","color":"WHITE"})
+
 func OnParentReady():
 	cur_bot_id = get_index()
 	SyncBotData()
@@ -57,7 +58,10 @@ func SyncBotData():
 		$BotDPS.text = Global.CurrencyToString((GlobalStats.GetBotFinalDPSWithGlobalAndStats(cur_bot_data,false,false,true)))+" DPS"
 		mouse_filter = Control.MOUSE_FILTER_STOP
 	else:
-		mouse_filter = Control.MOUSE_FILTER_IGNORE
+		if !$locked_slot.visible:
+			mouse_filter = Control.MOUSE_FILTER_IGNORE
+		else:
+			mouse_filter = Control.MOUSE_FILTER_PASS
 		$rank_color.visible = false
 		$BotImage.visible = false
 		$BotDPS.visible = false

@@ -17,6 +17,7 @@ mouse_filter = 1
 script = ExtResource("1_xbwj4")
 
 [node name="RelicItem" parent="." unique_id=892379017 instance=ExtResource("1_a4rcp")]
+visible = false
 layout_mode = 1
 darken_bg = true
 
@@ -148,7 +149,6 @@ texture = ExtResource("5_xbwj4")
 stretch_mode = 5
 
 [node name="LockedItem" parent="." unique_id=1222747643 instance=ExtResource("1_a4rcp")]
-visible = false
 layout_mode = 1
 panel_color = "TAB_BG"
 darken_bg = true

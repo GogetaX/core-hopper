@@ -20,10 +20,15 @@ func OnEmptyBtnPress(btn_node:Control):
 	GlobalSignals.ShowPopup.emit("SHOW_RELIC_INV",{"inv_mode":"equip_relic","equip_slot":cur_empty_slot})
 	
 func SetAsLocked():
+	GlobalBtn.AddBtnPress(self)
+	GlobalBtn.BtnPress.connect(OnLockedPress)
 	HideAllPanels()
 	$LockedItem.visible = true
 	
-	
+func OnLockedPress(btn_node:Control):
+	if btn_node != self:
+		return
+	GlobalSignals.AddNotification.emit({"type":"TEXT","description":"LOCKED RELIC\nUnlock: Skill tree and game progress","color":"WHITE"})
 func HideAllPanels():
 	for x in get_children():
 		x.visible = false

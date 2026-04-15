@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://bbgo6bxqgpta5" path="res://scenes/app/overlay_layer.gd" id="4_u2ckv"]
 [ext_resource type="Shader" uid="uid://dldrgd5gds6xv" path="res://shaders/popup_blur.gdshader" id="5_ajjm1"]
 [ext_resource type="Script" uid="uid://dnsd5jrynaq8t" path="res://scenes/components/drop_manager.gd" id="7_whjeo"]
+[ext_resource type="PackedScene" uid="uid://k6olpxsddwvn" path="res://scenes/components/notification_item.tscn" id="8_10g7k"]
+[ext_resource type="Script" uid="uid://de42tfe73scvj" path="res://scenes/components/notif_manager.gd" id="8_nsigk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_whjeo"]
 shader = ExtResource("5_ajjm1")
@@ -88,6 +90,7 @@ mouse_filter = 2
 script = ExtResource("4_u2ckv")
 
 [node name="BlurBG" type="ColorRect" parent="OverlayLayer" unique_id=1018703847]
+visible = false
 material = SubResource("ShaderMaterial_whjeo")
 anchors_preset = 15
 anchor_right = 1.0
@@ -133,3 +136,13 @@ script = ExtResource("7_whjeo")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=780856415]
 environment = SubResource("Environment_whjeo")
+
+[node name="NotifManager" type="VBoxContainer" parent="." unique_id=65052786]
+layout_mode = 0
+offset_right = 223.0
+offset_bottom = 445.0
+mouse_filter = 2
+script = ExtResource("8_nsigk")
+
+[node name="notification_item" parent="NotifManager" unique_id=708703639 instance=ExtResource("8_10g7k")]
+layout_mode = 2

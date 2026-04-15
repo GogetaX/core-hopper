@@ -1,4 +1,3 @@
-@tool
 extends Node2D
 
 class_name WorldSkillClass
@@ -9,7 +8,8 @@ var _is_selected = false
 var is_all_skill_toggled = false
 
 func _ready() -> void:
-	GlobalSignals.OnShowAllSkillsToggled.connect(OnShowAllSkillsToggled)
+	if !Engine.is_editor_hint():
+		GlobalSignals.OnShowAllSkillsToggled.connect(OnShowAllSkillsToggled)
 	
 func OnShowAllSkillsToggled(is_toggled:bool):
 	is_all_skill_toggled = is_toggled
@@ -104,6 +104,7 @@ func SetSkillVisibility():
 				visible = true
 				var t = create_tween()
 				t.tween_property(self,"modulate:a",1.0,0.3)
+				GlobalSignals.AddNotification.emit({"type":"TEXT","description":"Unlocked skill!\n"+skill_data.title,"color":"ORANGE"})
 			if _is_selected:
 				$SmartPanelCircleSkill.set_border_as_bg = true
 				$SmartPanelCircleSkill/skill_level.visible = true

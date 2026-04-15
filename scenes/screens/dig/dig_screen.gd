@@ -94,9 +94,10 @@ func _CheckBossRevealForLane(lane_index: int, lane_data: Dictionary) -> void:
 	_shown_boss_uid_by_lane[lane_index] = boss_uid
 	ShowBossIntro(lane_index, front_block)
 	
-func ShowBossIntro(lane_index: int, boss_block: Dictionary) -> void:
-	print("Boss appeared on lane ", lane_index, ": ", boss_block.get("name", "Boss"))
-	
+func ShowBossIntro(_lane_index: int, boss_block: Dictionary) -> void:
+	#print("Boss appeared on lane ", lane_index, ": ", boss_block.get("name", "Boss"))
+	GlobalSignals.AddNotification.emit({"type":"TEXT","description":"Boss appeared!\n"+boss_block.get("name", "Boss"),"color":"ORANGE"})
+
 	# Example UI:
 	# $BossBanner.show()
 	# $BossBanner/NameLabel.text = str(boss_block.get("name", "Boss"))

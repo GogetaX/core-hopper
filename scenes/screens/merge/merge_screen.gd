@@ -29,12 +29,12 @@ func _on_smart_button_buy_btn_pressed_with_price(currency: String, price: int) -
 	#Find Free Merge Slot
 	var free_merge_slot = GlobalSave.FindFreeMergeSlot()
 	if free_merge_slot == -1:
-		print_debug("TODO: [notification] not enough slots. -1")
+		GlobalSignals.AddNotification.emit({"type":"TEXT","description":"No free slots available","color":"RED"})
 		return
 	#Has Enough Money
 	var cur_currency = GlobalSave.GetCurrency(currency)
 	if price > cur_currency:
-		print_debug("TODO: [Notification] not enough currency")
+		GlobalSignals.AddNotification.emit({"type":"TEXT","description":"Not enough coins","color":"RED"})
 		return
 	GlobalSave.RemoveCurrency(currency,price)
 	
@@ -68,7 +68,7 @@ func MergeItemBasedOnSlot(slot_num):
 func _on_daily_free_bot_on_pressed() -> void:
 	var free_merge_slot = GlobalSave.FindFreeMergeSlot()
 	if free_merge_slot == -1:
-		print_debug("TODO: [notification] not enough slots. -1")
+		GlobalSignals.AddNotification.emit({"type":"TEXT","description":"No free slots available","color":"RED"})
 		return
 		
 	#Create Bot
@@ -94,7 +94,7 @@ func _on_daily_free_bot_on_pressed() -> void:
 func _on_daily_mythic_bot_on_press() -> void:
 	var free_merge_slot = GlobalSave.FindFreeMergeSlot()
 	if free_merge_slot == -1:
-		print_debug("TODO: [notification] not enough slots. -1")
+		GlobalSignals.AddNotification.emit({"type":"TEXT","description":"No free slots available","color":"RED"})
 		return
 		
 	#Create Bot

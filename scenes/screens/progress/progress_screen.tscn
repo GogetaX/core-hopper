@@ -605,10 +605,12 @@ mouse_filter = 2
 
 [node name="RelicVList" type="VBoxContainer" parent="Menu_Relics/RelicVList" unique_id=251269701]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 20
 
 [node name="HFlow" type="HFlowContainer" parent="Menu_Relics/RelicVList/RelicVList" unique_id=1043495580]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 
