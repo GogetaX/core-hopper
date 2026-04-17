@@ -24,10 +24,10 @@ func InitDaily(data:Dictionary,watch_ads := false):
 	cur_data = data
 	cur_watch_ads = watch_ads
 	#Set Colors
-	$DailyItem.panel_color = GlobalColor.GetSkillBranchColor(cur_data.group)
-	$DailyItem/VBoxContainer/BuyBtn.panel_color = GlobalColor.GetSkillBranchColor(cur_data.group)
-	$DailyItem/VBoxContainer/HList/Control/IconBG.panel_color = GlobalColor.GetSkillBranchColor(cur_data.group)
-	$DailyItem/VBoxContainer/time_left.hash_tag_color = GlobalColor.GetSkillBranchColor(cur_data.group)
+	$DailyItem.panel_color = GlobalSkillTree.GetBranchColorStr(cur_data.group)
+	$DailyItem/VBoxContainer/BuyBtn.panel_color = GlobalSkillTree.GetBranchColorStr(cur_data.group)
+	$DailyItem/VBoxContainer/HList/Control/IconBG.panel_color = GlobalSkillTree.GetBranchColorStr(cur_data.group)
+	$DailyItem/VBoxContainer/time_left.hash_tag_color = GlobalSkillTree.GetBranchColorStr(cur_data.group)
 	
 	#Set Data
 	$DailyItem/VBoxContainer/HList/VList/item_title.text = cur_data.title
@@ -61,11 +61,11 @@ func InitTactical(data):
 	HideAll()
 	$BuyItem.visible = true
 	#Set Colors
-	$BuyItem.panel_color = GlobalColor.GetSkillBranchColor(cur_data.group)
-	$BuyItem/VBoxContainer/HList/Control/IconBG.panel_color = GlobalColor.GetSkillBranchColor(cur_data.group)
-	$BuyItem/VBoxContainer/time_left.hash_tag_color = GlobalColor.GetSkillBranchColor(cur_data.group)
+	$BuyItem.panel_color = GlobalSkillTree.GetBranchColorStr(cur_data.group)
+	$BuyItem/VBoxContainer/HList/Control/IconBG.panel_color = GlobalSkillTree.GetBranchColorStr(cur_data.group)
+	$BuyItem/VBoxContainer/time_left.hash_tag_color = GlobalSkillTree.GetBranchColorStr(cur_data.group)
 	$BuyItem/VBoxContainer/BuyWithCurrencyBtn.currency_type = cur_data.cost_currency
-	$BuyItem/VBoxContainer/BuyWithCurrencyBtn.panel_color = GlobalColor.GetSkillBranchColor(cur_data.group)
+	$BuyItem/VBoxContainer/BuyWithCurrencyBtn.panel_color = GlobalSkillTree.GetBranchColorStr(cur_data.group)
 	
 	#Set Data
 	$BuyItem/VBoxContainer/HList/VList/item_title.text = cur_data.title

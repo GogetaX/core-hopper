@@ -285,3 +285,124 @@ func GetCoreResetStatValue(stat_name: String) -> float:
 
 	var stats: Dictionary = BuildFlatAcquiredCoreResetStats()
 	return float(stats.get(stat_name, 0.0))
+
+func _FormatCoreResetNumber(value: float) -> String:
+	var rounded := snappedf(value, 0.1)
+	if is_equal_approx(rounded, round(rounded)):
+		return str(int(round(rounded)))
+	return str(rounded)
+
+
+func GetCoreResetStatTitle(stat_name: String) -> String:
+	match stat_name.strip_edges().to_lower():
+		"merge_slot_bonus":
+			return "Merge Slots"
+		"bot_buy_start_level_bonus":
+			return "Starting Bot Level"
+		"relic_slot_bonus":
+			return "Relic Slots"
+		"bot_power_mult":
+			return "Bot Power"
+		"resource_drop_mult":
+			return "Resource Drops"
+		"boss_reward_mult":
+			return "Boss Rewards"
+		"tap_damage_mult":
+			return "Tap Damage"
+		_:
+			return stat_name.capitalize()
+
+
+func GetCoreResetEffectBonusStr(effect: Dictionary, include_total: bool = false) -> String:
+	if typeof(effect) != TYPE_DICTIONARY:
+		return ""
+
+	var kind := str(effect.get("kind", "")).strip_edges().to_lower()
+	if kind != "stat":
+		return ""
+
+	var stat_name := str(effect.get("stat", "")).strip_edges().to_lower()
+	if stat_name == "":
+		return ""
+
+	var effect_value := float(effect.get("value", 0.0))
+	var current_total := GetCoreResetStatValue(stat_name)
+	var next_total := current_total + effect_value
+
+	match stat_name:
+		"merge_slot_bonus":
+			var slot_word := "Merge Slot"
+			if int(round(effect_value)) != 1:
+				slot_word = "Merge Slots"
+
+			if include_total:
+				return "+" + str(int(round(effect_value))) + " " + slot_word + "  Total: +" + str(int(round(next_total)))
+			return "+" + str(int(round(effect_value))) + " " + slot_word
+
+		"bot_buy_start_level_bonus":
+			var start_level := 1 + int(round(next_total))
+			return "Start with Level " + str(start_level) + " Bots"
+
+		"relic_slot_bonus":
+			var relic_word := "Relic Slot"
+			if int(round(effect_value)) != 1:
+				relic_word = "Relic Slots"
+
+			if include_total:
+				return "+" + str(int(round(effect_value))) + " " + relic_word + "  Total: +" + str(int(round(next_total)))
+			return "+" + str(int(round(effect_value))) + " " + relic_word
+
+		"bot_power_mult":
+			return "+" + _FormatCoreResetNumber(effect_value * 100.0) + "% Bot Power"
+
+		"resource_drop_mult":
+			return "+" + _FormatCoreResetNumber(effect_value * 100.0) + "% Resource Drops"
+
+		"boss_reward_mult":
+			return "+" + _FormatCoreResetNumber(effect_value * 100.0) + "% Boss Rewards"
+
+		"tap_damage_mult":
+			return "+" + _FormatCoreResetNumber(effect_value * 100.0) + "% Tap Damage"
+
+		_:
+			if abs(effect_value) >= 1.0 and is_equal_approx(effect_value, round(effect_value)):
+				if effect_value > 0.0:
+					return "+" + str(int(round(effect_value))) + " " + GetCoreResetStatTitle(stat_name)
+				return str(int(round(effect_value))) + " " + GetCoreResetStatTitle(stat_name)
+
+			if effect_value > 0.0:
+				return "+" + _FormatCoreResetNumber(effect_value) + " " + GetCoreResetStatTitle(stat_name)
+			return _FormatCoreResetNumber(effect_value) + " " + GetCoreResetStatTitle(stat_name)
+
+
+func GetCoreResetEffectsBonusStr(effects: Array, separator: String = "\n", include_total: bool = false) -> String:
+	var parts: Array[String] = []
+
+	for effect in effects:
+		if typeof(effect) != TYPE_DICTIONARY:
+			continue
+
+		var part := GetCoreResetEffectBonusStr(effect, include_total)
+		if part != "":
+			parts.append(part)
+
+	return separator.join(parts)
+
+
+func GetResetDataBonusStr(reset_data: Dictionary, separator: String = "\n", include_total: bool = false) -> String:
+	if typeof(reset_data) != TYPE_DICTIONARY or reset_data.is_empty():
+		return ""
+
+	var effects = reset_data.get("effects", [])
+	if typeof(effects) != TYPE_ARRAY:
+		return ""
+
+	return GetCoreResetEffectsBonusStr(effects, separator, include_total)
+
+
+func GetCurrentResetBonusStr(separator: String = "\n", include_total: bool = false) -> String:
+	return GetResetDataBonusStr(GetCurrentResetData(), separator, include_total)
+
+
+func GetNextResetBonusStr(separator: String = "\n", include_total: bool = false) -> String:
+	return GetResetDataBonusStr(GetNextResetData(), separator, include_total)

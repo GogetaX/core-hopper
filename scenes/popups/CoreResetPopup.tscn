@@ -1,0 +1,406 @@
+[gd_scene format=3 uid="uid://dopg6p086t667"]
+
+[ext_resource type="Script" uid="uid://daqqxuxciy8cw" path="res://scenes/popups/core_reset_popup.gd" id="1_dqggo"]
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="2_0jdrq"]
+[ext_resource type="PackedScene" uid="uid://b2qghfcexq01t" path="res://scenes/components/icon_bg_circle.tscn" id="3_dqggo"]
+[ext_resource type="PackedScene" uid="uid://drlay20xc5ihb" path="res://scenes/components/icon_bg.tscn" id="4_cklkp"]
+[ext_resource type="Texture2D" uid="uid://8d4xunnuoyea" path="res://art/icons/20_px/close_icon.png" id="4_tc3tu"]
+[ext_resource type="Texture2D" uid="uid://cchau56rj3xbc" path="res://art/ui/core_reset.png" id="5_8sy2u"]
+[ext_resource type="Texture2D" uid="uid://cnd10htr36i28" path="res://art/ui/accept_icon.png" id="6_0jdrq"]
+[ext_resource type="Texture2D" uid="uid://ht1sl3ddnuhv" path="res://art/ui/decline_icon.png" id="7_dqggo"]
+[ext_resource type="PackedScene" uid="uid://c1v53sydvn3i7" path="res://scenes/components/core_reset_item.tscn" id="9_0aqc7"]
+[ext_resource type="PackedScene" uid="uid://njxlv6dxrlwj" path="res://scenes/screens/progress/smart_button_buy.tscn" id="10_45apc"]
+[ext_resource type="Texture2D" uid="uid://cop711sscd8gb" path="res://art/ui/reset_icon.png" id="10_qmstj"]
+[ext_resource type="Texture2D" uid="uid://uj5m581j5bo3" path="res://art/ui/dot_icon.png" id="11_yrojk"]
+[ext_resource type="Texture2D" uid="uid://bw2st18eidepw" path="res://art/ui/keep_icon.png" id="12_0aqc7"]
+
+[node name="CoreResetPopup" type="Control" unique_id=1294155484]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("1_dqggo")
+
+[node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("2_0jdrq")]
+layout_mode = 1
+panel_type = "INSIDE_ONLY"
+panel_color = "GOLD"
+darken_bg = true
+
+[node name="ClosePopup" parent="SmartPanel" unique_id=1682398798 instance=ExtResource("3_dqggo")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+panel_type = "INSIDE_ONLY"
+panel_color = "BLUE"
+icon = ExtResource("4_tc3tu")
+btn_type = "AS_BUTTON"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SmartPanel" unique_id=161037878]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_right = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Control2" type="Control" parent="SmartPanel/VBoxContainer" unique_id=1985073029]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="Control" type="Control" parent="SmartPanel/VBoxContainer" unique_id=1860574440]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="IconBG" parent="SmartPanel/VBoxContainer/Control" unique_id=1530672991 instance=ExtResource("4_cklkp")]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+panel_type = "BORDER_ONLY"
+panel_color = "BLUE"
+icon = ExtResource("5_8sy2u")
+
+[node name="core_reset_title" type="Label" parent="SmartPanel/VBoxContainer" unique_id=1220307511]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_White"
+text = "CORE RESET"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="SmartPanel/VBoxContainer" unique_id=446599109]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "Reset your current digging progress and beging against with permenent bonuses."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Control3" type="Control" parent="SmartPanel/VBoxContainer" unique_id=1070154031]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="SmartPanel" parent="SmartPanel/VBoxContainer" unique_id=586460612 instance=ExtResource("2_0jdrq")]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+panel_type = "INSIDE_ONLY"
+panel_color = "DISABLED"
+
+[node name="VList" type="VBoxContainer" parent="SmartPanel/VBoxContainer/SmartPanel" unique_id=1249998274]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="HList" type="HBoxContainer" parent="SmartPanel/VBoxContainer/SmartPanel/VList" unique_id=526344111]
+layout_mode = 2
+
+[node name="current_best" type="Label" parent="SmartPanel/VBoxContainer/SmartPanel/VList/HList" unique_id=2079666708]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "CURRENT BEST: 1240m"
+
+[node name="Control" type="Control" parent="SmartPanel/VBoxContainer/SmartPanel/VList/HList" unique_id=1967364101]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="target_value" type="Label" parent="SmartPanel/VBoxContainer/SmartPanel/VList/HList" unique_id=1197341164]
+layout_mode = 2
+theme_type_variation = &"LabelDailyBlue"
+text = "TARGET: 1000m"
+
+[node name="ProgressBar" type="ProgressBar" parent="SmartPanel/VBoxContainer/SmartPanel/VList" unique_id=280546804]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_type_variation = &"ProgressBarBlue"
+max_value = 1.0
+step = 0.001
+value = 1.0
+show_percentage = false
+
+[node name="ReadyContainer" type="HBoxContainer" parent="SmartPanel/VBoxContainer/SmartPanel/VList" unique_id=1525823253]
+layout_mode = 2
+alignment = 1
+
+[node name="accept_icon" type="TextureRect" parent="SmartPanel/VBoxContainer/SmartPanel/VList/ReadyContainer" unique_id=1846813515]
+self_modulate = Color(0.30980393, 0.89411765, 1, 1)
+layout_mode = 2
+texture = ExtResource("6_0jdrq")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label3" type="Label" parent="SmartPanel/VBoxContainer/SmartPanel/VList/ReadyContainer" unique_id=1359514162]
+layout_mode = 2
+theme_type_variation = &"LabelDailyBlue"
+theme_override_colors/font_color = Color(0.30980393, 0.89411765, 1, 1)
+theme_override_font_sizes/font_size = 26
+text = "READY FOR EXTRACTION"
+
+[node name="NotReadyContainer" type="HBoxContainer" parent="SmartPanel/VBoxContainer/SmartPanel/VList" unique_id=2051768896]
+layout_mode = 2
+alignment = 1
+
+[node name="accept_icon2" type="TextureRect" parent="SmartPanel/VBoxContainer/SmartPanel/VList/NotReadyContainer" unique_id=816102911]
+self_modulate = Color(1, 0.3529412, 0.23137255, 1)
+layout_mode = 2
+texture = ExtResource("7_dqggo")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label3" type="Label" parent="SmartPanel/VBoxContainer/SmartPanel/VList/NotReadyContainer" unique_id=594796770]
+layout_mode = 2
+theme_type_variation = &"LabelDailyBlue"
+theme_override_colors/font_color = Color(1, 0.3529412, 0.23137255, 1)
+theme_override_font_sizes/font_size = 26
+text = "NOT READY"
+
+[node name="Control4" type="Control" parent="SmartPanel/VBoxContainer" unique_id=1955871407]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="SmartPanel/VBoxContainer" unique_id=821910883]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_White"
+theme_override_colors/font_color = Color(1, 0.74509805, 0.23137255, 1)
+theme_override_font_sizes/font_size = 40
+text = "NEXT REWARD TIER"
+
+[node name="next_reward_desc" type="Label" parent="SmartPanel/VBoxContainer" unique_id=905569799]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "NEXT REWARD TIER"
+
+[node name="BonusList" type="VBoxContainer" parent="SmartPanel/VBoxContainer" unique_id=903736304]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+
+[node name="CoreResetItem" parent="SmartPanel/VBoxContainer/BonusList" unique_id=1537638433 instance=ExtResource("9_0aqc7")]
+layout_mode = 2
+
+[node name="SmartPanel2" parent="SmartPanel/VBoxContainer" unique_id=276639055 instance=ExtResource("2_0jdrq")]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+panel_type = "INSIDE_ONLY"
+panel_color = "DISABLED"
+
+[node name="HList" type="HBoxContainer" parent="SmartPanel/VBoxContainer/SmartPanel2" unique_id=1407697863]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ResetList" type="VBoxContainer" parent="SmartPanel/VBoxContainer/SmartPanel2/HList" unique_id=799645187]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HList" type="HBoxContainer" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/ResetList" unique_id=308761700]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/ResetList/HList" unique_id=640649195]
+self_modulate = Color(1, 0.3529412, 0.23137255, 1)
+layout_mode = 2
+texture = ExtResource("10_qmstj")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/ResetList/HList" unique_id=880537254]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+theme_override_font_sizes/font_size = 40
+text = "WILL RESET"
+
+[node name="Control" type="Control" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/ResetList" unique_id=1872508330]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="HList2" type="HBoxContainer" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/ResetList" unique_id=1064782178]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TextureRect" type="TextureRect" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/ResetList/HList2" unique_id=946470295]
+self_modulate = Color(1, 0.3529412, 0.23137255, 1)
+layout_mode = 2
+texture = ExtResource("11_yrojk")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/ResetList/HList2" unique_id=89302488]
+layout_mode = 2
+theme_type_variation = &"LabelGrayHint"
+theme_override_font_sizes/font_size = 28
+text = "DEPTH PROGRESS"
+
+[node name="HList3" type="HBoxContainer" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/ResetList" unique_id=822545091]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TextureRect" type="TextureRect" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/ResetList/HList3" unique_id=2136823332]
+self_modulate = Color(1, 0.3529412, 0.23137255, 1)
+layout_mode = 2
+texture = ExtResource("11_yrojk")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/ResetList/HList3" unique_id=855170796]
+layout_mode = 2
+theme_type_variation = &"LabelGrayHint"
+theme_override_font_sizes/font_size = 28
+text = "BOTS"
+
+[node name="HList4" type="HBoxContainer" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/ResetList" unique_id=38626024]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TextureRect" type="TextureRect" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/ResetList/HList4" unique_id=2068858516]
+self_modulate = Color(1, 0.3529412, 0.23137255, 1)
+layout_mode = 2
+texture = ExtResource("11_yrojk")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/ResetList/HList4" unique_id=702920856]
+layout_mode = 2
+theme_type_variation = &"LabelGrayHint"
+theme_override_font_sizes/font_size = 28
+text = "TEMP BOOSTS"
+
+[node name="HList5" type="HBoxContainer" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/ResetList" unique_id=2104023925]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TextureRect" type="TextureRect" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/ResetList/HList5" unique_id=1710198327]
+self_modulate = Color(1, 0.3529412, 0.23137255, 1)
+layout_mode = 2
+texture = ExtResource("11_yrojk")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/ResetList/HList5" unique_id=786325744]
+layout_mode = 2
+theme_type_variation = &"LabelGrayHint"
+theme_override_font_sizes/font_size = 28
+text = "ALL CURRENCY"
+
+[node name="Seperator" type="VSeparator" parent="SmartPanel/VBoxContainer/SmartPanel2/HList" unique_id=70036779]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="KeepList" type="VBoxContainer" parent="SmartPanel/VBoxContainer/SmartPanel2/HList" unique_id=563738124]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HList" type="HBoxContainer" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/KeepList" unique_id=648748855]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/KeepList/HList" unique_id=1121007659]
+self_modulate = Color(0.30980393, 0.89411765, 1, 1)
+layout_mode = 2
+texture = ExtResource("12_0aqc7")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/KeepList/HList" unique_id=476999869]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+theme_override_font_sizes/font_size = 40
+text = "WILL KEEP"
+
+[node name="Control" type="Control" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/KeepList" unique_id=1451406450]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="HList2" type="HBoxContainer" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/KeepList" unique_id=1812829583]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TextureRect" type="TextureRect" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/KeepList/HList2" unique_id=3048342]
+self_modulate = Color(0.30980393, 0.89411765, 1, 1)
+layout_mode = 2
+texture = ExtResource("11_yrojk")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/KeepList/HList2" unique_id=641439977]
+layout_mode = 2
+theme_type_variation = &"LabelGrayHint"
+theme_override_font_sizes/font_size = 28
+text = "RELICS"
+
+[node name="HList3" type="HBoxContainer" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/KeepList" unique_id=876414365]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TextureRect" type="TextureRect" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/KeepList/HList3" unique_id=1592231943]
+self_modulate = Color(0.30980393, 0.89411765, 1, 1)
+layout_mode = 2
+texture = ExtResource("11_yrojk")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/KeepList/HList3" unique_id=1030676076]
+layout_mode = 2
+theme_type_variation = &"LabelGrayHint"
+theme_override_font_sizes/font_size = 28
+text = "CORE BONUSES"
+
+[node name="HList4" type="HBoxContainer" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/KeepList" unique_id=1376507962]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TextureRect" type="TextureRect" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/KeepList/HList4" unique_id=472877104]
+self_modulate = Color(0.30980393, 0.89411765, 1, 1)
+layout_mode = 2
+texture = ExtResource("11_yrojk")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/KeepList/HList4" unique_id=1185394265]
+layout_mode = 2
+theme_type_variation = &"LabelGrayHint"
+theme_override_font_sizes/font_size = 28
+text = "SKILL TREE UNLOCKS"
+
+[node name="CoreResetBtn" parent="SmartPanel/VBoxContainer" unique_id=664760665 instance=ExtResource("10_45apc")]
+custom_minimum_size = Vector2(350, 100)
+layout_mode = 2
+size_flags_horizontal = 1
+currency_type = "crystals"
+buy_btn_title = "CORE RESET"
+panel_color = "BLUE"
+
+[connection signal="BtnPressed" from="SmartPanel/ClosePopup" to="." method="_on_close_popup_btn_pressed"]
+[connection signal="OnPressed" from="SmartPanel/VBoxContainer/CoreResetBtn" to="." method="_on_core_reset_btn_on_pressed"]

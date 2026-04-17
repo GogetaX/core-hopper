@@ -1,12 +1,21 @@
 [gd_scene format=3 uid="uid://caakrndjfym13"]
 
 [ext_resource type="Script" uid="uid://4wemxbiy6evq" path="res://scenes/screens/dig/next_core_reset.gd" id="1_wcvi3"]
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="2_nwjpg"]
 
-[node name="NextCoreReset" type="Panel" unique_id=852508425]
+[node name="NextCoreReset" type="Control" unique_id=1842211214]
 custom_minimum_size = Vector2(300, 120)
-mouse_filter = 2
+layout_mode = 3
+anchors_preset = 0
+offset_right = 300.0
+offset_bottom = 120.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 1
 theme_type_variation = &"PanelPurpleStatus"
 script = ExtResource("1_wcvi3")
+
+[node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("2_nwjpg")]
+layout_mode = 1
 
 [node name="CoreResetInProgress" type="VBoxContainer" parent="." unique_id=746558821]
 layout_mode = 1
@@ -59,3 +68,5 @@ layout_mode = 2
 theme_type_variation = &"LabelGrayHint"
 text = "+1 Core Shard next reset"
 horizontal_alignment = 2
+
+[connection signal="resized" from="CoreResetInProgress" to="." method="_on_core_reset_in_progress_resized"]

@@ -98,6 +98,9 @@ func _BuildCleanRelicInventory() -> Dictionary:
 	}
 
 
+func SyncRelicInv():
+	_EnsureRelicInventory()
+	
 func _EnsureRelicInventory() -> void:
 	if !GlobalSave.save_data.has("relic_inv") or typeof(GlobalSave.save_data.relic_inv) != TYPE_DICTIONARY:
 		GlobalSave.save_data["relic_inv"] = _BuildCleanRelicInventory()
@@ -119,9 +122,7 @@ func GetRelicInventory() -> Dictionary:
 	return GlobalSave.save_data.relic_inv
 
 
-func GetUnlockedRelicSlots() -> int:
-	_EnsureRelicInventory()
-	return maxi(0, int(GlobalSave.save_data.relic_inv.unlocked_slots))
+
 
 
 func IsRelicOwned(relic_id: String) -> bool:
@@ -153,7 +154,7 @@ func GetEquippedRelicIds() -> Array:
 	_EnsureRelicInventory()
 
 	var result: Array = []
-	var max_slots := GetUnlockedRelicSlots()
+	var max_slots := GlobalStats.GetUnlockedRelicSlots()
 
 	for relic_id_value in GlobalSave.save_data.relic_inv.equipped_ids:
 		if result.size() >= max_slots:
@@ -281,7 +282,7 @@ func CanEquipRelic(relic_id: String) -> bool:
 		return false
 
 	var equipped_ids := GetEquippedRelicIds()
-	return equipped_ids.size() < GetUnlockedRelicSlots()
+	return equipped_ids.size() < GlobalStats.GetUnlockedRelicSlots()
 
 
 func EquipRelic(relic_id: String) -> bool:

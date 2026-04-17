@@ -845,4 +845,7 @@ func BuildFlatAcquiredSkillStats() -> Dictionary:
 func GetBranchColorStr(branch_id:String)->String:
 	if !_skill_tree_data.branches.has(branch_id):
 		return "WHITE"
+	if _skill_tree_data.branches[branch_id].has("color"):
+		return _skill_tree_data.branches[branch_id].color
+	print_debug("unknown branch id: ",branch_id)
 	return _skill_tree_data.branches[branch_id].get("color","WHITE")

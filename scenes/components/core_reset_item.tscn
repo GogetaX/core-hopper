@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://c1v53sydvn3i7"]
+
+[ext_resource type="Script" uid="uid://qjjp8apgwlr" path="res://scenes/components/core_reset_item.gd" id="1_anbdh"]
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="1_cpi2t"]
+[ext_resource type="PackedScene" uid="uid://drlay20xc5ihb" path="res://scenes/components/icon_bg.tscn" id="2_anbdh"]
+[ext_resource type="Texture2D" uid="uid://bg18vum2cai3c" path="res://art/icons/rocket.png" id="3_ws57h"]
+
+[node name="CoreResetItem" type="Control" unique_id=1537638433]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 655.0
+offset_bottom = 150.0
+script = ExtResource("1_anbdh")
+
+[node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("1_cpi2t")]
+layout_mode = 1
+panel_type = "INSIDE_ONLY"
+panel_color = "DISABLED"
+
+[node name="HList" type="HBoxContainer" parent="." unique_id=2066272884]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="IconBG" parent="HList" unique_id=1682398798 instance=ExtResource("2_anbdh")]
+custom_minimum_size = Vector2(110, 100)
+layout_mode = 2
+panel_color = "GOLD"
+icon = ExtResource("3_ws57h")
+
+[node name="effect_name_and_value" type="Label" parent="HList" unique_id=473716431]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_White"
+theme_override_font_sizes/font_size = 40
+text = "+2 Merge Slots"

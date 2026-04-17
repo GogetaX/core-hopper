@@ -152,7 +152,7 @@ func _on_tab_relics_on_pressed() -> void:
 		x.queue_free()
 
 	#Populate the unlocked relics
-	var avilable_slots = GlobalRelicDb.GetUnlockedRelicSlots()
+	var avilable_slots = GlobalStats.GetUnlockedRelicSlots()
 	var equiped_relics = GlobalRelicDb.GetAllEquippedRelics()
 	var max_slots = GlobalRelicDb.MAX_ACTIVE_RELIC_SLOTS
 	var cur_slot = 0

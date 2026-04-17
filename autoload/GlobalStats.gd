@@ -241,6 +241,12 @@ func ApplyCritToDamage(base_damage: float) -> Dictionary:
 		"did_crit": did_crit
 	}
 
+func GetUnlockedRelicSlots() -> int:
+	GlobalRelicDb.SyncRelicInv()
+	var base_relic_slots = GlobalSave.save_data.relic_inv.unlocked_slots
+	var core_reset_slots = GlobalCoreResetDb.GetCoreResetStatValue("relic_slot_bonus")
+	return maxi(0, int(base_relic_slots + core_reset_slots))
+	
 #Relics
 func GetRelicMultiplierTotal(effect_type: String) -> float:
 	var total := 1.0
@@ -305,7 +311,10 @@ func ApplyBossDamageMultiplier(base_damage: float) -> float:
 	return max(0.0, float(base_damage) * GetBossDamageMultiplier())
 
 func GetFreeMergeSlots()->int:
-	return min(int(GlobalSave.save_data.bot_inventory.merge_free_slots + GlobalSkillTree.skill_summary.stats.merge_slot_bonus),MAX_MERGE_SLOTS)
+	var inv_merge_slots = GlobalSave.save_data.bot_inventory.merge_free_slots
+	var skill_merge_slots = GlobalSkillTree.skill_summary.stats.merge_slot_bonus
+	var core_reset_merge_slots = GlobalCoreResetDb.GetCoreResetStatValue("merge_slot_bonus")
+	return min(int(inv_merge_slots + skill_merge_slots + core_reset_merge_slots),MAX_MERGE_SLOTS)
 
 func BuyBotData():
 	var base_bot_price = 5 * pow(1.12,GlobalSave.save_data.player_stats.total_bots_bought)
@@ -331,6 +340,8 @@ func BuyBotData():
 		var boost_data = GlobalTimedBonus.GetBoosterDataById("bot_discount")
 		res.price = res.price - (res.price * boost_data.effect_value)
 	
+	#Core reset buy level bot
+	res.level += GlobalCoreResetDb.GetCoreResetStatValue("bot_buy_start_level_bonus")
 	#converting from float back to int
 	res.price = int(res.price)
 	res.level = int(res.level)

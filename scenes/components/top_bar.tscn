@@ -182,6 +182,7 @@ layout_mode = 2
 panel_type = "BORDER_AND_INSIDE"
 panel_color = "BLUE"
 icon = ExtResource("5_bywe0")
+btn_type = "AS_BUTTON"
 
 [node name="CloseSettingMenu" parent="HBoxContainer" unique_id=759189028 instance=ExtResource("4_bywe0")]
 custom_minimum_size = Vector2(110, 100)
@@ -189,6 +190,7 @@ layout_mode = 2
 panel_type = "INSIDE_ONLY"
 panel_color = "BLUE"
 icon = ExtResource("6_p8s5q")
+btn_type = "AS_BUTTON"
 
 [connection signal="BtnPressed" from="HBoxContainer/SettingButton" to="." method="_on_setting_button_btn_pressed"]
 [connection signal="BtnPressed" from="HBoxContainer/CloseSettingMenu" to="." method="_on_close_setting_menu_btn_pressed"]

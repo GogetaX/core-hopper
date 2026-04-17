@@ -89,6 +89,7 @@ panel_color = "BLUE"
 darken_bg = true
 
 [node name="State_BuyBot" type="Control" parent="." unique_id=1760469175]
+visible = false
 modulate = Color(0.23403707, 0.23403707, 0.23403707, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -182,7 +183,6 @@ hash_tag_color = "BLUE"
 no_bg = true
 
 [node name="State_Reach2kAnd25Crystals" type="Control" parent="." unique_id=1838847763]
-visible = false
 modulate = Color(0.23403707, 0.23403707, 0.23403707, 1)
 layout_mode = 1
 anchors_preset = 15
