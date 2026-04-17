@@ -2,7 +2,12 @@ extends Control
 
 
 func _ready() -> void:
+	SyncData()
 	SyncYSize()
+	
+func SyncData():
+	var currency_data = GlobalBlockDatabase.GetAverageCoinsForDepth(GlobalSave.save_data.player_stats.max_depth_reached)
+	print(currency_data)
 	
 func SyncYSize():
 	if !is_node_ready():

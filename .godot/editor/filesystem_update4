@@ -24,3 +24,5 @@ res://scenes/popups/WatchAdPopup.tscn
 res://scenes/popups/watch_ad_button.tscn
 res://scenes/popups/watch_ad_button.gd
 res://autoload/GlobalSave.gd
+res://autoload/GlobalBlockDatabase.gd
+res://scenes/popups/watch_ad_popup.gd

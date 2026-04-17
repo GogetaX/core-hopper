@@ -420,3 +420,51 @@ func RollBlockDrops(block_data: Dictionary, reward_mult: float = 1.0) -> Diction
 			result[currency] = int(result.get(currency, 0)) + rolled_amount
 
 	return result
+	
+
+func GetAverageCoinsForDepth(depth: int) -> float:
+	if not is_loaded():
+		load_data()
+
+	var band := get_band_for_depth(depth)
+	print(band)
+	if band.is_empty():
+		return 0.0
+
+	var spawn_pool: Array = band.get("spawn_pool", [])
+	if spawn_pool.is_empty():
+		return 0.0
+
+	var reward_multiplier := float(band.get("reward_multiplier", 1.0))
+
+	var total_weight := 0.0
+	var weighted_coin_sum := 0.0
+
+	for entry in spawn_pool:
+		if typeof(entry) != TYPE_DICTIONARY:
+			continue
+
+		var weight := float(entry.get("weight", 0.0))
+		if weight <= 0.0:
+			continue
+
+		var block_id := String(entry.get("id", "")).strip_edges()
+		if block_id == "":
+			continue
+
+		var archetype := get_archetype(block_id)
+		if archetype.is_empty():
+			continue
+		var reward_type := String(archetype.get("reward_type", "coins")).to_lower()
+		var reward_amount := float(archetype.get("reward_amount", 0.0))
+		var coin_reward := 0.0
+		if reward_type == "coins":
+			coin_reward = reward_amount * reward_multiplier
+
+		total_weight += weight
+		weighted_coin_sum += coin_reward * weight
+
+	if total_weight <= 0.0:
+		return 0.0
+
+	return weighted_coin_sum / total_weight
