@@ -406,3 +406,200 @@ func GetCurrentResetBonusStr(separator: String = "\n", include_total: bool = fal
 
 func GetNextResetBonusStr(separator: String = "\n", include_total: bool = false) -> String:
 	return GetResetDataBonusStr(GetNextResetData(), separator, include_total)
+
+func ActivateCoreReset() -> bool:
+	_EnsureLoaded()
+	_EnsureSaveSchema()
+
+	if !CanClaimNextReset():
+		return false
+
+	var next_data := GetNextResetData()
+	if next_data.is_empty():
+		return false
+
+	var next_level := int(next_data.get("tier", GetCurrentResetLevel() + 1))
+	var old_reset_count := int(GlobalSave.save_data.player_stats.get("core_resets", 0))
+	if next_level <= old_reset_count:
+		return false
+
+	# 1) grant the permanent reset tier first
+	GlobalSave.save_data.player_stats["core_resets"] = next_level
+	GlobalSave.save_data.player_stats["current_prestige"] = next_level
+
+	# 2) wipe current run state, keep meta systems
+	_ResetRunStateForCoreReset()
+
+	# 3) rebuild fresh lane blocks for the new run
+	if GlobalSave.has_method("RepapulateAllLaneBlocks"):
+		GlobalSave.RepapulateAllLaneBlocks()
+	else:
+		for lane_index in range(GlobalSave.save_data.get("lanes", []).size()):
+			var lane_data: Dictionary = GlobalSave.save_data.lanes[lane_index]
+			if lane_data.get("block_data", []).is_empty() and GlobalSave.has_method("GenerateNextBlocks"):
+				GlobalSave.GenerateNextBlocks(lane_index, 5)
+
+	# 4) refresh digging runtime
+	if has_node("/root/GlobalDiggingProcess"):
+		var digging = get_node("/root/GlobalDiggingProcess")
+		if digging != null:
+			if digging.has_method("SyncDiggingLanes"):
+				digging.SyncDiggingLanes()
+			else:
+				for lane_index in range(GlobalSave.save_data.get("lanes", []).size()):
+					if digging.has_method("RefreshLaneDigging"):
+						digging.RefreshLaneDigging(lane_index)
+
+	GlobalSave.SyncSave()
+	return true
+
+
+func _ResetRunStateForCoreReset() -> void:
+	var clean_save: Dictionary = GlobalSave.BuildCleanSaveData()
+
+	# KEEP META / PERSISTENT
+	var keep_relic_inv: Dictionary = GlobalSave.save_data.get("relic_inv", {}).duplicate(true)
+	var keep_skill_tree: Dictionary = GlobalSave.save_data.get("skill_tree", {}).duplicate(true)
+	var keep_reward_chests: Dictionary = GlobalSave.save_data.get("reward_chests", {}).duplicate(true)
+	var keep_milestones: Dictionary = GlobalSave.save_data.get("milestones", {}).duplicate(true)
+	var keep_boss_progress: Dictionary = GlobalSave.save_data.get("boss_progress", {}).duplicate(true)
+	var keep_daily_quests: Dictionary = GlobalSave.save_data.get("daily_quests", {}).duplicate(true)
+	var keep_daily_free_bot: Dictionary = GlobalSave.save_data.get("daily_free_bot", {}).duplicate(true)
+	var keep_settings: Dictionary = GlobalSave.save_data.get("settings", {}).duplicate(true)
+	var keep_player_stats: Dictionary = GlobalSave.save_data.get("player_stats", {}).duplicate(true)
+	var keep_meta: Dictionary = GlobalSave.save_data.get("meta", {}).duplicate(true)
+
+	# RESET CURRENT RUN
+	_ResetCurrenciesForCoreReset()
+	_ResetBotInventoryForCoreReset(clean_save)
+	_ResetLanesForCoreReset(clean_save)
+	_ResetProgressForCoreReset(clean_save)
+	_ResetUpgradesForCoreReset(clean_save)
+	_ResetTimedBonusesForCoreReset()
+	_ResetLegacyGlobalUpgradesForCoreReset(clean_save)
+
+	# RESTORE PERSISTENT / META
+	GlobalSave.save_data["relic_inv"] = keep_relic_inv
+	GlobalSave.save_data["skill_tree"] = keep_skill_tree
+	GlobalSave.save_data["reward_chests"] = keep_reward_chests
+	GlobalSave.save_data["milestones"] = keep_milestones
+	GlobalSave.save_data["boss_progress"] = keep_boss_progress
+	GlobalSave.save_data["daily_quests"] = keep_daily_quests
+	GlobalSave.save_data["daily_free_bot"] = keep_daily_free_bot
+	GlobalSave.save_data["settings"] = keep_settings
+
+	# keep long-term player stats, but reset only the current prestige counter to the newly reached value
+	GlobalSave.save_data["player_stats"] = keep_player_stats
+	if !GlobalSave.save_data.player_stats.has("core_resets"):
+		GlobalSave.save_data.player_stats["core_resets"] = 0
+	if !GlobalSave.save_data.player_stats.has("current_prestige"):
+		GlobalSave.save_data.player_stats["current_prestige"] = 0
+	if !GlobalSave.save_data.player_stats.has("total_bots_bought_this_reset"):
+		GlobalSave.save_data.player_stats.total_bots_bought_this_reset = 0
+	GlobalSave.save_data.player_stats["current_prestige"] = int(GlobalSave.save_data.player_stats.get("core_resets", 0))
+
+	# keep save metadata / uid serial so no weird collisions
+	GlobalSave.save_data["meta"] = keep_meta
+
+
+func _ResetCurrenciesForCoreReset() -> void:
+	if !GlobalSave.save_data.has("currencies") or typeof(GlobalSave.save_data.currencies) != TYPE_DICTIONARY:
+		GlobalSave.save_data["currencies"] = {}
+
+	# reset run currencies only
+	GlobalSave.save_data.currencies["coins"] = 0
+	GlobalSave.save_data.currencies["crystals"] = 0
+	GlobalSave.save_data.currencies["energy"] = 0
+
+	# KEEP relic dust because relic system stays
+	if !GlobalSave.save_data.has("relic_inv") or typeof(GlobalSave.save_data.relic_inv) != TYPE_DICTIONARY:
+		GlobalSave.save_data["relic_inv"] = {}
+
+
+func _ResetBotInventoryForCoreReset(clean_save: Dictionary) -> void:
+	var clean_bot_inventory: Dictionary = clean_save.get("bot_inventory", {
+		"bot_db": [],
+		"merge_free_slots": 4
+	}).duplicate(true)
+
+	clean_bot_inventory["bot_db"] = []
+	GlobalSave.save_data["bot_inventory"] = clean_bot_inventory
+
+
+func _ResetLanesForCoreReset(clean_save: Dictionary) -> void:
+	var clean_lanes: Array = clean_save.get("lanes", []).duplicate(true)
+
+	# fallback in case clean save changes unexpectedly
+	if clean_lanes.is_empty():
+		clean_lanes = []
+		for lane_index in range(5):
+			clean_lanes.append({
+				"auto_dig_unlocked": lane_index == 0,
+				"bot_uid": -1,
+				"dig_power": 1.0,
+				"dig_speed": 1.0,
+				"lane_index": lane_index,
+				"block_data": [],
+				"lane_depth": 0,
+				"last_cleared_depth": -1
+			})
+
+	for lane_data in clean_lanes:
+		lane_data["bot_uid"] = -1
+		lane_data["dig_power"] = 1.0
+		lane_data["dig_speed"] = 1.0
+		lane_data["lane_depth"] = 0
+		lane_data["last_cleared_depth"] = -1
+		lane_data["block_data"] = []
+
+	GlobalSave.save_data["lanes"] = clean_lanes
+
+
+func _ResetProgressForCoreReset(clean_save: Dictionary) -> void:
+	var clean_progress: Dictionary = clean_save.get("progress", {
+		"efficiency_mult": 1.0,
+		"global_depth": 0
+	}).duplicate(true)
+
+	clean_progress["global_depth"] = 0
+	clean_progress["efficiency_mult"] = 1.0
+
+	GlobalSave.save_data["progress"] = clean_progress
+
+
+func _ResetUpgradesForCoreReset(clean_save: Dictionary) -> void:
+	# safest version: reload the upgrade database fresh
+	if GlobalSave.has_method("LoadUpgrades"):
+		GlobalSave.save_data["upgrades"] = GlobalSave.LoadUpgrades().duplicate(true)
+	else:
+		GlobalSave.save_data["upgrades"] = clean_save.get("upgrades", {}).duplicate(true)
+
+
+func _ResetLegacyGlobalUpgradesForCoreReset(clean_save: Dictionary) -> void:
+	if clean_save.has("global_upgrades"):
+		GlobalSave.save_data["global_upgrades"] = clean_save.get("global_upgrades", {}).duplicate(true)
+	else:
+		GlobalSave.save_data["global_upgrades"] = {
+			"global_dig_power_level": 0,
+			"global_dig_speed_level": 0,
+			"offline_gain_level": 0.0
+		}
+
+
+func _ResetTimedBonusesForCoreReset() -> void:
+	if !GlobalSave.save_data.has("timed_bonuses") or typeof(GlobalSave.save_data.timed_bonuses) != TYPE_DICTIONARY:
+		GlobalSave.save_data["timed_bonuses"] = {
+			"active": {},
+			"daily_day_key": "",
+			"daily_ids": []
+		}
+		return
+
+	# clear only active temporary buffs
+	GlobalSave.save_data.timed_bonuses["active"] = {}
+
+	# keep the same day offer pool
+	if !GlobalSave.save_data.timed_bonuses.has("daily_day_key"):
+		GlobalSave.save_data.timed_bonuses["daily_day_key"] = ""
+	if !GlobalSave.save_data.timed_bonuses.has("daily_ids") or typeof(GlobalSave.save_data.timed_bonuses.daily_ids) != TYPE_ARRAY:
+		GlobalSave.save_data.timed_bonuses["daily_ids"] = []

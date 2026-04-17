@@ -1,8 +1,10 @@
-res://scenes/components/
-res://scenes/screens/dig/
+/home/sergio/GitHub/core-hopper/NotImported/exports/crazy_games_html5/
 res://autoload/
-/home/sergio/GitHub/core-hopper/data/core_reset/
+res://shaders/
+res://scenes/components/
 res://art/game_logos/
+res://scenes/screens/dig/
+/home/sergio/GitHub/core-hopper/data/core_reset/
 /home/sergio/GitHub/core-hopper/android/signature/
 res://scenes/popups/
 res://art/currency/
@@ -19,7 +21,6 @@ res://art/relics/
 res://scenes/label_data_scripts/
 res://scenes/screens/particles/
 res://data/icons/
-res://shaders/
 res://data/bosses/
 res://data/bot_atlas/
 res://art/bots/

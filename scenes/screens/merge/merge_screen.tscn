@@ -226,6 +226,7 @@ custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 buy_btn_title = "DAILY Mythic Bot (1)"
 buy_btn_icon = ExtResource("10_8ecmt")
+btn_type = "REWARDED_AD_BTN"
 
 [node name="DragDropHandler" type="Node" parent="." unique_id=2044087815]
 script = ExtResource("7_lfmeh")

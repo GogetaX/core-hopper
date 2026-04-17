@@ -9,6 +9,9 @@
 [ext_resource type="Script" uid="uid://dnsd5jrynaq8t" path="res://scenes/components/drop_manager.gd" id="7_whjeo"]
 [ext_resource type="PackedScene" uid="uid://k6olpxsddwvn" path="res://scenes/components/notification_item.tscn" id="8_10g7k"]
 [ext_resource type="Script" uid="uid://de42tfe73scvj" path="res://scenes/components/notif_manager.gd" id="8_nsigk"]
+[ext_resource type="Script" uid="uid://ohclp6xvx2qo" path="res://scenes/components/core_reset_animation.gd" id="10_mglx4"]
+[ext_resource type="Texture2D" uid="uid://fheqxe0yksu" path="res://art/game_logos/boot_splash.png" id="10_sw1ao"]
+[ext_resource type="Material" uid="uid://dvkjqyp27tl2w" path="res://shaders/glich_effect.tres" id="11_qva6k"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_whjeo"]
 shader = ExtResource("5_ajjm1")
@@ -25,6 +28,175 @@ glow_levels/1 = 1.0
 glow_levels/2 = 1.0
 glow_levels/3 = 1.0
 glow_intensity = 0.5
+
+[sub_resource type="Animation" id="Animation_sw1ao"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TextureRect:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("over_rect:color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_mglx4"]
+resource_name = "step_1"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.58),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.93333334),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"StartVibr"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_qva6k"]
+resource_name = "step_2"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(10, 10)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("over_rect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.03333333, 0.3, 1.2333333, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.56666666, 1.6),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"ResetShaderAndAll"
+}, {
+"args": [],
+"method": &"HideAndContinuePlaying"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qva6k"]
+_data = {
+&"RESET": SubResource("Animation_sw1ao"),
+&"step_1": SubResource("Animation_mglx4"),
+&"step_2": SubResource("Animation_qva6k")
+}
 
 [node name="App" type="Control" unique_id=1304418827]
 layout_mode = 3
@@ -146,3 +318,47 @@ script = ExtResource("8_nsigk")
 
 [node name="notification_item" parent="NotifManager" unique_id=708703639 instance=ExtResource("8_10g7k")]
 layout_mode = 2
+
+[node name="CoreResetAnimation" type="CanvasLayer" parent="." unique_id=1875873938]
+script = ExtResource("10_mglx4")
+
+[node name="ColorRect" type="ColorRect" parent="CoreResetAnimation" unique_id=863166747]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="TextureRect" type="TextureRect" parent="CoreResetAnimation" unique_id=1751586136]
+self_modulate = Color(1, 1, 1, 0)
+material = ExtResource("11_qva6k")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.5
+offset_top = -106.5
+offset_right = 105.5
+offset_bottom = 106.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("10_sw1ao")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CoreResetAnimation" unique_id=236086053]
+libraries/ = SubResource("AnimationLibrary_qva6k")
+
+[node name="vibr_timer" type="Timer" parent="CoreResetAnimation" unique_id=1457185536]
+one_shot = true
+
+[node name="over_rect" type="ColorRect" parent="CoreResetAnimation" unique_id=351729602]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[connection signal="timeout" from="CoreResetAnimation/vibr_timer" to="CoreResetAnimation" method="_on_vibr_timer_timeout"]

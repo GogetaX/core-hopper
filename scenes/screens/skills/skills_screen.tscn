@@ -129,12 +129,14 @@ layout_mode = 2
 panel_type = "BORDER_ONLY"
 panel_color = "DISABLED"
 icon = ExtResource("7_ymlgm")
+btn_type = "AS_BUTTON"
 
 [node name="ScrollUpBtn" parent="SelectedSkill/VList/HList/Control/HBoxContainer" unique_id=1204389369 instance=ExtResource("2_37rvp")]
 layout_mode = 2
 panel_type = "BORDER_ONLY"
 panel_color = "DISABLED"
 icon = ExtResource("8_wute0")
+btn_type = "AS_BUTTON"
 
 [node name="description" type="Label" parent="SelectedSkill/VList" unique_id=178832608]
 layout_mode = 2

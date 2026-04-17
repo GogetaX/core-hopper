@@ -15,6 +15,10 @@ func _ready() -> void:
 	GlobalDailyQuest.InitDailyQuestSystem()
 	GlobalStats.InitDailyFreeBot()
 	
+	#Init Crazy Games
+	await GlobalCrazyGames.wait_until_ready()
+	GlobalCrazyGames.gameplay_start()
+	
 func InitOfflineData():
 	var offline_data = GlobalOfflineProgress.ProcessOfflineProgress()
 	if !offline_data.is_empty():

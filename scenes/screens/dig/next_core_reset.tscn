@@ -18,6 +18,7 @@ script = ExtResource("1_wcvi3")
 layout_mode = 1
 
 [node name="CoreResetInProgress" type="VBoxContainer" parent="." unique_id=746558821]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -69,4 +70,29 @@ theme_type_variation = &"LabelGrayHint"
 text = "+1 Core Shard next reset"
 horizontal_alignment = 2
 
+[node name="CoreResetIsMaxed" type="VBoxContainer" parent="." unique_id=267359809]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="HList" type="HBoxContainer" parent="CoreResetIsMaxed" unique_id=851446409]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CoreResetIsMaxed/HList" unique_id=1344827198]
+layout_mode = 2
+theme_type_variation = &"LabelWithPurple"
+text = "CORE RESET MAXED"
+
 [connection signal="resized" from="CoreResetInProgress" to="." method="_on_core_reset_in_progress_resized"]
+[connection signal="resized" from="CoreResetIsMaxed" to="." method="_on_core_reset_in_progress_resized"]

@@ -1,7 +1,7 @@
 extends Camera2D
 
 const CAMERA_OFFSET = 250
-const LIMIT_OFFSET = 800
+const LIMIT_OFFSET = 3000
 
 @export var min_zoom: float = 0.55
 @export var max_zoom: float = 2.20

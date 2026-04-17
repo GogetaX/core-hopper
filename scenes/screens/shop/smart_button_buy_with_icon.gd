@@ -28,6 +28,8 @@ signal OnPress()
 
 var _disabled_because_of_price = false
 
+@export_enum("SIMPLE_BTN","REWARDED_AD_BTN") var btn_type := "SIMPLE_BTN"
+
 func _ready() -> void:
 	SyncTool()
 	if !Engine.is_editor_hint():
@@ -58,8 +60,13 @@ func OnBtnPressed(btn_node:Control):
 	if _disabled_because_of_price:
 		return
 	GlobalBtn.AnimateBtnPressed($Background)
-	OnPress.emit()
-	
+	match btn_type:
+		"REWARDED_AD_BTN":
+			var reward = await GlobalCrazyGames.OnWatchRewardedAd()
+			if reward == GlobalCrazyGames.AD_REWARD_SUCCESS:
+				OnPress.emit()
+		_:
+			OnPress.emit()
 func OnMergeBtnPressed(btn_node:Control):
 	if btn_node != self:
 		return

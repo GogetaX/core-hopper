@@ -34,11 +34,22 @@ extends Control
 	get:
 		return ad_subtitle
 		
+@export var times_per_day := 1
+		
 func _ready() -> void:
 	$SmartPanel/VList/HList/IconBG.panel_color = panel_color
 	$SmartPanel/VList/HList/VList/ad_subtitle.hash_tag_color = panel_color
 	$SmartPanel/VList/WatchAdBtn.panel_color = panel_color
 	$SmartPanel/VList/HList/IconBG.icon = icon_big
-	$SmartPanel/VList/HList/VList/ad_title.text = ad_title
+	if times_per_day > 0:
+		$SmartPanel/VList/HList/VList/ad_title.text = ad_title + " ("+str(times_per_day).pad_decimals(0)+")"
+	else:
+		$SmartPanel/VList/HList/VList/ad_title.text = ad_title
 	$SmartPanel/VList/HList/VList/ad_subtitle.text = ad_subtitle
-	
+	if !Engine.is_editor_hint():
+		if times_per_day > 0:
+			$SmartPanel/VList/HList/VList/ad_title.text = ad_title + " ("+str(times_per_day).pad_decimals(0)+")"
+
+
+func _on_watch_ad_btn_on_press() -> void:
+	pass # Replace with function body.

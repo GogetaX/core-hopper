@@ -112,7 +112,7 @@ func EnsureUpgradeSchema() -> void:
 
 func BuildCleanSaveData():
 	var res = {}
-	res["currencies"] = {"coins":50000,"crystals":50000,"energy":0} #default coins 0
+	res["currencies"] = {"coins":0,"crystals":0,"energy":0} #default coins 0
 	res["bot_inventory"]={
 		"bot_db": [],
 		"merge_free_slots":4
@@ -146,6 +146,7 @@ func BuildCleanSaveData():
 		"core_resets":0,
 		"current_prestige":0,
 		"total_bots_bought": 0,
+		"total_bots_bought_this_reset":0,
 		"total_bots_got_free":0
 	}
 	res["settings"] = {
@@ -195,6 +196,9 @@ func BuildCleanSaveData():
 			"amount":2,
 			"mythic_amount":1
 		}
+	res["daily_watch_ads"]={
+		
+	}
 	return res
 
 func GetDailyFreeBot():
@@ -342,6 +346,7 @@ func StoreUpdateBotData(new_bot_data:Dictionary,free_bot := false) -> void:
 		save_data.bot_inventory.bot_db.append(new_bot_data)
 		if !free_bot:
 			save_data.player_stats.total_bots_bought += 1
+			save_data.player_stats.total_bots_bought_this_reset += 1
 		else:
 			save_data.player_stats.total_bots_got_free += 1
 	else:

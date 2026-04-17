@@ -1,6 +1,7 @@
 extends VBoxContainer
 
 func _ready() -> void:
+	GlobalCrazyGames.gameplay_stop()
 	GlobalSignals.DataSaved.connect(SyncData)
 	SyncData()
 	$game_build_version.text = Global.GenerateGameVersion()

@@ -16,7 +16,8 @@ run/main_scene="uid://vgy1fkq56ix"
 config/features=PackedStringArray("4.6", "Mobile")
 run/max_fps=60
 boot_splash/bg_color=Color(0.039215688, 0.043137256, 0.105882354, 1)
-boot_splash/image="res://art/game_logos/core_hopper_logo.png"
+boot_splash/stretch_mode=0
+boot_splash/image="uid://fheqxe0yksu"
 config/icon="res://icon.svg"
 
 [audio]
@@ -44,6 +45,9 @@ GlobalRewardChest="*uid://b8pr5ti500uf7"
 GlobalBotStats="*uid://bwtswapp627e"
 GlobalTimedBonus="*uid://ra7ebkcyoa1c"
 GlobalMusic="*uid://e2sl11hh7ifj"
+CrazyGamesBridge="*uid://dy6hm3uccrdfq"
+CrazyGames="*uid://bgou58fmcljfp"
+GlobalCrazyGames="*uid://dh4wmbv6dh5dn"
 
 [display]
 
@@ -55,6 +59,10 @@ window/energy_saving/keep_screen_on=false
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/handheld/orientation=1
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/crazygames/plugin.cfg")
 
 [gui]
 

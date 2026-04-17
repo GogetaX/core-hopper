@@ -394,6 +394,22 @@ theme_type_variation = &"LabelGrayHint"
 theme_override_font_sizes/font_size = 28
 text = "SKILL TREE UNLOCKS"
 
+[node name="HList5" type="HBoxContainer" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/KeepList" unique_id=998351515]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TextureRect" type="TextureRect" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/KeepList/HList5" unique_id=1152555853]
+self_modulate = Color(0.30980393, 0.89411765, 1, 1)
+layout_mode = 2
+texture = ExtResource("11_yrojk")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/KeepList/HList5" unique_id=1355072000]
+layout_mode = 2
+theme_type_variation = &"LabelGrayHint"
+theme_override_font_sizes/font_size = 28
+text = "CHESTS"
+
 [node name="CoreResetBtn" parent="SmartPanel/VBoxContainer" unique_id=664760665 instance=ExtResource("10_45apc")]
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2

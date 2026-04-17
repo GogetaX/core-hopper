@@ -96,28 +96,39 @@ custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="VList" type="VBoxContainer" parent="SmartPanel/VBoxContainer" unique_id=1026594115]
+[node name="VList" type="HFlowContainer" parent="SmartPanel/VBoxContainer" unique_id=745998923]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/separation = 20
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
 alignment = 1
 
-[node name="WatchAdButton" parent="SmartPanel/VBoxContainer/VList" unique_id=235473059 instance=ExtResource("5_h44pm")]
+[node name="GetCoinsAndCrystalsBasedOnDepth" parent="SmartPanel/VBoxContainer/VList" unique_id=235473059 instance=ExtResource("5_h44pm")]
+custom_minimum_size = Vector2(600, 240)
 layout_mode = 2
+size_flags_horizontal = 3
 panel_color = "BLUE"
 icon_big = ExtResource("3_6ym58")
+ad_title = "Depth Cache"
+ad_subtitle = "Get Instantly 500 COINS & 5 CRYSTALS"
+times_per_day = 5
 
-[node name="WatchAdButton2" parent="SmartPanel/VBoxContainer/VList" unique_id=1933562370 instance=ExtResource("5_h44pm")]
+[node name="BotDrop" parent="SmartPanel/VBoxContainer/VList" unique_id=1933562370 instance=ExtResource("5_h44pm")]
+custom_minimum_size = Vector2(600, 240)
 layout_mode = 2
+size_flags_horizontal = 3
 icon_big = ExtResource("3_6ym58")
-ad_title = "x3 Speed Surge"
+ad_title = "Bot Drop"
 ad_subtitle = "ACTIVE FOR 10M"
+times_per_day = 3
 
 [node name="WatchAdButton3" parent="SmartPanel/VBoxContainer/VList" unique_id=233113782 instance=ExtResource("5_h44pm")]
+custom_minimum_size = Vector2(600, 240)
 layout_mode = 2
+size_flags_horizontal = 3
 panel_color = "GOLD"
 icon_big = ExtResource("3_6ym58")
-ad_title = "Free Rare Digger Crate"
+ad_title = "Relic Signal Crate"
 ad_subtitle = "UNBOX EPIC PARTS"
 
 [connection signal="BtnPressed" from="SmartPanel/ClosePopup" to="." method="_on_close_popup_btn_pressed"]

@@ -6,13 +6,12 @@ func _ready() -> void:
 	var reset_data = GlobalCoreResetDb.GetProgressToNextReset()
 	var reset_core_data = GlobalCoreResetDb.GetNextResetData()
 	print(reset_data)
-	print("reset_core_data")
-	print(reset_core_data)
+	GlobalSignals.OnResetAnimStep.connect(OnResetAnimStep)
 	$SmartPanel/VBoxContainer/core_reset_title.text = reset_core_data.title
 	$SmartPanel/VBoxContainer/next_reward_desc.text = reset_core_data.description
 	$SmartPanel/VBoxContainer/SmartPanel/VList/ReadyContainer.visible = false
 	$SmartPanel/VBoxContainer/SmartPanel/VList/NotReadyContainer.visible = false
-	if reset_data.is_maxed:
+	if reset_data.current_depth >= reset_data.required_depth:
 		$SmartPanel/VBoxContainer/SmartPanel/VList/ReadyContainer.visible = true
 		$SmartPanel/VBoxContainer/CoreResetBtn.SetDisabled(false)
 	else:
@@ -38,9 +37,20 @@ func _on_close_popup_btn_pressed() -> void:
 func _on_core_reset_btn_on_pressed() -> void:
 	#Disable Mouse Press
 	GlobalSignals.StopScreenClick.emit(true)
+	
 	#Core Reset and Save
+	GlobalCoreResetDb.ActivateCoreReset()
 	
 	#Play Animation
-	
+	GlobalSignals.StartResetAnim.emit()
 	#Hide everything, dig screen should be shown
 	pass
+
+func OnResetAnimStep(step_str):
+	match step_str:
+		"WHITE_BG":
+			GlobalSignals.CloseCurPopup.emit()
+		"RESET_FINISHED":
+			pass
+		_:
+			print_debug("Reset Uknown step: ",step_str)

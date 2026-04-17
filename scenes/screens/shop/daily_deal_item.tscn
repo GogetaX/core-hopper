@@ -18,7 +18,6 @@ script = ExtResource("1_ddhwx")
 [node name="count_down" type="Timer" parent="." unique_id=413526933]
 
 [node name="DailyItem" parent="." unique_id=892379017 instance=ExtResource("1_3xdhm")]
-visible = false
 layout_mode = 1
 panel_type = "INSIDE_ONLY"
 panel_color = "ORANGE"
@@ -87,6 +86,7 @@ horizontal_alignment = 1
 [node name="BuyBtn" parent="DailyItem/VBoxContainer" unique_id=664760665 instance=ExtResource("3_6tqjt")]
 layout_mode = 2
 buy_btn_title = "FREE"
+btn_type = "REWARDED_AD_BTN"
 
 [node name="time_left" parent="DailyItem/VBoxContainer" unique_id=713365230 instance=ExtResource("5_6tqjt")]
 self_modulate = Color(0.7607843, 0.43529412, 1, 1)
@@ -96,6 +96,7 @@ horizontal_alignment = 1
 no_bg = true
 
 [node name="BuyItem" parent="." unique_id=1493214162 instance=ExtResource("1_3xdhm")]
+visible = false
 layout_mode = 1
 panel_type = "INSIDE_ONLY"
 panel_color = "ORANGE"

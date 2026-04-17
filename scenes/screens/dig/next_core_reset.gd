@@ -16,11 +16,14 @@ func OnSyncSave():
 	var progress_data = GlobalCoreResetDb.GetProgressToNextReset()
 	var reward_data = GlobalCoreResetDb.GetNextResetBonusStr("\n",false)
 	if !progress_data.is_maxed:
+		mouse_filter = Control.MOUSE_FILTER_PASS
 		$CoreResetInProgress.visible = true
 		$CoreResetInProgress/core_reset_progressbar.value = progress_data.progress*100.0
 		$CoreResetInProgress/HList/core_recent_percent.text = str(snapped(progress_data.progress*100,1)).pad_decimals(0)
-		
 		$CoreResetInProgress/core_reset_reward.text = reward_data
+	else:
+		mouse_filter = Control.MOUSE_FILTER_IGNORE
+		$CoreResetIsMaxed.visible = true
 		
 func HideAllProgress():
 	for x in get_children():

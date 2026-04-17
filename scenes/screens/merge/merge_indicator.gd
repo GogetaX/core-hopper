@@ -32,4 +32,6 @@ func HideAll():
 
 
 func _on_activate_merge_btn_on_press() -> void:
-	GlobalTimedBonus.ActivateBooster("auto_merge",false)
+	var ad_result = await GlobalCrazyGames.OnWatchRewardedAd()
+	if ad_result == GlobalCrazyGames.AD_REWARD_SUCCESS:
+		GlobalTimedBonus.ActivateBooster("auto_merge",false)

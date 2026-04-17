@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dvkjqyp27tl2w"]
+
+[ext_resource type="Shader" uid="uid://su3lqqldl6o0" path="res://shaders/glich_effect.gdshader" id="1_aa34r"]
+
+[resource]
+shader = ExtResource("1_aa34r")
+shader_parameter/glitch_chance = 0.3670000174325
+shader_parameter/glitch_speed = 7.0
+shader_parameter/slice_density = 14.0
+shader_parameter/slice_strength = 0.38
+shader_parameter/shake_strength = 0.02
+shader_parameter/chroma_offset = 0.016
+shader_parameter/noise_strength = 0.2
+shader_parameter/color_flash_strength = 0.4
+shader_parameter/scanline_strength = 0.18
+shader_parameter/local_warp_strength = 0.14
+shader_parameter/flip_chance = 0.15

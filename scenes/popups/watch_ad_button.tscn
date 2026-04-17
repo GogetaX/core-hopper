@@ -59,3 +59,6 @@ no_bg = true
 layout_mode = 2
 buy_btn_title = "WATCH AD"
 buy_btn_icon = ExtResource("7_i78af")
+btn_type = "REWARDED_AD_BTN"
+
+[connection signal="OnPress" from="SmartPanel/VList/WatchAdBtn" to="." method="_on_watch_ad_btn_on_press"]
