@@ -2,18 +2,31 @@ extends Control
 
 
 func _ready() -> void:
+	GlobalSignals.DataSaved.connect(SyncData)
+	InitCreates()
 	SyncData()
 	SyncYSize()
 	
-func SyncData():
-	#Init GetCoinsBasedOnDepth
-	var currency_data = int(GlobalBlockDatabase.GetAverageCoinsForDepth(GlobalSave.save_data.player_stats.max_depth_reached))
-	if currency_data < 10:
-		$SmartPanel/VBoxContainer/VList/GetCoinsBasedOnDepth.visible = false
-	else:
-		$SmartPanel/VBoxContainer/VList/GetCoinsBasedOnDepth.visible = true
-		$SmartPanel/VBoxContainer/VList/GetCoinsBasedOnDepth.ad_subtitle = "Instantly get "+str(currency_data).pad_decimals(0)+" COINS"
+func InitCreates():
+	for x in $SmartPanel/VBoxContainer/VList.get_children():
+		if x is WatchAdClass:
+			x.WatchAdOpenedOnce.connect(OnWatchAdSuccess)
 	
+func OnWatchAdSuccess(watch_ad_id:String):
+	GlobalWatchAds.ConsumeAdUse(watch_ad_id)
+	GlobalSave.SyncSave()
+	
+func SyncData():
+	var watch_data = GlobalWatchAds.GetWatchAdData()
+	for x in watch_data:
+		var ad_node = $SmartPanel/VBoxContainer/VList.get_node_or_null(x.id) as WatchAdClass
+		if ad_node:
+			ad_node.icon_big = load(x.icon)
+			ad_node.panel_color = x.color
+			ad_node.ad_title = x.title
+			ad_node.ad_subtitle = x.description
+			ad_node.times_per_day = x.times_left
+			ad_node.AddRewards(x.rewards)
 	
 func SyncYSize():
 	if !is_node_ready():

@@ -69,7 +69,7 @@
       "target": 40,
       "weight": 70,
       "filters": {
-        "block_type": "coal_vein"
+        "block_type": "coal"
       },
       "requirements": {
         "min_depth": 0,

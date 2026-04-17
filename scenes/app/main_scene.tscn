@@ -309,17 +309,20 @@ script = ExtResource("7_whjeo")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=780856415]
 environment = SubResource("Environment_whjeo")
 
-[node name="NotifManager" type="VBoxContainer" parent="." unique_id=65052786]
-layout_mode = 0
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1987217052]
+
+[node name="NotifManager" type="VBoxContainer" parent="CanvasLayer" unique_id=65052786]
+z_index = 500
 offset_right = 223.0
 offset_bottom = 445.0
 mouse_filter = 2
 script = ExtResource("8_nsigk")
 
-[node name="notification_item" parent="NotifManager" unique_id=708703639 instance=ExtResource("8_10g7k")]
+[node name="notification_item" parent="CanvasLayer/NotifManager" unique_id=708703639 instance=ExtResource("8_10g7k")]
 layout_mode = 2
 
 [node name="CoreResetAnimation" type="CanvasLayer" parent="." unique_id=1875873938]
+visible = false
 script = ExtResource("10_mglx4")
 
 [node name="ColorRect" type="ColorRect" parent="CoreResetAnimation" unique_id=863166747]

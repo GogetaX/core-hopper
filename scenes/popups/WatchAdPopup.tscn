@@ -103,7 +103,7 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 alignment = 1
 
-[node name="GetCoinsBasedOnDepth" parent="SmartPanel/VBoxContainer/VList" unique_id=235473059 instance=ExtResource("5_h44pm")]
+[node name="depth_cache" parent="SmartPanel/VBoxContainer/VList" unique_id=235473059 instance=ExtResource("5_h44pm")]
 custom_minimum_size = Vector2(600, 240)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -113,7 +113,7 @@ ad_title = "Depth Cache"
 ad_subtitle = "Get Instantly 500 COINS & 5 CRYSTALS"
 times_per_day = 5
 
-[node name="BotDrop" parent="SmartPanel/VBoxContainer/VList" unique_id=1933562370 instance=ExtResource("5_h44pm")]
+[node name="relic_crate" parent="SmartPanel/VBoxContainer/VList" unique_id=1933562370 instance=ExtResource("5_h44pm")]
 custom_minimum_size = Vector2(600, 240)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -122,7 +122,7 @@ ad_title = "Bot Drop"
 ad_subtitle = "ACTIVE FOR 10M"
 times_per_day = 3
 
-[node name="WatchAdButton3" parent="SmartPanel/VBoxContainer/VList" unique_id=233113782 instance=ExtResource("5_h44pm")]
+[node name="bot_drop" parent="SmartPanel/VBoxContainer/VList" unique_id=233113782 instance=ExtResource("5_h44pm")]
 custom_minimum_size = Vector2(600, 240)
 layout_mode = 2
 size_flags_horizontal = 3

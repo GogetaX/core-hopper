@@ -28,3 +28,4 @@ res://autoload/GlobalBlockDatabase.gd
 res://scenes/popups/watch_ad_popup.gd
 res://autoload/GlobalWatchAds.gd
 res://scenes/screens/dig/dig_screen.tscn
+res://autoload/GlobalDailyQuest.gd

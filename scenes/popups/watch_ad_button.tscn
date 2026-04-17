@@ -47,7 +47,7 @@ layout_mode = 2
 layout_mode = 2
 theme_type_variation = &"LabelTitle_White"
 theme_override_font_sizes/font_size = 40
-text = "Instant Hyper-Dig"
+text = "Instant Hyper-Dig (1)"
 
 [node name="ad_subtitle" parent="SmartPanel/VList/HList/VList" unique_id=713365230 instance=ExtResource("4_hsxwf")]
 self_modulate = Color(0.7607843, 0.43529412, 1, 1)
@@ -59,6 +59,5 @@ no_bg = true
 layout_mode = 2
 buy_btn_title = "WATCH AD"
 buy_btn_icon = ExtResource("7_i78af")
-btn_type = "REWARDED_AD_BTN"
 
 [connection signal="OnPress" from="SmartPanel/VList/WatchAdBtn" to="." method="_on_watch_ad_btn_on_press"]

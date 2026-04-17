@@ -8,7 +8,6 @@ var archetypes: Dictionary = {}
 var depth_bands: Array = []
 
 var _rng := RandomNumberGenerator.new()
-var _spawn_serial: int = 0
 
 
 func _ready() -> void:
