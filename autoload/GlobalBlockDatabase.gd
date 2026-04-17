@@ -427,7 +427,6 @@ func GetAverageCoinsForDepth(depth: int) -> float:
 		load_data()
 
 	var band := get_band_for_depth(depth)
-	print(band)
 	if band.is_empty():
 		return 0.0
 
@@ -435,7 +434,7 @@ func GetAverageCoinsForDepth(depth: int) -> float:
 	if spawn_pool.is_empty():
 		return 0.0
 
-	var reward_multiplier := float(band.get("reward_multiplier", 1.0))
+	var band_reward_multiplier := float(band.get("reward_multiplier", 1.0))
 
 	var total_weight := 0.0
 	var weighted_coin_sum := 0.0
@@ -444,25 +443,33 @@ func GetAverageCoinsForDepth(depth: int) -> float:
 		if typeof(entry) != TYPE_DICTIONARY:
 			continue
 
-		var weight := float(entry.get("weight", 0.0))
-		if weight <= 0.0:
+		var spawn_weight := float(entry.get("weight", 0.0))
+		if spawn_weight <= 0.0:
 			continue
 
 		var block_id := String(entry.get("id", "")).strip_edges()
 		if block_id == "":
 			continue
 
-		var archetype := get_archetype(block_id)
+		var archetype: Dictionary = get_archetype(block_id)
 		if archetype.is_empty():
 			continue
-		var reward_type := String(archetype.get("reward_type", "coins")).to_lower()
-		var reward_amount := float(archetype.get("reward_amount", 0.0))
-		var coin_reward := 0.0
-		if reward_type == "coins":
-			coin_reward = reward_amount * reward_multiplier
 
-		total_weight += weight
-		weighted_coin_sum += coin_reward * weight
+		var drops: Dictionary = archetype.get("drops", {})
+		var coin_drop: Dictionary = drops.get("coins", {})
+		if coin_drop.is_empty():
+			total_weight += spawn_weight
+			continue
+
+		var coin_chance := float(coin_drop.get("weight", 0.0))
+		var min_amount := float(coin_drop.get("min", 0))
+		var max_amount := float(coin_drop.get("max", min_amount))
+		var avg_amount := (min_amount + max_amount) * 0.5
+
+		var expected_coin_reward := coin_chance * avg_amount * band_reward_multiplier
+
+		total_weight += spawn_weight
+		weighted_coin_sum += expected_coin_reward * spawn_weight
 
 	if total_weight <= 0.0:
 		return 0.0

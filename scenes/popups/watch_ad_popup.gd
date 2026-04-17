@@ -6,8 +6,14 @@ func _ready() -> void:
 	SyncYSize()
 	
 func SyncData():
-	var currency_data = GlobalBlockDatabase.GetAverageCoinsForDepth(GlobalSave.save_data.player_stats.max_depth_reached)
-	print(currency_data)
+	#Init GetCoinsBasedOnDepth
+	var currency_data = int(GlobalBlockDatabase.GetAverageCoinsForDepth(GlobalSave.save_data.player_stats.max_depth_reached))
+	if currency_data < 10:
+		$SmartPanel/VBoxContainer/VList/GetCoinsBasedOnDepth.visible = false
+	else:
+		$SmartPanel/VBoxContainer/VList/GetCoinsBasedOnDepth.visible = true
+		$SmartPanel/VBoxContainer/VList/GetCoinsBasedOnDepth.ad_subtitle = "Instantly get "+str(currency_data).pad_decimals(0)+" COINS"
+	
 	
 func SyncYSize():
 	if !is_node_ready():
