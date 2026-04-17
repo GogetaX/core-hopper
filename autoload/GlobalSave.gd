@@ -197,7 +197,7 @@ func BuildCleanSaveData():
 			"mythic_amount":1
 		}
 	res["daily_watch_ads"]={
-		
+		"day_key": ""
 	}
 	return res
 

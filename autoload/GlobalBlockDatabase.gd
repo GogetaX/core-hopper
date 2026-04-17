@@ -61,7 +61,6 @@ func get_band_for_depth(depth: int) -> Dictionary:
 
 func spawn_block(depth: int, lane_index: int = -1) -> Dictionary:
 	if not is_loaded():
-		push_warning("BlockDatabase: Data not loaded. Attempting to load now.")
 		load_data()
 
 	var band := get_band_for_depth(depth)
@@ -82,38 +81,7 @@ func spawn_block(depth: int, lane_index: int = -1) -> Dictionary:
 	if archetype.is_empty():
 		return {}
 
-	var base_hp: float = float(band.get("base_hp", 1))
-	var hp_multiplier: float = float(archetype.get("hp_multiplier", 1.0))
-	var reward_multiplier: float = float(band.get("reward_multiplier", 1.0))
-	var reward_amount_base: float = float(archetype.get("reward_amount", 1))
-	var band_start_depth: int = int(band.get("min_depth", depth))
-	var depth_in_band := depth - band_start_depth
-	var depth_growth := pow(1.01, depth_in_band)
-	var final_hp: int = max(1, roundi(base_hp * hp_multiplier * depth_growth))
-	var final_reward = max(1, reward_amount_base * reward_multiplier)
-
-	_spawn_serial += 1
-
-	var runtime_block := {
-		"uid": get_next_block_uid(depth,lane_index),
-		"id": block_id,
-		"name": String(archetype.get("name", block_id.capitalize())),
-		"max_hp": final_hp,
-		"hp": final_hp,
-		"reward_type": String(archetype.get("reward_type", "coins")),
-		"reward_amount": final_reward,
-		"base_reward_amount": reward_amount_base,
-		"rarity": String(archetype.get("rarity", "common")),
-		"depth": depth,
-		"lane_index": lane_index,
-		"color": String(archetype.get("color", "gray")),
-		"tags": archetype.get("tags", []).duplicate(true),
-		"base_hp": base_hp,
-		"hp_multiplier": hp_multiplier,
-		"reward_multiplier": reward_multiplier
-	}
-
-	return runtime_block
+	return _BuildRuntimeBlock(depth, lane_index, block_id, archetype, band)
 
 
 func get_next_block_uid(depth: int, lane_index: int) -> String:
@@ -296,12 +264,20 @@ func _load_json(path: String) -> Variant:
 	return json.data
 
 func CreateBlockForLane(depth: int, lane_index: int) -> Dictionary:
+	if not is_loaded():
+		load_data()
+
 	var band := get_band_for_depth(depth)
 	if band.is_empty():
 		push_error("No depth band found for depth %d" % depth)
 		return {}
 
-	var block_id := _PickBlockIdFromSpawnPool(band.spawn_pool)
+	var spawn_pool: Array = band.get("spawn_pool", [])
+	if spawn_pool.is_empty():
+		push_error("spawn_pool is empty for depth %d" % depth)
+		return {}
+
+	var block_id := _PickBlockIdFromSpawnPool(spawn_pool)
 	if block_id == "":
 		push_error("Failed picking block id for depth %d" % depth)
 		return {}
@@ -311,39 +287,7 @@ func CreateBlockForLane(depth: int, lane_index: int) -> Dictionary:
 		push_error("Missing archetype for id: %s" % block_id)
 		return {}
 
-	var base_hp := float(band.get("base_hp", 1))
-	var hp_multiplier := float(archetype.get("hp_multiplier", 1.0))
-	var reward_multiplier := float(band.get("reward_multiplier", 1.0))
-	var reward_amount_base := int(archetype.get("reward_amount", 1))
-
-	var band_start_depth := int(band.get("min_depth", depth))
-	var depth_in_band = max(0, depth - band_start_depth)
-	var depth_growth := float(band.get("depth_growth", 1.01))
-	var min_hit_damage := float(band.get("min_hit_damage", 0.0))
-
-	var final_hp = max(1, roundi(base_hp * hp_multiplier * pow(depth_growth, depth_in_band)))
-	var final_reward = max(1, roundi(float(reward_amount_base) * reward_multiplier))
-
-	return {
-		"uid": _BuildBlockUid(depth, lane_index),
-		"id": block_id,
-		"name": str(archetype.get("name", block_id)),
-		"depth": depth,
-		"lane_index": lane_index,
-		"base_hp": base_hp,
-		"hp_multiplier": hp_multiplier,
-		"max_hp": final_hp,
-		"hp": final_hp,
-		"reward_type": str(archetype.get("reward_type", "coins")),
-		"base_reward_amount": reward_amount_base,
-		"reward_multiplier": reward_multiplier,
-		"reward_amount": final_reward,
-		"rarity": str(archetype.get("rarity", "common")),
-		"color": str(archetype.get("color", "gray")),
-		"tags": archetype.get("tags", []).duplicate(),
-		"depth_growth": depth_growth,
-		"min_hit_damage": min_hit_damage
-	}
+	return _BuildRuntimeBlock(depth, lane_index, block_id, archetype, band)
 	
 func _GetDepthBand(depth: int) -> Dictionary:
 	return get_band_for_depth(depth)
@@ -475,3 +419,71 @@ func GetAverageCoinsForDepth(depth: int) -> float:
 		return 0.0
 
 	return weighted_coin_sum / total_weight
+
+func _GetExpectedDropAmount(archetype: Dictionary, currency: String, reward_multiplier: float = 1.0) -> float:
+	var drops: Dictionary = archetype.get("drops", {})
+	if drops.is_empty():
+		return 0.0
+
+	var drop_data: Dictionary = drops.get(currency, {})
+	if drop_data.is_empty():
+		return 0.0
+
+	var chance := clampf(float(drop_data.get("weight", 0.0)), 0.0, 1.0)
+	if chance <= 0.0:
+		return 0.0
+
+	var min_amount := float(drop_data.get("min", 0))
+	var max_amount := float(drop_data.get("max", min_amount))
+	var avg_amount := (min_amount + max_amount) * 0.5
+
+	var expected := chance * avg_amount
+	if currency == "coins":
+		expected *= reward_multiplier
+
+	return expected
+
+
+func _BuildRuntimeBlock(depth: int, lane_index: int, block_id: String, archetype: Dictionary, band: Dictionary) -> Dictionary:
+	var base_hp := float(band.get("base_hp", 1.0))
+	var hp_multiplier := float(archetype.get("hp_multiplier", 1.0))
+	var reward_multiplier := float(band.get("reward_multiplier", 1.0))
+
+	var band_start_depth := int(band.get("min_depth", depth))
+	var depth_in_band = max(0, depth - band_start_depth)
+	var depth_growth := float(band.get("depth_growth", 1.01))
+	var min_hit_damage := float(band.get("min_hit_damage", 0.0))
+
+	var final_hp = max(1, roundi(base_hp * hp_multiplier * pow(depth_growth, depth_in_band)))
+
+	# Compatibility fields for older code paths / boss generation.
+	var base_coin_reward := _GetExpectedDropAmount(archetype, "coins", 1.0)
+	var final_coin_reward := _GetExpectedDropAmount(archetype, "coins", reward_multiplier)
+
+	return {
+		"uid": _BuildBlockUid(depth, lane_index),
+		"id": block_id,
+		"name": str(archetype.get("name", block_id)),
+		"depth": depth,
+		"lane_index": lane_index,
+
+		"base_hp": base_hp,
+		"hp_multiplier": hp_multiplier,
+		"max_hp": final_hp,
+		"hp": final_hp,
+
+		# Keep these only for compatibility until all callers are migrated.
+		"reward_type": "coins",
+		"base_reward_amount": base_coin_reward,
+		"reward_multiplier": reward_multiplier,
+		"reward_amount": max(1, roundi(final_coin_reward)),
+
+		# New source of truth
+		"drops": archetype.get("drops", {}).duplicate(true),
+
+		"rarity": str(archetype.get("rarity", "common")),
+		"color": str(archetype.get("color", "gray")),
+		"tags": archetype.get("tags", []).duplicate(true),
+		"depth_growth": depth_growth,
+		"min_hit_damage": min_hit_damage
+	}
