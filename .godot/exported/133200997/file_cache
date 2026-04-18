@@ -126,7 +126,7 @@ res://fonts/RES_BeVietman_Regular.tres::3051b0fd785f429a1f69acc75262b557::177437
 res://fonts/RES_BeVietnam_Bold.tres::5ba631d7e33d5d8fe5e05d35397ac79f::1774384942::res://.godot/exported/133200997/export-13d2524024db3c1ce0b656d42d2ed89c-RES_BeVietnam_Bold.res
 res://fonts/RES_JakaraSans_Bold.tres::751600a808ea10db6d170c09b426fb83::1774384953::res://.godot/exported/133200997/export-cc1effb415432a5e2e27aa7f226f5344-RES_JakaraSans_Bold.res
 res://fonts/RES_JakaraSans_Regular.tres::aaf930d028816edb386bba8f7860dbde::1774373269::res://.godot/exported/133200997/export-5b96d8d7d6d2e0904a42056752e6f90e-RES_JakaraSans_Regular.res
-res://scenes/app/main_scene.tscn::71795ea7368130105e5c103dfc731e65::1776506665::res://.godot/exported/133200997/export-4f94396a82da23abb31a1e1311203510-main_scene.scn
+res://scenes/app/main_scene.tscn::843ba9a4563bb2c89d592a2ce5236fd3::1776509598::res://.godot/exported/133200997/export-4f94396a82da23abb31a1e1311203510-main_scene.scn
 res://scenes/components/boss_icon.tscn::05e9dd4131c57221e4751286374dc3f1::1775082212::res://.godot/exported/133200997/export-8d3ef845eb556b56d2e4da7180723943-boss_icon.scn
 res://scenes/components/boss_icon_effect.tscn::4e46bc42d325af71fa352c0fdcc61cd4::1775124809::res://.godot/exported/133200997/export-b76ca7b73fbf7651c6539987138cb1f7-boss_icon_effect.scn
 res://scenes/components/BotImage.tscn::1c7182c8c4984fe236a20b7cd71f5819::1775759057::res://.godot/exported/133200997/export-7c83631eb316859b2977d2c1eda9b1cc-BotImage.scn
@@ -168,7 +168,7 @@ res://scenes/popups/watch_ad_button.tscn::3ad320231995422ce026558dc86eb3da::1776
 res://scenes/screens/dig/active_boost.tscn::6674cff0a0f06546af8eebfe8dc07bb6::1775848049::res://.godot/exported/133200997/export-358c0a94a93570f5f19e7a06ed42c572-active_boost.scn
 res://scenes/screens/dig/current_daily_task.tscn::517115d7f8b83c199d0da3bb758446a2::1775842393::res://.godot/exported/133200997/export-b5ba9fe96022cba027bd9d3ab627d6c4-current_daily_task.scn
 res://scenes/screens/dig/dig_bot_slot.tscn::4650f12f945611bb664c909b8a3f1987::1776457224::res://.godot/exported/133200997/export-9f2ef0af28b33181e32db42c9b6d79e2-dig_bot_slot.scn
-res://scenes/screens/dig/dig_screen.tscn::0ab113e5e4e2ef20bebc5fd20fac641b::1776464975::res://.godot/exported/133200997/export-887271b8ea31ab594f162e952ca01493-dig_screen.scn
+res://scenes/screens/dig/dig_screen.tscn::0ab113e5e4e2ef20bebc5fd20fac641b::1776506847::res://.godot/exported/133200997/export-887271b8ea31ab594f162e952ca01493-dig_screen.scn
 res://scenes/screens/dig/material.tscn::0a991c614e4c9d1af6781b8c2a5fdbd6::1776018845::res://.godot/exported/133200997/export-c56b282df65b787ee884a2f0b37cf671-material.scn
 res://scenes/screens/dig/milestone_panel.tscn::2e08019f953fce8ccf2cdbf9f7d628c5::1775842439::res://.godot/exported/133200997/export-358ff9c5c2bab6105414c7c3cea78bd6-milestone_panel.scn
 res://scenes/screens/dig/milestone_reward_item.tscn::5430e132bbe5293568befa4820f8232d::1776019620::res://.godot/exported/133200997/export-66af53df4a3143c3eb52a14ddee4aa99-milestone_reward_item.scn
@@ -200,7 +200,7 @@ res://scenes/screens/settings/setting_toggle.tscn::1c9d91b5b722d6ddceaef3b8ad2f1
 res://scenes/screens/settings/setting_toggle_button.tscn::57a709928b702cc8407e381c4c826f88::1776014313::res://.godot/exported/133200997/export-9b6a2751063c649ce7075717663bc367-setting_toggle_button.scn
 res://scenes/screens/settings/social_button.tscn::99b986ce655bc2242a55db81c5eb641f::1774624388::res://.godot/exported/133200997/export-3e3df021465a17cfb91263ec0e36c195-social_button.scn
 res://scenes/screens/shop/daily_deal_item.tscn::3534eb2158271ff4c6f687f13a119a3a::1776460565::res://.godot/exported/133200997/export-98d72dd1b056c65ab071c571493f932d-daily_deal_item.scn
-res://scenes/screens/shop/shop_crystal_button.tscn::58357d3d6c34aa8a984a86c812e79796::1775894503::res://.godot/exported/133200997/export-42a31b36454273a1ebd98171cb7f3020-shop_crystal_button.scn
+res://scenes/screens/shop/shop_crystal_button.tscn::a1af082d8ca8e0e4f0703e9c3e26877f::1776509742::res://.godot/exported/133200997/export-42a31b36454273a1ebd98171cb7f3020-shop_crystal_button.scn
 res://scenes/screens/shop/shop_screen.tscn::5cea5fef2f922216ed2aeae3de9ab4f3::1776460471::res://.godot/exported/133200997/export-fcc8934d8f3712e96f10e19c5412f41d-shop_screen.scn
 res://scenes/screens/shop/smart_button_buy_with_icon.tscn::f665a625e96d8ac3e936b25b755cfaae::1776101505::res://.godot/exported/133200997/export-4edd6b2a56aab3230b24cc0eabe8c5b9-smart_button_buy_with_icon.scn
 res://scenes/screens/skills/skills_screen.tscn::29017de744e36eb90d0ae9ac7b961738::1776458249::res://.godot/exported/133200997/export-546a7e497d3cdf1997b8cd439209b140-skills_screen.scn

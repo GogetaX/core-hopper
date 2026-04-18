@@ -7,10 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="5_glq8e"]
 
 [node name="ShopCrystalButton" type="Control" unique_id=386489701]
-custom_minimum_size = Vector2(780, 160)
+custom_minimum_size = Vector2(1000, 160)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 776.0
+offset_right = 800.0
 offset_bottom = 160.0
 size_flags_horizontal = 3
 mouse_filter = 1

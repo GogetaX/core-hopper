@@ -15,6 +15,9 @@ func OnSDKReady():
 			GlobalCrazyGames.FlushCrazySave()
 		else:
 			GlobalSave.save_data = GlobalSave.BuildCleanSaveData()
+			GlobalSave.LoadingTimeStamp()
 	GlobalSave.EnsureUpgradeSchema()
 	GlobalSave.RepapulateAllLaneBlocks()
+	GlobalSignals.GameSaveLoaded.emit()
+	GlobalSignals.DataSaved.emit()
 	visible = false

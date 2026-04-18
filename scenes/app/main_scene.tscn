@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c2rs2h8royu5x" path="res://scenes/app/main_scene.gd" id="1_dphjg"]
 [ext_resource type="PackedScene" uid="uid://ctqo4k2ggmax2" path="res://scenes/components/top_bar.tscn" id="1_qfrj5"]
+[ext_resource type="Script" uid="uid://bstyxhf0j8rt3" path="res://scenes/components/safe_area.gd" id="2_f2rq0"]
 [ext_resource type="PackedScene" uid="uid://da8i4hknmta32" path="res://scenes/components/bottom_bar.tscn" id="2_kuj8t"]
 [ext_resource type="Script" uid="uid://d28vujcn28p14" path="res://scenes/ui/stop_click_overlay.gd" id="4_dphjg"]
 [ext_resource type="Script" uid="uid://bbgo6bxqgpta5" path="res://scenes/app/overlay_layer.gd" id="4_u2ckv"]
@@ -246,6 +247,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("2_f2rq0")
 
 [node name="Root" type="Control" parent="SafeArea" unique_id=200429389]
 layout_mode = 2
@@ -448,4 +450,5 @@ theme_type_variation = &"LabelGray"
 text = "LOADING"
 horizontal_alignment = 1
 
+[connection signal="resized" from="SafeArea" to="SafeArea" method="_on_resized"]
 [connection signal="timeout" from="CoreResetAnimation/vibr_timer" to="CoreResetAnimation" method="_on_vibr_timer_timeout"]

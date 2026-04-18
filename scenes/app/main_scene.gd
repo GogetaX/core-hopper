@@ -11,7 +11,6 @@ func _ready() -> void:
 	GlobalSignals.OpenCloseSettingMenu.connect(OnSettingBtnPress)
 	GlobalSignals.OpenTabFromStr.connect(show_tab)
 	
-	
 	show_tab("DIG")
 	InitOfflineData()
 	GlobalDailyQuest.InitDailyQuestSystem()

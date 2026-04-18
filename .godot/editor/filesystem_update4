@@ -11,3 +11,8 @@ res://scenes/app/main_scene.tscn
 res://scenes/app/crazy_games_loading_layer.gd
 res://scenes/screens/dig/dig_screen.tscn
 res://scenes/app/main_scene.gd
+res://scenes/screens/dig/dig_screen.gd
+res://autoload/GlobalSignals.gd
+res://autoload/GlobalDiggingProcess.gd
+res://scenes/components/safe_area.gd
+res://scenes/screens/shop/shop_crystal_button.tscn

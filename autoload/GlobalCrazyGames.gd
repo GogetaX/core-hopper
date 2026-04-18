@@ -114,6 +114,7 @@ func LoadFromCrazyGames() -> bool:
 	if typeof(parsed) == TYPE_DICTIONARY:
 		GlobalSave.save_data = parsed
 		_last_uploaded_json = raw
+		GlobalSave.LoadingTimeStamp()
 		return true
 
 	return false

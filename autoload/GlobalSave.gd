@@ -15,6 +15,9 @@ func _ready() -> void:
 	if !OS.has_feature("crazygames"):
 		LoadFromSave()
 		RepapulateAllLaneBlocks()
+	else:
+		save_data = GlobalSave.BuildCleanSaveData()
+		LoadingTimeStamp()
 	
 func RepapulateAllLaneBlocks():
 	GenerateNextBlocks(0,5)
@@ -44,10 +47,21 @@ func SyncSave(emit_data_saved:=true):
 		save_timer.start()
 	if emit_data_saved:
 		GlobalSignals.DataSaved.emit()
+
+func PrepareSaveMeta() -> void:
+	if !save_data.has("meta") or typeof(save_data.meta) != TYPE_DICTIONARY:
+		save_data["meta"] = {}
+
+	save_data.meta["save_version"] = CUR_SAVE_VERSION
+	save_data.meta["last_saved_unix"] = Time.get_unix_time_from_system()
+	
+func LoadingTimeStamp():
+	if !GlobalSave.save_data.has("meta"):
+		GlobalSave.save_data["meta"] = {}
+	GlobalSave.save_data.meta["last_loaded_unix"] = Time.get_unix_time_from_system()
 	
 func ForceSave():
-	save_data["meta"]["save_version"] = CUR_SAVE_VERSION
-	save_data["meta"]["last_saved_unix"] = Time.get_unix_time_from_system()
+	PrepareSaveMeta()
 	if OS.has_feature("crazygames"):
 		GlobalCrazyGames.QueueCrazySave()
 	else:
@@ -68,6 +82,7 @@ func ForceSave():
 func LoadFromSave():
 	if !FileAccess.file_exists(SAVE_FILE):
 		save_data = BuildCleanSaveData()
+		LoadingTimeStamp()
 		return
 
 	var f = FileAccess.open(SAVE_FILE, FileAccess.READ)
@@ -83,14 +98,17 @@ func LoadFromSave():
 			json.get_error_message()
 		])
 		save_data = BuildCleanSaveData()
+		LoadingTimeStamp()
 		return
 
 	if typeof(json.data) != TYPE_DICTIONARY:
 		push_error("SaveManager: Save file root is not a Dictionary.")
 		save_data = BuildCleanSaveData()
+		LoadingTimeStamp()
 		return
 
 	save_data = json.data
+	LoadingTimeStamp()
 	EnsureUpgradeSchema()
 
 func EnsureUpgradeSchema() -> void:

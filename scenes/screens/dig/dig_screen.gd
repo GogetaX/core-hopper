@@ -14,6 +14,7 @@ var _shown_boss_uid_by_lane := {}
 
 func _ready() -> void:
 	GlobalSignals.DataSaved.connect(OnDataUpdated)
+	GlobalSignals.GameSaveLoaded.connect(OnDataUpdated)
 	OnDataUpdated()
 	
 
