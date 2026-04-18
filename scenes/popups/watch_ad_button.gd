@@ -46,7 +46,7 @@ signal WatchAdOpenedOnce(watch_ad_id:String)
 		return times_per_day
 
 var reward_list = []
-
+var already_loaded = false
 func _ready() -> void:
 	$SmartPanel/VList/HList/IconBG.panel_color = panel_color
 	$SmartPanel/VList/HList/VList/ad_subtitle.hash_tag_color = panel_color
@@ -63,13 +63,29 @@ func _ready() -> void:
 			$SmartPanel/VList/HList/VList/ad_title.text = ad_title + " ("+str(times_per_day).pad_decimals(0)+")"
 		else:
 			$SmartPanel/VList/WatchAdBtn.SetDisabled(true)
+	if !Engine.is_editor_hint():
+		SyncRewardBtnDisabled()
+		if !already_loaded:
+			GlobalAds.rewarded_ready_changed.connect(OnRewardedReady)
+			already_loaded = true
+	
+
+func OnRewardedReady(_is_ready):
+	SyncRewardBtnDisabled()
+	
+func SyncRewardBtnDisabled():
+	$SmartPanel/VList/WatchAdBtn.SetDisabled(true)
+	if GlobalAds.IsRewardedReady():
+		$SmartPanel/VList/WatchAdBtn.SetDisabled(false)
+		
 func AddRewards(_rewards):
 	reward_list = _rewards
 	
 func _on_watch_ad_btn_on_press() -> void:
-	var reward = await GlobalCrazyGames.OnWatchRewardedAd()
-	if reward != GlobalCrazyGames.AD_REWARD_SUCCESS:
+	if !GlobalAds.IsRewardedReady():
 		return
+	GlobalAds.ShowRewarded()
+	await GlobalAds.rewarded_reward_earned
 	for x in reward_list:
 		if x.has("coins") || x.has("crystals") || x.has("dust") || x.has("energy"):
 			for key in x.keys():

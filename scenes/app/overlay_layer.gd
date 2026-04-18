@@ -13,7 +13,6 @@ func _ready() -> void:
 	
 func OnCloseCurPopup():
 	if current_screen:
-		GlobalCrazyGames.gameplay_start()
 		GlobalSignals.StopScreenClick.emit(true)
 		var t = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
 		t.tween_property($BlurBG,"color:a",0.0,0.2)

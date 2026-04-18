@@ -45,9 +45,6 @@ GlobalRewardChest="*uid://b8pr5ti500uf7"
 GlobalBotStats="*uid://bwtswapp627e"
 GlobalTimedBonus="*uid://ra7ebkcyoa1c"
 GlobalMusic="*uid://e2sl11hh7ifj"
-CrazyGamesBridge="*uid://dy6hm3uccrdfq"
-CrazyGames="*uid://bgou58fmcljfp"
-GlobalCrazyGames="*uid://dh4wmbv6dh5dn"
 GlobalWatchAds="*uid://bg5x81tgdkmj6"
 GlobalAds="*uid://bq43t6vv78p6s"
 
@@ -64,7 +61,7 @@ window/handheld/orientation=1
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/AdmobPlugin/plugin.cfg", "res://addons/crazygames/plugin.cfg")
+enabled=PackedStringArray("res://addons/AdmobPlugin/plugin.cfg")
 
 [gui]
 

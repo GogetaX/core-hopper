@@ -474,4 +474,3 @@ metadata/_custom_type_script = "uid://db6qqpj83t4dw"
 
 [connection signal="resized" from="SafeArea" to="SafeArea" method="_on_resized"]
 [connection signal="timeout" from="CoreResetAnimation/vibr_timer" to="CoreResetAnimation" method="_on_vibr_timer_timeout"]
-[connection signal="initialization_completed" from="Addons/Admob" to="Addons" method="_on_admob_initialization_completed"]

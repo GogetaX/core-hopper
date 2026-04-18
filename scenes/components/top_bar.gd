@@ -41,7 +41,6 @@ func _on_setting_button_btn_pressed() -> void:
 
 func _on_close_setting_menu_btn_pressed() -> void:
 	GlobalMusic.SFX_UIBack()
-	GlobalCrazyGames.gameplay_start()
 	GlobalSignals.OpenCloseSettingMenu.emit(false)
 	$HBoxContainer/SettingButton.visible = true
 	$HBoxContainer/CloseSettingMenu.visible = false

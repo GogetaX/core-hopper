@@ -5,7 +5,6 @@ extends Control
 var cur_data = {}
 
 func InitBotInfo(data):
-	GlobalCrazyGames.gameplay_stop()
 	cur_data = data
 	var bot_data = GlobalSave.GetBotDataFromUID(cur_data.bot_uid)
 	if bot_data.is_empty():

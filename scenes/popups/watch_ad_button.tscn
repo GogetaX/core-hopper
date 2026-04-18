@@ -56,6 +56,7 @@ text = "30M RESOURCE CACHE"
 no_bg = true
 
 [node name="WatchAdBtn" parent="SmartPanel/VList" unique_id=664760665 instance=ExtResource("5_iu1ja")]
+modulate = Color(0.4117647, 0.4117647, 0.4117647, 1)
 layout_mode = 2
 buy_btn_title = "WATCH AD"
 buy_btn_icon = ExtResource("7_i78af")

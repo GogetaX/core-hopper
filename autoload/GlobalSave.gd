@@ -12,12 +12,8 @@ var save_timer : Timer = null
 
 func _ready() -> void:
 	CreateSaveTimer()
-	if !OS.has_feature("crazygames"):
-		LoadFromSave()
-		RepapulateAllLaneBlocks()
-	else:
-		save_data = GlobalSave.BuildCleanSaveData()
-		LoadingTimeStamp()
+	LoadFromSave()
+	RepapulateAllLaneBlocks()
 	
 func RepapulateAllLaneBlocks():
 	GenerateNextBlocks(0,5)
@@ -62,22 +58,19 @@ func LoadingTimeStamp():
 	
 func ForceSave():
 	PrepareSaveMeta()
-	if OS.has_feature("crazygames"):
-		GlobalCrazyGames.QueueCrazySave()
-	else:
-		var f = FileAccess.open(SAVE_FILE,FileAccess.WRITE)
-		
-		var save_dup = save_data.duplicate()
-		
-		var json_string := JSON.stringify(save_dup, "\t")
+	var f = FileAccess.open(SAVE_FILE,FileAccess.WRITE)
+	
+	var save_dup = save_data.duplicate()
+	
+	var json_string := JSON.stringify(save_dup, "\t")
 
-		if f == null:
-			push_error("SaveManager: Failed to open save file for writing: %s" % SAVE_FILE)
-			return false
+	if f == null:
+		push_error("SaveManager: Failed to open save file for writing: %s" % SAVE_FILE)
+		return false
 
-		f.store_string(json_string)
-		
-		f.close()
+	f.store_string(json_string)
+	
+	f.close()
 		
 func LoadFromSave():
 	if !FileAccess.file_exists(SAVE_FILE):

@@ -62,9 +62,7 @@ func OnBtnPressed(btn_node:Control):
 	GlobalBtn.AnimateBtnPressed($Background)
 	match btn_type:
 		"REWARDED_AD_BTN":
-			var reward = await GlobalCrazyGames.OnWatchRewardedAd()
-			if reward == GlobalCrazyGames.AD_REWARD_SUCCESS:
-				OnPress.emit()
+			OnPress.emit()
 		_:
 			OnPress.emit()
 func OnMergeBtnPressed(btn_node:Control):
