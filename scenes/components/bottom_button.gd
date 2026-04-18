@@ -54,4 +54,5 @@ func AnimateUnpressed():
 func OnBtnPressed(btn_node:Control):
 	if btn_node != self:
 		return
+	GlobalMusic.SFX_UITap()
 	GlobalSignals.OnTabBtnpressed.emit(self)

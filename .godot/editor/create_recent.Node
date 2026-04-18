@@ -1,3 +1,6 @@
+res://addons/AdmobPlugin/Admob.gd
+Node
+HFlowContainer
 Control
 GPUParticles2D
 Label
@@ -5,10 +8,8 @@ TextureRect
 VBoxContainer
 ColorRect
 CanvasLayer
-HFlowContainer
 Timer
 AnimationPlayer
 HBoxContainer
 ProgressBar
 ScrollContainer
-RichTextLabel

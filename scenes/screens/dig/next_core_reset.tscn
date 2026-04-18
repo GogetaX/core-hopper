@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="2_nwjpg"]
 
 [node name="NextCoreReset" type="Control" unique_id=1842211214]
-custom_minimum_size = Vector2(300, 120)
+custom_minimum_size = Vector2(400, 150)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 300.0
@@ -18,7 +18,6 @@ script = ExtResource("1_wcvi3")
 layout_mode = 1
 
 [node name="CoreResetInProgress" type="VBoxContainer" parent="." unique_id=746558821]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -39,6 +38,7 @@ mouse_filter = 2
 [node name="Label" type="Label" parent="CoreResetInProgress/HList" unique_id=344730233]
 layout_mode = 2
 theme_type_variation = &"LabelWithPurple"
+theme_override_font_sizes/font_size = 35
 text = "CORE RESET"
 
 [node name="Control" type="Control" parent="CoreResetInProgress/HList" unique_id=1647190902]
@@ -49,11 +49,13 @@ mouse_filter = 2
 [node name="core_recent_percent" type="Label" parent="CoreResetInProgress/HList" unique_id=583179422]
 layout_mode = 2
 theme_type_variation = &"LabelWithPurple"
+theme_override_font_sizes/font_size = 35
 text = "74"
 
 [node name="Label3" type="Label" parent="CoreResetInProgress/HList" unique_id=148140426]
 layout_mode = 2
 theme_type_variation = &"LabelWithPurple"
+theme_override_font_sizes/font_size = 35
 text = "%"
 
 [node name="core_reset_progressbar" type="ProgressBar" parent="CoreResetInProgress" unique_id=1307898856]
@@ -67,10 +69,12 @@ show_percentage = false
 [node name="core_reset_reward" type="Label" parent="CoreResetInProgress" unique_id=1657984254]
 layout_mode = 2
 theme_type_variation = &"LabelGrayHint"
+theme_override_font_sizes/font_size = 28
 text = "+1 Core Shard next reset"
 horizontal_alignment = 2
 
 [node name="CoreResetIsMaxed" type="VBoxContainer" parent="." unique_id=267359809]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0

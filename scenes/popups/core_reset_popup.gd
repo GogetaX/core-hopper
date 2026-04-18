@@ -5,7 +5,6 @@ var reset_effect_item = preload("res://scenes/components/core_reset_item.tscn")
 func _ready() -> void:
 	var reset_data = GlobalCoreResetDb.GetProgressToNextReset()
 	var reset_core_data = GlobalCoreResetDb.GetNextResetData()
-	print(reset_data)
 	GlobalSignals.OnResetAnimStep.connect(OnResetAnimStep)
 	$SmartPanel/VBoxContainer/core_reset_title.text = reset_core_data.title
 	$SmartPanel/VBoxContainer/next_reward_desc.text = reset_core_data.description
@@ -31,6 +30,7 @@ func _ready() -> void:
 		i.InitItem(x)
 	
 func _on_close_popup_btn_pressed() -> void:
+	GlobalMusic.SFX_UIBack()
 	GlobalSignals.CloseCurPopup.emit()
 
 
@@ -54,3 +54,10 @@ func OnResetAnimStep(step_str):
 			pass
 		_:
 			print_debug("Reset Uknown step: ",step_str)
+
+
+func _on_v_box_container_resized() -> void:
+	var max_y = $SmartPanel/VBoxContainer.get_minimum_size().y
+	custom_minimum_size.y = max_y + 45
+	await get_tree().process_frame
+	size.y = custom_minimum_size.y

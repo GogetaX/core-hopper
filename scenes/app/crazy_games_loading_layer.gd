@@ -16,6 +16,7 @@ func OnSDKReady():
 		else:
 			GlobalSave.save_data = GlobalSave.BuildCleanSaveData()
 			GlobalSave.LoadingTimeStamp()
+	GlobalCrazyGames.ApplyCrazyGamesAudioSettings()
 	GlobalSave.EnsureUpgradeSchema()
 	GlobalSave.RepapulateAllLaneBlocks()
 	GlobalSignals.GameSaveLoaded.emit()

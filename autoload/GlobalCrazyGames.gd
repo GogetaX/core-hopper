@@ -118,3 +118,17 @@ func LoadFromCrazyGames() -> bool:
 		return true
 
 	return false
+
+
+func ApplyCrazyGamesAudioSettings() -> void:
+	if !OS.has_feature("crazygames"):
+		return
+	if !GlobalCrazyGames.is_ready:
+		return
+
+	var settings = CrazyGames.Game.get_game_settings()
+	var mute_audio := bool(settings.get("muteAudio", false))
+
+	var master_idx := AudioServer.get_bus_index("Master")
+	if master_idx != -1:
+		AudioServer.set_bus_mute(master_idx, mute_audio)

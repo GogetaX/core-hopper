@@ -5,6 +5,7 @@ extends Control
 var cur_data = {}
 
 func InitBotInfo(data):
+	GlobalCrazyGames.gameplay_stop()
 	cur_data = data
 	var bot_data = GlobalSave.GetBotDataFromUID(cur_data.bot_uid)
 	if bot_data.is_empty():
@@ -18,7 +19,7 @@ func InitBotInfo(data):
 	$BotStatInfo/VList/HFlow/BotStat_DPS.top_value = Global.CurrencyToString(bot_stat_dps)
 	$BotStatInfo/VList/HFlow/BotStat_SPD.top_value = str(snapped(GlobalStats.GetBotFinalDigSpeed(bot_data.level),0.01))
 	$BotStatInfo/VList/SmartPanel/rarity.hash_tag_color = GlobalColor.BotRankToColor(bot_data.rank)
-	print(bot_data)
+
 	#Clear additional stats
 	for x in $BotStatInfo/VList/AdditionalStats.get_children():
 		x.queue_free()
@@ -55,6 +56,7 @@ func _on_v_list_resized() -> void:
 
 	
 func _on_close_info_btn_on_pressed() -> void:
+	GlobalMusic.SFX_UIBack()
 	GlobalSignals.CloseCurPopup.emit()
 
 

@@ -96,5 +96,35 @@ func GenerateGameVersion()->String:
 	#Build v2.4.0-Final
 	#© 2026 CORE HOPPER STUDIOS
 	var version = ProjectSettings.get_setting("application/config/version")
-	return "Build v"+version+"-BETA\n© 2026 CORE HOPPER STUDIOS"
+	var for_platform = OS.get_name()
+	if OS.has_feature("crazygames"):
+		for_platform = "CrazyGames"
+	return "Build v"+version+"-BETA\n© 2026 CORE HOPPER STUDIOS\n"+for_platform+" Version"
 	
+func FormatNumberWithCommas(value) -> String:
+	var is_negative := false
+	var text := str(value)
+
+	if text.begins_with("-"):
+		is_negative = true
+		text = text.substr(1)
+
+	var parts := text.split(".")
+	var int_part := parts[0]
+	var decimal_part := ""
+	if parts.size() > 1:
+		decimal_part = "." + parts[1]
+
+	var result := ""
+	var count := 0
+
+	for i in range(int_part.length() - 1, -1, -1):
+		result = int_part[i] + result
+		count += 1
+		if count % 3 == 0 and i > 0:
+			result = "," + result
+
+	if is_negative:
+		result = "-" + result
+
+	return result + decimal_part

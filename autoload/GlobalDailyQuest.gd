@@ -288,7 +288,6 @@ func RegisterUpgradeBought(upgrade_id: String, upgrade_group: String) -> void:
 	})
 
 func RegisterBlockBroken(block_id: String = "", block_type: String = "") -> void:
-	print("registrying: ",block_type)
 	AddProgress("break_blocks", 1, {
 		"block_id": block_id,
 		"block_type": block_type

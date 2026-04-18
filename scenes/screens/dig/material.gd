@@ -17,6 +17,7 @@ func OnTap(node_control:Control):
 	if node_control != self:
 		return
 	if $tap_timer.is_stopped():
+		GlobalMusic.SFX_Tap()
 		GlobalMusic.VibrateLow()
 		GlobalDiggingProcess.ApplyTapDamage(cur_data.uid)
 		$tap_timer.start()
@@ -57,6 +58,7 @@ func _on_block_destroyed(_lane_index: int, block_uid: String) -> void:
 	if cur_data.has("is_boss") && cur_data.is_boss:
 		GlobalSignals.ShowChestAnimation.emit(global_position+(size/2.0),"boss")
 	else:
+		GlobalMusic.SFX_BlockBreak()
 		GlobalSignals.ShowCurrencyAnimation.emit(global_position+(size/2.0),cur_data.reward_type,2)
 	
 	SetAsMining(false)

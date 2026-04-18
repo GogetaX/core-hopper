@@ -39,6 +39,7 @@ alignment = 1
 [node name="Label" type="Label" parent="Milestone_Incomplete/VList" unique_id=1304081754]
 layout_mode = 2
 theme_type_variation = &"LabelDailyGold"
+theme_override_font_sizes/font_size = 34
 text = "NEXT MILESTONE"
 
 [node name="Control" type="Control" parent="Milestone_Incomplete/VList" unique_id=2066800847]
@@ -49,13 +50,14 @@ mouse_filter = 2
 [node name="title" type="Label" parent="Milestone_Incomplete/VList" unique_id=1781413649]
 layout_mode = 2
 theme_type_variation = &"LabelDailyTasks"
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 32
 text = "1,500m unlocks boss block"
 autowrap_mode = 2
 
 [node name="description" type="Label" parent="Milestone_Incomplete/VList" unique_id=1959641737]
 layout_mode = 2
 theme_type_variation = &"LabelGray"
+theme_override_font_sizes/font_size = 32
 text = "50m remaining"
 autowrap_mode = 2
 
@@ -81,6 +83,7 @@ alignment = 1
 [node name="Label" type="Label" parent="Milestone_Completed/VList" unique_id=1255876680]
 layout_mode = 2
 theme_type_variation = &"LabelDailyGold"
+theme_override_font_sizes/font_size = 34
 text = "COMPLETED"
 
 [node name="Control" type="Control" parent="Milestone_Completed/VList" unique_id=1916281483]
@@ -91,6 +94,7 @@ mouse_filter = 2
 [node name="description" type="Label" parent="Milestone_Completed/VList" unique_id=406144842]
 layout_mode = 2
 theme_type_variation = &"LabelGray"
+theme_override_font_sizes/font_size = 32
 text = "50m remaining"
 autowrap_mode = 2
 
@@ -101,7 +105,6 @@ mouse_filter = 2
 
 [node name="MilestoneRewardItem" parent="Milestone_Completed/VList/RewardContainer" unique_id=1001953382 instance=ExtResource("3_6etbr")]
 layout_mode = 2
-mouse_filter = 2
 
 [node name="Control2" type="Control" parent="Milestone_Completed/VList" unique_id=842002386]
 custom_minimum_size = Vector2(0, 5)
@@ -109,7 +112,7 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="ClaimBtn" parent="Milestone_Completed/VList" unique_id=664760665 instance=ExtResource("4_6etbr")]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 buy_btn_title = "CLAIM"
 panel_color = "GOLD"
@@ -149,7 +152,9 @@ alignment = 1
 [node name="Label" type="Label" parent="Milestone_NoMilestoneLeft/VList" unique_id=1069132024]
 layout_mode = 2
 theme_type_variation = &"LabelDailyGold"
+theme_override_font_sizes/font_size = 42
 text = "NO MORE MILESTONES"
 horizontal_alignment = 1
+autowrap_mode = 2
 
 [connection signal="OnPressed" from="Milestone_Completed/VList/ClaimBtn" to="." method="_on_claim_btn_on_pressed"]

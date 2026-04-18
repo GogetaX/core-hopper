@@ -64,9 +64,11 @@ func OnBtnPressed(btn_control:Control):
 		return
 	GlobalSignals.OnProgressTabPressed.emit(self)
 	AnimateSelected()
+	GlobalMusic.SFX_UITap()
 	OnPressed.emit()
 	
 func TriggerSignal():
+	#GlobalMusic.SFX_UITap()
 	OnPressed.emit()
 
 func OnProgressTabPressed(btn_node:ProgressTabClass):

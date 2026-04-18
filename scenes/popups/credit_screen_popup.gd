@@ -2,6 +2,7 @@ extends Control
 
 
 func _on_close_btn_on_pressed() -> void:
+	GlobalMusic.SFX_UIBack()
 	GlobalSignals.CloseCurPopup.emit()
 
 

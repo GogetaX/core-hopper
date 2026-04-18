@@ -10,12 +10,14 @@ func _ready() -> void:
 	GlobalSignals.StartDragBotItem.connect(OnStartDragBotItem)
 	
 func OnStartDragBotItem(bot_item:DigBotClass):
+	GlobalMusic.SFX_PickBot()
 	merge_drag_node = merge_drag_item.instantiate()
 	merge_drag_node.SetImageFromDigBotItem(bot_item)
 	add_child(merge_drag_node)
 	Global.cur_dragging_node = merge_drag_node
 	
 func OnStartDragMergeItem(merge_item:MergeItemClass):
+	GlobalMusic.SFX_PickBot()
 	merge_drag_node = merge_drag_item.instantiate()
 	merge_drag_node.SetImageFromMergeItem(merge_item)
 	add_child(merge_drag_node)
@@ -57,6 +59,7 @@ func EvaluateReleaseStateFromDigbot():
 	if Global.cur_drag_data.has("at_self_dig_bot"):
 		var is_mouse_in = merge_drag_node.cur_dragging_bot_node.get_global_rect().has_point(get_viewport().get_mouse_position())
 		if is_mouse_in:
+			GlobalMusic.SFX_PlaceBot()
 			#print("mouse in same node (cancel)")
 			return
 	elif Global.cur_drag_data.has("at_other_merge_node"):
@@ -70,14 +73,17 @@ func EvaluateReleaseStateFromDigbot():
 				source_bot_data.merge_slot_id = target_merge.cur_bot_id
 				source_dig.cur_lane_data.bot_uid = -1
 				GlobalSave.SyncSave()
+				GlobalMusic.SFX_PlaceBot()
 			elif target_merge.cur_bot_data.level == source_bot_data.level:
 				GlobalSave.MergeFromDigBotToMerge(source_dig.cur_lane_data.bot_uid,target_merge.cur_bot_data.uid)
 				GlobalSave.SetTotalMerges(1)
 				GlobalSave.SyncSave()
+				GlobalMusic.SFX_PlaceBot()
 				#print("mouse in, dig-bot and merge bot has same level, should merge them togeather into MERGE slot.")
 			else:
 				GlobalSave.SwapBetween2BotsDigBoToMerge(source_dig.cur_lane_data.bot_uid,target_merge.cur_bot_data.uid)
 				GlobalSave.SyncSave()
+				GlobalMusic.SFX_PlaceBot()
 				#print("mouse in, should swap bots.")
 	elif Global.cur_drag_data.has("at_other_dig_bot"):
 		var orig_bot : DigBotClass = merge_drag_node.cur_dragging_bot_node
@@ -91,6 +97,7 @@ func EvaluateReleaseStateFromDigbot():
 			target_lane_data.bot_uid = orig_bot_data.uid
 			orig_lane_data.bot_uid = -1
 			GlobalSave.SyncSave()
+			GlobalMusic.SFX_PlaceBot()
 			#print("Move to empty DigBot")
 			
 		elif orig_bot_data.level == target_bot_data.level:
@@ -99,6 +106,7 @@ func EvaluateReleaseStateFromDigbot():
 			GlobalSave.RemoveBotByID(orig_bot.cur_lane_data.bot_uid)
 			GlobalSave.SetTotalMerges(1)
 			GlobalSave.SyncSave()
+			GlobalMusic.SFX_PlaceBot()
 			#print("Merge between DigBot -> DigBot")
 		else:
 			var orig_bot_uid = orig_bot.cur_lane_data.bot_uid
@@ -106,6 +114,7 @@ func EvaluateReleaseStateFromDigbot():
 			orig_bot.cur_lane_data.bot_uid = target_bot_uid
 			target_bot.cur_lane_data.bot_uid = orig_bot_uid
 			GlobalSave.SyncSave()
+			GlobalMusic.SFX_PlaceBot()
 			#print("Swap Between Dig Bot -> Dig Bot")
 				
 func EvaluateReleaseStateFromMerge():
@@ -113,6 +122,7 @@ func EvaluateReleaseStateFromMerge():
 		var is_mouse_in = merge_drag_node.cur_dragging_merge_node.get_global_rect().has_point(get_viewport().get_mouse_position())
 		if is_mouse_in:
 			#print("mouse in same node (cancel)")
+			GlobalMusic.SFX_PlaceBot()
 			return
 	elif Global.cur_drag_data.has("at_other_merge_node"):
 		var merge_node = Global.cur_drag_data.at_other_merge_node as MergeItemClass
@@ -125,6 +135,7 @@ func EvaluateReleaseStateFromMerge():
 					var bot_db = GlobalSave.GetBotDataFromMergeSlot(orig_drag_node.cur_bot_id)
 					bot_db.merge_slot_id = int(merge_node.cur_bot_id)
 					GlobalSave.SyncSave()
+					GlobalMusic.SFX_PlaceBot()
 					return
 				else:
 					if merge_node.cur_bot_data.level == Global.cur_dragging_node.cur_dragging_merge_node.cur_bot_data.level:
@@ -134,16 +145,20 @@ func EvaluateReleaseStateFromMerge():
 						GlobalSave.CombineBetween2MergeNodes(orig_merge_node.cur_bot_data.uid,target_merge_node.cur_bot_data.uid)
 						GlobalSave.SetTotalMerges(1)
 						GlobalSave.SyncSave()
+						GlobalMusic.SFX_PlaceBot()
 					else:
 						var orig_merge_node :MergeItemClass = Global.cur_dragging_node.cur_dragging_merge_node
 						var target_merge_node : MergeItemClass = merge_node
 						GlobalSave.SwapBetween2BotsMergeToMerge(orig_merge_node.cur_bot_data.uid,target_merge_node.cur_bot_data.uid)
 						GlobalSave.SyncSave()
+						GlobalMusic.SFX_PlaceBot()
 						#print("mouse in, should swap between them")
 		else:
+			GlobalMusic.SFX_PlaceBot()
 			return
 			#print("mouse in, but merge bot is Locked.")
 	elif Global.cur_drag_data.has("at_self_dig_bot"):
+		GlobalMusic.SFX_PlaceBot()
 		#print("mouse in at same DigBot, should not do anything.")
 		return
 	elif Global.cur_drag_data.has("at_other_dig_bot"):
@@ -159,6 +174,7 @@ func EvaluateReleaseStateFromMerge():
 				bot_data.merge_slot_id = int(-1)
 				to_lane_data.bot_uid = int(bot_data.uid)
 				GlobalSave.SyncSave()
+				GlobalMusic.SFX_PlaceBot()
 				
 			else:
 				var bot_data = GlobalSave.GetBotDataFromUID(dig_node.cur_lane_data.bot_uid)
@@ -171,6 +187,7 @@ func EvaluateReleaseStateFromMerge():
 					GlobalSave.MergeFromMergeToDigBot(source_merge.cur_bot_data.uid,target_digbot.cur_lane_data.bot_uid)
 					GlobalSave.SetTotalMerges(1)
 					GlobalSave.SyncSave()
+					GlobalMusic.SFX_PlaceBot()
 					#print("mouse in, should merge from MergeItem -> BotItem")
 				else:
 					#print("mouse in, should swap MergeItem -> BotItem")
@@ -178,4 +195,5 @@ func EvaluateReleaseStateFromMerge():
 					var target_dig_bot : DigBotClass = Global.cur_drag_data.at_other_dig_bot
 					GlobalSave.SwapBetween2BotsMergeToDigBot(selected_merge_item.cur_bot_data.uid,target_dig_bot.cur_lane_data.bot_uid)
 					GlobalSave.SyncSave()
+					GlobalMusic.SFX_PlaceBot()
 #at_self_dig_bot, at_other_dig_bot, DigBotClass

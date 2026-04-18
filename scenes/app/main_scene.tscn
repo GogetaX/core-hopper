@@ -15,6 +15,9 @@
 [ext_resource type="Material" uid="uid://dvkjqyp27tl2w" path="res://shaders/glich_effect.tres" id="11_qva6k"]
 [ext_resource type="Script" uid="uid://dl3h3ybufbpyu" path="res://scenes/app/crazy_games_loading_layer.gd" id="13_fgoxt"]
 [ext_resource type="Texture2D" uid="uid://88ot8lfbupyo" path="res://art/particles/star_06.png" id="13_qwqsr"]
+[ext_resource type="PackedScene" uid="uid://cm85i32ossjjf" path="res://scenes/addons/screenshot_maker.tscn" id="16_6deuo"]
+[ext_resource type="Script" uid="uid://bg1hmr3ahbwns" path="res://scenes/app/addons.gd" id="16_o73k1"]
+[ext_resource type="Script" uid="uid://db6qqpj83t4dw" path="res://addons/AdmobPlugin/Admob.gd" id="17_jhe1c"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_whjeo"]
 shader = ExtResource("5_ajjm1")
@@ -450,5 +453,25 @@ theme_type_variation = &"LabelGray"
 text = "LOADING"
 horizontal_alignment = 1
 
+[node name="Addons" type="Node" parent="." unique_id=219466556]
+script = ExtResource("16_o73k1")
+
+[node name="ScreenshotMaker" parent="Addons" unique_id=1441912208 instance=ExtResource("16_6deuo")]
+
+[node name="Admob" type="Node" parent="Addons" unique_id=138492404]
+script = ExtResource("17_jhe1c")
+is_real = true
+android_debug_application_id = "ca-app-pub-6225081745698787~1725324448"
+android_real_application_id = "ca-app-pub-6225081745698787~1725324448"
+android_debug_banner_id = ""
+android_debug_interstitial_id = ""
+android_debug_rewarded_id = "ca-app-pub-6225081745698787/4585397866"
+android_debug_rewarded_interstitial_id = ""
+android_debug_app_open_id = ""
+android_debug_native_id = ""
+android_real_rewarded_id = "ca-app-pub-6225081745698787/4585397866"
+metadata/_custom_type_script = "uid://db6qqpj83t4dw"
+
 [connection signal="resized" from="SafeArea" to="SafeArea" method="_on_resized"]
 [connection signal="timeout" from="CoreResetAnimation/vibr_timer" to="CoreResetAnimation" method="_on_vibr_timer_timeout"]
+[connection signal="initialization_completed" from="Addons/Admob" to="Addons" method="_on_admob_initialization_completed"]

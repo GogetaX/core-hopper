@@ -27,7 +27,7 @@ func _OnMouseExited(anim_node_list:Array):
 			t.tween_property(x,"modulate",Color.WHITE,0.05)
 	
 func _gui_input(event,btn_node:Control):
-	if event is InputEventMouseButton and event.pressed:
+	if event is InputEventMouseButton and event.pressed && event.button_index == 1:
 		start_pos = event.position
 		canceled = false
 

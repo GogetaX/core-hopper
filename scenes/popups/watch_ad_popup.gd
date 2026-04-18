@@ -38,4 +38,5 @@ func SyncYSize():
 	$SmartPanel.position.y = (get_viewport_rect().size.y / 2.0)-(size.y / 2.0)
 
 func _on_close_popup_btn_pressed() -> void:
+	GlobalMusic.SFX_UIBack()
 	GlobalSignals.CloseCurPopup.emit()

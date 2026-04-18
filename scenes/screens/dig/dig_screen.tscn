@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://b1boirxy3j4fm" path="res://scenes/screens/dig/drop_bonus.gd" id="9_acvec"]
 [ext_resource type="Script" uid="uid://bb6aobrm7ji1h" path="res://scenes/screens/dig/drop_bonus_value.gd" id="9_elpyf"]
 [ext_resource type="Script" uid="uid://cpesek5rxsldo" path="res://scenes/screens/dig/next_boss_in_helper.gd" id="11_55ggj"]
+[ext_resource type="Script" uid="uid://c2mst35frvrs6" path="res://scenes/screens/dig/mining_panel.gd" id="12_whfaw"]
 [ext_resource type="PackedScene" uid="uid://x5j6celmf4at" path="res://scenes/screens/dig/current_daily_task.tscn" id="16_nk4bl"]
 [ext_resource type="PackedScene" uid="uid://bjyvsqllfsb14" path="res://scenes/screens/dig/milestone_panel.tscn" id="16_wjarc"]
 [ext_resource type="PackedScene" uid="uid://b6wigw7uqkhg7" path="res://scenes/screens/dig/active_boost.tscn" id="17_h74tp"]
@@ -27,7 +28,7 @@
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -126.0
+offset_bottom = 430.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -94,7 +95,7 @@ mouse_filter = 2
 alignment = 2
 
 [node name="NextCoreReset" parent="HList2/VList2" unique_id=852508425 instance=ExtResource("5_gh78i")]
-custom_minimum_size = Vector2(300, 130)
+custom_minimum_size = Vector2(400, 180)
 layout_mode = 2
 
 [node name="Control2" type="Control" parent="HList2/VList2" unique_id=9808653]
@@ -230,11 +231,12 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="MiningPanel" type="Panel" parent="." unique_id=443113635]
-custom_minimum_size = Vector2(0, 1200)
+custom_minimum_size = Vector2(0, 1300)
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 theme_type_variation = &"PanelDimmedBG"
+script = ExtResource("12_whfaw")
 
 [node name="VList" type="VBoxContainer" parent="MiningPanel" unique_id=1865003503]
 layout_mode = 1
@@ -561,7 +563,7 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="HList4" type="HBoxContainer" parent="." unique_id=517077393]
-custom_minimum_size = Vector2(0, 300)
+custom_minimum_size = Vector2(0, 360)
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 20

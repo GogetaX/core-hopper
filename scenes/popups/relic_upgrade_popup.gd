@@ -104,6 +104,7 @@ func HideAll():
 			x.visible = false
 
 func _on_return_back_btn_pressed() -> void:
+	GlobalMusic.SFX_UIBack()
 	GlobalSignals.ShowPopup.emit("SHOW_RELIC_INV",{"inv_mode":"show_inv"})
 
 

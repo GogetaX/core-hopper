@@ -12,7 +12,6 @@ offset_right = 316.0
 offset_bottom = 96.0
 mouse_filter = 1
 script = ExtResource("1_qoiet")
-panel_color = null
 
 [node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("2_vcli7")]
 modulate = Color(1, 1, 1, 0)
@@ -49,3 +48,4 @@ alignment = 1
 
 [node name="SmallNotifCounter" parent="HList/VBoxContainer" unique_id=1772552382 instance=ExtResource("3_d271x")]
 layout_mode = 2
+notif_count = 4

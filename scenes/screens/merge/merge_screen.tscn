@@ -102,25 +102,31 @@ text = "ACTIVE BOTS"
 
 [node name="HList2" type="HBoxContainer" parent="." unique_id=618588143]
 layout_mode = 2
+theme_override_constants/separation = 20
 alignment = 1
 
 [node name="DigBotSlot" parent="HList2" unique_id=1867726318 instance=ExtResource("2_ad68v")]
 layout_mode = 2
+size_flags_horizontal = 3
 cur_lane = 0
 
 [node name="DigBotSlot2" parent="HList2" unique_id=1166187269 instance=ExtResource("2_ad68v")]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="DigBotSlot3" parent="HList2" unique_id=1271617781 instance=ExtResource("2_ad68v")]
 layout_mode = 2
+size_flags_horizontal = 3
 cur_lane = 2
 
 [node name="DigBotSlot4" parent="HList2" unique_id=2110798222 instance=ExtResource("2_ad68v")]
 layout_mode = 2
+size_flags_horizontal = 3
 cur_lane = 3
 
 [node name="DigBotSlot5" parent="HList2" unique_id=411223900 instance=ExtResource("2_ad68v")]
 layout_mode = 2
+size_flags_horizontal = 3
 cur_lane = 4
 
 [node name="Control4" type="Control" parent="." unique_id=1010910210]

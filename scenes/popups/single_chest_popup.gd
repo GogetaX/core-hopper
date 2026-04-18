@@ -38,7 +38,7 @@ func InitChest(data:Dictionary):
 
 
 func _on_return_back_btn_pressed() -> void:
-	#GlobalSignals.CloseCurPopup.emit()
+	GlobalMusic.SFX_UIBack()
 	GlobalSignals.ShowPopup.emit("SHOW_CHESTS",{})
 
 

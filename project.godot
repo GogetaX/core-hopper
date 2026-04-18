@@ -49,6 +49,7 @@ CrazyGamesBridge="*uid://dy6hm3uccrdfq"
 CrazyGames="*uid://bgou58fmcljfp"
 GlobalCrazyGames="*uid://dh4wmbv6dh5dn"
 GlobalWatchAds="*uid://bg5x81tgdkmj6"
+GlobalAds="*uid://bq43t6vv78p6s"
 
 [display]
 
@@ -63,7 +64,7 @@ window/handheld/orientation=1
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/crazygames/plugin.cfg")
+enabled=PackedStringArray("res://addons/AdmobPlugin/plugin.cfg", "res://addons/crazygames/plugin.cfg")
 
 [gui]
 

@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="1_1pkcy"]
 [ext_resource type="Script" uid="uid://dl6m0ax8j3mci" path="res://scenes/screens/progress/progress_screen.gd" id="1_c4mrb"]
 [ext_resource type="PackedScene" uid="uid://bl0egobmu4a73" path="res://scenes/screens/progress/tab_btn.tscn" id="1_gg677"]
+[ext_resource type="Script" uid="uid://bws56jrjye5m0" path="res://scenes/screens/progress/next_unlock.gd" id="2_kd221"]
 [ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="3_4nere"]
 [ext_resource type="PackedScene" uid="uid://bsv1pqeyc0h4m" path="res://scenes/screens/progress/progress_skill.tscn" id="4_0fuef"]
 [ext_resource type="PackedScene" uid="uid://duvnpggfd3idr" path="res://scenes/screens/dig/notif_for_chests.tscn" id="4_a7wrj"]
@@ -40,7 +41,7 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="ProgressTopPanel" type="Panel" parent="." unique_id=1545174428]
-custom_minimum_size = Vector2(0, 570)
+custom_minimum_size = Vector2(0, 520)
 layout_mode = 2
 mouse_filter = 2
 theme_type_variation = &"PanelDimmedBG"
@@ -85,17 +86,19 @@ text = "This hub groups global upgrades, quests, and relics under one stable tab
 "
 autowrap_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ProgressTopPanel/VList/HList" unique_id=2035193776]
+[node name="NextUnlock" type="VBoxContainer" parent="ProgressTopPanel/VList/HList" unique_id=2035193776]
 layout_mode = 2
 mouse_filter = 2
+alignment = 1
+script = ExtResource("2_kd221")
 
-[node name="Panel" type="Panel" parent="ProgressTopPanel/VList/HList/VBoxContainer" unique_id=1065397053]
+[node name="Panel" type="Panel" parent="ProgressTopPanel/VList/HList/NextUnlock" unique_id=1065397053]
 custom_minimum_size = Vector2(300, 290)
 layout_mode = 2
 mouse_filter = 2
 theme_type_variation = &"PanelPurpleBorder"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ProgressTopPanel/VList/HList/VBoxContainer/Panel" unique_id=1482817855]
+[node name="VBoxContainer" type="VBoxContainer" parent="ProgressTopPanel/VList/HList/NextUnlock/Panel" unique_id=1482817855]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -107,35 +110,38 @@ offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+alignment = 1
 
-[node name="Label" type="Label" parent="ProgressTopPanel/VList/HList/VBoxContainer/Panel/VBoxContainer" unique_id=604542258]
+[node name="Label" type="Label" parent="ProgressTopPanel/VList/HList/NextUnlock/Panel/VBoxContainer" unique_id=604542258]
 layout_mode = 2
 theme_type_variation = &"LabelDailyPurple"
 text = "NEXT UNLOCK"
 horizontal_alignment = 2
 
-[node name="Label2" type="Label" parent="ProgressTopPanel/VList/HList/VBoxContainer/Panel/VBoxContainer" unique_id=1268893165]
+[node name="reset_title" type="Label" parent="ProgressTopPanel/VList/HList/NextUnlock/Panel/VBoxContainer" unique_id=1268893165]
 layout_mode = 2
 theme_type_variation = &"LabelTitle_Purple"
 theme_override_font_sizes/font_size = 40
+text = "TITLE"
+horizontal_alignment = 2
+autowrap_mode = 2
+
+[node name="reset_depth" type="Label" parent="ProgressTopPanel/VList/HList/NextUnlock/Panel/VBoxContainer" unique_id=2092851982]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_Purple"
+theme_override_font_sizes/font_size = 32
 text = "Core Depth 1,500m"
 horizontal_alignment = 2
 autowrap_mode = 2
 
-[node name="Label3" type="Label" parent="ProgressTopPanel/VList/HList/VBoxContainer/Panel/VBoxContainer" unique_id=394927183]
-layout_mode = 2
-theme_type_variation = &"LabelDailyPurple"
-text = "NEXT UNLOCK"
-horizontal_alignment = 2
-
-[node name="Label4" type="Label" parent="ProgressTopPanel/VList/HList/VBoxContainer/Panel/VBoxContainer" unique_id=1424025178]
+[node name="unlock_text" type="Label" parent="ProgressTopPanel/VList/HList/NextUnlock/Panel/VBoxContainer" unique_id=1424025178]
 layout_mode = 2
 theme_type_variation = &"LabelGrayHint"
 text = "Boss block and +1 module slot"
 horizontal_alignment = 2
 autowrap_mode = 2
 
-[node name="Control" type="Control" parent="ProgressTopPanel/VList/HList/VBoxContainer" unique_id=1240926569]
+[node name="Control" type="Control" parent="ProgressTopPanel/VList/HList/NextUnlock" unique_id=1240926569]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
@@ -192,48 +198,6 @@ script = ExtResource("7_60kmq")
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 mouse_filter = 1
-
-[node name="HashTags" type="HFlowContainer" parent="ProgressTopPanel/VList" unique_id=11774418]
-layout_mode = 2
-theme_override_constants/h_separation = 25
-theme_override_constants/v_separation = 25
-
-[node name="Control" type="Control" parent="ProgressTopPanel/VList/HashTags" unique_id=1132160651]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="ProgressHashTag" parent="ProgressTopPanel/VList/HashTags" unique_id=713365230 instance=ExtResource("3_4nere")]
-self_modulate = Color(0.81960785, 0.98039216, 1, 1)
-layout_mode = 2
-hash_tag_color = "BLUE"
-
-[node name="ProgressHashTag2" parent="ProgressTopPanel/VList/HashTags" unique_id=831183487 instance=ExtResource("3_4nere")]
-layout_mode = 2
-text = "SPEED"
-
-[node name="ProgressHashTag3" parent="ProgressTopPanel/VList/HashTags" unique_id=1938173101 instance=ExtResource("3_4nere")]
-self_modulate = Color(0.81960785, 0.98039216, 1, 1)
-layout_mode = 2
-text = "DURABILITY"
-hash_tag_color = "BLUE"
-
-[node name="ProgressHashTag4" parent="ProgressTopPanel/VList/HashTags" unique_id=565481457 instance=ExtResource("3_4nere")]
-self_modulate = Color(1, 0.90588236, 0.65882355, 1)
-layout_mode = 2
-text = "ECONOMY"
-hash_tag_color = "GOLD"
-
-[node name="ProgressHashTag5" parent="ProgressTopPanel/VList/HashTags" unique_id=513544290 instance=ExtResource("3_4nere")]
-self_modulate = Color(1, 0.827451, 0.6313726, 1)
-layout_mode = 2
-text = "LUCK"
-hash_tag_color = "ORANGE"
-
-[node name="ProgressHashTag6" parent="ProgressTopPanel/VList/HashTags" unique_id=121935060 instance=ExtResource("3_4nere")]
-self_modulate = Color(0.95686275, 0.972549, 1, 1)
-layout_mode = 2
-text = "OFFLINE"
-hash_tag_color = "WHITE"
 
 [node name="Control2" type="Control" parent="." unique_id=516283580]
 custom_minimum_size = Vector2(0, 20)

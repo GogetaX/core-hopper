@@ -1,5 +1,4 @@
 extends Node
-#ANDROID: ENABLE VIBRATION PERMISION
 
 func VibrateLow():
 	if !GlobalSave.save_data.settings.vibration_enabled:
@@ -17,10 +16,23 @@ func VibrationHigh():
 	Input.vibrate_handheld(300)
 
 func SFX_Tap():
-	pass
+	var rnd_tap = ["res://audio/sfx/tap_1.ogg","res://audio/sfx/tap_2.ogg","res://audio/sfx/tap_3.ogg"]
+	CreateSFXNodeAndFree(rnd_tap.pick_random())
 
+func SFX_UITap():
+	CreateSFXNodeAndFree("res://audio/sfx/ui_btn_tap.ogg")
+	
+func SFX_UIBack():
+	CreateSFXNodeAndFree("res://audio/sfx/ui_back.ogg")
+	
 func SFX_BlockBreak():
-	pass
+	CreateSFXNodeAndFree("res://audio/sfx/BlockBreaking.ogg")
+	
+func SFX_PickBot():
+	CreateSFXNodeAndFree("res://audio/sfx/pick_bot.ogg")
+	
+func SFX_PlaceBot():
+	CreateSFXNodeAndFree("res://audio/sfx/place_bot.ogg")
 	
 func SFX_CoinReward():
 	pass
@@ -40,7 +52,9 @@ func SFX_Boss():
 func SFX_Error():
 	pass
 	
-func CreateSFXNodeAndFree(play_sound_file):
+func CreateSFXNodeAndFree(play_sound_file:String):
+	if !GlobalSave.save_data.settings.sfx_enabled:
+		return
 	var s = AudioStreamPlayer.new()
 	add_child(s)
 	s.bus = "SFX"
@@ -50,4 +64,3 @@ func CreateSFXNodeAndFree(play_sound_file):
 	
 func OnFinishedSfx(sfx:AudioStreamPlayer):
 	sfx.queue_free()
-	print("finished.")

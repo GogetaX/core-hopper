@@ -42,6 +42,7 @@ func OnRelicEquip(_is_equiped):
 	GlobalSignals.OnRelicSynced.emit()
 
 func _on_close_popup_btn_pressed() -> void:
+	GlobalMusic.SFX_UIBack()
 	GlobalSignals.CloseCurPopup.emit()
 
 

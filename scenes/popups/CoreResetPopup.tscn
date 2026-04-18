@@ -16,14 +16,19 @@
 
 [node name="CoreResetPopup" type="Control" unique_id=1294155484]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -428.0
+offset_top = -860.0
+offset_right = 428.0
+offset_bottom = 860.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 size_flags_horizontal = 3
-size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("1_dqggo")
 
@@ -419,4 +424,5 @@ buy_btn_title = "CORE RESET"
 panel_color = "BLUE"
 
 [connection signal="BtnPressed" from="SmartPanel/ClosePopup" to="." method="_on_close_popup_btn_pressed"]
+[connection signal="resized" from="SmartPanel/VBoxContainer" to="." method="_on_v_box_container_resized"]
 [connection signal="OnPressed" from="SmartPanel/VBoxContainer/CoreResetBtn" to="." method="_on_core_reset_btn_on_pressed"]
