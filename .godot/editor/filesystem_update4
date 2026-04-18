@@ -11,3 +11,7 @@ res://scenes/popups/watch_ad_button.gd
 res://scenes/popups/WatchAdPopup.tscn
 res://autoload/GlobalAds.gd
 res://addons/AdmobPlugin/Admob.gd
+res://scenes/screens/dig/active_boost.tscn
+res://scenes/screens/dig/active_boost.gd
+res://scenes/components/status_label.tscn
+res://scenes/screens/dig/material.tscn

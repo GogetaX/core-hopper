@@ -5,11 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="2_4rwo6"]
 
 [node name="StatusLabel" type="Control" unique_id=2088306964]
-custom_minimum_size = Vector2(162, 30)
+custom_minimum_size = Vector2(206, 35)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 162.0
-offset_bottom = 30.0
+offset_right = 206.0
+offset_bottom = 35.0
 theme_type_variation = &"LabelWithBlue"
 script = ExtResource("1_08q52")
 panel_color = "GOLD"
@@ -17,7 +17,7 @@ status_text = "Hello World"
 
 [node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("1_av3fx")]
 layout_mode = 1
-panel_type = "BORDER_ONLY"
+panel_type = "INSIDE_ONLY"
 panel_color = "GOLD"
 
 [node name="ProgressHashTag" parent="." unique_id=713365230 instance=ExtResource("2_4rwo6")]
@@ -28,8 +28,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_font_sizes/font_size = 34
 text = "Hello World"
 horizontal_alignment = 1
+vertical_alignment = 1
 hash_tag_color = "GOLD"
 no_bg = true
 

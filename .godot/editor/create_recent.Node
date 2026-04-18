@@ -1,6 +1,5 @@
-res://addons/AdmobPlugin/Admob.gd
-Node
 HFlowContainer
+Node
 Control
 GPUParticles2D
 Label

@@ -52,7 +52,7 @@ theme_type_variation = &"LabelTitle_Blue"
 text = "x2.4"
 autowrap_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CurActiveBoost/VList" unique_id=2004781893]
+[node name="HBoxContainer" type="HFlowContainer" parent="CurActiveBoost/VList" unique_id=685379048]
 layout_mode = 2
 mouse_filter = 2
 
