@@ -12,8 +12,9 @@ var save_timer : Timer = null
 
 func _ready() -> void:
 	CreateSaveTimer()
-	LoadFromSave()
-	RepapulateAllLaneBlocks()
+	if !OS.has_feature("crazygames"):
+		LoadFromSave()
+		RepapulateAllLaneBlocks()
 	
 func RepapulateAllLaneBlocks():
 	GenerateNextBlocks(0,5)
@@ -45,12 +46,12 @@ func SyncSave(emit_data_saved:=true):
 		GlobalSignals.DataSaved.emit()
 	
 func ForceSave():
+	save_data["meta"]["save_version"] = CUR_SAVE_VERSION
+	save_data["meta"]["last_saved_unix"] = Time.get_unix_time_from_system()
 	if OS.has_feature("crazygames"):
 		GlobalCrazyGames.QueueCrazySave()
 	else:
 		var f = FileAccess.open(SAVE_FILE,FileAccess.WRITE)
-		save_data["meta"]["save_version"] = CUR_SAVE_VERSION
-		save_data["meta"]["last_saved_unix"] = Time.get_unix_time_from_system()
 		
 		var save_dup = save_data.duplicate()
 		

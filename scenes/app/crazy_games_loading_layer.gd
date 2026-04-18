@@ -9,6 +9,12 @@ func _ready() -> void:
 		visible = false
 
 func OnSDKReady():
-	GlobalCrazyGames.LoadFromCrazyGames()
-	GlobalSave.SyncSave(false)
+	if !GlobalCrazyGames.LoadFromCrazyGames():
+		if FileAccess.file_exists(GlobalSave.SAVE_FILE):
+			GlobalSave.LoadFromSave()
+			GlobalCrazyGames.FlushCrazySave()
+		else:
+			GlobalSave.save_data = GlobalSave.BuildCleanSaveData()
+	GlobalSave.EnsureUpgradeSchema()
+	GlobalSave.RepapulateAllLaneBlocks()
 	visible = false

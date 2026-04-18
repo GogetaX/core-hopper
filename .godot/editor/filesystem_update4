@@ -10,3 +10,4 @@ res://autoload/GlobalSave.gd
 res://scenes/app/main_scene.tscn
 res://scenes/app/crazy_games_loading_layer.gd
 res://scenes/screens/dig/dig_screen.tscn
+res://scenes/app/main_scene.gd
