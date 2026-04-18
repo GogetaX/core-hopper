@@ -45,21 +45,25 @@ func SyncSave(emit_data_saved:=true):
 		GlobalSignals.DataSaved.emit()
 	
 func ForceSave():
-	var f = FileAccess.open(SAVE_FILE,FileAccess.WRITE)
-	save_data["meta"]["save_version"] = CUR_SAVE_VERSION
-	save_data["meta"]["last_saved_unix"] = Time.get_unix_time_from_system()
-	
-	var save_dup = save_data.duplicate()
-	
-	var json_string := JSON.stringify(save_dup, "\t")
+	if OS.has_feature("crazygames"):
+		GlobalCrazyGames.QueueCrazySave()
+	else:
+		var f = FileAccess.open(SAVE_FILE,FileAccess.WRITE)
+		save_data["meta"]["save_version"] = CUR_SAVE_VERSION
+		save_data["meta"]["last_saved_unix"] = Time.get_unix_time_from_system()
+		
+		var save_dup = save_data.duplicate()
+		
+		var json_string := JSON.stringify(save_dup, "\t")
 
-	if f == null:
-		push_error("SaveManager: Failed to open save file for writing: %s" % SAVE_FILE)
-		return false
+		if f == null:
+			push_error("SaveManager: Failed to open save file for writing: %s" % SAVE_FILE)
+			return false
 
-	f.store_string(json_string)
-	
-	f.close()
+		f.store_string(json_string)
+		
+		f.close()
+		
 func LoadFromSave():
 	if !FileAccess.file_exists(SAVE_FILE):
 		save_data = BuildCleanSaveData()
@@ -266,7 +270,6 @@ func AddCurrency(currency_type:String, value:int) -> void:
 			if !save_data.currencies.has(currency_type):
 				save_data.currencies[currency_type] = 0
 			save_data.currencies[currency_type] = int(save_data.currencies[currency_type] + value)
-
 	GlobalSignals.CurrencyAdded.emit(currency_type, value)
 	
 

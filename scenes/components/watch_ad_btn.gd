@@ -29,4 +29,6 @@ func OnBtnPressed(btn_node:Control):
 	if btn_node != self:
 		return
 	GlobalBtn.AnimateBtnPressed($SmartPanel)
-	OnAdGained.emit()
+	var reward = await GlobalCrazyGames.OnWatchRewardedAd()
+	if reward == GlobalCrazyGames.AD_REWARD_SUCCESS:
+		OnAdGained.emit()

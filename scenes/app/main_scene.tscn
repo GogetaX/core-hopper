@@ -12,6 +12,8 @@
 [ext_resource type="Script" uid="uid://ohclp6xvx2qo" path="res://scenes/components/core_reset_animation.gd" id="10_mglx4"]
 [ext_resource type="Texture2D" uid="uid://fheqxe0yksu" path="res://art/game_logos/boot_splash.png" id="10_sw1ao"]
 [ext_resource type="Material" uid="uid://dvkjqyp27tl2w" path="res://shaders/glich_effect.tres" id="11_qva6k"]
+[ext_resource type="Script" uid="uid://dl3h3ybufbpyu" path="res://scenes/app/crazy_games_loading_layer.gd" id="13_fgoxt"]
+[ext_resource type="Texture2D" uid="uid://88ot8lfbupyo" path="res://art/particles/star_06.png" id="13_qwqsr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_whjeo"]
 shader = ExtResource("5_ajjm1")
@@ -198,6 +200,34 @@ _data = {
 &"step_2": SubResource("Animation_qva6k")
 }
 
+[sub_resource type="Gradient" id="Gradient_fgoxt"]
+offsets = PackedFloat32Array(0, 0.16603774, 0.8867925, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_f2rq0"]
+gradient = SubResource("Gradient_fgoxt")
+
+[sub_resource type="Curve" id="Curve_qwqsr"]
+_data = [Vector2(0, 0.2422753), 0.0, 0.0, 0, 0, Vector2(0.49828184, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.14185393), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_fgoxt"]
+curve = SubResource("Curve_qwqsr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6deuo"]
+particle_flag_disable_z = true
+emission_shape = 2
+emission_sphere_radius = 80.0
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 30.0
+gravity = Vector3(0, -98, 0)
+scale_min = 0.099999994
+scale_max = 0.19999999
+scale_curve = SubResource("CurveTexture_fgoxt")
+color = Color(0.31608012, 1.0227264, 1.0309138, 1)
+color_ramp = SubResource("GradientTexture1D_f2rq0")
+
 [node name="App" type="Control" unique_id=1304418827]
 layout_mode = 3
 anchors_preset = 15
@@ -363,5 +393,59 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
+
+[node name="CrazyGamesLoadingLayer" type="CanvasLayer" parent="." unique_id=1663092903]
+script = ExtResource("13_fgoxt")
+
+[node name="ColorRect" type="ColorRect" parent="CrazyGamesLoadingLayer" unique_id=1878998399]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBox" type="VBoxContainer" parent="CrazyGamesLoadingLayer" unique_id=646924568]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CrazyGamesLoadingLayer/VBox" unique_id=1988374355]
+layout_mode = 2
+texture = ExtResource("10_sw1ao")
+stretch_mode = 5
+
+[node name="Control" type="Control" parent="CrazyGamesLoadingLayer/VBox/TextureRect" unique_id=468778720]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -0.5
+offset_right = 0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="CrazyGamesLoadingLayer/VBox/TextureRect/Control" unique_id=2098458484]
+texture = ExtResource("13_qwqsr")
+process_material = SubResource("ParticleProcessMaterial_6deuo")
+
+[node name="Label" type="Label" parent="CrazyGamesLoadingLayer/VBox" unique_id=1984671329]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "LOADING"
+horizontal_alignment = 1
 
 [connection signal="timeout" from="CoreResetAnimation/vibr_timer" to="CoreResetAnimation" method="_on_vibr_timer_timeout"]

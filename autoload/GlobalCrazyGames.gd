@@ -1,4 +1,3 @@
-# GlobalCrazyGames.gd
 extends Node
 
 const AD_REWARD_SUCCESS = "SUCCESS"
@@ -8,11 +7,16 @@ signal sdk_ready
 
 var is_ready := false
 
-func _ready() -> void:
-	await CrazyGames.is_initialised_async()
-	is_ready = true
-	sdk_ready.emit()
+var _last_uploaded_json := ""
+var _save_queued := false
 
+
+func InitCrazyGames():
+	if OS.has_feature("crazygames"):
+		await CrazyGames.is_initialised_async()
+		is_ready = true
+		sdk_ready.emit()
+		
 func wait_until_ready() -> void:
 	if is_ready:
 		return
@@ -68,3 +72,48 @@ func OnWatchRewardedAd() -> String:
 		return AD_REWARD_SUCCESS
 	else:
 		return AD_REWARD_FAILED
+
+func QueueCrazySave() -> void:
+	if !OS.has_feature("crazygames"):
+		return
+	if !GlobalCrazyGames.is_ready:
+		return
+	if _save_queued:
+		return
+
+	_save_queued = true
+	await get_tree().create_timer(0.75).timeout
+	_save_queued = false
+	FlushCrazySave()
+
+func FlushCrazySave() -> void:
+	if !OS.has_feature("crazygames"):
+		return
+	if !GlobalCrazyGames.is_ready:
+		return
+
+	var json = JSON.stringify(GlobalSave.save_data)
+
+	if json == _last_uploaded_json:
+		return
+
+	CrazyGames.Data.data_set_item("save_data", json)
+	_last_uploaded_json = json
+
+func LoadFromCrazyGames() -> bool:
+	if !OS.has_feature("crazygames"):
+		return false
+	if !GlobalCrazyGames.is_ready:
+		return false
+	if !CrazyGames.Data.data_has_key("save_data"):
+		return false
+
+	var raw := str(CrazyGames.Data.data_get_item("save_data"))
+	var parsed = JSON.parse_string(raw)
+
+	if typeof(parsed) == TYPE_DICTIONARY:
+		GlobalSave.save_data = parsed
+		_last_uploaded_json = raw
+		return true
+
+	return false
