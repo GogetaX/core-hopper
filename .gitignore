@@ -20,6 +20,6 @@ android/build/
 *.translation
 
 
-#source svg file (too heavy)
-NotImported/exports/android/
-NotImported/exports/ios/
+
+NotImported/exports/Android
+NotImported/exports/crazy_games_html5
