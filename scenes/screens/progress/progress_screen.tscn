@@ -210,7 +210,7 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 
 [node name="SmartPanel" parent="HFlowContainer" unique_id=1581752751 instance=ExtResource("1_1pkcy")]
-custom_minimum_size = Vector2(350, 170)
+custom_minimum_size = Vector2(350, 190)
 layout_mode = 2
 size_flags_horizontal = 3
 panel_type = "BORDER_ONLY"
@@ -246,7 +246,7 @@ theme_type_variation = &"LabelGray"
 text = "Global bot output"
 
 [node name="SmartPanel2" parent="HFlowContainer" unique_id=1038386867 instance=ExtResource("1_1pkcy")]
-custom_minimum_size = Vector2(350, 170)
+custom_minimum_size = Vector2(350, 190)
 layout_mode = 2
 size_flags_horizontal = 3
 panel_type = "BORDER_ONLY"
@@ -281,7 +281,7 @@ theme_type_variation = &"LabelGray"
 text = "Current interval"
 
 [node name="SmartPanel3" parent="HFlowContainer" unique_id=1983765711 instance=ExtResource("1_1pkcy")]
-custom_minimum_size = Vector2(350, 170)
+custom_minimum_size = Vector2(350, 190)
 layout_mode = 2
 size_flags_horizontal = 3
 panel_type = "BORDER_ONLY"
@@ -316,7 +316,7 @@ theme_type_variation = &"LabelGray"
 text = "Ore value boosted"
 
 [node name="SmartPanel4" parent="HFlowContainer" unique_id=488895178 instance=ExtResource("1_1pkcy")]
-custom_minimum_size = Vector2(350, 170)
+custom_minimum_size = Vector2(350, 190)
 layout_mode = 2
 size_flags_horizontal = 3
 panel_type = "BORDER_ONLY"
@@ -396,7 +396,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="ProgressHashTagWithIcon" parent="Menu_Upgrades/VList/HList/VBoxContainer" unique_id=2003499456 instance=ExtResource("6_neoah")]
-custom_minimum_size = Vector2(208, 33)
+custom_minimum_size = Vector2(259, 44)
 layout_mode = 2
 hash_tag_type = "INSIDE_ONLY"
 hash_tag_color = "BLUE"
@@ -467,7 +467,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="quest_count" parent="Menu_Quests/QuestVList/HList/VBoxContainer" unique_id=88007381 instance=ExtResource("6_neoah")]
-custom_minimum_size = Vector2(244, 33)
+custom_minimum_size = Vector2(306, 44)
 layout_mode = 2
 hash_tag_type = "INSIDE_ONLY"
 hash_tag_text = "4 DAILY QUESTS"
@@ -547,7 +547,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="OwnedRelics" parent="Menu_Relics/RelicVList/HList/VList" unique_id=938022395 instance=ExtResource("6_neoah")]
-custom_minimum_size = Vector2(169, 33)
+custom_minimum_size = Vector2(206, 44)
 layout_mode = 2
 hash_tag_type = "INSIDE_ONLY"
 hash_tag_color = "GOLD"

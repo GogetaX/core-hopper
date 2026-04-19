@@ -31,3 +31,14 @@ res://scenes/screens/dig/active_boost.tscn
 res://autoload/GlobalCoreResetDB.gd
 res://scenes/popups/CoreResetPopup.tscn
 res://autoload/GlobalSave.gd
+res://scenes/screens/shop/shop_screen.tscn
+res://scenes/screens/shop/daily_deal_item.tscn
+res://scenes/screens/shop/daily_deal_item.gd
+res://scenes/screens/shop/resets_in_time.gd
+res://autoload/GlobalTimedBonus.gd
+res://scenes/screens/dig/dig_screen.tscn
+res://scenes/popups/core_reset_popup.gd
+res://scenes/screens/progress/relic_item.gd
+res://scenes/screens/progress/progress_screen.tscn
+res://scenes/popups/watch_ad_button.gd
+res://scenes/popups/OfflineDropPopup.tscn

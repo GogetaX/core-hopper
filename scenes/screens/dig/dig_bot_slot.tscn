@@ -10,12 +10,13 @@
 [ext_resource type="Texture2D" uid="uid://cl1g53qyb2nu0" path="res://data/icons/prestiege.tres" id="8_nel8w"]
 
 [node name="DigBotSlot" type="Panel" unique_id=1867726318]
-custom_minimum_size = Vector2(150, 150)
+custom_minimum_size = Vector2(170, 170)
 mouse_filter = 1
 theme_type_variation = &"PanelWithWhiteBG"
 script = ExtResource("1_na4w1")
 
 [node name="State_DigBot" type="Control" parent="." unique_id=1511592070]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -65,11 +66,17 @@ hash_tag_type = "INSIDE_ONLY"
 hash_tag_color = "WHITE"
 
 [node name="dps_label" type="Label" parent="State_DigBot" unique_id=972440170]
-layout_mode = 0
-offset_left = 20.0
-offset_top = 116.5
-offset_right = 130.0
-offset_bottom = 147.5
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -55.0
+offset_top = -41.0
+offset_right = 55.0
+grow_horizontal = 2
+grow_vertical = 0
 theme_type_variation = &"LabelGray"
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 20

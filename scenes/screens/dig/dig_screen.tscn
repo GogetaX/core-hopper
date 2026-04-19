@@ -79,7 +79,7 @@ layout_mode = 2
 script = ExtResource("3_yjxrm")
 
 [node name="StatusLabel" parent="HList2/VList/StatusFlowContainer" unique_id=2088306964 instance=ExtResource("1_fqevo")]
-custom_minimum_size = Vector2(256, 35)
+custom_minimum_size = Vector2(327, 35)
 layout_mode = 2
 panel_color = "BLUE"
 status_text = "DIGGING INACTIVE"
@@ -104,6 +104,7 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="HList3" type="HBoxContainer" parent="." unique_id=1465104853]
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 20
@@ -145,7 +146,7 @@ autostart = true
 
 [node name="bot_amount_active" type="Label" parent="HList3/IncomePanel/VList" unique_id=1960137476]
 layout_mode = 2
-theme_type_variation = &"LabelGray"
+theme_type_variation = &"LabelGrayHint"
 text = "5 bots online"
 script = ExtResource("4_ghiss")
 
@@ -183,7 +184,7 @@ script = ExtResource("7_5w0l6")
 
 [node name="offline_level" type="Label" parent="HList3/OfflinePanel/VList" unique_id=429210954]
 layout_mode = 2
-theme_type_variation = &"LabelGray"
+theme_type_variation = &"LabelGrayHint"
 text = "Deep stasis lvl 34"
 script = ExtResource("7_davrd")
 
@@ -221,7 +222,7 @@ script = ExtResource("9_elpyf")
 
 [node name="drop_bonus" type="Label" parent="HList3/XPBonusPanel/VList" unique_id=381458678]
 layout_mode = 2
-theme_type_variation = &"LabelGray"
+theme_type_variation = &"LabelGrayHint"
 text = "Boosted ore yield"
 script = ExtResource("9_acvec")
 
@@ -280,7 +281,7 @@ mouse_filter = 2
 alignment = 1
 
 [node name="StatusLabel" parent="MiningPanel/VList/HList/VList2" unique_id=286645920 instance=ExtResource("1_fqevo")]
-custom_minimum_size = Vector2(281, 35)
+custom_minimum_size = Vector2(362, 35)
 layout_mode = 2
 panel_color = "BLUE"
 status_text = "BOSS BLOCK IN 50M"

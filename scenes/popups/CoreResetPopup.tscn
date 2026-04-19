@@ -29,6 +29,7 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 size_flags_horizontal = 3
+size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("1_dqggo")
 
@@ -60,7 +61,9 @@ anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 50.0
+offset_top = 10.0
 offset_right = -50.0
+offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
@@ -191,7 +194,7 @@ theme_override_font_sizes/font_size = 26
 text = "NOT READY"
 
 [node name="Control4" type="Control" parent="SmartPanel/VBoxContainer" unique_id=1955871407]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
 [node name="Label3" type="Label" parent="SmartPanel/VBoxContainer" unique_id=821910883]
@@ -207,14 +210,14 @@ theme_type_variation = &"LabelGray"
 text = "NEXT REWARD TIER"
 
 [node name="BonusList" type="VBoxContainer" parent="SmartPanel/VBoxContainer" unique_id=903736304]
-custom_minimum_size = Vector2(0, 300)
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 
 [node name="CoreResetItem" parent="SmartPanel/VBoxContainer/BonusList" unique_id=1537638433 instance=ExtResource("9_0aqc7")]
 layout_mode = 2
 
 [node name="SmartPanel2" parent="SmartPanel/VBoxContainer" unique_id=276639055 instance=ExtResource("2_0jdrq")]
-custom_minimum_size = Vector2(0, 350)
+custom_minimum_size = Vector2(0, 330)
 layout_mode = 2
 panel_type = "INSIDE_ONLY"
 panel_color = "DISABLED"
@@ -430,6 +433,10 @@ layout_mode = 2
 theme_type_variation = &"LabelGrayHint"
 theme_override_font_sizes/font_size = 28
 text = "STRONGEST BOT"
+
+[node name="Control5" type="Control" parent="SmartPanel/VBoxContainer" unique_id=115209862]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
 
 [node name="CoreResetBtn" parent="SmartPanel/VBoxContainer" unique_id=664760665 instance=ExtResource("10_45apc")]
 custom_minimum_size = Vector2(350, 100)

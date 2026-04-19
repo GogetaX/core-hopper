@@ -383,3 +383,46 @@ func ActivateNonDailyBooster(booster_id: String, spend_currency: bool = true) ->
 		return false
 
 	return ActivateBooster(booster_id, spend_currency)
+
+func GetDailyTaskDayKey() -> String:
+	var timed_bonuses = GlobalSave.save_data.get("timed_bonuses", {})
+	return str(timed_bonuses.get("daily_day_key", ""))
+
+
+func GetSecondsUntilDailyTaskReset() -> int:
+	var saved_day_key := GetDailyTaskDayKey()
+
+	var now := Time.get_datetime_dict_from_system(false)
+	var today_key := "%04d-%02d-%02d" % [
+		int(now.year),
+		int(now.month),
+		int(now.day)
+	]
+
+	# already expired / needs refresh
+	if saved_day_key == "" or saved_day_key != today_key:
+		return 0
+
+	var today_midnight := {
+		"year": int(now.year),
+		"month": int(now.month),
+		"day": int(now.day),
+		"hour": 0,
+		"minute": 0,
+		"second": 0
+	}
+
+	var next_reset_unix := int(Time.get_unix_time_from_datetime_dict(today_midnight)) + 86400
+	var now_unix := int(Time.get_unix_time_from_system())
+
+	return max(0, next_reset_unix - now_unix)
+
+
+func GetDailyTaskResetCountdownText() -> String:
+	var left := GetSecondsUntilDailyTaskReset()
+
+	var hours := left / 3600.0
+	var minutes := (left % 3600) / 60.0
+	var seconds := left % 60
+
+	return "%02d:%02d:%02d" % [hours, minutes, seconds]

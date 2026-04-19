@@ -1,7 +1,7 @@
 extends Node
 
 #Ads Configuration
-const SKIP_REWARDED_VIDS = true
+const SKIP_REWARDED_VIDS = false
 
 signal rewarded_ready_changed(is_ready: bool)
 signal rewarded_reward_earned(reward_type: String, reward_amount: int)

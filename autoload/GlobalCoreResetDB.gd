@@ -520,10 +520,81 @@ func _ResetBotInventoryForCoreReset(clean_save: Dictionary) -> void:
 		"merge_free_slots": 4
 	}).duplicate(true)
 
+	var strongest_bot := _GetStrongestBotToKeepForCoreReset()
+
 	clean_bot_inventory["bot_db"] = []
+
+	if !strongest_bot.is_empty():
+		# make sure the kept bot starts clean in inventory
+		strongest_bot["merge_slot_id"] = 0
+		clean_bot_inventory["bot_db"].append(strongest_bot)
+
 	GlobalSave.save_data["bot_inventory"] = clean_bot_inventory
 
+func _GetStrongestBotToKeepForCoreReset() -> Dictionary:
+	var bot_inventory = GlobalSave.save_data.get("bot_inventory", {})
+	if typeof(bot_inventory) != TYPE_DICTIONARY:
+		return {}
 
+	var bot_db = bot_inventory.get("bot_db", [])
+	if typeof(bot_db) != TYPE_ARRAY or bot_db.is_empty():
+		return {}
+
+	var best_bot: Dictionary = {}
+	var best_level := -1
+	var best_rank := -1
+	var best_stat_score := -1.0
+	var best_uid := 999999999
+
+	for raw_bot in bot_db:
+		if typeof(raw_bot) != TYPE_DICTIONARY:
+			continue
+
+		var bot: Dictionary = raw_bot
+		var level := int(bot.get("level", 1))
+		var rank := int(bot.get("rank", 0))
+		var stat_score := _GetCoreResetBotTieBreakerScore(bot)
+		var uid := int(bot.get("uid", 999999999))
+
+		var should_take := false
+
+		if best_bot.is_empty():
+			should_take = true
+		elif level > best_level:
+			should_take = true
+		elif level == best_level and rank > best_rank:
+			should_take = true
+		elif level == best_level and rank == best_rank and stat_score > best_stat_score:
+			should_take = true
+		elif level == best_level and rank == best_rank and is_equal_approx(stat_score, best_stat_score) and uid < best_uid:
+			should_take = true
+
+		if should_take:
+			best_bot = bot.duplicate(true)
+			best_level = level
+			best_rank = rank
+			best_stat_score = stat_score
+			best_uid = uid
+
+	return best_bot
+
+func _GetCoreResetBotTieBreakerScore(bot_data: Dictionary) -> float:
+	var stats = bot_data.get("stats", {})
+	if typeof(stats) != TYPE_DICTIONARY:
+		return 0.0
+
+	var total := 0.0
+
+	for stat_id in stats.keys():
+		var stat_value = stats[stat_id]
+
+		if typeof(stat_value) == TYPE_DICTIONARY:
+			total += absf(float(stat_value.get("value", 0.0)))
+		else:
+			total += absf(float(stat_value))
+
+	return total
+	
 func _ResetLanesForCoreReset(clean_save: Dictionary) -> void:
 	var clean_lanes: Array = clean_save.get("lanes", []).duplicate(true)
 

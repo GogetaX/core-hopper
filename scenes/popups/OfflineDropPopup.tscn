@@ -148,12 +148,11 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="HList3" type="HFlowContainer" parent="SmartPanel/VBoxContainer" unique_id=1377036296]
-custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 alignment = 1
 
 [node name="OfflinePanel" parent="SmartPanel/VBoxContainer/HList3" unique_id=580292616 instance=ExtResource("2_cwrqk")]
-custom_minimum_size = Vector2(350, 40)
+custom_minimum_size = Vector2(450, 80)
 layout_mode = 2
 panel_type = "INSIDE_ONLY"
 panel_color = "DISABLED"
@@ -192,7 +191,7 @@ hash_tag_color = "BLUE"
 no_bg = true
 
 [node name="OfflineCapTime" parent="SmartPanel/VBoxContainer/HList3" unique_id=2047736744 instance=ExtResource("2_cwrqk")]
-custom_minimum_size = Vector2(350, 0)
+custom_minimum_size = Vector2(450, 80)
 layout_mode = 2
 panel_type = "INSIDE_ONLY"
 panel_color = "DISABLED"

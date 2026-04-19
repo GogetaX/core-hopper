@@ -109,3 +109,9 @@ func _on_buy_with_currency_btn_btn_pressed_with_price(_currency: String, _price:
 		GlobalTimedBonus.ActivateBooster(cur_data.id)
 	else:
 		GlobalTimedBonus.ActivateNonDailyBooster(cur_data.id)
+
+
+func DailyTaskResized() -> void:
+	var max_y = $DailyItem/VBoxContainer.get_minimum_size().y
+	custom_minimum_size.y = max_y + 35
+	size.y = custom_minimum_size.y

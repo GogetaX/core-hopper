@@ -64,8 +64,10 @@ func InitItem(item_data:Dictionary,popup_data:Dictionary):
 	else:
 		$RelicItem/VBoxContainer/HBox/relic_max.visible = true
 	if cur_data.is_equipped:
+		$RelicItem/VBoxContainer/RelicBtn.panel_color = "WHITE"
 		$RelicItem/VBoxContainer/RelicBtn.buy_btn_title = "UNEQUIP"
 	else:
+		$RelicItem/VBoxContainer/RelicBtn.panel_color = "PURPLE"
 		$RelicItem/VBoxContainer/RelicBtn.buy_btn_title = "EQUIP"
 	if popup_data.has("inv_mode"):
 		if popup_data.inv_mode == "show_inv":

@@ -63,7 +63,7 @@ mouse_filter = 2
 alignment = 1
 
 [node name="ProgressHashTagWithIcon" parent="SmartPanel/VBoxContainer/HList" unique_id=2003499456 instance=ExtResource("2_ipdis")]
-custom_minimum_size = Vector2(295, 33)
+custom_minimum_size = Vector2(372, 44)
 layout_mode = 2
 hash_tag_type = "INSIDE_ONLY"
 hash_tag_text = "LIMITED TIME OFFER"

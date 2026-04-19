@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://njxlv6dxrlwj" path="res://scenes/screens/progress/smart_button_buy.tscn" id="6_oyli1"]
 
 [node name="DailyDealItem" type="Control" unique_id=737257032]
-custom_minimum_size = Vector2(400, 350)
+custom_minimum_size = Vector2(400, 360)
 layout_mode = 3
 anchors_preset = 0
 size_flags_horizontal = 3
@@ -176,5 +176,6 @@ horizontal_alignment = 1
 no_bg = true
 
 [connection signal="timeout" from="count_down" to="." method="_on_count_down_timeout"]
+[connection signal="resized" from="DailyItem/VBoxContainer" to="." method="DailyTaskResized"]
 [connection signal="OnPress" from="DailyItem/VBoxContainer/BuyBtn" to="." method="_on_buy_btn_on_press"]
 [connection signal="BtnPressedWithPrice" from="BuyItem/VBoxContainer/BuyWithCurrencyBtn" to="." method="_on_buy_with_currency_btn_btn_pressed_with_price"]

@@ -63,7 +63,7 @@ func _ready() -> void:
 			$SmartPanel/VList/HList/VList/ad_title.text = ad_title + " ("+str(times_per_day).pad_decimals(0)+")"
 		else:
 			$SmartPanel/VList/WatchAdBtn.SetDisabled(true)
-	if !Engine.is_editor_hint():
+			
 		SyncRewardBtnDisabled()
 		if !already_loaded:
 			GlobalAds.rewarded_ready_changed.connect(OnRewardedReady)
@@ -75,7 +75,7 @@ func OnRewardedReady(_is_ready):
 	
 func SyncRewardBtnDisabled():
 	$SmartPanel/VList/WatchAdBtn.SetDisabled(true)
-	if GlobalAds.IsRewardedReady():
+	if GlobalAds.IsRewardedReady() && times_per_day > 0:
 		$SmartPanel/VList/WatchAdBtn.SetDisabled(false)
 		
 func AddRewards(_rewards):
@@ -112,5 +112,3 @@ func _on_watch_ad_btn_on_press() -> void:
 		else:
 			print_debug("Unknown: ",x)
 	WatchAdOpenedOnce.emit(str(name))
-	
-		

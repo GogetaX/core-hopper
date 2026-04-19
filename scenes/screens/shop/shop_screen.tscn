@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://d3us88jhniywe" path="res://scenes/screens/shop/daily_deal_item.tscn" id="6_0o6hu"]
 [ext_resource type="PackedScene" uid="uid://2qyad5tlekq8" path="res://scenes/screens/shop/shop_crystal_button.tscn" id="7_5vb6r"]
 [ext_resource type="Texture2D" uid="uid://bg18vum2cai3c" path="res://art/icons/rocket.png" id="8_3rjm8"]
+[ext_resource type="Script" uid="uid://cducjosg5ddnq" path="res://scenes/screens/shop/resets_in_time.gd" id="8_c5hhf"]
 [ext_resource type="Texture2D" uid="uid://bmi0xl7ivgbdw" path="res://art/shop/shop_icons.png" id="10_nspte"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8j0y4"]
@@ -102,7 +103,7 @@ size_flags_horizontal = 3
 mouse_filter = 2
 
 [node name="ProgressHashTagWithIcon" parent="SpecialOffser/VList/HList" unique_id=2003499456 instance=ExtResource("3_nw37m")]
-custom_minimum_size = Vector2(153, 33)
+custom_minimum_size = Vector2(186, 44)
 layout_mode = 2
 hash_tag_type = "BORDER_ONLY"
 hash_tag_text = "04:22:15"
@@ -193,11 +194,19 @@ size_flags_horizontal = 3
 mouse_filter = 2
 
 [node name="ProgressHashTag" parent="HBoxContainer" unique_id=1490333471 instance=ExtResource("2_8j0y4")]
-self_modulate = Color(0.8627451, 0.9098039, 1, 1)
+self_modulate = Color(0.95686275, 0.972549, 1, 1)
+custom_minimum_size = Vector2(340, 0)
 layout_mode = 2
 text = "Resets in 12h"
+horizontal_alignment = 1
+hash_tag_type = "INSIDE_ONLY"
 hash_tag_color = "WHITE"
-no_bg = true
+
+[node name="ResetsInTime" type="Node" parent="HBoxContainer/ProgressHashTag" unique_id=1308907079]
+script = ExtResource("8_c5hhf")
+
+[node name="Timer" type="Timer" parent="HBoxContainer/ProgressHashTag/ResetsInTime" unique_id=1280680251]
+autostart = true
 
 [node name="Control2" type="Control" parent="HBoxContainer" unique_id=1182231354]
 custom_minimum_size = Vector2(10, 0)
@@ -211,9 +220,11 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 
 [node name="DailyDeal" parent="DailyDealList" unique_id=737257032 instance=ExtResource("6_0o6hu")]
+custom_minimum_size = Vector2(400, 360)
 layout_mode = 2
 
 [node name="DailyDeal2" parent="DailyDealList" unique_id=153683194 instance=ExtResource("6_0o6hu")]
+custom_minimum_size = Vector2(400, 360)
 layout_mode = 2
 
 [node name="Control2" type="Control" parent="." unique_id=910548509]
@@ -330,10 +341,15 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 
 [node name="DailyDeal" parent="TacticalBoosters" unique_id=704533999 instance=ExtResource("6_0o6hu")]
+custom_minimum_size = Vector2(400, 360)
 layout_mode = 2
 
 [node name="DailyDeal2" parent="TacticalBoosters" unique_id=1416245813 instance=ExtResource("6_0o6hu")]
+custom_minimum_size = Vector2(400, 360)
 layout_mode = 2
 
 [node name="DailyDeal3" parent="TacticalBoosters" unique_id=1781121777 instance=ExtResource("6_0o6hu")]
+custom_minimum_size = Vector2(400, 360)
 layout_mode = 2
+
+[connection signal="timeout" from="HBoxContainer/ProgressHashTag/ResetsInTime/Timer" to="HBoxContainer/ProgressHashTag/ResetsInTime" method="_on_timer_timeout"]

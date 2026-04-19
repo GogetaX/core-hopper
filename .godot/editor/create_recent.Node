@@ -1,13 +1,13 @@
-HFlowContainer
-Node
 Control
+Timer
+Node
+HFlowContainer
 GPUParticles2D
 Label
 TextureRect
 VBoxContainer
 ColorRect
 CanvasLayer
-Timer
 AnimationPlayer
 HBoxContainer
 ProgressBar
