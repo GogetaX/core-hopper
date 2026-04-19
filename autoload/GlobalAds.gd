@@ -1,5 +1,8 @@
 extends Node
 
+#Ads Configuration
+const SKIP_REWARDED_VIDS = true
+
 signal rewarded_ready_changed(is_ready: bool)
 signal rewarded_reward_earned(reward_type: String, reward_amount: int)
 
@@ -55,21 +58,30 @@ func LoadRewarded() -> void:
 	if _rewarded_ad_id != "":
 		return
 	var request := LoadAdRequest.new()
+	request.set_ad_unit_id("ca-app-pub-6225081745698787/4585397866")
 	admob_plugin.load_rewarded_ad(request)
 
 
 func IsRewardedReady() -> bool:
+	if SKIP_REWARDED_VIDS:
+		return true
 	return _rewarded_ad_id != ""
 
 
 func ShowRewarded() -> bool:
+	if SKIP_REWARDED_VIDS:
+		await get_tree().create_timer(0.1).timeout
+		rewarded_reward_earned.emit("reward",1)
+		return true
+		
 	if admob_plugin == null:
 		return false
 	
 	if _rewarded_ad_id == "":
 		return false
 	
-	admob_plugin.show_rewarded_ad(_rewarded_ad_id)
+	else:
+		admob_plugin.show_rewarded_ad(_rewarded_ad_id)
 	return true
 
 

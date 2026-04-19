@@ -102,6 +102,7 @@ size_flags_vertical = 3
 buy_btn_title = "ACTIVATE"
 panel_color = "BLUE"
 buy_btn_icon = ExtResource("6_hjmsh")
+btn_type = "REWARDED_AD_BTN"
 
 [connection signal="timeout" from="MergeActive/skill_tick" to="." method="_on_skill_tick_timeout"]
 [connection signal="OnPress" from="MergeNotActive/HList/VList/ActivateMergeBtn" to="." method="_on_activate_merge_btn_on_press"]

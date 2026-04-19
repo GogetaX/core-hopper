@@ -30,6 +30,7 @@ var _disabled_because_of_price = false
 
 @export_enum("SIMPLE_BTN","REWARDED_AD_BTN") var btn_type := "SIMPLE_BTN"
 
+var is_ready = false
 func _ready() -> void:
 	SyncTool()
 	if !Engine.is_editor_hint():
@@ -37,7 +38,14 @@ func _ready() -> void:
 		GlobalBtn.AddBtnMouseInOut(self,[$Background])
 		GlobalBtn.BtnPress.connect(OnBtnPressed)
 		SyncTool()
-		
+		if btn_type == "REWARDED_AD_BTN" && !is_ready:
+			is_ready = true
+			SyncRewardedBtn()
+			GlobalAds.rewarded_ready_changed.connect(OnRewardedReady)
+
+func OnRewardedReady(_is_ready):
+	SyncRewardedBtn()
+	
 func SyncTool():
 	if !is_node_ready():
 		await ready
@@ -54,6 +62,11 @@ func ShowOnly(show_btn:Control):
 			x.visible = false
 	show_btn.visible = true
 	
+func SyncRewardedBtn():
+	SetDisabled(true)
+	if GlobalAds.IsRewardedReady():
+		SetDisabled(false)
+		
 func OnBtnPressed(btn_node:Control):
 	if btn_node != self:
 		return
@@ -62,16 +75,14 @@ func OnBtnPressed(btn_node:Control):
 	GlobalBtn.AnimateBtnPressed($Background)
 	match btn_type:
 		"REWARDED_AD_BTN":
+			GlobalBtn.AnimateBtnPressed($Background)
+			GlobalAds.ShowRewarded()
+			if !GlobalAds.IsRewardedReady():
+				return
+			await GlobalAds.rewarded_reward_earned
 			OnPress.emit()
 		_:
 			OnPress.emit()
-func OnMergeBtnPressed(btn_node:Control):
-	if btn_node != self:
-		return
-	if _disabled_because_of_price:
-		return
-		
-	GlobalBtn.AnimateBtnPressed($Background)
 
 func SetDisabled(_is_disabled:bool):
 	if _is_disabled:

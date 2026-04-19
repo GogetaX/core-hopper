@@ -122,6 +122,7 @@ func SyncLaneData():
 
 func State_Lane5Unlock():
 	$State_Reach10kAnd100CrystalsAndPrestiege.visible = true
+	
 func State_Lane4Unlock():
 	$State_Reach2kAnd25Crystals.visible = true
 	

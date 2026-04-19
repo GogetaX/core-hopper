@@ -317,7 +317,7 @@ func GetFreeMergeSlots()->int:
 	return min(int(inv_merge_slots + skill_merge_slots + core_reset_merge_slots),MAX_MERGE_SLOTS)
 
 func BuyBotData():
-	var base_bot_price = 5 * pow(1.12,GlobalSave.save_data.player_stats.total_bots_bought_this_reset)
+	var base_bot_price = 5 * pow(1.09,GlobalSave.save_data.progress.total_bots_bought_this_reset)
 	#Base
 	var res = {
 		"price":base_bot_price,

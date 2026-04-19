@@ -341,7 +341,7 @@ func GetCoreResetEffectBonusStr(effect: Dictionary, include_total: bool = false)
 
 		"bot_buy_start_level_bonus":
 			var start_level := 1 + int(round(next_total))
-			return "Start with Level " + str(start_level) + " Bots"
+			return "Start with level +" + str(start_level) + " Bots"
 
 		"relic_slot_bonus":
 			var relic_word := "Relic Slot"
@@ -494,8 +494,6 @@ func _ResetRunStateForCoreReset() -> void:
 		GlobalSave.save_data.player_stats["core_resets"] = 0
 	if !GlobalSave.save_data.player_stats.has("current_prestige"):
 		GlobalSave.save_data.player_stats["current_prestige"] = 0
-	if !GlobalSave.save_data.player_stats.has("total_bots_bought_this_reset"):
-		GlobalSave.save_data.player_stats.total_bots_bought_this_reset = 0
 	GlobalSave.save_data.player_stats["current_prestige"] = int(GlobalSave.save_data.player_stats.get("core_resets", 0))
 
 	# keep save metadata / uid serial so no weird collisions
@@ -563,6 +561,7 @@ func _ResetProgressForCoreReset(clean_save: Dictionary) -> void:
 
 	clean_progress["global_depth"] = 0
 	clean_progress["efficiency_mult"] = 1.0
+	clean_progress["total_bots_bought_this_reset"] = 0
 
 	GlobalSave.save_data["progress"] = clean_progress
 

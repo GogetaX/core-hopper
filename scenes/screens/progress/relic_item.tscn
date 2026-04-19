@@ -9,15 +9,16 @@
 [ext_resource type="Texture2D" uid="uid://52wk4te2cs6e" path="res://art/icons/20_px/lock_icon.png" id="6_om82t"]
 
 [node name="RelicItem" type="Control" unique_id=58938028]
-custom_minimum_size = Vector2(350, 260)
+custom_minimum_size = Vector2(350, 350)
 layout_mode = 3
 anchors_preset = 0
+offset_right = 565.0
+offset_bottom = 350.0
 size_flags_horizontal = 3
 mouse_filter = 1
 script = ExtResource("1_xbwj4")
 
 [node name="RelicItem" parent="." unique_id=892379017 instance=ExtResource("1_a4rcp")]
-visible = false
 layout_mode = 1
 darken_bg = true
 
@@ -66,14 +67,14 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"LabelTitle_White"
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 40
 text = "Relic Name"
 
 [node name="relic_desc" type="Label" parent="RelicItem/VBoxContainer/HList/VList" unique_id=585534831]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"LabelGray"
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 32
 text = "Relic Name"
 autowrap_mode = 2
 
@@ -114,7 +115,7 @@ custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
 [node name="RelicBtn" parent="RelicItem/VBoxContainer" unique_id=664760665 instance=ExtResource("5_ysijg")]
-custom_minimum_size = Vector2(0, 60)
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 buy_btn_title = "EQUIPED"
 
@@ -149,6 +150,7 @@ texture = ExtResource("5_xbwj4")
 stretch_mode = 5
 
 [node name="LockedItem" parent="." unique_id=1222747643 instance=ExtResource("1_a4rcp")]
+visible = false
 layout_mode = 1
 panel_color = "TAB_BG"
 darken_bg = true

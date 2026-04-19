@@ -16,7 +16,6 @@ theme_type_variation = &"PanelWithWhiteBG"
 script = ExtResource("1_na4w1")
 
 [node name="State_DigBot" type="Control" parent="." unique_id=1511592070]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -253,6 +252,7 @@ hash_tag_color = "BLUE"
 no_bg = true
 
 [node name="State_Reach10kAnd100CrystalsAndPrestiege" type="Control" parent="." unique_id=1712844576]
+visible = false
 modulate = Color(0.23403707, 0.23403707, 0.23403707, 1)
 layout_mode = 1
 anchors_preset = 15

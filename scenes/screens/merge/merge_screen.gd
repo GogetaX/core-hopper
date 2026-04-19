@@ -20,7 +20,7 @@ func SyncData():
 		$VList/DailyFreeBot.SetDisabled(true)
 		
 	$VList/DailyMythicBot.buy_btn_title = "DAILY FREE MYTHIC ("+str(daily_limit.mythic_amount).pad_decimals(0)+")"
-	if daily_limit.mythic_amount > 0:
+	if daily_limit.mythic_amount > 0 && GlobalAds.IsRewardedReady():
 		$VList/DailyMythicBot.SetDisabled(false)
 	else:
 		$VList/DailyMythicBot.SetDisabled(true)

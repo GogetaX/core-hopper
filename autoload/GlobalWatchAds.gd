@@ -84,7 +84,7 @@ func _GainCurrencyAd() -> Dictionary:
 	res.icon = "res://art/skills/resource_drop_mult.tres"
 	res.color = "BLUE"
 	res.title = "Depth Cache"
-	res.description = "Gain %d Coins and %d Crystals instantly" % [coins, crystals]
+	res.description = "Gain %s Coins and %s Crystals instantly" % [Global.CurrencyToString(coins), Global.CurrencyToString(crystals)]
 	res.max_times = GetMaxDailyUsesForAds(res.id)
 	res.times_left = GetTimesLeft(res.id)
 	res.rewards.append({"coins": coins})

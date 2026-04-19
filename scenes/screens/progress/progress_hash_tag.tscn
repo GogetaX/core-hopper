@@ -5,6 +5,7 @@
 
 [node name="ProgressHashTag" type="Label" unique_id=713365230]
 self_modulate = Color(0.9490196, 0.8392157, 1, 1)
+theme_override_font_sizes/font_size = 34
 text = "POWER"
 script = ExtResource("1_7a7o6")
 

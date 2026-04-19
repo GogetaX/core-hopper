@@ -5,7 +5,7 @@
   "gate_type": "max_depth_reached",
   "tiers": {
 	"1": {
-	  "required_depth": 1000,
+	  "required_depth": 800,
 	  "title": "Core Reset I",
 	  "description": "Expand the workshop.",
 	  "effects": [
@@ -13,7 +13,7 @@
 	  ]
 	},
 	"2": {
-	  "required_depth": 2500,
+	  "required_depth": 2000,
 	  "title": "Core Reset II",
 	  "description": "Start with stronger bots.",
 	  "effects": [
@@ -21,7 +21,7 @@
 	  ]
 	},
 	"3": {
-	  "required_depth": 5000,
+	  "required_depth": 4500,
 	  "title": "Core Reset III",
 	  "description": "Unlock one more relic slot.",
 	  "effects": [

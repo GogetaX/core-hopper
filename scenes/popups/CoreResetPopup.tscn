@@ -214,7 +214,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="SmartPanel2" parent="SmartPanel/VBoxContainer" unique_id=276639055 instance=ExtResource("2_0jdrq")]
-custom_minimum_size = Vector2(0, 300)
+custom_minimum_size = Vector2(0, 350)
 layout_mode = 2
 panel_type = "INSIDE_ONLY"
 panel_color = "DISABLED"
@@ -414,6 +414,22 @@ layout_mode = 2
 theme_type_variation = &"LabelGrayHint"
 theme_override_font_sizes/font_size = 28
 text = "CHESTS"
+
+[node name="HList6" type="HBoxContainer" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/KeepList" unique_id=44716583]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TextureRect" type="TextureRect" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/KeepList/HList6" unique_id=458555207]
+self_modulate = Color(0.30980393, 0.89411765, 1, 1)
+layout_mode = 2
+texture = ExtResource("11_yrojk")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="SmartPanel/VBoxContainer/SmartPanel2/HList/KeepList/HList6" unique_id=1434226383]
+layout_mode = 2
+theme_type_variation = &"LabelGrayHint"
+theme_override_font_sizes/font_size = 28
+text = "STRONGEST BOT"
 
 [node name="CoreResetBtn" parent="SmartPanel/VBoxContainer" unique_id=664760665 instance=ExtResource("10_45apc")]
 custom_minimum_size = Vector2(350, 100)

@@ -148,7 +148,8 @@ func BuildCleanSaveData():
 		}
 	res["progress"] = {
 		"efficiency_mult": 1.0,
-		"global_depth":0
+		"global_depth":0,
+		"total_bots_bought_this_reset":0
 	}
 	res["milestones"] = {
 		"completed_ids": [],
@@ -162,7 +163,7 @@ func BuildCleanSaveData():
 		"core_resets":0,
 		"current_prestige":0,
 		"total_bots_bought": 0,
-		"total_bots_bought_this_reset":0,
+		
 		"total_bots_got_free":0
 	}
 	res["settings"] = {
@@ -361,7 +362,7 @@ func StoreUpdateBotData(new_bot_data:Dictionary,free_bot := false) -> void:
 		save_data.bot_inventory.bot_db.append(new_bot_data)
 		if !free_bot:
 			save_data.player_stats.total_bots_bought += 1
-			save_data.player_stats.total_bots_bought_this_reset += 1
+			save_data.progress.total_bots_bought_this_reset += 1
 		else:
 			save_data.player_stats.total_bots_got_free += 1
 	else:

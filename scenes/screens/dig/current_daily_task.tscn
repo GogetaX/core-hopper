@@ -69,7 +69,6 @@ theme_override_font_sizes/font_size = 32
 text = "75% complete"
 
 [node name="NoQuestsLeft" parent="." unique_id=895280340 instance=ExtResource("1_wk0tb")]
-visible = false
 layout_mode = 1
 darken_bg = true
 
@@ -90,13 +89,14 @@ alignment = 1
 [node name="Label" type="Label" parent="NoQuestsLeft/VList" unique_id=1775824589]
 layout_mode = 2
 theme_type_variation = &"LabelDailyPurple"
-theme_override_font_sizes/font_size = 42
+theme_override_font_sizes/font_size = 34
 text = "NO QUESTS LEFT
 FOR TODAY"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Quest_Completed" parent="." unique_id=18129520 instance=ExtResource("1_wk0tb")]
+visible = false
 layout_mode = 1
 darken_bg = true
 

@@ -14,6 +14,7 @@ mouse_filter = 2
 script = ExtResource("1_c3gn4")
 
 [node name="CurActiveBoost" parent="." unique_id=892379017 instance=ExtResource("1_ib8av")]
+visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 panel_color = "BLUE"
@@ -72,7 +73,6 @@ theme_type_variation = &"LabelGray"
 text = "14m left"
 
 [node name="NoActiveBoost" parent="." unique_id=818189480 instance=ExtResource("1_ib8av")]
-visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 panel_color = "BLUE"
@@ -95,8 +95,10 @@ alignment = 1
 [node name="Label" type="Label" parent="NoActiveBoost/VList2" unique_id=1826318751]
 layout_mode = 2
 theme_type_variation = &"LabelDailyBlue"
+theme_override_font_sizes/font_size = 34
 text = "NO ACTIVE BOOSTS"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2
 
 [connection signal="timeout" from="CurActiveBoost/active_boost_tick" to="." method="_on_active_boost_tick_timeout"]
