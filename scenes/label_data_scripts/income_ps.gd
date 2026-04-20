@@ -59,4 +59,8 @@ func GetTotalIncome()->float:
 	return res
 	
 func _on_incone_counter_timeout() -> void:
-	text = str(snapped(GetTotalIncome(),0.1))
+	var tot_income = GetTotalIncome()
+	if tot_income < 100:
+		text = str(snapped(GetTotalIncome(),0.1))
+	else:
+		text = Global.CurrencyToString(tot_income)

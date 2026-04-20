@@ -340,7 +340,7 @@ func GetCoreResetEffectBonusStr(effect: Dictionary, include_total: bool = false)
 			return "+" + str(int(round(effect_value))) + " " + slot_word
 
 		"bot_buy_start_level_bonus":
-			var start_level := 1 + int(round(next_total))
+			var start_level := int(round(next_total))
 			return "Start with level +" + str(start_level) + " Bots"
 
 		"relic_slot_bonus":

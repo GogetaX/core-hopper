@@ -281,7 +281,7 @@ mouse_filter = 2
 alignment = 1
 
 [node name="StatusLabel" parent="MiningPanel/VList/HList/VList2" unique_id=286645920 instance=ExtResource("1_fqevo")]
-custom_minimum_size = Vector2(362, 35)
+custom_minimum_size = Vector2(362, 40)
 layout_mode = 2
 panel_color = "BLUE"
 status_text = "BOSS BLOCK IN 50M"

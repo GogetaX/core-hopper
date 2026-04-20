@@ -29,7 +29,7 @@ func Resize():
 	if !is_node_ready():
 		return
 	var max_x = $ProgressHashTag.get_minimum_size().x
-	var max_y = 35
+	var max_y = 40
 	custom_minimum_size.x = max_x+20
 	custom_minimum_size.y = max_y
 	size = custom_minimum_size

@@ -194,11 +194,6 @@ panel_color = "GOLD"
 [node name="NotifForRelicTab" parent="ProgressTopPanel/VList/Tabs/TabList/TAB_Relics" unique_id=1391386783 instance=ExtResource("4_a7wrj")]
 script = ExtResource("7_60kmq")
 
-[node name="Control2" type="Control" parent="ProgressTopPanel/VList" unique_id=1396446115]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-mouse_filter = 1
-
 [node name="Control2" type="Control" parent="." unique_id=516283580]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
@@ -596,6 +591,7 @@ size_flags_horizontal = 3
 button_color = "GOLD"
 btn_text = "Open relic inventory"
 
+[connection signal="resized" from="ProgressTopPanel/VList" to="." method="ProgressTopPanelResize"]
 [connection signal="OnPressed" from="ProgressTopPanel/VList/Tabs/TabList/TAB_Upgrades" to="." method="_on_tab_upgrades_on_pressed"]
 [connection signal="OnPressed" from="ProgressTopPanel/VList/Tabs/TabList/TAB_Quests" to="." method="_on_tab_quests_on_pressed"]
 [connection signal="OnPressed" from="ProgressTopPanel/VList/Tabs/TabList/TAB_Relics" to="." method="_on_tab_relics_on_pressed"]

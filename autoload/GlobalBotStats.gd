@@ -403,7 +403,7 @@ func GetStatDescription(stat_id: String, value: float) -> String:
 	match stat_type:
 		"percent":
 			var percent_value := value * 100.0
-			return _FormatSignedNumber(percent_value, decimals) + "%"
+			return _FormatSignedNumber(percent_value, 0) + "%"
 
 		"multiplier":
 			return _FormatSignedNumber(value, decimals) + "x"

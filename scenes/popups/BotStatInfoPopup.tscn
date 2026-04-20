@@ -116,13 +116,13 @@ text = "MAIN STATS"
 layout_mode = 2
 
 [node name="BotStat_DPS" parent="BotStatInfo/VList/HFlow" unique_id=587184023 instance=ExtResource("5_l8asv")]
-custom_minimum_size = Vector2(157, 80)
+custom_minimum_size = Vector2(191, 80)
 layout_mode = 2
 panel_color = "BLUE"
 icon = ExtResource("6_0f5q0")
 
 [node name="BotStat_SPD" parent="BotStatInfo/VList/HFlow" unique_id=330855504 instance=ExtResource("5_l8asv")]
-custom_minimum_size = Vector2(168, 80)
+custom_minimum_size = Vector2(210, 80)
 layout_mode = 2
 icon = ExtResource("7_ncfw4")
 stat_name = "SPEED"
@@ -135,13 +135,13 @@ text = "ADDITIONAL STATS"
 layout_mode = 2
 
 [node name="BotStat_DPS" parent="BotStatInfo/VList/AdditionalStats" unique_id=704584261 instance=ExtResource("5_l8asv")]
-custom_minimum_size = Vector2(157, 80)
+custom_minimum_size = Vector2(191, 80)
 layout_mode = 2
 panel_color = "BLUE"
 icon = ExtResource("6_0f5q0")
 
 [node name="BotStat_DPS2" parent="BotStatInfo/VList/AdditionalStats" unique_id=803214022 instance=ExtResource("5_l8asv")]
-custom_minimum_size = Vector2(168, 80)
+custom_minimum_size = Vector2(210, 80)
 layout_mode = 2
 icon = ExtResource("7_ncfw4")
 stat_name = "SPEED"

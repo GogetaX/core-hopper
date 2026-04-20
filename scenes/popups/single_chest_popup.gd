@@ -18,7 +18,8 @@ func InitChest(data:Dictionary):
 			$SmartPanel/VBoxContainer/CurrencyList.add_child(r)
 			r.currency_type = x.to_upper()
 			r.amount_str = Global.CurrencyToString(cur_chest_data.data.rewards[x])
-
+		elif !["relic_ids"].has(x):
+			print_debug("unknown currency: ",x)
 	#Remove Reward Items
 	for x in $SmartPanel/VBoxContainer/Scroll/RewardContainer.get_children():
 		x.queue_free()

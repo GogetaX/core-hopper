@@ -203,3 +203,11 @@ func _on_relic_v_list_resized() -> void:
 
 func _on_open_relic_inv_btn_on_press() -> void:
 	GlobalSignals.ShowPopup.emit("SHOW_RELIC_INV",{"inv_mode":"show_inv"})
+
+
+
+
+func ProgressTopPanelResize() -> void:
+	var max_y = $ProgressTopPanel/VList.get_minimum_size().y
+	$ProgressTopPanel.custom_minimum_size.y = max_y + 35
+	$ProgressTopPanel.size.y = $ProgressTopPanel.custom_minimum_size.y
