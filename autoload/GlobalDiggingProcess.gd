@@ -21,8 +21,6 @@ var _is_syncing := false
 
 func _ready() -> void:
 	GlobalSignals.DataSaved.connect(SyncDiggingLanes)
-	GlobalOfflineProgress.ProcessOfflineProgress()
-	SyncDiggingLanes()
 	set_process(true)
 
 

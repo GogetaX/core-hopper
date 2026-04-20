@@ -57,27 +57,90 @@ func _SimulateOfflineSeconds(seconds: int, efficiency: float) -> Dictionary:
 	}
 
 	for lane_index in range(GlobalSave.save_data.lanes.size()):
-		var lane = GlobalSave.save_data.lanes[lane_index]
+		var lane: Dictionary = GlobalSave.save_data.lanes[lane_index]
 
-		if !lane.auto_dig_unlocked:
+		if !bool(lane.get("auto_dig_unlocked", false)):
 			continue
 
-		if int(lane.bot_uid) == -1:
+		var bot_uid := int(lane.get("bot_uid", -1))
+		if bot_uid == -1:
 			continue
 
-		var harvest_depth := int(lane.get("last_cleared_depth", -1))
-		if harvest_depth < 0:
-			continue
-
-		var bot = _FindBotByUid(int(lane.bot_uid))
+		var bot := _FindBotByUid(bot_uid)
 		if bot.is_empty():
 			continue
 
-		var lane_dps := GlobalStats.GetBotFinalDPSWithGlobalAndStats(bot, true, false,true) * efficiency
-		
-		_HarvestLaneOffline(lane_index, harvest_depth, lane_dps, seconds, rewards)
+		var lane_dps := GlobalStats.GetBotFinalDPSWithGlobalAndStats(bot, true, false, true) * efficiency
+		if lane_dps <= 0.0:
+			continue
+
+		var lane_copy: Dictionary = lane.duplicate(true)
+		_SimulateLaneOfflineCopy(lane_index, lane_copy, lane_dps, seconds, rewards)
 
 	return rewards
+
+
+func _SimulateLaneOfflineCopy(
+	lane_index: int,
+	lane_state: Dictionary,
+	lane_dps: float,
+	seconds: int,
+	rewards: Dictionary
+) -> void:
+	if lane_dps <= 0.0 or seconds <= 0:
+		return
+
+	if typeof(lane_state.get("block_data", [])) != TYPE_ARRAY:
+		lane_state["block_data"] = []
+
+	var remaining_damage := lane_dps * float(seconds)
+
+	while remaining_damage > 0.0:
+		var block_array: Array = lane_state.get("block_data", [])
+
+		if block_array.is_empty():
+			var new_block := GlobalDiggingProcess.CreateGeneratedBlockForDepth(
+				lane_index,
+				int(lane_state.get("lane_depth", 0))
+			)
+
+			if new_block.is_empty():
+				return
+
+			# bosses stay online-only
+			if bool(new_block.get("is_boss", false)):
+				return
+
+			block_array.append(new_block)
+			lane_state["block_data"] = block_array
+
+		var block: Dictionary = lane_state["block_data"][0]
+
+		if bool(block.get("is_boss", false)):
+			return
+
+		var block_hp := float(block.get("hp", block.get("max_hp", 1.0)))
+		if block_hp <= 0.0:
+			lane_state["block_data"].remove_at(0)
+			continue
+
+		if remaining_damage >= block_hp:
+			remaining_damage -= block_hp
+
+			var rolled_drops := GlobalBlockDatabase.RollBlockDrops(block, 1.0)
+			_AddRolledDropsToRewards(rewards, rolled_drops)
+
+			var finished_depth := int(block.get("depth", int(lane_state.get("lane_depth", 0))))
+			lane_state["last_cleared_depth"] = max(
+				int(lane_state.get("last_cleared_depth", -1)),
+				finished_depth
+			)
+			lane_state["lane_depth"] = int(lane_state.get("lane_depth", 0)) + 1
+			lane_state["block_data"].remove_at(0)
+		else:
+			block["hp"] = block_hp - remaining_damage
+			lane_state["block_data"][0] = block
+			remaining_damage = 0.0
 
 
 func _SimulateLaneOffline(lane_index: int, lane_dps: float, seconds: int, rewards: Dictionary) -> void:

@@ -8,3 +8,5 @@ res://shaders/explode.gdshader
 res://autoload/GlobalBotStats.gd
 res://scenes/app/bot_stat_info.gd
 res://autoload/GlobalOfflineProgress.gd
+res://autoload/GlobalDiggingProcess.gd
+res://scenes/app/main_scene.gd

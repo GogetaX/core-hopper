@@ -38,8 +38,7 @@ func OnSettingBtnPress(to_show:bool):
 func OnBottomTabPressed(btn_node:ButtonTabClass):
 	show_tab(btn_node.btn_name)
 
-		
-	
+
 func show_tab(tab_name:String) -> void:
 	if tab_name == cur_screen_text:
 		return
