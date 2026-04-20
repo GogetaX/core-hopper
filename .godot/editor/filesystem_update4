@@ -7,3 +7,4 @@ res://shaders/glich_effect.gdshader
 res://shaders/explode.gdshader
 res://autoload/GlobalBotStats.gd
 res://scenes/app/bot_stat_info.gd
+res://autoload/GlobalOfflineProgress.gd
