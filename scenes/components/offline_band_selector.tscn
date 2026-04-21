@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://cgcqrf6d0j4pe"]
+
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="1_5uqbi"]
+[ext_resource type="Script" uid="uid://cbu2xvwd4eecv" path="res://scenes/components/offline_band_selector.gd" id="1_a0anl"]
+[ext_resource type="PackedScene" uid="uid://drlay20xc5ihb" path="res://scenes/components/icon_bg.tscn" id="2_a0anl"]
+[ext_resource type="Texture2D" uid="uid://bonsij74yg4rr" path="res://art/ui/target_icon.png" id="3_yp0b5"]
+[ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="4_81pus"]
+[ext_resource type="PackedScene" uid="uid://bv67grqssq2v2" path="res://scenes/screens/settings/setting_toggle.tscn" id="5_g4qa8"]
+
+[node name="OfflineBandSelector" type="Control" unique_id=45059016]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 937.0
+offset_bottom = 150.0
+script = ExtResource("1_a0anl")
+
+[node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("1_5uqbi")]
+layout_mode = 1
+panel_type = "INSIDE_ONLY"
+panel_color = "BLUE"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SmartPanel" unique_id=1637377734]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="IconBG" parent="SmartPanel/HBoxContainer" unique_id=1682398798 instance=ExtResource("2_a0anl")]
+layout_mode = 2
+panel_type = "INSIDE_ONLY"
+panel_color = "BLUE"
+icon = ExtResource("3_yp0b5")
+
+[node name="VList" type="VBoxContainer" parent="SmartPanel/HBoxContainer" unique_id=1624848074]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SmartPanel/HBoxContainer/VList" unique_id=948776333]
+layout_mode = 2
+
+[node name="meter_value" parent="SmartPanel/HBoxContainer/VList/HBoxContainer" unique_id=713365230 instance=ExtResource("4_81pus")]
+self_modulate = Color(0.30980393, 0.89411765, 1, 1)
+layout_mode = 2
+text = "600-799m"
+hash_tag_color = "BLUE"
+no_bg = true
+
+[node name="Control" type="Control" parent="SmartPanel/HBoxContainer/VList/HBoxContainer" unique_id=1767231079]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="recomendation_hint" parent="SmartPanel/HBoxContainer/VList/HBoxContainer" unique_id=1713856768 instance=ExtResource("4_81pus")]
+self_modulate = Color(0.81960785, 0.98039216, 1, 1)
+layout_mode = 2
+text = "RECOMENDED"
+hash_tag_color = "BLUE"
+
+[node name="ProgressBar" type="ProgressBar" parent="SmartPanel/HBoxContainer/VList" unique_id=1030446871]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_type_variation = &"ProgressBarBlue"
+value = 50.0
+show_percentage = false
+
+[node name="Control" type="Control" parent="SmartPanel/HBoxContainer" unique_id=287084842]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="HList" type="VBoxContainer" parent="SmartPanel/HBoxContainer" unique_id=1186304397]
+layout_mode = 2
+alignment = 1
+
+[node name="SettingToggle" parent="SmartPanel/HBoxContainer/HList" unique_id=1487079372 instance=ExtResource("5_g4qa8")]
+layout_mode = 2

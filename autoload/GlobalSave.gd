@@ -13,8 +13,12 @@ var save_timer : Timer = null
 func _ready() -> void:
 	CreateSaveTimer()
 	LoadFromSave()
+	AdjustNewData()
 	RepapulateAllLaneBlocks()
 	
+func AdjustNewData():
+	if !GlobalSave.save_data.progress.has("total_bots_bought_this_reset"):
+		GlobalSave.save_data.progress["total_bots_bought_this_reset"] = 0
 func RepapulateAllLaneBlocks():
 	GenerateNextBlocks(0,5)
 	GenerateNextBlocks(1,5)

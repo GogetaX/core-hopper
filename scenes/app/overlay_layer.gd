@@ -10,6 +10,7 @@ func _ready() -> void:
 	visible = true
 	$BlurBG.color.a = 0.0
 	$BlurBG.visible = false
+	screen_host.visible = false
 	
 func OnCloseCurPopup():
 	if current_screen:
@@ -20,9 +21,11 @@ func OnCloseCurPopup():
 		t.finished.connect(FreeCurPopup)
 
 func FreeCurPopup():
+	
 	current_screen.queue_free()
 	GlobalSignals.StopScreenClick.emit(false)
 	$BlurBG.visible = false
+	screen_host.visible = false
 	
 func OnShowPopup(popup_str:String,data : Dictionary):
 	show_tab(popup_str,data)
@@ -51,6 +54,8 @@ func show_tab(tab_name:String,data:Dictionary) -> void:
 			new_screen = preload("res://scenes/popups/CreditScreenPopup.tscn")
 		"SHOW_CORE_RESET":
 			new_screen = preload("res://scenes/popups/CoreResetPopup.tscn")
+		"OFFLINE_PLANNER":
+			new_screen = preload("res://scenes/popups/OfflinePlannerPopup.tscn")
 		_:
 			print_debug("unknown tab: ",tab_name)
 	current_screen = new_screen.instantiate()
@@ -59,7 +64,7 @@ func show_tab(tab_name:String,data:Dictionary) -> void:
 	if tab_name == "SHOW_RELIC_INV":
 		current_screen.InitCurPopupData(data)
 	
-		
+	screen_host.visible = true
 	screen_host.add_child(current_screen)
 	
 	if tab_name == "SHOW_OFFLINE_REWARD":

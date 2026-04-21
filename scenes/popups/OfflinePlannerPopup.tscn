@@ -1,0 +1,485 @@
+[gd_scene format=3 uid="uid://chpbl8dgj8oiw"]
+
+[ext_resource type="Script" uid="uid://dxh3cjgx3brwl" path="res://scenes/popups/offline_planner_popup.gd" id="1_cs2ma"]
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="2_86af1"]
+[ext_resource type="PackedScene" uid="uid://drlay20xc5ihb" path="res://scenes/components/icon_bg.tscn" id="2_jhrsr"]
+[ext_resource type="Texture2D" uid="uid://d1ggatglhrdo1" path="res://data/icons/offline_time.tres" id="3_m34vu"]
+[ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="5_4ngdh"]
+[ext_resource type="Texture2D" uid="uid://bivmhae3p5dlr" path="res://art/skills/buy_level_2_bots.tres" id="5_rgdwo"]
+[ext_resource type="Texture2D" uid="uid://d2l1yynuwvial" path="res://data/icons/offline_gain_mult.tres" id="6_ya3ds"]
+[ext_resource type="PackedScene" uid="uid://d32v5pknv4vq0" path="res://scenes/components/currency_icon.tscn" id="7_cyluo"]
+[ext_resource type="PackedScene" uid="uid://cgcqrf6d0j4pe" path="res://scenes/components/offline_band_selector.tscn" id="8_l2xbk"]
+[ext_resource type="PackedScene" uid="uid://njxlv6dxrlwj" path="res://scenes/screens/progress/smart_button_buy.tscn" id="10_fteyd"]
+
+[node name="OfflinePlannerPopup" type="Control" unique_id=529630592]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("1_cs2ma")
+
+[node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("2_86af1")]
+layout_mode = 1
+size_flags_vertical = 3
+panel_type = "INSIDE_ONLY"
+panel_color = "GOLD"
+darken_bg = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SmartPanel" unique_id=274183451]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 20
+
+[node name="title" type="Label" parent="SmartPanel/VBoxContainer" unique_id=2046432609]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_White"
+text = "OFFLINE PLANNER"
+horizontal_alignment = 1
+
+[node name="description" type="Label" parent="SmartPanel/VBoxContainer" unique_id=509960664]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "CHOOSE A DEPTH BAND FOR OFFLINE MINING"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SmartPanel/VBoxContainer" unique_id=816498466]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 20
+
+[node name="OfflineCap" parent="SmartPanel/VBoxContainer/HBoxContainer" unique_id=597258021 instance=ExtResource("2_86af1")]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
+size_flags_horizontal = 3
+panel_type = "INSIDE_ONLY"
+panel_color = "BLUE"
+
+[node name="VList" type="VBoxContainer" parent="SmartPanel/VBoxContainer/HBoxContainer/OfflineCap" unique_id=1318424742]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="IconBG" parent="SmartPanel/VBoxContainer/HBoxContainer/OfflineCap/VList" unique_id=1682398798 instance=ExtResource("2_jhrsr")]
+layout_mode = 2
+panel_type = "NO_BG"
+panel_color = "BLUE"
+icon = ExtResource("3_m34vu")
+
+[node name="description2" type="Label" parent="SmartPanel/VBoxContainer/HBoxContainer/OfflineCap/VList" unique_id=241908538]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "Offline Cap"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ProgressHashTag" parent="SmartPanel/VBoxContainer/HBoxContainer/OfflineCap/VList" unique_id=713365230 instance=ExtResource("5_4ngdh")]
+self_modulate = Color(0.8627451, 0.9098039, 1, 1)
+layout_mode = 2
+text = "2h"
+horizontal_alignment = 1
+hash_tag_color = "WHITE"
+no_bg = true
+
+[node name="ActiveBots" parent="SmartPanel/VBoxContainer/HBoxContainer" unique_id=393322120 instance=ExtResource("2_86af1")]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
+size_flags_horizontal = 3
+panel_type = "INSIDE_ONLY"
+
+[node name="VList" type="VBoxContainer" parent="SmartPanel/VBoxContainer/HBoxContainer/ActiveBots" unique_id=1074857359]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="IconBG" parent="SmartPanel/VBoxContainer/HBoxContainer/ActiveBots/VList" unique_id=1711298319 instance=ExtResource("2_jhrsr")]
+layout_mode = 2
+panel_type = "NO_BG"
+icon = ExtResource("5_rgdwo")
+
+[node name="description2" type="Label" parent="SmartPanel/VBoxContainer/HBoxContainer/ActiveBots/VList" unique_id=2068758989]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "Active Bots"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ProgressHashTag" parent="SmartPanel/VBoxContainer/HBoxContainer/ActiveBots/VList" unique_id=2105317750 instance=ExtResource("5_4ngdh")]
+self_modulate = Color(0.8627451, 0.9098039, 1, 1)
+layout_mode = 2
+text = "2"
+horizontal_alignment = 1
+hash_tag_color = "WHITE"
+no_bg = true
+
+[node name="ActiveBots2" parent="SmartPanel/VBoxContainer/HBoxContainer" unique_id=979264049 instance=ExtResource("2_86af1")]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
+size_flags_horizontal = 3
+panel_type = "INSIDE_ONLY"
+panel_color = "GOLD"
+
+[node name="VList" type="VBoxContainer" parent="SmartPanel/VBoxContainer/HBoxContainer/ActiveBots2" unique_id=705868418]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="IconBG" parent="SmartPanel/VBoxContainer/HBoxContainer/ActiveBots2/VList" unique_id=1290024431 instance=ExtResource("2_jhrsr")]
+layout_mode = 2
+panel_type = "NO_BG"
+panel_color = "GOLD"
+icon = ExtResource("6_ya3ds")
+
+[node name="description2" type="Label" parent="SmartPanel/VBoxContainer/HBoxContainer/ActiveBots2/VList" unique_id=456586151]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "Offline DPS"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ProgressHashTag" parent="SmartPanel/VBoxContainer/HBoxContainer/ActiveBots2/VList" unique_id=738142591 instance=ExtResource("5_4ngdh")]
+self_modulate = Color(0.8627451, 0.9098039, 1, 1)
+layout_mode = 2
+text = "1.64k"
+horizontal_alignment = 1
+hash_tag_color = "WHITE"
+no_bg = true
+
+[node name="SelectedTarget" parent="SmartPanel/VBoxContainer" unique_id=928332143 instance=ExtResource("2_86af1")]
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 2
+panel_type = "INSIDE_ONLY"
+panel_color = "DISABLED"
+
+[node name="VList" type="VBoxContainer" parent="SmartPanel/VBoxContainer/SelectedTarget" unique_id=1646842328]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 20
+
+[node name="HList" type="HBoxContainer" parent="SmartPanel/VBoxContainer/SelectedTarget/VList" unique_id=1421541493]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ProgressHashTag" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/HList" unique_id=688877206 instance=ExtResource("5_4ngdh")]
+self_modulate = Color(0.7607843, 0.43529412, 1, 1)
+layout_mode = 2
+text = "SELECTED TARGET"
+no_bg = true
+
+[node name="Control" type="Control" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/HList" unique_id=1282113822]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/HList" unique_id=334567877]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "Optimal Depth"
+
+[node name="HList2" type="HBoxContainer" parent="SmartPanel/VBoxContainer/SelectedTarget/VList" unique_id=44922867]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/HList2" unique_id=302633050]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_White"
+text = "600-799m"
+
+[node name="ClearRate" parent="SmartPanel/VBoxContainer/SelectedTarget/VList" unique_id=1829521657 instance=ExtResource("2_86af1")]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+panel_type = "INSIDE_ONLY"
+panel_color = "DISABLED"
+darken_bg = true
+
+[node name="HList" type="HBoxContainer" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/ClearRate" unique_id=1308564880]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = 20.0
+offset_right = -40.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/ClearRate/HList" unique_id=2087182054]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "Clear Rate"
+
+[node name="Control" type="Control" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/ClearRate/HList" unique_id=543422126]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/ClearRate/HList" unique_id=697675921]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "48/h"
+
+[node name="HList3" type="HBoxContainer" parent="SmartPanel/VBoxContainer/SelectedTarget/VList" unique_id=318742827]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="CoinCurrencyGain" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/HList3" unique_id=1230560692 instance=ExtResource("2_86af1")]
+custom_minimum_size = Vector2(100, 180)
+layout_mode = 2
+size_flags_horizontal = 3
+panel_color = "BLUE"
+
+[node name="VList" type="VBoxContainer" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/HList3/CoinCurrencyGain" unique_id=100667540]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CurrencyIcon" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/HList3/CoinCurrencyGain/VList" unique_id=529445326 instance=ExtResource("7_cyluo")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+mouse_filter = 2
+icon_type = "COIN_BIG_ANIMATED"
+
+[node name="ProgressHashTag" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/HList3/CoinCurrencyGain/VList" unique_id=115613880 instance=ExtResource("5_4ngdh")]
+self_modulate = Color(0.30980393, 0.89411765, 1, 1)
+layout_mode = 2
+text = "11.2K"
+horizontal_alignment = 1
+hash_tag_color = "BLUE"
+no_bg = true
+
+[node name="Label" type="Label" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/HList3/CoinCurrencyGain/VList" unique_id=260671688]
+layout_mode = 2
+theme_type_variation = &"LabelGrayHint"
+text = "/HR"
+horizontal_alignment = 1
+
+[node name="CrystalCurrencyGan" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/HList3" unique_id=140238814 instance=ExtResource("2_86af1")]
+custom_minimum_size = Vector2(100, 180)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VList" type="VBoxContainer" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/HList3/CrystalCurrencyGan" unique_id=662507487]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CurrencyIcon" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/HList3/CrystalCurrencyGan/VList" unique_id=322544133 instance=ExtResource("7_cyluo")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+mouse_filter = 2
+icon_type = "CRYSTAL_BIG_ANIMATED"
+
+[node name="ProgressHashTag" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/HList3/CrystalCurrencyGan/VList" unique_id=99250601 instance=ExtResource("5_4ngdh")]
+self_modulate = Color(0.7607843, 0.43529412, 1, 1)
+layout_mode = 2
+text = "11.2K"
+horizontal_alignment = 1
+no_bg = true
+
+[node name="Label" type="Label" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/HList3/CrystalCurrencyGan/VList" unique_id=1852243371]
+layout_mode = 2
+theme_type_variation = &"LabelGrayHint"
+text = "/HR"
+horizontal_alignment = 1
+
+[node name="EnergyCurrencyGan" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/HList3" unique_id=212365564 instance=ExtResource("2_86af1")]
+custom_minimum_size = Vector2(100, 180)
+layout_mode = 2
+size_flags_horizontal = 3
+panel_color = "GOLD"
+
+[node name="VList" type="VBoxContainer" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/HList3/EnergyCurrencyGan" unique_id=1684192285]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CurrencyIcon" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/HList3/EnergyCurrencyGan/VList" unique_id=1714234772 instance=ExtResource("7_cyluo")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+mouse_filter = 2
+icon_type = "ENERGY_SMALL_ANIMATED"
+
+[node name="ProgressHashTag" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/HList3/EnergyCurrencyGan/VList" unique_id=1482205334 instance=ExtResource("5_4ngdh")]
+self_modulate = Color(1, 0.74509805, 0.23137255, 1)
+layout_mode = 2
+text = "11.2K"
+horizontal_alignment = 1
+hash_tag_color = "GOLD"
+no_bg = true
+
+[node name="Label" type="Label" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/HList3/EnergyCurrencyGan/VList" unique_id=2048149713]
+layout_mode = 2
+theme_type_variation = &"LabelGrayHint"
+text = "/HR"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="SmartPanel/VBoxContainer" unique_id=438734599]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "AVAILABLE DEPTHS"
+
+[node name="VList" type="VBoxContainer" parent="SmartPanel/VBoxContainer" unique_id=747883952]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = 20
+
+[node name="OfflineBandSelector" parent="SmartPanel/VBoxContainer/VList" unique_id=45059016 instance=ExtResource("8_l2xbk")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="OfflineBandSelector2" parent="SmartPanel/VBoxContainer/VList" unique_id=895639037 instance=ExtResource("8_l2xbk")]
+layout_mode = 2
+mouse_filter = 2
+btn_type = "RECOMENDED"
+
+[node name="OfflineBandSelector3" parent="SmartPanel/VBoxContainer/VList" unique_id=1432425635 instance=ExtResource("8_l2xbk")]
+layout_mode = 2
+mouse_filter = 2
+btn_type = "TOO_HARD"
+
+[node name="SmartPanel" parent="SmartPanel/VBoxContainer" unique_id=2125252063 instance=ExtResource("2_86af1")]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+panel_type = "INSIDE_ONLY"
+darken_bg = true
+
+[node name="VList" type="VBoxContainer" parent="SmartPanel/VBoxContainer/SmartPanel" unique_id=1298005352]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="SmartPanel/VBoxContainer/SmartPanel/VList" unique_id=837624583]
+layout_mode = 2
+theme_type_variation = &"LabelGrayHint"
+text = "Offline Target: 600-799m"
+
+[node name="HList2" type="HBoxContainer" parent="SmartPanel/VBoxContainer/SmartPanel/VList" unique_id=756026146]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label2" type="Label" parent="SmartPanel/VBoxContainer/SmartPanel/VList/HList2" unique_id=1154510602]
+layout_mode = 2
+theme_type_variation = &"LabelGrayHint"
+text = "Expected: "
+
+[node name="ProgressHashTag" parent="SmartPanel/VBoxContainer/SmartPanel/VList/HList2" unique_id=761462414 instance=ExtResource("5_4ngdh")]
+self_modulate = Color(0.30980393, 0.89411765, 1, 1)
+layout_mode = 2
+text = "22.4K"
+hash_tag_color = "BLUE"
+no_bg = true
+
+[node name="Label3" type="Label" parent="SmartPanel/VBoxContainer/SmartPanel/VList/HList2" unique_id=1869205247]
+layout_mode = 2
+theme_type_variation = &"LabelGrayHint"
+text = "|"
+
+[node name="ProgressHashTag2" parent="SmartPanel/VBoxContainer/SmartPanel/VList/HList2" unique_id=181466752 instance=ExtResource("5_4ngdh")]
+self_modulate = Color(0.7607843, 0.43529412, 1, 1)
+layout_mode = 2
+text = "28"
+no_bg = true
+
+[node name="Label4" type="Label" parent="SmartPanel/VBoxContainer/SmartPanel/VList/HList2" unique_id=1013455670]
+layout_mode = 2
+theme_type_variation = &"LabelGrayHint"
+text = "|"
+
+[node name="ProgressHashTag3" parent="SmartPanel/VBoxContainer/SmartPanel/VList/HList2" unique_id=976345781 instance=ExtResource("5_4ngdh")]
+self_modulate = Color(1, 0.74509805, 0.23137255, 1)
+layout_mode = 2
+text = "1.2"
+hash_tag_color = "GOLD"
+no_bg = true
+
+[node name="Control" type="Control" parent="SmartPanel/VBoxContainer/SmartPanel/VList" unique_id=1475619805]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="HList" type="HBoxContainer" parent="SmartPanel/VBoxContainer/SmartPanel/VList" unique_id=530813211]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 20
+
+[node name="OpenAllBtn" parent="SmartPanel/VBoxContainer/SmartPanel/VList/HList" unique_id=506836531 instance=ExtResource("10_fteyd")]
+layout_mode = 2
+size_flags_stretch_ratio = 0.5
+buy_btn_title = "CANCEL"
+panel_color = "DISABLED"
+
+[node name="OpenAllBtn2" parent="SmartPanel/VBoxContainer/SmartPanel/VList/HList" unique_id=664760665 instance=ExtResource("10_fteyd")]
+layout_mode = 2
+buy_btn_title = "SET TARGET"
+
+[connection signal="resized" from="SmartPanel/VBoxContainer" to="." method="_on_v_box_container_resized"]

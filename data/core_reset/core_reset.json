@@ -13,7 +13,7 @@
 	  ]
 	},
 	"2": {
-	  "required_depth": 2000,
+	  "required_depth": 1600,
 	  "title": "Core Reset II",
 	  "description": "Start with stronger bots.",
 	  "effects": [
@@ -21,7 +21,7 @@
 	  ]
 	},
 	"3": {
-	  "required_depth": 4500,
+	  "required_depth": 3200,
 	  "title": "Core Reset III",
 	  "description": "Unlock one more relic slot.",
 	  "effects": [
@@ -29,7 +29,7 @@
 	  ]
 	},
 	"4": {
-	  "required_depth": 9000,
+	  "required_depth": 6400,
 	  "title": "Core Reset IV",
 	  "description": "Start with Level 3 bots.",
 	  "effects": [
@@ -37,7 +37,7 @@
 	  ]
 	},
 	"5": {
-	  "required_depth": 14000,
+	  "required_depth": 12800,
 	  "title": "Core Reset V",
 	  "description": "Permanent bot power increase.",
 	  "effects": [

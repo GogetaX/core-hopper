@@ -645,7 +645,7 @@
 		  "kind": "unlock",
 		  "feature": "direct_bot_buy_level",
 		  "level": 2,
-		  "base_cost_multiplier": 5.0
+		  "base_cost_multiplier": 3.0
 		}
 	  ],
 	  "description": "Unlocks direct purchase of level 2 bots."
@@ -671,7 +671,7 @@
 		  "kind": "unlock",
 		  "feature": "direct_bot_buy_level",
 		  "level": 3,
-		  "base_cost_multiplier": 14.0
+		  "base_cost_multiplier": 8.0
 		}
 	  ],
 	  "description": "Unlocks direct purchase of level 3 bots."
@@ -697,7 +697,7 @@
 		  "kind": "unlock",
 		  "feature": "direct_bot_buy_level",
 		  "level": 4,
-		  "base_cost_multiplier": 40.0
+		  "base_cost_multiplier": 23.0
 		}
 	  ],
 	  "description": "Unlocks direct purchase of level 4 bots."
@@ -723,7 +723,7 @@
 		  "kind": "unlock",
 		  "feature": "direct_bot_buy_level",
 		  "level": 5,
-		  "base_cost_multiplier": 110.0
+		  "base_cost_multiplier": 60.0
 		}
 	  ],
 	  "description": "Unlocks direct purchase of level 5 bots."

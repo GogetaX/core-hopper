@@ -2,428 +2,428 @@
   "version": 1,
   "daily_count": 3,
   "quest_pool": [
-    {
-      "id": "dq_break_blocks_001",
-      "title": "Light Excavation",
-      "desc": "Break 50 blocks",
-      "category": "daily",
-      "objective_type": "break_blocks",
-      "progress_mode": "add",
-      "target": 50,
-      "weight": 100,
-      "filters": {},
-      "requirements": {
-        "min_depth": 0,
-        "min_lane_unlocked": 1
-      },
-      "reward": {
-        "coins": 250,
-        "crystals": 0
-      }
-    },
-    {
-      "id": "dq_break_blocks_002",
-      "title": "Rock Routine",
-      "desc": "Break 100 blocks",
-      "category": "daily",
-      "objective_type": "break_blocks",
-      "progress_mode": "add",
-      "target": 100,
-      "weight": 90,
-      "filters": {},
-      "requirements": {
-        "min_depth": 0,
-        "min_lane_unlocked": 1
-      },
-      "reward": {
-        "coins": 500,
-        "crystals": 1
-      }
-    },
-    {
-      "id": "dq_break_blocks_003",
-      "title": "Deep Shift",
-      "desc": "Break 200 blocks",
-      "category": "daily",
-      "objective_type": "break_blocks",
-      "progress_mode": "add",
-      "target": 200,
-      "weight": 60,
-      "filters": {},
-      "requirements": {
-        "min_depth": 20,
-        "min_lane_unlocked": 2
-      },
-      "reward": {
-        "coins": 1000,
-        "crystals": 2
-      }
-    },
-    {
-      "id": "dq_break_block_type_coal_001",
-      "title": "Coal Collector",
-      "desc": "Break 40 Coal Vein blocks",
-      "category": "daily",
-      "objective_type": "break_blocks",
-      "progress_mode": "add",
-      "target": 40,
-      "weight": 70,
-      "filters": {
-        "block_type": "coal"
-      },
-      "requirements": {
-        "min_depth": 0,
-        "min_lane_unlocked": 1
-      },
-      "reward": {
-        "coins": 450,
-        "crystals": 1
-      }
-    },
-    {
-      "id": "dq_break_block_type_soft_stone_001",
-      "title": "Soft Stone Sweep",
-      "desc": "Break 60 Soft Stone blocks",
-      "category": "daily",
-      "objective_type": "break_blocks",
-      "progress_mode": "add",
-      "target": 60,
-      "weight": 70,
-      "filters": {
-        "block_type": "soft_stone"
-      },
-      "requirements": {
-        "min_depth": 0,
-        "min_lane_unlocked": 1
-      },
-      "reward": {
-        "coins": 450,
-        "crystals": 1
-      }
-    },
-    {
-      "id": "dq_break_block_type_iron_001",
-      "title": "Iron Duty",
-      "desc": "Break 50 Iron Ore blocks",
-      "category": "daily",
-      "objective_type": "break_blocks",
-      "progress_mode": "add",
-      "target": 50,
-      "weight": 50,
-      "filters": {
-        "block_type": "iron_ore"
-      },
-      "requirements": {
-        "min_depth": 15,
-        "min_lane_unlocked": 2
-      },
-      "reward": {
-        "coins": 700,
-        "crystals": 2
-      }
-    },
-    {
-      "id": "dq_break_block_type_gold_001",
-      "title": "Gold Rush",
-      "desc": "Break 30 Gold Ore blocks",
-      "category": "daily",
-      "objective_type": "break_blocks",
-      "progress_mode": "add",
-      "target": 30,
-      "weight": 35,
-      "filters": {
-        "block_type": "gold_ore"
-      },
-      "requirements": {
-        "min_depth": 30,
-        "min_lane_unlocked": 2
-      },
-      "reward": {
-        "coins": 900,
-        "crystals": 3
-      }
-    },
-    {
-      "id": "dq_merge_total_001",
-      "title": "Merge Warmup",
-      "desc": "Merge 2 times",
-      "category": "daily",
-      "objective_type": "merge_bots",
-      "progress_mode": "add",
-      "target": 2,
-      "weight": 90,
-      "filters": {},
-      "requirements": {
-        "min_depth": 0,
-        "min_lane_unlocked": 1
-      },
-      "reward": {
-        "coins": 300,
-        "crystals": 0
-      }
-    },
-    {
-      "id": "dq_merge_total_002",
-      "title": "Merge Session",
-      "desc": "Merge 5 times",
-      "category": "daily",
-      "objective_type": "merge_bots",
-      "progress_mode": "add",
-      "target": 5,
-      "weight": 70,
-      "filters": {},
-      "requirements": {
-        "min_depth": 0,
-        "min_lane_unlocked": 1
-      },
-      "reward": {
-        "coins": 700,
-        "crystals": 1
-      }
-    },
-    {
-      "id": "dq_merge_result_level_002",
-      "title": "Tool Upgrade",
-      "desc": "Create 2 level 2 bots by merging",
-      "category": "daily",
-      "objective_type": "merge_bots",
-      "progress_mode": "add",
-      "target": 2,
-      "weight": 80,
-      "filters": {
-        "result_bot_level": 2
-      },
-      "requirements": {
-        "min_depth": 0,
-        "min_lane_unlocked": 1
-      },
-      "reward": {
-        "coins": 400,
-        "crystals": 1
-      }
-    },
-    {
-      "id": "dq_merge_result_level_003",
-      "title": "Advanced Assembly",
-      "desc": "Create 1 level 3 bot by merging",
-      "category": "daily",
-      "objective_type": "merge_bots",
-      "progress_mode": "add",
-      "target": 1,
-      "weight": 55,
-      "filters": {
-        "result_bot_level": 3
-      },
-      "requirements": {
-        "min_depth": 10,
-        "min_lane_unlocked": 1
-      },
-      "reward": {
-        "coins": 650,
-        "crystals": 2
-      }
-    },
-    {
-      "id": "dq_merge_result_level_004",
-      "title": "Heavy Combination",
-      "desc": "Create 1 level 4 bot by merging",
-      "category": "daily",
-      "objective_type": "merge_bots",
-      "progress_mode": "add",
-      "target": 1,
-      "weight": 35,
-      "filters": {
-        "result_bot_level": 4
-      },
-      "requirements": {
-        "min_depth": 20,
-        "min_lane_unlocked": 2
-      },
-      "reward": {
-        "coins": 1000,
-        "crystals": 3
-      }
-    },
-    {
-      "id": "dq_buy_upgrades_total_001",
-      "title": "Investor",
-      "desc": "Buy 2 upgrades",
-      "category": "daily",
-      "objective_type": "buy_upgrades",
-      "progress_mode": "add",
-      "target": 2,
-      "weight": 100,
-      "filters": {},
-      "requirements": {
-        "min_depth": 0,
-        "min_lane_unlocked": 1
-      },
-      "reward": {
-        "coins": 250,
-        "crystals": 0
-      }
-    },
-    {
-      "id": "dq_buy_upgrades_total_002",
-      "title": "Spending Spree",
-      "desc": "Buy 5 upgrades",
-      "category": "daily",
-      "objective_type": "buy_upgrades",
-      "progress_mode": "add",
-      "target": 5,
-      "weight": 75,
-      "filters": {},
-      "requirements": {
-        "min_depth": 0,
-        "min_lane_unlocked": 1
-      },
-      "reward": {
-        "coins": 650,
-        "crystals": 1
-      }
-    },
-    {
-      "id": "dq_buy_upgrade_group_power_001",
-      "title": "Power Training",
-      "desc": "Buy 3 Power upgrades",
-      "category": "daily",
-      "objective_type": "buy_upgrades",
-      "progress_mode": "add",
-      "target": 3,
-      "weight": 80,
-      "filters": {
-        "upgrade_group": "power"
-      },
-      "requirements": {
-        "min_depth": 0,
-        "min_lane_unlocked": 1
-      },
-      "reward": {
-        "coins": 500,
-        "crystals": 1
-      }
-    },
-    {
-      "id": "dq_buy_upgrade_group_tap_001",
-      "title": "Busy Fingers",
-      "desc": "Buy 2 Tap upgrades",
-      "category": "daily",
-      "objective_type": "buy_upgrades",
-      "progress_mode": "add",
-      "target": 2,
-      "weight": 70,
-      "filters": {
-        "upgrade_group": "tap"
-      },
-      "requirements": {
-        "min_depth": 0,
-        "min_lane_unlocked": 1
-      },
-      "reward": {
-        "coins": 450,
-        "crystals": 1
-      }
-    },
-    {
-      "id": "dq_buy_upgrade_group_bot_001",
-      "title": "Bot Workshop",
-      "desc": "Buy 3 Bot upgrades",
-      "category": "daily",
-      "objective_type": "buy_upgrades",
-      "progress_mode": "add",
-      "target": 3,
-      "weight": 70,
-      "filters": {
-        "upgrade_group": "bot"
-      },
-      "requirements": {
-        "min_depth": 5,
-        "min_lane_unlocked": 1
-      },
-      "reward": {
-        "coins": 550,
-        "crystals": 1
-      }
-    },
-    {
-      "id": "dq_buy_specific_upgrade_tap_damage_001",
-      "title": "Tap Specialist",
-      "desc": "Buy Tap Damage 2 times",
-      "category": "daily",
-      "objective_type": "buy_upgrades",
-      "progress_mode": "add",
-      "target": 2,
-      "weight": 60,
-      "filters": {
-        "upgrade_id": "tap_damage"
-      },
-      "requirements": {
-        "min_depth": 0,
-        "min_lane_unlocked": 1
-      },
-      "reward": {
-        "coins": 500,
-        "crystals": 1
-      }
-    },
-    {
-      "id": "dq_buy_specific_upgrade_drill_power_001",
-      "title": "Drill Tuning",
-      "desc": "Buy Drill Power 2 times",
-      "category": "daily",
-      "objective_type": "buy_upgrades",
-      "progress_mode": "add",
-      "target": 2,
-      "weight": 60,
-      "filters": {
-        "upgrade_id": "drill_power"
-      },
-      "requirements": {
-        "min_depth": 0,
-        "min_lane_unlocked": 1
-      },
-      "reward": {
-        "coins": 500,
-        "crystals": 1
-      }
-    },
-    {
-      "id": "dq_break_and_merge_combo_bias_001",
-      "title": "Busy Shift",
-      "desc": "Break 150 blocks",
-      "category": "daily",
-      "objective_type": "break_blocks",
-      "progress_mode": "add",
-      "target": 150,
-      "weight": 65,
-      "filters": {},
-      "requirements": {
-        "min_depth": 10,
-        "min_lane_unlocked": 2
-      },
-      "reward": {
-        "coins": 800,
-        "crystals": 2
-      }
-    },
-    {
-      "id": "dq_merge_and_upgrade_bias_001",
-      "title": "Refinement Day",
-      "desc": "Buy 4 upgrades",
-      "category": "daily",
-      "objective_type": "buy_upgrades",
-      "progress_mode": "add",
-      "target": 4,
-      "weight": 70,
-      "filters": {},
-      "requirements": {
-        "min_depth": 10,
-        "min_lane_unlocked": 2
-      },
-      "reward": {
-        "coins": 700,
-        "crystals": 2
-      }
-    }
+	{
+	  "id": "dq_break_blocks_001",
+	  "title": "Light Excavation",
+	  "desc": "Break 50 blocks",
+	  "category": "daily",
+	  "objective_type": "break_blocks",
+	  "progress_mode": "add",
+	  "target": 50,
+	  "weight": 100,
+	  "filters": {},
+	  "requirements": {
+		"min_depth": 0,
+		"min_lane_unlocked": 1
+	  },
+	  "reward": {
+		"coins": 250,
+		"crystals": 0
+	  }
+	},
+	{
+	  "id": "dq_break_blocks_002",
+	  "title": "Rock Routine",
+	  "desc": "Break 100 blocks",
+	  "category": "daily",
+	  "objective_type": "break_blocks",
+	  "progress_mode": "add",
+	  "target": 100,
+	  "weight": 90,
+	  "filters": {},
+	  "requirements": {
+		"min_depth": 0,
+		"min_lane_unlocked": 1
+	  },
+	  "reward": {
+		"coins": 500,
+		"crystals": 1
+	  }
+	},
+	{
+	  "id": "dq_break_blocks_003",
+	  "title": "Deep Shift",
+	  "desc": "Break 200 blocks",
+	  "category": "daily",
+	  "objective_type": "break_blocks",
+	  "progress_mode": "add",
+	  "target": 200,
+	  "weight": 60,
+	  "filters": {},
+	  "requirements": {
+		"min_depth": 20,
+		"min_lane_unlocked": 2
+	  },
+	  "reward": {
+		"coins": 1000,
+		"crystals": 2
+	  }
+	},
+	{
+	  "id": "dq_break_block_type_coal_001",
+	  "title": "Coal Collector",
+	  "desc": "Break 40 Coal Vein blocks",
+	  "category": "daily",
+	  "objective_type": "break_blocks",
+	  "progress_mode": "add",
+	  "target": 40,
+	  "weight": 70,
+	  "filters": {
+		"block_type": "coal"
+	  },
+	  "requirements": {
+		"min_depth": 0,
+		"min_lane_unlocked": 1
+	  },
+	  "reward": {
+		"coins": 450,
+		"crystals": 1
+	  }
+	},
+	{
+	  "id": "dq_break_block_type_soft_stone_001",
+	  "title": "Soft Stone Sweep",
+	  "desc": "Break 60 Soft Stone blocks",
+	  "category": "daily",
+	  "objective_type": "break_blocks",
+	  "progress_mode": "add",
+	  "target": 60,
+	  "weight": 70,
+	  "filters": {
+		"block_type": "soft_stone"
+	  },
+	  "requirements": {
+		"min_depth": 0,
+		"min_lane_unlocked": 1
+	  },
+	  "reward": {
+		"coins": 450,
+		"crystals": 1
+	  }
+	},
+	{
+	  "id": "dq_break_block_type_iron_001",
+	  "title": "Iron Duty",
+	  "desc": "Break 50 Iron Ore blocks",
+	  "category": "daily",
+	  "objective_type": "break_blocks",
+	  "progress_mode": "add",
+	  "target": 50,
+	  "weight": 50,
+	  "filters": {
+		"block_type": "iron_ore"
+	  },
+	  "requirements": {
+		"min_depth": 15,
+		"min_lane_unlocked": 2
+	  },
+	  "reward": {
+		"coins": 700,
+		"crystals": 2
+	  }
+	},
+	{
+	  "id": "dq_break_block_type_gold_001",
+	  "title": "Gold Rush",
+	  "desc": "Break 30 Gold Ore blocks",
+	  "category": "daily",
+	  "objective_type": "break_blocks",
+	  "progress_mode": "add",
+	  "target": 30,
+	  "weight": 35,
+	  "filters": {
+		"block_type": "gold_ore"
+	  },
+	  "requirements": {
+		"min_depth": 30,
+		"min_lane_unlocked": 2
+	  },
+	  "reward": {
+		"coins": 900,
+		"crystals": 3
+	  }
+	},
+	{
+	  "id": "dq_merge_total_001",
+	  "title": "Merge Warmup",
+	  "desc": "Merge 2 times",
+	  "category": "daily",
+	  "objective_type": "merge_bots",
+	  "progress_mode": "add",
+	  "target": 2,
+	  "weight": 90,
+	  "filters": {},
+	  "requirements": {
+		"min_depth": 0,
+		"min_lane_unlocked": 1
+	  },
+	  "reward": {
+		"coins": 300,
+		"crystals": 0
+	  }
+	},
+	{
+	  "id": "dq_merge_total_002",
+	  "title": "Merge Session",
+	  "desc": "Merge 5 times",
+	  "category": "daily",
+	  "objective_type": "merge_bots",
+	  "progress_mode": "add",
+	  "target": 5,
+	  "weight": 70,
+	  "filters": {},
+	  "requirements": {
+		"min_depth": 0,
+		"min_lane_unlocked": 1
+	  },
+	  "reward": {
+		"coins": 700,
+		"crystals": 1
+	  }
+	},
+	{
+	  "id": "dq_merge_result_level_002",
+	  "title": "Tool Upgrade",
+	  "desc": "Create 2 level 2 bots by merging",
+	  "category": "daily",
+	  "objective_type": "merge_bots",
+	  "progress_mode": "add",
+	  "target": 2,
+	  "weight": 80,
+	  "filters": {
+		"result_bot_level": 2
+	  },
+	  "requirements": {
+		"min_depth": 0,
+		"min_lane_unlocked": 1
+	  },
+	  "reward": {
+		"coins": 400,
+		"crystals": 1
+	  }
+	},
+	{
+	  "id": "dq_merge_result_level_003",
+	  "title": "Advanced Assembly",
+	  "desc": "Create 1 level 3 bot by merging",
+	  "category": "daily",
+	  "objective_type": "merge_bots",
+	  "progress_mode": "add",
+	  "target": 1,
+	  "weight": 55,
+	  "filters": {
+		"result_bot_level": 3
+	  },
+	  "requirements": {
+		"min_depth": 10,
+		"min_lane_unlocked": 1
+	  },
+	  "reward": {
+		"coins": 650,
+		"crystals": 2
+	  }
+	},
+	{
+	  "id": "dq_merge_result_level_004",
+	  "title": "Heavy Combination",
+	  "desc": "Create 1 level 4 bot by merging",
+	  "category": "daily",
+	  "objective_type": "merge_bots",
+	  "progress_mode": "add",
+	  "target": 1,
+	  "weight": 35,
+	  "filters": {
+		"result_bot_level": 4
+	  },
+	  "requirements": {
+		"min_depth": 20,
+		"min_lane_unlocked": 2
+	  },
+	  "reward": {
+		"coins": 1000,
+		"crystals": 3
+	  }
+	},
+	{
+	  "id": "dq_buy_upgrades_total_001",
+	  "title": "Investor",
+	  "desc": "Buy 2 upgrades",
+	  "category": "daily",
+	  "objective_type": "buy_upgrades",
+	  "progress_mode": "add",
+	  "target": 2,
+	  "weight": 100,
+	  "filters": {},
+	  "requirements": {
+		"min_depth": 0,
+		"min_lane_unlocked": 1
+	  },
+	  "reward": {
+		"coins": 250,
+		"crystals": 0
+	  }
+	},
+	{
+	  "id": "dq_buy_upgrades_total_002",
+	  "title": "Spending Spree",
+	  "desc": "Buy 5 upgrades",
+	  "category": "daily",
+	  "objective_type": "buy_upgrades",
+	  "progress_mode": "add",
+	  "target": 5,
+	  "weight": 75,
+	  "filters": {},
+	  "requirements": {
+		"min_depth": 0,
+		"min_lane_unlocked": 1
+	  },
+	  "reward": {
+		"coins": 650,
+		"crystals": 1
+	  }
+	},
+	{
+	  "id": "dq_buy_upgrade_group_power_001",
+	  "title": "Power Training",
+	  "desc": "Buy 3 Power upgrades",
+	  "category": "daily",
+	  "objective_type": "buy_upgrades",
+	  "progress_mode": "add",
+	  "target": 3,
+	  "weight": 80,
+	  "filters": {
+		"upgrade_group": "power"
+	  },
+	  "requirements": {
+		"min_depth": 0,
+		"min_lane_unlocked": 1
+	  },
+	  "reward": {
+		"coins": 500,
+		"crystals": 1
+	  }
+	},
+	{
+	  "id": "dq_buy_upgrade_group_tap_001",
+	  "title": "Busy Fingers",
+	  "desc": "Buy 2 Tap upgrades",
+	  "category": "daily",
+	  "objective_type": "buy_upgrades",
+	  "progress_mode": "add",
+	  "target": 2,
+	  "weight": 70,
+	  "filters": {
+		"upgrade_group": "tap"
+	  },
+	  "requirements": {
+		"min_depth": 0,
+		"min_lane_unlocked": 1
+	  },
+	  "reward": {
+		"coins": 450,
+		"crystals": 1
+	  }
+	},
+	{
+	  "id": "dq_buy_upgrade_group_bot_001",
+	  "title": "Bot Workshop",
+	  "desc": "Buy 3 Bot upgrades",
+	  "category": "daily",
+	  "objective_type": "buy_upgrades",
+	  "progress_mode": "add",
+	  "target": 3,
+	  "weight": 70,
+	  "filters": {
+		"upgrade_group": "bot"
+	  },
+	  "requirements": {
+		"min_depth": 5,
+		"min_lane_unlocked": 1
+	  },
+	  "reward": {
+		"coins": 550,
+		"crystals": 1
+	  }
+	},
+	{
+	  "id": "dq_buy_specific_upgrade_tap_damage_001",
+	  "title": "Tap Specialist",
+	  "desc": "Buy Tap Damage 2 times",
+	  "category": "daily",
+	  "objective_type": "buy_upgrades",
+	  "progress_mode": "add",
+	  "target": 2,
+	  "weight": 60,
+	  "filters": {
+		"upgrade_id": "tap_damage"
+	  },
+	  "requirements": {
+		"min_depth": 0,
+		"min_lane_unlocked": 1
+	  },
+	  "reward": {
+		"coins": 500,
+		"crystals": 1
+	  }
+	},
+	{
+	  "id": "dq_buy_specific_upgrade_drill_power_001",
+	  "title": "Drill Tuning",
+	  "desc": "Buy Drill Power 2 times",
+	  "category": "daily",
+	  "objective_type": "buy_upgrades",
+	  "progress_mode": "add",
+	  "target": 2,
+	  "weight": 60,
+	  "filters": {
+		"upgrade_id": "drill_power"
+	  },
+	  "requirements": {
+		"min_depth": 0,
+		"min_lane_unlocked": 1
+	  },
+	  "reward": {
+		"coins": 500,
+		"crystals": 1
+	  }
+	},
+	{
+	  "id": "dq_break_and_merge_combo_bias_001",
+	  "title": "Busy Shift",
+	  "desc": "Break 150 blocks",
+	  "category": "daily",
+	  "objective_type": "break_blocks",
+	  "progress_mode": "add",
+	  "target": 150,
+	  "weight": 65,
+	  "filters": {},
+	  "requirements": {
+		"min_depth": 10,
+		"min_lane_unlocked": 2
+	  },
+	  "reward": {
+		"coins": 800,
+		"crystals": 2
+	  }
+	},
+	{
+	  "id": "dq_merge_and_upgrade_bias_001",
+	  "title": "Refinement Day",
+	  "desc": "Buy 4 upgrades",
+	  "category": "daily",
+	  "objective_type": "buy_upgrades",
+	  "progress_mode": "add",
+	  "target": 4,
+	  "weight": 70,
+	  "filters": {},
+	  "requirements": {
+		"min_depth": 10,
+		"min_lane_unlocked": 2
+	  },
+	  "reward": {
+		"coins": 700,
+		"crystals": 2
+	  }
+	}
   ]
 }

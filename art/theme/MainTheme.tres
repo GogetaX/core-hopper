@@ -257,6 +257,13 @@ corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7revp"]
+bg_color = Color(1, 0.3529412, 0.23137255, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pr0kf"]
 bg_color = Color(1, 0.74509805, 0.23137255, 1)
 corner_radius_top_left = 4
@@ -409,6 +416,9 @@ ProgressBarGold/styles/fill = SubResource("StyleBoxFlat_ombao")
 ProgressBarPurple/base_type = &"ProgressBar"
 ProgressBarPurple/styles/background = SubResource("StyleBoxFlat_btuh1")
 ProgressBarPurple/styles/fill = SubResource("StyleBoxFlat_5cbpq")
+ProgressBarRed/base_type = &"ProgressBar"
+ProgressBarRed/styles/background = SubResource("StyleBoxFlat_btuh1")
+ProgressBarRed/styles/fill = SubResource("StyleBoxFlat_7revp")
 RichTextLabel/colors/default_color = Color(0.5764706, 0.6392157, 0.74509805, 1)
 RichTextLabel/font_sizes/normal_font_size = 30
 RichTextLabel/fonts/normal_font = ExtResource("2_btuh1")

@@ -4,7 +4,7 @@ extends Control
 signal BtnPressed()
 signal BtnToggled(_is_toggled:bool)
 
-@export_enum("BORDER_ONLY","INSIDE_ONLY","BORDER_AND_INSIDE") var panel_type = "BORDER_AND_INSIDE":
+@export_enum("BORDER_ONLY","INSIDE_ONLY","BORDER_AND_INSIDE","NO_BG") var panel_type = "BORDER_AND_INSIDE":
 	set(value):
 		panel_type = value
 		if is_node_ready():

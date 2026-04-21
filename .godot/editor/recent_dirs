@@ -1,3 +1,5 @@
+res://scenes/components/
+res://scenes/screens/dig/
 /home/sergio/GitHub/core-hopper/NotImported/exports/Android/
 res://scenes/screens/shop/
 res://autoload/
@@ -5,9 +7,7 @@ res://scenes/addons/
 /home/sergio/GitHub/core-hopper/NotImported/exports/crazy_games_html5/
 res://scenes/screens/progress/
 res://art/game_logos/
-res://scenes/components/
 res://shaders/
-res://scenes/screens/dig/
 /home/sergio/GitHub/core-hopper/data/core_reset/
 /home/sergio/GitHub/core-hopper/android/signature/
 res://scenes/popups/

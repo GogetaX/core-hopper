@@ -12,10 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://bisqfreq6vd5f" path="res://art/icons/20_px/depth_icon.png" id="5_131td"]
 [ext_resource type="PackedScene" uid="uid://caakrndjfym13" path="res://scenes/screens/dig/next_core_reset.tscn" id="5_gh78i"]
 [ext_resource type="PackedScene" uid="uid://tunwhalbrg53" path="res://scenes/components/lane_depth_update.tscn" id="6_8n6rl"]
-[ext_resource type="Script" uid="uid://cq4k4opbybd6n" path="res://scenes/screens/dig/offline_cap.gd" id="7_5w0l6"]
-[ext_resource type="Script" uid="uid://d3une2dqopjgs" path="res://scenes/screens/dig/offline_level.gd" id="7_davrd"]
 [ext_resource type="Script" uid="uid://b1boirxy3j4fm" path="res://scenes/screens/dig/drop_bonus.gd" id="9_acvec"]
 [ext_resource type="Script" uid="uid://bb6aobrm7ji1h" path="res://scenes/screens/dig/drop_bonus_value.gd" id="9_elpyf"]
+[ext_resource type="PackedScene" uid="uid://cullbxvsnqu0h" path="res://scenes/screens/dig/offline_panel.tscn" id="10_gh78i"]
 [ext_resource type="Script" uid="uid://cpesek5rxsldo" path="res://scenes/screens/dig/next_boss_in_helper.gd" id="11_55ggj"]
 [ext_resource type="Script" uid="uid://c2mst35frvrs6" path="res://scenes/screens/dig/mining_panel.gd" id="12_whfaw"]
 [ext_resource type="PackedScene" uid="uid://x5j6celmf4at" path="res://scenes/screens/dig/current_daily_task.tscn" id="16_nk4bl"]
@@ -79,7 +78,7 @@ layout_mode = 2
 script = ExtResource("3_yjxrm")
 
 [node name="StatusLabel" parent="HList2/VList/StatusFlowContainer" unique_id=2088306964 instance=ExtResource("1_fqevo")]
-custom_minimum_size = Vector2(327, 35)
+custom_minimum_size = Vector2(327, 40)
 layout_mode = 2
 panel_color = "BLUE"
 status_text = "DIGGING INACTIVE"
@@ -103,8 +102,8 @@ custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HList3" type="HBoxContainer" parent="." unique_id=1465104853]
-custom_minimum_size = Vector2(0, 200)
+[node name="HList3" type="HBoxContainer" parent="." unique_id=1130600581]
+custom_minimum_size = Vector2(0, 190)
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 20
@@ -113,6 +112,7 @@ theme_override_constants/separation = 20
 custom_minimum_size = Vector2(0, 170)
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 mouse_filter = 2
 theme_type_variation = &"PanelDimmedBG"
 
@@ -150,48 +150,11 @@ theme_type_variation = &"LabelGrayHint"
 text = "5 bots online"
 script = ExtResource("4_ghiss")
 
-[node name="OfflinePanel" type="Panel" parent="HList3" unique_id=1953278239]
-custom_minimum_size = Vector2(0, 170)
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 2
-theme_type_variation = &"PanelDimmedBG"
-
-[node name="VList" type="VBoxContainer" parent="HList3/OfflinePanel" unique_id=1378124218]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = 20.0
-offset_right = -20.0
-offset_bottom = -20.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="HList3/OfflinePanel/VList" unique_id=351293233]
-layout_mode = 2
-theme_type_variation = &"LabelGray"
-text = "OFFLINE CAP"
-
-[node name="offline_cap" type="Label" parent="HList3/OfflinePanel/VList" unique_id=1722322066]
-layout_mode = 2
-theme_type_variation = &"LabelTitle_Purple"
-text = "6h 00m"
-script = ExtResource("7_5w0l6")
-
-[node name="offline_level" type="Label" parent="HList3/OfflinePanel/VList" unique_id=429210954]
-layout_mode = 2
-theme_type_variation = &"LabelGrayHint"
-text = "Deep stasis lvl 34"
-script = ExtResource("7_davrd")
-
 [node name="XPBonusPanel" type="Panel" parent="HList3" unique_id=1579834141]
 custom_minimum_size = Vector2(0, 170)
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 mouse_filter = 2
 theme_type_variation = &"PanelDimmedBG"
 
@@ -225,6 +188,9 @@ layout_mode = 2
 theme_type_variation = &"LabelGrayHint"
 text = "Boosted ore yield"
 script = ExtResource("9_acvec")
+
+[node name="OfflinePanel" parent="HList3" unique_id=1850590666 instance=ExtResource("10_gh78i")]
+layout_mode = 2
 
 [node name="Control2" type="Control" parent="." unique_id=353041489]
 custom_minimum_size = Vector2(0, 40)

@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://b4xrpvbmstwpc"]
+
+[ext_resource type="Script" uid="uid://b8vbdkqhf6pj4" path="res://scenes/components/open_popup_icon.gd" id="1_shet7"]
+[ext_resource type="Texture2D" uid="uid://6ax7yrajbr65" path="res://art/ui/open_popup_arrow.png" id="1_vokac"]
+[ext_resource type="Texture2D" uid="uid://bs6l43rdtl0qh" path="res://art/ui/open_popup_base.png" id="2_shet7"]
+
+[node name="OpenPopupIcon" type="Control" unique_id=707058535]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_shet7")
+
+[node name="arrow_rect" type="TextureRect" parent="." unique_id=202066511]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_vokac")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="border_rect" type="TextureRect" parent="." unique_id=834085194]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 5.0
+offset_right = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_shet7")
+expand_mode = 1
+stretch_mode = 5

@@ -1,7 +1,7 @@
 @tool
 extends Control
 
-@export_enum("BORDER_ONLY","INSIDE_ONLY","BORDER_AND_INSIDE") var panel_type = "BORDER_AND_INSIDE":
+@export_enum("BORDER_ONLY","INSIDE_ONLY","BORDER_AND_INSIDE","NO_BG") var panel_type = "BORDER_AND_INSIDE":
 	set(value):
 		panel_type = value
 		if is_node_ready():
@@ -46,6 +46,9 @@ func _ready():
 		"BORDER_AND_INSIDE":
 			$BorderOnly.visible = true
 			$BGOnly.visible = true
+		"NO_BG":
+			$BorderOnly.visible = false
+			$BGOnly.visible = false
 	#Init Colors
 	match panel_color:
 		"WHITE":

@@ -51,12 +51,13 @@
 	"depth_growth": 1.008,
 	"min_hit_damage": 4,
 	"spawn_pool": [
-	  { "id": "iron_ore", "weight": 25 },
-	  { "id": "crystal_shard", "weight": 20 },
-	  { "id": "rare_vein", "weight": 20 },
-	  { "id": "energy_pocket", "weight": 15 },
-	  { "id": "obsidian", "weight": 15 },
-	  { "id": "core_fragment", "weight": 5 }
+	  { "id": "iron_ore",       "weight": 22 },
+	  { "id": "crystal_shard",  "weight": 18 },
+	  { "id": "rare_vein",      "weight": 18 },
+	  { "id": "energy_pocket",  "weight": 15 },
+	  { "id": "obsidian",       "weight": 15 },
+	  { "id": "core_fragment",  "weight": 4  },
+	  { "id": "dense_iron",     "weight": 8  }
 	]
   },
   {
@@ -67,12 +68,14 @@
 	"depth_growth": 1.01,
 	"min_hit_damage": 7,
 	"spawn_pool": [
-	  { "id": "iron_ore", "weight": 10 },
-	  { "id": "crystal_shard", "weight": 18 },
-	  { "id": "rare_vein", "weight": 20 },
-	  { "id": "energy_pocket", "weight": 18 },
-	  { "id": "obsidian", "weight": 24 },
-	  { "id": "core_fragment", "weight": 10 }
+	  { "id": "iron_ore",       "weight": 10 },
+	  { "id": "crystal_shard",  "weight": 16 },
+	  { "id": "rare_vein",      "weight": 18 },
+	  { "id": "energy_pocket",  "weight": 16 },
+	  { "id": "obsidian",       "weight": 20 },
+	  { "id": "core_fragment",  "weight": 8  },
+	  { "id": "dense_iron",     "weight": 6  },
+	  { "id": "crystal_geode",  "weight": 6  }
 	]
   },
   {
@@ -83,11 +86,13 @@
 	"depth_growth": 1.012,
 	"min_hit_damage": 12,
 	"spawn_pool": [
-	  { "id": "crystal_shard", "weight": 18 },
-	  { "id": "rare_vein", "weight": 22 },
-	  { "id": "energy_pocket", "weight": 18 },
-	  { "id": "obsidian", "weight": 28 },
-	  { "id": "core_fragment", "weight": 14 }
+	  { "id": "crystal_shard",  "weight": 15 },
+	  { "id": "rare_vein",      "weight": 20 },
+	  { "id": "energy_pocket",  "weight": 16 },
+	  { "id": "obsidian",       "weight": 24 },
+	  { "id": "core_fragment",  "weight": 12 },
+	  { "id": "crystal_geode",  "weight": 8  },
+	  { "id": "plasma_vein",    "weight": 5  }
 	]
   },
   {
@@ -98,11 +103,14 @@
 	"depth_growth": 1.014,
 	"min_hit_damage": 20,
 	"spawn_pool": [
-	  { "id": "crystal_shard", "weight": 12 },
-	  { "id": "rare_vein", "weight": 18 },
-	  { "id": "energy_pocket", "weight": 15 },
-	  { "id": "obsidian", "weight": 32 },
-	  { "id": "core_fragment", "weight": 23 }
+	  { "id": "crystal_shard",  "weight": 10 },
+	  { "id": "rare_vein",      "weight": 16 },
+	  { "id": "energy_pocket",  "weight": 13 },
+	  { "id": "obsidian",       "weight": 27 },
+	  { "id": "core_fragment",  "weight": 18 },
+	  { "id": "crystal_geode",  "weight": 6  },
+	  { "id": "plasma_vein",    "weight": 5  },
+	  { "id": "void_shale",     "weight": 5  }
 	]
   },
   {
@@ -113,10 +121,12 @@
 	"depth_growth": 1.017,
 	"min_hit_damage": 32,
 	"spawn_pool": [
-	  { "id": "rare_vein", "weight": 16 },
-	  { "id": "energy_pocket", "weight": 12 },
-	  { "id": "obsidian", "weight": 38 },
-	  { "id": "core_fragment", "weight": 34 }
+	  { "id": "rare_vein",      "weight": 14 },
+	  { "id": "energy_pocket",  "weight": 10 },
+	  { "id": "obsidian",       "weight": 31 },
+	  { "id": "core_fragment",  "weight": 28 },
+	  { "id": "plasma_vein",    "weight": 7  },
+	  { "id": "void_shale",     "weight": 10 }
 	]
   },
   {
@@ -127,9 +137,12 @@
 	"depth_growth": 1.02,
 	"min_hit_damage": 50,
 	"spawn_pool": [
-	  { "id": "energy_pocket", "weight": 8 },
-	  { "id": "obsidian", "weight": 40 },
-	  { "id": "core_fragment", "weight": 52 }
+	  { "id": "energy_pocket",  "weight": 6  },
+	  { "id": "obsidian",       "weight": 32 },
+	  { "id": "core_fragment",  "weight": 34 },
+	  { "id": "plasma_vein",    "weight": 8  },
+	  { "id": "void_shale",     "weight": 12 },
+	  { "id": "ancient_core",   "weight": 8  }
 	]
   },
   {
@@ -140,8 +153,11 @@
 	"depth_growth": 1.023,
 	"min_hit_damage": 75,
 	"spawn_pool": [
-	  { "id": "obsidian", "weight": 35 },
-	  { "id": "core_fragment", "weight": 65 }
+	  { "id": "obsidian",       "weight": 28 },
+	  { "id": "core_fragment",  "weight": 42 },
+	  { "id": "plasma_vein",    "weight": 8  },
+	  { "id": "void_shale",     "weight": 12 },
+	  { "id": "ancient_core",   "weight": 10 }
 	]
   }
 ]
