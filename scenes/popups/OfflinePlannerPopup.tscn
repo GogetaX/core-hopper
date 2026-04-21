@@ -56,7 +56,6 @@ layout_mode = 2
 theme_type_variation = &"LabelGray"
 text = "CHOOSE A DEPTH BAND FOR OFFLINE MINING"
 horizontal_alignment = 1
-autowrap_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="SmartPanel/VBoxContainer" unique_id=816498466]
 layout_mode = 2
@@ -90,9 +89,8 @@ layout_mode = 2
 theme_type_variation = &"LabelGray"
 text = "Offline Cap"
 horizontal_alignment = 1
-autowrap_mode = 2
 
-[node name="ProgressHashTag" parent="SmartPanel/VBoxContainer/HBoxContainer/OfflineCap/VList" unique_id=713365230 instance=ExtResource("5_4ngdh")]
+[node name="offline_cap" parent="SmartPanel/VBoxContainer/HBoxContainer/OfflineCap/VList" unique_id=713365230 instance=ExtResource("5_4ngdh")]
 self_modulate = Color(0.8627451, 0.9098039, 1, 1)
 layout_mode = 2
 text = "2h"
@@ -125,9 +123,8 @@ layout_mode = 2
 theme_type_variation = &"LabelGray"
 text = "Active Bots"
 horizontal_alignment = 1
-autowrap_mode = 2
 
-[node name="ProgressHashTag" parent="SmartPanel/VBoxContainer/HBoxContainer/ActiveBots/VList" unique_id=2105317750 instance=ExtResource("5_4ngdh")]
+[node name="active_bots" parent="SmartPanel/VBoxContainer/HBoxContainer/ActiveBots/VList" unique_id=2105317750 instance=ExtResource("5_4ngdh")]
 self_modulate = Color(0.8627451, 0.9098039, 1, 1)
 layout_mode = 2
 text = "2"
@@ -162,9 +159,8 @@ layout_mode = 2
 theme_type_variation = &"LabelGray"
 text = "Offline DPS"
 horizontal_alignment = 1
-autowrap_mode = 2
 
-[node name="ProgressHashTag" parent="SmartPanel/VBoxContainer/HBoxContainer/ActiveBots2/VList" unique_id=738142591 instance=ExtResource("5_4ngdh")]
+[node name="offline_dps" parent="SmartPanel/VBoxContainer/HBoxContainer/ActiveBots2/VList" unique_id=738142591 instance=ExtResource("5_4ngdh")]
 self_modulate = Color(0.8627451, 0.9098039, 1, 1)
 layout_mode = 2
 text = "1.64k"
@@ -206,7 +202,7 @@ no_bg = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/HList" unique_id=334567877]
+[node name="selected_slot" type="Label" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/HList" unique_id=334567877]
 layout_mode = 2
 theme_type_variation = &"LabelGray"
 text = "Optimal Depth"
@@ -215,10 +211,21 @@ text = "Optimal Depth"
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/HList2" unique_id=302633050]
+[node name="selected_band_depth" type="Label" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/HList2" unique_id=302633050]
 layout_mode = 2
 theme_type_variation = &"LabelTitle_White"
 text = "600-799m"
+
+[node name="Control2" type="Control" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/HList2" unique_id=212852475]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="representive_depth" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/HList2" unique_id=1882967122 instance=ExtResource("5_4ngdh")]
+self_modulate = Color(0.30980393, 0.89411765, 1, 1)
+layout_mode = 2
+text = "700m"
+hash_tag_color = "BLUE"
+no_bg = true
 
 [node name="ClearRate" parent="SmartPanel/VBoxContainer/SelectedTarget/VList" unique_id=1829521657 instance=ExtResource("2_86af1")]
 custom_minimum_size = Vector2(0, 120)
@@ -248,7 +255,7 @@ text = "Clear Rate"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label2" type="Label" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/ClearRate/HList" unique_id=697675921]
+[node name="clear_rate_ph" type="Label" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/ClearRate/HList" unique_id=697675921]
 layout_mode = 2
 theme_type_variation = &"LabelGray"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -283,7 +290,7 @@ layout_mode = 2
 mouse_filter = 2
 icon_type = "COIN_BIG_ANIMATED"
 
-[node name="ProgressHashTag" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/HList3/CoinCurrencyGain/VList" unique_id=115613880 instance=ExtResource("5_4ngdh")]
+[node name="coins_ph" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/HList3/CoinCurrencyGain/VList" unique_id=115613880 instance=ExtResource("5_4ngdh")]
 self_modulate = Color(0.30980393, 0.89411765, 1, 1)
 layout_mode = 2
 text = "11.2K"
@@ -321,7 +328,7 @@ layout_mode = 2
 mouse_filter = 2
 icon_type = "CRYSTAL_BIG_ANIMATED"
 
-[node name="ProgressHashTag" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/HList3/CrystalCurrencyGan/VList" unique_id=99250601 instance=ExtResource("5_4ngdh")]
+[node name="crystals_ph" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/HList3/CrystalCurrencyGan/VList" unique_id=99250601 instance=ExtResource("5_4ngdh")]
 self_modulate = Color(0.7607843, 0.43529412, 1, 1)
 layout_mode = 2
 text = "11.2K"
@@ -359,7 +366,7 @@ layout_mode = 2
 mouse_filter = 2
 icon_type = "ENERGY_SMALL_ANIMATED"
 
-[node name="ProgressHashTag" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/HList3/EnergyCurrencyGan/VList" unique_id=1482205334 instance=ExtResource("5_4ngdh")]
+[node name="energy_ph" parent="SmartPanel/VBoxContainer/SelectedTarget/VList/HList3/EnergyCurrencyGan/VList" unique_id=1482205334 instance=ExtResource("5_4ngdh")]
 self_modulate = Color(1, 0.74509805, 0.23137255, 1)
 layout_mode = 2
 text = "11.2K"
@@ -378,26 +385,20 @@ layout_mode = 2
 theme_type_variation = &"LabelGray"
 text = "AVAILABLE DEPTHS"
 
-[node name="VList" type="VBoxContainer" parent="SmartPanel/VBoxContainer" unique_id=747883952]
+[node name="AvailableDepthList" type="VBoxContainer" parent="SmartPanel/VBoxContainer" unique_id=747883952]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
 mouse_filter = 2
 theme_override_constants/separation = 20
 
-[node name="OfflineBandSelector" parent="SmartPanel/VBoxContainer/VList" unique_id=45059016 instance=ExtResource("8_l2xbk")]
+[node name="OfflineBandSelector" parent="SmartPanel/VBoxContainer/AvailableDepthList" unique_id=45059016 instance=ExtResource("8_l2xbk")]
 layout_mode = 2
-mouse_filter = 2
 
-[node name="OfflineBandSelector2" parent="SmartPanel/VBoxContainer/VList" unique_id=895639037 instance=ExtResource("8_l2xbk")]
+[node name="OfflineBandSelector2" parent="SmartPanel/VBoxContainer/AvailableDepthList" unique_id=895639037 instance=ExtResource("8_l2xbk")]
 layout_mode = 2
-mouse_filter = 2
-btn_type = "RECOMENDED"
 
-[node name="OfflineBandSelector3" parent="SmartPanel/VBoxContainer/VList" unique_id=1432425635 instance=ExtResource("8_l2xbk")]
+[node name="OfflineBandSelector3" parent="SmartPanel/VBoxContainer/AvailableDepthList" unique_id=1432425635 instance=ExtResource("8_l2xbk")]
 layout_mode = 2
-mouse_filter = 2
-btn_type = "TOO_HARD"
 
 [node name="SmartPanel" parent="SmartPanel/VBoxContainer" unique_id=2125252063 instance=ExtResource("2_86af1")]
 custom_minimum_size = Vector2(0, 300)
@@ -418,7 +419,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="SmartPanel/VBoxContainer/SmartPanel/VList" unique_id=837624583]
+[node name="selected_target" type="Label" parent="SmartPanel/VBoxContainer/SmartPanel/VList" unique_id=837624583]
 layout_mode = 2
 theme_type_variation = &"LabelGrayHint"
 text = "Offline Target: 600-799m"
@@ -430,9 +431,9 @@ mouse_filter = 2
 [node name="Label2" type="Label" parent="SmartPanel/VBoxContainer/SmartPanel/VList/HList2" unique_id=1154510602]
 layout_mode = 2
 theme_type_variation = &"LabelGrayHint"
-text = "Expected: "
+text = "Expected /h: "
 
-[node name="ProgressHashTag" parent="SmartPanel/VBoxContainer/SmartPanel/VList/HList2" unique_id=761462414 instance=ExtResource("5_4ngdh")]
+[node name="expected_coins" parent="SmartPanel/VBoxContainer/SmartPanel/VList/HList2" unique_id=761462414 instance=ExtResource("5_4ngdh")]
 self_modulate = Color(0.30980393, 0.89411765, 1, 1)
 layout_mode = 2
 text = "22.4K"
@@ -444,7 +445,7 @@ layout_mode = 2
 theme_type_variation = &"LabelGrayHint"
 text = "|"
 
-[node name="ProgressHashTag2" parent="SmartPanel/VBoxContainer/SmartPanel/VList/HList2" unique_id=181466752 instance=ExtResource("5_4ngdh")]
+[node name="expected_crystals" parent="SmartPanel/VBoxContainer/SmartPanel/VList/HList2" unique_id=181466752 instance=ExtResource("5_4ngdh")]
 self_modulate = Color(0.7607843, 0.43529412, 1, 1)
 layout_mode = 2
 text = "28"
@@ -455,7 +456,7 @@ layout_mode = 2
 theme_type_variation = &"LabelGrayHint"
 text = "|"
 
-[node name="ProgressHashTag3" parent="SmartPanel/VBoxContainer/SmartPanel/VList/HList2" unique_id=976345781 instance=ExtResource("5_4ngdh")]
+[node name="expected_energy" parent="SmartPanel/VBoxContainer/SmartPanel/VList/HList2" unique_id=976345781 instance=ExtResource("5_4ngdh")]
 self_modulate = Color(1, 0.74509805, 0.23137255, 1)
 layout_mode = 2
 text = "1.2"
@@ -472,14 +473,16 @@ layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 20
 
-[node name="OpenAllBtn" parent="SmartPanel/VBoxContainer/SmartPanel/VList/HList" unique_id=506836531 instance=ExtResource("10_fteyd")]
+[node name="CloseBtn" parent="SmartPanel/VBoxContainer/SmartPanel/VList/HList" unique_id=506836531 instance=ExtResource("10_fteyd")]
 layout_mode = 2
 size_flags_stretch_ratio = 0.5
 buy_btn_title = "CANCEL"
 panel_color = "DISABLED"
 
-[node name="OpenAllBtn2" parent="SmartPanel/VBoxContainer/SmartPanel/VList/HList" unique_id=664760665 instance=ExtResource("10_fteyd")]
+[node name="SelectBtn" parent="SmartPanel/VBoxContainer/SmartPanel/VList/HList" unique_id=664760665 instance=ExtResource("10_fteyd")]
 layout_mode = 2
 buy_btn_title = "SET TARGET"
 
 [connection signal="resized" from="SmartPanel/VBoxContainer" to="." method="_on_v_box_container_resized"]
+[connection signal="OnPressed" from="SmartPanel/VBoxContainer/SmartPanel/VList/HList/CloseBtn" to="." method="_on_close_btn_on_pressed"]
+[connection signal="OnPressed" from="SmartPanel/VBoxContainer/SmartPanel/VList/HList/SelectBtn" to="." method="_on_select_btn_on_pressed"]

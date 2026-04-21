@@ -65,7 +65,7 @@ res://art/skills/tap_cirt_chance.tres::cd6b71e2ae1e978cd8b38344fc455bc0::1775502
 res://art/skills/tap_crit_multiplier.tres::e6af5412a7209d61e8b72213ff2178aa::1775502649::res://.godot/exported/133200997/export-bc50edf1f6dfff069c215396ca902a4b-tap_crit_multiplier.res
 res://art/skills/tap_damage.tres::729ea3f54485c5ddf9df6e7190551746::1775502574::res://.godot/exported/133200997/export-8bc33663e6624051554de876cc3d0d05-tap_damage.res
 res://art/skills/titan_cache.tres::b1ab6b3a88841da6d1eba068d2824459::1775588150::res://.godot/exported/133200997/export-351bbabf64c3fd8ddb0ecf63f1e70e96-titan_cache.res
-res://art/theme/MainTheme.tres::406854d57eb7222005b93cb35f9f2d64::1776752585::res://.godot/exported/133200997/export-95335fcf5764926a3a45225ffef89f38-MainTheme.res
+res://art/theme/MainTheme.tres::60e42280b064bf9bc83635a0b706d787::1776802991::res://.godot/exported/133200997/export-95335fcf5764926a3a45225ffef89f38-MainTheme.res
 res://data/boss_icons/boss_01_void_driller.tres::1678ff3c957e631aaead1758f073fa55::1775052086::res://.godot/exported/133200997/export-fe7d1d56b871161e2fb4bb169c08780e-boss_01_void_driller.res
 res://data/boss_icons/boss_02_crystal_beast.tres::f35d0f7942a4ec703f40f6801636c8b2::1775050764::res://.godot/exported/133200997/export-9ca52475a13834e94d81b97bc25a3c8d-boss_02_crystal_beast.res
 res://data/boss_icons/boss_03_magma_maw.tres::579a0c7c99172b66093ed583a7986e29::1775050812::res://.godot/exported/133200997/export-f79107d57fdad9a3e69fd8f533f1a9ac-boss_03_magma_maw.res
@@ -126,7 +126,7 @@ res://fonts/RES_BeVietman_Regular.tres::3051b0fd785f429a1f69acc75262b557::177437
 res://fonts/RES_BeVietnam_Bold.tres::5ba631d7e33d5d8fe5e05d35397ac79f::1774384942::res://.godot/exported/133200997/export-13d2524024db3c1ce0b656d42d2ed89c-RES_BeVietnam_Bold.res
 res://fonts/RES_JakaraSans_Bold.tres::751600a808ea10db6d170c09b426fb83::1774384953::res://.godot/exported/133200997/export-cc1effb415432a5e2e27aa7f226f5344-RES_JakaraSans_Bold.res
 res://fonts/RES_JakaraSans_Regular.tres::aaf930d028816edb386bba8f7860dbde::1774373269::res://.godot/exported/133200997/export-5b96d8d7d6d2e0904a42056752e6f90e-RES_JakaraSans_Regular.res
-res://scenes/app/main_scene.tscn::bd42e95826193020fe15d5c22d6ce6a4::1776756542::res://.godot/exported/133200997/export-4f94396a82da23abb31a1e1311203510-main_scene.scn
+res://scenes/app/main_scene.tscn::e79bb5f3bf4f8400eaca94b4f14f62af::1776801104::res://.godot/exported/133200997/export-4f94396a82da23abb31a1e1311203510-main_scene.scn
 res://scenes/components/boss_icon.tscn::05e9dd4131c57221e4751286374dc3f1::1775082212::res://.godot/exported/133200997/export-8d3ef845eb556b56d2e4da7180723943-boss_icon.scn
 res://scenes/components/boss_icon_effect.tscn::4e46bc42d325af71fa352c0fdcc61cd4::1775124809::res://.godot/exported/133200997/export-b76ca7b73fbf7651c6539987138cb1f7-boss_icon_effect.scn
 res://scenes/components/BotImage.tscn::1c7182c8c4984fe236a20b7cd71f5819::1775759057::res://.godot/exported/133200997/export-7c83631eb316859b2977d2c1eda9b1cc-BotImage.scn
@@ -139,7 +139,7 @@ res://scenes/components/chest_animation.tscn::1cad6bab248b8a2d5082e3e30fed852e::
 res://scenes/components/chest_reward.tscn::2109a4ff65875e6ebff1568c23437bd8::1775421208::res://.godot/exported/133200997/export-0abf6492e14f960aace20cbbf951be1b-chest_reward.scn
 res://scenes/components/currency_animation.tscn::754853181fcde4015f44e06db6e43826::1775415076::res://.godot/exported/133200997/export-267a6e7f409ef9c6495cba7c0e23769c-currency_animation.scn
 res://scenes/components/currency_icon.tscn::281e8e0af3a0a2ec386fc675da7fc8d4::1775996802::res://.godot/exported/133200997/export-dde7824352adcb7a208329fb869d03f3-currency_icon.scn
-res://scenes/components/icon_bg.tscn::fbd11343bb3bbf2bb05c3cefd497f750::1775679075::res://.godot/exported/133200997/export-7b98bd0dd46de599532b451f72d4c2bc-icon_bg.scn
+res://scenes/components/icon_bg.tscn::fbd11343bb3bbf2bb05c3cefd497f750::1776797638::res://.godot/exported/133200997/export-7b98bd0dd46de599532b451f72d4c2bc-icon_bg.scn
 res://scenes/components/icon_bg_circle.tscn::2b62e8e8f8829a6ab2c413cea8436d77::1776198229::res://.godot/exported/133200997/export-8e8b22652b3a2502db0802fad1631307-icon_bg_circle.scn
 res://scenes/components/lane_depth_update.tscn::8289b0151d94394036f0244236fa152e::1774724072::res://.godot/exported/133200997/export-4ed9bb5d2e5446b495763798db1b1e6e-lane_depth_update.scn
 res://scenes/components/reward_currency.tscn::ccdc4a5e0bdece6906de781c4403a1bd::1775552734::res://.godot/exported/133200997/export-62d18598f9c8633f36c06e5c0ec15c2e-reward_currency.scn
@@ -147,8 +147,8 @@ res://scenes/components/reward_extracted_rare_ores.tscn::32710ab7071e880b8f719c4
 res://scenes/components/reward_item.tscn::900b539b3bc071a749c5ef6443dc9c16::1775420252::res://.godot/exported/133200997/export-2df83730556ea3a7b596eb2aebc40a35-reward_item.scn
 res://scenes/components/simple_btn.tscn::ccc98b80acf05af20b20dcdeccd680c8::1774895702::res://.godot/exported/133200997/export-eb262a3d2291deffb153ad79cef8b58a-simple_btn.scn
 res://scenes/components/small_notif_counter.tscn::581cf2107885eff6c0354edb74468843::1775161379::res://.godot/exported/133200997/export-c4131ee42db4d76e5a8c16e5a11292d9-small_notif_counter.scn
-res://scenes/components/smart_button.tscn::d8ce915fa939a652fcb0e170f0cf45b7::1776533892::res://.godot/exported/133200997/export-e7336767de9519ec464cd61679667e6f-smart_button.scn
-res://scenes/components/smart_panel.tscn::120683a792657ea8e9e9fe7134d16bac::1775678923::res://.godot/exported/133200997/export-342a9e54b97fa430e1924ae1f4f48380-smart_panel.scn
+res://scenes/components/smart_button.tscn::b07a982d8131d04b14f9791fffbd37fd::1776805533::res://.godot/exported/133200997/export-e7336767de9519ec464cd61679667e6f-smart_button.scn
+res://scenes/components/smart_panel.tscn::d395f8161ae376ba22cf0044003cba8d::1776797614::res://.godot/exported/133200997/export-342a9e54b97fa430e1924ae1f4f48380-smart_panel.scn
 res://scenes/components/smart_panel_circle.tscn::9274f38fbc0b83feb301b9092cf11426::1774550828::res://.godot/exported/133200997/export-55ddef34e8af472e50f517ff31004020-smart_panel_circle.scn
 res://scenes/components/smart_panel_circle_skill_tree.tscn::2a1fa18661c62023c1b51cf5177af14c::1776194041::res://.godot/exported/133200997/export-e575dfdb82230c827dd87eabd80a1cff-smart_panel_circle_skill_tree.scn
 res://scenes/components/status_label.tscn::88dfdf9653d8ae5a29f56dda92b4a6d7::1776717405::res://.godot/exported/133200997/export-8a86afe59589a32b6e06af843244b55b-status_label.scn
@@ -168,7 +168,7 @@ res://scenes/popups/watch_ad_button.tscn::9a9f52809d53c4c4fc3bdf5e36abfe00::1776
 res://scenes/screens/dig/active_boost.tscn::cc4c6b98c723ed308dbc724da92541e4::1776621799::res://.godot/exported/133200997/export-358c0a94a93570f5f19e7a06ed42c572-active_boost.scn
 res://scenes/screens/dig/current_daily_task.tscn::0f6fc7affd7f55adbdde2fcce4cd0958::1776620417::res://.godot/exported/133200997/export-b5ba9fe96022cba027bd9d3ab627d6c4-current_daily_task.scn
 res://scenes/screens/dig/dig_bot_slot.tscn::25123295088e66716eb0efe298b8a73f::1776625386::res://.godot/exported/133200997/export-9f2ef0af28b33181e32db42c9b6d79e2-dig_bot_slot.scn
-res://scenes/screens/dig/dig_screen.tscn::31087e7482191a30ec1f81b5e28f8ddd::1776717799::res://.godot/exported/133200997/export-887271b8ea31ab594f162e952ca01493-dig_screen.scn
+res://scenes/screens/dig/dig_screen.tscn::0b6497640ad4a2dda70400074c8a5f17::1776805713::res://.godot/exported/133200997/export-887271b8ea31ab594f162e952ca01493-dig_screen.scn
 res://scenes/screens/dig/material.tscn::58376bb91f900e10b2d76dc3230fcd5e::1776602446::res://.godot/exported/133200997/export-c56b282df65b787ee884a2f0b37cf671-material.scn
 res://scenes/screens/dig/milestone_panel.tscn::0db2c114adf71dd466d6c6d506ffba2c::1776536902::res://.godot/exported/133200997/export-358ff9c5c2bab6105414c7c3cea78bd6-milestone_panel.scn
 res://scenes/screens/dig/milestone_reward_item.tscn::52ad112f465aa5bd161f1d00af196bb5::1776536103::res://.godot/exported/133200997/export-66af53df4a3143c3eb52a14ddee4aa99-milestone_reward_item.scn
@@ -183,10 +183,10 @@ res://scenes/screens/merge/sell_node.tscn::6077f94049a2e751e2872a697ae83bd6::177
 res://scenes/screens/merge/smart_button_merge.tscn::62387bc07cdfc9b5bf0f6e8b36b11c61::1775846267::res://.godot/exported/133200997/export-2b06f70aa65c833dc73be32657336a0e-smart_button_merge.scn
 res://scenes/screens/particles/shield_particle.tscn::e686e4828623a290d37d02a6d140ea7f::1775120474::res://.godot/exported/133200997/export-45536f309c70a8f0d5af340a1537d5ec-shield_particle.scn
 res://scenes/screens/progress/locked_relic_item.tscn::3704f86212c7176b850ff68301bdaa0a::1776278847::res://.godot/exported/133200997/export-80409fc5761b0f2c4bbfa608f0ee021e-locked_relic_item.scn
-res://scenes/screens/progress/owned_relics_hashtag.tscn::8c69acbdcab7acca260f0cdc574e8d0e::1775298428::res://.godot/exported/133200997/export-2ff8809d56bf76655b37d285357539f1-owned_relics_hashtag.scn
+res://scenes/screens/progress/owned_relics_hashtag.tscn::8c69acbdcab7acca260f0cdc574e8d0e::1776797752::res://.godot/exported/133200997/export-2ff8809d56bf76655b37d285357539f1-owned_relics_hashtag.scn
 res://scenes/screens/progress/progress_hash_tag.tscn::2e33125cb0dbbd27c71bc9e8f01d3271::1776606742::res://.godot/exported/133200997/export-4a89f766a3f13c6fdd3f64c6cebb03b4-progress_hash_tag.scn
 res://scenes/screens/progress/progress_hash_tag_with_icon.tscn::cb7a2ff4686bf555e4e01e967f1c7668::1775629121::res://.godot/exported/133200997/export-77313594d920b7060bfd5bc3a7d51d2e-progress_hash_tag_with_icon.scn
-res://scenes/screens/progress/progress_screen.tscn::6b7dc043dd89d6f323e4ebdd6ea9ffbf::1776717319::res://.godot/exported/133200997/export-e8b0d51a22d9c36136bcb85663125909-progress_screen.scn
+res://scenes/screens/progress/progress_screen.tscn::1a95520e48dd99b5b47a1143173d6223::1776804452::res://.godot/exported/133200997/export-e8b0d51a22d9c36136bcb85663125909-progress_screen.scn
 res://scenes/screens/progress/progress_skill.tscn::39571541e35fc8486dfcc7696e9d0d20::1776278856::res://.godot/exported/133200997/export-aaa0d2dd0809554130c5cfc4f18137af-progress_skill.scn
 res://scenes/screens/progress/quest_item.tscn::b85fe733db47b7fe9435537f368bb230::1776019575::res://.godot/exported/133200997/export-11084679ab0baf78cf9bb02b16de423c-quest_item.scn
 res://scenes/screens/progress/relic_item.tscn::40203ae039bbf79dfb4e7a5de3d91a7e::1776624553::res://.godot/exported/133200997/export-2a5fd624b0da6213e6daf27b23d0745b-relic_item.scn
@@ -229,3 +229,7 @@ res://shaders/glich_effect.tres::48ef204bf549337c701164971e4f778a::1776455136::r
 res://data/icons/bot_damage_mult.tres::b6b3520d0b7eaaabc635d8d51abf4eb4::1776457224::res://.godot/exported/133200997/export-4f3d173d14e33b3a8a293e50641676e8-bot_damage_mult.res
 res://scenes/addons/screenshot_maker.tscn::4fd3c82f6f48433e1ff13fc4457900e3::1776537129::res://.godot/exported/133200997/export-f0a5db80db03422434e5abeea01f5c8d-screenshot_maker.scn
 res://data/icons/offline_gain_mult.tres::25a53a20412ded762a288da3e41f9dd6::1776716684::res://.godot/exported/133200997/export-f17d65b7dd4861bc51bf2840f0dac64f-offline_gain_mult.res
+res://scenes/components/offline_band_selector.tscn::600635e8ba051a186d6cefd65fa794fd::1776805796::res://.godot/exported/133200997/export-0aafc881ffdd4412e1873dbf9cd96347-offline_band_selector.scn
+res://scenes/components/open_popup_icon.tscn::87edebd6fc62167781029c5cf98df7ef::1776805491::res://.godot/exported/133200997/export-23e5777af9d7c32efea055da5b4d7aaa-open_popup_icon.scn
+res://scenes/popups/OfflinePlannerPopup.tscn::49c255cf05628832609798d006a5d649::1776806188::res://.godot/exported/133200997/export-e312edf44ce9918736bcbe114cef9a1d-OfflinePlannerPopup.scn
+res://scenes/screens/dig/offline_panel.tscn::41c1302c3ec2862930ae7cd6ba8ed7c9::1776797126::res://.godot/exported/133200997/export-f8828d8d92471ae67c8fbc51e052323d-offline_panel.scn

@@ -37,15 +37,19 @@ func _ready() -> void:
 		"BLUE_MARGIN":
 			$Panel.theme_type_variation = "PanelBlueBorder"
 			$Panel/HBoxContainer.modulate = Color("D1FAFF")
+			$OpenPopupIcon.panel_color = "BLUE"
 		"PURPLE_MARGIN":
 			$Panel.theme_type_variation = "PanelPurpleBorder"
 			$Panel/HBoxContainer.modulate = Color("F2D6FF")
+			$OpenPopupIcon.panel_color = "PURPLE"
 		"GOLD_MARGIN":
 			$Panel.theme_type_variation = "PanelGoldBorder"
 			$Panel/HBoxContainer.modulate = Color("FFE7A8")
+			$OpenPopupIcon.panel_color = "GOLD"
 		"WHITE_MARGIN":
 			$Panel.theme_type_variation = "PanelDimmedBG"
 			$Panel/HBoxContainer.modulate = Color.WHITE
+			$OpenPopupIcon.panel_color = "WHITE"
 	if !Engine.is_editor_hint():
 		GlobalBtn.AddBtnPress(self)
 		GlobalBtn.BtnPress.connect(OnBtnPress)

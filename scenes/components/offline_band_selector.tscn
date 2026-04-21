@@ -13,6 +13,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 937.0
 offset_bottom = 150.0
+mouse_filter = 2
 script = ExtResource("1_a0anl")
 
 [node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("1_5uqbi")]
@@ -31,10 +32,12 @@ offset_right = -20.0
 offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/separation = 20
 
 [node name="IconBG" parent="SmartPanel/HBoxContainer" unique_id=1682398798 instance=ExtResource("2_a0anl")]
 layout_mode = 2
+mouse_filter = 2
 panel_type = "INSIDE_ONLY"
 panel_color = "BLUE"
 icon = ExtResource("3_yp0b5")
@@ -42,11 +45,13 @@ icon = ExtResource("3_yp0b5")
 [node name="VList" type="VBoxContainer" parent="SmartPanel/HBoxContainer" unique_id=1624848074]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 theme_override_constants/separation = 20
 alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="SmartPanel/HBoxContainer/VList" unique_id=948776333]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="meter_value" parent="SmartPanel/HBoxContainer/VList/HBoxContainer" unique_id=713365230 instance=ExtResource("4_81pus")]
 self_modulate = Color(0.30980393, 0.89411765, 1, 1)
@@ -58,27 +63,34 @@ no_bg = true
 [node name="Control" type="Control" parent="SmartPanel/HBoxContainer/VList/HBoxContainer" unique_id=1767231079]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="recomendation_hint" parent="SmartPanel/HBoxContainer/VList/HBoxContainer" unique_id=1713856768 instance=ExtResource("4_81pus")]
 self_modulate = Color(0.81960785, 0.98039216, 1, 1)
 layout_mode = 2
+theme_override_font_sizes/font_size = 26
 text = "RECOMENDED"
 hash_tag_color = "BLUE"
 
 [node name="ProgressBar" type="ProgressBar" parent="SmartPanel/HBoxContainer/VList" unique_id=1030446871]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
+mouse_filter = 2
 theme_type_variation = &"ProgressBarBlue"
 value = 50.0
 show_percentage = false
 
 [node name="Control" type="Control" parent="SmartPanel/HBoxContainer" unique_id=287084842]
-custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="HList" type="VBoxContainer" parent="SmartPanel/HBoxContainer" unique_id=1186304397]
 layout_mode = 2
+mouse_filter = 2
 alignment = 1
 
 [node name="SettingToggle" parent="SmartPanel/HBoxContainer/HList" unique_id=1487079372 instance=ExtResource("5_g4qa8")]
 layout_mode = 2
+disable_toggle_off = true
+
+[connection signal="IsToggled" from="SmartPanel/HBoxContainer/HList/SettingToggle" to="." method="_on_setting_toggle_is_toggled"]

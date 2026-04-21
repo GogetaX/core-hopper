@@ -21,7 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://dtuuq8uy378eb" path="res://scenes/screens/progress/relic_item.tscn" id="9_tsw2o"]
 [ext_resource type="PackedScene" uid="uid://byej242eayu0l" path="res://scenes/screens/progress/locked_relic_item.tscn" id="10_nipnh"]
 [ext_resource type="Texture2D" uid="uid://b7xf4f3dspkbe" path="res://data/icons/relic_icon.tres" id="14_ag5h6"]
-[ext_resource type="PackedScene" uid="uid://cd1h4fd8nlefg" path="res://scenes/screens/progress/owned_relics_hashtag.tscn" id="14_i8y5d"]
+[ext_resource type="PackedScene" path="res://scenes/screens/progress/owned_relics_hashtag.tscn" id="14_i8y5d"]
 [ext_resource type="Script" uid="uid://bty8m4gyqh6nd" path="res://scenes/screens/progress/quest_count.gd" id="16_sormt"]
 [ext_resource type="Texture2D" uid="uid://dwwkd07dwfbch" path="res://art/skills/daily_quest_limit.tres" id="16_vembr"]
 

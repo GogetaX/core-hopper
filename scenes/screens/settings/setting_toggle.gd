@@ -1,5 +1,6 @@
 extends Control
 
+@export var disable_toggle_off := false
 
 signal IsToggled(toggled_on:bool)
 
@@ -24,6 +25,8 @@ func SetEnabled(is_enabled:bool):
 	
 func OnTogglePressed(control_node:Control):
 	if control_node != self:
+		return
+	if _is_toggled && disable_toggle_off:
 		return
 	_is_toggled = !_is_toggled
 	IsToggled.emit(_is_toggled)

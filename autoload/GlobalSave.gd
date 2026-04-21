@@ -19,6 +19,14 @@ func _ready() -> void:
 func AdjustNewData():
 	if !GlobalSave.save_data.progress.has("total_bots_bought_this_reset"):
 		GlobalSave.save_data.progress["total_bots_bought_this_reset"] = 0
+
+	if !GlobalSave.save_data.has("offline_mining") or typeof(GlobalSave.save_data.offline_mining) != TYPE_DICTIONARY:
+		GlobalSave.save_data["offline_mining"] = {
+			"selected_band_index": -1
+		}
+	elif !GlobalSave.save_data.offline_mining.has("selected_band_index"):
+		GlobalSave.save_data.offline_mining["selected_band_index"] = -1
+		
 func RepapulateAllLaneBlocks():
 	GenerateNextBlocks(0,5)
 	GenerateNextBlocks(1,5)
@@ -219,6 +227,9 @@ func BuildCleanSaveData():
 		}
 	res["daily_watch_ads"]={
 		"day_key": ""
+	}
+	res["offline_mining"] = {
+		"selected_band_index": -1
 	}
 	return res
 
