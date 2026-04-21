@@ -457,8 +457,9 @@ func _GetContinuousBandBaseHp(band_index: int) -> float:
 
 func _BuildRuntimeBlock(depth: int, lane_index: int, block_id: String, archetype: Dictionary, band: Dictionary) -> Dictionary:
 	var band_index := get_depth_band_index(depth)
-	var effective_base_hp := _GetContinuousBandBaseHp(band_index)
+	var carried_base := _GetContinuousBandBaseHp(band_index)
 	var base_hp := float(band.get("base_hp", 1.0))
+	var effective_base_hp := lerpf(base_hp, carried_base, 0.35)
 	var hp_multiplier := float(archetype.get("hp_multiplier", 1.0))
 	var reward_multiplier := float(band.get("reward_multiplier", 1.0))
 
