@@ -442,8 +442,22 @@ func _GetExpectedDropAmount(archetype: Dictionary, currency: String, reward_mult
 
 	return expected
 
+func _GetContinuousBandBaseHp(band_index: int) -> float:
+	var band_base := float(depth_bands[band_index].get("base_hp", 1.0))
+	if band_index <= 0:
+		return band_base
+
+	var prev_band = depth_bands[band_index - 1]
+	var prev_base := _GetContinuousBandBaseHp(band_index - 1)
+	var prev_steps := int(prev_band.get("max_depth", 0)) - int(prev_band.get("min_depth", 0)) + 1
+	var prev_growth := float(prev_band.get("depth_growth", 1.01))
+	var prev_tail_base := prev_base * pow(prev_growth, prev_steps)
+
+	return max(band_base, prev_tail_base)
 
 func _BuildRuntimeBlock(depth: int, lane_index: int, block_id: String, archetype: Dictionary, band: Dictionary) -> Dictionary:
+	var band_index := get_depth_band_index(depth)
+	var effective_base_hp := _GetContinuousBandBaseHp(band_index)
 	var base_hp := float(band.get("base_hp", 1.0))
 	var hp_multiplier := float(archetype.get("hp_multiplier", 1.0))
 	var reward_multiplier := float(band.get("reward_multiplier", 1.0))
@@ -453,8 +467,9 @@ func _BuildRuntimeBlock(depth: int, lane_index: int, block_id: String, archetype
 	var depth_growth := float(band.get("depth_growth", 1.01))
 	var min_hit_damage := float(band.get("min_hit_damage", 0.0))
 
-	var final_hp = max(1, roundi(base_hp * hp_multiplier * pow(depth_growth, depth_in_band)))
-
+	var final_hp = max(1, roundi(
+	effective_base_hp * hp_multiplier * pow(depth_growth, depth_in_band)
+	))
 	# Compatibility fields for older code paths / boss generation.
 	var base_coin_reward := _GetExpectedDropAmount(archetype, "coins", 1.0)
 	var final_coin_reward := _GetExpectedDropAmount(archetype, "coins", reward_multiplier)

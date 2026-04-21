@@ -13,11 +13,12 @@ func InitChest(data:Dictionary):
 	
 	#Populate currency rewards
 	for x in cur_chest_data.data.rewards:
-		if ["coins","crystals","energy"].has(x) && cur_chest_data.data.rewards[x] > 0:
-			var r = reward_currency.instantiate() as RewardCurrencyClass
-			$SmartPanel/VBoxContainer/CurrencyList.add_child(r)
-			r.currency_type = x.to_upper()
-			r.amount_str = Global.CurrencyToString(cur_chest_data.data.rewards[x])
+		if ["coins","crystals","energy"].has(x):
+			if cur_chest_data.data.rewards[x] > 0:
+				var r = reward_currency.instantiate() as RewardCurrencyClass
+				$SmartPanel/VBoxContainer/CurrencyList.add_child(r)
+				r.currency_type = x.to_upper()
+				r.amount_str = Global.CurrencyToString(cur_chest_data.data.rewards[x])
 		elif !["relic_ids"].has(x):
 			print_debug("unknown currency: ",x)
 	#Remove Reward Items

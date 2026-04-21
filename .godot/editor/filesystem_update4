@@ -1,12 +1,7 @@
-res://scenes/popups/BotStatInfoPopup.tscn
+res://scenes/app/main_scene.tscn
 res://art/theme/MainTheme.tres
 res://shaders/boss_outline.gdshader
 res://shaders/shop_screen.gdshader
 res://shaders/popup_blur.gdshader
 res://shaders/glich_effect.gdshader
 res://shaders/explode.gdshader
-res://autoload/GlobalBotStats.gd
-res://scenes/app/bot_stat_info.gd
-res://autoload/GlobalOfflineProgress.gd
-res://autoload/GlobalDiggingProcess.gd
-res://scenes/app/main_scene.gd
