@@ -117,7 +117,9 @@ layout_mode = 2
 [node name="RelicBtn" parent="RelicItem/VBoxContainer" unique_id=664760665 instance=ExtResource("5_ysijg")]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
+btn_type = "NO_PRICE"
 buy_btn_title = "EQUIPED"
+sub_text = ""
 
 [node name="relic_rank" parent="RelicItem" unique_id=1361408738 instance=ExtResource("4_ysijg")]
 layout_mode = 0

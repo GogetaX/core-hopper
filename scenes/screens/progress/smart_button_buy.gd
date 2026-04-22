@@ -52,6 +52,14 @@ signal OnPressed()
 			_ready()
 	get:
 		return price_int
+		
+@export var sub_text := "":
+	set(value):
+		sub_text = value
+		if is_node_ready():
+			_ready()
+	get:
+		return sub_text
 
 var _disabled_because_of_price = false
 
@@ -95,7 +103,12 @@ func SyncTool():
 	
 	$WITH_PRICE/HBoxContainer/VList/SmartPanel.panel_color = panel_color
 	$WITH_PRICE/HBoxContainer/VList/SmartPanel/HBoxContainer/value_str.text = price_text
-
+	
+	$WITH_PRICE/HBoxContainer/VList/sub_text.text = sub_text
+	if sub_text == "":
+		$WITH_PRICE/HBoxContainer/VList/sub_text.visible = false
+	else:
+		$WITH_PRICE/HBoxContainer/VList/sub_text.visible = true
 func CheckForCurrency():
 	if btn_type == "WITH_PRICE":
 		var cur_currency = GlobalSave.GetCurrency(currency_type)

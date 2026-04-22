@@ -25,8 +25,7 @@ func SyncData():
 	else:
 		$VList/DailyMythicBot.SetDisabled(true)
 	
-
-	$VList/BuyBotBtn/free_bot_in.text = "Free bot in "+str(GlobalStats.GetFreeBotCountDown()-GlobalSave.save_data.progress.free_bot_count).pad_decimals(0)
+	$VList/BuyBotBtn.sub_text = "Free bot in "+str(GlobalStats.GetFreeBotCountDown()-GlobalSave.save_data.progress.free_bot_count).pad_decimals(0)
 
 func _on_smart_button_buy_btn_pressed_with_price(currency: String, price: int) -> void:
 	#Find Free Merge Slot

@@ -172,7 +172,9 @@ fit_content = true
 
 [node name="CloseBtn" parent="SmartPanel/VList" unique_id=664760665 instance=ExtResource("4_agsv0")]
 layout_mode = 2
+btn_type = "NO_PRICE"
 buy_btn_title = "CLOSE"
+sub_text = ""
 
 [connection signal="resized" from="SmartPanel/VList" to="." method="_on_v_box_container_resized"]
 [connection signal="resized" from="SmartPanel/VList/HList2/Label" to="." method="SyncYSize"]

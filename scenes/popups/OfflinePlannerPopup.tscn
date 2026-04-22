@@ -476,12 +476,16 @@ theme_override_constants/separation = 20
 [node name="CloseBtn" parent="SmartPanel/VBoxContainer/SmartPanel/VList/HList" unique_id=506836531 instance=ExtResource("10_fteyd")]
 layout_mode = 2
 size_flags_stretch_ratio = 0.5
+btn_type = "NO_PRICE"
 buy_btn_title = "CANCEL"
 panel_color = "DISABLED"
+sub_text = ""
 
 [node name="SelectBtn" parent="SmartPanel/VBoxContainer/SmartPanel/VList/HList" unique_id=664760665 instance=ExtResource("10_fteyd")]
 layout_mode = 2
+btn_type = "NO_PRICE"
 buy_btn_title = "SET TARGET"
+sub_text = ""
 
 [connection signal="resized" from="SmartPanel/VBoxContainer" to="." method="_on_v_box_container_resized"]
 [connection signal="OnPressed" from="SmartPanel/VBoxContainer/SmartPanel/VList/HList/CloseBtn" to="." method="_on_close_btn_on_pressed"]

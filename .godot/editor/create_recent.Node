@@ -1,6 +1,7 @@
-TextureProgressBar
 Label
 Control
+CanvasLayer
+TextureProgressBar
 HBoxContainer
 VBoxContainer
 ProgressBar
@@ -11,5 +12,3 @@ HFlowContainer
 Timer
 Node
 GPUParticles2D
-ColorRect
-CanvasLayer

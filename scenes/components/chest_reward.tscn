@@ -77,6 +77,8 @@ size_flags_horizontal = 3
 [node name="ClaimBtn" parent="SmartPanel/HBox/VList/HList" unique_id=664760665 instance=ExtResource("5_vt8dr")]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
+btn_type = "NO_PRICE"
 buy_btn_title = "OPEN"
+sub_text = ""
 
 [connection signal="OnPressed" from="SmartPanel/HBox/VList/HList/ClaimBtn" to="." method="_on_claim_btn_on_pressed"]

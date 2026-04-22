@@ -17,7 +17,6 @@ mouse_filter = 2
 script = ExtResource("1_wkfjo")
 
 [node name="Milestone_Incomplete" parent="." unique_id=892379017 instance=ExtResource("1_u4gin")]
-visible = false
 layout_mode = 1
 panel_color = "GOLD"
 darken_bg = true
@@ -62,6 +61,7 @@ text = "50m remaining"
 autowrap_mode = 2
 
 [node name="Milestone_Completed" parent="." unique_id=852632016 instance=ExtResource("1_u4gin")]
+visible = false
 layout_mode = 1
 panel_color = "GOLD"
 darken_bg = true
@@ -114,8 +114,10 @@ mouse_filter = 2
 [node name="ClaimBtn" parent="Milestone_Completed/VList" unique_id=664760665 instance=ExtResource("4_6etbr")]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
+btn_type = "NO_PRICE"
 buy_btn_title = "CLAIM"
 panel_color = "GOLD"
+sub_text = ""
 
 [node name="SmallNotifCounter" parent="Milestone_Completed" unique_id=1772552382 instance=ExtResource("5_ajrku")]
 layout_mode = 1

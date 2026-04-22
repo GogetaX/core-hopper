@@ -1,14 +1,14 @@
 72322a848ab928aa5c89f0cb78209805
-::res://::1776837620
+::res://::1776886857
 default_bus_layout.tres::AudioBusLayout::1932480817288655633::1776530784::0::1::::<><><>0<>0<><>::
 export_presets.cfg::TextFile::-1::1776806200::0::1::::<><><>0<>0<><>::
 icon.svg::CompressedTexture2D::6983593420846663045::1776516710::1776516714::1::::<><><>0<>0<>1e48820d6b241a3917eeb9a3ec23f0c4<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 ::res://addons/::1776540607
 ::res://addons/AdmobPlugin/::1776543433
-Admob.gd::GDScript::7294447452970989096::1776543433::0::1::::Admob<>Node<><>0<>1<><>::
+Admob.gd::GDScript::7294447452970989096::1776543433::0::1::::Admob<>Node<>res://addons/AdmobPlugin/icon.png<>0<>1<><>::
 AdmobPlugin.gd::GDScript::347843785406009744::1769913322::0::1::::<>EditorPlugin<><>0<>1<><>::
 icon.png::CompressedTexture2D::2643730722566410808::1769913322::1776539609::1::::<><><>0<>0<>c1d8ae1661fd14c410356843797cd6f7<>res://.godot/imported/icon.png-928f79d906c5a286de384358dfb1ba26.ctex::
-InlineAdaptiveBanner.gd::GDScript::2532410937006507041::1769913322::0::1::::InlineAdaptiveBanner<>Control<><>0<>0<><>::
+InlineAdaptiveBanner.gd::GDScript::2532410937006507041::1769913322::0::1::::InlineAdaptiveBanner<>Control<>res://addons/AdmobPlugin/icon.png<>0<>0<><>::
 plugin.cfg::TextFile::-1::1769913322::0::1::::<><><>0<>0<><>::
 ::res://addons/AdmobPlugin/bin/::1769913322
 ::res://addons/AdmobPlugin/bin/debug/::1769913322
@@ -140,7 +140,10 @@ boss_energy_cache.tres::AtlasTexture::492543377307518654::1775588120::0::1::::<>
 boss_rewards.tres::AtlasTexture::8006312490247829280::1775501543::0::1::::<><><>0<>0<><>::uid://df86tkgwuy3il::::res://art/skills/skill_icons_02.png
 boss_reward_mult.tres::AtlasTexture::7945072430201382228::1776449456::0::1::::<><><>0<>0<><>::uid://qjry6nfmma1h::::res://art/skills/skill_icons_08.png
 bot_buy_start_level_bonus.tres::AtlasTexture::8147992829747027728::1776449298::0::1::::<><><>0<>0<><>::uid://qjry6nfmma1h::::res://art/skills/skill_icons_08.png
+bot_overclock.tres::AtlasTexture::7112707757744171108::1776883512::0::1::::<><><>0<>0<><>::uid://bm2cmf134n4::::res://art/skills/skill_icons_09.png
 bot_power_mult.tres::AtlasTexture::3621460449816463592::1776449392::0::1::::<><><>0<>0<><>::uid://qjry6nfmma1h::::res://art/skills/skill_icons_08.png
+bulk_orders.tres::AtlasTexture::2556493225143467144::1776883597::0::1::::<><><>0<>0<><>::uid://bm2cmf134n4::::res://art/skills/skill_icons_09.png
+bulk_orders_plus.tres::AtlasTexture::3216909143076707960::1776883637::0::1::::<><><>0<>0<><>::uid://bm2cmf134n4::::res://art/skills/skill_icons_09.png
 buy_level_2_bots.tres::AtlasTexture::2992024477575784819::1775502223::0::1::::<><><>0<>0<><>::uid://bc4ca00gqojxh::::res://art/skills/skill_icons_04.png
 buy_level_3_bots.tres::AtlasTexture::2469891085920344943::1775502330::0::1::::<><><>0<>0<><>::uid://bc4ca00gqojxh::::res://art/skills/skill_icons_04.png
 buy_level_4_bots.tres::AtlasTexture::1106610105774404607::1775502304::0::1::::<><><>0<>0<><>::uid://bc4ca00gqojxh::::res://art/skills/skill_icons_04.png
@@ -156,6 +159,7 @@ direct_buy_refund.tres::AtlasTexture::713435420574916241::1775593172::0::1::::<>
 energy_gain.tres::AtlasTexture::9103768372450538284::1775553927::0::1::::<><><>0<>0<><>::uid://don6dria8d6rp::::res://art/currency/energy.png
 execute_protocol.tres::AtlasTexture::5762604672376362638::1775502592::0::1::::<><><>0<>0<><>::uid://hp6tanmbuu87::::res://art/skills/skill_icons_05.png
 execute_threshold.tres::AtlasTexture::2252925559807907480::1775502620::0::1::::<><><>0<>0<><>::uid://hp6tanmbuu87::::res://art/skills/skill_icons_05.png
+factory_overdrive.tres::AtlasTexture::4873785620553511009::1776883710::0::1::::<><><>0<>0<><>::uid://bm2cmf134n4::::res://art/skills/skill_icons_09.png
 master_workshop.tres::AtlasTexture::2860904633490616477::1775500972::0::1::::<><><>0<>0<><>::uid://bucup5amnuqib::::res://art/skills/skill_icons_01.png
 merge_bonus.tres::AtlasTexture::1117352682306447243::1775501015::0::1::::<><><>0<>0<><>::uid://bucup5amnuqib::::res://art/skills/skill_icons_01.png
 merge_efficiency.tres::AtlasTexture::707581109918456617::1775500947::0::1::::<><><>0<>0<><>::uid://bucup5amnuqib::::res://art/skills/skill_icons_01.png
@@ -174,11 +178,6 @@ relic_find.tres::AtlasTexture::1383402223780298169::1775501560::0::1::::<><><>0<
 relic_hunter.tres::AtlasTexture::3524292841175777386::1775501619::0::1::::<><><>0<>0<><>::uid://df86tkgwuy3il::::res://art/skills/skill_icons_02.png
 relic_slot.tres::AtlasTexture::7191075583249633682::1776105410::0::1::::<><><>0<>0<><>::uid://cylucu246bflu::::res://art/skills/skill_icons_07.png
 relic_slot_bonus.tres::AtlasTexture::3149789577273981804::1776449361::0::1::::<><><>0<>0<><>::uid://qjry6nfmma1h::::res://art/skills/skill_icons_08.png
-bot_overclock.tres::AtlasTexture::7112707757744171108::1776883512::0::1::::<><><>0<>0<><>::uid://bm2cmf134n4::::res://art/skills/skill_icons_09.png
-factory_overdrive.tres::AtlasTexture::4873785620553511009::1776883710::0::1::::<><><>0<>0<><>::uid://bm2cmf134n4::::res://art/skills/skill_icons_09.png
-bulk_orders.tres::AtlasTexture::2556493225143467144::1776883597::0::1::::<><><>0<>0<><>::uid://bm2cmf134n4::::res://art/skills/skill_icons_09.png
-bulk_orders_plus.tres::AtlasTexture::3216909143076707960::1776883637::0::1::::<><><>0<>0<><>::uid://bm2cmf134n4::::res://art/skills/skill_icons_09.png
-stat_salvage.tres::AtlasTexture::3297978887653166088::1776883658::0::1::::<><><>0<>0<><>::uid://bm2cmf134n4::::res://art/skills/skill_icons_09.png
 resource_drop_mult.tres::AtlasTexture::9006085119911711226::1776449412::0::1::::<><><>0<>0<><>::uid://qjry6nfmma1h::::res://art/skills/skill_icons_08.png
 skill_icons.png::CompressedTexture2D::522270508748175871::1775498987::1775499024::1::::<><><>0<>0<>52fb62d797e4d4fa88c28382eb11d24f<>res://.godot/imported/skill_icons.png-1316add16b180f97f5e926658ae534dd.ctex::
 skill_icons_01.png::CompressedTexture2D::3795569014989677633::1775500865::1775500867::1::::<><><>0<>0<>7d9089c006a2bc03136650b125927320<>res://.godot/imported/skill_icons_01.png-c8677dc557eb76ab495f440cbacea6b6.ctex::
@@ -190,6 +189,7 @@ skill_icons_06.png::CompressedTexture2D::5383413033868981422::1775588068::177558
 skill_icons_07.png::CompressedTexture2D::6481300774972597238::1776105373::1776105378::1::::<><><>0<>0<>f396043b4a87d6f4b70449e6094e941a<>res://.godot/imported/skill_icons_07.png-678b2c2bb8e0886f4910ed95485f1c54.ctex::
 skill_icons_08.png::CompressedTexture2D::1142677594475801083::1776449255::1776449256::1::::<><><>0<>0<>2bcfcc3e922d46f1964f23a517ee1f9c<>res://.godot/imported/skill_icons_08.png-8dd56f8441f633912dab6ab221853bf2.ctex::
 skill_icons_09.png::CompressedTexture2D::2841321950099179::1776883453::1776883454::1::::<><><>0<>0<>f8c083dfce8d53971321767960b77c2a<>res://.godot/imported/skill_icons_09.png-6e5d8ec033f2cba8026d2d8ae81d4f45.ctex::
+stat_salvage.tres::AtlasTexture::3297978887653166088::1776883658::0::1::::<><><>0<>0<><>::uid://bm2cmf134n4::::res://art/skills/skill_icons_09.png
 tap_cirt_chance.tres::AtlasTexture::6380763921445566997::1775502635::0::1::::<><><>0<>0<><>::uid://hp6tanmbuu87::::res://art/skills/skill_icons_05.png
 tap_crit_multiplier.tres::AtlasTexture::6947196540319466383::1775502649::0::1::::<><><>0<>0<><>::uid://hp6tanmbuu87::::res://art/skills/skill_icons_05.png
 tap_damage.tres::AtlasTexture::3335725785359155828::1775502574::0::1::::<><><>0<>0<><>::uid://hp6tanmbuu87::::res://art/skills/skill_icons_05.png
@@ -197,7 +197,7 @@ tap_damage_mult.tres::AtlasTexture::509529686104070841::1776449489::0::1::::<><>
 titan_cache.tres::AtlasTexture::5411570876449204121::1775588150::0::1::::<><><>0<>0<><>::uid://cix1a5hpuu72y::::res://art/skills/skill_icons_06.png
 ::res://art/theme/::1776838047
 MainTheme.tres::Theme::4327626992097300834::1776838047::0::1::::<><><>0<>0<><>::uid://bapc7tyfxh8r7::::res://fonts/RES_BeVietman_Regular.tres<>uid://d2w56dg5r1dwf::::res://fonts/RES_BeVietnam_Bold.tres<>uid://bbgny2bpigrdg::::res://fonts/RES_JakaraSans_Bold.tres<>uid://c7lcpg0hc4w6j::::res://fonts/BeVietnamPro-Bold.ttf<>uid://c8yaxjyx7hkn7::::res://fonts/RES_JakaraSans_Regular.tres
-::res://art/ui/::1776886380
+::res://art/ui/::1776886381
 accept_icon.png::CompressedTexture2D::5693113152428136047::1776425525::1776425531::1::::<><><>0<>0<>2d6a991fcf79955823d0d34345282596<>res://.godot/imported/accept_icon.png-c1d9c7cafb11354727018b3127deb24a.ctex::
 arrow_down.png::CompressedTexture2D::9164296781207954788::1775508759::1775508760::1::::<><><>0<>0<>01524467b41f9ef892fb80369fc3fe86<>res://.godot/imported/arrow_down.png-db1be14afa1fbf96c790aaebd7eabe0b.ctex::
 arrow_left.png::CompressedTexture2D::7878579931446897868::1775392357::1775392358::1::::<><><>0<>0<>d0d6a5a84bb05321916c256358086987<>res://.godot/imported/arrow_left.png-0bd6c2ed34d00687bd618c7cb5266bbe.ctex::
@@ -230,7 +230,7 @@ tap_3.ogg::AudioStreamOggVorbis::1876529273158903502::1776520011::1776520013::1:
 tap_crit.ogg::AudioStreamOggVorbis::485261298957667645::1776520248::1776520250::1::::<><><>0<>0<>a1e0af2397977385de29954461484b75<>res://.godot/imported/tap_crit.ogg-11294dd7bd6ac2e68b9417e36fbafb8f.oggvorbisstr::
 ui_back.ogg::AudioStreamOggVorbis::4443694604734210044::1776529632::1776529633::1::::<><><>0<>0<>9adf74be4958b2ff127e9a384c80dcc2<>res://.godot/imported/ui_back.ogg-17ad741119f4103092644beb0508fca3.oggvorbisstr::
 ui_btn_tap.ogg::AudioStreamOggVorbis::3654465849806862524::1776529364::1776529367::1::::<><><>0<>0<>6d3aaf7200df9878040e4ccaf03073ef<>res://.godot/imported/ui_btn_tap.ogg-6b90cd0afd985c1496919086a9c45013.oggvorbisstr::
-::res://autoload/::1776886282
+::res://autoload/::1776886846
 Global.gd::GDScript::8310856520125008593::1776531857::0::1::::<>Node<><>0<>0<><>::
 GlobalAds.gd::GDScript::3571044804313976020::1776625326::0::1::::<>Node<><>0<>0<><>::
 GlobalBlockDatabase.gd::GDScript::2347787554313096123::1776753530::0::1::::BlockDatabase<>Node<><>0<>0<><>::
@@ -246,7 +246,7 @@ GlobalMusic.gd::GDScript::337607529615181731::1776530450::0::1::::<>Node<><>0<>0
 GlobalOfflineProgress.gd::GDScript::7741491734743064324::1776802800::0::1::::<>Node<><>0<>0<><>::
 GlobalRelicDB.gd::GDScript::738038921527469597::1776285269::0::1::::<>Node<><>0<>0<><>::
 GlobalRewardChest.gd::GDScript::4734704964452808242::1775335094::0::1::::<>Node<><>0<>0<><>::
-GlobalSave.gd::GDScript::1160283151659335217::1776886027::0::1::::<>Node<><>0<>0<><>::
+GlobalSave.gd::GDScript::1160283151659335217::1776886846::0::1::::<>Node<><>0<>0<><>::
 GlobalSignals.gd::GDScript::5656591596851837001::1776804719::0::1::::<>Node<><>0<>0<><>::
 GlobalSkillTree.gd::GDScript::5601380538439576669::1776883996::0::1::::<>Node<><>0<>0<><>::
 GlobalStats.gd::GDScript::1535984886273656338::1776886282::0::1::::<>Node<><>0<>0<><>::
@@ -302,6 +302,7 @@ daily_quests.json::JSON::-1::1776758323::0::1::::<><><>0<>0<><>::
 ::res://data/icons/::1776848629
 auto_dig.tres::AtlasTexture::5605035291745336114::1775065214::0::1::::<><><>0<>0<><>::uid://cgwi8dee56n7w::::res://art/upgrades/upgrades.png
 boss_damage.tres::AtlasTexture::437869282101711704::1775065006::0::1::::<><><>0<>0<><>::uid://cgwi8dee56n7w::::res://art/upgrades/upgrades.png
+boss_damage_mult.tres::AtlasTexture::7582807623093424680::1776848629::0::1::::<><><>0<>0<><>::uid://cgwi8dee56n7w::::res://art/upgrades/upgrades.png
 boss_reward.tres::AtlasTexture::319775139006534716::1775065030::0::1::::<><><>0<>0<><>::uid://cgwi8dee56n7w::::res://art/upgrades/upgrades.png
 bot_capacity.tres::AtlasTexture::1182752919502539565::1775065059::0::1::::<><><>0<>0<><>::uid://cgwi8dee56n7w::::res://art/upgrades/upgrades.png
 bot_damage_mult.tres::AtlasTexture::1317772225855048454::1776457224::0::1::::<><><>0<>0<><>::uid://cgwi8dee56n7w::::res://art/upgrades/upgrades.png
@@ -325,7 +326,6 @@ offline_time.tres::AtlasTexture::8996923561871397978::1775064958::0::1::::<><><>
 prestiege.tres::AtlasTexture::5599011841247396317::1775160740::0::1::::<><><>0<>0<><>::uid://cgwi8dee56n7w::::res://art/upgrades/upgrades.png
 rare_drop.tres::AtlasTexture::2408840908186272616::1775064982::0::1::::<><><>0<>0<><>::uid://cgwi8dee56n7w::::res://art/upgrades/upgrades.png
 relic_icon.tres::AtlasTexture::4680300047472822342::1775298562::0::1::::<><><>0<>0<><>::uid://cgwi8dee56n7w::::res://art/upgrades/upgrades.png
-boss_damage_mult.tres::AtlasTexture::7582807623093424680::1776848629::0::1::::<><><>0<>0<><>::uid://cgwi8dee56n7w::::res://art/upgrades/upgrades.png
 tap_damage.tres::AtlasTexture::6909754457683220607::1775065152::0::1::::<><><>0<>0<><>::uid://cgwi8dee56n7w::::res://art/upgrades/upgrades.png
 tap_damage_mult.tres::AtlasTexture::5266267625508411207::1776007105::0::1::::<><><>0<>0<><>::uid://cgwi8dee56n7w::::res://art/upgrades/upgrades.png
 time.tres::AtlasTexture::8219392074435107020::1775064942::0::1::::<><><>0<>0<><>::uid://cgwi8dee56n7w::::res://art/upgrades/upgrades.png
@@ -603,7 +603,7 @@ shop_screen.gd::GDScript::2049224725241787868::1775855974::0::1::::<>VBoxContain
 shop_screen.tscn::PackedScene::6367080072884507133::1776623603::0::1::::<><><>0<>0<><>::uid://8ukb8nh4swmh::::res://shaders/shop_screen.gdshader<>uid://4gwoxgu8g6iq::::res://scenes/screens/shop/shop_screen.gd<>uid://c2s6fmv66183n::::res://scenes/screens/progress/progress_hash_tag.tscn<>uid://cyrssis6jwdc2::::res://scenes/screens/progress/progress_hash_tag_with_icon.tscn<>uid://drlay20xc5ihb::::res://scenes/components/icon_bg.tscn<>uid://njxlv6dxrlwj::::res://scenes/screens/progress/smart_button_buy.tscn<>uid://d3us88jhniywe::::res://scenes/screens/shop/daily_deal_item.tscn<>uid://2qyad5tlekq8::::res://scenes/screens/shop/shop_crystal_button.tscn<>uid://bg18vum2cai3c::::res://art/icons/rocket.png<>uid://cducjosg5ddnq::::res://scenes/screens/shop/resets_in_time.gd<>uid://bmi0xl7ivgbdw::::res://art/shop/shop_icons.png
 smart_button_buy_with_icon.gd::GDScript::3531646432280825111::1776615198::0::1::::<>Control<><>0<>1<><>::
 smart_button_buy_with_icon.tscn::PackedScene::3892730631536319401::1776615632::0::1::::<><><>0<>0<><>::uid://bqk0x3cwmpn8j::::res://scenes/screens/shop/smart_button_buy_with_icon.gd<>uid://babuofulhomgc::::res://scenes/components/smart_panel.tscn<>uid://bbgny2bpigrdg::::res://fonts/RES_JakaraSans_Bold.tres
-::res://scenes/screens/skills/::1776886339
+::res://scenes/screens/skills/::1776886845
 camera_2d.gd::GDScript::5773715543011378746::1776459304::0::1::::<>Camera2D<><>0<>0<><>::
 line_2d_list.gd::GDScript::7795643338442201422::1776198498::0::1::::<>Node2D<><>0<>0<><>::
 skills_screen.gd::GDScript::6933210947968380591::1776198977::0::1::::<>Control<><>0<>0<><>::
@@ -613,8 +613,8 @@ skill_list_line_2d.gd::GDScript::3043852390238674311::1776197734::0::1::::SkillL
 skill_list_line_2d.tscn::PackedScene::7949973117994406131::1774563605::0::1::::<><><>0<>0<><>::uid://bjmp2lurbyl00::::res://scenes/screens/skills/skill_list_line_2d.gd
 skill_tree_world.gd::GDScript::2333348464642078412::1776198558::0::1::::<>Node2D<><>0<>0<><>::
 skill_tree_world.tscn::PackedScene::7469742381385858599::1776459632::0::1::::<><><>0<>0<><>::uid://8ij55acikx4g::::res://scenes/screens/skills/skill_tree_world.gd<>uid://cawapxracrhht::::res://scenes/screens/skills/skill_tree_world_item.tscn<>uid://coi3iswylkb6y::::res://scenes/screens/skills/camera_2d.gd<>uid://dlja5pqp8h372::::res://scenes/screens/skills/skill_list_line_2d.tscn<>uid://djcjdvqx7whmk::::res://scenes/screens/skills/line_2d_list.gd
-skill_tree_world_item.gd::GDScript::2369041834012341387::1776280015::0::1::::WorldSkillClass<>Node2D<><>0<>0<><>::
-skill_tree_world_item.tscn::PackedScene::4818285699186168197::1776886339::0::1::::<><><>0<>0<><>::uid://80t1jpp3njp8::::res://scenes/screens/skills/skill_tree_world_item.gd<>uid://cyrpeu1w058da::::res://scenes/components/smart_panel_circle_skill_tree.tscn<>uid://c2s6fmv66183n::::res://scenes/screens/progress/progress_hash_tag.tscn
+skill_tree_world_item.gd::GDScript::2369041834012341387::1776886659::0::1::::WorldSkillClass<>Node2D<><>0<>0<><>::
+skill_tree_world_item.tscn::PackedScene::4818285699186168197::1776886845::0::1::::<><><>0<>0<><>::uid://80t1jpp3njp8::::res://scenes/screens/skills/skill_tree_world_item.gd<>uid://cyrpeu1w058da::::res://scenes/components/smart_panel_circle_skill_tree.tscn<>uid://b4y5a2ovgxnru::::res://art/ui/skill_progressbar.png<>uid://c2s6fmv66183n::::res://scenes/screens/progress/progress_hash_tag.tscn
 ::res://scenes/ui/::1776273884
 border_btn.gd::GDScript::3239836719888757584::1774376698::0::1::::<>Panel<><>0<>1<><>::
 border_btn.tscn::PackedScene::3985188189151482586::1776273884::0::1::::<><><>0<>0<><>::uid://bmfnvw4tk87pk::::res://scenes/ui/border_btn.gd<>uid://h5f146aldh4x::::res://art/game_logos/game_top_ico.png

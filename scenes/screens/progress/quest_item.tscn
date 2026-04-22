@@ -14,6 +14,7 @@ mouse_filter = 2
 script = ExtResource("1_ly53i")
 
 [node name="QuestItem_Incomplete" parent="." unique_id=892379017 instance=ExtResource("1_60bcs")]
+visible = false
 custom_minimum_size = Vector2(0, 160)
 layout_mode = 1
 panel_type = "INSIDE_ONLY"
@@ -139,8 +140,10 @@ layout_mode = 2
 [node name="DailyQuestCompleteBtn" parent="QuestItem_Complete/VList/HList/VList/HList2" unique_id=664760665 instance=ExtResource("3_ly53i")]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+btn_type = "NO_PRICE"
 buy_btn_title = "CLAIM"
 panel_color = "BLUE"
+sub_text = ""
 
 [node name="Control" type="Control" parent="QuestItem_Complete/VList/HList/VList/HList2" unique_id=293017606]
 layout_mode = 2
@@ -246,7 +249,6 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="MilestoneItem_Complete" parent="." unique_id=531124647 instance=ExtResource("1_60bcs")]
-visible = false
 custom_minimum_size = Vector2(0, 160)
 layout_mode = 1
 panel_type = "INSIDE_ONLY"
@@ -294,8 +296,10 @@ mouse_filter = 2
 [node name="MilestoneBtnComplete" parent="MilestoneItem_Complete/VList/HList/VList/HList" unique_id=372829613 instance=ExtResource("3_ly53i")]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+btn_type = "NO_PRICE"
 buy_btn_title = "CLAIM"
 panel_color = "GOLD"
+sub_text = ""
 
 [node name="Control" type="Control" parent="MilestoneItem_Complete/VList/HList/VList/HList" unique_id=1338153037]
 layout_mode = 2
