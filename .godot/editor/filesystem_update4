@@ -20,3 +20,4 @@ res://art/skills/factory_overdrive.tres
 res://art/skills/stat_salvage.tres
 res://art/skills/bulk_orders.tres
 res://art/skills/bulk_orders_plus.tres
+res://autoload/GlobalSkillTree.gd

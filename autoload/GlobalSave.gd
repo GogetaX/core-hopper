@@ -625,20 +625,46 @@ func _MergeSingleBotStat(stat_id: String, value_a: float, value_b: float) -> flo
 
 func _MergeBotStatsDict(stats_a: Dictionary, stats_b: Dictionary) -> Dictionary:
 	var result := {}
+	var inherit_ratio := 0.0
 
+	if GlobalSkillTree != null \
+	and typeof(GlobalSkillTree.skill_summary) == TYPE_DICTIONARY \
+	and GlobalSkillTree.skill_summary.has("stats"):
+		inherit_ratio = float(GlobalSkillTree.skill_summary.stats.get("merge_lower_bot_stat_inherit_ratio", 0.0))
+
+	inherit_ratio = clampf(inherit_ratio, 0.0, 1.0)
+
+	# stats_a = stronger bot / winning bot
 	if typeof(stats_a) == TYPE_DICTIONARY:
 		for stat_id in stats_a.keys():
 			result[str(stat_id)] = float(stats_a[stat_id])
 
-	if typeof(stats_b) == TYPE_DICTIONARY:
-		for stat_id_value in stats_b.keys():
-			var stat_id := str(stat_id_value)
-			var value_b := float(stats_b[stat_id_value])
+	# stats_b = lower bot / sacrificed bot
+	if typeof(stats_b) != TYPE_DICTIONARY:
+		return result
 
-			if result.has(stat_id):
-				result[stat_id] = _MergeSingleBotStat(stat_id, float(result[stat_id]), value_b)
-			else:
-				result[stat_id] = _SnapBotStatValue(stat_id, value_b)
+	if inherit_ratio <= 0.0:
+		return result
+
+	for stat_id_value in stats_b.keys():
+		var stat_id := str(stat_id_value)
+		var lower_value := float(stats_b[stat_id_value])
+
+		if is_zero_approx(lower_value):
+			continue
+
+		var inherited_value := _SnapBotStatValue(stat_id, lower_value * inherit_ratio)
+
+		if is_zero_approx(inherited_value):
+			continue
+
+		if result.has(stat_id):
+			result[stat_id] = _SnapBotStatValue(
+				stat_id,
+				float(result[stat_id]) + inherited_value
+			)
+		else:
+			result[stat_id] = inherited_value
 
 	return result
 

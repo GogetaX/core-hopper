@@ -499,8 +499,17 @@ func _BuildStatEffectText(effect: Dictionary, level: int) -> String:
 		"merge_output_power_mult":
 			return "+%d%% Merge Output Power" % _ToPercentInt(total_value)
 
+		"merge_lower_bot_stat_inherit_ratio":
+			return "+%d%% Lower Bot Stat Inheritance" % _ToPercentInt(total_value)
+
 		"direct_bot_buy_refund_chance":
 			return "+%d%% Chance to refund Bot purchase cost" % _ToPercentInt(total_value)
+
+		"direct_bot_buy_free_every_count":
+			return "1 Free Bot every %d Purchases" % int(total_value)
+
+		"direct_bot_buy_free_every_count_reduction":
+			return "-%d Purchases Needed for Free Bot" % int(total_value)
 	
 		"boss_damage_mult":
 			return "+%d%% Boss Damage" % _ToPercentInt(total_value)
@@ -516,7 +525,6 @@ func _BuildStatEffectText(effect: Dictionary, level: int) -> String:
 		
 		"boss_crystal_reward_mult":
 			return "+%d%% Boss Crystal Reward Gains" % _ToPercentInt(total_value)
-
 
 		"boss_regen_reduction":
 			return "-%d%% Boss Regen" % _ToPercentInt(total_value)
@@ -545,6 +553,9 @@ func _BuildStatEffectText(effect: Dictionary, level: int) -> String:
 		"bought_bot_power_mult":
 			return "+%d%% Bought Bot Power" % _ToPercentInt(total_value)
 
+		"bot_damage_mult":
+			return "+%d%% Bot Damage" % _ToPercentInt(total_value)
+
 		"tap_damage_mult":
 			return "+%d%% Tap Damage" % _ToPercentInt(total_value)
 
@@ -572,9 +583,6 @@ func _BuildStatEffectText(effect: Dictionary, level: int) -> String:
 		"daily_quest_limit_bonus":
 			return "+%d Daily Quest Limit" % int(total_value)
 			
-		"merge_bonus_level_chance":
-			return "+%d%% Chance for merges to create a +1 Level Bot" % _ToPercentInt(total_value)
-
 		"merge_spawn_base_bot_chance":
 			return "+%d%% Chance for merges to spawn a free Level 1 Bot" % _ToPercentInt(total_value)
 		
@@ -589,8 +597,10 @@ func _BuildStatEffectText(effect: Dictionary, level: int) -> String:
 
 		"daily_free_bot_level_bonus":
 			return "+%d Daily Free Bot Levels" % int(total_value)
+
 		_:
-			print_debug("Unknown stat: ",stat)
+			print_debug("Unknown stat: ", stat)
+
 	return ""
 
 
