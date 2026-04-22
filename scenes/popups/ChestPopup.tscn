@@ -92,7 +92,9 @@ layout_mode = 2
 
 [node name="OpenAllBtn" parent="SmartPanel/VBoxContainer" unique_id=506836531 instance=ExtResource("5_o210y")]
 layout_mode = 2
+btn_type = "NO_PRICE"
 buy_btn_title = "OPEN ALL"
+sub_text = ""
 
 [node name="pendin_amount" type="Label" parent="SmartPanel/VBoxContainer" unique_id=1807867284]
 layout_mode = 2

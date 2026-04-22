@@ -21,3 +21,5 @@ res://scenes/screens/progress/relic_item.tscn
 res://scenes/popups/RelicUpgradePopup.tscn
 res://scenes/popups/SingleChestPopup.tscn
 res://scenes/screens/dig/current_daily_task.tscn
+res://autoload/GlobalSave.gd
+res://scenes/popups/ChestPopup.tscn
