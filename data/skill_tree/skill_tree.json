@@ -45,89 +45,89 @@
 	  "description": "Unlocks the core skill tree."
 	},
 	"daily_free_bot_levels_1": {
-  "title": "Charged Crate",
-  "branch": "bot_shop",
-  "node_type": "stat",
-  "max_level": 3,
-  "costs": [
-	120,
-	230,
-	390
-  ],
-  "prereq_ids": [
-    "quality_control_1"
-  ],
-  "pos": {
-	"x": -760,
-	"y": 920
-  },
-  "icon": "daily_free_bot_levels",
-  "effects": [
-	{
-	  "kind": "stat",
-	  "stat": "daily_free_bot_level_bonus",
-	  "op": "add",
-	  "value_per_level": 1
-	}
-  ],
-  "description": "Daily free bots gain +1 level per skill level."
-},
-"daily_mythic_bot_1": {
-  "title": "Mythic Voucher",
-  "branch": "bot_shop",
-  "node_type": "keystone",
-  "max_level": 1,
-  "costs": [
-	880
-  ],
-  "prereq_ids": [
-    "quality_control_1"
-  ],
-  "pos": {
-	"x": -1140,
-	"y": 900
-  },
-  "icon": "daily_mythic_bot",
-  "effects": [
-	{
-	  "kind": "stat",
-	  "stat": "daily_free_mythic_bot_limit_bonus",
-	  "op": "add",
-	  "value_per_level": 1
-	}
-  ],
-  "description": "Adds 1 daily free Mythic bot."
-},
-"quality_control_1": {
-	"title": "Quality Control",
-	"branch": "bot_shop",
-	"node_type": "stat",
-	"max_level": 5,
-  "costs": [
-	90,
-	160,
-	250,
-	360,
-	490
-  ],
-  "prereq_ids": [
-    "premium_assembly"
-  ],
-  "pos": {
-	"x": -940,
-	"y": 760
-  },
-  "icon": "quality_control",
-  "effects": [
-	{
-	  "kind": "stat",
-	  "stat": "direct_bot_buy_better_rank_chance",
-	  "op": "add",
-	  "value_per_level": 0.04
-	}
-  ],
-  "description": "Direct bot purchases have a chance to roll better bot stats."
-},
+	  "title": "Charged Crate",
+	  "branch": "bot_shop",
+	  "node_type": "stat",
+	  "max_level": 3,
+	  "costs": [
+		120,
+		230,
+		390
+	  ],
+	  "prereq_ids": [
+        "quality_control_1"
+	  ],
+	  "pos": {
+		"x": -760,
+		"y": 920
+	  },
+	  "icon": "daily_free_bot_levels",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "daily_free_bot_level_bonus",
+		  "op": "add",
+		  "value_per_level": 1
+		}
+	  ],
+	  "description": "Daily free bots gain +1 level per skill level."
+	},
+	"daily_mythic_bot_1": {
+	  "title": "Mythic Voucher",
+	  "branch": "bot_shop",
+	  "node_type": "keystone",
+	  "max_level": 1,
+	  "costs": [
+		880
+	  ],
+	  "prereq_ids": [
+        "quality_control_1"
+	  ],
+	  "pos": {
+		"x": -1140,
+		"y": 900
+	  },
+	  "icon": "daily_mythic_bot",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "daily_free_mythic_bot_limit_bonus",
+		  "op": "add",
+		  "value_per_level": 1
+		}
+	  ],
+	  "description": "Adds 1 daily free Mythic bot."
+	},
+	"quality_control_1": {
+	  "title": "Quality Control",
+	  "branch": "bot_shop",
+	  "node_type": "stat",
+	  "max_level": 5,
+	  "costs": [
+		90,
+		160,
+		250,
+		360,
+		490
+	  ],
+	  "prereq_ids": [
+        "premium_assembly"
+	  ],
+	  "pos": {
+		"x": -940,
+		"y": 760
+	  },
+	  "icon": "quality_control",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "direct_bot_buy_better_rank_chance",
+		  "op": "add",
+		  "value_per_level": 0.04
+		}
+	  ],
+	  "description": "Direct bot purchases have a chance to roll better bot stats."
+	},
 	"merge_slot_1": {
 	  "title": "Merge Slot I",
 	  "branch": "merge",
@@ -417,31 +417,31 @@
 	  "description": "Massively improves boss currency rewards."
 	},
 	"relic_slot_1": {
-  "title": "Relic Socket",
-  "branch": "boss",
-  "node_type": "unlock",
-  "max_level": 1,
-  "costs": [
-	760
-  ],
-  "prereq_ids": [
-    "relic_hunter"
-  ],
-  "pos": {
-	"x": -520,
-	"y": -760
-  },
-  "icon": "relic_slot",
-  "effects": [
-	{
-	  "kind": "stat",
-	  "stat": "relic_slot_bonus",
-	  "op": "add",
-	  "value_per_level": 1
-	}
-  ],
-  "description": "Unlocks 1 additional relic slot."
-},
+	  "title": "Relic Socket",
+	  "branch": "boss",
+	  "node_type": "unlock",
+	  "max_level": 1,
+	  "costs": [
+		760
+	  ],
+	  "prereq_ids": [
+        "relic_hunter"
+	  ],
+	  "pos": {
+		"x": -520,
+		"y": -760
+	  },
+	  "icon": "relic_slot",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "relic_slot_bonus",
+		  "op": "add",
+		  "value_per_level": 1
+		}
+	  ],
+	  "description": "Unlocks 1 additional relic slot."
+	},
 	"offline_time_1": {
 	  "title": "Offline Time",
 	  "branch": "offline",
@@ -727,6 +727,62 @@
 		}
 	  ],
 	  "description": "Unlocks direct purchase of level 5 bots."
+	},
+	"bot_overclock_1": {
+	  "title": "Bot Overclock",
+	  "branch": "bot_shop",
+	  "node_type": "stat",
+	  "max_level": 5,
+	  "costs": [
+		60,
+		115,
+		185,
+		275,
+		390
+	  ],
+	  "prereq_ids": [
+        "buy_bot_lv5"
+	  ],
+	  "pos": {
+		"x": -820,
+		"y": 560
+	  },
+	  "icon": "bot_overclock",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "bot_damage_mult",
+		  "op": "add",
+		  "value_per_level": 0.1
+		}
+	  ],
+	  "description": "Increases all bot damage by 10% per skill level."
+	},
+	"factory_overdrive": {
+	  "title": "Factory Overdrive",
+	  "branch": "bot_shop",
+	  "node_type": "keystone",
+	  "max_level": 1,
+	  "costs": [
+		760
+	  ],
+	  "prereq_ids": [
+        "bot_overclock_1"
+	  ],
+	  "pos": {
+		"x": -1020,
+		"y": 560
+	  },
+	  "icon": "factory_overdrive",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "bot_damage_mult",
+		  "op": "add",
+		  "value_per_level": 0.2
+		}
+	  ],
+	  "description": "Massively increases all bot damage."
 	},
 	"direct_buy_discount_1": {
 	  "title": "Direct Buy Discount",
@@ -1018,6 +1074,36 @@
 	  ],
 	  "description": "Merges have a chance to create a +1 Level Bot."
 	},
+	"merge_stat_salvage_1": {
+	  "title": "Stat Salvage",
+	  "branch": "merge",
+	  "node_type": "stat",
+	  "max_level": 5,
+	  "costs": [
+		70,
+		135,
+		220,
+		330,
+		470
+	  ],
+	  "prereq_ids": [
+        "merge_efficiency_1"
+	  ],
+	  "pos": {
+		"x": -620,
+		"y": -300
+	  },
+	  "icon": "stat_salvage",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "merge_lower_bot_stat_inherit_ratio",
+		  "op": "add",
+		  "value_per_level": 0.1
+		}
+	  ],
+	  "description": "Merged bots inherit 10% of the lower bot's additional stats per skill level."
+	},
 	"master_workshop": {
 	  "title": "Master Workshop",
 	  "branch": "merge",
@@ -1078,6 +1164,62 @@
 		}
 	  ],
 	  "description": "Direct bot purchases have a chance to refund their coin cost."
+	},
+	"bulk_orders_unlock": {
+	  "title": "Bulk Orders",
+	  "branch": "bot_shop",
+	  "node_type": "unlock",
+	  "max_level": 1,
+	  "costs": [
+		190
+	  ],
+	  "prereq_ids": [
+        "direct_buy_refund_1"
+	  ],
+	  "pos": {
+		"x": -340,
+		"y": 660
+	  },
+	  "icon": "bulk_orders",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "direct_bot_buy_free_every_count",
+		  "op": "add",
+		  "value_per_level": 10
+		}
+	  ],
+	  "description": "Every 10 direct bot purchases grants 1 free bot."
+	},
+	"bulk_orders_optimization_1": {
+	  "title": "Bulk Orders+",
+	  "branch": "bot_shop",
+	  "node_type": "stat",
+	  "max_level": 5,
+	  "costs": [
+		85,
+		165,
+		265,
+		390,
+		540
+	  ],
+	  "prereq_ids": [
+        "bulk_orders_unlock"
+	  ],
+	  "pos": {
+		"x": -520,
+		"y": 820
+	  },
+	  "icon": "bulk_orders_plus",
+	  "effects": [
+		{
+		  "kind": "stat",
+		  "stat": "direct_bot_buy_free_every_count_reduction",
+		  "op": "add",
+		  "value_per_level": 1
+		}
+	  ],
+	  "description": "Reduces purchases needed for a free bot by 1 per level, down to every 5 bots."
 	}
   }
 }

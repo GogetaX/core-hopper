@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://4wemxbiy6evq" path="res://scenes/screens/dig/next_core_reset.gd" id="1_wcvi3"]
 [ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="2_nwjpg"]
+[ext_resource type="PackedScene" uid="uid://b4xrpvbmstwpc" path="res://scenes/components/open_popup_icon.tscn" id="3_pf7dx"]
 
 [node name="NextCoreReset" type="Control" unique_id=1842211214]
 custom_minimum_size = Vector2(400, 150)
@@ -16,6 +17,12 @@ script = ExtResource("1_wcvi3")
 
 [node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("2_nwjpg")]
 layout_mode = 1
+
+[node name="OpenPopupIcon" parent="." unique_id=707058535 instance=ExtResource("3_pf7dx")]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 0.0
+offset_bottom = 40.0
 
 [node name="CoreResetInProgress" type="VBoxContainer" parent="." unique_id=746558821]
 layout_mode = 1
@@ -57,6 +64,11 @@ layout_mode = 2
 theme_type_variation = &"LabelWithPurple"
 theme_override_font_sizes/font_size = 35
 text = "%"
+
+[node name="Control2" type="Control" parent="CoreResetInProgress/HList" unique_id=1786019212]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="core_reset_progressbar" type="ProgressBar" parent="CoreResetInProgress" unique_id=1307898856]
 custom_minimum_size = Vector2(0, 20)

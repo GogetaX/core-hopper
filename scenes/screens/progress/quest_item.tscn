@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://njxlv6dxrlwj" path="res://scenes/screens/progress/smart_button_buy.tscn" id="3_ly53i"]
 
 [node name="QuestItem" type="Control" unique_id=688889240]
-custom_minimum_size = Vector2(0, 150)
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 811.0
@@ -14,7 +14,6 @@ mouse_filter = 2
 script = ExtResource("1_ly53i")
 
 [node name="QuestItem_Incomplete" parent="." unique_id=892379017 instance=ExtResource("1_60bcs")]
-visible = false
 custom_minimum_size = Vector2(0, 160)
 layout_mode = 1
 panel_type = "INSIDE_ONLY"
@@ -93,6 +92,7 @@ value = 75.0
 show_percentage = false
 
 [node name="QuestItem_Complete" parent="." unique_id=1224417790 instance=ExtResource("1_60bcs")]
+visible = false
 custom_minimum_size = Vector2(0, 160)
 layout_mode = 1
 panel_type = "INSIDE_ONLY"

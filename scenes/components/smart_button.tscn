@@ -20,6 +20,8 @@ btn_icon = ExtResource("1_crr8x")
 
 [node name="OpenPopupIcon" parent="." unique_id=707058535 instance=ExtResource("3_kewjv")]
 layout_mode = 1
+offset_top = 0.0
+offset_bottom = 40.0
 panel_color = "BLUE"
 
 [node name="Panel" type="Panel" parent="." unique_id=272776267]

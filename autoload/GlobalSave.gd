@@ -26,7 +26,15 @@ func AdjustNewData():
 		}
 	elif !GlobalSave.save_data.offline_mining.has("selected_band_index"):
 		GlobalSave.save_data.offline_mining["selected_band_index"] = -1
-		
+	
+	#Removing the flat dig_speed dig_power from the bots
+	for x in save_data.bot_inventory.bot_db:
+		if x.has("stats"):
+			if x.stats.has("dig_power"):
+				x.stats.erase("dig_power")
+			if x.stats.has("dig_speed"):
+				x.stats.erase("dig_speed")
+				
 func RepapulateAllLaneBlocks():
 	GenerateNextBlocks(0,5)
 	GenerateNextBlocks(1,5)

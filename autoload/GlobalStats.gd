@@ -316,36 +316,63 @@ func GetFreeMergeSlots()->int:
 	var core_reset_merge_slots = GlobalCoreResetDb.GetCoreResetStatValue("merge_slot_bonus")
 	return min(int(inv_merge_slots + skill_merge_slots + core_reset_merge_slots),MAX_MERGE_SLOTS)
 
-func BuyBotData():
-	var base_bot_price = 5 * pow(1.09,GlobalSave.save_data.progress.total_bots_bought_this_reset)
-	#Base
-	var res = {
-		"price":base_bot_price,
-		"level":1
-	}
-	#Apply new level and price
+
+func GetBotPriceBasedOnLevel(bot_level: int) -> int:
+	var price := 5.0 * pow(1.09, GlobalSave.save_data.progress.total_bots_bought_this_reset)
+
+	# Extra price for direct higher-level bot purchase from skill tree
+	if bot_level > 1:
+		if GlobalSkillTree.skill_summary.unlock_features.direct_bot_buy_level.unlocked:
+			var cost_map = GlobalSkillTree.skill_summary.unlock_features.direct_bot_buy_level.cost_multiplier_by_level
+			var level_key := str(bot_level).pad_decimals(0)
+
+			if cost_map.has(level_key):
+				price *= float(cost_map[level_key])
+
+	# Bot reduction price from skills
+	var reduction_percent := float(GlobalSkillTree.skill_summary.stats.direct_bot_buy_cost_reduction)
+	price -= price * reduction_percent
+
+	# Bot reduction price from timed bonus
+	if GlobalTimedBonus.IsBoosterActive("bot_discount"):
+		var boost_data = GlobalTimedBonus.GetBoosterDataById("bot_discount")
+		price -= price * float(boost_data.effect_value)
+
+	return int(price)
+
+
+func GetBotBuyLevel() -> int:
+	var bot_level := 1
+
+	# Skill tree direct buy level
 	if GlobalSkillTree.skill_summary.unlock_features.direct_bot_buy_level.unlocked:
 		var unlocked_level_list = GlobalSkillTree.skill_summary.unlock_features.direct_bot_buy_level.unlocked_levels
 		if !unlocked_level_list.is_empty():
-			var unlocked_last_level = unlocked_level_list[unlocked_level_list.size()-1]
-			var cost_multiplayer = GlobalSkillTree.skill_summary.unlock_features.direct_bot_buy_level.cost_multiplier_by_level[str(unlocked_last_level).pad_decimals(0)]
-			res.level = res.level + int(unlocked_last_level-1)
-			res.price = int(res.price * cost_multiplayer)
-	#Bot Reduction price from skills
-	var reduction_percent = GlobalSkillTree.skill_summary.stats.direct_bot_buy_cost_reduction
-	res.price = res.price - (res.price * reduction_percent)
-	
-	#Bot Reduction price from Timed Bonus
-	if GlobalTimedBonus.IsBoosterActive("bot_discount"):
-		var boost_data = GlobalTimedBonus.GetBoosterDataById("bot_discount")
-		res.price = res.price - (res.price * boost_data.effect_value)
-	
-	#Core reset buy level bot
-	res.level += GlobalCoreResetDb.GetCoreResetStatValue("bot_buy_start_level_bonus")
-	#converting from float back to int
-	res.price = int(res.price)
-	res.level = int(res.level)
-	return res
+			var unlocked_last_level = unlocked_level_list[unlocked_level_list.size() - 1]
+			bot_level += int(unlocked_last_level - 1)
+
+	# Core reset buy level bot
+	bot_level += int(GlobalCoreResetDb.GetCoreResetStatValue("bot_buy_start_level_bonus"))
+
+	return int(bot_level)
+
+
+func BuyBotData() -> Dictionary:
+	var skill_buy_level := 1
+
+	if GlobalSkillTree.skill_summary.unlock_features.direct_bot_buy_level.unlocked:
+		var unlocked_level_list = GlobalSkillTree.skill_summary.unlock_features.direct_bot_buy_level.unlocked_levels
+		if !unlocked_level_list.is_empty():
+			var unlocked_last_level = unlocked_level_list[unlocked_level_list.size() - 1]
+			skill_buy_level += int(unlocked_last_level - 1)
+
+	var final_level := GetBotBuyLevel()
+	var final_price := GetBotPriceBasedOnLevel(skill_buy_level)
+
+	return {
+		"price": final_price,
+		"level": final_level
+	}
 
 func GetOfflineCapSeconds():
 	var cap_offline = GlobalOfflineProgress.GetOfflineCapSeconds()

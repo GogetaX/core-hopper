@@ -71,6 +71,7 @@ func show_tab(tab_name:String) -> void:
 
 		_:
 			print_debug("unknown tab: ",tab_name)
+			
 	current_screen = new_screen.instantiate()
 	if animate:
 		current_screen.modulate.a = 0.0
