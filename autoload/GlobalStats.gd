@@ -4,7 +4,7 @@ extends Node
 
 #bot base stuff
 const BOT_BASE_DPS := 1.0
-const BOT_DPS_GROWTH := 2.1
+const BOT_DPS_GROWTH := 2.2
 const MAX_MERGE_SLOTS = 16
 const DAILY_FREE_BOT = 2
 const DAILY_MYTHIC_BOT = 1
@@ -120,7 +120,10 @@ func GetBotFinalDPSWithGlobalAndStats(
 		)
 
 		dps *= 1.0 + (crit_chance * (crit_mult - 1.0))
-
+	
+	#boss_damage_mult from Skill summary
+	dps = dps + (dps * GlobalSkillTree.skill_summary.stats.bot_damage_mult)
+	
 	if is_boss:
 		dps *= GetBossDamageMultiplier()
 
@@ -554,3 +557,7 @@ func RollDirectBotBuyRank() -> int:
 			break
 
 	return clampi(rank, 0, 3)
+
+func GetFreeBotCountDown()->int:
+	var free_bot_counter = 10-GlobalSkillTree.skill_summary.stats.direct_bot_buy_free_every_count_reduction
+	return free_bot_counter

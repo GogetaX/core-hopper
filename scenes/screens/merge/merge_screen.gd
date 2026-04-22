@@ -24,7 +24,10 @@ func SyncData():
 		$VList/DailyMythicBot.SetDisabled(false)
 	else:
 		$VList/DailyMythicBot.SetDisabled(true)
-		
+	
+
+	$VList/BuyBotBtn/free_bot_in.text = "Free bot in "+str(GlobalStats.GetFreeBotCountDown()-GlobalSave.save_data.progress.free_bot_count).pad_decimals(0)
+
 func _on_smart_button_buy_btn_pressed_with_price(currency: String, price: int) -> void:
 	#Find Free Merge Slot
 	var free_merge_slot = GlobalSave.FindFreeMergeSlot()
@@ -57,7 +60,10 @@ func _on_smart_button_buy_btn_pressed_with_price(currency: String, price: int) -
 		GlobalSave.AddCurrency(currency,price)
 	
 	#Save all
-	
+	GlobalSave.save_data.progress.free_bot_count += 1
+	if GlobalStats.GetFreeBotCountDown()<= GlobalSave.save_data.progress.free_bot_count:
+		GlobalSave.save_data.progress.free_bot_count = 0
+		GlobalSave.save_data.daily_free_bot.amount += 1
 	GlobalSave.SyncSave()
 	
 func MergeItemBasedOnSlot(slot_num):

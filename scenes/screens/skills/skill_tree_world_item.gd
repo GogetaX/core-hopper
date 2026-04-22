@@ -42,6 +42,7 @@ func InitSkill(skill_key):
 	if Global.last_skill_key_selected == cur_skill_key:
 		await get_tree().process_frame
 		GlobalSignals.OnWorldSkillClassSelected.emit(self)
+		
 	
 
 func SetSkillVisibility():
@@ -126,6 +127,13 @@ func SetSkillVisibility():
 		else:
 			z_index = 0
 	$SmartPanelCircleSkill/TextureRect.self_modulate = $SmartPanelCircleSkill.GetBorderColor()
+	
+	#Init Progress bar
+	$SmartPanelCircleSkill/TextureProgressBar.max_value = max_level
+	$SmartPanelCircleSkill/TextureProgressBar.value = cur_level
+	$SmartPanelCircleSkill/TextureProgressBar.tint_under = $SmartPanelCircleSkill.GetBorderColor()
+	$SmartPanelCircleSkill/TextureProgressBar.tint_progress = $SmartPanelCircleSkill.GetTextColor()
+	
 	
 func OnSkillUpdated(_skill_id:String):
 	if _skill_id == cur_skill_key:

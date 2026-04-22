@@ -34,7 +34,11 @@ func AdjustNewData():
 				x.stats.erase("dig_power")
 			if x.stats.has("dig_speed"):
 				x.stats.erase("dig_speed")
-				
+	
+	#Adjusting Bot Shop branch skill
+	if !save_data.progress.has("free_bot_count"):
+		
+		save_data.progress["free_bot_count"] = 0
 func RepapulateAllLaneBlocks():
 	GenerateNextBlocks(0,5)
 	GenerateNextBlocks(1,5)
@@ -148,7 +152,7 @@ func EnsureUpgradeSchema() -> void:
 
 func BuildCleanSaveData():
 	var res = {}
-	res["currencies"] = {"coins":0,"crystals":0,"energy":0} #default coins 0
+	res["currencies"] = {"coins":50000,"crystals":500000,"energy":0} #default coins 0
 	res["bot_inventory"]={
 		"bot_db": [],
 		"merge_free_slots":4
@@ -623,6 +627,99 @@ func _MergeSingleBotStat(stat_id: String, value_a: float, value_b: float) -> flo
 	return _SnapBotStatValue(stat_id, merged)
 
 
+func _MergeOrderedBotStats(bot_a: Dictionary, bot_b: Dictionary) -> Dictionary:
+	var ordered := _OrderMergeBots(bot_a, bot_b)
+	var winner_stats = ordered["winner"].get("stats", {})
+	var lower_stats = ordered["lower"].get("stats", {})
+	return _MergeBotStatsDict(winner_stats, lower_stats)
+
+func _OrderMergeBots(bot_a: Dictionary, bot_b: Dictionary) -> Dictionary:
+	var score_a := _GetMergeBotStrengthScore(bot_a)
+	var score_b := _GetMergeBotStrengthScore(bot_b)
+
+	if score_b > score_a:
+		return {
+			"winner": bot_b,
+			"lower": bot_a
+		}
+
+	if is_equal_approx(score_a, score_b):
+		# deterministic tie-breaker so it never feels random
+		var key_a := _BuildStableMergeTieKey(bot_a)
+		var key_b := _BuildStableMergeTieKey(bot_b)
+
+		if key_b < key_a:
+			return {
+				"winner": bot_b,
+				"lower": bot_a
+			}
+
+	return {
+		"winner": bot_a,
+		"lower": bot_b
+	}
+
+
+func _GetMergeBotStrengthScore(bot_data: Dictionary) -> float:
+	var score := 0.0
+	var level := int(bot_data.get("level", 1))
+	var rank := int(bot_data.get("rank", 0))
+	var stats = bot_data.get("stats", {})
+
+	# level should dominate if different levels can ever reach this point
+	score += float(level) * 100000.0
+
+	# rank is the next strongest signal
+	score += float(rank) * 1000.0
+
+	if typeof(stats) == TYPE_DICTIONARY:
+		score += float(stats.size()) * 10.0
+
+		for stat_id_value in stats.keys():
+			var stat_id := str(stat_id_value)
+			var value := float(stats[stat_id_value])
+			score += _GetComparableMergeStatScore(stat_id, value)
+
+	return score
+
+
+func _GetComparableMergeStatScore(stat_id: String, value: float) -> float:
+	var stat_data := GlobalBotStats.GetStatData(stat_id)
+	if stat_data.is_empty():
+		return absf(value)
+
+	var stat_type := str(stat_data.get("stat_type", "percent"))
+	var min_value := float(stat_data.get("min_value", 0.0))
+	var max_value := float(stat_data.get("max_value", min_value))
+
+	if stat_type == "flat":
+		# flat stats are already stored as final rolled values on the bot
+		return absf(value)
+
+	if is_equal_approx(min_value, max_value):
+		return absf(value)
+
+	return clampf(inverse_lerp(min_value, max_value, value), 0.0, 1.0)
+
+
+func _BuildStableMergeTieKey(bot_data: Dictionary) -> String:
+	var stats = bot_data.get("stats", {})
+	var parts: Array[String] = []
+
+	if typeof(stats) == TYPE_DICTIONARY:
+		var keys = stats.keys()
+		keys.sort()
+
+		for key_value in keys:
+			var key := str(key_value)
+			parts.append("%s:%0.4f" % [key, float(stats[key_value])])
+
+	return "%04d|%04d|%s" % [
+		int(bot_data.get("level", 1)),
+		int(bot_data.get("rank", 0)),
+		"|".join(parts)
+	]
+	
 func _MergeBotStatsDict(stats_a: Dictionary, stats_b: Dictionary) -> Dictionary:
 	var result := {}
 	var inherit_ratio := 0.0
@@ -634,12 +731,12 @@ func _MergeBotStatsDict(stats_a: Dictionary, stats_b: Dictionary) -> Dictionary:
 
 	inherit_ratio = clampf(inherit_ratio, 0.0, 1.0)
 
-	# stats_a = stronger bot / winning bot
+	# stats_a = winner / stronger bot
 	if typeof(stats_a) == TYPE_DICTIONARY:
 		for stat_id in stats_a.keys():
 			result[str(stat_id)] = float(stats_a[stat_id])
 
-	# stats_b = lower bot / sacrificed bot
+	# stats_b = lower / sacrificed bot
 	if typeof(stats_b) != TYPE_DICTIONARY:
 		return result
 

@@ -216,19 +216,34 @@ layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="BuyBotBtn" parent="VList" unique_id=664760665 instance=ExtResource("2_2m8po")]
+custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 btn_type = "WITH_PRICE"
 panel_color = "BLUE"
 price_text = "25"
 
+[node name="free_bot_in" type="Label" parent="VList/BuyBotBtn" unique_id=2041663156]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -33.0
+offset_right = 149.0
+offset_bottom = -10.0
+grow_vertical = 0
+theme_type_variation = &"LabelGray"
+text = "Free bot in 5"
+
 [node name="DailyFreeBot" parent="VList" unique_id=1797573628 instance=ExtResource("2_2m8po")]
+custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 buy_btn_title = "DAILY FREE BOT (2)"
 panel_color = "BLUE"
 price_text = "25"
 
 [node name="DailyMythicBot" parent="VList" unique_id=880031611 instance=ExtResource("9_grbnr")]
-custom_minimum_size = Vector2(0, 100)
+custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 buy_btn_title = "DAILY Mythic Bot (1)"
 buy_btn_icon = ExtResource("10_8ecmt")

@@ -21,3 +21,7 @@ res://art/skills/stat_salvage.tres
 res://art/skills/bulk_orders.tres
 res://art/skills/bulk_orders_plus.tres
 res://autoload/GlobalSkillTree.gd
+res://scenes/screens/merge/merge_screen.tscn
+res://scenes/screens/merge/merge_screen.gd
+res://scenes/screens/skills/skill_tree_world_item.tscn
+res://scenes/screens/skills/skill_tree_world_item.gd

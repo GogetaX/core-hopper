@@ -1,8 +1,9 @@
+TextureProgressBar
+Label
 Control
 HBoxContainer
 VBoxContainer
 ProgressBar
-Label
 ScrollContainer
 TextureRect
 VFlowContainer
