@@ -1,10 +1,9 @@
 extends Node
 
+const BOT_DPS_GROWTH = 2.1
 
 
 #bot base stuff
-const BOT_BASE_DPS := 1.0
-const BOT_DPS_GROWTH := 2.2
 const MAX_MERGE_SLOTS = 16
 const DAILY_FREE_BOT = 2
 const DAILY_MYTHIC_BOT = 1
@@ -15,12 +14,9 @@ func InitDailyFreeBot():
 		GlobalSave.save_data.daily_free_bot.mythic_amount = DAILY_MYTHIC_BOT+GlobalSkillTree.skill_summary.stats.daily_free_mythic_bot_limit_bonus
 		GlobalSave.save_data.daily_free_bot.day_key = _GetTodayKey()
 		
-func GetBotDPSFromLevel(level: int) -> float:
-	level = max(level, 1)
-	return BOT_BASE_DPS * pow(BOT_DPS_GROWTH, level - 1)
 
 func GetBotBaseDigPower(level: int) -> int:
-	return maxi(1, int(round(pow(1.9, level - 1))))
+	return maxi(1, int(round(pow(BOT_DPS_GROWTH, level - 1))))
 	
 func GetBotBaseDigSpeed(level: int) -> float:
 	return min(3.0, snapped(pow(1.12, level - 1), 0.01))
@@ -134,7 +130,7 @@ func GetBotFinalDigSpeedWithGlobal(level: int) -> float:
 	return final_speed * GlobalStats.GetUpgradeValue("drill_speed")
 	
 func GetBotStats(level: int) -> Dictionary:
-	var base_power := maxi(1, int(round(pow(1.9, level - 1))))
+	var base_power := maxi(1, int(round(pow(BOT_DPS_GROWTH, level - 1))))
 	var base_speed = min(3.0, snapped(pow(1.12, level - 1), 0.01))
 
 	var power_mult = 1.0 + (GlobalSave.save_data.global_upgrades.global_dig_power_level * 0.15)
@@ -161,7 +157,7 @@ func GetBotStats(level: int) -> Dictionary:
 
 func GetTapBaseDamageFromUpgradeLevel(level: int) -> int:
 	var effective_level = max(1, level + 1)
-	return maxi(1, int(round(pow(1.9, effective_level - 1) * 0.8)))
+	return maxi(1, int(round(pow(BOT_DPS_GROWTH, effective_level - 1) * 0.8)))
 	
 func GetUpgradeCost(upgrade_id: String) -> int:
 	if !GlobalSave.save_data.has("upgrades") or !GlobalSave.save_data.upgrades.has(upgrade_id):
@@ -247,8 +243,9 @@ func ApplyCritToDamage(base_damage: float) -> Dictionary:
 func GetUnlockedRelicSlots() -> int:
 	GlobalRelicDb.SyncRelicInv()
 	var base_relic_slots = GlobalSave.save_data.relic_inv.unlocked_slots
+	var skill_relic_slots = GlobalSkillTree.GetStat("relic_slot_bonus")
 	var core_reset_slots = GlobalCoreResetDb.GetCoreResetStatValue("relic_slot_bonus")
-	return maxi(0, int(base_relic_slots + core_reset_slots))
+	return maxi(0, int(base_relic_slots + core_reset_slots+skill_relic_slots))
 	
 #Relics
 func GetRelicMultiplierTotal(effect_type: String) -> float:

@@ -732,16 +732,21 @@
 	  "title": "Bot Overclock",
 	  "branch": "bot_shop",
 	  "node_type": "stat",
-	  "max_level": 5,
+	  "max_level": 10,
 	  "costs": [
-		60,
-		115,
-		185,
-		275,
-		390
+		120,
+		260,
+		480,
+		800,
+		1250,
+		1850,
+		2650,
+		3700,
+		5050,
+		6800
 	  ],
 	  "prereq_ids": [
-        "buy_bot_lv5"
+	    "buy_bot_lv5"
 	  ],
 	  "pos": {
 		"x": -820,
@@ -761,13 +766,17 @@
 	"factory_overdrive": {
 	  "title": "Factory Overdrive",
 	  "branch": "bot_shop",
-	  "node_type": "keystone",
-	  "max_level": 1,
+	  "node_type": "stat",
+	  "max_level": 5,
 	  "costs": [
-		760
+		1400,
+		3000,
+		5600,
+		9200,
+		14000
 	  ],
 	  "prereq_ids": [
-        "bot_overclock_1"
+	    "bot_overclock_1"
 	  ],
 	  "pos": {
 		"x": -1020,
@@ -1134,7 +1143,7 @@
 		  "value_per_level": 0.12
 		}
 	  ],
-	  "description": "Merges have a higher chance to create a +1 Level Bot and may also produce a free Level 1 Bot."
+	  "description": "Merges have a higher chance to create a +1 Level Bot and may also produce a free Bot."
 	},
 	"direct_buy_refund_1": {
 	  "title": "Lucky Purchase",

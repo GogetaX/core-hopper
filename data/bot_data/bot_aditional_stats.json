@@ -7,7 +7,7 @@
 	  "stat_type": "percent",
 	  "weight": 10,
 	  "min_value": 0.05,
-	  "max_value": 0.20,
+	  "max_value": 0.80,
 	  "decimals": 2
 	},
 	"dig_speed_mult": {
@@ -17,7 +17,7 @@
 	  "stat_type": "percent",
 	  "weight": 10,
 	  "min_value": 0.05,
-	  "max_value": 0.20,
+	  "max_value": 0.80,
 	  "decimals": 2
 	},
 	"crit_chance": {
@@ -27,7 +27,7 @@
 	  "stat_type": "percent",
 	  "weight": 15,
 	  "min_value": 0.02,
-	  "max_value": 0.10,
+	  "max_value": 0.20,
 	  "decimals": 2
 	},
 	"crit_mult": {
@@ -37,7 +37,7 @@
 	  "stat_type": "percent",
 	  "weight": 15,
 	  "min_value": 0.10,
-	  "max_value": 0.50,
+	  "max_value": 1.50,
 	  "decimals": 2
 	}
   },

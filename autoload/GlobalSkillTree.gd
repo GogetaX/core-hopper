@@ -584,7 +584,7 @@ func _BuildStatEffectText(effect: Dictionary, level: int) -> String:
 			return "+%d Daily Quest Limit" % int(total_value)
 			
 		"merge_spawn_base_bot_chance":
-			return "+%d%% Chance for merges to spawn a free Level 1 Bot" % _ToPercentInt(total_value)
+			return "+%d%% Chance for merges to spawn a free Bot" % _ToPercentInt(total_value)
 		
 		"relic_slot_bonus":
 			return "+%d Relic Slot" % int(total_value)
@@ -603,6 +603,15 @@ func _BuildStatEffectText(effect: Dictionary, level: int) -> String:
 
 	return ""
 
+
+func GetStat(stat_id:String,default_num:=0.0)->float:
+	if skill_summary.stats.has(stat_id):
+		return skill_summary.stats[stat_id]
+	else:
+		print_debug("Unknown stat: ",stat_id)
+		print("stat list: ")
+		print(skill_summary)
+		return default_num
 
 func _BuildUnlockEffectText(effect: Dictionary) -> String:
 	var feature := str(effect.get("feature", ""))

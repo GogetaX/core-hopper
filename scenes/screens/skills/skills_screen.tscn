@@ -158,14 +158,13 @@ theme_type_variation = &"LabelGrayHint"
 theme_override_font_sizes/font_size = 40
 text = "CURRENT EFFECT"
 
-[node name="Control" type="Control" parent="SelectedSkill/VList/cur_level_row" unique_id=2134988694]
-layout_mode = 2
-size_flags_horizontal = 3
-
 [node name="cur_level_effect" parent="SelectedSkill/VList/cur_level_row" unique_id=713365230 instance=ExtResource("4_a6y85")]
 self_modulate = Color(0.8627451, 0.9098039, 1, 1)
 layout_mode = 2
+size_flags_horizontal = 3
 text = "+5% Idle Gain"
+horizontal_alignment = 2
+autowrap_mode = 2
 hash_tag_color = "WHITE"
 no_bg = true
 
@@ -178,24 +177,23 @@ theme_type_variation = &"LabelGrayHint"
 theme_override_font_sizes/font_size = 40
 text = "NEXT LEVEL"
 
-[node name="Control" type="Control" parent="SelectedSkill/VList/next_level_row" unique_id=1622055597]
-layout_mode = 2
-size_flags_horizontal = 3
-
 [node name="next_level_effect" parent="SelectedSkill/VList/next_level_row" unique_id=885810886 instance=ExtResource("4_a6y85")]
 self_modulate = Color(0.30980393, 0.89411765, 1, 1)
 layout_mode = 2
+size_flags_horizontal = 3
 text = "+12% Idle Gain"
+horizontal_alignment = 2
+autowrap_mode = 2
 hash_tag_color = "BLUE"
 no_bg = true
 
 [node name="UpgradeSkillBtn" parent="SelectedSkill/VList" unique_id=664760665 instance=ExtResource("5_pewj6")]
 layout_mode = 2
-btn_type = "WITH_PRICE"
 currency_type = "crystals"
 buy_btn_title = "UPGRADE SKILL"
 panel_color = "BLUE"
 price_text = "450K AU"
+sub_text = ""
 
 [node name="VList" type="VBoxContainer" parent="." unique_id=752231860]
 layout_mode = 1
