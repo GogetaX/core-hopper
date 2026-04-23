@@ -28,20 +28,16 @@ func ProcessOfflineProgress() -> Dictionary:
 			"energy": 0,
 			"drop_data": []
 		}
-	print("1")
 	var capped_seconds := mini(offline_seconds, GlobalStats.GetOfflineCapSeconds())
-	print("1.1")
 	var selected_band_index := GetSelectedOfflineBandIndex()
-	print("1.2")
 	var result := _SimulateSelectedBandOffline(capped_seconds, selected_band_index)
-	print("2")
 	result["coins"] = int(result["coins"] * GlobalStats.GetOfflineCoinGain())
 	result["crystals"] = int(result["crystals"] * GlobalStats.GetOfflineCrystalGain())
 	result["energy"] = int(result["energy"] * GlobalStats.GetOfflineEnergyGain())
 	result["did_collect"] = true
 	result["offline_seconds"] = offline_seconds
 	result["capped_seconds"] = capped_seconds
-	print("3")
+
 	# keep your current final coin multiplier behavior
 	result["coins"] = int(result["coins"] * GlobalStats.GetCoinYieldMultiplier())
 

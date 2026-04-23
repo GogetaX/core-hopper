@@ -11,3 +11,10 @@ res://autoload/GlobalOfflineProgress.gd
 res://data/blocks/block_archetypes.json
 res://autoload/GlobalStats.gd
 res://scenes/screens/dig/offline_panel.tscn
+res://scenes/screens/dig/offline_panel.gd
+res://autoload/GlobalRelicDB.gd
+res://scenes/screens/dig/dig_screen.tscn
+res://scenes/components/small_notif_counter.tscn
+res://scenes/screens/dig/current_daily_task.tscn
+res://scenes/screens/dig/milestone_panel.tscn
+res://scenes/components/smart_button.tscn

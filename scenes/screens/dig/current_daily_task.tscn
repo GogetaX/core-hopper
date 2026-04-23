@@ -154,13 +154,10 @@ sub_text = ""
 
 [node name="SmallNotifCounter" parent="Quest_Completed" unique_id=1772552382 instance=ExtResource("5_ab5au")]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -30.0
-offset_right = 0.0
-offset_bottom = 30.0
-grow_horizontal = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 33.0
+offset_bottom = 33.0
 mouse_filter = 2
 notif_count = 1
 
