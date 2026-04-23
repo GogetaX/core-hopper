@@ -48,6 +48,10 @@ GlobalMusic="*uid://e2sl11hh7ifj"
 GlobalWatchAds="*uid://bg5x81tgdkmj6"
 GlobalAds="*uid://bq43t6vv78p6s"
 
+[debug]
+
+file_logging/enable_file_logging=true
+
 [display]
 
 window/size/viewport_width=1080

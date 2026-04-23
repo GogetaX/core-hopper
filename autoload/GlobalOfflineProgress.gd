@@ -28,18 +28,20 @@ func ProcessOfflineProgress() -> Dictionary:
 			"energy": 0,
 			"drop_data": []
 		}
-
+	print("1")
 	var capped_seconds := mini(offline_seconds, GlobalStats.GetOfflineCapSeconds())
+	print("1.1")
 	var selected_band_index := GetSelectedOfflineBandIndex()
+	print("1.2")
 	var result := _SimulateSelectedBandOffline(capped_seconds, selected_band_index)
-
+	print("2")
 	result["coins"] = int(result["coins"] * GlobalStats.GetOfflineCoinGain())
 	result["crystals"] = int(result["crystals"] * GlobalStats.GetOfflineCrystalGain())
 	result["energy"] = int(result["energy"] * GlobalStats.GetOfflineEnergyGain())
 	result["did_collect"] = true
 	result["offline_seconds"] = offline_seconds
 	result["capped_seconds"] = capped_seconds
-
+	print("3")
 	# keep your current final coin multiplier behavior
 	result["coins"] = int(result["coins"] * GlobalStats.GetCoinYieldMultiplier())
 
@@ -152,35 +154,36 @@ func _SimulateSelectedBandOffline(seconds: int, band_index: int) -> Dictionary:
 		"drop_data": [],
 		"band_index": band_index
 	}
-
+	print("5.1")
 	if seconds <= 0:
 		return rewards
-
+	print("5.2")
 	if not GlobalBlockDatabase.is_loaded():
 		GlobalBlockDatabase.load_data()
-
+	print("5.3")
 	if band_index < 0 or band_index >= GlobalBlockDatabase.depth_bands.size():
 		return rewards
-
+	print("5.4")
 	var total_dps := _GetTotalOfflineDps() * GlobalStats.GetOfflineEfficiency()
 	if total_dps <= 0.0:
 		return rewards
-
+	print("5.5")
 	var band_entry := _BuildBandEntry(band_index, total_dps)
 	var avg_block_hp = max(1.0, float(band_entry.get("avg_block_hp", 1.0)))
 	var total_damage := total_dps * float(seconds)
 	var whole_blocks := maxi(0, int(floor(total_damage / avg_block_hp)))
-
+	print("5.6")
 	rewards["min_depth"] = int(band_entry.get("min_depth", 0))
 	rewards["max_depth"] = int(band_entry.get("max_depth", 0))
 	rewards["representative_depth"] = int(band_entry.get("representative_depth", 0))
 	rewards["whole_blocks"] = whole_blocks
-
+	print("5.7")
 	if whole_blocks <= 0:
 		return rewards
-
+	print("5.8")
 	var representative_depth := int(band_entry.get("representative_depth", 0))
-
+	print("5.9")
+	print("seconds: ",seconds)
 	for i in range(whole_blocks):
 		var sample_block := GlobalBlockDatabase.CreateBlockForLane(representative_depth, 0)
 		if sample_block.is_empty():
@@ -188,7 +191,7 @@ func _SimulateSelectedBandOffline(seconds: int, band_index: int) -> Dictionary:
 
 		var rolled_drops := GlobalBlockDatabase.RollBlockDrops(sample_block, 1.0)
 		_AddRolledDropsToRewards(rewards, rolled_drops)
-
+	print("6.0")
 	return rewards
 
 

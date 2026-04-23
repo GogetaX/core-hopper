@@ -1,0 +1,10 @@
+res://scenes/app/main_scene.tscn
+res://art/theme/MainTheme.tres
+res://shaders/boss_outline.gdshader
+res://shaders/shop_screen.gdshader
+res://shaders/popup_blur.gdshader
+res://shaders/glich_effect.gdshader
+res://shaders/explode.gdshader
+res://autoload/GlobalSave.gd
+res://scenes/app/main_scene.gd
+res://autoload/GlobalOfflineProgress.gd

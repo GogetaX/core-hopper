@@ -48,7 +48,7 @@
 	"max_depth": 499,
 	"base_hp": 55,
 	"reward_multiplier": 1.5,
-	"depth_growth": 1.008,
+	"depth_growth": 1.007,
 	"min_hit_damage": 4,
 	"spawn_pool": [
 	  { "id": "iron_ore",       "weight": 22 },
@@ -65,7 +65,7 @@
 	"max_depth": 749,
 	"base_hp": 95,
 	"reward_multiplier": 1.85,
-	"depth_growth": 1.01,
+	"depth_growth": 1.008,
 	"min_hit_damage": 7,
 	"spawn_pool": [
 	  { "id": "iron_ore",       "weight": 10 },
@@ -83,7 +83,7 @@
 	"max_depth": 999,
 	"base_hp": 150,
 	"reward_multiplier": 2.15,
-	"depth_growth": 1.012,
+	"depth_growth": 1.009,
 	"min_hit_damage": 12,
 	"spawn_pool": [
 	  { "id": "crystal_shard",  "weight": 15 },
@@ -100,7 +100,7 @@
 	"max_depth": 1249,
 	"base_hp": 240,
 	"reward_multiplier": 2.45,
-	"depth_growth": 1.014,
+	"depth_growth": 1.010,
 	"min_hit_damage": 20,
 	"spawn_pool": [
 	  { "id": "crystal_shard",  "weight": 10 },
@@ -118,7 +118,7 @@
 	"max_depth": 1499,
 	"base_hp": 380,
 	"reward_multiplier": 2.85,
-	"depth_growth": 1.017,
+	"depth_growth": 1.011,
 	"min_hit_damage": 32,
 	"spawn_pool": [
 	  { "id": "rare_vein",      "weight": 14 },
@@ -134,7 +134,7 @@
 	"max_depth": 1999,
 	"base_hp": 620,
 	"reward_multiplier": 3.3,
-	"depth_growth": 1.02,
+	"depth_growth": 1.012,
 	"min_hit_damage": 50,
 	"spawn_pool": [
 	  { "id": "energy_pocket",  "weight": 6  },
@@ -150,7 +150,7 @@
 	"max_depth": 999999,
 	"base_hp": 980,
 	"reward_multiplier": 3.8,
-	"depth_growth": 1.023,
+	"depth_growth": 1.013,
 	"min_hit_damage": 75,
 	"spawn_pool": [
 	  { "id": "obsidian",       "weight": 28 },

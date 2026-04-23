@@ -97,7 +97,7 @@
   },
   "obsidian": {
 	"name": "Obsidian",
-	"hp_multiplier": 4.0,
+	"hp_multiplier": 3.8,
 	"rarity": "epic",
 	"color": "black",
 	"tags": ["hard", "stone"],
@@ -109,7 +109,7 @@
   },
   "core_fragment": {
 	"name": "Core Fragment",
-	"hp_multiplier": 5.5,
+	"hp_multiplier": 4.8,
 	"rarity": "epic",
 	"color": "gold",
 	"tags": ["core", "fragment"],
@@ -149,7 +149,7 @@
 	"name": "Plasma Vein",
 	"rarity": "rare",
 	"color": "blue",
-	"hp_multiplier": 2.5,
+	"hp_multiplier": 2.4,
 	"tags": ["energy", "vein", "plasma"],
 	"drops": {
 	  "coins":    { "min": 18, "max": 26, "weight": 1.0 },
@@ -162,7 +162,7 @@
 	"name": "Void Shale",
 	"rarity": "epic",
 	"color": "purple",
-	"hp_multiplier": 3.2,
+	"hp_multiplier": 3.0,
 	"tags": ["void", "stone"],
 	"drops": {
 	  "coins":    { "min": 20, "max": 30, "weight": 1.0 },
@@ -175,7 +175,7 @@
 	"name": "Ancient Core",
 	"rarity": "epic",
 	"color": "gold",
-	"hp_multiplier": 4.4,
+	"hp_multiplier": 4.0,
 	"tags": ["core", "ancient"],
 	"drops": {
 	  "coins":    { "min": 24, "max": 36, "weight": 1.0 },

@@ -589,7 +589,7 @@ func _BuildStatEffectText(effect: Dictionary, level: int) -> String:
 		"relic_slot_bonus":
 			return "+%d Relic Slot" % int(total_value)
 
-		"direct_bot_buy_better_rank_chance":
+		"direcan you calct_bot_buy_better_rank_chance":
 			return "+%d%% Chance to buy a bot with better stats" % _ToPercentInt(total_value)
 
 		"daily_free_mythic_bot_limit_bonus":
