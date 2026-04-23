@@ -30,13 +30,9 @@ theme_type_variation = &"PanelDimmedBG"
 
 [node name="OpenPopupIcon" parent="OfflinePanel" unique_id=707058535 instance=ExtResource("2_pnfq0")]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
 offset_left = -50.0
-offset_right = 0.0
+offset_top = 0.0
 offset_bottom = 50.0
-grow_horizontal = 0
 
 [node name="VList" type="VBoxContainer" parent="OfflinePanel" unique_id=737940393]
 layout_mode = 1

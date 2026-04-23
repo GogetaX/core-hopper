@@ -318,7 +318,7 @@ func GetFreeMergeSlots()->int:
 
 
 func GetBotPriceBasedOnLevel(bot_level: int) -> int:
-	var price := 5.0 * pow(1.09, GlobalSave.save_data.progress.total_bots_bought_this_reset)
+	var price := 5.0 * pow(1.15, GlobalSave.save_data.progress.total_bots_bought_this_reset)
 
 	# Extra price for direct higher-level bot purchase from skill tree
 	if bot_level > 1:

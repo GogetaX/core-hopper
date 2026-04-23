@@ -8,3 +8,6 @@ res://shaders/explode.gdshader
 res://autoload/GlobalSave.gd
 res://scenes/app/main_scene.gd
 res://autoload/GlobalOfflineProgress.gd
+res://data/blocks/block_archetypes.json
+res://autoload/GlobalStats.gd
+res://scenes/screens/dig/offline_panel.tscn
