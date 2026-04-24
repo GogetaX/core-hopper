@@ -10,6 +10,11 @@ const UPGRADE_DATA = "res://data/upgrades/upgrade_db.json"
 var save_data := {}
 var save_timer : Timer = null
 
+var save_loaded := false
+var offline_processed_this_session := false
+var last_saved_unix_at_load := 0.0
+var last_loaded_unix := 0.0
+
 func _ready() -> void:
 	CreateSaveTimer()
 	LoadFromSave()
@@ -103,9 +108,15 @@ func PrepareSaveMeta() -> void:
 	save_data.meta["last_saved_unix"] = Time.get_unix_time_from_system()
 	
 func LoadingTimeStamp():
-	if !GlobalSave.save_data.has("meta"):
+	if !GlobalSave.save_data.has("meta") or typeof(GlobalSave.save_data.meta) != TYPE_DICTIONARY:
 		GlobalSave.save_data["meta"] = {}
-	GlobalSave.save_data.meta["last_loaded_unix"] = Time.get_unix_time_from_system()
+
+	var now := Time.get_unix_time_from_system()
+
+	last_saved_unix_at_load = float(GlobalSave.save_data.meta.get("last_saved_unix", now))
+	last_loaded_unix = now
+
+	GlobalSave.save_data.meta["last_loaded_unix"] = now
 	
 func ForceSave():
 	PrepareSaveMeta()
@@ -122,7 +133,16 @@ func ForceSave():
 	f.store_string(json_string)
 	
 	f.close()
-		
+
+func MarkGameSaveLoaded() -> void:
+	if save_data.is_empty():
+		save_data = BuildCleanSaveData()
+		LoadingTimeStamp()
+
+	save_loaded = true
+	offline_processed_this_session = false
+	GlobalSignals.GameSaveLoaded.emit()
+	
 func LoadFromSave():
 	if !FileAccess.file_exists(SAVE_FILE):
 		save_data = BuildCleanSaveData()

@@ -607,6 +607,8 @@ func _BuildStatEffectText(effect: Dictionary, level: int) -> String:
 
 
 func GetStat(stat_id:String,default_num:=0.0)->float:
+	if !skill_summary.has("stats"):
+		skill_summary = BuildAcquiredSkillSummary()
 	if skill_summary.stats.has(stat_id):
 		return skill_summary.stats[stat_id]
 	else:

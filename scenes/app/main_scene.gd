@@ -27,6 +27,7 @@ func InitOfflineData():
 			return
 		if offline_data.offline_seconds >= GlobalOfflineProgress.OFFLINE_MIN_SECONDS:
 			GlobalSignals.ShowPopup.emit("SHOW_OFFLINE_REWARD",offline_data)
+	GlobalSave.MarkGameSaveLoaded()
 	
 func OnSettingBtnPress(to_show:bool):
 	if to_show:

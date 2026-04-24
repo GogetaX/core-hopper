@@ -126,7 +126,7 @@ res://fonts/RES_BeVietman_Regular.tres::3051b0fd785f429a1f69acc75262b557::177437
 res://fonts/RES_BeVietnam_Bold.tres::5ba631d7e33d5d8fe5e05d35397ac79f::1774384942::res://.godot/exported/133200997/export-13d2524024db3c1ce0b656d42d2ed89c-RES_BeVietnam_Bold.res
 res://fonts/RES_JakaraSans_Bold.tres::751600a808ea10db6d170c09b426fb83::1774384953::res://.godot/exported/133200997/export-cc1effb415432a5e2e27aa7f226f5344-RES_JakaraSans_Bold.res
 res://fonts/RES_JakaraSans_Regular.tres::aaf930d028816edb386bba8f7860dbde::1774373269::res://.godot/exported/133200997/export-5b96d8d7d6d2e0904a42056752e6f90e-RES_JakaraSans_Regular.res
-res://scenes/app/main_scene.tscn::cc91a8cc7cadd530b2aedc44c0c36baf::1777066478::res://.godot/exported/133200997/export-4f94396a82da23abb31a1e1311203510-main_scene.scn
+res://scenes/app/main_scene.tscn::cc91a8cc7cadd530b2aedc44c0c36baf::1777067352::res://.godot/exported/133200997/export-4f94396a82da23abb31a1e1311203510-main_scene.scn
 res://scenes/components/boss_icon.tscn::05e9dd4131c57221e4751286374dc3f1::1775082212::res://.godot/exported/133200997/export-8d3ef845eb556b56d2e4da7180723943-boss_icon.scn
 res://scenes/components/boss_icon_effect.tscn::4e46bc42d325af71fa352c0fdcc61cd4::1775124809::res://.godot/exported/133200997/export-b76ca7b73fbf7651c6539987138cb1f7-boss_icon_effect.scn
 res://scenes/components/BotImage.tscn::1c7182c8c4984fe236a20b7cd71f5819::1775759057::res://.godot/exported/133200997/export-7c83631eb316859b2977d2c1eda9b1cc-BotImage.scn
@@ -157,7 +157,7 @@ res://scenes/components/UpdateControlFromSave.tscn::3070ecf9a035adaa522595285418
 res://scenes/components/watch_ad_btn.tscn::6c088857cf4250a8e73127198f48cc8f::1777059877::res://.godot/exported/133200997/export-40600ffe8d8a9aabee8a6f8026f61a71-watch_ad_btn.scn
 res://scenes/popups/BotStatInfoPopup.tscn::53c46c0d2b2ccb7635aff207438216a5::1776887389::res://.godot/exported/133200997/export-f711b39090295d47d38ccefeaa757a17-BotStatInfoPopup.scn
 res://scenes/popups/ChestPopup.tscn::471d88b09265420e043d21b5bb468998::1776946844::res://.godot/exported/133200997/export-5e361f28d17dc74238418dfa944a25b2-ChestPopup.scn
-res://scenes/popups/OfflineDropPopup.tscn::66fafa0d6fde0bad030283e2e9baf6b8::1777057094::res://.godot/exported/133200997/export-d7d45d5236e4183c886b8a51a693884d-OfflineDropPopup.scn
+res://scenes/popups/OfflineDropPopup.tscn::66fafa0d6fde0bad030283e2e9baf6b8::1777067085::res://.godot/exported/133200997/export-d7d45d5236e4183c886b8a51a693884d-OfflineDropPopup.scn
 res://scenes/popups/RelicInvPopup.tscn::cf0da05be767ac67db63296aabfd604c::1776614401::res://.godot/exported/133200997/export-f270e1410d4b106e4ade7c1421784671-RelicInvPopup.scn
 res://scenes/popups/RelicUpgradePopup.tscn::d904918f54237740ba28f835f27f8c5f::1777065280::res://.godot/exported/133200997/export-25f59ee83a2fbddbe9d91231b483df66-RelicUpgradePopup.scn
 res://scenes/popups/relic_upgrade_item.tscn::379b99a033626416a91cd2ed59589b88::1777058112::res://.godot/exported/133200997/export-350c61baae67a949411947b7fbb4dd30-relic_upgrade_item.scn

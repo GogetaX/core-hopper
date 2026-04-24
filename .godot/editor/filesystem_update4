@@ -60,3 +60,4 @@ res://scenes/components/currency_animation.gd
 res://scenes/screens/shop/shop_crystal_button.tscn
 res://scenes/components/bottom_button.tscn
 res://scenes/app/main_scene.gd
+res://autoload/GlobalSkillTree.gd
