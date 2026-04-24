@@ -457,9 +457,15 @@ func _GetContinuousBandBaseHp(band_index: int) -> float:
 
 func _BuildRuntimeBlock(depth: int, lane_index: int, block_id: String, archetype: Dictionary, band: Dictionary) -> Dictionary:
 	var band_index := get_depth_band_index(depth)
-	var carried_base := _GetContinuousBandBaseHp(band_index)
-	var base_hp := float(band.get("base_hp", 1.0))
-	var effective_base_hp := lerpf(base_hp, carried_base, 0.35)
+
+	var carried_base := _GetContinuousBandBaseHpBig(band_index)
+	var base_hp_big := GlobalBigNumber.FromFloat(float(band.get("base_hp", 1.0)))
+
+	var effective_base_hp := GlobalBigNumber.Add(
+		GlobalBigNumber.MulFloat(base_hp_big, 0.65),
+		GlobalBigNumber.MulFloat(carried_base, 0.35)
+	)
+
 	var hp_multiplier := float(archetype.get("hp_multiplier", 1.0))
 	var reward_multiplier := float(band.get("reward_multiplier", 1.0))
 
@@ -468,10 +474,11 @@ func _BuildRuntimeBlock(depth: int, lane_index: int, block_id: String, archetype
 	var depth_growth := float(band.get("depth_growth", 1.01))
 	var min_hit_damage := float(band.get("min_hit_damage", 0.0))
 
-	var final_hp = max(1, roundi(
-	effective_base_hp * hp_multiplier * pow(depth_growth, depth_in_band)
-	))
-	# Compatibility fields for older code paths / boss generation.
+	var final_hp := GlobalBigNumber.Mul(
+		GlobalBigNumber.MulFloat(effective_base_hp, hp_multiplier),
+		GlobalBigNumber.PowFloat(depth_growth, depth_in_band)
+	)
+
 	var base_coin_reward := _GetExpectedDropAmount(archetype, "coins", 1.0)
 	var final_coin_reward := _GetExpectedDropAmount(archetype, "coins", reward_multiplier)
 
@@ -482,23 +489,41 @@ func _BuildRuntimeBlock(depth: int, lane_index: int, block_id: String, archetype
 		"depth": depth,
 		"lane_index": lane_index,
 
-		"base_hp": base_hp,
+		"base_hp": base_hp_big,
 		"hp_multiplier": hp_multiplier,
 		"max_hp": final_hp,
-		"hp": final_hp,
+		"hp": final_hp.duplicate(true),
 
-		# Keep these only for compatibility until all callers are migrated.
 		"reward_type": "coins",
 		"base_reward_amount": base_coin_reward,
 		"reward_multiplier": reward_multiplier,
 		"reward_amount": max(1, roundi(final_coin_reward)),
 
-		# New source of truth
 		"drops": archetype.get("drops", {}).duplicate(true),
-
 		"rarity": str(archetype.get("rarity", "common")),
 		"color": str(archetype.get("color", "gray")),
 		"tags": archetype.get("tags", []).duplicate(true),
 		"depth_growth": depth_growth,
 		"min_hit_damage": min_hit_damage
 	}
+
+func _GetContinuousBandBaseHpBig(band_index: int) -> Dictionary:
+	var band_base := GlobalBigNumber.FromFloat(float(depth_bands[band_index].get("base_hp", 1.0)))
+
+	if band_index <= 0:
+		return band_base
+
+	var prev_band = depth_bands[band_index - 1]
+	var prev_base := _GetContinuousBandBaseHpBig(band_index - 1)
+	var prev_steps := int(prev_band.get("max_depth", 0)) - int(prev_band.get("min_depth", 0)) + 1
+	var prev_growth := float(prev_band.get("depth_growth", 1.01))
+
+	var prev_tail_base := GlobalBigNumber.Mul(
+		prev_base,
+		GlobalBigNumber.PowFloat(prev_growth, prev_steps)
+	)
+
+	if GlobalBigNumber.Compare(band_base, prev_tail_base) >= 0:
+		return band_base
+
+	return prev_tail_base

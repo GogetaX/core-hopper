@@ -25,19 +25,19 @@ func OnTap(node_control:Control):
 	
 
 
-func _on_block_hp_updated(_lane_index: int, block_uid: String, hp: float, max_hp: float, _hp_percent: float) -> void:
+func _on_block_hp_updated(_lane_index: int, block_uid: String, hp: Dictionary, max_hp: Dictionary, _hp_percent: float) -> void:
 	if block_uid != cur_data.uid:
 		return
-	
+	var hp_percent = GlobalBigNumber.Percent(hp,max_hp)
 	SetAsMining(true)
-	$BG/VList/ProgressBar.max_value = max_hp
+	$BG/VList/ProgressBar.max_value = 1.0
 	if hp == max_hp:
-		$BG/VList/ProgressBar.value = hp
+		$BG/VList/ProgressBar.value = hp_percent
 	else:
 		
 		var t = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
-		t.tween_property($BG/VList/ProgressBar,"value",hp,0.2)
-		if hp <$BG/VList/ProgressBar.value:
+		t.tween_property($BG/VList/ProgressBar,"value",hp_percent,0.2)
+		if hp_percent <$BG/VList/ProgressBar.value:
 			TakeDmgAnimation()
 	if time_before_idle:
 		time_before_idle.start()
@@ -95,8 +95,8 @@ func InitAsBossMine():
 func InitAsNormalMine():
 	SetAsMining(false)
 	$BG/VList/name.text = cur_data.name
-	$BG/VList/ProgressBar.max_value = cur_data.max_hp
-	$BG/VList/ProgressBar.value = cur_data.hp
+	$BG/VList/ProgressBar.max_value = 1.0
+	$BG/VList/ProgressBar.value = GlobalBigNumber.Percent(cur_data.hp,cur_data.max_hp)
 	$BG.self_modulate = GlobalColor.GetBlockColorFromKey(cur_data.color)
 	$Particles.modulate = $BG.self_modulate*1.1
 	$BG/VList/name.self_modulate = GlobalColor.GetReadableTextColor($BG.self_modulate)

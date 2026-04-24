@@ -27,6 +27,7 @@ buses/default_bus_layout="uid://2sdxaj4wik0x"
 [autoload]
 
 Global="*uid://dqn3ufdym5tav"
+GlobalBigNumber="*uid://bcdhu7h8casqm"
 GlobalBtn="*uid://uo87dmyq1xsa"
 GlobalSignals="*uid://cmudicfn21w14"
 GlobalColor="*uid://b4ma3ahiidw13"

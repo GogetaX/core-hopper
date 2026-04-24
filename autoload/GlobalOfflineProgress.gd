@@ -188,10 +188,10 @@ func _SimulateSelectedBandOffline(seconds: int, band_index: int) -> Dictionary:
 		return rewards
 
 	var band_entry := _BuildBandEntry(band_index, total_dps)
-	var avg_block_hp = max(1.0, float(band_entry.get("avg_block_hp", 1.0)))
-	var total_damage := total_dps * float(seconds)
-	var whole_blocks := maxi(0, int(floor(total_damage / avg_block_hp)))
-
+	var avg_block_hp := GlobalBigNumber.ToBig(band_entry.get("avg_block_hp", GlobalBigNumber.One()))
+	var total_damage := GlobalBigNumber.FromFloat(total_dps * float(seconds))
+	var whole_blocks := maxi(0, int(floor(GlobalBigNumber.DivideToFloat(total_damage, avg_block_hp))))
+	
 	rewards["min_depth"] = int(band_entry.get("min_depth", 0))
 	rewards["max_depth"] = int(band_entry.get("max_depth", 0))
 	rewards["representative_depth"] = int(band_entry.get("representative_depth", 0))
@@ -234,14 +234,13 @@ func _BuildVisibleBandEntries() -> Array:
 func _BuildBandEntry(band_index: int, total_dps: float) -> Dictionary:
 	var band: Dictionary = GlobalBlockDatabase.depth_bands[band_index]
 	var representative_depth := _GetRepresentativeDepthForBand(band)
-	var avg_block_hp := _GetAverageBlockHpForBand(band_index, representative_depth)
-
+	var avg_block_hp := _GetAverageBlockHpForBandBig(band_index, representative_depth)
 	var seconds_per_block := INF
 	var blocks_per_hour := 0.0
 
-	if total_dps > 0.0 and avg_block_hp > 0.0:
-		seconds_per_block = avg_block_hp / total_dps
-		blocks_per_hour = (total_dps * 3600.0) / avg_block_hp
+	if total_dps > 0.0 and GlobalBigNumber.Compare(avg_block_hp, GlobalBigNumber.Zero()) > 0:
+		seconds_per_block = GlobalBigNumber.DivideToFloat(avg_block_hp, GlobalBigNumber.FromFloat(total_dps))
+		blocks_per_hour = 3600.0 / max(seconds_per_block, 0.001)
 
 	var coins_per_block := _GetAverageExpectedCurrencyForBand(band_index, "coins")
 	var crystals_per_block := _GetAverageExpectedCurrencyForBand(band_index, "crystals")
@@ -538,3 +537,11 @@ func _EnsureOfflinePlannerData() -> void:
 
 	if !GlobalSave.save_data.offline_mining.has("selected_band_index"):
 		GlobalSave.save_data.offline_mining["selected_band_index"] = -1
+
+func _GetAverageBlockHpForBandBig(_band_index: int, representative_depth: int) -> Dictionary:
+	var block := GlobalBlockDatabase.CreateBlockForLane(representative_depth, 0)
+
+	if block.is_empty():
+		return GlobalBigNumber.One()
+
+	return GlobalBigNumber.ToBig(block.get("max_hp", 1.0))

@@ -16,6 +16,28 @@ func _ready() -> void:
 	AdjustNewData()
 	RepapulateAllLaneBlocks()
 	
+	
+func MigrateBlockHpToBigNumbers() -> void:
+	if !save_data.has("lanes"):
+		return
+
+	for lane in save_data.lanes:
+		if !lane.has("block_data"):
+			continue
+
+		for block in lane.block_data:
+			if typeof(block) != TYPE_DICTIONARY:
+				continue
+
+			if block.has("hp"):
+				block.hp = GlobalBigNumber.ToBig(block.hp)
+
+			if block.has("max_hp"):
+				block.max_hp = GlobalBigNumber.ToBig(block.max_hp)
+
+			if block.has("base_hp"):
+				block.base_hp = GlobalBigNumber.ToBig(block.base_hp)
+				
 func AdjustNewData():
 	if !GlobalSave.save_data.progress.has("total_bots_bought_this_reset"):
 		GlobalSave.save_data.progress["total_bots_bought_this_reset"] = 0
@@ -39,6 +61,8 @@ func AdjustNewData():
 	if !save_data.progress.has("free_bot_count"):
 		
 		save_data.progress["free_bot_count"] = 0
+	MigrateBlockHpToBigNumbers()
+	
 func RepapulateAllLaneBlocks():
 	GenerateNextBlocks(0,5)
 	GenerateNextBlocks(1,5)

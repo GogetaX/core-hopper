@@ -77,21 +77,21 @@ func _EmitBlockHpUpdated(lane_index: int) -> void:
 		return
 
 	var lane = GlobalSave.save_data.lanes[lane_index]
+
 	if lane.block_data.is_empty():
 		return
 
 	var block = lane.block_data[0]
-	var hp := float(block.hp)
-	var max_hp := float(block.max_hp)
-	var hp_percent = hp / max(max_hp, 0.001)
 
-	#print("EMIT hp update lane=", lane_index, " uid=", str(block.uid), " hp=", hp)
+	var hp_big := GlobalBigNumber.ToBig(block.get("hp", 0.0))
+	var max_hp_big := GlobalBigNumber.ToBig(block.get("max_hp", 1.0))
+	var hp_percent := GlobalBigNumber.Percent(hp_big, max_hp_big)
 
 	block_hp_updated.emit(
 		lane_index,
 		str(block.uid),
-		hp,
-		max_hp,
+		GlobalBigNumber.ToFloatSafe(hp_big),
+		GlobalBigNumber.ToFloatSafe(max_hp_big),
 		hp_percent
 	)
 	
@@ -256,7 +256,7 @@ func _ResetCurrentBlockProgress(lane_index: int) -> void:
 		return
 
 	# reset same front block back to full hp
-	lane.block_data[0].hp = float(lane.block_data[0].max_hp)
+	lane.block_data[0].hp = GlobalBigNumber.ToBig(lane.block_data[0].max_hp).duplicate(true)
 
 	if _lane_runtime.has(lane_index):
 		_lane_runtime[lane_index]["hit_progress"] = 0.0
@@ -309,26 +309,23 @@ func GetLaneCurrentHp(lane_index: int) -> float:
 	var block = GetLaneCurrentBlock(lane_index)
 	if block.is_empty():
 		return 0.0
-	return float(block.hp)
-
+	return GlobalBigNumber.ToFloatSafe(block.get("hp", 0.0))
 
 func GetLaneCurrentMaxHp(lane_index: int) -> float:
 	var block = GetLaneCurrentBlock(lane_index)
 	if block.is_empty():
 		return 0.0
-	return float(block.max_hp)
-
+	return GlobalBigNumber.ToFloatSafe(block.get("max_hp", 0.0))
 
 func GetLaneCurrentHpLeftPercent(lane_index: int) -> float:
 	var block = GetLaneCurrentBlock(lane_index)
 	if block.is_empty():
 		return 0.0
 
-	var max_hp := float(block.max_hp)
-	if max_hp <= 0.0:
-		return 0.0
-
-	return float(block.hp) / max_hp
+	return GlobalBigNumber.Percent(
+		block.get("hp", 0.0),
+		block.get("max_hp", 1.0)
+	)
 
 
 func GetLaneCurrentBlockName(lane_index: int) -> String:
@@ -379,9 +376,11 @@ func GetLaneDigInfo(lane_index: int) -> Dictionary:
 		"block_name": str(block.name),
 		"block_id": str(block.id),
 		"block_uid": str(block.uid),
-		"hp": float(block.hp),
-		"max_hp": float(block.max_hp),
-		"hp_percent": float(block.hp) / max(float(block.max_hp), 0.001)
+		"hp": GlobalBigNumber.ToFloatSafe(block.get("hp", 0.0)),
+		"max_hp": GlobalBigNumber.ToFloatSafe(block.get("max_hp", 0.0)),
+		"hp_percent": GlobalBigNumber.Percent(block.get("hp", 0.0), block.get("max_hp", 1.0)),
+		"hp_text": GlobalBigNumber.Format(block.get("hp", 0.0)),
+		"max_hp_text": GlobalBigNumber.Format(block.get("max_hp", 0.0))
 	}
 
 func RefreshLaneDigging(lane_index: int) -> void:
@@ -501,7 +500,7 @@ func _ApplyDamageToFrontBlock(lane_index: int, damage: float, is_tap_damage: boo
 
 	if is_tap_damage:
 		if !is_boss and _CanTapExecuteBlock(current_block):
-			damage = float(current_block.get("hp", 0.0))
+			damage = GlobalBigNumber.ToFloatSafe(current_block.get("hp", 0.0))
 			destroy_context["did_tap_execute"] = true
 			destroy_context["reward_mult"] = GlobalStats.GetTapExecuteRewardMultiplier()
 		else:
@@ -512,10 +511,14 @@ func _ApplyDamageToFrontBlock(lane_index: int, damage: float, is_tap_damage: boo
 		var crit_result := GlobalStats.ApplyCritToDamage(damage)
 		damage = float(crit_result.get("damage", damage))
 
-	current_block.hp = max(0.0, float(current_block.hp) - float(damage))
+	var hp_big := GlobalBigNumber.ToBig(current_block.get("hp", 0.0))
+	var damage_big := GlobalBigNumber.ToBig(damage)
+
+	current_block["hp"] = GlobalBigNumber.Sub(hp_big, damage_big)
+
 	_EmitBlockHpUpdated(lane_index)
 
-	if current_block.hp > 0.0:
+	if GlobalBigNumber.Compare(current_block["hp"], GlobalBigNumber.Zero()) > 0:
 		return false
 
 	var destroyed_uid := str(current_block.uid)
@@ -690,15 +693,15 @@ func _ProcessBossSpecial(lane_index: int, delta: float) -> void:
 
 	runtime["elapsed_sec"] = float(runtime.get("elapsed_sec", 0.0)) + delta
 
-	var old_hp := float(block.get("hp", 0.0))
-	var max_hp := float(block.get("max_hp", 1.0))
-	var new_hp := old_hp
+	var old_hp := GlobalBigNumber.ToBig(block.get("hp", 0.0))
+	var max_hp := GlobalBigNumber.ToBig(block.get("max_hp", 1.0))
+	var new_hp := old_hp.duplicate(true)
 
 	match special_type:
 		"regen":
 			var regen_percent := float(special_values.get("regen_percent_per_sec", 0.0) * GlobalStats.GetBossRegenReduction())
-			new_hp += max_hp * regen_percent * delta
-
+			var regen_amount := GlobalBigNumber.MulFloat(max_hp, regen_percent * delta)
+			new_hp = GlobalBigNumber.Add(new_hp, regen_amount)
 		"timer_enrage":
 			var enrage_after := float(special_values.get("enrage_after_sec", 999999.0))
 
@@ -706,17 +709,20 @@ func _ProcessBossSpecial(lane_index: int, delta: float) -> void:
 				runtime["enraged"] = true
 
 			if bool(runtime.get("enraged", false)):
-				var extra_regen := float(special_values.get("extra_regen_percent_per_sec", 0.0)* GlobalStats.GetBossRegenReduction())
-				new_hp += max_hp * extra_regen * delta
+				var extra_regen := float(special_values.get("extra_regen_percent_per_sec", 0.0) * GlobalStats.GetBossRegenReduction())
+				var extra_regen_amount := GlobalBigNumber.MulFloat(max_hp, extra_regen * delta)
+				new_hp = GlobalBigNumber.Add(new_hp, extra_regen_amount)
 
 		"shield_cycle":
 			if bool(runtime.get("shield_active", false)):
 				runtime["shield_time_left"] = max(0.0, float(runtime.get("shield_time_left", 0.0)) - delta)
+
 				if float(runtime["shield_time_left"]) <= 0.0:
 					runtime["shield_active"] = false
 					runtime["shield_cooldown_left"] = float(special_values.get("shield_cooldown_sec", 0.0))
 			else:
 				runtime["shield_cooldown_left"] = max(0.0, float(runtime.get("shield_cooldown_left", 0.0)) - delta)
+
 				if float(runtime["shield_cooldown_left"]) <= 0.0:
 					runtime["shield_active"] = true
 					runtime["shield_time_left"] = float(special_values.get("shield_duration_sec", 0.0))
@@ -724,24 +730,16 @@ func _ProcessBossSpecial(lane_index: int, delta: float) -> void:
 		_:
 			return
 
-	new_hp = clamp(new_hp, 0.0, max_hp)
+
+	if GlobalBigNumber.Compare(new_hp, max_hp) > 0:
+		new_hp = max_hp.duplicate(true)
 
 	if special_type == "timer_enrage":
-		if is_equal_approx(new_hp, max_hp):
+		if GlobalBigNumber.Compare(new_hp, max_hp) >= 0:
 			runtime["elapsed_sec"] = 0.0
 			runtime["enraged"] = false
 
-	if !is_equal_approx(new_hp, old_hp):
-		block["hp"] = new_hp
-		_EmitBlockHpUpdated(lane_index)
-
-	new_hp = clamp(new_hp, 0.0, max_hp)
-	if special_type == "timer_enrage":
-		if is_equal_approx(new_hp, max_hp):
-			runtime["elapsed_sec"] = 0.0
-			runtime["enraged"] = false
-
-	if !is_equal_approx(new_hp, old_hp):
+	if GlobalBigNumber.Compare(new_hp, old_hp) != 0:
 		block["hp"] = new_hp
 		_EmitBlockHpUpdated(lane_index)
 		
