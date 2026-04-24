@@ -6,6 +6,18 @@ signal OnEquip(is_equiped:bool)
 var cur_data = {}
 
 var cur_empty_slot = -1
+var has_enough_to_level = false
+
+func _ready() -> void:
+	GlobalBtn.AddBtnPress($RelicItem/VBoxContainer/HBox/relic_dupes)
+	GlobalBtn.BtnPress.connect(OnHasRelicDupes)
+
+func OnHasRelicDupes(btn_node:Control):
+	if btn_node != $RelicItem/VBoxContainer/HBox/relic_dupes:
+		return
+	if !has_enough_to_level:
+		return
+	GlobalSignals.ShowPopup.emit("UPGRADE_RELIC_POPUP",{"selected_relic_id":cur_data.id})
 
 func SetAsEmpty(empty_slot):
 	cur_empty_slot = empty_slot
@@ -53,10 +65,12 @@ func InitItem(item_data:Dictionary,popup_data:Dictionary):
 	var dupes = cur_data.save_data.dupes
 	$RelicItem/VBoxContainer/HBox/relic_dupes.visible = false
 	$RelicItem/VBoxContainer/HBox/relic_max.visible = false
+	has_enough_to_level = false
 	if cur_data.save_data.rank < cur_data.db_data.max_rank:
 		$RelicItem/VBoxContainer/HBox/relic_dupes.visible = true
 		var next_level_dupes = cur_data.db_data.rank_data[str(cur_data.save_data.rank+1).pad_decimals(0)]
 		if next_level_dupes.dupes_required <= dupes:
+			has_enough_to_level = true
 			$RelicItem/VBoxContainer/HBox/relic_dupes.text = "Ready to Rank Up"
 			$RelicItem/VBoxContainer/HBox/relic_dupes.hash_tag_color = "PURPLE"
 		else:

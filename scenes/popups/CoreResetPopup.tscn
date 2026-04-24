@@ -442,11 +442,10 @@ layout_mode = 2
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 size_flags_horizontal = 1
-btn_type = "NO_PRICE"
+btn_type = "NO_PRICE_GLOWING"
 currency_type = "crystals"
 buy_btn_title = "CORE RESET"
 panel_color = "BLUE"
-sub_text = ""
 
 [connection signal="BtnPressed" from="SmartPanel/ClosePopup" to="." method="_on_close_popup_btn_pressed"]
 [connection signal="resized" from="SmartPanel/VBoxContainer" to="." method="_on_v_box_container_resized"]

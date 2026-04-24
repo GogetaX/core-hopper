@@ -479,6 +479,11 @@ func _BuildRuntimeBlock(depth: int, lane_index: int, block_id: String, archetype
 		GlobalBigNumber.PowFloat(depth_growth, depth_in_band)
 	)
 
+	final_hp = GlobalBigNumber.MulFloat(
+		final_hp,
+		GlobalStats.GetBlockHpMultiplier()
+	)
+
 	var base_coin_reward := _GetExpectedDropAmount(archetype, "coins", 1.0)
 	var final_coin_reward := _GetExpectedDropAmount(archetype, "coins", reward_multiplier)
 
@@ -486,7 +491,7 @@ func _BuildRuntimeBlock(depth: int, lane_index: int, block_id: String, archetype
 		"uid": _BuildBlockUid(depth, lane_index),
 		"id": block_id,
 		"name": str(archetype.get("name", block_id)),
-		"depth": depth,
+		#"depth": depth,x
 		"lane_index": lane_index,
 
 		"base_hp": base_hp_big,

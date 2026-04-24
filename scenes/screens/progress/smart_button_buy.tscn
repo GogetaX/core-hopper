@@ -16,7 +16,6 @@ size_flags_horizontal = 3
 mouse_filter = 1
 script = ExtResource("1_kdsiy")
 btn_type = "WITH_PRICE"
-sub_text = null
 
 [node name="NO_PRICE" parent="." unique_id=892379017 instance=ExtResource("2_kdsiy")]
 visible = false
@@ -25,6 +24,24 @@ panel_type = "INSIDE_ONLY"
 set_border_as_bg = true
 
 [node name="Label" type="Label" parent="NO_PRICE" unique_id=352021334]
+self_modulate = Color(0.14117648, 0.08627451, 0.23921569, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_qbhmr")
+text = "NEW UNIT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NO_PRICE_GLOWING" parent="." unique_id=1270576333 instance=ExtResource("2_kdsiy")]
+layout_mode = 1
+panel_type = "INSIDE_GLOWING"
+set_border_as_bg = true
+
+[node name="Label" type="Label" parent="NO_PRICE_GLOWING" unique_id=981169075]
 self_modulate = Color(0.14117648, 0.08627451, 0.23921569, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -106,6 +123,6 @@ layout_mode = 2
 text = "150K AU"
 
 [node name="sub_text" type="Label" parent="WITH_PRICE/HBoxContainer/VList" unique_id=1741374886]
+visible = false
 layout_mode = 2
 theme_type_variation = &"LabelGrayHint"
-text = "Free Bot in"

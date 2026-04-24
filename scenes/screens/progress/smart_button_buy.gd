@@ -5,7 +5,7 @@ class_name SmartBuyBtn
 signal BtnPressedWithPrice(currency:String,price:int)
 signal OnPressed()
 
-@export_enum("NO_PRICE","WITH_PRICE") var btn_type := "NO_PRICE":
+@export_enum("NO_PRICE","WITH_PRICE","NO_PRICE_GLOWING") var btn_type := "NO_PRICE":
 	set(value):
 		btn_type = value
 		if is_node_ready():
@@ -71,7 +71,7 @@ func _ready() -> void:
 		CheckForCurrency()
 		if !already_inited:
 			GlobalBtn.AddBtnPress(self)
-			GlobalBtn.AddBtnMouseInOut(self,[$NO_PRICE,$WITH_PRICE])
+			GlobalBtn.AddBtnMouseInOut(self,[$NO_PRICE,$WITH_PRICE,$NO_PRICE_GLOWING])
 			GlobalBtn.BtnPress.connect(OnBtnPressed)
 			GlobalSignals.DataSaved.connect(CheckForCurrency)
 			already_inited = true
@@ -79,9 +79,12 @@ func _ready() -> void:
 func SyncTool():
 	$NO_PRICE.visible = false
 	$WITH_PRICE.visible = false
+	$NO_PRICE_GLOWING.visible = false
 	match btn_type:
 		"NO_PRICE":
 			$NO_PRICE.visible = true
+		"NO_PRICE_GLOWING":
+			$NO_PRICE_GLOWING.visible = true
 		"WITH_PRICE":
 			$WITH_PRICE.visible = true
 			match currency_type:
@@ -91,14 +94,19 @@ func SyncTool():
 					$WITH_PRICE/HBoxContainer/VList/SmartPanel/HBoxContainer/CurrencyIcon.icon_type = "CRYSTAL_SMALL"
 				"energy":
 					$WITH_PRICE/HBoxContainer/VList/SmartPanel/HBoxContainer/CurrencyIcon.icon_type = "ENERGY_SMALL"
+		
 			
 	$NO_PRICE/Label.text = buy_btn_title
+	$NO_PRICE_GLOWING/Label.text = buy_btn_title
+	
 	$WITH_PRICE/HBoxContainer/Label.text = buy_btn_title
 	
 	$NO_PRICE.panel_color = panel_color
+	$NO_PRICE_GLOWING.panel_color = panel_color
 	$WITH_PRICE.panel_color = panel_color
 	
 	$NO_PRICE/Label.self_modulate = $NO_PRICE.GetBorderColor()
+	$NO_PRICE_GLOWING/Label.self_modulate = $NO_PRICE.GetBorderColor()
 	$WITH_PRICE/HBoxContainer/Label.self_modulate = $WITH_PRICE.GetBorderColor()
 	
 	$WITH_PRICE/HBoxContainer/VList/SmartPanel.panel_color = panel_color
@@ -121,9 +129,15 @@ func CheckForCurrency():
 
 func SetDisabled(_is_disabled:bool):
 	if _is_disabled:
+		if btn_type == "NO_PRICE_GLOWING":
+			$NO_PRICE_GLOWING.visible = false
+			$NO_PRICE.visible = true
 		_disabled_because_of_price = true
 		modulate = GlobalColor.PRICE_DISABLED_COLOR
 	else:
+		if btn_type == "NO_PRICE_GLOWING":
+			$NO_PRICE_GLOWING.visible = true
+			$NO_PRICE.visible = false
 		modulate = Color.WHITE
 		_disabled_because_of_price = false
 		
@@ -140,10 +154,11 @@ func OnBtnPressed(btn_node:Control):
 		return
 	GlobalBtn.AnimateBtnPressed($NO_PRICE)
 	GlobalBtn.AnimateBtnPressed($WITH_PRICE)
+	GlobalBtn.AnimateBtnPressed($NO_PRICE_GLOWING)
 	match btn_type:
 		"WITH_PRICE":
 			BtnPressedWithPrice.emit(currency_type,price_int)
-		"NO_PRICE":
+		"NO_PRICE","NO_PRICE_GLOWING":
 			OnPressed.emit()
 	
 func GetCoinGlobalPos():

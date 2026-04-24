@@ -10,6 +10,8 @@ var admob_plugin: Admob = null
 var _rewarded_ad_id: String = ""
 var _is_initialized: bool = false
 
+var earned_reward_data = {}
+
 
 func Setup(plugin: Admob) -> void:
 	admob_plugin = plugin
@@ -51,6 +53,7 @@ func _OnAdmobInitialized(_status_data) -> void:
 
 
 func LoadRewarded() -> void:
+	earned_reward_data = {}
 	if admob_plugin == null:
 		return
 	if !_is_initialized:
@@ -63,13 +66,14 @@ func LoadRewarded() -> void:
 
 
 func IsRewardedReady() -> bool:
-	if SKIP_REWARDED_VIDS:
+	if SKIP_REWARDED_VIDS || OS.get_name() == "Linux":
 		return true
 	return _rewarded_ad_id != ""
 
 
 func ShowRewarded() -> bool:
-	if SKIP_REWARDED_VIDS:
+	if SKIP_REWARDED_VIDS || OS.get_name() == "Linux":
+		print("force skips reward because on Linux")
 		await get_tree().create_timer(0.1).timeout
 		rewarded_reward_earned.emit("reward",1)
 		return true
@@ -111,12 +115,14 @@ func _OnRewardedEarned(_ad_info, reward_data) -> void:
 			reward_amount = int(reward_data.get_amount())
 		elif reward_data.has_method("get_reward_amount"):
 			reward_amount = int(reward_data.get_reward_amount())
+	earned_reward_data = {"reward_type":reward_type,"reward_amount":reward_amount}
 	
-	print("Reward earned: ", reward_type, " x", reward_amount)
-	rewarded_reward_earned.emit(reward_type, reward_amount)
 
 
 func _OnRewardedDismissed(_ad_info) -> void:
+	if !earned_reward_data.is_empty():
+		await get_tree().create_timer(0.2).timeout
+		rewarded_reward_earned.emit(earned_reward_data.reward_type, earned_reward_data.reward_amount)
 	_rewarded_ad_id = ""
 	rewarded_ready_changed.emit(false)
 	LoadRewarded()

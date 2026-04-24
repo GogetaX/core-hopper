@@ -4,6 +4,7 @@ extends Control
 @onready var relic_item = preload("res://scenes/popups/relic_upgrade_item.tscn")
 var cur_data := {}
 var cur_relic_id := ""
+
 func _ready() -> void:
 	GlobalSignals.OnRelicUpgradeSelected.connect(OnRelicSelected)
 	
@@ -58,15 +59,14 @@ func ShowRelic(relic_id:String):
 	for x in $HasRelics/Control3/VList/UpgradeCost.get_children():
 		x.queue_free()
 	#Populate new upgrade cost items
-	var is_disabled = false
+	var has_enough_resource = true
 	for x in relic_rank_data.upgrade_cost:
 		if relic_rank_data.upgrade_cost[x] > 0:
 			var u = upgrade_cost_item.instantiate() as UpgradeCostItemClass
 			$HasRelics/Control3/VList/UpgradeCost.add_child(u)
 			u.InitCost(x,relic_rank_data.upgrade_cost[x])
 			if !u.HasEnough():
-				is_disabled = true
-	$HasRelics/Control3/VList/UpgradeBtn.SetDisabled(is_disabled)
+				has_enough_resource = false
  	
 	#Remove all relic items
 	for x in $HasRelics/Control3/VList/Scroll/RelicFlow.get_children():
@@ -80,7 +80,7 @@ func ShowRelic(relic_id:String):
 		if relic_id == x.id:
 			r.SetAsSelected()
 	
-	$HasRelics/Control3/VList/UpgradeBtn.visible = false
+	var upgrade_disabled = true
 	$HasRelics/Control3/VList/relic_at_max_label.visible = false
 	$HasRelics/Control3/VList/relic_stat/HBoxContainer/double_arrow.visible = false
 	
@@ -89,14 +89,19 @@ func ShowRelic(relic_id:String):
 	else:
 		
 		$HasRelics/Control3/VList/dups/VList/HList/cur_dups.hash_tag_color = "RED"
-	if owned_relic_data.rank < relic_data.max_rank:
+
+	if owned_relic_data.rank == relic_data.max_rank:
+		$HasRelics/Control3/VList/relic_stat/HBoxContainer/double_arrow.visible = false
+		$HasRelics/Control3/VList/UpgradeBtn.visible = false
+		$HasRelics/Control3/VList/relic_at_max_label.visible = true
+	else:
 		$HasRelics/Control3/VList/relic_stat/HBoxContainer/double_arrow.visible = true
-		if owned_relic_data.dupes >= relic_rank_data.dupes_required:
+		$HasRelics/Control3/VList/UpgradeBtn.visible = true
+		$HasRelics/Control3/VList/relic_at_max_label.visible = false
+		if owned_relic_data.dupes >= relic_rank_data.dupes_required && has_enough_resource:
+			upgrade_disabled = false
 			
-			$HasRelics/Control3/VList/UpgradeBtn.visible = true
-		else:
-			$HasRelics/Control3/VList/UpgradeBtn.visible = false
-		
+	$HasRelics/Control3/VList/UpgradeBtn.SetDisabled(upgrade_disabled)
 		
 func HideAll():
 	for x in get_children():

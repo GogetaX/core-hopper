@@ -382,6 +382,8 @@ func GetEffectTypeDescription(effect_type: String) -> String:
 			return "Boss Damage"
 		"offline_gain_mult":
 			return "Offline Rewards"
+		"block_hp_mult":
+			return "Block HP"
 		_:
 			return "Unknown Effect"
 

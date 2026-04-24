@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="3_w2p20"]
 
 [node name="RelicUpgradeItem" type="Control" unique_id=1943960417]
-custom_minimum_size = Vector2(200, 250)
+custom_minimum_size = Vector2(250, 250)
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 1
@@ -56,7 +56,6 @@ hash_tag_color = "BLUE"
 [node name="relic_name" parent="VBoxContainer" unique_id=1318404242 instance=ExtResource("3_w2p20")]
 self_modulate = Color(0.30980393, 0.89411765, 1, 1)
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
 text = "CRACKED CORE"
 horizontal_alignment = 1
 autowrap_mode = 2

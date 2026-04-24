@@ -558,3 +558,6 @@ func RollDirectBotBuyRank() -> int:
 func GetFreeBotCountDown()->int:
 	var free_bot_counter = 10-GlobalSkillTree.skill_summary.stats.direct_bot_buy_free_every_count_reduction
 	return free_bot_counter
+
+func GetBlockHpMultiplier() -> float:
+	return clampf(GetRelicMultiplierTotal("block_hp_mult"), 0.50, 1.0)

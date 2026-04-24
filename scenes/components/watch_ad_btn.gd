@@ -37,7 +37,11 @@ func SetDisabled(_is_disabled:bool):
 	if _is_disabled:
 		_disabled_because_of_price = true
 		modulate = GlobalColor.PRICE_DISABLED_COLOR
+		$SmartPanel/HList/TextureRect.visible = false
+		$SmartPanel/HList/LoadingAnmation.visible = true
 	else:
+		$SmartPanel/HList/TextureRect.visible = true
+		$SmartPanel/HList/LoadingAnmation.visible = false
 		modulate = Color.WHITE
 		_disabled_because_of_price = false
 		

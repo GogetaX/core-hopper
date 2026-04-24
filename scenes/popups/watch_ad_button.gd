@@ -48,10 +48,10 @@ signal WatchAdOpenedOnce(watch_ad_id:String)
 var reward_list = []
 var already_loaded = false
 func _ready() -> void:
-	$SmartPanel/VList/HList/IconBG.panel_color = panel_color
+	$SmartPanel/VList/HList/VList2/IconBG.panel_color = panel_color
 	$SmartPanel/VList/HList/VList/ad_subtitle.hash_tag_color = panel_color
 	$SmartPanel/VList/WatchAdBtn.panel_color = panel_color
-	$SmartPanel/VList/HList/IconBG.icon = icon_big
+	$SmartPanel/VList/HList/VList2/IconBG.icon = icon_big
 	if times_per_day > 0:
 		$SmartPanel/VList/HList/VList/ad_title.text = ad_title + " ("+str(times_per_day).pad_decimals(0)+")"
 	else:
@@ -86,6 +86,7 @@ func _on_watch_ad_btn_on_press() -> void:
 		return
 	GlobalAds.ShowRewarded()
 	await GlobalAds.rewarded_reward_earned
+	print(reward_list)
 	for x in reward_list:
 		if x.has("coins") || x.has("crystals") || x.has("dust") || x.has("energy"):
 			for key in x.keys():

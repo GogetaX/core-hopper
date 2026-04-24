@@ -28,41 +28,14 @@ func ProcessOfflineProgress() -> Dictionary:
 			"energy": 0,
 			"drop_data": []
 		}
+
 	var capped_seconds := mini(offline_seconds, GlobalStats.GetOfflineCapSeconds())
+	var result := SimulateOfflineGainsForSeconds(capped_seconds, true)
 
-	var selected_band_index := GetSelectedOfflineBandIndex()
-	var result := _SimulateSelectedBandOffline(capped_seconds, selected_band_index)
-	
-	# If selected band is too hard and gives 0 rewards, fallback to available bands.
-	if int(result.get("whole_blocks", 0)) <= 0:
-		var bands_data := GetAvailableBands()
-		var bands: Array = bands_data.get("bands", [])
-
-		for slot in [SLOT_RECOMMENDED, SLOT_EASY_COINS]:
-			for band in bands:
-				if str(band.get("slot", "")) != slot:
-					continue
-
-				var fallback_index := int(band.get("band_index", -1))
-				var fallback_result := _SimulateSelectedBandOffline(capped_seconds, fallback_index)
-
-				if int(fallback_result.get("whole_blocks", 0)) > 0:
-					result = fallback_result
-					GlobalSave.save_data.offline_mining["selected_band_index"] = fallback_index
-					break
-
-			if int(result.get("whole_blocks", 0)) > 0:
-				break
-	
-	result["coins"] = int(result["coins"] * GlobalStats.GetOfflineCoinGain())
-	result["crystals"] = int(result["crystals"] * GlobalStats.GetOfflineCrystalGain())
-	result["energy"] = int(result["energy"] * GlobalStats.GetOfflineEnergyGain())
 	result["did_collect"] = true
 	result["offline_seconds"] = offline_seconds
 	result["capped_seconds"] = capped_seconds
-
-	# keep your current final coin multiplier behavior
-	result["coins"] = int(result["coins"] * GlobalStats.GetCoinYieldMultiplier())
+	result["is_simulated"] = false
 
 	return result
 
@@ -545,3 +518,47 @@ func _GetAverageBlockHpForBandBig(_band_index: int, representative_depth: int) -
 		return GlobalBigNumber.One()
 
 	return GlobalBigNumber.ToBig(block.get("max_hp", 1.0))
+
+func SimulateOfflineGainsForSeconds(seconds: int, update_selected_band_on_fallback: bool = false) -> Dictionary:
+	var simulated_seconds := maxi(0, seconds)
+
+	var selected_band_index := GetSelectedOfflineBandIndex()
+	var result := _SimulateSelectedBandOffline(simulated_seconds, selected_band_index)
+
+	# If selected band is too hard and gives 0 rewards, fallback to safer bands.
+	if int(result.get("whole_blocks", 0)) <= 0:
+		var bands_data := GetAvailableBands()
+		var bands: Array = bands_data.get("bands", [])
+
+		for slot in [SLOT_RECOMMENDED, SLOT_EASY_COINS]:
+			for band in bands:
+				if str(band.get("slot", "")) != slot:
+					continue
+
+				var fallback_index := int(band.get("band_index", -1))
+				var fallback_result := _SimulateSelectedBandOffline(simulated_seconds, fallback_index)
+
+				if int(fallback_result.get("whole_blocks", 0)) > 0:
+					result = fallback_result
+
+					if update_selected_band_on_fallback:
+						GlobalSave.save_data.offline_mining["selected_band_index"] = fallback_index
+
+					break
+
+			if int(result.get("whole_blocks", 0)) > 0:
+				break
+
+	result["coins"] = int(result.get("coins", 0) * GlobalStats.GetOfflineCoinGain())
+	result["crystals"] = int(result.get("crystals", 0) * GlobalStats.GetOfflineCrystalGain())
+	result["energy"] = int(result.get("energy", 0) * GlobalStats.GetOfflineEnergyGain())
+
+	# Keep your current final coin multiplier behavior.
+	result["coins"] = int(result.get("coins", 0) * GlobalStats.GetCoinYieldMultiplier())
+
+	result["did_collect"] = int(result.get("whole_blocks", 0)) > 0
+	result["offline_seconds"] = simulated_seconds
+	result["capped_seconds"] = simulated_seconds
+	result["is_simulated"] = true
+
+	return result

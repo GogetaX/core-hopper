@@ -85,6 +85,7 @@ mouse_filter = 2
 [node name="relic_dupes" parent="RelicItem/VBoxContainer/HBox" unique_id=713365230 instance=ExtResource("4_ysijg")]
 self_modulate = Color(0.8627451, 0.9098039, 1, 1)
 layout_mode = 2
+mouse_filter = 1
 text = "Next Lv 2/3"
 horizontal_alignment = 2
 hash_tag_color = "WHITE"

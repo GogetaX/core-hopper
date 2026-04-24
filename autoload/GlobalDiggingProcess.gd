@@ -845,3 +845,39 @@ func _GrantRolledBlockDrops(finished_block: Dictionary, reward_mult: float = 1.0
 			amount = int(round(float(amount) * GlobalStats.GetCoinYieldMultiplier()))
 
 		GlobalSave.AddCurrency(currency, amount)
+
+func SyncCurrentLaneBlockHpByMultiplierChange(old_mult: float, new_mult: float) -> void:
+	if old_mult <= 0.0:
+		return
+
+	if is_equal_approx(old_mult, new_mult):
+		return
+
+	var ratio := new_mult / old_mult
+
+	for lane_index in range(GlobalSave.save_data.lanes.size()):
+		var lane = GlobalSave.save_data.lanes[lane_index]
+
+		if !lane.has("block_data"):
+			continue
+
+		var block_data: Array = lane.get("block_data", [])
+		if block_data.is_empty():
+			continue
+
+		for i in range(block_data.size()):
+			var block = block_data[i]
+			if typeof(block) != TYPE_DICTIONARY or block.is_empty():
+				continue
+
+			var old_hp_big = GlobalBigNumber.ToBig(block.get("hp", 1.0))
+			var old_max_hp_big = GlobalBigNumber.ToBig(block.get("max_hp", 1.0))
+
+			var new_hp_big = GlobalBigNumber.MulFloat(old_hp_big, ratio)
+			var new_max_hp_big = GlobalBigNumber.MulFloat(old_max_hp_big, ratio)
+
+			block["hp"] = new_hp_big
+			block["max_hp"] = new_max_hp_big
+
+		lane["block_data"] = block_data
+		_EmitBlockHpUpdated(lane_index)

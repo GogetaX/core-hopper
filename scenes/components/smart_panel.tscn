@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dcdt85ybg0fcg" path="res://scenes/components/smart_panel.gd" id="1_xpgen"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lof2k"]
+resource_local_to_scene = true
 bg_color = Color(1, 1, 1, 0.9411765)
 corner_radius_top_left = 24
 corner_radius_top_right = 24

@@ -12,7 +12,8 @@ custom_minimum_size = Vector2(0, 240)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 681.0
-offset_bottom = 240.0
+offset_bottom = 299.0
+mouse_filter = 2
 script = ExtResource("1_2mag0")
 
 [node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("1_l365k")]
@@ -31,17 +32,27 @@ offset_right = -20.0
 offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/separation = 20
 
 [node name="HList" type="HBoxContainer" parent="SmartPanel/VList" unique_id=1379691270]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 20
 
-[node name="IconBG" parent="SmartPanel/VList/HList" unique_id=1682398798 instance=ExtResource("2_2mag0")]
+[node name="VList2" type="VBoxContainer" parent="SmartPanel/VList/HList" unique_id=1431943685]
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
+mouse_filter = 2
+
+[node name="IconBG" parent="SmartPanel/VList/HList/VList2" unique_id=1682398798 instance=ExtResource("2_2mag0")]
+layout_mode = 2
+mouse_filter = 2
 
 [node name="VList" type="VBoxContainer" parent="SmartPanel/VList/HList" unique_id=395413787]
 layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="ad_title" type="Label" parent="SmartPanel/VList/HList/VList" unique_id=573676018]
 layout_mode = 2
@@ -53,10 +64,12 @@ text = "Instant Hyper-Dig (1)"
 self_modulate = Color(0.7607843, 0.43529412, 1, 1)
 layout_mode = 2
 text = "30M RESOURCE CACHE"
+autowrap_mode = 2
 no_bg = true
 
 [node name="WatchAdBtn" parent="SmartPanel/VList" unique_id=664760665 instance=ExtResource("5_iu1ja")]
 modulate = Color(0.4117647, 0.4117647, 0.4117647, 1)
+custom_minimum_size = Vector2(1, 80)
 layout_mode = 2
 buy_btn_title = "WATCH AD"
 buy_btn_icon = ExtResource("7_i78af")

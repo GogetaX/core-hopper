@@ -309,5 +309,66 @@
 	  "drop_weight": 30,
 	  "salvage_dust": 26
 	}
-  }
+  },
+	"hollow_chisel": {
+	  "title": "Hollow Chisel",
+	  "group": "progress",
+	  "rarity": "epic",
+	  "icon": "hollow_chisel",
+	  "description": "Reduces block HP.",
+	  "max_rank": 5,
+	  "effect_type": "block_hp_mult",
+	  "effect_format": "multiplier",
+	  "rank_data": {
+		"1": {
+		  "effect_value": 0.90,
+		  "dupes_required": 1,
+		  "upgrade_cost": {
+			"coins": 500,
+			"crystals": 1,
+			"dust": 12
+		  }
+		},
+		"2": {
+		  "effect_value": 0.80,
+		  "dupes_required": 1,
+		  "upgrade_cost": {
+			"coins": 1100,
+			"crystals": 2,
+			"dust": 22
+		  }
+		},
+		"3": {
+		  "effect_value": 0.70,
+		  "dupes_required": 2,
+		  "upgrade_cost": {
+			"coins": 2400,
+			"crystals": 3,
+			"dust": 38
+		  }
+		},
+		"4": {
+		  "effect_value": 0.60,
+		  "dupes_required": 2,
+		  "upgrade_cost": {
+			"coins": 5200,
+			"crystals": 5,
+			"dust": 60
+		  }
+		},
+		"5": {
+		  "effect_value": 0.50,
+		  "dupes_required": 0,
+		  "upgrade_cost": {
+			"coins": 0,
+			"crystals": 0,
+			"dust": 0
+		  }
+		}
+	  },
+	  "unlock_type": "boss_kill",
+	  "unlock_value": 5,
+	  "drop_weight": 25,
+	  "salvage_dust": 30
+	}
 }

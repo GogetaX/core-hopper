@@ -3,6 +3,9 @@ extends Node
 const AD_ID_DEPTH_CACHE := "depth_cache"
 const AD_ID_RELIC_CRATE := "relic_crate"
 const AD_ID_BOT_DROP := "bot_drop"
+const AD_ID_OFFLINE_CACHE := "offline_cache"
+
+const AD_OFFLINE_CACHE_SECONDS := 3600
 
 const WATCH_AD_DATA := {
 	"id": "",
@@ -23,9 +26,11 @@ func GetWatchAdData() -> Array:
 	InitTodayKey()
 
 	var res: Array = []
+
 	res.append(_GainCurrencyAd())
 	res.append(_RelicCrateAd())
 	res.append(_BotDropAd())
+
 	return res
 
 
@@ -43,10 +48,16 @@ func GetMaxDailyUsesForAds(ad_id: String) -> int:
 	match ad_id:
 		AD_ID_DEPTH_CACHE:
 			return 5
+
+		AD_ID_OFFLINE_CACHE:
+			return 2
+
 		AD_ID_RELIC_CRATE:
 			return 1
+
 		AD_ID_BOT_DROP:
 			return 2
+
 		_:
 			return 0
 
@@ -92,7 +103,40 @@ func _GainCurrencyAd() -> Dictionary:
 
 	return res
 
+func OfflineCacheAd() -> Dictionary:
+	var res: Dictionary = WATCH_AD_DATA.duplicate(true)
 
+	var reward_data := GlobalOfflineProgress.SimulateOfflineGainsForSeconds(AD_OFFLINE_CACHE_SECONDS)
+
+	var coins := int(reward_data.get("coins", 0))
+	var crystals := int(reward_data.get("crystals", 0))
+	var energy := int(reward_data.get("energy", 0))
+
+	res.id = AD_ID_OFFLINE_CACHE
+	res.icon = "res://art/skills/offline_time.tres"
+	res.color = "BLUE"
+	res.title = "Offline Cache"
+
+	res.description = "Gain 1 offline hour:\n%s Coins, %s Crystals, %s Energy" % [
+		Global.CurrencyToString(coins),
+		Global.CurrencyToString(crystals),
+		Global.CurrencyToString(energy)
+	]
+
+	res.max_times = GetMaxDailyUsesForAds(res.id)
+	res.times_left = GetTimesLeft(res.id)
+
+	if coins > 0:
+		res.rewards.append({"coins": coins})
+
+	if crystals > 0:
+		res.rewards.append({"crystals": crystals})
+
+	if energy > 0:
+		res.rewards.append({"energy": energy})
+
+	return res
+	
 func _RelicCrateAd() -> Dictionary:
 	var res: Dictionary = WATCH_AD_DATA.duplicate(true)
 

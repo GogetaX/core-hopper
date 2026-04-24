@@ -8,7 +8,15 @@ var new_selected_band_index = -1
 func _ready() -> void:
 	GlobalSignals.SelectedOfflineBandSync.connect(SyncBand)
 	InitBands()
+	InitOfflineRewards()
 	
+func InitOfflineRewards():
+	var offline_catche = GlobalWatchAds.OfflineCacheAd()
+	$SmartPanel/VBoxContainer/SelectedTarget/VList/offline_cache.ad_title = offline_catche.title
+	$SmartPanel/VBoxContainer/SelectedTarget/VList/offline_cache.ad_subtitle = offline_catche.description
+	$SmartPanel/VBoxContainer/SelectedTarget/VList/offline_cache.panel_color = offline_catche.color
+	$SmartPanel/VBoxContainer/SelectedTarget/VList/offline_cache.times_per_day = offline_catche.times_left
+	$SmartPanel/VBoxContainer/SelectedTarget/VList/offline_cache.AddRewards(offline_catche.rewards)
 func SyncBand(selected_band_index:int):
 	new_selected_band_index = selected_band_index
 	InitBands(true)
@@ -43,7 +51,7 @@ func InitBands(sync_selected:=false):
 			if x.auto_dig_unlocked && x.bot_uid != -1:
 				count += 1
 	$SmartPanel/VBoxContainer/HBoxContainer/ActiveBots/VList/active_bots.text = str(count).pad_decimals(0)
-	
+	InitOfflineRewards()
 	if !sync_selected:
 		#Remove old offline bands
 		for x in $SmartPanel/VBoxContainer/AvailableDepthList.get_children():
@@ -88,3 +96,13 @@ func _on_close_btn_on_pressed() -> void:
 func _on_select_btn_on_pressed() -> void:
 	GlobalOfflineProgress.SetSelectedOfflineBand(new_selected_band_index)
 	GlobalSignals.CloseCurPopup.emit()
+
+
+func _on_offline_cache_watch_ad_opened_once(watch_ad_id: String) -> void:
+	var mouse_pos = get_global_mouse_position()
+	GlobalSignals.ShowCurrencyAnimation.emit(mouse_pos,"coins",50)
+	GlobalSignals.ShowCurrencyAnimation.emit(mouse_pos,"crystals",10)
+	GlobalSignals.ShowCurrencyAnimation.emit(mouse_pos,"energy",3)
+	GlobalWatchAds.ConsumeAdUse(watch_ad_id)
+	GlobalSave.SyncSave()
+	InitOfflineRewards()

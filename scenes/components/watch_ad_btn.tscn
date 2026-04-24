@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="1_biyfq"]
 [ext_resource type="Script" uid="uid://dip8mv2chyo5o" path="res://scenes/components/watch_ad_btn.gd" id="1_n3dt7"]
 [ext_resource type="Texture2D" uid="uid://dveir84r8dkuf" path="res://art/icons/20_px/play_icon.png" id="2_n3dt7"]
+[ext_resource type="PackedScene" uid="uid://cixpkwqwvwubd" path="res://scenes/components/loading_anmation.tscn" id="3_3m4gl"]
 
 [node name="WatchAdBtn" type="Control" unique_id=2145509240]
 custom_minimum_size = Vector2(0, 120)
@@ -34,6 +35,9 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = 20
 alignment = 1
+
+[node name="LoadingAnmation" parent="SmartPanel/HList" unique_id=1446948490 instance=ExtResource("3_3m4gl")]
+layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="SmartPanel/HList" unique_id=233824646]
 layout_mode = 2

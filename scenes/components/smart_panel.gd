@@ -1,7 +1,9 @@
 @tool
 extends Control
 
-@export_enum("BORDER_ONLY","INSIDE_ONLY","BORDER_AND_INSIDE","NO_BG") var panel_type = "BORDER_AND_INSIDE":
+const DEFAULT_SHADOW_COLOR = Color("00091973")
+
+@export_enum("BORDER_ONLY","INSIDE_ONLY","BORDER_AND_INSIDE","NO_BG","INSIDE_GLOWING") var panel_type = "BORDER_AND_INSIDE":
 	set(value):
 		panel_type = value
 		if is_node_ready():
@@ -46,6 +48,9 @@ func _ready():
 		"BORDER_AND_INSIDE":
 			$BorderOnly.visible = true
 			$BGOnly.visible = true
+		"INSIDE_GLOWING":
+			$BGOnly.visible = true
+			$BorderOnly.visible = false
 		"NO_BG":
 			$BorderOnly.visible = false
 			$BGOnly.visible = false
@@ -57,6 +62,7 @@ func _ready():
 			if set_border_as_bg:
 				$BGOnly.self_modulate = GlobalColor.COLOR_TEXT_WHITE
 				$BorderOnly.self_modulate = GlobalColor.COLOR_BG_WHITE
+			
 		"BLUE":
 			$BGOnly.self_modulate = GlobalColor.COLOR_BG_BLUE
 			$BorderOnly.self_modulate = GlobalColor.COLOR_BORDER_BLUE
@@ -103,7 +109,12 @@ func _ready():
 	if darken_bg:
 		#var relic_bg_color = Color(0.1,0.1,0.1,0.5)
 		$BGOnly.self_modulate = GlobalColor.COLOR_DISABLED_BG_WHITE / 2.0
-
+	else:
+		if panel_type == "INSIDE_GLOWING":
+			$BGOnly.get_theme_stylebox("panel").shadow_color = $BGOnly.self_modulate
+			$BGOnly.get_theme_stylebox("panel").shadow_color.a = 0.2
+		else:
+			$BGOnly.get_theme_stylebox("panel").shadow_color = DEFAULT_SHADOW_COLOR
 func GetTextColor():
 	match panel_color:
 		"WHITE":
