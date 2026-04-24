@@ -1,4 +1,5 @@
 Control
+HFlowContainer
 GPUParticles2D
 VBoxContainer
 Label
@@ -9,6 +10,5 @@ ProgressBar
 ScrollContainer
 TextureRect
 VFlowContainer
-HFlowContainer
 Timer
 Node

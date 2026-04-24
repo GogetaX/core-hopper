@@ -335,55 +335,6 @@ func _GetRepresentativeDepthForBand(band: Dictionary) -> int:
 	return min_depth + int(floor(float(max_depth - min_depth) * 0.5))
 
 
-func _GetAverageBlockHpForBand(band_index: int, representative_depth: int) -> float:
-	var band: Dictionary = GlobalBlockDatabase.depth_bands[band_index]
-	var spawn_pool: Array = band.get("spawn_pool", [])
-
-	if spawn_pool.is_empty():
-		return 1.0
-
-	var carried_base := float(GlobalBlockDatabase._GetContinuousBandBaseHp(band_index))
-	var base_hp := float(band.get("base_hp", 1.0))
-	var effective_base_hp := lerpf(base_hp, carried_base, 0.35)
-
-	var band_start_depth := int(band.get("min_depth", representative_depth))
-	var depth_in_band := maxi(0, representative_depth - band_start_depth)
-	var depth_growth := float(band.get("depth_growth", 1.01))
-
-	var total_weight := 0.0
-	var weighted_hp_sum := 0.0
-
-	for entry in spawn_pool:
-		if typeof(entry) != TYPE_DICTIONARY:
-			continue
-
-		var spawn_weight := float(entry.get("weight", 0.0))
-		if spawn_weight <= 0.0:
-			continue
-
-		var block_id := str(entry.get("id", "")).strip_edges()
-		if block_id == "":
-			continue
-
-		var archetype: Dictionary = GlobalBlockDatabase.get_archetype(block_id)
-		if archetype.is_empty():
-			continue
-
-		var hp_multiplier := float(archetype.get("hp_multiplier", 1.0))
-		var final_hp = max(
-			1.0,
-			effective_base_hp * hp_multiplier * pow(depth_growth, depth_in_band)
-		)
-
-		total_weight += spawn_weight
-		weighted_hp_sum += final_hp * spawn_weight
-
-	if total_weight <= 0.0:
-		return 1.0
-
-	return weighted_hp_sum / total_weight
-
-
 func _GetAverageExpectedCurrencyForBand(band_index: int, currency: String) -> float:
 	var band: Dictionary = GlobalBlockDatabase.depth_bands[band_index]
 	var spawn_pool: Array = band.get("spawn_pool", [])

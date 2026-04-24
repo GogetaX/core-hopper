@@ -66,17 +66,23 @@ text = "LIVE DIG OPERATIONS"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VList" type="VBoxContainer" parent="HBoxContainer" unique_id=699787057]
-layout_mode = 2
-alignment = 1
-
-[node name="CurrencyCointainer" type="HBoxContainer" parent="HBoxContainer/VList" unique_id=1723722295]
-custom_minimum_size = Vector2(0, 70)
+[node name="VList" type="Control" parent="HBoxContainer" unique_id=759140578]
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="CurrencyCointainer" type="HFlowContainer" parent="HBoxContainer/VList" unique_id=1139465904]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
 [node name="total_coins" parent="HBoxContainer/VList/CurrencyCointainer" unique_id=892379017 instance=ExtResource("4_amswt")]
-custom_minimum_size = Vector2(180, 0)
+custom_minimum_size = Vector2(120, 70)
 layout_mode = 2
 size_flags_horizontal = 3
 panel_type = "INSIDE_ONLY"
@@ -108,7 +114,7 @@ listen_to_save_data = "currencies.coins"
 added_end_text = " "
 
 [node name="total_crystals" parent="HBoxContainer/VList/CurrencyCointainer" unique_id=1229446735 instance=ExtResource("4_amswt")]
-custom_minimum_size = Vector2(180, 0)
+custom_minimum_size = Vector2(120, 70)
 layout_mode = 2
 size_flags_horizontal = 3
 panel_type = "INSIDE_ONLY"
@@ -141,7 +147,7 @@ listen_to_save_data = "currencies.crystals"
 added_end_text = " "
 
 [node name="tot_energy" parent="HBoxContainer/VList/CurrencyCointainer" unique_id=1187071397 instance=ExtResource("4_amswt")]
-custom_minimum_size = Vector2(180, 0)
+custom_minimum_size = Vector2(120, 70)
 layout_mode = 2
 size_flags_horizontal = 3
 panel_type = "INSIDE_ONLY"
@@ -171,6 +177,39 @@ horizontal_alignment = 2
 [node name="SaveLabelUpdate" parent="HBoxContainer/VList/CurrencyCointainer/tot_energy/HList/Value" unique_id=1425473503 instance=ExtResource("4_nts21")]
 str_format = "CURRENCY"
 listen_to_save_data = "currencies.energy"
+added_end_text = " "
+
+[node name="tot_dust" parent="HBoxContainer/VList/CurrencyCointainer" unique_id=1801041639 instance=ExtResource("4_amswt")]
+custom_minimum_size = Vector2(120, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+panel_type = "INSIDE_ONLY"
+panel_color = "BLUE"
+darken_bg = true
+
+[node name="HList" type="HBoxContainer" parent="HBoxContainer/VList/CurrencyCointainer/tot_dust" unique_id=1270440410]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="CurrencyIcon" parent="HBoxContainer/VList/CurrencyCointainer/tot_dust/HList" unique_id=1265940928 instance=ExtResource("4_glubf")]
+custom_minimum_size = Vector2(30, 25)
+layout_mode = 2
+icon_type = "DUST_SMALL"
+
+[node name="Value" type="Label" parent="HBoxContainer/VList/CurrencyCointainer/tot_dust/HList" unique_id=1747160047]
+layout_mode = 2
+theme_type_variation = &"LabelCurrency"
+text = "123.K"
+horizontal_alignment = 2
+
+[node name="SaveLabelUpdate" parent="HBoxContainer/VList/CurrencyCointainer/tot_dust/HList/Value" unique_id=138700460 instance=ExtResource("4_nts21")]
+str_format = "CURRENCY"
+listen_to_save_data = "relic_inv.dust"
 added_end_text = " "
 
 [node name="expand_control" type="Control" parent="HBoxContainer" unique_id=587114375]

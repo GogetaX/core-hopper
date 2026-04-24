@@ -273,7 +273,6 @@ btn_type = "NO_PRICE"
 currency_type = "crystals"
 buy_btn_title = "UPGRADE"
 panel_color = "BLUE"
-sub_text = ""
 
 [node name="relic_at_max_label" parent="HasRelics/Control3/VList" unique_id=652620379 instance=ExtResource("4_fp6mu")]
 self_modulate = Color(1, 0.3529412, 0.23137255, 1)

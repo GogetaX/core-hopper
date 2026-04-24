@@ -8,6 +8,7 @@ func _ready() -> void:
 	Global.top_currency_node_coin = $HBoxContainer/VList/CurrencyCointainer/total_coins/HList/CurrencyIcon
 	Global.top_currency_node_crystal = $HBoxContainer/VList/CurrencyCointainer/total_crystals/HList/CurrencyIcon
 	Global.top_currency_node_energy = $HBoxContainer/VList/CurrencyCointainer/tot_energy/HList/CurrencyIcon
+	Global.top_currency_node_dust = $HBoxContainer/VList/CurrencyCointainer/tot_dust/HList/CurrencyIcon
 	$HBoxContainer/VList/CurrencyCointainer/tot_energy.visible = false
 	Global.top_bar_y_pos = size.y+10
 func OnTabPressed(_tab_btn:ButtonTabClass):

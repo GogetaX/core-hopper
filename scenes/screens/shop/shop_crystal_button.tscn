@@ -61,6 +61,7 @@ text = "500 Crystals + 50 Bonus"
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
 size_flags_horizontal = 1
+btn_type = "NO_PRICE"
 buy_btn_title = "$1.99"
 
 [node name="MostPopular" parent="." unique_id=713365230 instance=ExtResource("5_glq8e")]

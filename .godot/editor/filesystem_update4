@@ -48,3 +48,15 @@ res://scenes/components/smart_panel.tscn
 res://scenes/components/smart_panel.gd
 res://scenes/screens/progress/smart_button_buy.gd
 res://scenes/app/main_scene.tscn
+res://scenes/popups/upgrade_cost_item.gd
+res://scenes/screens/shop/shop_screen.tscn
+res://scenes/screens/shop/shop_crystal_button.gd
+res://scenes/components/icon_bg.tscn
+res://scenes/components/top_bar.tscn
+res://autoload/Global.gd
+res://scenes/components/top_bar.gd
+res://scenes/components/currency_animation.tscn
+res://scenes/components/currency_animation.gd
+res://scenes/screens/shop/shop_crystal_button.tscn
+res://scenes/components/bottom_button.tscn
+res://scenes/app/main_scene.gd

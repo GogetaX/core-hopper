@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bg18vum2cai3c" path="res://art/icons/rocket.png" id="8_3rjm8"]
 [ext_resource type="Script" uid="uid://cducjosg5ddnq" path="res://scenes/screens/shop/resets_in_time.gd" id="8_c5hhf"]
 [ext_resource type="Texture2D" uid="uid://bmi0xl7ivgbdw" path="res://art/shop/shop_icons.png" id="10_nspte"]
+[ext_resource type="Texture2D" uid="uid://c05hifuypiqi2" path="res://art/currency/currency_dust.tres" id="12_r2ylk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8j0y4"]
 shader = ExtResource("1_bndor")
@@ -220,11 +221,9 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 
 [node name="DailyDeal" parent="DailyDealList" unique_id=737257032 instance=ExtResource("6_0o6hu")]
-custom_minimum_size = Vector2(400, 360)
 layout_mode = 2
 
 [node name="DailyDeal2" parent="DailyDealList" unique_id=153683194 instance=ExtResource("6_0o6hu")]
-custom_minimum_size = Vector2(400, 360)
 layout_mode = 2
 
 [node name="Control2" type="Control" parent="." unique_id=910548509]
@@ -310,6 +309,46 @@ crystal_icon = SubResource("AtlasTexture_r2ylk")
 currency_type = "energy"
 get_currency_value = 12500
 
+[node name="Control4" type="Control" parent="." unique_id=251780889]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="." unique_id=1463046969]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="HBoxContainer4" unique_id=176762537]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_Orange"
+text = "DUST PACKS"
+
+[node name="Control" type="Control" parent="HBoxContainer4" unique_id=1987474789]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Control2" type="Control" parent="HBoxContainer4" unique_id=802718023]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="BuyWithCurrency2" type="HFlowContainer" parent="." unique_id=53419344]
+layout_mode = 2
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = 30
+
+[node name="ShopEnergyButton" parent="BuyWithCurrency2" unique_id=40613000 instance=ExtResource("7_5vb6r")]
+layout_mode = 2
+panel_color = "ORANGE"
+item_name = "Relic Upgrade Pack"
+item_subname = "20 Dust + 5 Bonus"
+item_price = "400"
+crystal_icon = ExtResource("12_r2ylk")
+currency_type = "energy"
+get_currency_type = "dust"
+get_currency_value = 25
+
 [node name="Control3" type="Control" parent="." unique_id=50843159]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
@@ -341,15 +380,12 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 
 [node name="DailyDeal" parent="TacticalBoosters" unique_id=704533999 instance=ExtResource("6_0o6hu")]
-custom_minimum_size = Vector2(400, 360)
 layout_mode = 2
 
 [node name="DailyDeal2" parent="TacticalBoosters" unique_id=1416245813 instance=ExtResource("6_0o6hu")]
-custom_minimum_size = Vector2(400, 360)
 layout_mode = 2
 
 [node name="DailyDeal3" parent="TacticalBoosters" unique_id=1781121777 instance=ExtResource("6_0o6hu")]
-custom_minimum_size = Vector2(400, 360)
 layout_mode = 2
 
 [connection signal="timeout" from="HBoxContainer/ProgressHashTag/ResetsInTime/Timer" to="HBoxContainer/ProgressHashTag/ResetsInTime" method="_on_timer_timeout"]

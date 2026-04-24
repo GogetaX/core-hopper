@@ -1,6 +1,6 @@
 extends Node
 
-signal block_hp_updated(lane_index: int, block_uid: String, hp: float, max_hp: float, hp_percent: float)
+signal block_hp_updated(lane_index: int, block_uid: String, hp: Dictionary, max_hp: Dictionary, hp_percent: float)
 signal block_destroyed(lane_index: int, block_uid: String)
 signal boss_special_blocked_hit(lane_index: int, block_uid: String, reason: String)
 
@@ -522,22 +522,24 @@ func _ApplyDamageToFrontBlock(lane_index: int, damage: float, is_tap_damage: boo
 	if damage <= 0.0:
 		return false
 
+	var damage_big: Dictionary = GlobalBigNumber.Zero()
+
 	if is_tap_damage:
 		if !is_boss and _CanTapExecuteBlock(current_block):
-			damage = GlobalBigNumber.ToFloatSafe(current_block.get("hp", 0.0))
+			damage_big = GlobalBigNumber.ToBig(current_block.get("hp", 0.0))
 			destroy_context["did_tap_execute"] = true
 			destroy_context["reward_mult"] = GlobalStats.GetTapExecuteRewardMultiplier()
 		else:
 			var tap_crit_result := GlobalStats.ApplyTapCritToDamage(damage)
 			damage = float(tap_crit_result.get("damage", damage))
 			destroy_context["did_tap_crit"] = bool(tap_crit_result.get("did_crit", false))
+			damage_big = GlobalBigNumber.ToBig(damage)
 	else:
 		var crit_result := GlobalStats.ApplyCritToDamage(damage)
 		damage = float(crit_result.get("damage", damage))
+		damage_big = GlobalBigNumber.ToBig(damage)
 
 	var hp_big := GlobalBigNumber.ToBig(current_block.get("hp", 0.0))
-	var damage_big := GlobalBigNumber.ToBig(damage)
-
 	current_block["hp"] = GlobalBigNumber.Sub(hp_big, damage_big)
 
 	_EmitBlockHpUpdated(lane_index)
@@ -824,10 +826,15 @@ func _CanTapExecuteBlock(block: Dictionary) -> bool:
 	if threshold <= 0.0:
 		return false
 
-	var max_hp = max(1.0, float(block.get("max_hp", block.get("hp", 1.0))))
-	var current_hp = max(0.0, float(block.get("hp", 0.0)))
+	var max_hp_big := GlobalBigNumber.ToBig(block.get("max_hp", block.get("hp", 1.0)))
+	var current_hp_big := GlobalBigNumber.ToBig(block.get("hp", 0.0))
 
-	return current_hp <= max_hp * threshold
+	if GlobalBigNumber.Compare(max_hp_big, GlobalBigNumber.Zero()) <= 0:
+		return false
+
+	var execute_threshold_hp := GlobalBigNumber.MulFloat(max_hp_big, threshold)
+
+	return GlobalBigNumber.Compare(current_hp_big, execute_threshold_hp) <= 0
 
 func _GrantRolledBlockDrops(finished_block: Dictionary, reward_mult: float = 1.0) -> void:
 	var block_id := str(finished_block.get("id", ""))

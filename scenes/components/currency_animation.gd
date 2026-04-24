@@ -23,6 +23,10 @@ func StartAnimation(currency_type) -> void:
 			texture = preload("res://art/currency/crystal_small.png")
 			self_modulate = GlobalColor.COLOR_BORDER_PURPLE
 			cur_fly_node = Global.top_currency_node_crystal
+		"dust":
+			texture = preload("res://art/currency/currency_dust.tres")
+			self_modulate = GlobalColor.COLOR_BORDER_GOLD
+			cur_fly_node = Global.top_currency_node_dust
 		_:
 			print_debug("Unknown currency_type: ",currency_type)
 	scale = Vector2.ONE * randf_range(0.85, 1.1)
