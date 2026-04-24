@@ -12,3 +12,10 @@ res://autoload/GlobalOfflineProgress.gd
 res://autoload/GlobalSave.gd
 res://scenes/screens/dig/material.gd
 res://autoload/GlobalBossDB.gd
+res://data/upgrades/upgrade_db.json
+res://scenes/screens/progress/progress_skill.tscn
+res://scenes/screens/progress/progress_screen.gd
+res://scenes/screens/progress/progress_screen.tscn
+res://data/bosses/boss_db.json
+res://data/daily_quests/daily_quests.json
+res://autoload/GlobalDailyQuest.gd

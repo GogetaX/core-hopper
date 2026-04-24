@@ -93,7 +93,8 @@ func GenerateNewSet() -> void:
 	var type_counts := {}
 	var type_caps := {
 		"merge_bots": 1,
-		"buy_upgrades": 1
+		"buy_upgrades": 1,
+		"defeat_bosses": 1
 	}
 
 	# Prefer at least 1 break quest if possible

@@ -25,19 +25,6 @@
 	"unlock_type": "default",
 	"unlock_value": 0
   },
-  "drill_speed": {
-	"title": "Drill Speed",
-	"group": "speed",
-	"icon": "dig_speed",
-	"level": 0,
-	"max_level": -1,
-	"base_cost": 40,
-	"cost_scale": 1.8,
-	"effect_type": "mult_pow",
-	"effect_base": 1.12,
-	"unlock_type": "default",
-	"unlock_value": 0
-  },
   "coin_yield": {
 	"title": "Coin Yield",
 	"group": "economy",

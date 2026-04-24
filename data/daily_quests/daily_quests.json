@@ -424,6 +424,26 @@
 		"coins": 700,
 		"crystals": 2
 	  }
+	},
+	{
+	  "id": "dq_defeat_bosses_any_003",
+	  "title": "Boss Breaker",
+	  "desc": "Defeat 3 bosses",
+	  "category": "daily",
+	  "objective_type": "defeat_bosses",
+	  "progress_mode": "add",
+	  "target": 3,
+	  "weight": 35,
+	  "filters": {},
+	  "requirements": {
+		"min_depth": 100,
+		"min_lane_unlocked": 1
+	  },
+	  "reward": {
+		"coins": 1500,
+		"crystals": 4,
+		"energy": 1
+	  }
 	}
   ]
 }

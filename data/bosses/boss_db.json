@@ -14,7 +14,7 @@
 		"energy": 0
 	  },
 	  "drop_table": [
-        "cracked_core"
+        "random_relic"
 	  ],
 	 "special_type": "none",
 	  "special_values": {
@@ -38,7 +38,7 @@
 		"energy": 0
 	  },
 	  "drop_table": [
-		"combo_finger", "combo_finger", "lucky_nail", "idle_battery"
+        "random_relic"
 	  ],
 	  "special_type": "regen",
 	  "special_values": {
@@ -63,7 +63,7 @@
 		"energy": 0
 	  },
 	  "drop_table": [
-		"titan_shard"
+        "random_relic"
 	  ],
 	  "special_type": "armor",
 	  "special_values": {
@@ -87,7 +87,9 @@
 		"crystals": 10,
 		"energy": 1
 	  },
-	  "drop_table": ["combo_finger", "lucky_nail", "idle_battery", "titan_shard"],
+	  "drop_table": [
+        "random_relic"
+	  ],
 	  "special_type": "tap_resist",
 	  "special_values": {
 		"tap_damage_multiplier": 0.0
@@ -110,8 +112,9 @@
 		"crystals": 20,
 		"energy": 2
 	  },
-	"drop_table": ["cracked_core", "combo_finger", "lucky_nail", "titan_shard", "idle_battery"],
-
+	  "drop_table": [
+        "random_relic"
+	  ],
 	  "special_type": "timer_enrage",
 	  "special_values": {
 		"enrage_after_sec": 20.0,
@@ -135,7 +138,9 @@
 		"crystals": 35,
 		"energy": 4
 	  },
-	  "drop_table": ["cracked_core", "combo_finger", "lucky_nail", "titan_shard", "idle_battery"],
+	  "drop_table": [
+        "random_relic"
+	  ],
 	  "special_type": "shield_cycle",
 	  "special_values": {
 		"shield_duration_sec": 4.0,

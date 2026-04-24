@@ -78,20 +78,20 @@ func _EmitBlockHpUpdated(lane_index: int) -> void:
 
 	var lane = GlobalSave.save_data.lanes[lane_index]
 
-	if lane.block_data.is_empty():
+	if !lane.has("block_data") or lane.block_data.is_empty():
 		return
 
-	var block = lane.block_data[0]
+	var block: Dictionary = lane.block_data[0]
 
-	var hp_big := GlobalBigNumber.ToBig(block.get("hp", 0.0))
-	var max_hp_big := GlobalBigNumber.ToBig(block.get("max_hp", 1.0))
+	var hp_big: Dictionary = GlobalBigNumber.ToBig(block.get("hp", 0.0))
+	var max_hp_big: Dictionary = GlobalBigNumber.ToBig(block.get("max_hp", 1.0))
 	var hp_percent := GlobalBigNumber.Percent(hp_big, max_hp_big)
 
 	block_hp_updated.emit(
 		lane_index,
-		str(block.uid),
-		GlobalBigNumber.ToFloatSafe(hp_big),
-		GlobalBigNumber.ToFloatSafe(max_hp_big),
+		str(block.get("uid", "")),
+		hp_big,
+		max_hp_big,
 		hp_percent
 	)
 	
@@ -551,7 +551,12 @@ func _ApplyDamageToFrontBlock(lane_index: int, damage: float, is_tap_damage: boo
 	if current_block.has("is_boss") and current_block.is_boss:
 		GlobalSave.SetTotalBossKills(1)
 
-	GlobalDailyQuest.RegisterBlockBroken(current_block.id, current_block.id)
+		GlobalDailyQuest.RegisterBossDefeated(
+			str(current_block.get("boss_id", "")),
+			str(current_block.get("type", "boss"))
+		)
+	else:
+		GlobalDailyQuest.RegisterBlockBroken(current_block.id, current_block.id)
 	_FinishFrontBlock(lane_index, destroy_context)
 	return true
 
@@ -574,8 +579,6 @@ func _HandleBossBlockFinished(finished_block: Dictionary) -> void:
 	var boss_id := str(finished_block.get("boss_id", ""))
 	var boss_name := str(finished_block.get("name", boss_id))
 
-	var is_first_kill_by_id := !GlobalBossDb.HasBossBeenKilledByID(boss_id)
-
 	var rewards = GlobalBossDb.OnBossKilled(finished_block)
 	if rewards.is_empty():
 		return
@@ -585,14 +588,9 @@ func _HandleBossBlockFinished(finished_block: Dictionary) -> void:
 		final_coins = int(round(final_coins * GlobalStats.GetCoinYieldMultiplier()))
 		rewards["coins"] = final_coins
 
-	var relic_ids: Array = []
 
-	if is_first_kill_by_id:
-		var bonus_relic_id := GlobalRelicDb.GetRandomRelicID()
-		if bonus_relic_id != "":
-			relic_ids.append(bonus_relic_id)
-
-	rewards["relic_ids"] = relic_ids
+	if !rewards.has("relic_ids") or typeof(rewards["relic_ids"]) != TYPE_ARRAY:
+		rewards["relic_ids"] = []
 
 	var chest_data = GlobalRewardChest.MakeBossRewardChest(boss_id, boss_name, rewards)
 	GlobalRewardChest.AddChest(chest_data)

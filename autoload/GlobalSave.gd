@@ -62,6 +62,9 @@ func AdjustNewData():
 		
 		save_data.progress["free_bot_count"] = 0
 	MigrateBlockHpToBigNumbers()
+	#Remove the drill_speed from save_data.upgrades.drill_speed
+	if save_data.upgrades.has("drill_speed"):
+		save_data.upgrades.erase("drill_speed")
 	
 func RepapulateAllLaneBlocks():
 	GenerateNextBlocks(0,5)

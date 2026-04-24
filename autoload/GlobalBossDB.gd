@@ -2,6 +2,8 @@ extends Node
 
 const BOSS_DB_PATH := "res://data/bosses/boss_db.json"
 
+const RANDOM_RELIC_DROP_ID := "random_relic"
+
 var boss_db: Dictionary = {}
 var boss_depth_map: Dictionary = {}
 
@@ -187,22 +189,42 @@ func IsBossBlock(block_data: Dictionary) -> bool:
 
 func GetBossRewardsByID(boss_id: String) -> Dictionary:
 	var boss_data := GetBossDataByID(boss_id)
+
 	if boss_data.is_empty():
 		return {
 			"coins": 0,
 			"crystals": 0,
 			"energy": 0,
 			"drop_table": [],
+			"relic_ids": [],
 			"unlocks_on_kill": []
 		}
 
 	var guaranteed_rewards = boss_data.get("guaranteed_rewards", {})
+
+	var drop_table: Array = []
+	var raw_drop_table = boss_data.get("drop_table", [])
+	if typeof(raw_drop_table) == TYPE_ARRAY:
+		drop_table = raw_drop_table.duplicate(true)
+
+	var unlocks_on_kill: Array = []
+	var raw_unlocks = boss_data.get("unlocks_on_kill", [])
+	if typeof(raw_unlocks) == TYPE_ARRAY:
+		unlocks_on_kill = raw_unlocks.duplicate(true)
+
+	var relic_ids: Array = []
+	var rolled_relic_id := _RollBossRelicDrop(drop_table)
+
+	if rolled_relic_id != "":
+		relic_ids.append(rolled_relic_id)
+
 	return {
 		"coins": int(guaranteed_rewards.get("coins", 0)),
 		"crystals": int(guaranteed_rewards.get("crystals", 0)),
 		"energy": int(guaranteed_rewards.get("energy", 0)),
-		"drop_table": boss_data.get("drop_table", []).duplicate(true),
-		"unlocks_on_kill": []
+		"drop_table": drop_table,
+		"relic_ids": relic_ids,
+		"unlocks_on_kill": unlocks_on_kill
 	}
 
 
@@ -255,3 +277,34 @@ func GetNextBossDepth(from_depth: int) -> int:
 func GetBossIcon(boss_id):
 	var boss_data = GlobalBossDb.GetBossDataByID(boss_id)
 	return load("res://data/boss_icons/"+boss_data.boss_icon+".tres")
+
+func _RollBossRelicDrop(drop_table: Array) -> String:
+	if drop_table.is_empty():
+		return ""
+
+	var valid_entries: Array = []
+
+	for entry_value in drop_table:
+		var entry := str(entry_value).strip_edges()
+
+		if entry == "":
+			continue
+
+		if entry == RANDOM_RELIC_DROP_ID:
+			valid_entries.append(entry)
+			continue
+
+		# Backward compatibility if you ever put a specific relic id again.
+		if GlobalRelicDb.HasRelicData(entry):
+			valid_entries.append(entry)
+
+	if valid_entries.is_empty():
+		return ""
+
+	var rolled_entry := str(valid_entries[randi() % valid_entries.size()])
+
+	if rolled_entry == RANDOM_RELIC_DROP_ID:
+		return GlobalRelicDb.GetRandomRelicID()
+
+	return rolled_entry
+	
