@@ -126,7 +126,7 @@
 	  "id": "core_serpent",
 	  "name": "Core Serpent",
 	  "boss_icon":"boss_04_core_serpent",
-	  "spawn_depth": 2200,
+	  "spawn_depth": 1900,
 	  "tier": 6,
 	  "hp_multiplier": 180.0,
 	  "coin_reward_multiplier": 42.0,

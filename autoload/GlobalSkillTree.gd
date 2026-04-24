@@ -597,7 +597,9 @@ func _BuildStatEffectText(effect: Dictionary, level: int) -> String:
 
 		"daily_free_bot_level_bonus":
 			return "+%d Daily Free Bot Levels" % int(total_value)
-
+		
+		"direct_bot_buy_better_rank_chance":
+			return "+%s%% better bot rank chance" % _ToPercentInt(total_value)
 		_:
 			print_debug("Unknown stat: ", stat)
 

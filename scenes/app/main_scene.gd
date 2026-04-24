@@ -20,6 +20,8 @@ func _ready() -> void:
 	
 func InitOfflineData():
 	var offline_data = GlobalOfflineProgress.ProcessOfflineProgress()
+	print("oflinedata: ")
+	print(offline_data)
 	if !offline_data.is_empty():
 		if offline_data.coins == 0 && offline_data.crystals == 0 && offline_data.energy == 0 && offline_data.drop_data == []:
 			return

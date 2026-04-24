@@ -13,7 +13,7 @@
 	  ]
 	},
 	"2": {
-	  "required_depth": 1600,
+	  "required_depth": 1500,
 	  "title": "Core Reset II",
 	  "description": "Start with stronger bots.",
 	  "effects": [
@@ -21,7 +21,7 @@
 	  ]
 	},
 	"3": {
-	  "required_depth": 3200,
+	  "required_depth": 1900,
 	  "title": "Core Reset III",
 	  "description": "Unlock one more relic slot.",
 	  "effects": [
@@ -29,7 +29,7 @@
 	  ]
 	},
 	"4": {
-	  "required_depth": 6400,
+	  "required_depth": 2300,
 	  "title": "Core Reset IV",
 	  "description": "Start with Level 3 bots.",
 	  "effects": [
@@ -37,7 +37,7 @@
 	  ]
 	},
 	"5": {
-	  "required_depth": 12800,
+	  "required_depth": 2700,
 	  "title": "Core Reset V",
 	  "description": "Permanent bot power increase.",
 	  "effects": [
@@ -45,7 +45,7 @@
 	  ]
 	},
 	"6": {
-	  "required_depth": 20000,
+	  "required_depth": 3100,
 	  "title": "Core Reset VI",
 	  "description": "One more merge slot.",
 	  "effects": [
@@ -53,7 +53,7 @@
 	  ]
 	},
 	"7": {
-	  "required_depth": 28000,
+	  "required_depth": 3500,
 	  "title": "Core Reset VII",
 	  "description": "Start with Level 4 bots.",
 	  "effects": [
@@ -61,7 +61,7 @@
 	  ]
 	},
 	"8": {
-	  "required_depth": 38000,
+	  "required_depth": 3900,
 	  "title": "Core Reset VIII",
 	  "description": "More value from block drops.",
 	  "effects": [
@@ -69,7 +69,7 @@
 	  ]
 	},
 	"9": {
-	  "required_depth": 50000,
+	  "required_depth": 4300,
 	  "title": "Core Reset IX",
 	  "description": "Unlock one more relic slot.",
 	  "effects": [
@@ -77,7 +77,7 @@
 	  ]
 	},
 	"10": {
-	  "required_depth": 65000,
+	  "required_depth": 4700,
 	  "title": "Core Reset X",
 	  "description": "Start with Level 5 bots.",
 	  "effects": [
@@ -85,7 +85,7 @@
 	  ]
 	},
 	"11": {
-	  "required_depth": 82000,
+	  "required_depth": 5100,
 	  "title": "Core Reset XI",
 	  "description": "Final merge slot bonus.",
 	  "effects": [
@@ -93,7 +93,7 @@
 	  ]
 	},
 	"12": {
-	  "required_depth": 102000,
+	  "required_depth": 5500,
 	  "title": "Core Reset XII",
 	  "description": "Permanent bot power increase.",
 	  "effects": [
@@ -101,7 +101,7 @@
 	  ]
 	},
 	"13": {
-	  "required_depth": 125000,
+	  "required_depth": 5900,
 	  "title": "Core Reset XIII",
 	  "description": "More value from all resource drops.",
 	  "effects": [
@@ -109,7 +109,7 @@
 	  ]
 	},
 	"14": {
-	  "required_depth": 150000,
+	  "required_depth": 6300,
 	  "title": "Core Reset XIV",
 	  "description": "Boss rewards become more valuable.",
 	  "effects": [
@@ -117,7 +117,7 @@
 	  ]
 	},
 	"15": {
-	  "required_depth": 180000,
+	  "required_depth": 6700,
 	  "title": "Core Reset XV",
 	  "description": "Manual tapping remains relevant late game.",
 	  "effects": [

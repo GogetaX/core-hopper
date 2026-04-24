@@ -29,8 +29,31 @@ func ProcessOfflineProgress() -> Dictionary:
 			"drop_data": []
 		}
 	var capped_seconds := mini(offline_seconds, GlobalStats.GetOfflineCapSeconds())
+
 	var selected_band_index := GetSelectedOfflineBandIndex()
 	var result := _SimulateSelectedBandOffline(capped_seconds, selected_band_index)
+	
+	# If selected band is too hard and gives 0 rewards, fallback to available bands.
+	if int(result.get("whole_blocks", 0)) <= 0:
+		var bands_data := GetAvailableBands()
+		var bands: Array = bands_data.get("bands", [])
+
+		for slot in [SLOT_RECOMMENDED, SLOT_EASY_COINS]:
+			for band in bands:
+				if str(band.get("slot", "")) != slot:
+					continue
+
+				var fallback_index := int(band.get("band_index", -1))
+				var fallback_result := _SimulateSelectedBandOffline(capped_seconds, fallback_index)
+
+				if int(fallback_result.get("whole_blocks", 0)) > 0:
+					result = fallback_result
+					GlobalSave.save_data.offline_mining["selected_band_index"] = fallback_index
+					break
+
+			if int(result.get("whole_blocks", 0)) > 0:
+				break
+	
 	result["coins"] = int(result["coins"] * GlobalStats.GetOfflineCoinGain())
 	result["crystals"] = int(result["crystals"] * GlobalStats.GetOfflineCrystalGain())
 	result["energy"] = int(result["energy"] * GlobalStats.GetOfflineEnergyGain())

@@ -18,3 +18,7 @@ res://scenes/components/small_notif_counter.tscn
 res://scenes/screens/dig/current_daily_task.tscn
 res://scenes/screens/dig/milestone_panel.tscn
 res://scenes/components/smart_button.tscn
+res://scenes/popups/SingleChestPopup.tscn
+res://autoload/GlobalSkillTree.gd
+res://data/core_reset/core_reset.json
+res://data/bosses/boss_db.json
