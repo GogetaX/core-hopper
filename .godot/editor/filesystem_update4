@@ -11,3 +11,4 @@ res://autoload/GlobalDiggingProcess.gd
 res://autoload/GlobalOfflineProgress.gd
 res://autoload/GlobalSave.gd
 res://scenes/screens/dig/material.gd
+res://autoload/GlobalBossDB.gd

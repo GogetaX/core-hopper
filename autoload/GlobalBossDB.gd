@@ -138,7 +138,7 @@ func _MakeBossUID(lane_index: int, depth: int, boss_id: String) -> String:
 	return "boss_%s_%s_%s" % [str(lane_index), str(depth), boss_id]
 
 
-func GenerateBossBlock(depth: int, lane_index: int, normal_block_hp: float, normal_coin_reward: int = 0) -> Dictionary:
+func GenerateBossBlock(depth: int, lane_index: int, normal_block_hp, normal_coin_reward: int = 0) -> Dictionary:
 	var boss_id := GetBossIDAtDepth(depth)
 	if boss_id == "":
 		return {}
@@ -150,7 +150,11 @@ func GenerateBossBlock(depth: int, lane_index: int, normal_block_hp: float, norm
 	var hp_multiplier := float(boss_data.get("hp_multiplier", 10.0))
 	var coin_mult := float(boss_data.get("coin_reward_multiplier", 1.0))
 
-	var boss_hp = max(1.0, normal_block_hp * hp_multiplier)
+	var boss_hp := GlobalBigNumber.MulFloat(
+		GlobalBigNumber.ToBig(normal_block_hp),
+		hp_multiplier
+	)
+
 	var reward_coins := int(round(float(normal_coin_reward) * coin_mult))
 
 	return {
@@ -161,8 +165,8 @@ func GenerateBossBlock(depth: int, lane_index: int, normal_block_hp: float, norm
 		"name": str(boss_data.get("name", boss_id)),
 		"depth": depth,
 		"lane_index": lane_index,
-		"hp": boss_hp,
-		"max_hp": boss_hp,
+		"hp": boss_hp.duplicate(true),
+		"max_hp": boss_hp.duplicate(true),
 		"reward_coin_multiplier": coin_mult,
 		"reward_coins": reward_coins,
 		"icon_key": str(boss_data.get("icon_key", "")),
@@ -171,11 +175,11 @@ func GenerateBossBlock(depth: int, lane_index: int, normal_block_hp: float, norm
 	}
 
 
-func TryGenerateBossBlock(depth: int, lane_index: int, normal_block_hp: float, normal_coin_reward: int = 0) -> Dictionary:
+func TryGenerateBossBlock(depth: int, lane_index: int, normal_block_hp, normal_coin_reward: int = 0) -> Dictionary:
 	if !CanSpawnBossAtDepth(depth):
 		return {}
-	return GenerateBossBlock(depth, lane_index, normal_block_hp, normal_coin_reward)
 
+	return GenerateBossBlock(depth, lane_index, normal_block_hp, normal_coin_reward)
 
 func IsBossBlock(block_data: Dictionary) -> bool:
 	return bool(block_data.get("is_boss", false))

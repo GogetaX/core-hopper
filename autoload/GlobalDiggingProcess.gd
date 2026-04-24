@@ -411,7 +411,9 @@ func CreateGeneratedBlockForDepth(lane_index: int, block_depth: int) -> Dictiona
 	if normal_block.is_empty():
 		return {}
 
-	var normal_hp := float(normal_block.get("max_hp", normal_block.get("hp", 1.0)))
+	normal_block = _ConvertGeneratedBlockHpToBigNumber(normal_block)
+
+	var normal_hp := GlobalBigNumber.ToBig(normal_block.get("max_hp", normal_block.get("hp", 1.0)))
 	var normal_reward := int(normal_block.get("reward_amount", 0))
 
 	var boss_block = GlobalBossDb.TryGenerateBossBlock(
@@ -428,10 +430,32 @@ func CreateGeneratedBlockForDepth(lane_index: int, block_depth: int) -> Dictiona
 			boss_block["reward_type"] = "coins"
 		if !boss_block.has("reward_amount"):
 			boss_block["reward_amount"] = int(boss_block.get("reward_coins", 0))
+
+		boss_block = _ConvertGeneratedBlockHpToBigNumber(boss_block)
 		return boss_block
 
 	return normal_block
-		
+
+
+func _ConvertGeneratedBlockHpToBigNumber(block: Dictionary) -> Dictionary:
+	if block.has("hp"):
+		block["hp"] = GlobalBigNumber.ToBig(block["hp"])
+
+	if block.has("max_hp"):
+		block["max_hp"] = GlobalBigNumber.ToBig(block["max_hp"])
+
+	if block.has("base_hp"):
+		block["base_hp"] = GlobalBigNumber.ToBig(block["base_hp"])
+
+	if !block.has("hp") and block.has("max_hp"):
+		block["hp"] = GlobalBigNumber.ToBig(block["max_hp"])
+
+	if block.has("hp") and block.has("max_hp"):
+		if GlobalBigNumber.Compare(block["hp"], block["max_hp"]) > 0:
+			block["hp"] = GlobalBigNumber.ToBig(block["max_hp"])
+
+	return block
+	
 func ApplyTapDamage(block_uid: String) -> void:
 	var lane_index := _FindLaneIndexByFrontBlockUid(block_uid)
 	if lane_index == -1:
@@ -531,35 +555,7 @@ func _ApplyDamageToFrontBlock(lane_index: int, damage: float, is_tap_damage: boo
 	_FinishFrontBlock(lane_index, destroy_context)
 	return true
 
-	
-func _CreateGeneratedBlockForDepth(lane_index: int, block_depth: int) -> Dictionary:
-	var normal_block = GlobalBlockDatabase.CreateBlockForLane(block_depth, lane_index)
-	if normal_block.is_empty():
-		return {}
 
-	var normal_hp := float(normal_block.get("max_hp", normal_block.get("hp", 1.0)))
-	var normal_reward := int(normal_block.get("reward_amount", 0))
-
-	var boss_block = GlobalBossDb.TryGenerateBossBlock(
-		block_depth,
-		lane_index,
-		normal_hp,
-		normal_reward
-	)
-
-	if !boss_block.is_empty():
-		# keep a few fields consistent with normal block handling / UI
-		if !boss_block.has("id"):
-			boss_block["id"] = str(boss_block.get("boss_id", "boss"))
-		if !boss_block.has("reward_type"):
-			boss_block["reward_type"] = "coins"
-		if !boss_block.has("reward_amount"):
-			boss_block["reward_amount"] = int(boss_block.get("reward_coins", 0))
-		return boss_block
-
-	return normal_block
-	
-	
 func IsLaneCurrentBlockBoss(lane_index: int) -> bool:
 	var block = GetLaneCurrentBlock(lane_index)
 	if block.is_empty():
