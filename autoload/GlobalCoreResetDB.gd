@@ -449,7 +449,8 @@ func ActivateCoreReset() -> bool:
 				for lane_index in range(GlobalSave.save_data.get("lanes", []).size()):
 					if digging.has_method("RefreshLaneDigging"):
 						digging.RefreshLaneDigging(lane_index)
-
+	
+	GlobalSave.MarkGameSaveLoaded()
 	GlobalSave.SyncSave()
 	return true
 
@@ -470,7 +471,7 @@ func _ResetRunStateForCoreReset() -> void:
 	var keep_meta: Dictionary = GlobalSave.save_data.get("meta", {}).duplicate(true)
 
 	# RESET CURRENT RUN
-	_ResetCurrenciesForCoreReset()
+	_ResetCurrenciesForCoreReset(clean_save)
 	_ResetBotInventoryForCoreReset(clean_save)
 	_ResetLanesForCoreReset(clean_save)
 	_ResetProgressForCoreReset(clean_save)
@@ -500,18 +501,31 @@ func _ResetRunStateForCoreReset() -> void:
 	GlobalSave.save_data["meta"] = keep_meta
 
 
-func _ResetCurrenciesForCoreReset() -> void:
-	if !GlobalSave.save_data.has("currencies") or typeof(GlobalSave.save_data.currencies) != TYPE_DICTIONARY:
-		GlobalSave.save_data["currencies"] = {}
+func _ResetCurrenciesForCoreReset(clean_save: Dictionary = {}) -> void:
+	var reset_currencies: Dictionary = {}
 
-	# reset run currencies only
-	GlobalSave.save_data.currencies["coins"] = 0
-	GlobalSave.save_data.currencies["crystals"] = 0
-	GlobalSave.save_data.currencies["energy"] = 0
+	# Keep all clean/default currency keys.
+	var clean_currencies = clean_save.get("currencies", {})
+	if typeof(clean_currencies) == TYPE_DICTIONARY:
+		for currency_id in clean_currencies.keys():
+			reset_currencies[str(currency_id)] = 0
 
-	# KEEP relic dust because relic system stays
-	if !GlobalSave.save_data.has("relic_inv") or typeof(GlobalSave.save_data.relic_inv) != TYPE_DICTIONARY:
-		GlobalSave.save_data["relic_inv"] = {}
+	# Also reset any newer/dynamic currencies that exist in the current save.
+	var current_currencies = GlobalSave.save_data.get("currencies", {})
+	if typeof(current_currencies) == TYPE_DICTIONARY:
+		for currency_id in current_currencies.keys():
+			reset_currencies[str(currency_id)] = 0
+
+	# Fallback safety.
+	if reset_currencies.is_empty():
+		reset_currencies = {
+			"coins": 0,
+			"crystals": 0,
+			"energy": 0
+		}
+
+	GlobalSave.save_data["currencies"] = reset_currencies
+	
 
 
 func _ResetBotInventoryForCoreReset(clean_save: Dictionary) -> void:

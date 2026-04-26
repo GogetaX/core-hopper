@@ -266,7 +266,7 @@ func BuildCleanSaveData():
 	res["relic_inv"]={
 			"equipped_ids" : [],
 			"owned" : {},
-			"dust": 18,
+			"dust": 0,
 			"unlocked_slots": 2
 	}
 	res["reward_chests"] = {

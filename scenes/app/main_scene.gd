@@ -24,6 +24,7 @@ func InitOfflineData():
 	print(offline_data)
 	if !offline_data.is_empty():
 		if offline_data.coins == 0 && offline_data.crystals == 0 && offline_data.energy == 0 && offline_data.drop_data == []:
+			GlobalSave.MarkGameSaveLoaded()
 			return
 		if offline_data.offline_seconds >= GlobalOfflineProgress.OFFLINE_MIN_SECONDS:
 			GlobalSignals.ShowPopup.emit("SHOW_OFFLINE_REWARD",offline_data)

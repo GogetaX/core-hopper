@@ -197,7 +197,7 @@ grow_vertical = 2
 alignment = 1
 
 [node name="CurrencyIcon" parent="HBoxContainer/VList/CurrencyCointainer/tot_dust/HList" unique_id=1265940928 instance=ExtResource("4_glubf")]
-custom_minimum_size = Vector2(30, 25)
+custom_minimum_size = Vector2(45, 25)
 layout_mode = 2
 icon_type = "DUST_SMALL"
 

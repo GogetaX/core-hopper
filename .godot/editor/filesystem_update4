@@ -15,3 +15,6 @@ res://scenes/screens/skills/skill_tree_world.tscn
 res://scenes/screens/skills/skills_screen.gd
 res://scenes/screens/skills/skills_screen.tscn
 res://autoload/GlobalSave.gd
+res://autoload/GlobalCoreResetDB.gd
+res://scenes/app/main_scene.gd
+res://scenes/components/top_bar.tscn
