@@ -11,7 +11,8 @@
 	  "guaranteed_rewards": {
 		"coins": 250,
 		"crystals": 0,
-		"energy": 0
+		"energy": 0,
+		"dust": 4
 	  },
 	  "drop_table": [
         "random_relic"
@@ -35,7 +36,8 @@
 	  "guaranteed_rewards": {
 		"coins": 600,
 		"crystals": 2,
-		"energy": 0
+		"energy": 0,
+		"dust": 8
 	  },
 	  "drop_table": [
         "random_relic"
@@ -60,7 +62,8 @@
 	  "guaranteed_rewards": {
 		"coins": 1400,
 		"crystals": 5,
-		"energy": 0
+		"energy": 0,
+		"dust": 14
 	  },
 	  "drop_table": [
         "random_relic"
@@ -85,7 +88,8 @@
 	  "guaranteed_rewards": {
 		"coins": 3200,
 		"crystals": 10,
-		"energy": 1
+		"energy": 1,
+		"dust": 24
 	  },
 	  "drop_table": [
         "random_relic"
@@ -110,7 +114,8 @@
 	  "guaranteed_rewards": {
 		"coins": 7000,
 		"crystals": 20,
-		"energy": 2
+		"energy": 2,
+		"dust": 38
 	  },
 	  "drop_table": [
         "random_relic"
@@ -136,7 +141,8 @@
 	  "guaranteed_rewards": {
 		"coins": 15000,
 		"crystals": 35,
-		"energy": 4
+		"energy": 4,
+		"dust": 55
 	  },
 	  "drop_table": [
         "random_relic"

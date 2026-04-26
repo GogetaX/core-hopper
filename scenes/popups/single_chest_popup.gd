@@ -13,7 +13,7 @@ func InitChest(data:Dictionary):
 	
 	#Populate currency rewards
 	for x in cur_chest_data.data.rewards:
-		if ["coins","crystals","energy"].has(x):
+		if ["coins","crystals","energy","dust"].has(x):
 			if cur_chest_data.data.rewards[x] > 0:
 				var r = reward_currency.instantiate() as RewardCurrencyClass
 				$SmartPanel/VBoxContainer/CurrencyList.add_child(r)
@@ -50,4 +50,7 @@ func _on_open_all_btn_on_pressed() -> void:
 			var coin_pos = x.GetCurrencyCenterGlobalPos()
 			GlobalSignals.ShowCurrencyAnimation.emit(coin_pos,x.currency_type.to_lower(),8)
 	GlobalRewardChest.OpenChest(cur_chest_data.chest_id)
-	GlobalSignals.ShowPopup.emit("SHOW_CHESTS",{})
+	if GlobalRewardChest.GetRewardChestQueue().is_empty():
+		GlobalSignals.CloseCurPopup.emit()
+	else:
+		GlobalSignals.ShowPopup.emit("SHOW_CHESTS",{})

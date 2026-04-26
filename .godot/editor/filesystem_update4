@@ -19,3 +19,11 @@ res://autoload/GlobalCoreResetDB.gd
 res://scenes/app/main_scene.gd
 res://scenes/components/top_bar.tscn
 res://autoload/GlobalDailyQuest.gd
+res://data/bosses/boss_db.json
+res://autoload/GlobalBossDB.gd
+res://autoload/GlobalRewardChest.gd
+res://scenes/popups/single_chest_popup.gd
+res://scenes/components/reward_currency.tscn
+res://scenes/components/reward_currency.gd
+res://scenes/popups/SingleChestPopup.tscn
+res://scenes/screens/merge/merge_screen.tscn

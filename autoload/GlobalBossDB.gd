@@ -195,38 +195,21 @@ func GetBossRewardsByID(boss_id: String) -> Dictionary:
 			"coins": 0,
 			"crystals": 0,
 			"energy": 0,
+			"dust": 0,
 			"drop_table": [],
-			"relic_ids": [],
 			"unlocks_on_kill": []
 		}
 
 	var guaranteed_rewards = boss_data.get("guaranteed_rewards", {})
 
-	var drop_table: Array = []
-	var raw_drop_table = boss_data.get("drop_table", [])
-	if typeof(raw_drop_table) == TYPE_ARRAY:
-		drop_table = raw_drop_table.duplicate(true)
-
-	var unlocks_on_kill: Array = []
-	var raw_unlocks = boss_data.get("unlocks_on_kill", [])
-	if typeof(raw_unlocks) == TYPE_ARRAY:
-		unlocks_on_kill = raw_unlocks.duplicate(true)
-
-	var relic_ids: Array = []
-	var rolled_relic_id := _RollBossRelicDrop(drop_table)
-
-	if rolled_relic_id != "":
-		relic_ids.append(rolled_relic_id)
-
 	return {
 		"coins": int(guaranteed_rewards.get("coins", 0)),
 		"crystals": int(guaranteed_rewards.get("crystals", 0)),
 		"energy": int(guaranteed_rewards.get("energy", 0)),
-		"drop_table": drop_table,
-		"relic_ids": relic_ids,
-		"unlocks_on_kill": unlocks_on_kill
+		"dust": int(guaranteed_rewards.get("dust", 0)),
+		"drop_table": boss_data.get("drop_table", []).duplicate(true),
+		"unlocks_on_kill": []
 	}
-
 
 func GetBossRewardsFromBlock(block_data: Dictionary) -> Dictionary:
 	if !IsBossBlock(block_data):
@@ -234,6 +217,7 @@ func GetBossRewardsFromBlock(block_data: Dictionary) -> Dictionary:
 			"coins": 0,
 			"crystals": 0,
 			"energy": 0,
+			"dust": 0,
 			"drop_table": [],
 			"unlocks_on_kill": []
 		}
@@ -249,6 +233,7 @@ func GetBossRewardsFromBlock(block_data: Dictionary) -> Dictionary:
 	rewards["coins"] = int(rewards["coins"] * GlobalStats.GetBossRewardMulti())
 	rewards["energy"] = int(rewards["energy"] * GlobalStats.GetBossRewardMulti())
 	rewards["crystals"] = int(rewards["crystals"] * GlobalStats.GetBossRewardMulti())
+	rewards["dust"] = int(rewards.get("dust", 0) * GlobalStats.GetBossRewardMulti())
 	return rewards
 
 

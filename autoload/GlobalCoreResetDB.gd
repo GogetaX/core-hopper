@@ -485,7 +485,10 @@ func _ResetRunStateForCoreReset() -> void:
 	GlobalSave.save_data["skill_tree"] = keep_skill_tree
 	GlobalSave.save_data["reward_chests"] = keep_reward_chests
 	GlobalSave.save_data["milestones"] = keep_milestones
-	GlobalSave.save_data["boss_progress"] = keep_boss_progress
+	GlobalSave.save_data["boss_progress"] = {
+		"killed_depths": [],
+		"killed_ids": keep_boss_progress.get("killed_ids", [])
+	}
 	GlobalSave.save_data["daily_quests"] = keep_daily_quests
 	GlobalSave.save_data["daily_free_bot"] = keep_daily_free_bot
 	GlobalSave.save_data["settings"] = keep_settings

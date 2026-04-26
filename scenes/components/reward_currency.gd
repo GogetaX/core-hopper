@@ -31,6 +31,9 @@ func _ready() -> void:
 		"ENERGY":
 			$SmartPanel/VList/HList/CurrencyIcon.icon_type = "ENERGY_SMALL_ANIMATED"
 			$SmartPanel/VList/value.theme_type_variation = "LabelTitle_Gold"
+		"DUST":
+			$SmartPanel/VList/HList/CurrencyIcon.icon_type = "DUST_SMALL"
+			$SmartPanel/VList/value.theme_type_variation = "LabelTitle_Gold"
 	$SmartPanel/VList/value.text = amount_str
 
 func GetCurrencyCenterGlobalPos():

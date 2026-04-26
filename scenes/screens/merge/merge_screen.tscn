@@ -229,7 +229,6 @@ btn_type = "NO_PRICE"
 buy_btn_title = "DAILY FREE BOT (2)"
 panel_color = "BLUE"
 price_text = "25"
-sub_text = ""
 
 [node name="DailyMythicBot" parent="VList" unique_id=880031611 instance=ExtResource("9_grbnr")]
 custom_minimum_size = Vector2(0, 120)

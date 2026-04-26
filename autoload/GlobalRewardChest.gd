@@ -20,6 +20,7 @@ func MakeBossRewardChest(boss_id: String, boss_name: String, rewards: Dictionary
 			"coins": int(rewards.get("coins", 0)),
 			"crystals": int(rewards.get("crystals", 0)),
 			"energy": int(rewards.get("energy", 0)),
+			"dust": int(rewards.get("dust", 0)),
 			"relic_ids": rewards.get("relic_ids", []).duplicate(true)
 		}
 	}
@@ -59,6 +60,7 @@ func OpenChest(index: int = 0) -> Dictionary:
 	var coins := int(rewards.get("coins", 0))
 	var crystals := int(rewards.get("crystals", 0))
 	var energy := int(rewards.get("energy", 0))
+	var dust := int(rewards.get("dust", 0))
 	var relic_ids: Array = rewards.get("relic_ids", [])
 
 	if coins > 0:
@@ -67,6 +69,8 @@ func OpenChest(index: int = 0) -> Dictionary:
 		GlobalSave.AddCurrency("crystals", crystals)
 	if energy > 0:
 		GlobalSave.AddCurrency("energy", energy)
+	if dust > 0:
+		GlobalSave.AddCurrency("dust", dust)
 
 	for relic_id_value in relic_ids:
 		var relic_id := str(relic_id_value)
