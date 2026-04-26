@@ -481,6 +481,7 @@ func _ResetRunStateForCoreReset() -> void:
 
 	# RESTORE PERSISTENT / META
 	GlobalSave.save_data["relic_inv"] = keep_relic_inv
+	GlobalSave.save_data.relic_inv["dust"] = 0
 	GlobalSave.save_data["skill_tree"] = keep_skill_tree
 	GlobalSave.save_data["reward_chests"] = keep_reward_chests
 	GlobalSave.save_data["milestones"] = keep_milestones

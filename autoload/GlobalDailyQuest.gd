@@ -565,15 +565,7 @@ func _OnBlockDestroyed(lane_index: int, _block_uid: String) -> void:
 
 	# In your current digging flow, block_destroyed emits before the front block is removed,
 	# so lane_data.block_data[0] is still the destroyed block here.
-	var front_block: Dictionary = lane_data["block_data"][0]
 
-	var block_id := str(front_block.get("id", ""))
-	var block_type := str(front_block.get("type", ""))
-
-	AddProgress("break_blocks", 1, {
-		"block_id": block_id,
-		"block_type": block_type
-	})
 
 func GetMostProgressedActiveQuest(include_completed: bool = true, include_claimed: bool = false) -> Dictionary:
 	RefreshForToday()

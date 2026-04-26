@@ -18,3 +18,4 @@ res://autoload/GlobalSave.gd
 res://autoload/GlobalCoreResetDB.gd
 res://scenes/app/main_scene.gd
 res://scenes/components/top_bar.tscn
+res://autoload/GlobalDailyQuest.gd
