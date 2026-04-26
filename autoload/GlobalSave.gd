@@ -103,7 +103,6 @@ func SyncSave(emit_data_saved:=true):
 func PrepareSaveMeta() -> void:
 	if !save_data.has("meta") or typeof(save_data.meta) != TYPE_DICTIONARY:
 		save_data["meta"] = {}
-
 	save_data.meta["save_version"] = CUR_SAVE_VERSION
 	save_data.meta["last_saved_unix"] = Time.get_unix_time_from_system()
 	
@@ -119,6 +118,9 @@ func LoadingTimeStamp():
 	GlobalSave.save_data.meta["last_loaded_unix"] = now
 	
 func ForceSave():
+	if !save_loaded:
+		print_debug("Save not loaded yet, trying to save...")
+		return
 	PrepareSaveMeta()
 	var f = FileAccess.open(SAVE_FILE,FileAccess.WRITE)
 	

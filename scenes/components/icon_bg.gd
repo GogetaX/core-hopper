@@ -30,6 +30,13 @@ signal BtnToggled(_is_toggled:bool)
 		return icon
 		
 @export_enum("AS_ICON","AS_BUTTON","AS_TOGGLE") var btn_type := "AS_ICON"
+@export_enum("TO_HORIZONTAL","TO_VERTICAL") var icon_resize := "TO_HORIZONTAL":
+	set(value):
+		icon_resize = value
+		if is_node_ready():
+			_ready()
+	get:
+		return icon_resize
 
 var is_toggled = false
 func _ready() -> void:
@@ -37,6 +44,12 @@ func _ready() -> void:
 	$IconBG.panel_type = panel_type
 	$IconBG/SkillIcon.self_modulate = $IconBG.GetBorderColor()
 	$IconBG/SkillIcon.texture = icon
+	match icon_resize:
+		"TO_HORIZONTAL":
+			$IconBG/SkillIcon.expand_mode = 3
+		"TO_VERTICAL":
+			$IconBG/SkillIcon.expand_mode = 5
+			
 	if !Engine.is_editor_hint():
 		if btn_type == "AS_BUTTON" || btn_type == "AS_TOGGLE":
 			GlobalBtn.AddBtnPress(self)

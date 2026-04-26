@@ -13,7 +13,8 @@ func InitCost(currency:String,target_currency:int):
 	$HList/cur_value.hash_tag_color = currency_color
 	$HList/max_value.hash_tag_color = currency_color
 	$HList/ProgressHashTag2.hash_tag_color = currency_color
-	if target_currency < my_currency:
+	
+	if my_currency < target_currency:
 		_has_enough = false
 		$HList/cur_value.hash_tag_color = "RED"
 	else:

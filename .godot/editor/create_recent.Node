@@ -1,6 +1,8 @@
+GPUParticles2D
+Node2D
+TextureRect
 Control
 HFlowContainer
-GPUParticles2D
 VBoxContainer
 Label
 CanvasLayer
@@ -8,7 +10,5 @@ TextureProgressBar
 HBoxContainer
 ProgressBar
 ScrollContainer
-TextureRect
 VFlowContainer
 Timer
-Node

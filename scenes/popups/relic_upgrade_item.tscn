@@ -33,6 +33,7 @@ layout_mode = 2
 mouse_filter = 2
 panel_color = "BLUE"
 icon = ExtResource("2_lmuq6")
+icon_resize = "TO_HORIZONTAL"
 
 [node name="dupe_amount" parent="VBoxContainer/IconBG" unique_id=713365230 instance=ExtResource("3_w2p20")]
 self_modulate = Color(0.81960785, 0.98039216, 1, 1)

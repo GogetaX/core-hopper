@@ -193,7 +193,6 @@ currency_type = "crystals"
 buy_btn_title = "UPGRADE SKILL"
 panel_color = "BLUE"
 price_text = "450K AU"
-sub_text = ""
 
 [node name="VList" type="VBoxContainer" parent="." unique_id=752231860]
 layout_mode = 1

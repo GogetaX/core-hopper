@@ -82,6 +82,7 @@ offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
 panel_type = "INSIDE_ONLY"
+icon_resize = "TO_HORIZONTAL"
 
 [node name="relic_rank" parent="HasRelics/Relic/IconBG" unique_id=486212889 instance=ExtResource("4_fp6mu")]
 layout_mode = 1

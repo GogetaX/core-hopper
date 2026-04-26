@@ -8,6 +8,7 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_bhobo")
+icon_resize = "TO_VERTICAL"
 
 [node name="IconBG" parent="." unique_id=892379017 instance=ExtResource("1_fsg7g")]
 layout_mode = 1

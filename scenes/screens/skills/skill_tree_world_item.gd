@@ -19,6 +19,7 @@ func GetSkillIcon():
 	return $SmartPanelCircleSkill/TextureRect.texture
 	
 func InitSkill(skill_key):
+	
 	var skill_data = GlobalSkillTree.GetSkillData(skill_key)
 	cur_skill_key = skill_key
 	global_position = Vector2(skill_data.pos.x*2,skill_data.pos.y*2)
@@ -39,6 +40,7 @@ func InitSkill(skill_key):
 	GlobalSignals.OnSkillLevelUpdated.connect(OnSkillUpdated)
 	
 	SetSkillVisibility()
+	
 	if Global.last_skill_key_selected == cur_skill_key:
 		await get_tree().process_frame
 		GlobalSignals.OnWorldSkillClassSelected.emit(self)
@@ -46,6 +48,7 @@ func InitSkill(skill_key):
 	
 
 func SetSkillVisibility():
+	$notif.visible = false
 	#Check visibility
 	var skill_data = GlobalSkillTree.GetSkillData(cur_skill_key)
 	var cur_level = GlobalSkillTree.GetAccuredSkillLevel(cur_skill_key)
@@ -134,6 +137,21 @@ func SetSkillVisibility():
 	$SmartPanelCircleSkill/TextureProgressBar.tint_under = $SmartPanelCircleSkill.GetBorderColor()
 	$SmartPanelCircleSkill/TextureProgressBar.tint_progress = $SmartPanelCircleSkill.GetTextColor()
 	
+	#Set Notification
+	if !_is_selected:
+		var has_prepreq = false
+		var prereq_amount = 0
+		for x in get_prereq:
+			if GlobalSkillTree.GetAccuredSkillLevel(x)>0:
+				prereq_amount += 1
+
+		if prereq_amount != get_prereq.size():
+			has_prepreq = false
+		else:
+			has_prepreq = true
+		if cur_level < max_level && has_prepreq:
+			if GlobalSkillTree.GetSkillNextCost(cur_skill_key) <= GlobalSave.GetCurrency("crystals"):
+				$notif.visible = true
 	
 func OnSkillUpdated(_skill_id:String):
 	if _skill_id == cur_skill_key:

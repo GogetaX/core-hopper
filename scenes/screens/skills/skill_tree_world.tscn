@@ -5,6 +5,30 @@
 [ext_resource type="Script" uid="uid://coi3iswylkb6y" path="res://scenes/screens/skills/camera_2d.gd" id="2_of02k"]
 [ext_resource type="PackedScene" uid="uid://dlja5pqp8h372" path="res://scenes/screens/skills/skill_list_line_2d.tscn" id="2_uywm7"]
 [ext_resource type="Script" uid="uid://djcjdvqx7whmk" path="res://scenes/screens/skills/line_2d_list.gd" id="3_of02k"]
+[ext_resource type="Texture2D" uid="uid://8gehs2jnoysm" path="res://art/particles/star_08.png" id="3_riwsr"]
+[ext_resource type="Texture2D" uid="uid://88ot8lfbupyo" path="res://art/particles/star_06.png" id="4_rtfpf"]
+
+[sub_resource type="Gradient" id="Gradient_fqhaa"]
+offsets = PackedFloat32Array(0, 0.26966292, 0.83707863, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2hsxe"]
+gradient = SubResource("Gradient_fqhaa")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rtfpf"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(2000, 2000, 1)
+angle_min = 1.0728835e-05
+angle_max = 90.000015
+spread = 180.0
+initial_velocity_max = 20.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.099999994
+scale_max = 0.19999999
+color_ramp = SubResource("GradientTexture1D_2hsxe")
+hue_variation_min = -2.2351742e-08
+hue_variation_max = 0.99999994
 
 [sub_resource type="Gradient" id="Gradient_of02k"]
 resource_local_to_scene = true
@@ -37,6 +61,20 @@ script = ExtResource("1_mtsct")
 position_smoothing_enabled = true
 position_smoothing_speed = 20.0
 script = ExtResource("2_of02k")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Camera2D" unique_id=1314097357]
+amount = 50
+texture = ExtResource("3_riwsr")
+lifetime = 10.0
+preprocess = 5.0
+process_material = SubResource("ParticleProcessMaterial_rtfpf")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="Camera2D" unique_id=1811013495]
+amount = 50
+texture = ExtResource("4_rtfpf")
+lifetime = 10.0
+preprocess = 5.0
+process_material = SubResource("ParticleProcessMaterial_rtfpf")
 
 [node name="Line2DList" type="Node2D" parent="." unique_id=500391358]
 script = ExtResource("3_of02k")

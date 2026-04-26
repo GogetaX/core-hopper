@@ -118,5 +118,3 @@ func _on_upgrade_skill_btn_btn_pressed_with_price(_currency: String, _price: int
 
 func _on_toggle_visibility_btn_toggled(_is_toggled: bool) -> void:
 	GlobalSignals.OnShowAllSkillsToggled.emit(_is_toggled)
-	if _is_toggled:
-		GlobalSignals.ResetSkillCamera.emit()
