@@ -27,3 +27,4 @@ res://scenes/components/reward_currency.tscn
 res://scenes/components/reward_currency.gd
 res://scenes/popups/SingleChestPopup.tscn
 res://scenes/screens/merge/merge_screen.tscn
+res://scenes/screens/dig/current_daily_task.gd

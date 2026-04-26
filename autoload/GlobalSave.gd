@@ -885,14 +885,19 @@ func _GetMergedBotRank(rank_a: int, rank_b: int) -> int:
 
 
 func _ApplyMergedBotProgress(target_bot: Dictionary) -> void:
-	target_bot.level = int(target_bot.level + 1)
-
-	if target_bot.level == 3:
-		if !GlobalSave.IsMilestoneCompleted("bot_level_3"):
-			GlobalSave.SetMilestoneToCompleted("bot_level_3")
-
+	var base_result_level := int(target_bot.get("level", 1)) + 1
+	
+	target_bot.level = base_result_level
+	
+	# Daily quest should count the normal merge result,
+	# before bonus level jumps.
+	GlobalDailyQuest.RegisterMergeCreated(base_result_level)
+	
 	if GlobalStats.HasChanceOfNextLevelBotOnMerge():
 		target_bot.level += 1
-
-	GlobalDailyQuest.RegisterMergeCreated(target_bot.level)
-	GlobalSave.SetHighestBotLevel(target_bot.level)
+	
+	if int(target_bot.level) >= 3:
+		if !GlobalSave.IsMilestoneCompleted("bot_level_3"):
+			GlobalSave.SetMilestoneToCompleted("bot_level_3")
+	
+	GlobalSave.SetHighestBotLevel(int(target_bot.level))

@@ -277,6 +277,7 @@ func ClaimQuest(quest_id: String) -> bool:
 
 
 func RegisterMergeCreated(result_bot_level: int) -> void:
+	print("register merge: ",result_bot_level)
 	AddProgress("merge_bots", 1, {
 		"result_bot_level": result_bot_level
 	})
