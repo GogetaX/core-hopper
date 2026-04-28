@@ -208,6 +208,7 @@ func AddProgress(objective_type: String, amount: int = 1, event_data: Dictionary
 	if amount <= 0:
 		return
 
+	_EnsureSaveSection()
 	RefreshForToday()
 
 	var changed := false
@@ -222,10 +223,11 @@ func AddProgress(objective_type: String, amount: int = 1, event_data: Dictionary
 		if str(template.get("objective_type", "")) != objective_type:
 			continue
 
-		if !_DoesQuestMatchFilters(template.get("filters", {}), event_data):
+		if IsQuestClaimed(quest_id):
 			continue
 
-		if IsQuestClaimed(quest_id):
+		var filters: Dictionary = template.get("filters", {})
+		if !_DoesQuestMatchFilters(filters, event_data):
 			continue
 
 		var target := int(template.get("target", 0))
@@ -237,6 +239,7 @@ func AddProgress(objective_type: String, amount: int = 1, event_data: Dictionary
 
 		_SetQuestProgress(quest_id, new_progress)
 		daily_quest_progress_updated.emit(quest_id, new_progress, target)
+
 		changed = true
 
 		if new_progress >= target and !_IsMarkedCompleted(quest_id):
@@ -246,7 +249,7 @@ func AddProgress(objective_type: String, amount: int = 1, event_data: Dictionary
 	if changed:
 		GlobalSave.SyncSave()
 
-
+	
 func ClaimQuest(quest_id: String) -> bool:
 	RefreshForToday()
 
@@ -277,7 +280,6 @@ func ClaimQuest(quest_id: String) -> bool:
 
 
 func RegisterMergeCreated(result_bot_level: int) -> void:
-	print("register merge: ",result_bot_level)
 	AddProgress("merge_bots", 1, {
 		"result_bot_level": result_bot_level
 	})
@@ -534,12 +536,30 @@ func _DoesQuestMatchFilters(filters: Dictionary, event_data: Dictionary) -> bool
 		if !event_data.has(key):
 			return false
 
-		if str(filters[key]) != str(event_data[key]):
+		var filter_value = filters[key]
+		var event_value = event_data[key]
+
+		# Fixes JSON float/int mismatch, for example:
+		# filter = 2.0, event = 2
+		if _AreBothNumeric(filter_value, event_value):
+			if int(filter_value) != int(event_value):
+				return false
+			continue
+
+		if str(filter_value) != str(event_value):
 			return false
 
 	return true
 
+func _AreBothNumeric(a, b) -> bool:
+	var a_type := typeof(a)
+	var b_type := typeof(b)
 
+	var a_is_number := a_type == TYPE_INT or a_type == TYPE_FLOAT
+	var b_is_number := b_type == TYPE_INT or b_type == TYPE_FLOAT
+
+	return a_is_number and b_is_number
+	
 func _GrantReward(reward: Dictionary) -> void:
 	for currency_type in ["coins", "crystals", "energy"]:
 		var value := int(reward.get(currency_type, 0))
