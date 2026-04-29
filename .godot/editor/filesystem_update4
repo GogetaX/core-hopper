@@ -20,3 +20,6 @@ res://data/boss_icons/boss_13_deep_oracle.tres
 res://data/boss_icons/boss_14_coal_berseker.tres
 res://data/boss_icons/boss_15_golen_mimic.tres
 res://data/boss_icons/boss_16_abyss_core.tres
+res://autoload/GlobalRewardChest.gd
+res://scenes/screens/dig/dig_screen.gd
+res://scenes/screens/dig/mining_panel.gd

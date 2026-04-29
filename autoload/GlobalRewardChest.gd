@@ -7,7 +7,7 @@ func _EnsureSchema() -> void:
 
 	if !GlobalSave.save_data.reward_chests.has("queue") or typeof(GlobalSave.save_data.reward_chests.queue) != TYPE_ARRAY:
 		GlobalSave.save_data.reward_chests["queue"] = []
-
+		
 
 func MakeBossRewardChest(boss_id: String, boss_name: String, rewards: Dictionary) -> Dictionary:
 	return {
