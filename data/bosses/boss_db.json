@@ -156,11 +156,11 @@
 	  "bg_color": "#0F766E",
 	  "title_color": "#FFFFFF",
 	  "unlocks_on_kill": []
-	},
-	{
+},
+{
 	"id": "iron_shell_golem",
 	"name": "Iron Shell Golem",
-	"boss_icon": "boss_iron_shell_golem",
+	"boss_icon": "boss_07_iron_shell_golem",
 	"spawn_depth": 2300,
 	"tier": 7,
 	"hp_multiplier": 240.0,
@@ -183,11 +183,11 @@
 	"bg_color": "#475569",
 	"title_color": "#FFFFFF",
 	"unlocks_on_kill": []
-	},
-	{
+},
+{
 	"id": "rust_maw",
 	"name": "Rust Maw",
-	"boss_icon": "boss_rust_maw",
+	"boss_icon": "boss_08_rust_maw",
 	"spawn_depth": 2700,
 	"tier": 8,
 	"hp_multiplier": 310.0,
@@ -208,11 +208,11 @@
 	"bg_color": "#92400E",
 	"title_color": "#FFFFFF",
 	"unlocks_on_kill": []
-	},
-	{
+},
+{
 	"id": "mirror_core",
 	"name": "Mirror Core",
-	"boss_icon": "boss_mirror_core",
+	"boss_icon": "boss_09_mirror_core",
 	"spawn_depth": 3100,
 	"tier": 9,
 	"hp_multiplier": 390.0,
@@ -234,11 +234,11 @@
 	"bg_color": "#0E7490",
 	"title_color": "#E0F2FE",
 	"unlocks_on_kill": []
-	},
-	{
+},
+{
 	"id": "ancient_vault",
 	"name": "Ancient Vault",
-	"boss_icon": "boss_ancient_vault",
+	"boss_icon": "boss_10_ancient_vault",
 	"spawn_depth": 3500,
 	"tier": 10,
 	"hp_multiplier": 480.0,
@@ -257,11 +257,11 @@
 	"bg_color": "#A16207",
 	"title_color": "#FFF7ED",
 	"unlocks_on_kill": []
-	},
-	{
+},
+{
 	"id": "obsidian_worm",
 	"name": "Obsidian Worm",
-	"boss_icon": "boss_obsidian_worm",
+	"boss_icon": "boss_11_obsidian_worm",
 	"spawn_depth": 3900,
 	"tier": 11,
 	"hp_multiplier": 590.0,
@@ -282,11 +282,11 @@
 	"bg_color": "#18181B",
 	"title_color": "#FFFFFF",
 	"unlocks_on_kill": []
-	},
-	{
+},
+{
 	"id": "thunder_drill",
 	"name": "Thunder Drill",
-	"boss_icon": "boss_thunder_drill",
+	"boss_icon": "boss_12_thunder_drill.tres",
 	"spawn_depth": 4300,
 	"tier": 12,
 	"hp_multiplier": 720.0,
@@ -307,11 +307,11 @@
 	"bg_color": "#1D4ED8",
 	"title_color": "#DBEAFE",
 	"unlocks_on_kill": []
-	},
-	{
+},
+{
 	"id": "deep_oracle",
 	"name": "Deep Oracle",
-	"boss_icon": "boss_deep_oracle",
+	"boss_icon": "boss_13_deep_oracle",
 	"spawn_depth": 4700,
 	"tier": 13,
 	"hp_multiplier": 860.0,
@@ -333,11 +333,11 @@
 	"bg_color": "#581C87",
 	"title_color": "#F3E8FF",
 	"unlocks_on_kill": []
-	},
-	{
+},
+{
 	"id": "coal_berserker",
 	"name": "Coal Berserker",
-	"boss_icon": "boss_coal_berserker",
+	"boss_icon": "boss_14_coal_berseker",
 	"spawn_depth": 5100,
 	"tier": 14,
 	"hp_multiplier": 1030.0,
@@ -359,11 +359,11 @@
 	"bg_color": "#3F3F46",
 	"title_color": "#FFFFFF",
 	"unlocks_on_kill": []
-	},
-	{
+},
+{
 	"id": "golden_mimic",
 	"name": "Golden Mimic",
-	"boss_icon": "boss_golden_mimic",
+	"boss_icon": "boss_15_golen_mimic",
 	"spawn_depth": 5500,
 	"tier": 15,
 	"hp_multiplier": 1220.0,
@@ -382,11 +382,11 @@
 	"bg_color": "#CA8A04",
 	"title_color": "#FFFBEB",
 	"unlocks_on_kill": []
-	},
-	{
+},
+{
 	"id": "abyss_core",
 	"name": "Abyss Core",
-	"boss_icon": "boss_abyss_core",
+	"boss_icon": "boss_16_abyss_core",
 	"spawn_depth": 5900,
 	"tier": 16,
 	"hp_multiplier": 1450.0,

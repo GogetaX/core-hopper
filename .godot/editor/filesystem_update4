@@ -10,3 +10,13 @@ res://scenes/popups/OfflinePlannerPopup.tscn
 res://data/bosses/boss_db.json
 res://scenes/app/main_scene.tscn
 res://autoload/GlobalDiggingProcess.gd
+res://data/boss_icons/boss_07_iron_shell_golem.tres
+res://data/boss_icons/boss_08_rust_maw.tres
+res://data/boss_icons/boss_09_mirror_core.tres
+res://data/boss_icons/boss_10_ancient_vault.tres
+res://data/boss_icons/boss_11_obsidian_worm.tres
+res://data/boss_icons/boss_12_thunder_drill.tres
+res://data/boss_icons/boss_13_deep_oracle.tres
+res://data/boss_icons/boss_14_coal_berseker.tres
+res://data/boss_icons/boss_15_golen_mimic.tres
+res://data/boss_icons/boss_16_abyss_core.tres

@@ -464,19 +464,25 @@ func ApplyTapDamage(block_uid: String) -> void:
 	var lane_index := _FindLaneIndexByFrontBlockUid(block_uid)
 	if lane_index == -1:
 		return
+
 	var lane_data = GlobalSave.save_data.lanes[lane_index]
+
 	if !lane_data.auto_dig_unlocked:
 		return
+
 	if lane_data.block_data.is_empty():
 		return
-	if str(lane_data.block_data[0].uid) != str(block_uid):
+
+	var front_block: Dictionary = lane_data.block_data[0]
+
+	if str(front_block.get("uid", "")) != str(block_uid):
 		return
-	var tap_damage := GlobalStats.GetTapDamage()
-	if !lane_data.block_data.has("is_boss"):
-		tap_damage = int(tap_damage * GlobalStats.GetFrontBlockTapDmgMulti())
-	elif !lane_data.block_data.is_boss:
-		tap_damage = int(tap_damage * GlobalStats.GetFrontBlockTapDmgMulti())
-	
+
+	var tap_damage := float(GlobalStats.GetTapDamage())
+
+	if !bool(front_block.get("is_boss", false)):
+		tap_damage *= GlobalStats.GetFrontBlockTapDmgMulti()
+
 	_ApplyDamageToFrontBlock(lane_index, tap_damage, true)
 
 func _FindLaneIndexByFrontBlockUid(block_uid: String) -> int:
@@ -691,17 +697,6 @@ func _ProcessBossSpecial(lane_index: int, delta: float) -> void:
 		block["boss_runtime"] = {}
 
 	var runtime := _EnsureBossRuntime(block, boss_data)
-
-	if !runtime.has("elapsed_sec"):
-		runtime["elapsed_sec"] = 0.0
-	if !runtime.has("enraged"):
-		runtime["enraged"] = false
-	if !runtime.has("shield_active"):
-		runtime["shield_active"] = false
-	if !runtime.has("shield_time_left"):
-		runtime["shield_time_left"] = 0.0
-	if !runtime.has("shield_cooldown_left"):
-		runtime["shield_cooldown_left"] = float(special_values.get("shield_cooldown_sec", 0.0))
 
 	runtime["elapsed_sec"] = float(runtime.get("elapsed_sec", 0.0)) + delta
 
