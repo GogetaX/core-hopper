@@ -36,6 +36,9 @@ func _process(delta: float) -> void:
 
 func _ProcessBossPassiveLanes(delta: float) -> void:
 	for lane_index in range(GlobalSave.save_data.lanes.size()):
+		if _lane_runtime.has(lane_index):
+			continue
+
 		var lane = GlobalSave.save_data.lanes[lane_index]
 
 		if !lane.auto_dig_unlocked:
@@ -45,6 +48,7 @@ func _ProcessBossPassiveLanes(delta: float) -> void:
 			continue
 
 		var front_block = lane.block_data[0]
+
 		if !bool(front_block.get("is_boss", false)):
 			continue
 
@@ -648,7 +652,19 @@ func _EnsureBossRuntime(block: Dictionary, boss_data: Dictionary) -> Dictionary:
 
 	if !runtime.has("shield_cooldown_left"):
 		runtime["shield_cooldown_left"] = float(special_values.get("shield_cooldown_sec", 0.0))
+	
+	if !runtime.has("armor_active"):
+		runtime["armor_active"] = false
 
+	if !runtime.has("armor_time_left"):
+		runtime["armor_time_left"] = 0.0
+
+	if !runtime.has("armor_cooldown_left"):
+		runtime["armor_cooldown_left"] = float(special_values.get("armor_cooldown_sec", 0.0))
+
+	if !runtime.has("reflect_hit_counter"):
+		runtime["reflect_hit_counter"] = 0
+		
 	return runtime
 	
 func _ProcessBossSpecial(lane_index: int, delta: float) -> void:
@@ -674,7 +690,7 @@ func _ProcessBossSpecial(lane_index: int, delta: float) -> void:
 	if !block.has("boss_runtime") or typeof(block["boss_runtime"]) != TYPE_DICTIONARY:
 		block["boss_runtime"] = {}
 
-	var runtime: Dictionary = block["boss_runtime"]
+	var runtime := _EnsureBossRuntime(block, boss_data)
 
 	if !runtime.has("elapsed_sec"):
 		runtime["elapsed_sec"] = 0.0
@@ -722,7 +738,19 @@ func _ProcessBossSpecial(lane_index: int, delta: float) -> void:
 				if float(runtime["shield_cooldown_left"]) <= 0.0:
 					runtime["shield_active"] = true
 					runtime["shield_time_left"] = float(special_values.get("shield_duration_sec", 0.0))
+		"armor_phase":
+			if bool(runtime.get("armor_active", false)):
+				runtime["armor_time_left"] = max(0.0, float(runtime.get("armor_time_left", 0.0)) - delta)
 
+				if float(runtime["armor_time_left"]) <= 0.0:
+					runtime["armor_active"] = false
+					runtime["armor_cooldown_left"] = float(special_values.get("armor_cooldown_sec", 0.0))
+			else:
+				runtime["armor_cooldown_left"] = max(0.0, float(runtime.get("armor_cooldown_left", 0.0)) - delta)
+
+				if float(runtime["armor_cooldown_left"]) <= 0.0:
+					runtime["armor_active"] = true
+					runtime["armor_time_left"] = float(special_values.get("armor_duration_sec", 0.0))
 		_:
 			return
 
@@ -770,7 +798,32 @@ func _GetBossDamageResult(block: Dictionary, damage: float, is_tap_damage: bool)
 					"blocked": true,
 					"reason": "shield"
 				}
+		"armor_phase":
+			if bool(runtime.get("armor_active", false)):
+				var reduction := float(special_values.get("damage_reduction_percent", 0.0))
+				damage *= max(0.0, 1.0 - reduction)
 
+		"bot_corrosion":
+			if !is_tap_damage:
+				var bot_mult := float(special_values.get("bot_damage_multiplier", 1.0))
+				damage *= max(0.0, bot_mult)
+
+		"mirror_reflect":
+			var reflect_tap_only := bool(special_values.get("reflect_tap_only", true))
+
+			if !reflect_tap_only or is_tap_damage:
+				var every_hits := int(special_values.get("reflect_every_hits", 4))
+				every_hits = max(1, every_hits)
+
+				runtime["reflect_hit_counter"] = int(runtime.get("reflect_hit_counter", 0)) + 1
+
+				if int(runtime["reflect_hit_counter"]) >= every_hits:
+					runtime["reflect_hit_counter"] = 0
+					return {
+						"damage": 0.0,
+						"blocked": true,
+						"reason": "mirror_reflect"
+					}
 		_:
 			pass
 

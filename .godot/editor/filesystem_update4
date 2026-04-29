@@ -1,0 +1,12 @@
+res://scenes/screens/dig/dig_screen.tscn
+res://art/theme/MainTheme.tres
+res://shaders/boss_outline.gdshader
+res://shaders/shop_screen.gdshader
+res://shaders/popup_blur.gdshader
+res://shaders/glich_effect.gdshader
+res://shaders/explode.gdshader
+res://scenes/popups/watch_ad_button.gd
+res://scenes/popups/OfflinePlannerPopup.tscn
+res://data/bosses/boss_db.json
+res://scenes/app/main_scene.tscn
+res://autoload/GlobalDiggingProcess.gd

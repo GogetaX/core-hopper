@@ -90,7 +90,7 @@ func _on_watch_ad_btn_on_press() -> void:
 	for x in reward_list:
 		if x.has("coins") || x.has("crystals") || x.has("dust") || x.has("energy"):
 			for key in x.keys():
-				GlobalSignals.AddNotification.emit({"type":"TEXT","description":"+"+str(x[key]).pad_decimals(0)+" "+key.to_upper(),"color":"BLUE"})
+				GlobalSignals.AddNotification.emit({"type":"TEXT","description":"+"+Global.CurrencyToString(x[key])+" "+key.to_upper(),"color":"BLUE"})
 				GlobalSave.AddCurrency(key,x[key])
 		elif x.has("random_relic_crate"):
 			var relic_create_amount = x.random_relic_crate
