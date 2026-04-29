@@ -204,6 +204,7 @@ size_flags_vertical = 3
 mouse_filter = 2
 theme_type_variation = &"PanelDimmedBG"
 script = ExtResource("12_whfaw")
+test_boss_id = "rust_maw"
 
 [node name="VList" type="VBoxContainer" parent="MiningPanel" unique_id=1865003503]
 layout_mode = 1

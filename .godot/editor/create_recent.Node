@@ -1,3 +1,4 @@
+HBoxContainer
 GPUParticles2D
 Node2D
 TextureRect
@@ -7,7 +8,6 @@ VBoxContainer
 Label
 CanvasLayer
 TextureProgressBar
-HBoxContainer
 ProgressBar
 ScrollContainer
 VFlowContainer

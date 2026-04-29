@@ -66,13 +66,13 @@ func LoadRewarded() -> void:
 
 
 func IsRewardedReady() -> bool:
-	if SKIP_REWARDED_VIDS || OS.get_name() == "Linux":
+	if SKIP_REWARDED_VIDS || OS.is_debug_build():
 		return true
 	return _rewarded_ad_id != ""
 
 
 func ShowRewarded() -> bool:
-	if SKIP_REWARDED_VIDS || OS.get_name() == "Linux":
+	if SKIP_REWARDED_VIDS || OS.is_debug_build():
 		print("force skips reward because on Linux")
 		await get_tree().create_timer(0.1).timeout
 		rewarded_reward_earned.emit("reward",1)

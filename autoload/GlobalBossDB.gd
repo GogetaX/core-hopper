@@ -142,39 +142,17 @@ func _MakeBossUID(lane_index: int, depth: int, boss_id: String) -> String:
 
 func GenerateBossBlock(depth: int, lane_index: int, normal_block_hp, normal_coin_reward: int = 0) -> Dictionary:
 	var boss_id := GetBossIDAtDepth(depth)
+
 	if boss_id == "":
 		return {}
 
-	var boss_data := GetBossDataByID(boss_id)
-	if boss_data.is_empty():
-		return {}
-
-	var hp_multiplier := float(boss_data.get("hp_multiplier", 10.0))
-	var coin_mult := float(boss_data.get("coin_reward_multiplier", 1.0))
-
-	var boss_hp := GlobalBigNumber.MulFloat(
-		GlobalBigNumber.ToBig(normal_block_hp),
-		hp_multiplier
+	return GenerateBossBlockByID(
+		boss_id,
+		depth,
+		lane_index,
+		normal_block_hp,
+		normal_coin_reward
 	)
-
-	var reward_coins := int(round(float(normal_coin_reward) * coin_mult))
-
-	return {
-		"uid": _MakeBossUID(lane_index, depth, boss_id),
-		"type": "boss",
-		"is_boss": true,
-		"boss_id": boss_id,
-		"name": str(boss_data.get("name", boss_id)),
-		"depth": depth,
-		"lane_index": lane_index,
-		"hp": boss_hp.duplicate(true),
-		"max_hp": boss_hp.duplicate(true),
-		"reward_coin_multiplier": coin_mult,
-		"reward_coins": reward_coins,
-		"icon_key": str(boss_data.get("icon_key", "")),
-		"special_type": str(boss_data.get("special_type", "none")),
-		"special_values": boss_data.get("special_values", {}).duplicate(true)
-	}
 
 
 func TryGenerateBossBlock(depth: int, lane_index: int, normal_block_hp, normal_coin_reward: int = 0) -> Dictionary:
@@ -293,3 +271,47 @@ func _RollBossRelicDrop(drop_table: Array) -> String:
 
 	return rolled_entry
 	
+
+func GenerateBossBlockByID(
+	boss_id: String,
+	depth: int,
+	lane_index: int,
+	normal_block_hp,
+	normal_coin_reward: int = 0
+) -> Dictionary:
+	boss_id = boss_id.strip_edges()
+
+	if boss_id == "":
+		return {}
+
+	var boss_data := GetBossDataByID(boss_id)
+
+	if boss_data.is_empty():
+		return {}
+
+	var hp_multiplier := float(boss_data.get("hp_multiplier", 10.0))
+	var coin_mult := float(boss_data.get("coin_reward_multiplier", 1.0))
+
+	var boss_hp := GlobalBigNumber.MulFloat(
+		GlobalBigNumber.ToBig(normal_block_hp),
+		hp_multiplier
+	)
+
+	var reward_coins := int(round(float(normal_coin_reward) * coin_mult))
+
+	return {
+		"uid": _MakeBossUID(lane_index, depth, boss_id),
+		"type": "boss",
+		"is_boss": true,
+		"boss_id": boss_id,
+		"name": str(boss_data.get("name", boss_id)),
+		"depth": depth,
+		"lane_index": lane_index,
+		"hp": boss_hp.duplicate(true),
+		"max_hp": boss_hp.duplicate(true),
+		"reward_coin_multiplier": coin_mult,
+		"reward_coins": reward_coins,
+		"icon_key": str(boss_data.get("icon_key", "")),
+		"special_type": str(boss_data.get("special_type", "none")),
+		"special_values": boss_data.get("special_values", {}).duplicate(true)
+	}

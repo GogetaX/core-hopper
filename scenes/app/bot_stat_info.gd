@@ -4,6 +4,10 @@ extends Control
 
 var cur_data = {}
 
+func _ready() -> void:
+	if !OS.is_debug_build():
+		$BotStatInfo/VList/HList/PlusLvlBot.visible = false
+
 func InitBotInfo(data):
 	cur_data = data
 	var bot_data = GlobalSave.GetBotDataFromUID(cur_data.bot_uid)
@@ -45,8 +49,8 @@ func InitBotInfo(data):
 			
 	#Init Sell Price
 	var sell_price = GlobalStats.GetBotSellValue(bot_data.level)
-	$BotStatInfo/VList/SellBotBtn.price_text = Global.CurrencyToString(sell_price)
-	$BotStatInfo/VList/SellBotBtn.price_int = sell_price
+	$BotStatInfo/VList/HList/SellBotBtn.price_text = Global.CurrencyToString(sell_price)
+	$BotStatInfo/VList/HList/SellBotBtn.price_int = sell_price
 			
 func _on_v_list_resized() -> void:
 	var max_y = $BotStatInfo/VList.get_minimum_size().y
@@ -64,3 +68,9 @@ func _on_sell_bot_btn_btn_pressed_with_price(currency: String, price: int) -> vo
 	GlobalSave.RemoveBotByID(cur_data.bot_uid)
 	GlobalSave.SyncSave()
 	GlobalSignals.CloseCurPopup.emit()
+
+
+func _on_plus_lvl_bot_on_pressed() -> void:
+	GlobalSave.LevelUpBotFromUID(cur_data.bot_uid,1)
+	InitBotInfo(cur_data)
+	GlobalSave.SyncSave()

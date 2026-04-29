@@ -9,7 +9,7 @@ const SCREENSHOT_FOLDER = "user://shots/"
 var _cur_size_multiplayer = 1.0
 
 func _ready() -> void:
-	if OS.get_name() != "Linux" || screenshot_type == "DISABLED":
+	if !OS.is_debug_build() || screenshot_type == "DISABLED":
 		queue_free()
 		return
 	visible = true

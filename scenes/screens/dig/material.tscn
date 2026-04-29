@@ -68,7 +68,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Status" type="HBoxContainer" parent="BG" unique_id=1717556344]
-custom_minimum_size = Vector2(0, 20)
+custom_minimum_size = Vector2(0, 25)
 layout_mode = 1
 offset_left = 10.0
 offset_top = 10.0

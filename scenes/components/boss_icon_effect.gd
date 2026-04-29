@@ -19,6 +19,12 @@ func InitIconFromEffect(special_type:String)->void:
 			self_modulate = GlobalColor.COLOR_BORDER_ORANGE
 		"none":
 			texture = null
+		"armor_phase":
+			texture = load("res://art/particles/shield_icon.png")
+			self_modulate = GlobalColor.COLOR_BORDER_BLUE
+		"bot_corrosion":
+			texture = load("res://art/icons/bot_corrotion.png")
+			self_modulate = GlobalColor.COLOR_BORDER_RED
 		_:
 			texture = null
 			print_debug("Unknown special_type: ",special_type)

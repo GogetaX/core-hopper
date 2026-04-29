@@ -901,3 +901,7 @@ func _ApplyMergedBotProgress(target_bot: Dictionary) -> void:
 			GlobalSave.SetMilestoneToCompleted("bot_level_3")
 	
 	GlobalSave.SetHighestBotLevel(int(target_bot.level))
+
+func LevelUpBotFromUID(uid:int,plus_level:int = 1)->void:
+	var bot_data = GetBotDataFromUID(uid)
+	bot_data.level += plus_level

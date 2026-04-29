@@ -85,7 +85,7 @@ func OnBtnPressed(btn_node:Control):
 			OnPress.emit()
 
 func SetDisabled(_is_disabled:bool):
-	if OS.get_name() == "Linux":
+	if OS.is_debug_build():
 		if _is_disabled:
 			$Background/HList/Label.text = buy_btn_title + " - (disabled)"
 			return

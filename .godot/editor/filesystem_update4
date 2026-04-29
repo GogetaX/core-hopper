@@ -23,3 +23,14 @@ res://data/boss_icons/boss_16_abyss_core.tres
 res://autoload/GlobalRewardChest.gd
 res://scenes/screens/dig/dig_screen.gd
 res://scenes/screens/dig/mining_panel.gd
+res://autoload/GlobalBossDB.gd
+res://scenes/screens/dig/material.gd
+res://autoload/GlobalAds.gd
+res://scenes/addons/screenshot_maker.gd
+res://scenes/screens/shop/smart_button_buy_with_icon.gd
+res://scenes/popups/BotStatInfoPopup.tscn
+res://scenes/app/bot_stat_info.gd
+res://autoload/GlobalSave.gd
+res://scenes/components/boss_icon_effect.gd
+res://scenes/components/boss_icon_effect.tscn
+res://scenes/screens/dig/material.tscn
