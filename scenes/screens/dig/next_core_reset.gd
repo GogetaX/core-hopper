@@ -19,7 +19,13 @@ func OnSyncSave():
 		mouse_filter = Control.MOUSE_FILTER_PASS
 		$CoreResetInProgress.visible = true
 		$CoreResetInProgress/core_reset_progressbar.value = progress_data.progress*100.0
-		$CoreResetInProgress/HList/core_recent_percent.text = str(snapped(progress_data.progress*100,1)).pad_decimals(0)
+		var progress := float(progress_data.progress)
+		var percent := int(floor(progress * 100.0))
+
+		if progress < 1.0:
+			percent = min(percent, 99)
+
+		$CoreResetInProgress/HList/core_recent_percent.text = "%d" % percent
 		$CoreResetInProgress/core_reset_reward.text = reward_data
 	else:
 		mouse_filter = Control.MOUSE_FILTER_IGNORE

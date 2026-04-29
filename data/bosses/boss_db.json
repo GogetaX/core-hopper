@@ -291,7 +291,7 @@
 {
 	"id": "thunder_drill",
 	"name": "Thunder Drill",
-	"boss_icon": "boss_12_thunder_drill.tres",
+	"boss_icon": "boss_12_thunder_drill",
 	"spawn_depth": 4300,
 	"tier": 12,
 	"hp_multiplier": 720.0,

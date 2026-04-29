@@ -14,7 +14,11 @@ func _ready() -> void:
 	visible = false
 
 
-		
+
+#func _process(delta: float) -> void:
+	#if Input.is_action_just_pressed("ui_accept"):
+		#StartAnim()
+		#
 func StartAnim():
 	vib_amp = 1.0
 	vib_timer = 0.0

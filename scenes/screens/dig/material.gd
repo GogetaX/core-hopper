@@ -89,7 +89,6 @@ func InitAsBossMine():
 	$BG/VList/name.self_modulate = GlobalColor.GetReadableTextColor($BG.self_modulate)
 	$BG/BossIcon.InitBossIcon(cur_data.boss_id)
 	$BG/Status/BossIconEffect.InitIconFromEffect(cur_data.special_type)
-	#$BG/BossIcon.modulate = GlobalColor.COLOR_TEXT_PURPLE
 	
 	
 func InitAsNormalMine():

@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://dl3h3ybufbpyu" path="res://scenes/app/crazy_games_loading_layer.gd" id="13_fgoxt"]
 [ext_resource type="Texture2D" uid="uid://88ot8lfbupyo" path="res://art/particles/star_06.png" id="13_qwqsr"]
 [ext_resource type="PackedScene" uid="uid://cm85i32ossjjf" path="res://scenes/addons/screenshot_maker.tscn" id="16_6deuo"]
+[ext_resource type="AudioStream" uid="uid://cft8eq2rxspwd" path="res://audio/sfx/core_reset_sfx.ogg" id="16_exom0"]
 [ext_resource type="Script" uid="uid://bg1hmr3ahbwns" path="res://scenes/app/addons.gd" id="16_o73k1"]
 [ext_resource type="Script" uid="uid://db6qqpj83t4dw" path="res://addons/AdmobPlugin/Admob.gd" id="17_jhe1c"]
 
@@ -99,6 +100,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AudioStreamPlayer:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_mglx4"]
 resource_name = "step_1"
@@ -140,6 +153,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.53333336),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_qva6k"]
@@ -429,6 +454,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CoreResetAnimation" unique_id=1619382576]
+stream = ExtResource("16_exom0")
+bus = &"SFX"
 
 [node name="CrazyGamesLoadingLayer" type="CanvasLayer" parent="." unique_id=1663092903]
 visible = false

@@ -34,3 +34,6 @@ res://autoload/GlobalSave.gd
 res://scenes/components/boss_icon_effect.gd
 res://scenes/components/boss_icon_effect.tscn
 res://scenes/screens/dig/material.tscn
+res://scenes/screens/dig/next_core_reset.tscn
+res://scenes/screens/dig/next_core_reset.gd
+res://scenes/components/core_reset_animation.gd

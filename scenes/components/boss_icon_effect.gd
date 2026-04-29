@@ -25,6 +25,9 @@ func InitIconFromEffect(special_type:String)->void:
 		"bot_corrosion":
 			texture = load("res://art/icons/bot_corrotion.png")
 			self_modulate = GlobalColor.COLOR_BORDER_RED
+		"mirror_reflect":
+			texture = load("res://art/icons/reflect_tap.png")
+			self_modulate = GlobalColor.COLOR_BORDER_BLUE
 		_:
 			texture = null
 			print_debug("Unknown special_type: ",special_type)
