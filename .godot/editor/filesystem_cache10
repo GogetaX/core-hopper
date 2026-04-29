@@ -1,14 +1,14 @@
 72322a848ab928aa5c89f0cb78209805
-::res://::1777236875
+::res://::1777487508
 default_bus_layout.tres::AudioBusLayout::1932480817288655633::1776530784::0::1::::<><><>0<>0<><>::
 export_presets.cfg::TextFile::-1::1777236875::0::1::::<><><>0<>0<><>::
 icon.svg::CompressedTexture2D::6983593420846663045::1776516710::1776516714::1::::<><><>0<>0<>1e48820d6b241a3917eeb9a3ec23f0c4<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 ::res://addons/::1776540607
 ::res://addons/AdmobPlugin/::1776543433
-Admob.gd::GDScript::7294447452970989096::1776543433::0::1::::Admob<>Node<><>0<>1<><>::
+Admob.gd::GDScript::7294447452970989096::1776543433::0::1::::Admob<>Node<>res://addons/AdmobPlugin/icon.png<>0<>1<><>::
 AdmobPlugin.gd::GDScript::347843785406009744::1769913322::0::1::::<>EditorPlugin<><>0<>1<><>::
 icon.png::CompressedTexture2D::2643730722566410808::1769913322::1776539609::1::::<><><>0<>0<>c1d8ae1661fd14c410356843797cd6f7<>res://.godot/imported/icon.png-928f79d906c5a286de384358dfb1ba26.ctex::
-InlineAdaptiveBanner.gd::GDScript::2532410937006507041::1769913322::0::1::::InlineAdaptiveBanner<>Control<><>0<>0<><>::
+InlineAdaptiveBanner.gd::GDScript::2532410937006507041::1769913322::0::1::::InlineAdaptiveBanner<>Control<>res://addons/AdmobPlugin/icon.png<>0<>0<><>::
 plugin.cfg::TextFile::-1::1769913322::0::1::::<><><>0<>0<><>::
 ::res://addons/AdmobPlugin/bin/::1769913322
 ::res://addons/AdmobPlugin/bin/debug/::1769913322
@@ -390,7 +390,7 @@ RES_JakaraSans_Regular.tres::FontVariation::7138659857672039962::1774373269::0::
 ::res://ios/plugins/AdmobPlugin.release.xcframework/::1769914555
 ::res://ios/plugins/AdmobPlugin.release.xcframework/ios-arm64/::1769914555
 ::res://ios/plugins/AdmobPlugin.release.xcframework/ios-arm64_x86_64-simulator/::1769914555
-::res://NotImported/::1777108984
+::res://NotImported/::1777295638
 CoreHopper.svg::CompressedTexture2D::4776401096813519066::1777236927::1777295638::1::::<><><>0<>0<>fee8e01632bcbc37cf244f241ea69bff<>res://.godot/imported/CoreHopper.svg-51d29810344fa320d9cf9157fc3e4535.ctex::
 ::res://NotImported/exports/::1776604008
 ::res://NotImported/exports/Android/::1776604064
@@ -439,6 +439,7 @@ currency_animation.tscn::PackedScene::5925518035284996911::1777066033::0::1::::<
 currency_icon.gd::GDScript::5259324436895343869::1775996786::0::1::::CurrencyIconClass<>Control<><>0<>1<><>::
 currency_icon.tscn::PackedScene::9181617306887251045::1777232174::0::1::::<><><>0<>0<><>::uid://cg6wkmw2yluk8::::res://scenes/components/currency_icon.gd<>uid://c7bumgwoipcdo::::res://art/currency/currency_crystals.tres<>uid://xlueiw1ent7v::::res://art/currency/crystal_plus.png<>uid://vh4nm1v02e04::::res://art/currency/currency_coins.tres<>uid://88ot8lfbupyo::::res://art/particles/star_06.png<>uid://bnxwhioxjvx8g::::res://art/currency/dust_icon.png<>uid://biy4o4utcr7l::::res://art/currency/energy_sun.png<>uid://dpgix2k5wrhmg::::res://art/currency/currency_energy.tres
 drop_manager.gd::GDScript::8109112042821914949::1776015098::0::1::::<>Control<><>0<>0<><>::
+game_bg.gd::GDScript::5262976990301442742::1777149983::0::1::::<>Control<><>0<>0<><>::
 icon_bg.gd::GDScript::6589663460754875871::1777109306::0::1::::<>Control<><>0<>1<><>::
 icon_bg.tscn::PackedScene::8375224865073669055::1777109244::0::1::::<><><>0<>0<><>::uid://c05c2amsoxcd0::::res://scenes/components/icon_bg.gd<>uid://babuofulhomgc::::res://scenes/components/smart_panel.tscn
 icon_bg_circle.tscn::PackedScene::4314926574418360539::1776198229::0::1::::<><><>0<>0<><>::uid://c05c2amsoxcd0::::res://scenes/components/icon_bg.gd<>uid://d0evldvdwvtf2::::res://scenes/components/smart_panel_circle.tscn
@@ -456,7 +457,6 @@ offline_band_selector.gd::GDScript::4885999335321209273::1776805023::0::1::::Off
 offline_band_selector.tscn::PackedScene::5199105325778952686::1776805796::0::1::::<><><>0<>0<><>::uid://babuofulhomgc::::res://scenes/components/smart_panel.tscn<>uid://cbu2xvwd4eecv::::res://scenes/components/offline_band_selector.gd<>uid://drlay20xc5ihb::::res://scenes/components/icon_bg.tscn<>uid://bonsij74yg4rr::::res://art/ui/target_icon.png<>uid://c2s6fmv66183n::::res://scenes/screens/progress/progress_hash_tag.tscn<>uid://bv67grqssq2v2::::res://scenes/screens/settings/setting_toggle.tscn
 open_popup_icon.gd::GDScript::4746071081234244019::1776797008::0::1::::<>Control<><>0<>1<><>::
 open_popup_icon.tscn::PackedScene::4470437918430227664::1776838047::0::1::::<><><>0<>0<><>::uid://b8vbdkqhf6pj4::::res://scenes/components/open_popup_icon.gd<>uid://6ax7yrajbr65::::res://art/ui/open_popup_arrow.png<>uid://bs6l43rdtl0qh::::res://art/ui/open_popup_base.png
-game_bg.gd::GDScript::5262976990301442742::1777149983::0::1::::<>Control<><>0<>0<><>::
 reward_currency.gd::GDScript::1996824370484574139::1777235315::0::1::::RewardCurrencyClass<>Control<><>0<>1<><>::
 reward_currency.tscn::PackedScene::504058403762424971::1777235327::0::1::::<><><>0<>0<><>::uid://babuofulhomgc::::res://scenes/components/smart_panel.tscn<>uid://3pjn16mi4k8j::::res://scenes/components/reward_currency.gd<>uid://d32v5pknv4vq0::::res://scenes/components/currency_icon.tscn
 reward_extracted_rare_ores.tscn::PackedScene::4431921204522731418::1774821367::0::1::::<><><>0<>0<><>::uid://babuofulhomgc::::res://scenes/components/smart_panel.tscn
@@ -517,7 +517,7 @@ watch_ad_button.gd::GDScript::4329908004897114551::1777063527::0::1::::WatchAdCl
 watch_ad_button.tscn::PackedScene::2650439275546259121::1777057084::0::1::::<><><>0<>0<><>::uid://b2xo7m1tqh128::::res://scenes/popups/watch_ad_button.gd<>uid://babuofulhomgc::::res://scenes/components/smart_panel.tscn<>uid://drlay20xc5ihb::::res://scenes/components/icon_bg.tscn<>uid://c2s6fmv66183n::::res://scenes/screens/progress/progress_hash_tag.tscn<>uid://bvpwx7yevqtth::::res://scenes/screens/shop/smart_button_buy_with_icon.tscn<>uid://dveir84r8dkuf::::res://art/icons/20_px/play_icon.png
 watch_ad_popup.gd::GDScript::5734423380468092380::1776529756::0::1::::<>Control<><>0<>0<><>::
 ::res://scenes/screens/::1775117585
-::res://scenes/screens/dig/::1777236921
+::res://scenes/screens/dig/::1777296200
 active_boost.gd::GDScript::6053560678631423960::1776546059::0::1::::<>Control<><>0<>0<><>::
 active_boost.tscn::PackedScene::4608188803644916824::1776621799::0::1::::<><><>0<>0<><>::uid://csini3qyhmf1a::::res://scenes/screens/dig/active_boost.gd<>uid://babuofulhomgc::::res://scenes/components/smart_panel.tscn
 current_daily_task.gd::GDScript::8956217172766867811::1777236124::0::1::::<>Control<><>0<>0<><>::
@@ -525,7 +525,7 @@ current_daily_task.tscn::PackedScene::1676876660584461775::1776968710::0::1::::<
 dig_bot_slot.gd::GDScript::8994038081487280127::1776604217::0::1::::DigBotClass<>Panel<><>0<>0<><>::
 dig_bot_slot.tscn::PackedScene::5539065255126785812::1776625386::0::1::::<><><>0<>0<><>::uid://d1e1q1dbbfdvr::::res://scenes/screens/dig/dig_bot_slot.gd<>uid://52wk4te2cs6e::::res://art/icons/20_px/lock_icon.png<>uid://b7eir18rjtank::::res://scenes/components/BotImage.tscn<>uid://c2s6fmv66183n::::res://scenes/screens/progress/progress_hash_tag.tscn<>uid://babuofulhomgc::::res://scenes/components/smart_panel.tscn<>uid://d32v5pknv4vq0::::res://scenes/components/currency_icon.tscn<>uid://bisqfreq6vd5f::::res://art/icons/20_px/depth_icon.png<>uid://cl1g53qyb2nu0::::res://data/icons/prestiege.tres
 dig_screen.gd::GDScript::2533709428672986041::1776535309::0::1::::<>VBoxContainer<><>0<>0<><>::
-dig_screen.tscn::PackedScene::550666326357653755::1777236921::0::1::::<><><>0<>0<><>::uid://bcdl3aw30ovv2::::res://scenes/screens/dig/dig_screen.gd<>uid://ds2fs82ijg3xn::::res://scenes/components/status_label.tscn<>uid://dk2ys8k4etgng::::res://scenes/components/smart_button.tscn<>uid://ck6fuim6hek81::::res://scenes/screens/dig/dig_bot_slot.tscn<>uid://wo27y1bp48s3::::res://scenes/screens/dig/global_deapth.gd<>uid://dpi87sp21cmph::::res://scenes/screens/dig/status_flow_container.gd<>uid://cxmfj632fs325::::res://scenes/label_data_scripts/bot_amount_active.gd<>uid://drpo6jpqmbllk::::res://scenes/label_data_scripts/income_ps.gd<>uid://cyrssis6jwdc2::::res://scenes/screens/progress/progress_hash_tag_with_icon.tscn<>uid://bisqfreq6vd5f::::res://art/icons/20_px/depth_icon.png<>uid://caakrndjfym13::::res://scenes/screens/dig/next_core_reset.tscn<>uid://tunwhalbrg53::::res://scenes/components/lane_depth_update.tscn<>uid://b1boirxy3j4fm::::res://scenes/screens/dig/drop_bonus.gd<>uid://bb6aobrm7ji1h::::res://scenes/screens/dig/drop_bonus_value.gd<>uid://cullbxvsnqu0h::::res://scenes/screens/dig/offline_panel.tscn<>uid://cpesek5rxsldo::::res://scenes/screens/dig/next_boss_in_helper.gd<>uid://c2mst35frvrs6::::res://scenes/screens/dig/mining_panel.gd<>uid://x5j6celmf4at::::res://scenes/screens/dig/current_daily_task.tscn<>uid://bjyvsqllfsb14::::res://scenes/screens/dig/milestone_panel.tscn<>uid://b6wigw7uqkhg7::::res://scenes/screens/dig/active_boost.tscn<>uid://bg68ksebamcji::::res://scenes/screens/merge/drag_drop_handler.gd<>uid://duvnpggfd3idr::::res://scenes/screens/dig/notif_for_chests.tscn
+dig_screen.tscn::PackedScene::550666326357653755::1777296200::0::1::::<><><>0<>0<><>::uid://bcdl3aw30ovv2::::res://scenes/screens/dig/dig_screen.gd<>uid://ds2fs82ijg3xn::::res://scenes/components/status_label.tscn<>uid://dk2ys8k4etgng::::res://scenes/components/smart_button.tscn<>uid://ck6fuim6hek81::::res://scenes/screens/dig/dig_bot_slot.tscn<>uid://wo27y1bp48s3::::res://scenes/screens/dig/global_deapth.gd<>uid://dpi87sp21cmph::::res://scenes/screens/dig/status_flow_container.gd<>uid://cxmfj632fs325::::res://scenes/label_data_scripts/bot_amount_active.gd<>uid://drpo6jpqmbllk::::res://scenes/label_data_scripts/income_ps.gd<>uid://cyrssis6jwdc2::::res://scenes/screens/progress/progress_hash_tag_with_icon.tscn<>uid://bisqfreq6vd5f::::res://art/icons/20_px/depth_icon.png<>uid://caakrndjfym13::::res://scenes/screens/dig/next_core_reset.tscn<>uid://tunwhalbrg53::::res://scenes/components/lane_depth_update.tscn<>uid://b1boirxy3j4fm::::res://scenes/screens/dig/drop_bonus.gd<>uid://bb6aobrm7ji1h::::res://scenes/screens/dig/drop_bonus_value.gd<>uid://cullbxvsnqu0h::::res://scenes/screens/dig/offline_panel.tscn<>uid://cpesek5rxsldo::::res://scenes/screens/dig/next_boss_in_helper.gd<>uid://c2mst35frvrs6::::res://scenes/screens/dig/mining_panel.gd<>uid://x5j6celmf4at::::res://scenes/screens/dig/current_daily_task.tscn<>uid://bjyvsqllfsb14::::res://scenes/screens/dig/milestone_panel.tscn<>uid://b6wigw7uqkhg7::::res://scenes/screens/dig/active_boost.tscn<>uid://bg68ksebamcji::::res://scenes/screens/merge/drag_drop_handler.gd<>uid://duvnpggfd3idr::::res://scenes/screens/dig/notif_for_chests.tscn
 drop_bonus.gd::GDScript::4214260249841681522::1774989219::0::1::::<>Label<><>0<>0<><>::
 drop_bonus_value.gd::GDScript::2520630318195031971::1775893040::0::1::::<>Label<><>0<>0<><>::
 global_deapth.gd::GDScript::1574753653595177852::1774993290::0::1::::<>Label<><>0<>0<><>::
