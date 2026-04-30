@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://da8i4hknmta32"]
 
 [ext_resource type="PackedScene" uid="uid://cnkdl7afnnis7" path="res://scenes/components/bottom_button.tscn" id="1_5qgah"]
+[ext_resource type="Texture2D" uid="uid://cmh3b4yx10pd7" path="res://art/bottom_bar/dig.tres" id="2_l56ak"]
+[ext_resource type="Texture2D" uid="uid://dgkfcrxyv4eok" path="res://art/bottom_bar/merge.tres" id="3_kcigs"]
+[ext_resource type="Texture2D" uid="uid://cxasfkky71phc" path="res://art/bottom_bar/progress.tres" id="4_vm2dr"]
+[ext_resource type="Texture2D" uid="uid://doss81m00xpfb" path="res://art/bottom_bar/skills.tres" id="5_5c6ms"]
 
 [node name="BottomBar" type="Control" unique_id=331824961]
 custom_minimum_size = Vector2(0, 130)
@@ -35,21 +39,25 @@ mouse_filter = 2
 [node name="BottomButton" parent="HBoxContainer" unique_id=727157254 instance=ExtResource("1_5qgah")]
 layout_mode = 2
 size_flags_horizontal = 3
+icon = ExtResource("2_l56ak")
 is_default = true
 
 [node name="BottomButton2" parent="HBoxContainer" unique_id=58706183 instance=ExtResource("1_5qgah")]
 layout_mode = 2
 size_flags_horizontal = 3
+icon = ExtResource("3_kcigs")
 btn_name = "MERGE"
 
 [node name="BottomButton3" parent="HBoxContainer" unique_id=1783667291 instance=ExtResource("1_5qgah")]
 layout_mode = 2
 size_flags_horizontal = 3
+icon = ExtResource("4_vm2dr")
 btn_name = "PROGRESS"
 
 [node name="BottomButton4" parent="HBoxContainer" unique_id=340154130 instance=ExtResource("1_5qgah")]
 layout_mode = 2
 size_flags_horizontal = 3
+icon = ExtResource("5_5c6ms")
 btn_name = "SKILLS"
 
 [node name="BottomButton5" parent="HBoxContainer" unique_id=122767507 instance=ExtResource("1_5qgah")]

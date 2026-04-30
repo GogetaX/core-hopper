@@ -1,5 +1,6 @@
-/home/sergio/GitHub/core-hopper/NotImported/exports/Android/
 res://scenes/components/
+res://art/bottom_bar/
+/home/sergio/GitHub/core-hopper/NotImported/exports/Android/
 res://autoload/
 res://scenes/screens/dig/
 res://scenes/screens/shop/
@@ -27,4 +28,3 @@ res://data/icons/
 res://data/bosses/
 res://data/bot_atlas/
 res://art/bots/
-res://scenes/app/

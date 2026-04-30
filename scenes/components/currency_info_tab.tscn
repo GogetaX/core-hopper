@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://bhjfx8wf7xisg"]
+
+[ext_resource type="Script" uid="uid://dt47shajnrk6g" path="res://scenes/components/currency_info_tab.gd" id="1_46jkm"]
+[ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="1_jpc7k"]
+[ext_resource type="PackedScene" uid="uid://d32v5pknv4vq0" path="res://scenes/components/currency_icon.tscn" id="2_46jkm"]
+[ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="3_sbb1q"]
+
+[node name="CurrencyInfoTab" type="Control" unique_id=499008952]
+custom_minimum_size = Vector2(150, 120)
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 1
+script = ExtResource("1_46jkm")
+
+[node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("1_jpc7k")]
+layout_mode = 1
+panel_type = "INSIDE_ONLY"
+panel_color = "BLUE"
+
+[node name="VList" type="VBoxContainer" parent="SmartPanel" unique_id=68906119]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="CurrencyIcon" parent="SmartPanel/VList" unique_id=529445326 instance=ExtResource("2_46jkm")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+mouse_filter = 2
+icon_type = "COIN_BIG_ANIMATED"
+
+[node name="ProgressHashTag" parent="SmartPanel/VList" unique_id=713365230 instance=ExtResource("3_sbb1q")]
+self_modulate = Color(0.8627451, 0.9098039, 1, 1)
+layout_mode = 2
+text = "COINS"
+horizontal_alignment = 1
+hash_tag_color = "WHITE"
+no_bg = true

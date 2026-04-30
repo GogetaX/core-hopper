@@ -2,6 +2,14 @@
 extends Control
 class_name ButtonTabClass
 
+@export var icon : Texture2D = null:
+	set(value):
+		icon = value
+		if is_node_ready():
+			_ready()
+	get:
+		return icon
+
 @export var btn_name := "DIG":
 	set(value):
 		btn_name = value
@@ -17,6 +25,7 @@ var is_pressed = false
 		
 func _ready() -> void:
 	$VList/Label.text = btn_name
+	$VList/TextureRect.texture = icon
 	if !Engine.is_editor_hint():
 		$Panel.self_modulate.a = 0.0
 		GlobalBtn.AddBtnPress(self)
@@ -31,6 +40,7 @@ func OnForceTabFromStr(tab_name:String):
 		AnimatePressed()
 	else:
 		AnimateUnpressed()
+		
 func OnTabPressed(btn_node:ButtonTabClass):
 	if btn_node == self:
 		AnimatePressed()
