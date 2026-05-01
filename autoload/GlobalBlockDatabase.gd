@@ -357,7 +357,7 @@ func RollBlockDrops(block_data: Dictionary, reward_mult: float = 1.0) -> Diction
 			var reward_multiplier := float(block_data.get("reward_multiplier", 1.0))
 			rolled_amount = int(round(float(rolled_amount) * reward_multiplier))
 
-		rolled_amount = int(round(float(rolled_amount) * reward_mult))
+		rolled_amount = int(round(float(rolled_amount) * reward_mult * GlobalStats.GetResourceDropMultiplier()))
 
 		if rolled_amount > 0:
 			result[currency] = int(result.get(currency, 0)) + rolled_amount

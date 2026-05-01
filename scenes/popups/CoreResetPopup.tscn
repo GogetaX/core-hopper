@@ -2,9 +2,7 @@
 
 [ext_resource type="Script" uid="uid://daqqxuxciy8cw" path="res://scenes/popups/core_reset_popup.gd" id="1_dqggo"]
 [ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="2_0jdrq"]
-[ext_resource type="PackedScene" uid="uid://b2qghfcexq01t" path="res://scenes/components/icon_bg_circle.tscn" id="3_dqggo"]
 [ext_resource type="PackedScene" uid="uid://drlay20xc5ihb" path="res://scenes/components/icon_bg.tscn" id="4_cklkp"]
-[ext_resource type="Texture2D" uid="uid://8d4xunnuoyea" path="res://art/icons/20_px/close_icon.png" id="4_tc3tu"]
 [ext_resource type="Texture2D" uid="uid://cchau56rj3xbc" path="res://art/ui/core_reset.png" id="5_8sy2u"]
 [ext_resource type="Texture2D" uid="uid://cnd10htr36i28" path="res://art/ui/accept_icon.png" id="6_0jdrq"]
 [ext_resource type="Texture2D" uid="uid://ht1sl3ddnuhv" path="res://art/ui/decline_icon.png" id="7_dqggo"]
@@ -38,22 +36,6 @@ layout_mode = 1
 panel_type = "INSIDE_ONLY"
 panel_color = "GOLD"
 darken_bg = true
-
-[node name="ClosePopup" parent="SmartPanel" unique_id=1682398798 instance=ExtResource("3_dqggo")]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -50.0
-offset_top = -50.0
-offset_right = 50.0
-offset_bottom = 50.0
-grow_horizontal = 0
-pivot_offset_ratio = Vector2(0.5, 0.5)
-panel_type = "INSIDE_ONLY"
-panel_color = "BLUE"
-icon = ExtResource("4_tc3tu")
-btn_type = "AS_BUTTON"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="SmartPanel" unique_id=161037878]
 layout_mode = 1
@@ -447,6 +429,15 @@ currency_type = "crystals"
 buy_btn_title = "CORE RESET"
 panel_color = "BLUE"
 
-[connection signal="BtnPressed" from="SmartPanel/ClosePopup" to="." method="_on_close_popup_btn_pressed"]
+[node name="CoreResetBtn2" parent="SmartPanel/VBoxContainer" unique_id=1183663939 instance=ExtResource("10_45apc")]
+custom_minimum_size = Vector2(350, 100)
+layout_mode = 2
+size_flags_horizontal = 1
+btn_type = "NO_PRICE"
+currency_type = "crystals"
+buy_btn_title = "CLOSE"
+panel_color = "GOLD"
+
 [connection signal="resized" from="SmartPanel/VBoxContainer" to="." method="_on_v_box_container_resized"]
 [connection signal="OnPressed" from="SmartPanel/VBoxContainer/CoreResetBtn" to="." method="_on_core_reset_btn_on_pressed"]
+[connection signal="OnPressed" from="SmartPanel/VBoxContainer/CoreResetBtn2" to="." method="_on_core_reset_btn_2_on_pressed"]

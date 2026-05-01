@@ -63,3 +63,7 @@ func _on_v_box_container_resized() -> void:
 	
 	await get_tree().process_frame
 	size.y = custom_minimum_size.y
+
+
+func _on_core_reset_btn_2_on_pressed() -> void:
+	GlobalSignals.CloseCurPopup.emit()

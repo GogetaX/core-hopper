@@ -201,8 +201,9 @@ func GetTapDamage() -> float:
 	if GlobalSkillTree.skill_summary.stats.has("tap_damage_mult"):
 		tap_skill_bonus = float(GlobalSkillTree.skill_summary.stats.tap_damage_mult)
 
-	var skill_mult := 1.0 + tap_skill_bonus
-	var res = base_tap_damage * upgrade_mult * skill_mult
+	var core_tap_bonus := GlobalCoreResetDb.GetCoreResetStatValue("tap_damage_mult")
+	var total_tap_mult := 1.0 + tap_skill_bonus + core_tap_bonus
+	var res = base_tap_damage * upgrade_mult * total_tap_mult  
 	return max(1.0, res)
 
 
@@ -291,8 +292,13 @@ func GetRelicFlatTotal(effect_type: String) -> float:
 
 
 func GetBotDamageMultiplier() -> float:
-	return float(GetUpgradeValue("drill_power")) * GetRelicMultiplierTotal("bot_damage_mult")
+	var upgrade_mult := float(GetUpgradeValue("drill_power"))
+	var relic_mult := GetRelicMultiplierTotal("bot_damage_mult")
+	var core_mult := 1.0 + GlobalCoreResetDb.GetCoreResetStatValue("bot_power_mult")
+	return upgrade_mult * relic_mult * core_mult  
 
+func GetResourceDropMultiplier() -> float:
+	return 1.0 + GlobalCoreResetDb.GetCoreResetStatValue("resource_drop_mult") 
 
 func GetTapDamageMultiplier() -> float:
 	return GetRelicMultiplierTotal("tap_damage_mult")
@@ -461,6 +467,7 @@ func GetBossRewardEnergyMulti():
 func GetBossRegenReduction():
 	var ret = 1.0
 	ret -= GlobalSkillTree.skill_summary.stats.boss_regen_reduction
+	ret += GlobalCoreResetDb.GetCoreResetStatValue("boss_reward_mult")
 	return max(0,ret)
 
 func GetBossRewardMulti():

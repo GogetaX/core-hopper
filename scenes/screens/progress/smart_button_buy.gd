@@ -5,7 +5,7 @@ class_name SmartBuyBtn
 signal BtnPressedWithPrice(currency:String,price:int)
 signal OnPressed()
 
-@export_enum("NO_PRICE","WITH_PRICE","NO_PRICE_GLOWING") var btn_type := "NO_PRICE":
+@export_enum("NO_PRICE","WITH_PRICE","NO_PRICE_GLOWING","SELL_PRICE") var btn_type := "NO_PRICE":
 	set(value):
 		btn_type = value
 		if is_node_ready():
@@ -85,7 +85,7 @@ func SyncTool():
 			$NO_PRICE.visible = true
 		"NO_PRICE_GLOWING":
 			$NO_PRICE_GLOWING.visible = true
-		"WITH_PRICE":
+		"WITH_PRICE","SELL_PRICE":
 			$WITH_PRICE.visible = true
 			match currency_type:
 				"coins":
@@ -117,6 +117,7 @@ func SyncTool():
 		$WITH_PRICE/HBoxContainer/VList/sub_text.visible = false
 	else:
 		$WITH_PRICE/HBoxContainer/VList/sub_text.visible = true
+		
 func CheckForCurrency():
 	if btn_type == "WITH_PRICE":
 		var cur_currency = GlobalSave.GetCurrency(currency_type)

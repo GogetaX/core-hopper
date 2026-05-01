@@ -17,3 +17,13 @@ res://scenes/screens/progress/progress_hash_tag_with_icon.gd
 res://scenes/components/used_for_item.tscn
 res://scenes/components/used_for_item.gd
 res://scenes/components/currency_info_tab.gd
+res://data/core_reset/core_reset.json
+res://autoload/GlobalStats.gd
+res://autoload/GlobalBlockDatabase.gd
+res://scenes/popups/CoreResetPopup.tscn
+res://scenes/popups/core_reset_popup.gd
+res://scenes/components/core_reset_item.tscn
+res://scenes/screens/progress/smart_button_buy.tscn
+res://scenes/screens/progress/smart_button_buy.gd
+res://scenes/popups/BotStatInfoPopup.tscn
+res://autoload/GlobalBossDB.gd

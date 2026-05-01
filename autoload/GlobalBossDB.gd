@@ -197,21 +197,34 @@ func GetBossRewardsFromBlock(block_data: Dictionary) -> Dictionary:
 			"energy": 0,
 			"dust": 0,
 			"drop_table": [],
+			"relic_ids": [],
 			"unlocks_on_kill": []
 		}
 
 	var boss_id := str(block_data.get("boss_id", ""))
 	var rewards := GetBossRewardsByID(boss_id)
 
-	# add scaled coin reward from block itself
+	# Add scaled coin reward from block itself.
 	rewards["coins"] += int(block_data.get("reward_coins", 0))
+
+	# Apply boss reward multipliers.
 	rewards["crystals"] = int(rewards["crystals"] * GlobalStats.GetBossRewardCrystalMulti())
-	
-	#boss_reward_mult
 	rewards["coins"] = int(rewards["coins"] * GlobalStats.GetBossRewardMulti())
 	rewards["energy"] = int(rewards["energy"] * GlobalStats.GetBossRewardMulti())
 	rewards["crystals"] = int(rewards["crystals"] * GlobalStats.GetBossRewardMulti())
 	rewards["dust"] = int(rewards.get("dust", 0) * GlobalStats.GetBossRewardMulti())
+
+	# Roll relic from boss drop_table.
+	var relic_ids: Array = []
+	var drop_table_value = rewards.get("drop_table", [])
+
+	if typeof(drop_table_value) == TYPE_ARRAY:
+		var rolled_relic_id := _RollBossRelicDrop(drop_table_value)
+		if rolled_relic_id != "":
+			relic_ids.append(rolled_relic_id)
+
+	rewards["relic_ids"] = relic_ids
+
 	return rewards
 
 
