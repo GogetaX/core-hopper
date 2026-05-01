@@ -56,7 +56,7 @@ func _ready() -> void:
 	$SmartPanel.panel_type = hash_tag_type
 	#$HBoxContainer.modulate = $SmartPanel.GetTextColor()
 	$HBoxContainer/ProgressHashTag.text = hash_tag_text
-	$HBoxContainer/Control/TextureRect.texture = hashtag_icon
+	$HBoxContainer/TextureRect.texture = hashtag_icon
 	$SmartPanel.visible = !hide_bg
 	match text_direction:
 		"LEFT":

@@ -11,6 +11,13 @@ func _ready() -> void:
 	Global.top_currency_node_dust = $HBoxContainer/VList/CurrencyCointainer/tot_dust/HList/CurrencyIcon
 	$HBoxContainer/VList/CurrencyCointainer/tot_energy.visible = false
 	Global.top_bar_y_pos = size.y+10
+	GlobalBtn.AddBtnPress($HBoxContainer/VList/CurrencyCointainer)
+	GlobalBtn.BtnPress.connect(OnCurrencyPress)
+	
+func OnCurrencyPress(btn_control:Control):
+	if btn_control != $HBoxContainer/VList/CurrencyCointainer:
+		return
+	GlobalSignals.ShowPopup.emit("SHOW_CURRENCIES",{})
 	
 func OnTabPressed(_tab_btn:ButtonTabClass):
 	OnOpenCloseSettingMenu(false)

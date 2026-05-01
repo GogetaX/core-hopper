@@ -1,9 +1,9 @@
-Control
 Label
+HBoxContainer
 VBoxContainer
+Control
 HFlowContainer
 AudioStreamPlayer
-HBoxContainer
 GPUParticles2D
 Node2D
 TextureRect

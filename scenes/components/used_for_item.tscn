@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://x2ujgrv8iqh3"]
+
+[ext_resource type="PackedScene" uid="uid://drlay20xc5ihb" path="res://scenes/components/icon_bg.tscn" id="1_n7i7y"]
+[ext_resource type="Script" uid="uid://cjv6rwe6j6q3r" path="res://scenes/components/used_for_item.gd" id="1_qe21n"]
+[ext_resource type="Texture2D" uid="uid://doss81m00xpfb" path="res://art/bottom_bar/skills.tres" id="2_qe21n"]
+
+[node name="UsedForItem" type="HBoxContainer" unique_id=2024869148]
+theme_override_constants/separation = 20
+script = ExtResource("1_qe21n")
+
+[node name="IconBG" parent="." unique_id=1682398798 instance=ExtResource("1_n7i7y")]
+layout_mode = 2
+icon = ExtResource("2_qe21n")
+
+[node name="Label" type="Label" parent="." unique_id=1381764509]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "Skill Tree Specialization"

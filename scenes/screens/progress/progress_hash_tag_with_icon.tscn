@@ -7,15 +7,14 @@
 
 [node name="ProgressHashTagWithIcon" type="Control" unique_id=2003499456]
 self_modulate = Color(0.9490196, 0.8392157, 1, 1)
-custom_minimum_size = Vector2(156, 33)
+custom_minimum_size = Vector2(190, 44)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 156.0
-offset_bottom = 33.0
+offset_right = 190.0
+offset_bottom = 44.0
 mouse_filter = 2
 script = ExtResource("1_dhuuj")
 hashtag_icon = ExtResource("2_dhuuj")
-is_currency = null
 
 [node name="SmartPanel" parent="." unique_id=892379017 instance=ExtResource("2_2xauu")]
 show_behind_parent = true
@@ -35,21 +34,11 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Control" type="Control" parent="HBoxContainer" unique_id=932687345]
-custom_minimum_size = Vector2(20, 20)
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=1992750027]
 layout_mode = 2
 mouse_filter = 2
-
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Control" unique_id=1992750027]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
 texture = ExtResource("2_dhuuj")
-expand_mode = 1
+expand_mode = 3
 stretch_mode = 5
 
 [node name="ProgressHashTag" parent="HBoxContainer" unique_id=713365230 instance=ExtResource("2_iru2d")]

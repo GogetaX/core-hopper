@@ -12,6 +12,7 @@ class_name CurrencyTabClass
 		
 @export var default_selected := false
 @export var tab_id = "where_to_find_tab"
+var _is_selected = false
 		
 func _ready() -> void:
 	match currency_type:
@@ -50,8 +51,14 @@ func OnBtnPress(btn_control:Control):
 	GlobalSignals.OnCurrencyTabPressed.emit(self)
 	
 func SetSelected():
+	_is_selected = true
 	GlobalBtn.AnimateBtnPressed($SmartPanel)
 	$SmartPanel.panel_type = "BORDER_AND_INSIDE"
 	
 func SetUnSelected():
+	_is_selected = false
 	$SmartPanel.panel_type = "INSIDE_ONLY"
+
+func IsSelected():
+	return _is_selected
+	

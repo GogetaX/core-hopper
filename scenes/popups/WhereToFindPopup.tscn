@@ -1,7 +1,11 @@
 [gd_scene format=3 uid="uid://bmjhnxm4bt6jj"]
 
+[ext_resource type="Script" uid="uid://b7u4bob0vgd2w" path="res://scenes/popups/where_to_find_popup.gd" id="1_nobp3"]
 [ext_resource type="PackedScene" uid="uid://bhjfx8wf7xisg" path="res://scenes/components/currency_info_tab.tscn" id="2_860ld"]
 [ext_resource type="PackedScene" uid="uid://babuofulhomgc" path="res://scenes/components/smart_panel.tscn" id="2_b2exo"]
+[ext_resource type="PackedScene" uid="uid://d32v5pknv4vq0" path="res://scenes/components/currency_icon.tscn" id="4_rnj71"]
+[ext_resource type="PackedScene" uid="uid://c2s6fmv66183n" path="res://scenes/screens/progress/progress_hash_tag.tscn" id="5_rsmhf"]
+[ext_resource type="PackedScene" uid="uid://x2ujgrv8iqh3" path="res://scenes/components/used_for_item.tscn" id="6_rgq5y"]
 [ext_resource type="PackedScene" uid="uid://njxlv6dxrlwj" path="res://scenes/screens/progress/smart_button_buy.tscn" id="8_ou73t"]
 
 [node name="WhereToFindPopup" type="Control" unique_id=743967306]
@@ -13,6 +17,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("1_nobp3")
 
 [node name="CurrencyInfo" parent="." unique_id=892379017 instance=ExtResource("2_b2exo")]
 custom_minimum_size = Vector2(300, 300)
@@ -47,31 +52,136 @@ layout_mode = 2
 theme_type_variation = &"LabelGray"
 text = "CURRENCY INFO"
 
-[node name="HFlow" type="HFlowContainer" parent="CurrencyInfo/VList" unique_id=499780354]
+[node name="TopTabBar" type="HFlowContainer" parent="CurrencyInfo/VList" unique_id=499780354]
 layout_mode = 2
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 alignment = 1
 
-[node name="CurrencyInfoTab" parent="CurrencyInfo/VList/HFlow" unique_id=499008952 instance=ExtResource("2_860ld")]
+[node name="CurrencyInfoTab" parent="CurrencyInfo/VList/TopTabBar" unique_id=499008952 instance=ExtResource("2_860ld")]
 layout_mode = 2
 size_flags_horizontal = 3
 default_selected = true
 
-[node name="CurrencyInfoTab2" parent="CurrencyInfo/VList/HFlow" unique_id=259172155 instance=ExtResource("2_860ld")]
+[node name="CurrencyInfoTab2" parent="CurrencyInfo/VList/TopTabBar" unique_id=259172155 instance=ExtResource("2_860ld")]
 layout_mode = 2
 size_flags_horizontal = 3
 currency_type = "CRYSTALS"
 
-[node name="CurrencyInfoTab3" parent="CurrencyInfo/VList/HFlow" unique_id=87958159 instance=ExtResource("2_860ld")]
+[node name="CurrencyInfoTab3" parent="CurrencyInfo/VList/TopTabBar" unique_id=87958159 instance=ExtResource("2_860ld")]
 layout_mode = 2
 size_flags_horizontal = 3
 currency_type = "DUST"
 
-[node name="CurrencyInfoTab4" parent="CurrencyInfo/VList/HFlow" unique_id=1845002219 instance=ExtResource("2_860ld")]
+[node name="CurrencyInfoTab4" parent="CurrencyInfo/VList/TopTabBar" unique_id=1845002219 instance=ExtResource("2_860ld")]
 layout_mode = 2
 size_flags_horizontal = 3
 currency_type = "ENERGY"
+
+[node name="Control2" type="Control" parent="CurrencyInfo/VList" unique_id=2116396394]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="Control" type="Control" parent="CurrencyInfo/VList" unique_id=1455954812]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="CurrencyIcon" parent="CurrencyInfo/VList/Control" unique_id=529445326 instance=ExtResource("4_rnj71")]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = -15.0
+offset_right = 15.0
+offset_bottom = 15.0
+icon_type = "CRYSTAL_BIG_ANIMATED"
+
+[node name="currency_name" parent="CurrencyInfo/VList" unique_id=713365230 instance=ExtResource("5_rsmhf")]
+self_modulate = Color(0.7607843, 0.43529412, 1, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "CRYSTALS"
+horizontal_alignment = 1
+no_bg = true
+
+[node name="currency_value" type="Label" parent="CurrencyInfo/VList" unique_id=1003031169]
+layout_mode = 2
+theme_type_variation = &"LabelTitle_White"
+text = "8,450"
+horizontal_alignment = 1
+
+[node name="currenc_description" type="Label" parent="CurrencyInfo/VList" unique_id=1460471757]
+layout_mode = 2
+theme_type_variation = &"LabelGray"
+text = "description"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="UsedFor" parent="CurrencyInfo/VList" unique_id=24956654 instance=ExtResource("2_b2exo")]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+panel_type = "INSIDE_ONLY"
+panel_color = "DISABLED"
+
+[node name="VList" type="VBoxContainer" parent="CurrencyInfo/VList/UsedFor" unique_id=239256424]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="ProgressHashTag" parent="CurrencyInfo/VList/UsedFor/VList" unique_id=1505805418 instance=ExtResource("5_rsmhf")]
+self_modulate = Color(0.8627451, 0.9098039, 1, 1)
+layout_mode = 2
+text = "USED FOR"
+hash_tag_color = "WHITE"
+no_bg = true
+
+[node name="UsedForItem" parent="CurrencyInfo/VList/UsedFor/VList" unique_id=2024869148 instance=ExtResource("6_rgq5y")]
+layout_mode = 2
+
+[node name="HowToGet" parent="CurrencyInfo/VList" unique_id=1987571624 instance=ExtResource("2_b2exo")]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+panel_type = "INSIDE_ONLY"
+panel_color = "DISABLED"
+
+[node name="VList" type="VBoxContainer" parent="CurrencyInfo/VList/HowToGet" unique_id=1097147233]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="ProgressHashTag" parent="CurrencyInfo/VList/HowToGet/VList" unique_id=1566107606 instance=ExtResource("5_rsmhf")]
+self_modulate = Color(0.8627451, 0.9098039, 1, 1)
+layout_mode = 2
+text = "HOW TO GET"
+hash_tag_color = "WHITE"
+no_bg = true
+
+[node name="UsedForItem" parent="CurrencyInfo/VList/HowToGet/VList" unique_id=1757817340 instance=ExtResource("6_rgq5y")]
+layout_mode = 2
+
+[node name="Control3" type="Control" parent="CurrencyInfo/VList" unique_id=1804496607]
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="CloseInfoBtn" parent="CurrencyInfo/VList" unique_id=1702305444 instance=ExtResource("8_ou73t")]
 custom_minimum_size = Vector2(350, 80)
@@ -81,4 +191,7 @@ btn_type = "NO_PRICE"
 buy_btn_title = "CLOSE"
 panel_color = "ORANGE"
 
+[connection signal="resized" from="CurrencyInfo/VList" to="." method="OnPopupResize"]
+[connection signal="resized" from="CurrencyInfo/VList/UsedFor/VList" to="." method="UsedForSync"]
+[connection signal="resized" from="CurrencyInfo/VList/HowToGet/VList" to="." method="SyncHowToGet"]
 [connection signal="OnPressed" from="CurrencyInfo/VList/CloseInfoBtn" to="." method="_on_close_info_btn_on_pressed"]

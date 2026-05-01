@@ -53,6 +53,7 @@ func AnimatePressed():
 	is_pressed = true
 	var t =create_tween()
 	t.tween_property($Panel,"self_modulate:a",1.0,0.1)
+	GlobalBtn.AnimateBtnPressed(self)
 	
 func AnimateUnpressed():
 	if !is_pressed:
