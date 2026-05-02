@@ -3,6 +3,7 @@ extends Node
 const BOSS_DB_PATH := "res://data/bosses/boss_db.json"
 
 const RANDOM_RELIC_DROP_ID := "random_relic"
+const RELIC_DROP_RATE := 0.5 # 0.5 = 50%, 1.0 = 100%, 0.0 = 0%
 
 var boss_db: Dictionary = {}
 var boss_depth_map: Dictionary = {}
@@ -219,9 +220,10 @@ func GetBossRewardsFromBlock(block_data: Dictionary) -> Dictionary:
 	var drop_table_value = rewards.get("drop_table", [])
 
 	if typeof(drop_table_value) == TYPE_ARRAY:
-		var rolled_relic_id := _RollBossRelicDrop(drop_table_value)
-		if rolled_relic_id != "":
-			relic_ids.append(rolled_relic_id)
+		if randf() < RELIC_DROP_RATE:
+			var rolled_relic_id := _RollBossRelicDrop(drop_table_value)
+			if rolled_relic_id != "":
+				relic_ids.append(rolled_relic_id)
 
 	rewards["relic_ids"] = relic_ids
 

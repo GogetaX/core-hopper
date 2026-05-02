@@ -70,7 +70,7 @@ func SyncMinXSize():
 	if hide_bg:
 		return
 	var min_size := Vector2.ZERO
-	min_size.x = $HBoxContainer.get_minimum_size().x
+	min_size.x = $HBoxContainer.get_minimum_size().x+$HBoxContainer/TextureRect.get_minimum_size().x-20
 	min_size.y = $HBoxContainer/ProgressHashTag.get_minimum_size().y
 	custom_minimum_size = Vector2(min_size.x+20,min_size.y)
 	size = min_size

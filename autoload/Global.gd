@@ -129,3 +129,9 @@ func FormatNumberWithCommas(value) -> String:
 		result = "-" + result
 
 	return result + decimal_part
+
+func IsTestMachine():
+	if OS.get_name() == "Linux" && OS.is_debug_build():
+		return true
+	return false
+	

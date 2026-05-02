@@ -9,4 +9,4 @@ func OnParentReady():
 	
 func SyncData():
 	var tot_quest = GlobalStats.GetAdditionalDailyQuestLimit()+GlobalDailyQuest.DEFAULT_DAILY_COUNT
-	get_parent().hash_tag_text = str(tot_quest).pad_decimals(0)+" DAILY QUESTS"
+	get_parent().text = str(tot_quest).pad_decimals(0)+" DAILY QUESTS"

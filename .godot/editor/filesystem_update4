@@ -27,3 +27,14 @@ res://scenes/screens/progress/smart_button_buy.tscn
 res://scenes/screens/progress/smart_button_buy.gd
 res://scenes/popups/BotStatInfoPopup.tscn
 res://autoload/GlobalBossDB.gd
+res://autoload/GlobalDiggingProcess.gd
+res://autoload/Global.gd
+res://scenes/app/bot_stat_info.gd
+res://autoload/GlobalAds.gd
+res://scenes/screens/dig/mining_panel.gd
+res://scenes/addons/screenshot_maker.gd
+res://scenes/screens/shop/smart_button_buy_with_icon.gd
+res://scenes/screens/progress/progress_screen.tscn
+res://scenes/screens/progress/quest_count.gd
+res://scenes/screens/progress/owned_relics_hashtag.gd
+res://scenes/popups/RelicUpgradePopup.tscn

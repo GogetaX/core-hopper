@@ -29,7 +29,7 @@ func _ApplyTestBossIfNeeded() -> void:
 		return
 
 	# Keep this from accidentally affecting release builds.
-	if !OS.is_debug_build():
+	if !Global.IsTestMachine():
 		return
 
 	if GlobalSave.save_data.lanes.is_empty():

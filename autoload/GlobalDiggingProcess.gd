@@ -828,43 +828,6 @@ func _GetBossDamageResult(block: Dictionary, damage: float, is_tap_damage: bool)
 		"reason": ""
 	}
 
-func _RollBossRelicDrop(drop_table: Array) -> String:
-	if drop_table.is_empty():
-		return ""
-
-	var valid_ids: Array = []
-	for entry in drop_table:
-		var relic_id := str(entry)
-		if relic_id == "":
-			continue
-		if !GlobalRelicDb.HasRelicData(relic_id):
-			continue
-		valid_ids.append(relic_id)
-
-	if valid_ids.is_empty():
-		return ""
-
-	return str(valid_ids[randi() % valid_ids.size()])
-
-
-func _HandleBossDrops(drop_table: Array) -> String:
-	var relic_id := _RollBossRelicDrop(drop_table)
-	if relic_id == "":
-		return ""
-
-	GlobalRelicDb.AddOwnedRelic(relic_id, 1)
-	return relic_id
-
-func _GrantFirstKillRandomRelic(boss_id: String) -> String:
-	if boss_id == "":
-		return ""
-
-	var relic_id := GlobalRelicDb.GetRandomRelicID()
-	if relic_id == "":
-		return ""
-
-	GlobalRelicDb.AddOwnedRelic(relic_id, 1)
-	return relic_id
 
 func _CanTapExecuteBlock(block: Dictionary) -> bool:
 	if bool(block.get("is_boss", false)):

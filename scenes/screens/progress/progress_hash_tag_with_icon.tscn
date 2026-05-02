@@ -7,10 +7,10 @@
 
 [node name="ProgressHashTagWithIcon" type="Control" unique_id=2003499456]
 self_modulate = Color(0.9490196, 0.8392157, 1, 1)
-custom_minimum_size = Vector2(190, 44)
+custom_minimum_size = Vector2(170, 44)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 190.0
+offset_right = 170.0
 offset_bottom = 44.0
 mouse_filter = 2
 script = ExtResource("1_dhuuj")
@@ -39,7 +39,7 @@ layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("2_dhuuj")
 expand_mode = 3
-stretch_mode = 5
+stretch_mode = 4
 
 [node name="ProgressHashTag" parent="HBoxContainer" unique_id=713365230 instance=ExtResource("2_iru2d")]
 self_modulate = Color(0.8627451, 0.9098039, 1, 1)

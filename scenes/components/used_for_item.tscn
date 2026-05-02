@@ -11,6 +11,7 @@ script = ExtResource("1_qe21n")
 [node name="IconBG" parent="." unique_id=1682398798 instance=ExtResource("1_n7i7y")]
 layout_mode = 2
 icon = ExtResource("2_qe21n")
+icon_resize = "TO_HORIZONTAL"
 
 [node name="Label" type="Label" parent="." unique_id=1381764509]
 layout_mode = 2

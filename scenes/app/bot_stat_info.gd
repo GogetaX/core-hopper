@@ -5,7 +5,7 @@ extends Control
 var cur_data = {}
 
 func _ready() -> void:
-	if !OS.is_debug_build():
+	if !Global.IsTestMachine():
 		$BotStatInfo/VList/HList/PlusLvlBot.visible = false
 
 func InitBotInfo(data):
