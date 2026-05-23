@@ -15,7 +15,8 @@ var earned_reward_data = {}
 
 func Setup(plugin: Admob) -> void:
 	admob_plugin = plugin
-	
+	if OS.get_name() == "Android":
+		admob_plugin.att_enabled = false
 	if admob_plugin == null:
 		push_error("GlobalAds.Setup: admob_plugin is null")
 		return
@@ -44,14 +45,32 @@ func Setup(plugin: Admob) -> void:
 		if !admob_plugin.rewarded_ad_failed_to_show_full_screen_content.is_connected(_OnRewardedFailedToShow):
 			admob_plugin.rewarded_ad_failed_to_show_full_screen_content.connect(_OnRewardedFailedToShow)
 	
+	if !admob_plugin.tracking_authorization_denied.is_connected(_OnTrackingAuthDenied):
+		admob_plugin.tracking_authorization_denied.connect(_OnTrackingAuthDenied)
+	if !admob_plugin.tracking_authorization_granted.is_connected(_OnTrackingAuthGranted):
+		admob_plugin.tracking_authorization_granted.connect(_OnTrackingAuthGranted)
+	
+	
 	admob_plugin.initialize()
 
 
+func _OnTrackingAuthDenied():
+	LoadRewarded()
+	
+func _OnTrackingAuthGranted():
+	LoadRewarded()
+	
 func _OnAdmobInitialized(_status_data) -> void:
 	_is_initialized = true
-	LoadRewarded()
+	match OS.get_name():
+		"Android":
+			LoadRewarded()
+		"iOS":
+			GrandPermisions()
 
-
+func GrandPermisions():
+	admob_plugin.request_tracking_authorization()
+	
 func LoadRewarded() -> void:
 	earned_reward_data = {}
 	if admob_plugin == null:
@@ -61,7 +80,11 @@ func LoadRewarded() -> void:
 	if _rewarded_ad_id != "":
 		return
 	var request := LoadAdRequest.new()
-	request.set_ad_unit_id("ca-app-pub-6225081745698787/4585397866")
+	match OS.get_name():
+		"Android":
+			request.set_ad_unit_id("ca-app-pub-6225081745698787/4585397866")
+		"iOS":
+			request.set_ad_unit_id("ca-app-pub-6225081745698787/5249663100")
 	admob_plugin.load_rewarded_ad(request)
 
 
