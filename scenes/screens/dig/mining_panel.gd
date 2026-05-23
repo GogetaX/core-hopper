@@ -118,10 +118,6 @@ func OnDataUpdated():
 	SyncLane(lane_3_list)
 	SyncLane(lane_4_list)
 
-	
-func _on_watch_ad_btn_btn_pressed() -> void:
-	GlobalSignals.ShowPopup.emit("WATCH_AD_POPUP",{})
-
 
 func _CheckBossRevealForLane(lane_index: int, lane_data: Dictionary) -> void:
 	if lane_data.block_data.is_empty():

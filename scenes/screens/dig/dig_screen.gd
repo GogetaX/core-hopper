@@ -7,3 +7,7 @@ func _on_view_quests_btn_btn_pressed() -> void:
 
 func _on_show_chests_btn_btn_pressed() -> void:
 	GlobalSignals.ShowPopup.emit("SHOW_CHESTS",{})
+
+
+func _on_watch_ad_btn_btn_pressed() -> void:
+	GlobalSignals.ShowPopup.emit("WATCH_AD_POPUP",{})

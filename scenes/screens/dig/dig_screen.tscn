@@ -298,7 +298,6 @@ hash_tag_text = "100M"
 hashtag_icon = ExtResource("5_131td")
 hide_bg = true
 text_direction = "MIDDLE"
-is_currency = false
 
 [node name="LaneDepthUpdate" parent="MiningPanel/VList/HList2/VList1/Panel/VBoxContainer/Lane_0_Depth" unique_id=1771884160 instance=ExtResource("6_8n6rl")]
 
@@ -350,7 +349,6 @@ hash_tag_text = "100M"
 hashtag_icon = ExtResource("5_131td")
 hide_bg = true
 text_direction = "MIDDLE"
-is_currency = false
 
 [node name="LaneDepthUpdate" parent="MiningPanel/VList/HList2/VList2/Panel/VBoxContainer/Lane_1_Depth" unique_id=338296388 instance=ExtResource("6_8n6rl")]
 
@@ -401,7 +399,6 @@ hash_tag_text = "100M"
 hashtag_icon = ExtResource("5_131td")
 hide_bg = true
 text_direction = "MIDDLE"
-is_currency = false
 
 [node name="LaneDepthUpdate" parent="MiningPanel/VList/HList2/VList3/Panel/VBoxContainer/Lane_2_Depth" unique_id=2133176978 instance=ExtResource("6_8n6rl")]
 
@@ -453,7 +450,6 @@ hash_tag_text = "100M"
 hashtag_icon = ExtResource("5_131td")
 hide_bg = true
 text_direction = "MIDDLE"
-is_currency = false
 
 [node name="LaneDepthUpdate" parent="MiningPanel/VList/HList2/VList4/Panel/VBoxContainer/Lane_3_Depth" unique_id=1063287346 instance=ExtResource("6_8n6rl")]
 
@@ -505,7 +501,6 @@ hash_tag_text = "100M"
 hashtag_icon = ExtResource("5_131td")
 hide_bg = true
 text_direction = "MIDDLE"
-is_currency = false
 
 [node name="LaneDepthUpdate" parent="MiningPanel/VList/HList2/VList5/Panel/VBoxContainer/Lane_4_Depth" unique_id=1457944446 instance=ExtResource("6_8n6rl")]
 
